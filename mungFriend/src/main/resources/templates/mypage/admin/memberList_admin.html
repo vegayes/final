@@ -1,177 +1,180 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>회원 관리 (관리자)</title>
-        <link rel="stylesheet" href="memberList_admin.css">
-        <script src="https://kit.fontawesome.com/ac58eafae7.js" crossorigin="anonymous"></script>
-        
-    </head>
-    <body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 관리 (관리자)</title>
+    
+    <link rel="stylesheet" th:href="@{/css/mypage/admin/memberList_admin.css}">
+    
+    <script th:src="@{https://kit.fontawesome.com/ac58eafae7.js}" crossorigin="anonymous"></script>
+</head>
+<body>
+    <main>
+        <section class = "adminIntroArea">
+            <div class = "adminIntroTitle">
+                회원 관리
+            </div>
+            <hr>
+        </section>
 
-        <main>
-            <section class = "adminIntroArea">
-                <div class = "adminIntroTitle">
-                    회원 관리
+        <section class = "adminContentArea">
+
+            <!-- nav 자리-->
+            <nav class = "navAdmission">
+                <ul>
+                    <li> <a href = "#"> 1:1 문의함 </a> </li>
+                    <li> <a href = "#"> 예약 내역 </a> </li>
+                    <li> <a href = "#"> 후원 내역 </a> </li>
+                    <li> <a href = "#"> 입소신청 내역 </a></li>
+                    <li> <a href = "#"> 회원 관리 </a></li>
+                    <li> <a href = "#"> 관리 현황 </a></li>
+                </ul>
+            </nav>
+
+            <!-- 회원관리 내용 영역-->
+            <div class = "adminContentContainer">
+
+                <!-- 회원 검색 창-->
+                <div class = "adminSearchArea">
+                    <form th:action="@{/#}" name="adminMemberSearch">
+                        <fieldset class = "adminSearch">
+                            <input type="search" id="memberSearch" name="memberSearch" class = "applyInput"
+                            autocomplete="on" placeholder="회원 검색">
+                            <button id="searchBtn" class="fa-solid fa-magnifying-glass"></button>
+                        </fieldset>
+                    </form>	 
                 </div>
-                <hr>
-            </section>
-
-            <section class = "adminContentArea">
-
-                <!-- nav 자리-->
-                <nav class = "navAdmission">
-                    <ul>
-                        <li> <a href = "#"> 1:1 문의함 </a> </li>
-                        <li> <a href = "#"> 예약 내역 </a> </li>
-                        <li> <a href = "#"> 후원 내역 </a> </li>
-                        <li> <a href = "#"> 입소신청 내역 </a></li>
-                        <li> <a href = "#"> 회원 관리 </a></li>
-                        <li> <a href = "#"> 관리 현황 </a></li>
-                    </ul>
-                </nav>
-
-                <!-- 회원관리 내용 영역-->
-                <div class = "adminContentContainer">
-
-                    <!-- 회원 검색 창-->
-                    <div class = "adminSearchArea">
-                        <form action="#" name="adminMemberSearch">
-                            <fieldset class = "adminSearch">
-                                <input type="search" id="memberSearch" name="memberSearch" class = "applyInput"
-                                autocomplete="on" placeholder="회원 검색">
-                                <button id="searchBtn" class="fa-solid fa-magnifying-glass"></button>
-                            </fieldset>
-                        </form>	 
-                    </div>
 
 
-                    <!-- 회원 리스트 -->
-                    <div class = "adminMemberListContainer">
+                <!-- 회원 리스트 -->
+                <div class = "adminMemberListContainer">
 
-                        <table class="memberListTable">
-                
-                            <thead>
-                                <tr class = "memberTheadTr">
-                                    <th>번호</th>
-                                    <th>아이디</th>
-                                    <th>이름</th>
-                                    <th>이메일</th>
-                                    <th>닉네임</th>
-                                    <th>전화번호</th>
-                                    <th>관리</th>
-                                </tr>
-                            </thead>
-        
-                            <tbody>
-                                
-                                <tr class = "memberBodyTr">
-                                    <td>1</td>
-                                    <td>user01</td>
-                                    <td>이유진</td>
-                                    <td>aaaa@naver.com</td>
-                                    <td>빵빵이</td>
-                                    <td>010-4444-4444</td>
-                                    <td><button>탈퇴하기</button></td>
-                                </tr> 	
-                                
-                                <tr class = "memberBodyTr">
-                                    <td>2</td>
-                                    <td>user02</td>
-                                    <td>유동민</td>
-                                    <td>bbbb@naver.com</td>
-                                    <td>빵빵이2</td>
-                                    <td>010-7777-7777</td>
-                                    <td><button>탈퇴하기</button></td>
-                                </tr>                                 
+                    <table class="memberListTable">
+            
+                        <thead>
+                            <tr class = "memberTheadTr">
+                                <th>번호</th>
+                                <th>아이디</th>
+                                <th>이름</th>
+                                <th>이메일</th>
+                                <th>닉네임</th>
+                                <th>전화번호</th>
+                                <th>관리</th>
+                            </tr>
+                        </thead>
+    
+                        <tbody>
+                            
+                            <tr class = "memberBodyTr">
+                                <td>1</td>
+                                <td>user01</td>
+                                <td>이유진</td>
+                                <td>aaaa@naver.com</td>
+                                <td>빵빵이</td>
+                                <td>010-4444-4444</td>
+                                <td><button>탈퇴하기</button></td>
+                            </tr> 	
+                            
+                            <tr class = "memberBodyTr">
+                                <td>2</td>
+                                <td>user02</td>
+                                <td>유동민</td>
+                                <td>bbbb@naver.com</td>
+                                <td>빵빵이2</td>
+                                <td>010-7777-7777</td>
+                                <td><button>탈퇴하기</button></td>
+                            </tr>                                 
 
-                                <tr class = "memberBodyTr">
-                                    <td>3</td>
-                                    <td>user03</td>
-                                    <td>유은서</td>
-                                    <td>cccc@naver.com</td>
-                                    <td>빵빵이3</td>
-                                    <td>010-3333-3333</td>
-                                    <td><button>탈퇴하기</button></td>
-                                </tr>   
+                            <tr class = "memberBodyTr">
+                                <td>3</td>
+                                <td>user03</td>
+                                <td>유은서</td>
+                                <td>cccc@naver.com</td>
+                                <td>빵빵이3</td>
+                                <td>010-3333-3333</td>
+                                <td><button>탈퇴하기</button></td>
+                            </tr>   
 
-                                <tr class = "memberBodyTr">
-                                    <td>4</td>
-                                    <td>user04</td>
-                                    <td>최지은</td>
-                                    <td>dddd@naver.com</td>
-                                    <td>빵빵이4</td>
-                                    <td>010-1111-1111</td>
-                                    <td><button>탈퇴하기</button></td>
-                                </tr>  
+                            <tr class = "memberBodyTr">
+                                <td>4</td>
+                                <td>user04</td>
+                                <td>최지은</td>
+                                <td>dddd@naver.com</td>
+                                <td>빵빵이4</td>
+                                <td>010-1111-1111</td>
+                                <td><button>탈퇴하기</button></td>
+                            </tr>  
 
-                                <tr class = "memberBodyTr">
-                                    <td>5</td>
-                                    <td>user05</td>
-                                    <td>김도연</td>
-                                    <td>eeee@naver.com</td>
-                                    <td>빵빵이5</td>
-                                    <td>010-2222-2222</td>
-                                    <td><button>탈퇴하기</button></td>
-                                </tr>                                 
+                            <tr class = "memberBodyTr">
+                                <td>5</td>
+                                <td>user05</td>
+                                <td>김도연</td>
+                                <td>eeee@naver.com</td>
+                                <td>빵빵이5</td>
+                                <td>010-2222-2222</td>
+                                <td><button>탈퇴하기</button></td>
+                            </tr>                                 
 
-                            </tbody>
-                        </table>
-                    </div>
+                        </tbody>
+                    </table>
+                </div>
 
 
-                    <!-- 페이지 네이션 -->
-                    <div class="paginationArea">
-                        <ul class="pagination">
+                <!-- 페이지 네이션 -->
+                <div class="paginationArea">
+                    <ul class="pagination">
+                    
+                        <!-- 첫 페이지로 이동 -->
+                        <li><a th:href="@{/#}">&lt;&lt;</a></li>
+    
+                        <!-- 이전 목록 마지막 번호로 이동 -->
+                        <li><a th:href="@{/#}">&lt;</a></li>
+    
                         
-                            <!-- 첫 페이지로 이동 -->
-                            <li><a href="#">&lt;&lt;</a></li>
-        
-                            <!-- 이전 목록 마지막 번호로 이동 -->
-                            <li><a href="#">&lt;</a></li>
-        
+                        <!-- 특정 페이지로 이동 -->
+                        <!-- jsp 코드 
+                        <c:forEach var="i" begin="${pagination.startPage}" end = "${pagination.endPage}" step="1">
                             
-                            <!-- 특정 페이지로 이동 -->
-                            <!-- jsp 코드 
-                            <c:forEach var="i" begin="${pagination.startPage}" end = "${pagination.endPage}" step="1">
+                            <c:choose>
+                                <c:when test="${i == pagination.currentPage }">
+                                    <li><a class="current">${i}</a></li>
+                                </c:when>
                                 
-                                <c:choose>
-                                    <c:when test="${i == pagination.currentPage }">
-                                        <li><a class="current">${i}</a></li>
-                                    </c:when>
-                                    
-                                    <c:otherwise>
-                                        <li><a href="/board/${boardCode}/?cp=${i}${kq}">${i}</a></li>                  		
-                                    </c:otherwise>
-                                </c:choose>
-                                
-                            </c:forEach>
-                            -->
-                            <li><a class = "current">1</a></li>
-                            <li><a href = "#">2</a></li>
-                            <li><a href = "#">3</a></li>
-                            <li><a href = "#">4</a></li>
-                            <li><a href = "#">5</a></li>
-                            <li><a href = "#">6</a></li>
-                            <li><a href = "#">7</a></li>
-                            <li><a href = "#">8</a></li>
-                            <li><a href = "#">9</a></li>
-                            <li><a href = "#">10</a></li>
-
+                                <c:otherwise>
+                                    <li><a href="/board/${boardCode}/?cp=${i}${kq}">${i}</a></li>                  		
+                                </c:otherwise>
+                            </c:choose>
                             
-                            
-                            <!-- 다음 목록 시작 번호로 이동 -->
-                            <li><a href="#">&gt;</a></li>
-        
-                            <!-- 끝 페이지로 이동 -->
-                            <li><a href="#">&gt;&gt;</a></li>
-        
-                        </ul>
-                    </div>
+                        </c:forEach>
+                        -->
+                        <li><a class = "current">1</a></li>
+                        <li><a th:href = "@{/#}">2</a></li>
+                        <li><a th:href = "@{/#}">3</a></li>
+                        <li><a th:href = "@{/#}">4</a></li>
+                        <li><a th:href = "@{/#}">5</a></li>
+                        <li><a th:href = "@{/#}">6</a></li>
+                        <li><a th:href = "@{/#}">7</a></li>
+                        <li><a th:href = "@{/#}">8</a></li>
+                        <li><a th:href = "@{/#}">9</a></li>
+                        <li><a th:href = "@{/#}">10</a></li>
 
+                        
+                        
+                        <!-- 다음 목록 시작 번호로 이동 -->
+                        <li><a th:href = "@{/#}">&gt;</a></li>
+    
+                        <!-- 끝 페이지로 이동 -->
+                        <li><a th:href = "@{/#}">&gt;&gt;</a></li>
+    
+                    </ul>
                 </div>
-            </section>
-        </main>
-    </body>
+
+            </div>
+        </section>
+    </main>
+    
+    <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
+    <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+</body>
 </html>

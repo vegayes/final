@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>유기견 상세페이지(등록하기)</title>
-    <link rel="stylesheet" href="/FinalProject/css/dogRegistration.css">
+    <link rel="stylesheet" th:href="@{/css/adopt/dogRegistration.css}">
 </head>
 <body>
 
-    <th:block th:replac="~{common/header}"></th:block>
+    <th:block th:replace="~{common/header}"></th:block>
 
     <main>
         <div class="main-left"></div>
@@ -22,7 +22,7 @@
                         <div class="img-thumbnail">
                             <label for="img0">
                                 <button type="button" id="thumbnailButton" style="border-radius: 50%;">
-                                    <img src="/FinalProject/final-img/jieun/카메라.png" width="50" height="50">
+                                    <img th:src="@{/images/adopt/카메라.png}" width="50" height="50">
                                 </button>
                                 <input type="file" name="images" class="inputImage" id="img1" style="display:none;" accept="image/*">
                             </label>
@@ -91,7 +91,7 @@
                 <div class="img-input">
                     <div class="boardImg">
                         <div type="button" id="imageButton1">
-                            <img src="/FinalProject/final-img/jieun/카메라.png" width="25" height="25">
+                            <img th:src="@{/images/adopt/카메라.png}" width="25" height="25">
                         </div>
                         <span class="delete-image">&times;</span>
                         <div>
@@ -101,7 +101,7 @@
 
                     <div class="boardImg">
                         <div type="button" id="imageButton2">
-                            <img src="/FinalProject/final-img/jieun/카메라.png" width="25" height="25">
+                            <img th:src="@{/images/adopt/카메라.png}" width="25" height="25">
                         </div>
                         <span class="delete-image">&times;</span>
                         <div>
@@ -111,7 +111,7 @@
                     
                     <div class="boardImg">
                         <div type="button" id="imageButton3">
-                            <img src="/FinalProject/final-img/jieun/카메라.png" width="25" height="25">
+                            <img th:src="@{/images/adopt/카메라.png}" width="25" height="25">
                         </div>
                         <span class="delete-image">&times;</span>
                         <div>
@@ -126,10 +126,13 @@
 
         </div>
 
-        <div class="main-right"></div>
+        <div class="main-right">
+            <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
+            <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+        </div>
     </main>
 
-    <th:block th:replac="~{common/footer}"></th:block>
+    <th:block th:replace="~{common/footer}"></th:block>
     
 </body>
 </html>

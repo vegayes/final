@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>유기견 상세페이지(조회)</title>
-    <link rel="stylesheet" th:href="@{/css/dogDetail.css}">
+    <link rel="stylesheet" th:href="@{/css/adopt/dogDetail.css}">
 </head>
 <body>
 
-    <th:block th:replac="~{common/header}"></th:block>
+    <th:block th:replace="~{common/header}"></th:block>
 
     <main>
         <div class="main-left"></div>
@@ -73,9 +73,9 @@
 
                 <div id="content-text">
                     <div class="img-box">
-                        <img src="/FinalProject/final-img/jieun/상세이미지1.png" style="max-width: 500px; max-height: 375px;">   
-                        <img src="/FinalProject/final-img/jieun/상세이미지2.png" style="max-width: 500px; max-height: 375px;">   
-                        <img src="/FinalProject/final-img/jieun/상세이미지3.png" style="max-width: 500px; max-height: 375px;">   
+                        <img th:src="@{/images/adopt/상세이미지1.png}" style="max-width: 500px; max-height: 375px;">   
+                        <img th:src="@{/images/adopt/상세이미지2.png}" style="max-width: 500px; max-height: 375px;">   
+                        <img th:src="@{/images/adopt/상세이미지3.png}" style="max-width: 500px; max-height: 375px;">   
                     </div>
                 </div>
 
@@ -88,9 +88,12 @@
             </div>
         </div>
 
-        <div class="main-right"></div>
+        <div class="main-right">
+            <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
+            <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+        </div>
     </main>
 
-    <th:block th:replac="~{common/footer}"></th:block>
+    <th:block th:replace="~{common/footer}"></th:block>
 </body>
 </html> 
