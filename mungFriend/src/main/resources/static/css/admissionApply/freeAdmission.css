@@ -268,7 +268,7 @@ main{
 .formDogProfile>img{
     /*너무 큰거 같아서 일단 padding 줌. 
      진짜 사진넣을때는 없애야함.*/
-    padding: 5px;
+    /*padding: 5px;*/
     width: 100%;
 }
 
