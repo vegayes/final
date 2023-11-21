@@ -20,7 +20,7 @@
                 <li><a th:href="@{/}">입양 후기</a></li>
                 
                 <li>
-                    <a th:unless="${loginMember}" th:href="@{/}">로그인</a>
+                    <a th:unless="${loginMember}" th:href="@{/member/login}">로그인</a>
                     <a th:if="${loginMember}" th:href="@{/}">마이페이지</a>
                 </li>
             </ul>
