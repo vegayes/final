@@ -8,17 +8,21 @@
 </head>
 <body>
     <header>
-        <img class="image3" src="@{/images/로고.png}" alt="로고" class="image3">
+		<div class ="header-img">
+       	 	<img class="image3" th:src="@{/images/로고.png}" alt="로고">			
+		</div>
         <nav class="header-bar">
             <ul class="menu-items">
-                <li><a th:href="#절차및관리">절차 및 관리</a></li>
-                <li><a th:href="#무료입소신청">무료 입소 신청</a></li>
+                <li><a th:href="@{/}">절차 및 관리</a></li>
+                <li><a th:href="@{/}">무료 입소 신청</a></li>
                 <li><a th:href="@{/adopt/dogList}">입양하기</a></li>
-                <li><a th:href="#병원">병원, 훈련소</a></li>
-                <li><a th:href="#입양후기">입양 후기</a></li>
+                <li><a th:href="@{/}">병원, 훈련소</a></li>
+                <li><a th:href="@{/}">입양 후기</a></li>
                 
-                <li><a th:if="${loginMember}" th:href="#로그인">마이페이지</a></li>
-                <li><a th:unless="${loginMember}" th:href="#로그인">로그인</a></li>
+                <li>
+                    <a th:unless="${loginMember}" th:href="@{/}">로그인</a>
+                    <a th:if="${loginMember}" th:href="@{/}">마이페이지</a>
+                </li>
             </ul>
         </nav>
     </header>
