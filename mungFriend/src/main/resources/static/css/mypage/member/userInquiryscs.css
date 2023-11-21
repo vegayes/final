@@ -130,3 +130,22 @@ a:hover {
     font-weight: bold;
     color: #333;
 }
+
+.fixed-image {
+    position: fixed;
+    right: 10px;
+    z-index: 100;
+    width: 50px;
+}
+
+.fixed-image:hover {
+    cursor: pointer;
+}
+
+#chat-image {
+    bottom: 10px;
+}
+
+#donate-image {
+    bottom: 70px;
+}
