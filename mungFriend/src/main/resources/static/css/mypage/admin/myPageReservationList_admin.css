@@ -17,7 +17,7 @@
 main{
     /* min-height: 1080px; */
     height: auto;
-    width: 1920px;
+    width: 100%;
 
     display: flex;
     flex-direction: column;
@@ -258,4 +258,26 @@ form{
 
     border: none;
     border-radius: 10px;
+}
+
+
+/* donation, chat */
+
+.fixed-image {
+    position: fixed;
+    right: 10px;
+    z-index: 100;
+    width: 50px;
+}
+
+.fixed-image:hover {
+    cursor: pointer;
+}
+
+#chat-image {
+    bottom: 10px;
+}
+
+#donate-image {
+    bottom: 70px;
 }

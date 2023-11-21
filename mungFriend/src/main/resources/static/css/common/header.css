@@ -1,31 +1,29 @@
 header{
-   position:sticky;
+	position:sticky;
     top : 0px;
     width: auto;
     height: 70px;
     display: flex;
-    
-
 }
 
 .header-img{
-   flex-basis: 15%;
+	flex-basis: 15%;
 
-   padding-top: 7px;
-   display: flex;
-   justify-content: center;
-   align-items: center;
+	padding-top: 7px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .header-img > img{
 
     width: 200px;
     height: 85px;
-   
+	
 }
 
 .header-bar {
-   flex-basis: 85%;
+	flex-basis: 85%;
     width: 1600px;
     height: 70px;
     background-color: #FEE4D6;

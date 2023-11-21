@@ -36,6 +36,7 @@ main{
      
      /* padding : 20px 100px; */
      padding : 20px 18%;
+     padding-top : 90px;
 }
 
 .donationIntroTitle{
@@ -225,6 +226,28 @@ input[name="amount"]:checked + div{
 
 
 
+
+/*************************************************
+                우측 nav 
+*************************************************/
+.fixed-image {
+    position: fixed;
+    right: 10px;
+    z-index: 100;
+    width: 50px;
+}
+
+.fixed-image:hover {
+    cursor: pointer;
+}
+
+#chat-image {
+    bottom: 10px;
+}
+
+#donate-image {
+    bottom: 70px;
+}
 
 
 
