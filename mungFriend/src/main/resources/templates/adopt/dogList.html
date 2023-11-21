@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>입양하기(리스트)</title>
-    <link rel="stylesheet" href="/FinalProject/css/dogList.css">
+    <link rel="stylesheet" th:href="@{/css/adopt/dogList.css}">
 </head>
+
 <body>
 
-    <th:block th:replac="~{common/header}"></th:block>
+    <th:block th:replace="~{common/header}"></th:block>
 
     <main>
         <div class="main-left"></div>
@@ -18,7 +20,7 @@
             <div class="explane">"이 작은 발걸음이 여러분 가정에 큰 사랑으로 다가오길 바랍니다.
                 새로운 가족 구성원을 환영하면서, 그들의 행복한 삶을 위해 함께 노력해 주세요."
             </div>
-            
+
             <div class="filter">
                 <form name="filter" multiple required action="#">
                     <div class="filter-age">
@@ -48,7 +50,7 @@
                         </select>
                     </div>
                     <div class="filter-character">
-                        <select id="character" name="character">                            
+                        <select id="character" name="character">
                             <option value="none">성격</option>
                             <option value="male"></option>
                         </select>
@@ -61,7 +63,7 @@
                         </select>
                     </div>
                     <button type="submit" value="Submit">
-                        <img src="/FinalProject/final-img/jieun/finder.png" id="finder-img">
+                        <img th:src="@{images/adopt/finder.png}" id="finder-img">
                     </button>
                 </form>
             </div>
@@ -69,114 +71,120 @@
             <div class="dog">
                 <div class="dog-list">
                     <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
                         <div id="dog-kind">말티푸</div>
                     </div>
                     <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
                         <div id="dog-kind">말티푸</div>
                     </div>
                     <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
                         <div id="dog-kind">말티푸</div>
                     </div>
                     <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
                         <div id="dog-kind">말티푸</div>
                     </div>
                     <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
                         <div id="dog-kind">말티푸</div>
                     </div>
                     <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
                         <div id="dog-kind">말티푸</div>
                     </div>
                     <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
                         <div id="dog-kind">말티푸</div>
                     </div>
                     <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
                         <div id="dog-kind">말티푸</div>
                     </div>
                     <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
                         <div id="dog-kind">말티푸</div>
                     </div>
                     <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
                         <div id="dog-kind">말티푸</div>
                     </div>
                     <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
                         <div id="dog-kind">말티푸</div>
                     </div>
                     <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
                         <div id="dog-kind">말티푸</div>
                     </div>
                     <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
                         <div id="dog-kind">말티푸</div>
                     </div>
                     <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
                         <div id="dog-kind">말티푸</div>
                     </div>
                     <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
                         <div id="dog-kind">말티푸</div>
                     </div>
                     <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
                         <div id="dog-kind">말티푸</div>
                     </div>
                 </div>
             </div>
 
             <div class="regits">
-                <a class="regits-btn" href="#">등록하기</a>
+                <!-- <a th:if="${session.loginMember}" class="regits-btn" th:href="@{#}">등록하기</a> -->
+                <a class="regits-btn" th:href="@{#}">등록하기</a>
             </div>
 
+            <!-- <div class="pagination-area" th:if="${#lists.size(dogList) > 0}"> -->
             <div class="pagination-area">
                 <ul class="pagination">
-           
+
                     <!-- 첫 페이지로 이동 -->
-                    <li><a href="/link/dogList?cp=1${kq}">&lt;&lt;</a></li>
+                    <li><a th:href="@{/link/dogList?cp=1${kq}}">&lt;&lt;</a></li>
 
                     <!-- 이전 목록 마지막 번호로 이동 -->
-                    <li><a href="/link/dogList?cp=${pagination.prevPage}${kq}">&lt;</a></li>
+                    <li><a th:href="@{/link/dogList?cp=${pagination.prevPage}${kq}}">&lt;</a></li>
 
                     <!-- 특정 페이지로 이동 -->
-                    <c:forEach var ="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
+                    <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
                         <c:choose>
                             <!-- 현재 보고있는 페이지 -->
                             <c:when test="${i == pagination.currentPage}">
                                 <li><a class="current">${i}</a></li>
                             </c:when>
-                            
+
                             <!-- 현재 페이지를 제외한 나머지 페이지 -->
                             <c:otherwise>
                                 <li><a href="/link/dogList?cp=${i}${kq}">${i}</a></li>
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
-                    
+
                     <!-- 다음 목록 시작 번호로 이동 -->
-                    <li><a href="/link/dogList?cp=${pagination.nextPage}${kq}">&gt;</a></li>
+                    <li><a th:href="@{/link/dogList?cp=${pagination.nextPage}${kq}}">&gt;</a></li>
 
                     <!-- 끝 페이지로 이동 -->
-                    <li><a href="/link/dogList?cp=${pagination.maxPage}${kq}">&gt;&gt;</a></li>
+                    <li><a th:href="@{/link/dogList?cp=${pagination.maxPage}${kq}}">&gt;&gt;</a></li>
 
                 </ul>
             </div>
 
         </div>
 
-        <div class="main-right"></div>
+        <div class="main-right">
+            <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
+            <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+        </div>
     </main>
 
-    <th:block th:replac="~{common/footer}"></th:block>
+    <th:block th:replace="~{common/footer}"></th:block>
 </body>
+
 </html>
