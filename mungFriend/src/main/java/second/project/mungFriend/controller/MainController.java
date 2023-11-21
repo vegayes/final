@@ -17,7 +17,9 @@ public class MainController {
 		
 //		return "common/main_test";
 //		return "common/header";
-		return "admissionApply/freeAdmission";
+//		return "adopt/dogRegistration";		
+		return "mypage/admin/myPageReservationList_admin";
+//		return "admissionApply/freeAdmission";
 	}
 	
 	
