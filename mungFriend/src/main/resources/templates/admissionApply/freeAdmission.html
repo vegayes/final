@@ -9,8 +9,10 @@
     </head>
     <body>
 
-        <main>
 
+	    <th:block th:replace="~{common/header}"></th:block>
+
+        <main>
             <section class = "admissionIntro">
                 <div class = "admissionIntroTitle">
                     멍프랜드만의 특별함
@@ -212,26 +214,12 @@
 
 
             </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         </main>
-
+        
+		<a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
+        <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+        
+	    <th:block th:replace="~{common/footer}"></th:block>
+		
     </body>
 </html>

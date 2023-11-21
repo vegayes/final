@@ -17,7 +17,7 @@ public class MainController {
 		
 //		return "common/main_test";
 //		return "common/header";
-		return "admissionApply/freeAdmission";
+		return "mypage/member/donationList_user";
 	}
 	
 	
