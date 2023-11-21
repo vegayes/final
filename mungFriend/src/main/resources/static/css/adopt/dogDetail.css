@@ -1,6 +1,8 @@
 *{
     /* border: 1px solid red; */
     box-sizing: border-box;
+    font-family: 'Nanum Gothic', sans-serif;
+    margin: 0;
 }
 
 
@@ -25,7 +27,7 @@ main{
     display: flex;
     align-items: center;
 
-    margin: 80px 0 50px 0;
+    margin: 90px 0 50px 0;
 }
 
 #img-wrap {
@@ -144,4 +146,26 @@ table td{
 
 .img-box >img{
     margin-bottom: 40px;
+}
+
+
+/* donation, chat */
+
+.fixed-image {
+    position: fixed;
+    right: 10px;
+    z-index: 100;
+    width: 50px;
+}
+
+.fixed-image:hover {
+    cursor: pointer;
+}
+
+#chat-image {
+    bottom: 10px;
+}
+
+#donate-image {
+    bottom: 70px;
 }

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>비밀번호 찾기2</title>
 
-    <link rel="stylesheet" href="findPw2.css">
+    <link rel="stylesheet" th:href="@{/css/member/findPw2.css}">
 </head>
 <body>
     <section>
@@ -21,7 +21,7 @@
             <div id="findPw-section">
                 <!-- 로고 영역 -->
                 <div id="logo-section">
-                    <img src="img/logo.png" id="logo">
+                    <img th:src="@{/images/member/logo.png}" id="logo">
                 </div>
 
                 <!-- 비밀번호 찾기 설명 영역 -->
@@ -32,7 +32,7 @@
 
                 <!-- 비밀번호 찾기 form 영역 -->
                 <div id="form-section">
-                    <form action="#" method="">
+                    <form th:action="@{/#}" method="">
                         <div id="authNumber-section">
                             인증번호 입력 <br>
                             <input type="text" id="authNumber" name="authNumber" placeholder="인증번호 입력 (유효시간 5분)">
@@ -47,8 +47,8 @@
 
             <!-- 오른쪽 여백 -->
             <div id="right-gap">
-                <a href="#"><img src="img/chat.png" class="fixed-image" id="chat-image"></a>
-                <img src="img/donate.png" class="fixed-image" id="donate-image">
+                <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
+                <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
             </div>
         </div>
 

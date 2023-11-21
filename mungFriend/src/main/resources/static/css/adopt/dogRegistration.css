@@ -1,12 +1,13 @@
 @import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
 .nanumgothic * {
-font-family: 'Nanum Gothic', sans-serif;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 *{
     /* border: 1px solid red; */
     box-sizing: border-box;
+    margin: 0;
     font-family: 'Nanum Gothic', sans-serif;
 }
 
@@ -30,7 +31,7 @@ main{
 }
 
 .main-center > div:first-child{
-    margin-top: 100px;
+    margin-top: 90px;
     margin-bottom: 100px;
     
     width: 900px;
@@ -122,7 +123,7 @@ form{
 }
 
 select{
-    width: 304px;
+    width: 300px;
     height: 29px;
 
     border: none;
@@ -182,4 +183,27 @@ div[id ^= imageButton] {
     border-radius: 10px;
     font-size: 15px;
     font-weight: bold;
+}
+
+
+
+/* donation, chat */
+
+.fixed-image {
+    position: fixed;
+    right: 10px;
+    z-index: 100;
+    width: 50px;
+}
+
+.fixed-image:hover {
+    cursor: pointer;
+}
+
+#chat-image {
+    bottom: 10px;
+}
+
+#donate-image {
+    bottom: 70px;
 }

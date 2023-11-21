@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>입양후기</title>
+    <link rel="stylesheet" th:href="@{/css/adoptReview/ReviewList.css}">
+  	<script th:src="@{https://kit.fontawesome.com/ac58eafae7.js}" crossorigin="anonymous"></script>
+</head>
+
+
+<body>
+	
+	<th:block th:replace="~{common/header}"></th:block>
+	
+	<main>
+	    <div class="mainContainer">
+	        <div>입양후기</div>
+	        <div>안락사 없는 동물보호소 멍프랜드에서 행복한 입양 후기를 남겨주세요~</div>
+	
+	        <div>입양리뷰 인증게시판</div> 
+	
+	       
+	        <table class="boardList"> 
+	           
+	            <thead>
+	                <tr>
+	                    <td class="boardRectangle"></td>
+	                </tr>
+	                <tr class="boardTitle">
+	                    <th>게시글 번호</th>
+	                    <th>제목</th>
+	                    <th>작성자</th>
+	                    <th>작성일</th>
+	                    <th>조회수</th>
+	                </tr>
+	                <tr>
+	                    <td class="boardRectangle"></td>
+	                </tr>
+	            </thead>
+	            
+	            <tbody>
+	                <tr class="boardContent">
+	                    <td>3</td> <td>저희 모카 잘 지내고 있어요~</td> <td>이쁜이</td> <td>23.11.15</td> <td>1</td>
+	                </tr>
+	
+	                <tr>
+	                    <td class="boardRectangle_1"></td>
+	                </tr>
+	                
+	                <tr class="boardContent">
+	                    <td>2</td> <td>우리 레오를 만나게 해주셔서 감사합니다!</td> <td>뽀삐뽀</td> <td>23.10.27</td> <td>5</td>
+	                </tr>
+	
+	                <tr>
+	                    <td class="boardRectangle_1"></td>
+	                </tr>
+	
+	                <tr class="boardContent">
+	                    <td>1</td> <td>봄이를 입양했어요 :)</td> <td>예슬</td> <td>23.09.01</td> <td>11</td>
+	                </tr>
+	
+	                <tr>
+	                    <td class="boardRectangle_1"></td>
+	                </tr>
+	
+	            </tbody>
+	           
+	        </table>
+	
+	
+	        <button id="writeReview">글쓰기</button>
+	
+	
+	        <div id="searchContainer"> 
+	            <select name="searchType" id="searchType">
+	                <option value="title">제목</option>
+	                <option value="content">내용</option>
+	                <option value="writer">작성자</option>
+	            </select>
+	            <input type="text" name="searchContent" id="searchContent" placeholder="검색어를 입력해주세요.">
+	            <button id="searchButton">검색</button>
+	        </div>
+	
+	        <div class="pagination">
+	            <a th:href="@{/}" style="letter-spacing: -7px;">&lt;&lt;</a> 
+	            <a th:href="@{/}">&lt;</a>
+	            <a th:href="@{/}">1</a>
+	            <a th:href="@{/}">2</a>
+	            <a th:href="@{/}">3</a>
+	            <a th:href="@{/}">4</a>
+	            <a th:href="@{/}">5</a>
+	            <a th:href="@{/}">6</a>
+	            <a th:href="@{/}">7</a>
+	            <a th:href="@{/}">8</a>
+	            <a th:href="@{/}">9</a>
+	            <a th:href="@{/}">10</a>
+	            <a th:href="@{/}">&gt;</a>
+	            <a th:href="@{/}" style="letter-spacing: -7px;">&gt;&gt;</a>
+	        </div>
+	    </div>		
+		
+	</main>
+
+    <th:block th:replace="~{common/footer}"></th:block>
+   
+</body>
+</html>
+
+
+ 
