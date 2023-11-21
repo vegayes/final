@@ -18,12 +18,13 @@ public class MainController {
 //		return "common/main_test";
 //		return "common/header";
 
-		return "member/findId";
+    
+		return "mypage/admin/DogStatus";
+//	return "member/findId";
 
 //		return "adopt/dogRegistration";		
 //		return "mypage/admin/myPageReservationList_admin";
 //		return "admissionApply/freeAdmission";
-
 	}
 	
 	
