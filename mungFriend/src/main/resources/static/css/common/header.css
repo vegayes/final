@@ -1,0 +1,56 @@
+.header-bar {
+    position: fixed;
+    left: 385px;
+    top: -1px;
+    width: 1600px;
+    height: 90px;
+    background-color: #FEE4D6;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 20px;
+    z-index: 1000;
+}
+
+.logo-container img {
+    max-height: 50px;
+    margin-right: 10px;
+}
+
+
+
+
+.image3 {
+
+    position: fixed;
+    margin-left: -50px;
+    top: 0;
+    left: 120px;
+    z-index: 1000;
+
+
+    width: 200px;
+    height: 85px;
+}
+
+.menu-items {
+    display: flex;
+    flex: 1;
+    justify-content: space-around;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+.menu-items li a {
+    color: black;
+    text-decoration: none;
+    padding: 14px;
+    white-space: nowrap;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.menu-items li a:hover {
+    color: goldenrod;
+    transform: scale(1.40);
+}

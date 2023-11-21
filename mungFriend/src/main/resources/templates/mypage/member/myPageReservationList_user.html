@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이 페이지(유저)-예약 내역 있을 때</title>
+    <link rel="stylesheet" href="/FinalProject/css/myPageReservationList_user.css">
+    <script src="https://kit.fontawesome.com/ac58eafae7.js" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+
+    <main>
+        <!-- 사용자 마이페이지 타이틀 영역-->
+        <section class = "userIntroArea">
+            <div class = "userIntroTitle">
+                예약 내역
+            </div>
+            <hr>
+        </section>
+
+        <!-- 사용자 마이페이지 내용 영역-->
+        <section class = "userContentArea">
+
+            <!-- nav 자리-->
+            <nav class = "navUser">
+                <ul>
+                    <li> <a href = "#"> 찜한 목록</a> </li>
+                    <li> <a href = "#"> 예약 내역</a> </li>
+                    <li> <a href = "#"> 후원 내역</a> </li>
+                    <li> <a href = "#"> 1:1 문의</a></li>
+                    <li> <a href = "#"> 쿠폰함</a></li>
+                    <li> <a href = "#"> 정보 수정</a></li>
+                    <li> <a href = "#"> 회원 탈퇴</a></li>
+                </ul>
+            </nav>
+
+            <!-- 내용 작성영역-->
+            <div class = "userContentContainer">
+
+                <div class="list-top">
+                    <div>사진</div>
+                    <div>정보</div>
+                    <div>예약일</div>
+                </div>
+   
+                <div class="list-bottom">
+                    <div>
+                        <div id="img-wrap">
+                            <img src="/FinalProject/final-img/jieun/시바사진.png" id="dog-img">
+                        </div>
+                    </div>
+                    <div id="dog-info">
+                        <div id="name">코코</div>
+                        <div id="kind">웰시코기</div>
+                        <div id="age">12개월</div>
+                        <div id="gender">남아</div>
+                    </div>
+                    <div id="reserve-date">2023.11.10 15:00</div>
+                    <button id="cancle-btn" type="button">X</button>
+
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

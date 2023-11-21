@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>정보수정 (사용자) </title>
+        <link rel="stylesheet" href="updateInfo_user.css">
+        <script src="https://kit.fontawesome.com/ac58eafae7.js" crossorigin="anonymous"></script>
+        
+    </head>
+    <body>
+
+        <main>
+            <!-- 사용자 마이페이지 타이틀 영역-->
+            <section class = "userIntroArea">
+                <div class = "userIntroTitle">
+                    정보수정
+                </div>
+                <hr>
+            </section>
+
+            <!-- 사용자 마이페이지 내용 영역-->
+            <section class = "userContentArea">
+
+                <!-- nav 자리-->
+                <nav class = "navUser">
+                    <ul>
+                        <li> <a href = "#"> 찜한 목록</a> </li>
+                        <li> <a href = "#"> 예약 내역 </a> </li>
+                        <li> <a href = "#"> 후원 내역 </a> </li>
+                        <li> <a href = "#"> 1:1 문의 </a></li>
+                        <li> <a href = "#"> 쿠폰함 </a></li>
+                        <li> <a href = "#"> 정보 수정 </a></li>
+                        <li> <a href = "#"> 회원 탈퇴 </a></li>
+                    </ul>
+                </nav>
+
+                <!-- 내용 작성영역-->
+                <div class = "userContentContainer">
+                    <form action = "#" method = "POST" name ="updateForm" class = "updateForm">
+
+                        <!-- 정보 수정 한번에 가능? 프로필이랑 내용까지..-->
+                        <div class = "updateElement">
+                            <div class = "updateTitle formDogFlex">
+                                <div class = "formProfile">
+                                    <img src="img/jjangu.png">
+                                </div>
+                            </div>
+    
+                            <div class = "updateInput updateImageFlex">
+                                <label class = "profileBtnArea">
+                                    <input type="file" id="updateProfile" name="updateProfileImage" accept="image/*"/>
+                                    <div class = "formFont formMemberBtn ">
+                                        프로필 사진 변경
+                                    </div>
+                                </label>
+    
+    
+                                <div class = "formFont formMemberBtn profileBtnArea">
+                                    이미지 삭제
+                                </div>
+    
+                            </div>
+                        </div>
+
+
+                        <div class = "updateElement">
+
+                            <div class = "updateTitle">
+                                아이디
+                            </div>
+
+                            <div class = "updateInput">
+                                <fieldset class = "updateFieldset" id = "updateId">
+                                    <input type = "text" name = "updateId" id = "updateId" class = "updateId" value = "user01" readonly>
+                                </fieldset>
+                            </div>
+
+                            <div class = "updateBtn">
+                            </div>
+
+                        </div>
+
+                        <div class = "updateElement">
+
+                            <div class = "updateTitle">
+                                비밀번호
+                            </div>
+
+                            <div class = "updateInput">
+                                <fieldset class = "updateFieldset">
+                                    <input type = "password" name = "updatePw" id = "updatePw" class = "updatePw" >
+                                </fieldset>
+                            </div>
+
+                            <div class = "updateBtn">
+                            </div>
+
+                        </div>
+
+
+                        <div class = "updateElement">
+
+                            <div class = "updateTitle">
+                                비밀번호 확인
+                            </div>
+
+                            <div class = "updateInput">
+                                <fieldset class = "updateFieldset">
+                                    <input type = "password" name = "updatePwCheck" id = "updatePwCheck" class = "updatePwCheck">
+                                </fieldset>
+                            </div>
+
+                            <div class = "updateBtn">
+                            </div>
+                        </div>
+
+                        <!-- 유효성 검사.. -->
+                        <div class = "updateValidationElement">
+                            <div class = "updateProcessBox">
+                                비밀번호가 일치하지 않습니다.
+                            </div>
+                        </div>
+
+                        <div class = "updateElement">
+
+                            <div class = "updateTitle">
+                                이름
+                            </div>
+
+                            <div class = "updateInput">
+                                <fieldset class = "updateFieldset" id = "updateName">
+                                    <input type = "text" name = "updateName" id = "updateName" class = "updateName" value = "김유저" readonly>
+                                </fieldset>
+                            </div>
+
+                            <div class = "updateBtn">
+                            </div>
+
+                        </div>
+
+                        <div class = "updateElement">
+
+                            <div class = "updateTitle">
+                                전화번호
+                            </div>
+
+                            <div class = "updateInput">
+                                <fieldset class = "updateFieldset">
+                                    <input type = "text" name = "updatePhone" id = "updatePhone" class = "updatePhone" value = "010-1234-1212">
+                                </fieldset>
+                            </div>
+
+                            <div class = "updateBtn">
+                            </div>
+                        </div>
+
+
+                        
+                        
+                        <div class = "updateElement">
+
+                            <div class = "updateTitle">
+                                이메일
+                            </div>
+
+                            <div class = "updateInput">
+                                <fieldset class = "updateFieldset">
+                                    <input type = "email" name = "updateEmail" id = "updateEmail" class = "updateEmail">
+                                </fieldset>
+                            </div>
+
+                            <div class = "updateBtn">
+                                <div class = "updateEmailBtn">
+                                    인증번호<br> 받기
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class = "updateElement">
+
+                            <div class = "updateTitle">
+                                인증번호 입력
+                            </div>
+
+                            <div class = "updateInput">
+                                <fieldset class = "updateFieldset">
+                                    <input type = "text" name = "updateEmailCheck" id = "updateEmailCheck" class = "updateEmailCheck">
+                                </fieldset>
+                            </div>
+
+                            <div class = "updateBtn">
+                            </div>
+                        </div>
+
+                        <!-- 유효성 검사.. -->
+                        <div class = "updateValidationElement">
+                            <div class = "updateProcessBox">
+                                인증번호가 일치하지 않습니다.
+                            </div>
+                        </div>
+
+
+                        <div class = "updateElement">
+
+                            <div class = "updateTitle">
+                                닉네임
+                            </div>
+
+                            <div class = "updateInput">
+                                <fieldset class = "updateFieldset">
+                                    <input type = "text" name = "updateNickname" id = "updateNickname" class = "updateNickname" value = "김유저">
+                                </fieldset>
+                            </div>
+
+                            <div class = "updateBtn">
+                            </div>
+                        </div>
+
+                        <!-- 유효성 검사.. -->
+                        <div class = "updateValidationElement">
+                            <div class = "updateProcessBox">
+                                중복된 닉네임입니다.
+                            </div>
+                        </div>
+
+                        <div class = "updateElement">
+
+                            <div class = "updateTitle">
+                                주소
+                            </div>
+
+                            <div class = "updateInput addressFlex">
+                                <div class="updateAddressBorder">
+                                    <input type="text" name="memberAddress" id="sample6_postcode" placeholder="우편번호" maxlength="6">
+
+                                    <button type="button" class = "updateSearchBtn" onclick="sample6_execDaumPostcode()">검색</button>
+                                </div>
+                
+                                <div class="updateAddressBorder">
+                                    <input type="text" name="memberAddress" id="sample6_address" placeholder="도로명/지번 주소">
+                                </div>
+                
+                                <div class="updateAddressBorder">
+                                    <input type="text" name="memberAddress" id="sample6_detailAddress" placeholder="상세 주소">
+                                </div>
+                            </div>
+
+                            <div class = "updateBtn">
+                            </div>
+                        </div>
+
+
+
+
+                        <div class = "updateButtonArea">
+                            <div class = "updateButtonBox">
+                                수정하기
+                            </div>
+                        </div>
+
+
+
+
+                    </form>                    
+                </div>
+            </section>
+        </main>
+    </body>
+</html>

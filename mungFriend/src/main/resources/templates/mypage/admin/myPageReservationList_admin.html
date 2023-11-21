@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이 페이지(관리자) - 예약내역 있을 때</title>
+    <link rel="stylesheet" href="/FinalProject/css/myPageReservationList_admin.css">
+    <script src="https://kit.fontawesome.com/ac58eafae7.js" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+
+    <main>
+        <!-- 타이틀 변경-->
+        <section class = "adminIntroArea">
+            <div class = "adminIntroTitle">
+                예약 내역
+            </div>
+            <hr>
+        </section>
+
+        <!-- nav + 내용작성 -->
+        <section class = "adminContentArea">
+
+            <!-- nav 자리-->
+            <nav class = "navAdmission">
+                <ul>
+                    <li> <a href = "#"> 1:1 문의함</a> </li>
+                    <li> <a href = "#"> 예약 내역</a> </li>
+                    <li> <a href = "#"> 후원 내역</a> </li>
+                    <li> <a href = "#"> 입소신청 내역</a></li>
+                    <li> <a href = "#"> 회원 관리</a></li>
+                    <li> <a href = "#"> 관리 현황</a></li>
+                </ul>
+            </nav>
+
+            <!-- 내용 영역-->
+            <div class = "adminContentContainer">
+
+                <form action="#">
+                    <div class="search-area">
+                        <input type="search" id="search" placeholder="강아지 이름 검색">
+                        <img src="/FinalProject/final-img/jieun/finder.png" id="finder-img">
+                    </div>
+                </form>
+
+                <div class="list-top">
+                    <div>예약번호</div>
+                    <div>강아지 이름</div>
+                    <div>예약자</div>
+                    <div>예약자 이메일</div>
+                    <div>예약 일시</div>
+                    <div>신청 시각</div>
+                    <div>처리상황</div>
+                </div>
+
+                <div id="scroll">
+                    <div class="list-bottom">
+                        <div id="list">
+                            <input type="checkbox">
+                            <div id="reserve-no">1</div>
+                            <div id="dog-name">모카</div>
+                            <div id="reserve-name">유은서</div>
+                            <div id="reserve-email">eunseo@naver.com</div>
+                            <div id="reserve-date">2023-11-15</div>
+                            <div id="reserve-time">11:00</div>
+                            <div id="reserve-state">예약 완료</div>
+                        </div>
+                        <div id="list">
+                            <input type="checkbox">
+                            <div id="reserve-no">1</div>
+                            <div id="dog-name">모카</div>
+                            <div id="reserve-name">유은서</div>
+                            <div id="reserve-email">eunseo@naver.com</div>
+                            <div id="reserve-date">2023-11-15</div>
+                            <div id="reserve-time">11:00</div>
+                            <div id="reserve-state">예약 완료</div>
+                        </div>
+                    </div>                            
+                </div>
+
+                <button type="submit" id="cancle-btn">예약 취소</button>
+
+            </div>
+        </section>
+    </main>
+</body>
+
+<script>
+    // JavaScript를 사용하여 내용이 있는 경우에만 스크롤을 활성화
+    const scroll = document.getElementById('scroll');
+    const hasContent = scroll.scrollHeight > scroll.clientHeight;
+
+    if (!hasContent) {
+        scroll.style.overflowY = 'hidden';
+    }
+</script>
+
+</html>

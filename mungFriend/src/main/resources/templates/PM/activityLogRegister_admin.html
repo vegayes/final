@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>활동 일지 등록</title>
+
+    <link rel="stylesheet" href="activityLogRegister_admin.css">
+
+    <script src="https://kit.fontawesome.com/f821b57119.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <section>
+        <!-- 헤더 -->
+        <div id="header"></div>
+
+        <!-- 내용 -->
+        <div id="content">
+            <!-- 왼쪽 여백 -->
+            <div id="left-gap"></div>
+
+            <!-- 콘텐츠 영역 -->
+            <div id="content-section">
+                <!-- 제목 영역 -->
+                <div id="title-section">
+                    <div id="bone-section">
+                        <img src="img/bone.png" id="bone">
+                    </div>
+                    <div id="title-sec">
+                        오늘의 활동 일지
+                    </div>
+                </div>
+
+                <!-- 내용 영역 -->
+                <div id="cont-section">
+                    <form action="#" method="" id="register-form">
+                        <!-- 사진 영역 -->
+                        <div id="photoLine-up"></div>
+                        <div id="photo-title">사진</div>
+                        <div id="photoLine-bottom"></div>
+                        <div id="photo-section">
+                            <div id="photo-upload-sec">
+                                <img src="img/noImage.png" id="noImage">
+                            </div>
+                            <div id="upload-btn-sec">
+                                <label for="uploadInput">사진 업로드</label>
+                                <input type="file" name="uploadImage" id="uploadInput" accept="image/*">
+                            </div>
+                            <div id="img-delete-sec">
+                                <button type="button" id="img-del-btn">이미지 삭제</button>
+                            </div>
+                        </div>
+
+                        <!-- 내용 영역 -->
+                        <div id="contentLine-up"></div>
+                        <div id="content-title">내용</div>
+                        <div id="contentLine-bottom"></div>
+                        <div id="contentInsert-section">
+                            <textarea id="textarea" name="textarea" placeholder="내용을 입력해주세요."></textarea>
+                        </div>
+
+                        <!-- 등록하기 영역 -->
+                        <div id="register-section">
+                            <button type="submit" id="register-btn">등록하기</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- 오른쪽 여백 -->
+            <div id="right-gap">
+                <a href="#"><img src="img/chat.png" class="fixed-image" id="chat-image"></a>
+                <img src="img/donate.png" class="fixed-image" id="donate-image">
+            </div>
+        </div>
+
+        <!-- 풋터 -->
+        <div id="footer"></div>
+    </section>
+</body>
+</html>

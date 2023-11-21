@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이 페이지(유저) -찜한 목록 있을 때</title>
+    <link rel="stylesheet" href="/FinalProject/css/myPageLikeList.css">
+    <script src="https://kit.fontawesome.com/ac58eafae7.js" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+
+    <main>
+        <!-- 사용자 마이페이지 타이틀 영역-->
+        <section class = "userIntroArea">
+            <div class = "userIntroTitle">
+                찜한 목록
+            </div>
+            <hr>
+        </section>
+
+        <!-- 사용자 마이페이지 내용 영역-->
+        <section class = "userContentArea">
+
+            <!-- nav 자리-->
+            <nav class = "navUser">
+                <ul>
+                    <li> <a href = "#"> 찜한 목록</a> </li>
+                    <li> <a href = "#"> 예약 내역</a> </li>
+                    <li> <a href = "#"> 후원 내역</a> </li>
+                    <li> <a href = "#"> 1:1 문의</a></li>
+                    <li> <a href = "#"> 쿠폰함</a></li>
+                    <li> <a href = "#"> 정보 수정</a></li>
+                    <li> <a href = "#"> 회원 탈퇴</a></li>
+                </ul>
+            </nav>
+
+            <!-- 내용 작성영역-->
+            <div class = "userContentContainer">
+                <button id="prevBtn" type="button"><</button>
+                <div class="like-dog-list">
+                    <div class="like-dog">
+                        <div class="top">
+                            <div id="dog-name">코코</div>
+                            <button type="button">X</button>
+                        </div>
+                        <div class="image">
+                            <div id="img-wrap">
+                                <img src="/FinalProject/final-img/jieun/시바사진.png" id="dog-img">
+                            </div>
+                        </div>
+                        <div id="dog-info">12개월 / 남아</div>
+                        <div id="dog-kind">웰시코기</div>
+                    </div>
+                    <div class="like-dog">
+                        <div class="top">
+                            <div id="dog-name">코코</div>
+                            <button type="button">X</button>
+                        </div>
+                        <div class="image">
+                            <div id="img-wrap">
+                                <img src="/FinalProject/final-img/jieun/시바사진.png" id="dog-img">
+                            </div>
+                        </div>
+                        <div id="dog-info">12개월 / 남아</div>
+                        <div id="dog-kind">웰시코기</div>
+                    </div>
+                    <div class="like-dog">
+                        <div class="top">
+                            <div id="dog-name">코코</div>
+                            <button type="button">X</button>
+                        </div>
+                        <div class="image">
+                            <div id="img-wrap">
+                                <img src="/FinalProject/final-img/jieun/시바사진.png" id="dog-img">
+                            </div>
+                        </div>
+                        <div id="dog-info">12개월 / 남아</div>
+                        <div id="dog-kind">웰시코기</div>
+                    </div>
+                    <div class="like-dog">
+                        <div class="top">
+                            <div id="dog-name">코코</div>
+                            <button type="button">X</button>
+                        </div>
+                        <div class="image">
+                            <div id="img-wrap">
+                                <img src="/FinalProject/final-img/jieun/시바사진.png" id="dog-img">
+                            </div>
+                        </div>
+                        <div id="dog-info">12개월 / 남아</div>
+                        <div id="dog-kind">웰시코기</div>
+                    </div>
+                </div>                    
+                <button id="nextBtn" type="button">></button>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

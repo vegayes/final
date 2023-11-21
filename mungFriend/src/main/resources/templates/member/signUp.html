@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+
+    <link rel="stylesheet" href="signUp.css">
+</head>
+<body>
+    <section>
+        <!-- 헤더 -->
+        <div id="header"></div>
+
+        <!-- 내용 -->
+        <div id="content">
+            <!-- 왼쪽 여백 -->
+            <div id="left-gap"></div>
+
+            <!-- 회원가입 영역 -->
+            <div id="signUp-section">
+                <!-- 로고 영역 -->
+                <div id="logo-section">
+                    <img src="img/logo.png" id="logo">
+                </div>
+
+                <!-- 회원가입 form 영역 -->
+                <div id="form-section">
+                    <form action="#" method="" id="signUp-form">
+                        <!-- 아이디 -->
+                        <div id="id-sec">
+                            <div id="id-tit">아이디</div>
+                            <div id="id-input">
+                                <input type="text" id="id" name="id">
+                            </div>
+                            <div id="id-blank"></div>
+                        </div>
+
+                        <div id="id-dupli-sec">
+                            <div id="id-left-blank"></div>
+                            <div id="id-center">중복검사</div>
+                            <div id="id-right-blank"></div>
+                        </div>
+
+                        <!-- 비밀번호 -->
+                        <div id="pw-sec">
+                            <div id="pw-tit">비밀번호</div>
+                            <div id="pw-input">
+                                <input type="password" id="pw" name="pw">
+                            </div>
+                            <div id="pw-blank"></div>
+                        </div>
+
+                        <div id="pw-confir-sec">
+                            <div id="pw-confir-tit">비밀번호 확인</div>
+                            <div id="pw-confir-input">
+                                <input type="password" id="pw-confir" name="pw-confir">
+                            </div>
+                            <div id="pw-confir-blank"></div> 
+                        </div>
+
+                        <div id="pw-vali-sec">
+                            <div id="pw-left-blank"></div>
+                            <div id="pw-center">유효성검사</div>
+                            <div id="pw-right-blank"></div>
+                        </div>
+
+                        <!-- 이름 -->
+                        <div id="name-sec">
+                            <div id="name-tit">이름</div>
+                            <div id="name-input">
+                                <input type="text" id="name" name="name">
+                            </div>
+                            <div id="name-blank"></div>
+                        </div>
+
+                        <div id="name-vali-sec">
+                            <div id="name-left-blank"></div>
+                            <div id="name-center">유효성검사</div>
+                            <div id="name-right-blank"></div>
+                        </div>
+
+                        <!-- 전화번호 -->
+                        <div id="phone-sec">
+                            <div id="phone-tit">전화번호</div>
+                            <div id="phone-input">
+                                <input type="tel" id="phone" name="phone" placeholder="'-' 제외">
+                            </div>
+                            <div id="phone-blank"></div>
+                        </div>
+
+                        <div id="phone-vali-sec">
+                            <div id="phone-left-blank"></div>
+                            <div id="phone-center">유효성검사</div>
+                            <div id="phone-right-blank"></div>
+                        </div>
+
+                        <!-- 이메일 -->
+                        <div id="email-sec">
+                            <div id="email-tit">이메일</div>
+                            <div id="email-input">
+                                <input type="email" id="email" name="email">
+                            </div>
+                            <div id="authNum-section">
+                                <button type="button" id="authNum-btn">인증번호 받기</button>
+                            </div>
+                        </div>
+
+                        <div id="email-vali-sec">
+                            <div id="email-left-blank"></div>
+                            <div id="email-center">유효성검사</div>
+                            <div id="email-right-blank"></div>
+                        </div>
+
+                        <div id="authNum-sec">
+                            <div id="authNum-tit">인증번호 입력</div>
+                            <div id="authNum-input">
+                                <input type="text" id="authNum" name="authNum">
+                            </div>
+                            <div id="authNum-confir-section">
+                                <button type="button" id="authNum-confir-btn">인증번호 확인</button>
+                            </div>
+                        </div>
+
+                        <div id="authNum-vali-sec">
+                            <div id="authNum-left-blank"></div>
+                            <div id="authNum-center">유효성검사</div>
+                            <div id="authNum-right-blank"></div>
+                        </div>
+
+                        <!-- 닉네임 -->
+                        <div id="nickName-sec">
+                            <div id="nickName-tit">닉네임</div>
+                            <div id="nickName-input">
+                                <input type="text" id="nickName" name="nickName">
+                            </div>
+                            <div id="nickName-blank"></div>
+                        </div>
+
+                        <!-- 주소 -->
+                        <div class="addr-sec">
+                            <div id="addr-tit">주소</div>
+                            <div id="addr-input">
+                                <input type="text" id="addr1" name="addr1">
+                            </div>
+                            <div id="addr-btn-sec">
+                                <button type="button" id="search-btn">검색</button>
+                            </div>
+                        </div>
+
+                        <div id="line1-sec">
+                            <div id="line1-left-blank"></div>
+                            <div id="line1-center"></div>
+                            <div id="line1-right-blank"></div>
+                        </div>
+
+                        <div class="addr-sec">
+                            <div id="addr-left-blank1"></div>
+                            <div id="addr-input">
+                                <input type="text" id="addr2" name="addr2">
+                            </div>
+                            <div id="addr-right-blank1"></div>
+                        </div>
+
+                        <div id="line2-sec">
+                            <div id="line2-left-blank"></div>
+                            <div id="line2-center"></div>
+                            <div id="line2-right-blank"></div>
+                        </div>
+
+                        <div class="addr-sec">
+                            <div id="addr-left-blank2"></div>
+                            <div id="addr-input">
+                                <input type="text" id="addr3" name="addr3">
+                            </div>
+                            <div id="addr-right-blank2"></div>
+                        </div>
+
+                        <div id="line3-sec">
+                            <div id="line3-left-blank"></div>
+                            <div id="line3-center"></div>
+                            <div id="line3-right-blank"></div>
+                        </div>
+
+                        <!-- 프로필 -->
+                        <div id="profile-sec">
+                            <div id="profile-upload-sec">
+                                <img src="img/profile_noImage.png" id="profile_noImage">
+                            </div>
+                            <div id="upload-btn-sec">
+                                <label for="uploadInput">프로필 사진 업로드</label>
+                                <input type="file" name="uploadImage" id="uploadInput" accept="image/*">
+                            </div>
+                            <div id="img-delete-sec">
+                                <button type="button" id="img-del-btn">이미지 삭제</button>
+                            </div>
+                        </div>
+
+                        <!-- 회원가입 버튼 -->
+                        <div id="signUp-btn-sec">
+                            <button type="submit" id="signUp-btn">회원가입</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- 오른쪽 여백 -->
+            <div id="right-gap">
+                <a href="#"><img src="img/chat.png" class="fixed-image" id="chat-image"></a>
+                <img src="img/donate.png" class="fixed-image" id="donate-image">
+            </div>
+        </div>
+
+        <!-- 풋터 -->
+        <div id="footer"></div>
+    </section>
+</body>
+</html>

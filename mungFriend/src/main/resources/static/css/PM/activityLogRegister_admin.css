@@ -1,0 +1,269 @@
+/* 글꼴 */
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+.nanumgothic * {
+ font-family: 'Nanum Gothic', sans-serif;
+}
+
+/* 전체 */
+* {
+    box-sizing: border-box;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+/* section, div {
+    border: 1px solid black;
+} */
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+body > section {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 헤더 */
+#header {
+    flex-basis: 10%;
+}
+
+/* 내용 */
+#content {
+    flex-basis: 70%;
+    display: flex;
+}
+
+/* 왼쪽 여백 */
+#left-gap {
+    flex-basis: 20%;
+}
+
+/* 콘텐츠 영역 */
+#content-section {
+    flex-basis: 60%;
+    display: flex;
+    flex-direction: column;
+    padding: 150px;
+}
+
+/* 제목 영역 */
+#title-section {
+    flex-basis: 10%;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+#bone-section {
+    flex-basis: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#bone {
+    width: 40px;
+    height: 40px;
+}
+
+#title-sec {
+    flex-basis: 95%;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 20px;
+    padding-left: 10px;
+}
+
+/* 내용 영역 */
+#cont-section {
+    flex-basis: 90%;
+}
+
+#register-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 500px;
+}
+
+/* 사진 영역 */
+#photoLine-up {
+    flex-basis: 2%;
+    width: 400px;
+    background-color: #F9C9B0;
+}
+
+#photo-title {
+    flex-basis: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    padding: 10px;
+}
+
+#photoLine-bottom {
+    flex-basis: 2%;
+    width: 400px;
+    background-color: #F9C9B0;
+}
+
+#photo-section {
+    flex-basis: 36%;
+    display: flex;
+}
+
+#photo-upload-sec {
+    flex-basis: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#noImage {
+    width: 130px;
+    height: 130px;
+}
+
+#upload-btn-sec {
+    flex-basis: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#upload-btn-sec > * {
+    border: 1px solid #FFC0C0;
+    border-radius: 5px;
+    width: 110px;
+    height: 30px;
+    text-align: center;
+    margin: 14px;
+    padding: 5px 0px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+#uploadInput {
+    display: none;
+}
+
+#img-delete-sec {
+    flex-basis: 30%;
+    display: flex;
+    align-items: center;
+}
+
+#img-del-btn {
+    border: 1px solid #FFC0C0;
+    background-color: white;
+    border-radius: 5px;
+    width: 110px;
+    height: 30px;
+    text-align: center;
+    padding: 3px 0px;
+    cursor: pointer;
+}
+
+/* 내용 영역 */
+#contentLine-up {
+    flex-basis: 2%;
+    width: 400px;
+    background-color: #F9C9B0;
+}
+
+#content-title {
+    flex-basis: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    padding: 10px;
+}
+
+#contentLine-bottom {
+    flex-basis: 2%;
+    width: 400px;
+    background-color: #F9C9B0;
+}
+
+#contentInsert-section {
+    flex-basis: 36%;
+}
+
+#textarea {
+    width: 400px;
+    height: 130px;
+    border: 2px solid #F9C9B0;
+    border-radius: 5px;
+    resize: none;
+    padding: 10px;
+    margin: 10px 0px;
+}
+
+/* 등록하기 영역 */
+#register-section {
+    flex-basis: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#register-btn {
+    width: 130px;
+    height: 40px;
+    background-color: #FEE4D6;
+    font-weight: bold;
+    border: none;
+}
+
+#register-btn:hover {
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 오른쪽 여백 */
+#right-gap {
+    flex-basis: 20%;
+}
+
+/* 오른쪽 하단 후원, 챗봇 아이콘 */
+.fixed-image {
+    position: fixed;
+    right: 10px;
+    z-index: 100;
+    width: 50px;
+}
+
+.fixed-image:hover {
+    cursor: pointer;
+}
+
+#chat-image {
+    bottom: 10px;
+}
+
+#donate-image {
+    bottom: 70px;
+}
+
+/* 풋터 */
+#footer {
+    flex-basis: 20%;
+}

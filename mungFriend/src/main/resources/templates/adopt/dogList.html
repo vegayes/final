@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>입양하기(리스트)</title>
+    <link rel="stylesheet" href="/FinalProject/css/dogList.css">
+</head>
+<body>
+    <main>
+        <div class="main-left"></div>
+
+        <div class="main-center">
+            <div class="title">입양하기</div>
+            <div class="explane">"이 작은 발걸음이 여러분 가정에 큰 사랑으로 다가오길 바랍니다.
+                새로운 가족 구성원을 환영하면서, 그들의 행복한 삶을 위해 함께 노력해 주세요."
+            </div>
+            
+            <div class="filter">
+                <form name="filter" multiple required action="#">
+                    <div class="filter-age">
+                        <select id="age" name="age">
+                            <option value="none">나이</option>
+                        </select>
+                    </div>
+                    <div class="filter-gender">
+                        <select id="gender" name="gender">
+                            <option value="none">성별</option>
+                            <option value="mail">남아</option>
+                            <option value="femail">여아</option>
+                        </select>
+                    </div>
+                    <div class="filter-kind">
+                        <select id="kind" name="kind">
+                            <option value="none">견종</option>
+                            <option value=""></option>
+                        </select>
+                    </div>
+                    <div class="filter-size">
+                        <select id="size" name="size">
+                            <option value="none">크기</option>
+                            <option value="small">소형</option>
+                            <option value="medium">중형</option>
+                            <option value="large">대형</option>
+                        </select>
+                    </div>
+                    <div class="filter-character">
+                        <select id="character" name="character">                            
+                            <option value="none">성격</option>
+                            <option value="male"></option>
+                        </select>
+                    </div>
+                    <div class="filter-surgery">
+                        <select id="surgery" name="surgery">
+                            <option value="none">중성화 여부</option>
+                            <option value="Y">완료</option>
+                            <option value="N">미완료</option>
+                        </select>
+                    </div>
+                    <button type="submit" value="Submit">
+                        <img src="/FinalProject/final-img/jieun/finder.png" id="finder-img">
+                    </button>
+                </form>
+            </div>
+
+            <div class="dog">
+                <div class="dog-list">
+                    <div id="dog-list">
+                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <div id="dog-kind">말티푸</div>
+                    </div>
+                    <div id="dog-list">
+                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <div id="dog-kind">말티푸</div>
+                    </div>
+                    <div id="dog-list">
+                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <div id="dog-kind">말티푸</div>
+                    </div>
+                    <div id="dog-list">
+                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <div id="dog-kind">말티푸</div>
+                    </div>
+                    <div id="dog-list">
+                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <div id="dog-kind">말티푸</div>
+                    </div>
+                    <div id="dog-list">
+                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <div id="dog-kind">말티푸</div>
+                    </div>
+                    <div id="dog-list">
+                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <div id="dog-kind">말티푸</div>
+                    </div>
+                    <div id="dog-list">
+                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <div id="dog-kind">말티푸</div>
+                    </div>
+                    <div id="dog-list">
+                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <div id="dog-kind">말티푸</div>
+                    </div>
+                    <div id="dog-list">
+                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <div id="dog-kind">말티푸</div>
+                    </div>
+                    <div id="dog-list">
+                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <div id="dog-kind">말티푸</div>
+                    </div>
+                    <div id="dog-list">
+                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <div id="dog-kind">말티푸</div>
+                    </div>
+                    <div id="dog-list">
+                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <div id="dog-kind">말티푸</div>
+                    </div>
+                    <div id="dog-list">
+                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <div id="dog-kind">말티푸</div>
+                    </div>
+                    <div id="dog-list">
+                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <div id="dog-kind">말티푸</div>
+                    </div>
+                    <div id="dog-list">
+                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
+                        <div id="dog-kind">말티푸</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="regits">
+                <a class="regits-btn" href="#">등록하기</a>
+            </div>
+
+            <div class="pagination-area">
+                <ul class="pagination">
+           
+                    <!-- 첫 페이지로 이동 -->
+                    <li><a href="/link/dogList?cp=1${kq}">&lt;&lt;</a></li>
+
+                    <!-- 이전 목록 마지막 번호로 이동 -->
+                    <li><a href="/link/dogList?cp=${pagination.prevPage}${kq}">&lt;</a></li>
+
+                    <!-- 특정 페이지로 이동 -->
+                    <c:forEach var ="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
+                        <c:choose>
+                            <!-- 현재 보고있는 페이지 -->
+                            <c:when test="${i == pagination.currentPage}">
+                                <li><a class="current">${i}</a></li>
+                            </c:when>
+                            
+                            <!-- 현재 페이지를 제외한 나머지 페이지 -->
+                            <c:otherwise>
+                                <li><a href="/link/dogList?cp=${i}${kq}">${i}</a></li>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                    
+                    <!-- 다음 목록 시작 번호로 이동 -->
+                    <li><a href="/link/dogList?cp=${pagination.nextPage}${kq}">&gt;</a></li>
+
+                    <!-- 끝 페이지로 이동 -->
+                    <li><a href="/link/dogList?cp=${pagination.maxPage}${kq}">&gt;&gt;</a></li>
+
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="main-right"></div>
+    </main>
+</body>
+</html>

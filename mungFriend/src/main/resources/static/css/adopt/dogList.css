@@ -1,0 +1,213 @@
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+.nanumgothic * {
+font-family: 'Nanum Gothic', sans-serif;
+}
+
+*{
+    /* border: 1px solid red; */
+    box-sizing: border-box;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+main{
+    display: flex;
+    width: 100%;
+    height: auto;
+}
+
+.main-left,
+.main-right{
+    flex-basis: 20%;
+}
+
+.main-center{
+    flex-basis: 60%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* explane */
+
+.main-center > div:first-child{
+    margin-top: 100px;
+    
+    width: 100%;
+    height: 60px;
+
+    margin-left: 30px;
+    margin-bottom: 10px;
+    
+    font-weight: bold;
+    font-size: 25px;
+    
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.explane{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
+    margin-left: 30px;
+    
+    white-space: pre-line;
+    line-height: 3;
+    font-size: 13px;
+    padding-left: 20px;
+
+    width: 1000px;
+    height: 100px;
+
+    border: 3px solid #FEE4D6;
+    border-radius: 15px;
+}
+
+
+/* filter */
+.filter{
+    margin: 100px 0 50px 0 ;
+}
+
+.filter > form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+div[class ^= filter-] select{
+    border: none;
+    background-color: #FEE4D6;
+
+    border-radius: 8px;
+
+    width: auto;
+    height: 30px;
+
+    padding: 0 3px 0 3px;
+    margin-right: 8px;
+}   
+
+form > button{
+    background-color: white;
+    border: none;
+    
+    line-height: 3px;
+    
+    margin-left: 10px;
+}
+
+form > button > img{
+    width: 25px;
+    height: 25px;
+}
+
+
+/* dog-list */
+.dog{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0 30px 60px 30px;
+}
+
+.dog-list{
+    display: grid;
+    width: 90%;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 10px;
+}
+
+#dog-img{
+    max-width: 230px;
+    max-height: 230px;
+}
+
+#dog-kind{
+    border: 2px solid #FEE4D6;
+    border-radius: 8px;
+
+    width: 225px;
+    height: 30px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
+
+/* regits */
+.regits{
+    display: flex;
+    justify-content: end;
+    margin-right: 95px;
+}
+
+.regits-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 110px;
+    height: 30px;
+
+    text-decoration: none;
+    color:  black;
+    background-color: #FEE4D6;
+    border-radius: 5px;
+
+    font-size: 15px;
+    font-weight: bold;
+}
+
+
+/* main - content - index */
+
+.pagination{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+	height: 10%;
+}
+
+.pagination li{
+    width: 30px;
+    height: 30px;
+    margin: 0 5px;
+    text-align: center;
+    font-size: 12px;
+    
+	list-style: none;
+}
+
+.pagination a {
+    text-decoration: none;
+}
+
+.pagination a{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.pagination > li > a{
+	color : black;
+}
+
+.pagination-area{
+	height: 10%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

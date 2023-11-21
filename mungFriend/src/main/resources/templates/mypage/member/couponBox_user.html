@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>쿠폰함 (사용자)</title>
+        <link rel="stylesheet" th:href="@{/css/mypage/member/couponBox_user.css}">
+        <script th:src="@{https://kit.fontawesome.com/ac58eafae7.js}" crossorigin="anonymous"></script>
+        
+    </head>
+    <body>
+
+        <main>
+            <section class = "userIntroArea">
+                <div class = "userIntroTitle">
+                    쿠폰함
+                </div>
+                <hr>
+            </section>
+
+            <section class = "userContentArea">
+
+                <!-- nav 자리-->
+                <nav class = "navUser">
+                    <ul>
+                        <li> <a href = "#"> 찜한 목록</a> </li>
+                        <li> <a href = "#"> 예약 내역 </a> </li>
+                        <li> <a href = "#"> 후원 내역 </a> </li>
+                        <li> <a href = "#"> 1:1 문의 </a></li>
+                        <li> <a href = "#"> 쿠폰함 </a></li>
+                        <li> <a href = "#"> 정보 수정 </a></li>
+                        <li> <a href = "#"> 회원 탈퇴 </a></li>
+                    </ul>
+                </nav>
+
+                <!-- 쿠폰함 내용 영역-->
+                <div class = "userContentContainer">
+
+                    <!-- 쿠폰 영역 잡기-->
+                    <div class = "userCouponListArea">
+
+                        <!-- 쿠폰 한개-->
+                        <div class = "userCouponElementArea">
+
+                            <div class = "couponBoxArea">
+                                <div class = "couponBox">
+                                    <div class = "couponImgArea">
+                                        <img src="../images/coupon.png">
+                                    </div>
+                                    <div class = "couponInfoArea">
+                                        <p>방문 시 이벤트 용품 증정</p>
+                                        <p class = "couponInfo">유효기간 : 2023.11.15 까지</p>
+                                    </div>
+                                </div>
+
+                                <div class = "couponBoxPointArea">
+                                    <div class="point"></div>
+                                    <div class="point"></div>
+                                    <div class="point"></div>
+                                    <div class="point"></div>
+                                    <div class="point"></div>
+                                    <div class="point"></div>
+                                </div>
+                            </div>
+							<!--
+                            <div class = "couponInfo">
+                                유효기간 : 2023.11.15 까지
+                            </div>
+							-->
+                        </div>
+
+
+                            <!-- 쿠폰 한개-->
+                            <div class = "userCouponElementArea">
+                                <div>
+    
+                                </div>
+    
+                            </div>
+ 
+                    </div>
+                </div>
+            </section>
+        </main>
+    </body>
+</html>

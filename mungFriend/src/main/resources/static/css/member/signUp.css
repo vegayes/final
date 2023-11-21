@@ -1,0 +1,700 @@
+/* 글꼴 */
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+.nanumgothic * {
+ font-family: 'Nanum Gothic', sans-serif;
+}
+
+/* 전체 */
+* {
+    box-sizing: border-box;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+/* section, div {
+    border: 1px solid black;
+} */
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+body > section {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 헤더 */
+#header {
+    flex-basis: 10%;
+}
+
+/* 내용 */
+#content {
+    flex-basis: 70%;
+    display: flex;
+}
+
+/* 왼쪽 여백 */
+#left-gap {
+    flex-basis: 20%;
+}
+
+/* 회원가입 영역 */
+#signUp-section {
+    flex-basis: 60%;
+    display: flex;
+    flex-direction: column;
+    background-color: #FEE4D6;
+    border-radius: 5px;
+    align-items: center;
+    margin: 100px 450px;
+    padding: 50px;
+}
+
+/* 로고 영역 */
+#logo-section {
+    flex-basis: 20%;
+}
+
+#logo {
+    width: 150px;
+    height: 130px;
+}
+
+/* 회원가입 form 영역 */
+#form-section {
+    flex-basis: 80%;
+    width: 100%;
+}
+
+#signUp-form {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+}
+
+/* 아이디 */
+#id-sec {
+    flex-basis: 5%;
+    display: flex;
+    margin-bottom: 5px;
+}
+
+#id-tit {
+    flex-basis: 30%;
+    font-weight: bold;
+}
+
+#id-input {
+    flex-basis: 50%;
+}
+
+#id {
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+#id-blank {
+    flex-basis: 20%;
+}
+
+#id-dupli-sec {
+    flex-basis: calc(17%/9);
+    display: flex;
+    margin-bottom: 10px;
+}
+
+#id-left-blank {
+    flex-basis: 30%;
+}
+
+#id-center {
+    flex-basis: 50%;
+    font-weight: lighter;
+    font-size: 13px;
+}
+
+#id-right-blank {
+    flex-basis: 20%;
+}
+
+/* 비밀번호 */
+#pw-sec {
+    flex-basis: 5%;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+#pw-tit {
+    flex-basis: 30%;
+    font-weight: bold;
+}
+
+#pw-input {
+    flex-basis: 50%;
+}
+
+#pw {
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+#pw-blank {
+    flex-basis: 20%;
+}
+
+#pw-confir-sec {
+    flex-basis: 5%;
+    display: flex;
+    margin-bottom: 5px;
+}
+
+#pw-confir-tit {
+    flex-basis: 30%;
+    font-weight: bold;
+}
+
+#pw-confir-input {
+    flex-basis: 50%;
+}
+
+#pw-confir {
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+#pw-confir-blank {
+    flex-basis: 20%;
+}
+
+#pw-vali-sec {
+    flex-basis: calc(17%/9);
+    display: flex;
+    margin-bottom: 10px;
+}
+
+#pw-left-blank {
+    flex-basis: 30%;
+}
+
+#pw-center {
+    flex-basis: 50%;
+    font-weight: lighter;
+    font-size: 13px;
+}
+
+#pw-right-blank {
+    flex-basis: 20%;
+}
+
+/* 이름 */
+#name-sec {
+    flex-basis: 5%;
+    display: flex;
+    margin-bottom: 5px;
+}
+
+#name-tit {
+    flex-basis: 30%;
+    font-weight: bold;
+}
+
+#name-input {
+    flex-basis: 50%;
+}
+
+#name {
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+#name-blank {
+    flex-basis: 20%;
+}
+
+#name-vali-sec {
+    flex-basis: calc(17%/9);
+    display: flex;
+    margin-bottom: 10px;
+}
+
+#name-left-blank {
+    flex-basis: 30%;
+}
+
+#name-center {
+    flex-basis: 50%;
+    font-weight: lighter;
+    font-size: 13px;
+}
+
+#name-right-blank {
+    flex-basis: 20%;
+}
+
+/* 전화번호 */
+#phone-sec {
+    flex-basis: 5%;
+    display: flex;
+    margin-bottom: 5px;
+}
+
+#phone-tit {
+    flex-basis: 30%;
+    font-weight: bold;
+}
+
+#phone-input {
+    flex-basis: 50%;
+}
+
+#phone {
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+#phone-blank {
+    flex-basis: 20%;
+}
+
+#phone-vali-sec {
+    flex-basis: calc(17%/9);
+    display: flex;
+    margin-bottom: 10px;
+}
+
+#phone-left-blank {
+    flex-basis: 30%;
+}
+
+#phone-center {
+    flex-basis: 50%;
+    font-weight: lighter;
+    font-size: 13px;
+}
+
+#phone-right-blank {
+    flex-basis: 20%;
+}
+
+/* 이메일 */
+#email-sec {
+    flex-basis: 5%;
+    display: flex;
+}
+
+#email-tit {
+    flex-basis: 30%;
+    font-weight: bold;
+}
+
+#email-input {
+    flex-basis: 50%;
+}
+
+#email {
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+#authNum-section{
+    flex-basis: 20%;
+}
+
+#authNum-btn {
+    width: 70px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+}
+
+#authNum-btn:hover {
+    cursor: pointer;
+}
+
+#email-vali-sec {
+    flex-basis: calc(17%/9);
+    display: flex;
+    margin-bottom: 10px;
+}
+
+#email-left-blank {
+    flex-basis: 30%;
+}
+
+#email-center {
+    flex-basis: 50%;
+    font-weight: lighter;
+    font-size: 13px;
+}
+
+#email-right-blank {
+    flex-basis: 20%;
+}
+
+#authNum-sec {
+    flex-basis: 5%;
+    display: flex;
+    margin-bottom: 5px;
+}
+
+#authNum-tit {
+    flex-basis: 30%;
+    font-weight: bold;
+}
+
+#authNum-input {
+    flex-basis: 50%;
+}
+
+#authNum {
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+#authNum-confir-section {
+    flex-basis: 20%;
+}
+
+#authNum-confir-btn {
+    width: 70px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+}
+
+#authNum-confir-btn:hover {
+    cursor: pointer;
+}
+
+#authNum-vali-sec {
+    flex-basis: calc(17%/9);
+    display: flex;
+    margin-bottom: 10px;
+}
+
+#authNum-left-blank {
+    flex-basis: 30%;
+}
+
+#authNum-center {
+    flex-basis: 50%;
+    font-weight: lighter;
+    font-size: 13px;
+}
+
+#authNum-right-blank {
+    flex-basis: 20%;
+}
+
+/* 닉네임 */
+#nickName-sec {
+    flex-basis: 5%;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+#nickName-tit {
+    flex-basis: 30%;
+    font-weight: bold;
+}
+
+#nickName-input {
+    flex-basis: 50%;
+}
+
+#nickName {
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+#nickName-blank {
+    flex-basis: 20%;
+}
+
+/* 주소 */
+.addr-sec {
+    flex-basis: 5%;
+    display: flex;
+}
+
+#addr-tit {
+    flex-basis: 30%;
+    font-weight: bold;
+}
+
+#addr-input {
+    flex-basis: 50%;
+}
+
+#addr1 {
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    padding-left: 10px;
+    background-color: transparent;
+}
+
+#addr-btn-sec {
+    flex-basis: 20%;
+}
+
+#search-btn {
+    width: 50px;
+    height: 30px;
+    margin-left: 25px;
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+}
+
+#search-btn:hover {
+    cursor: pointer;
+}
+
+#line1-sec {
+    flex-basis: calc(17%/9);
+    display: flex;
+}
+
+#line1-left-blank {
+    flex-basis: 30%;
+}
+
+#line1-center {
+    flex-basis: 50%;
+    width: 100%;
+    height: 5px;
+    background-color: white;
+}
+
+#line1-right-blank {
+    flex-basis: 20%;
+}
+
+#addr-left-blank1 {
+    flex-basis: 30%;
+}
+
+#addr-input {
+    flex-basis: 50%;
+}
+
+#addr2 {
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    padding-left: 10px;
+    background-color: transparent;
+}
+
+#addr-right-blank1 {
+    flex-basis: 20%;
+}
+
+#line2-sec {
+    flex-basis: calc(17%/9);
+    display: flex;
+}
+
+#line2-left-blank {
+    flex-basis: 30%;
+}
+
+#line2-center {
+    flex-basis: 50%;
+    width: 100%;
+    height: 5px;
+    background-color: white;
+}
+
+#line2-right-blank {
+    flex-basis: 20%;
+}
+
+#addr-left-blank2 {
+    flex-basis: 30%;
+}
+
+#addr-input {
+    flex-basis: 50%;
+}
+
+#addr3 {
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    padding-left: 10px;
+    background-color: transparent;
+}
+
+#addr-right-blank2 {
+    flex-basis: 20%;
+}
+
+#line3-sec {
+    flex-basis: calc(17%/9);
+    display: flex;
+}
+
+#line3-left-blank {
+    flex-basis: 30%;
+}
+
+#line3-center {
+    flex-basis: 50%;
+    width: 100%;
+    height: 5px;
+    background-color: white;
+}
+
+#line3-right-blank {
+    flex-basis: 20%;
+}
+
+/* 프로필 */
+#profile-sec {
+    flex-basis: 16%;
+    display: flex;
+    margin-top: 10px;
+}
+
+#profile-upload-sec {
+    flex-basis: 30%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+#profile_noImage {
+    width: 70px;
+    height: 70px;
+}
+
+#upload-btn-sec {
+    flex-basis: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#upload-btn-sec > * {
+    border: 1px solid #FFFDFD;
+    background-color: #FFFDFD;
+    border-radius: 5px;
+    width: 120px;
+    height: 30px;
+    text-align: center;
+    margin: 14px;
+    padding: 5px 0px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+#uploadInput {
+    display: none;
+}
+
+#img-delete-sec {
+    flex-basis: 40%;
+    display: flex;
+    align-items: center;
+}
+
+#img-del-btn {
+    border: 1px solid #FFFDFD;
+    background-color: #FFFDFD;
+    border-radius: 5px;
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    padding: 3px 0px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* 회원가입 버튼 */
+#signUp-btn-sec {
+    flex-basis: 12%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#signUp-btn {
+    width: 300px;
+    height: 50px;
+    background-color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+#signUp-btn:hover {
+    cursor: pointer;
+}
+
+/* 오른쪽 여백 */
+#right-gap {
+    flex-basis: 20%;
+}
+
+/* 오른쪽 하단 후원, 챗봇 아이콘 */
+.fixed-image {
+    position: fixed;
+    right: 10px;
+    z-index: 100;
+    width: 50px;
+}
+
+.fixed-image:hover {
+    cursor: pointer;
+}
+
+#chat-image {
+    bottom: 10px;
+}
+
+#donate-image {
+    bottom: 70px;
+}
+
+/* 풋터 */
+#footer {
+    flex-basis: 20%;
+}

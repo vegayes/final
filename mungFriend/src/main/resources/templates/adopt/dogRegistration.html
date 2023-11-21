@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>유기견 상세페이지(등록하기)</title>
+    <link rel="stylesheet" href="/FinalProject/css/dogRegistration.css">
+</head>
+<body>
+    <main>
+        <div class="main-left"></div>
+
+        <div class="main-center">
+            <div>유기견 등록하기</div>
+
+            <form action="#">
+                <div class="info-input">
+                    <div class="img-box">
+                        <div class="img-thumbnail">
+                            <label for="img0">
+                                <button type="button" id="thumbnailButton" style="border-radius: 50%;">
+                                    <img src="/FinalProject/final-img/jieun/카메라.png" width="50" height="50">
+                                </button>
+                                <input type="file" name="images" class="inputImage" id="img1" style="display:none;" accept="image/*">
+                            </label>
+                            <span class="delete-image">&times;</span>
+                        </div>
+                    </div>
+                    <div class="select-box">
+                        <div>
+                            <label for="name">이름</label>
+                            <input type="text">
+                        </div>
+                        <div>
+                            <label for="birth">생일</label>
+                            <input type="text" id="birthday" name="birthday" pattern="\d{4}-\d{2}-\d{2}" placeholder="yyyy-mm-dd">
+                            <!-- <input type="date"> -->
+                        </div>
+                        <div>
+                            <label for="gender">성별</label>
+                            <select id="gender" name="gender">
+                                <option value="male">남아</option>
+                                <option value="femail">여아</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="kind">견종</label>
+                            <input type="text">
+                        </div>
+                        <div>
+                            <label for="size">크기</label>
+                            <select id="size" name="size">
+                                <option value="small">소형</option>
+                                <option value="medium">중형</option>
+                                <option value="large">대형</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="character">성격</label>
+                            <input type="text">
+                        </div>
+                        <div>
+                            <label for="surgery">중성화</label>
+                            <select id="surgery" name="surgery">
+                                <option value="Y">완료</option>
+                                <option value="N">미완료</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="Vaccin">접종유무</label>
+                            <input type="text">
+                        </div>
+                        <div>
+                            <label for="likeThings">좋아하는 것</label>
+                            <input type="text">
+                        </div>
+                        <div>
+                            <label for="hateThings">싫어하는 것</label>
+                            <input type="text">
+                        </div>
+                        <div>
+                            <label for="specialNote">특이 사항</label>
+                            <input type="text">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="img-input">
+                    <div class="boardImg">
+                        <div type="button" id="imageButton1">
+                            <img src="/FinalProject/final-img/jieun/카메라.png" width="25" height="25">
+                        </div>
+                        <span class="delete-image">&times;</span>
+                        <div>
+                            <input type="file" id="imageInput" name="boardImage" accept="image/*">
+                        </div>
+                    </div>
+
+                    <div class="boardImg">
+                        <div type="button" id="imageButton2">
+                            <img src="/FinalProject/final-img/jieun/카메라.png" width="25" height="25">
+                        </div>
+                        <span class="delete-image">&times;</span>
+                        <div>
+                            <input type="file" id="imageInput" name="boardImage" accept="image/*">
+                        </div>
+                    </div>
+                    
+                    <div class="boardImg">
+                        <div type="button" id="imageButton3">
+                            <img src="/FinalProject/final-img/jieun/카메라.png" width="25" height="25">
+                        </div>
+                        <span class="delete-image">&times;</span>
+                        <div>
+                            <input type="file" id="imageInput" name="boardImage" accept="image/*">
+                        </div>
+                    </div>
+                </div>
+
+                <button id="submit" type="submit">제출하기</button>
+            </form>
+
+
+        </div>
+
+        <div class="main-right"></div>
+    </main>
+
+
+</body>
+</html>

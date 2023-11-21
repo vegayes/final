@@ -1,0 +1,87 @@
+/* 글꼴 */
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+.nanumgothic * {
+ font-family: 'Nanum Gothic', sans-serif;
+}
+
+/* 전체 */
+* {
+    box-sizing: border-box;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+/* section, div {
+    border: 1px solid black;
+} */
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+body > section {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 헤더 */
+#header {
+    flex-basis: 10%;
+}
+
+/* 내용 */
+#content {
+    flex-basis: 70%;
+    display: flex;
+}
+
+/* 왼쪽 여백 */
+#left-gap {
+    flex-basis: 20%;
+}
+
+#content-section {
+    flex-basis: 60%;
+    display: flex;
+    justify-content: center;
+    padding: 150px;
+}
+
+/* 입양 절차 관련 이미지 */
+#adoptProcedure {
+    width: 700px;
+    height: 2500px;
+}
+
+/* 오른쪽 여백 */
+#right-gap {
+    flex-basis: 20%;
+}
+
+/* 오른쪽 하단 후원, 챗봇 아이콘 */
+.fixed-image {
+    position: fixed;
+    right: 10px;
+    z-index: 100;
+    width: 50px;
+}
+
+.fixed-image:hover {
+    cursor: pointer;
+}
+
+#chat-image {
+    bottom: 10px;
+}
+
+#donate-image {
+    bottom: 70px;
+}
+
+/* 풋터 */
+#footer {
+    flex-basis: 20%;
+}

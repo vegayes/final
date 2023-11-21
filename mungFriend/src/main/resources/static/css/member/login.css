@@ -1,0 +1,209 @@
+/* 글꼴 */
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+.nanumgothic * {
+ font-family: 'Nanum Gothic', sans-serif;
+}
+
+/* 전체 */
+* {
+    box-sizing: border-box;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+/* section, div {
+    border: 1px solid black;
+} */
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+body > section {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 헤더 */
+#header {
+    flex-basis: 10%;
+}
+
+/* 내용 */
+#content {
+    flex-basis: 70%;
+    display: flex;
+}
+
+/* 왼쪽 여백 */
+#left-gap {
+    flex-basis: 20%;
+}
+
+/* 로그인 영역 */
+#login-section {
+    flex-basis: 60%;
+    display: flex;
+    flex-direction: column;
+    background-color: #FEE4D6;
+    border-radius: 5px;
+    align-items: center;
+    margin: 100px 660px;
+    padding: 50px;
+}
+
+/* 로고 영역 */
+#logo-section {
+    flex-basis: 20%;
+}
+
+#logo {
+    width: 150px;
+    height: 130px;
+}
+
+/* 로그인 form 영역 */
+#form-section {
+    flex-basis: 60%;
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+}
+
+/* 아이디 */
+#id-section {
+    flex-basis: 30%;
+}
+
+#id {
+    width: 350px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    margin: 15px 0px;
+    padding-left: 10px;
+}
+
+/* 비밀번호 */
+#pw-section {
+    flex-basis: 30%;
+}
+
+#pw {
+    width: 350px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    margin: 15px 0px;
+    padding-left: 10px;
+}
+
+/* 아이디 / 비밀번호 찾기 및 회원가입 */
+#link-section {
+    flex-basis: 10%;
+    display: flex;
+    font-weight: lighter;
+    font-size: 13px;
+}
+
+#find-section {
+    flex-basis: 80%;
+}
+
+#find-section > a {
+    text-decoration-line: none;
+    color: black;
+}
+
+#signUp-section {
+    flex-basis: 20%;
+    display: flex;
+    justify-content: end;
+}
+
+#signUp-section > a {
+    text-decoration-line: none;
+    color: black;
+}
+
+/* 로그인 버튼 */
+#loginBtn-section {
+    flex-basis: 30%;
+}
+
+#login-btn {
+    width: 350px;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    margin: 20px 0px;
+    background-color: white;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+#login-btn:hover {
+    cursor: pointer;
+}
+
+/* sns 영역 */
+#sns-section {
+    flex-basis: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#hr {
+    flex-basis: 20%;
+    width: 350px;
+    color: #ddd;
+    margin: 20px 0px;
+}
+
+#sns {
+    flex-basis: 80%;
+}
+
+#sns > img {
+    width: 50px;
+    height: 50px;
+    margin: 0px 25px;
+}
+
+#sns > img:hover {
+    cursor: pointer;
+}
+
+/* 오른쪽 여백 */
+#right-gap {
+    flex-basis: 20%;
+}
+
+/* 오른쪽 하단 후원, 챗봇 아이콘 */
+.fixed-image {
+    position: fixed;
+    right: 10px;
+    z-index: 100;
+    width: 50px;
+}
+
+.fixed-image:hover {
+    cursor: pointer;
+}
+
+#chat-image {
+    bottom: 10px;
+}
+
+#donate-image {
+    bottom: 70px;
+}
+
+/* 풋터 */
+#footer {
+    flex-basis: 20%;
+}
