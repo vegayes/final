@@ -11,7 +11,7 @@
         -->
     </head>
     <body>
-
+	    <th:block th:replace="~{common/header}"></th:block>
         <main>
             <section class = "adminIntroArea">
                 <div class = "adminIntroTitle">
@@ -303,17 +303,11 @@
             </section>
         </main>
 
-        <!-- <footer>
-            <div class="footer-content">
-                <img src="images/phone.png" alt="전화번호 아이콘" width="30" height="30" style="margin-bottom: -10px;">
-                <p>1544-9770</p>
-            <br>
-            <br>
-            <p>주식회사 멍프랜드</p><br>
-            <p>사업자번호 : 851-87-00622 | 사업장 주소 : 서울특별시 중구 남대문로 120 그레이츠 청계(구 대일빌딩) 2F, 3F</p><br><br>
-            <p>&copy; Mungfriend all right reserved.</p>
-            </div>
-        </footer> -->
+		<a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
+        <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>      
+
+
+	    <th:block th:replace="~{common/footer}"></th:block>
 
     </body>
 </html>
