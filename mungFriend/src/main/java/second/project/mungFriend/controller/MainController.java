@@ -15,9 +15,9 @@ public class MainController {
 		
 		model.addAttribute("name", "홍길동");
 		
-//		return "common/main_test";
-//		return "common/header";
 
+
+//       return "centerInfo/map";
 //		return "admissionApply/freeAdmission";  
 //		return "mypage/admin/DogStatus";
 //	return "member/findId";
