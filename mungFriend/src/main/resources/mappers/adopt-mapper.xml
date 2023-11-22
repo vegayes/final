@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="second.project.mungFriend.adopt.model.dao.AdoptMapper">
+	
+	<!-- Dog resultMap -->
+	<resultMap type="Dog" id="dog_rm">
+		<id property="dogNo" column="DOG_NO"/>
+		
+		<result property="breedNo" column="BREED_NO"/>
+		<result property="dogName" column="DOG_NAME"/>
+		<result property="dogBirthDay" column="DOG_BIRTHDAY"/>
+		<result property="dogGender" column="DOG_GENDER"/>
+		<result property="dogSize" column="DOG_SIZE"/>		
+		<result property="dogPersonality" column="DOG_PERSONALITY"/>
+		<result property="dogNeutering" column="DOG_NEUTERING_YN"/>
+		<result property="dogVaccine" column="DOG_VACCINE_YN"/>
+		<result property="dogLike" column="DOG_LIKE"/>
+		<result property="dogHate" column="DOG_HATE"/>
+		<result property="dogSpecialNote" column="DOG_SIGNIFICANT"/>
+		<result property="dogAdmissionDate" column="DOG_ADMISSION_DATE"/>
+		<result property="dogAdoptFl" column="DOG_ADOPT_FL"/>
+		
+		<result property="thumbnail" column="THUMBNAIL"/>
+		
+		<collection property="imageList" 
+					select="selectImageList"
+					column="DOG_NO"
+					javaType="java.util.ArrayList"
+					ofType="DogImage"
+		/>
+	</resultMap>
+	
+	<!-- DogImage resultMap -->
+	<resultMap type="DogImage" id="DogImage_rm">
+		<id property="imageNo" column="IMG_NO"/>
+		
+		<result property="dogNo" column="DOG_NO"/>
+		<result property="imagePath" column="IMG_PATH"/>
+		<result property="imageReName" column="IMG_RENAME"/>
+		<result property="imageOriginal" column="IMG_ORIGINAL"/>
+		<result property="imageOrder" column="IMG_ORDER"/>
+	</resultMap>
+	
+	<!-- 삭제되지않은 강아지 수 조회 -->
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*) FROM DOG
+		WHERE DOG_ADOPT_FL = 'N'
+	</select>	
+	
+	
+	<select id="selectDogList" resultMap="dog_rm">
+		SELECT DOG_NAME FROM DOG
+		WHERE DOG_ADOPT_FL = 'N'
+		ORDER BY DOG_ADMISSION_DATE DESC
+	</select>
+	
+
+</mapper>

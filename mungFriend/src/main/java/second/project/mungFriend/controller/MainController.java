@@ -19,11 +19,11 @@ public class MainController {
 //		return "common/header";
 
 //		return "admissionApply/freeAdmission";  
-		return "mypage/admin/DogStatus";
+//		return "mypage/admin/DogStatus";
 //	return "member/findId";
 
-//		return "adopt/dogRegistration";		
-//		return "mypage/admin/myPageReservationList_admin";
+		return "common/header";
+//		return "mypage/member/myPageReservationList_user";
 //		return "admissionApply/freeAdmission";
 	}
 	

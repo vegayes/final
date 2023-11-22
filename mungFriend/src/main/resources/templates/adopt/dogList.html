@@ -12,7 +12,7 @@
 
     <th:block th:replace="~{common/header}"></th:block>
 
-    <main>
+    <main th:with="pagination=${map.pagination}, dogList=${map.dogList}"></main>
         <div class="main-left"></div>
 
         <div class="main-center">
@@ -49,12 +49,6 @@
                             <option value="large">대형</option>
                         </select>
                     </div>
-                    <div class="filter-character">
-                        <select id="character" name="character">
-                            <option value="none">성격</option>
-                            <option value="male"></option>
-                        </select>
-                    </div>
                     <div class="filter-surgery">
                         <select id="surgery" name="surgery">
                             <option value="none">중성화 여부</option>
@@ -63,83 +57,31 @@
                         </select>
                     </div>
                     <button type="submit" value="Submit">
-                        <img th:src="@{images/adopt/finder.png}" id="finder-img">
+                        <img th:src="@{/images/adopt/finder.png}" id="finder-img">
                     </button>
                 </form>
             </div>
 
             <div class="dog">
-                <div class="dog-list">
+                <div class="dog-list" th:if="${#lists.size(dogList) == 0}">
                     <div id="dog-list">
-                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
+                        <p style="font-size: 12px;">입양리스트가 존재하지 않습니다.</p>
                     </div>
+                </div>
+                <div class="dog-list" th:if="${#lists.size(dogList) > 0}">
                     <div id="dog-list">
-                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
-                    </div>
-                    <div id="dog-list">
-                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
-                    </div>
-                    <div id="dog-list">
-                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
-                    </div>
-                    <div id="dog-list">
-                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
-                    </div>
-                    <div id="dog-list">
-                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
-                    </div>
-                    <div id="dog-list">
-                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
-                    </div>
-                    <div id="dog-list">
-                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
-                    </div>
-                    <div id="dog-list">
-                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
-                    </div>
-                    <div id="dog-list">
-                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
-                    </div>
-                    <div id="dog-list">
-                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
-                    </div>
-                    <div id="dog-list">
-                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
-                    </div>
-                    <div id="dog-list">
-                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
-                    </div>
-                    <div id="dog-list">
-                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
-                    </div>
-                    <div id="dog-list">
-                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
-                    </div>
-                    <div id="dog-list">
-                        <img th:src="@{images/adopt/말티푸.png}" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
+                        <a th:href="@{/adopt/{dogNo}(dogNo=${dog.dogNo}, cp=${pagination.currentPage})}" 
+                            th:text="${board.boardTitle}">
+                            <img th:src="@{/images/adopt/말티푸.png}" id="dog-img">
+                        </a>                        
+                        <div id="dog-kind" th:text="${dogList.dogName}"></div>
                     </div>
                 </div>
             </div>
 
             <div class="regits">
                 <!-- <a th:if="${session.loginMember}" class="regits-btn" th:href="@{#}">등록하기</a> -->
-                <a class="regits-btn" th:href="@{#}">등록하기</a>
+                <a class="regits-btn" th:href="@{/adopt/dogRegistration}">등록하기</a>
             </div>
 
             <!-- <div class="pagination-area" th:if="${#lists.size(dogList) > 0}"> -->
