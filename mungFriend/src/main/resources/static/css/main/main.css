@@ -22,6 +22,7 @@ main {
     display: flex;
     flex-direction: column;
     padding: 0px 20%;
+   
 }
 
 
@@ -34,7 +35,7 @@ main {
     left:260px; /* 왼쪽에서 5픽셀 오른쪽으로 */
     /* 추가적인 스타일 설정 */
      cursor: pointer; /* 마우스 오버시 커서 변경 */
-      z-index: -1; /* 하위 레이어에 표시 */
+      z-index: 0; /* 하위 레이어에 표시 */
 }
 
 #search-box {
@@ -45,7 +46,7 @@ main {
     padding: 5px 10px; /* 내부 여백 */
     font-size: 16px; /* 글자 크기 */
     margin-top: 10px; /* 상단 마진을 50px로 설정 */
-      z-index: -1; /* 하위 레이어에 표시 */
+      z-index: 0; /* 하위 레이어에 표시 */
      position: relative; /* 상대 위치 지정 */
     top: 350px; /* 상단에서 20픽셀 아래로 */
     left : 300px
@@ -66,7 +67,7 @@ main {
     margin-top: 400px;
     margin-left: 100px;
     cursor: pointer;
-     z-index: -1; /* 하위 레이어에 표시 */
+     z-index: 0; /* 하위 레이어에 표시 */
 }
 
 .dog-photo-grid .dog-photo img {
