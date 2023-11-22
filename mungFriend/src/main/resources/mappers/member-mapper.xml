@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="second.project.mungFriend.member.model.dao.MemberMapper">
+	
+	<resultMap type="Member" id="member_rm">
+		
+		<id property="memberNo" column="MEMBER_NO" />
+		
+		<result property="memberId" column="MEMBER_ID" />
+		<result property="memberPw" column="MEMBER_PW" />
+		<result property="memberEmail" column="MEMBER_EMAIL" />
+		<result property="memberName" column="MEMBER_NAME" />
+		<result property="memberTel" column="MEMBER_TEL" />
+		<result property="memberNickname" column="MEMBER_NICKNAME" />
+		<result property="memberAddress" column="MEMBER_ADDRESS" />
+		<result property="memberProfile" column="MEMBER_PROFILE" />
+		<result property="memberEnrollDate" column="MEMBER_ENROLL_DATE" />
+		<result property="adminYn" column="ADMIN_YN" />
+		<result property="memberDelYn" column="MEMBER_DEL_YN" />
+		
+	</resultMap>
+	
+	<!-- 로그인 -->
+	<select id="login" resultMap="member_rm">
+		SELECT MEMBER_NO, MEMBER_ID, MEMBER_PW, MEMBER_EMAIL, MEMBER_NAME, MEMBER_TEL, MEMBER_NICKNAME, MEMBER_ADDRESS, MEMBER_PROFILE, 
+		TO_CHAR(MEMBER_ENROLL_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') AS MEMBER_ENROLL_DATE, ADMIN_YN, MEMBER_DEL_YN
+		FROM "MEMBER"
+		WHERE MEMBER_DEL_YN = 'N'
+		AND MEMBER_ID = #{memberId}
+	</select>
+	
+	<!-- 회원가입 -->
+	
+	<!-- 아이디찾기 -->
+	<select id="findId" resultType="string">
+		SELECT MEMBER_ID
+		FROM "MEMBER"
+		WHERE MEMBER_NAME = #{memberName}
+		AND MEMBER_EMAIL = #{memberEmail}
+		AND MEMBER_DEL_YN = 'N'
+	</select>
+	
+</mapper>

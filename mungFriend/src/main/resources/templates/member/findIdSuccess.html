@@ -10,7 +10,7 @@
 <body>
     <section>
         <!-- 헤더 -->
-        <div id="header"></div>
+        <th:block th:replace="~{common/header}"></th:block>
 
         <!-- 내용 -->
         <div id="content">
@@ -27,7 +27,7 @@
                 <!-- 아이디 찾기 설명 영역 -->
                 <div id="findIdInfo-section">
                     <div id="title">아이디 찾기</div>
-                    <div id="info">회원가입 시 사용한 아이디는 <b>user01</b> 입니다.</div>
+                    <div id="info">회원가입 시 사용한 아이디는 <b th:text="${memberId}">회원 아이디</b> 입니다.</div>
                 </div>
 
                 <!-- 로그인 버튼 영역 -->
@@ -44,7 +44,7 @@
         </div>
 
         <!-- 풋터 -->
-        <div id="footer"></div>
+        <th:block th:replace="~{common/footer}"></th:block>
     </section>
 </body>
 </html>

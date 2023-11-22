@@ -15,16 +15,19 @@ public class MainController {
 		
 		model.addAttribute("name", "홍길동");
 		
-//		return "common/main_test";
-//		return "common/header";
 
-		return "adoptReview/ReviewUpdate";  
+
+//		return "adoptReview/ReviewUpdate";  
 //		return "mypage/admin/DonationStatus";
 //		return "member/findId";
- 		
 //		return "adopt/dogRegistration";		
 //		return "mypage/admin/myPageReservationList_admin";
-//		return "admissionApply/freeAdmission";
+//    return "centerInfo/map";
+//		return "admissionApply/freeAdmission";  
+//		return "mypage/admin/DogStatus";
+//	return "member/findId";
+		return "common/header";
+//		return "mypage/member/myPageReservationList_user";
 	}
 	
 	
