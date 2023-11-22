@@ -96,7 +96,8 @@ $(function () {
         e.preventDefault();     //form 태그의 페이지 이동 기능을 막음
     });
 
-    $("#chat-image").click(function () {
+    $("#chat-image").click(function (e) {
+        e.preventDefault();
         connect();
     });
 
