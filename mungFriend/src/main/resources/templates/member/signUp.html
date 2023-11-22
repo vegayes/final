@@ -26,7 +26,7 @@
 
                 <!-- 회원가입 form 영역 -->
                 <div id="form-section">
-                    <form th:action="@{/#}" method="" id="signUp-form">
+                    <form th:action="@{/#}" method="POST" id="signUp-form">
                         <!-- 아이디 -->
                         <div id="id-sec">
                             <div id="id-tit">아이디</div>
@@ -214,5 +214,7 @@
         <!-- 풋터 -->
         <th:block th:replace="~{common/footer}"></th:block>
     </section>
+    
+    <script th:src="@{/js/member/signUp.js}"></script>
 </body>
 </html>

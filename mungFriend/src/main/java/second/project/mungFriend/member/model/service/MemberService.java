@@ -10,4 +10,10 @@ public interface MemberService {
 	 */
 	Member login(Member inputMember);
 
+	/** 아이디찾기
+	 * @param inputMember
+	 * @return String
+	 */
+	String findId(Member inputMember);
+
 }

@@ -20,4 +20,13 @@ public class MemberDAO {
 		return memberMapper.login(inputMember);
 	}
 
+	/** 아이디찾기
+	 * @param inputMember
+	 * @return String
+	 */
+	public String findId(Member inputMember) {
+		
+		return memberMapper.findId(inputMember);
+	}
+
 }

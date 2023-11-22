@@ -38,4 +38,11 @@ public class MemberServiceImpl implements MemberService{
 		return loginMember;
 	}
 
+	// 아이디찾기
+	@Override
+	public String findId(Member inputMember) {
+		
+		return dao.findId(inputMember);
+	}
+
 }

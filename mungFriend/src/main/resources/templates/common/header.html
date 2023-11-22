@@ -13,19 +13,28 @@
 		</div>
         <nav class="header-bar">
             <ul class="menu-items">
-                <li><a th:href="@{/}">절차 및 관리</a></li>
+                <li><a>절차 및 관리</a>
+                    <ul>
+                        <li><a th:href="@{/}">무료입양 절차</a></li>
+                        <li><a th:href="@{/}">활동일지</a></li>
+                    </ul> 
+                </li>
                 <li><a th:href="@{/}">무료 입소 신청</a></li>
                 <li><a th:href="@{/adopt/dogList}">입양하기</a></li>
                 <li><a th:href="@{/}">병원, 훈련소</a></li>
                 <li><a th:href="@{/}">입양 후기</a></li>
                 
                 <li>
-                    <a th:unless="${loginMember}" th:href="@{/member/login}">로그인</a>
-                    <a th:if="${loginMember}" th:href="@{/}">마이페이지</a>
+                    <a th:unless="${session.loginMember}" th:href="@{/member/login}">로그인</a>
+                    <a th:if="${session.loginMember}" th:href="@{/}">마이페이지</a>
                 </li>
             </ul>
         </nav>
     </header>
-
+    
+    <script th:inline="javascript">
+		const message = /*[[${message}]]*/ "전달 받은 메세지";
+		if(message != null) alert(message);
+	</script>
 </body>
 </html>

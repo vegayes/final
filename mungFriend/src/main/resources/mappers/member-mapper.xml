@@ -31,4 +31,13 @@
 	
 	<!-- 회원가입 -->
 	
+	<!-- 아이디찾기 -->
+	<select id="findId" resultType="string">
+		SELECT MEMBER_ID
+		FROM "MEMBER"
+		WHERE MEMBER_NAME = #{memberName}
+		AND MEMBER_EMAIL = #{memberEmail}
+		AND MEMBER_DEL_YN = 'N'
+	</select>
+	
 </mapper>
