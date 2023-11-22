@@ -132,13 +132,16 @@ input[type="radio"]{
 
 /*◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆선택할 때 색상 변경 어떻게 해야할지 모르겠움.◆◆◆◆◆◆◆◆◆◆◆◆◆◆*/
 /*부모선택자 뭐야..*/
+/*
 input[name="cycle"]:checked + div{
     border : 5px solid red;
 }
 
+
 input[name="amount"]:checked + div{
     border : 5px solid blue;
 }
+*/
 /*◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆*/
 
 
@@ -220,6 +223,8 @@ input[name="amount"]:checked + div{
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    
+    cursor: pointer;
 }
 
 

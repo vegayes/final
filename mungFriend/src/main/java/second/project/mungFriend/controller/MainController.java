@@ -40,5 +40,22 @@ public class MainController {
 	}
 	
 	
+	/** 무료입소신청 페이지 이동
+	 * @return
+	 */
+	@GetMapping("/freeAdmission")
+	public String freeAdmissionPage() {
+		return "admissionApply/freeAdmission";
+	}
+	
+	/** 후원하기 페이지 이동
+	 * @return
+	 */
+	@GetMapping("/donation")
+	public String donationPage() {
+		return "donation/donation";
+	}
+	
+	
 	
 }
