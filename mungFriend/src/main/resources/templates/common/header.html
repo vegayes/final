@@ -25,12 +25,16 @@
                 <li><a th:href="@{/}">입양 후기</a></li>
                 
                 <li>
-                    <a th:unless="${session.loginMember}" th:href="@{/}">로그인</a>
+                    <a th:unless="${session.loginMember}" th:href="@{/member/login}">로그인</a>
                     <a th:if="${session.loginMember}" th:href="@{/}">마이페이지</a>
                 </li>
             </ul>
         </nav>
     </header>
-
+    
+    <script th:inline="javascript">
+		const message = /*[[${message}]]*/ "전달 받은 메세지";
+		if(message != null) alert(message);
+	</script>
 </body>
 </html>

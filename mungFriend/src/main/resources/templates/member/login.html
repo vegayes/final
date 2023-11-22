@@ -26,14 +26,14 @@
 
                 <!-- 로그인 form 영역 -->
                 <div id="form-section">
-                    <form th:action="@{/member/login}" method="POST">
+                    <form th:action="@{/member/login}" method="POST" id="loginForm">
                         <div id="id-section">
                             아이디 <br>
-                            <input type="text" id="id" name="id">
+                            <input type="text" id="id" name="memberId">
                         </div>
                         <div id="pw-section">
                             비밀번호 <br>
-                            <input type="password" id="pw" name="pw">
+                            <input type="password" id="pw" name="memberPw">
                         </div>
                         <div id="link-section">
                             <div id="find-section">
@@ -72,5 +72,7 @@
 		<!-- 풋터 -->
         <th:block th:replace="~{common/footer}"></th:block>
     </section>
+    
+    <script th:src="@{/js/member/login.js}"></script>
 </body>
 </html>

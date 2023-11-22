@@ -51,7 +51,8 @@ body > section {
     background-color: #FEE4D6;
     border-radius: 5px;
     align-items: center;
-    margin: 100px 580px;
+    margin: 90px 580px;
+    margin-bottom: 120px;
     padding: 50px;
 }
 
