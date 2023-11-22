@@ -25,6 +25,7 @@ main{
    /*여백 이렇게 잡아도 되는지 모르겠음.*/
     /* padding: 0px 460px; */
     padding: 0px 20%;
+
 }
 
 /*************************************************
@@ -140,14 +141,14 @@ main{
 
 /* form 값의 타이틀 잡기*/
 .formElementTitle{
-    flex-basis: 25%;
+    flex-basis: 30%;
 
     /* border : 2px solid red; */
 }
 
 /* form 값의 내용 잡기*/
 .formElementContent{
-    flex-basis: 75%;
+    flex-basis: 70%;
     /* border : 2px solid green; */
 
     padding : 0px 15px;
@@ -213,8 +214,8 @@ main{
     width: 100%;
     border : none; 
     outline : 0;
-
-    font-size: 18px;
+	padding:2px;
+    font-size: 15px;
 }
 
 /*입력창 CSS */
@@ -314,7 +315,7 @@ input[type="radio"]{
     display: none;
 }
 
-/*◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆선택할 때 색상 변경 어떻게 해야할지 모르겠움.◆◆◆◆◆◆◆◆◆◆◆◆◆◆*/
+/*◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆선택할 때 색상 변경 어떻게 해야할지 모르겠움 (js 이용).◆◆◆◆◆◆◆◆◆◆◆◆◆◆*/
 /*부모 요소 어떻게 선택하는거지.. */
 input[name="gender"]:checked:has(label){
     border : 5px solid red;
@@ -323,6 +324,7 @@ input[name="gender"]:checked:has(label){
 input[name="amount"]:checked ~ label{
     border : 5px solid blue;
 }
+
 /*◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆*/
 
 

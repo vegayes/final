@@ -19,12 +19,12 @@ public class MainController {
 //		return "common/header";
 
 //		return "admissionApply/freeAdmission";  
-		return "mypage/admin/DogStatus";
+//		return "mypage/admin/DogStatus";
 //	return "member/findId";
 
 //		return "adopt/dogRegistration";		
 //		return "mypage/admin/myPageReservationList_admin";
-//		return "admissionApply/freeAdmission";
+		return "admissionApply/freeAdmission";
 	}
 	
 	
@@ -34,6 +34,23 @@ public class MainController {
 		ra.addFlashAttribute("message", "로그인 후 이용해주세요");
 		
 		return "redirect:/";
+	}
+	
+	
+	/** 무료입소신청 페이지 이동
+	 * @return
+	 */
+	@GetMapping("/freeAdmission")
+	public String freeAdmissionPage() {
+		return "admissionApply/freeAdmission";
+	}
+	
+	/** 후원하기 페이지 이동
+	 * @return
+	 */
+	@GetMapping("/donation")
+	public String donationPage() {
+		return "donation/donation";
 	}
 	
 	

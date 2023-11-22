@@ -8,8 +8,6 @@
         
     </head>
     <body>
-
-
 	    <th:block th:replace="~{common/header}"></th:block>
 
         <main>
@@ -216,10 +214,12 @@
             </section>
         </main>
         
+        <a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
 		<a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
-        <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
         
 	    <th:block th:replace="~{common/footer}"></th:block>
+	    
+	    <script th:src="@{/js/admissionApply/freeAdmission.js}"></script>
 		
     </body>
 </html>

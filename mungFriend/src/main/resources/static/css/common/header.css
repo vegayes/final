@@ -1,3 +1,17 @@
+*{
+    box-sizing: border-box;
+    list-style : none; /* 리스트 스타일 X */
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    /* font-family: 'Nanum Gothic', sans-serif; */
+    font-family: 'NanumGothic', 'sans-serif';
+}
+
+a{
+	cursor: pointer;
+}
+
 header{
 	position:sticky;
     top : 0px;
@@ -48,12 +62,78 @@ header{
 .menu-items li a {
     color: black;
     text-decoration: none;
-    padding: 14px;
+    /* padding: 14px; */
+    padding:25px 14px;
     white-space: nowrap;
     transition: color 0.3s, transform 0.3s;
 }
 
-.menu-items li a:hover {
+.menu-items > li a:hover {
     color: goldenrod;
-    transform: scale(1.40);
+    /* transform: scale(1.40); */
 }
+
+
+/*************************************************
+                드롭 메뉴 
+*************************************************/
+
+
+
+.header-bar ul ul {
+    /* display: none; */
+    /* background-color: #ddd; */
+    /* background-color: red; */
+    /* border : 0.5px solid #ddd; */
+    /* border-top :0px; */
+    height:auto;
+    position:absolute;
+    width:140px;
+    z-index:200;
+
+    border-radius: 0px 0px 10px 10px;
+    list-style:none;
+
+    margin-top:25px;
+    margin-left:-15px;
+
+	/* transition-property: all;
+    transition-duration: 5s; */
+    height: 0px;
+    overflow: hidden;
+    transition-duration: 0.5s;
+}
+
+.header-bar li li{
+    /* background: yellow; */
+    display:block;
+    float:none;
+    margin:0px;
+    padding:0px;
+    width:135px;
+
+    display: flex;
+    justify-content: center;
+
+    /* border : 2px solid blue; */
+}
+
+.menu-items li li a {
+    color: black;
+    text-decoration: none;
+    padding:7px;
+    white-space: nowrap;
+	font-size: 12px;
+    font-weight:400 ;
+}
+
+.header-bar li:hover ul{
+    display:block;
+    /* transition-timing-function: linear; */
+    height: 90%;
+    width:140px;
+    overflow:hidden;
+    border : 0.5px solid #ddd;
+    border-top:0px;
+}
+
