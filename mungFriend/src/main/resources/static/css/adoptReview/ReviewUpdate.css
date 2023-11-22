@@ -223,3 +223,28 @@
     margin: 10px;
     border: 1px solid #000;
 }
+
+
+
+
+/*************************************************
+                우측 nav 
+*************************************************/
+.fixed-image {
+    position: fixed;
+    right: 10px;
+    z-index: 100;
+    width: 50px;
+}
+
+.fixed-image:hover {
+    cursor: pointer;
+}
+
+#chat-image {
+    bottom: 10px;
+}
+
+#donate-image {
+    bottom: 70px;
+}
