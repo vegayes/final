@@ -16,8 +16,14 @@ public class MainController {
 		model.addAttribute("name", "홍길동");
 		
 
-       return "centerInfo/map";
 
+//       return "centerInfo/map";
+//		return "admissionApply/freeAdmission";  
+//		return "mypage/admin/DogStatus";
+//	return "member/findId";
+		return "common/header";
+//		return "mypage/member/myPageReservationList_user";
+//		return "admissionApply/freeAdmission";
 	}
 	
 	
