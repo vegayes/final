@@ -32,14 +32,14 @@
 
                 <!-- 아이디 찾기 form 영역 -->
                 <div id="form-section">
-                    <form th:action="@{/#}" method="">
+                    <form th:action="@{/member/findId}" method="POST" id="findIdForm">
                         <div id="name-section">
                             이름 <br>
-                            <input type="text" id="name" name="name">
+                            <input type="text" id="name" name="memberName">
                         </div>
                         <div id="email-section">
                             이메일 <br>
-                            <input type="email" id="email" name="email">
+                            <input type="email" id="email" name="memberEmail">
                         </div>
                         <div id="findBtn-section">
                             <button type="submit" id="find-btn">찾기</button>
@@ -58,5 +58,7 @@
         <!-- 풋터 -->
         <th:block th:replace="~{common/footer}"></th:block>
     </section>
+    
+    <script th:src="@{/js/member/findId.js}"></script>
 </body>
 </html>

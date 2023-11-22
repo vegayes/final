@@ -19,8 +19,8 @@ button{
 }
 
 main{
-    min-height: 1080px;
-    width: 1920px;
+    min-height: 800px;
+    width: 100%;
 
     display: flex;
     flex-direction: column;

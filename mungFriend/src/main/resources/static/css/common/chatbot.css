@@ -1,0 +1,93 @@
+body {
+    background-color: #f5f5f5;
+}
+
+
+
+
+#main-container {
+  
+    padding: 2em 3em;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    position: fixed;
+    /*
+    margin-left: 54%;
+    margin-top: 270px;
+    */
+   
+    right: 1px;
+    top : 352px;
+    z-index: 200;
+    width: 500px;
+    height: 500px;
+  
+}
+
+
+
+#content-container {
+    max-height: 300px; /* 원하는 최대 높이로 설정 */
+    overflow-y: auto; /* 세로 스크롤을 표시하도록 설정 */
+}
+
+
+
+#msg {
+    width: 65%;
+    margin-left: 20px;
+    height: 30px;
+    text-indent: 1em;
+}
+
+
+.container {
+  
+    opacity: 0;
+    visibility: hidden; /* 초기에는 숨김 상태로 설정 */
+    transition: visibility 0s, opacity 0.5s ease-in-out; /* 트랜지션 효과 추가 */
+}
+
+.visible {
+    opacity: 1;
+    visibility: visible; /* 보이게 함 */
+}
+
+.connectButton {
+    width: 200px;
+    height: 150px;
+    margin-left: 40%;
+    overflow: hidden;
+   
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.connectButton img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.sendButton {
+    width: 50px;
+    height: 25px;
+}
+
+.selectButton {
+    width: auto;
+    height: 30px;
+    background-color: #FFF0E8;
+    text-align: center;
+    font-size: normal;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.selectButton > p {
+    margin-left: 10px;
+    margin-right: 10px;
+}

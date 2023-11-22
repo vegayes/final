@@ -12,8 +12,9 @@
 <body>
 	
 	<th:block th:replace="~{common/header}"></th:block>
-	
+
 	<main>
+
 	    <div class="mainContainer">
 	        <div>입양후기</div>
 	        <div>안락사 없는 동물보호소 멍프랜드에서 행복한 입양 후기를 남겨주세요~</div>
@@ -100,10 +101,16 @@
 	        </div>
 	    </div>		
 		
+		
 	</main>
 
+	<th:block th:replace="~{common/chatbot}"></th:block>
+
+    <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
+    <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+	
     <th:block th:replace="~{common/footer}"></th:block>
-   
+	
 </body>
 </html>
 

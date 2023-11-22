@@ -1,9 +1,10 @@
-@font-face {
-    font-family: 'NanumGothic';
-    src: url('/fonts/NanumGothic.eot');
-    src: url('/fonts/NanumGothic.eot') format('embedded-opentype'),
-         url('/fonts/NanumGothic.woff') format('woff');
+/* 글꼴 */
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+.nanumgothic * {
+ font-family: 'Nanum Gothic', sans-serif;
 }
+
 
 /* 기본 스타일 */
 * {
@@ -21,8 +22,8 @@ main {
     width: 1920px;
     display: flex;
     flex-direction: column;
-    padding: 20px 20% ;
-   
+    padding: 0px 20% ;
+  
 }
 
 /* 구분선 스타일 */
