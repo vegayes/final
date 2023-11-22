@@ -20,10 +20,9 @@ public class MainController {
 
 //		return "admissionApply/freeAdmission";  
 //		return "mypage/admin/DogStatus";
+//	return "member/findId";
 		return "common/header";
-
-//		return "adopt/dogRegistration";		
-//		return "mypage/admin/myPageReservationList_admin";
+//		return "mypage/member/myPageReservationList_user";
 //		return "admissionApply/freeAdmission";
 	}
 	
