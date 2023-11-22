@@ -17,13 +17,17 @@ public class MainController {
 		
 
 
-//       return "centerInfo/map";
+//		return "adoptReview/ReviewUpdate";  
+//		return "mypage/admin/DonationStatus";
+//		return "member/findId";
+//		return "adopt/dogRegistration";		
+//		return "mypage/admin/myPageReservationList_admin";
+//    return "centerInfo/map";
 //		return "admissionApply/freeAdmission";  
 //		return "mypage/admin/DogStatus";
 //	return "member/findId";
 		return "common/header";
 //		return "mypage/member/myPageReservationList_user";
-//		return "admissionApply/freeAdmission";
 	}
 	
 	

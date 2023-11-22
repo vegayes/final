@@ -95,9 +95,7 @@
     margin: 10px 0 10px 0;
 }
 
-#title:focus {
-    border-color: #FEE4D6; /* 클릭 시 태두리 색을 바꾸는 스타일 */
-}
+
 
 /* 전체사진 컨테이너 */
 #dogImages {
@@ -182,4 +180,27 @@
     line-height: normal;
     cursor: pointer;
 
+}
+
+
+/*************************************************
+                우측 nav 
+*************************************************/
+.fixed-image {
+    position: fixed;
+    right: 10px;
+    z-index: 100;
+    width: 50px;
+}
+
+.fixed-image:hover {
+    cursor: pointer;
+}
+
+#chat-image {
+    bottom: 10px;
+}
+
+#donate-image {
+    bottom: 70px;
 }

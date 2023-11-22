@@ -9,50 +9,56 @@
 </head>
 <body>
      
-     <th:block th:replace="~{common/header}"></th:block>
-     
-    <div class="mainContainer">
-        <div>입양후기</div>
-        <div>안락사 없는 동물보호소 멍프랜드에서 행복한 입양 후기를 남겨주세요~</div>
-
-        <div>입양리뷰 인증게시판</div> 
-        <span style="text-align: end;">조회수 : 11</span>
-
-        <form th:action="@{/}" class="formContainer">
-        
-            <div class="boardRectangle"></div>
-            <div>제목</div>
-            <div class="boardRectangle"></div>
-            <input type="text" name="title" class="titleContent" value="봄이를 입양했어요 :)"></input>
-            <div class="boardImage">
-	            <img th:src="@{/images/review/image24.png}" alt="">
-                <img th:src="@{/images/review/image25.png}" alt="">
-                <img th:src="@{/images/review/image26.png}" alt="">
-                <div class="file-input-container">
-                    <label for="dogImage_1" class="file-input-label">
-                        <span class="icon">📷</span> <!-- 여기에 아이콘 또는 이미지를 넣으세요 -->
-                    </label>
-                    <input type="file" id="dogImage_1" name="dogImage_1" class="file-input" accept="image/*">
+    <th:block th:replace="~{common/header}"></th:block>
+    
+    <main>
+        <div class="mainContainer">
+            <div>입양후기</div>
+            <div>안락사 없는 동물보호소 멍프랜드에서 행복한 입양 후기를 남겨주세요~</div>
+    
+            <div>입양리뷰 인증게시판</div> 
+            <span style="text-align: end;">조회수 : 11</span>
+    
+            <form th:action="@{/}" class="formContainer">
+            
+                <div class="boardRectangle"></div>
+                <div>제목</div>
+                <div class="boardRectangle"></div>
+                <input type="text" name="title" class="titleContent" value="봄이를 입양했어요 :)"></input>
+                <div class="boardImage">
+                    <img th:src="@{/images/review/image24.png}" alt="">
+                    <img th:src="@{/images/review/image25.png}" alt="">
+                    <img th:src="@{/images/review/image26.png}" alt="">
+                    <div class="file-input-container">
+                        <label for="dogImage_1" class="file-input-label">
+                            <span class="icon">📷</span> <!-- 여기에 아이콘 또는 이미지를 넣으세요 -->
+                        </label>
+                        <input type="file" id="dogImage_1" name="dogImage_1" class="file-input" accept="image/*">
+                    </div>
                 </div>
-            </div>
-      
-
-        
-
-            <div class="boardRectangle"></div>
-            <div class="contentTitle">내용</div>
-            <div class="boardRectangle"></div>
-            <textarea name="content" id="boardContent"> 봄이를 입양했는데 너무너무 잘 적응하고 잘 지내네요 ~  좋은 인연 만들어주셔서 감사합니다!!! </textarea>
           
-        </form>  
-           
-    </div>
     
-    <section class="buttons">   
-        <button id="updateReview" onclick="submitForm()">수정하기</button>
-        <button id="toList">목록으로</button>
-    </section>
+            
     
+                <div class="boardRectangle"></div>
+                <div class="contentTitle">내용</div>
+                <div class="boardRectangle"></div>
+                <textarea name="content" id="boardContent"> 봄이를 입양했는데 너무너무 잘 적응하고 잘 지내네요 ~  좋은 인연 만들어주셔서 감사합니다!!! </textarea>
+              
+            </form>   
+        </div>
+  
+        <section class="buttons">   
+            <button id="updateReview" onclick="submitForm()">수정하기</button>
+            <button id="toList">목록으로</button>
+        </section>
+
+    </main>
+
+    <th:block th:replace="~{common/chatbot}"></th:block>
+
+    <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
+    <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
     <th:block th:replace="~{common/footer}"></th:block>
 
     <script>
