@@ -12,7 +12,7 @@
 
     <th:block th:replace="~{common/header}"></th:block>
 
-    <main th:with="pagination=${map.pagination}, dogList=${map.dogList}"></main>
+    <main th:with="pagination=${map.pagination}, dogList=${map.dogList}">
         <div class="main-left"></div>
 
         <div class="main-center">
@@ -63,25 +63,25 @@
             </div>
 
             <div class="dog">
-                <div class="dog-list" th:if="${#lists.size(dogList) == 0}">
-                    <div id="dog-list">
+                <th:block th:if="${dogList.isEmpty()}">
+                    <div class="dog-list" th:each="dog : ${dogList}">
                         <p style="font-size: 12px;">입양리스트가 존재하지 않습니다.</p>
                     </div>
-                </div>
-                <div class="dog-list" th:if="${#lists.size(dogList) > 0}">
-                    <div id="dog-list">
-                        <a th:href="@{/adopt/{dogNo}(dogNo=${dog.dogNo}, cp=${pagination.currentPage})}" 
-                            th:text="${board.boardTitle}">
-                            <img th:src="@{/images/adopt/말티푸.png}" id="dog-img">
-                        </a>                        
-                        <div id="dog-kind" th:text="${dogList.dogName}"></div>
+                </th:block>
+                <th:block th:unless="${dogList.isEmpty()}">
+                    <div class="dog-list" th:each="dog : ${dogList}">
+                        <div id="dog-list">
+                            <a th:href="@{/adopt/{dogNo}(dogNo=${dog.dogNo}, cp=${pagination.currentPage})}">
+                                <img th:src="@{/images/adopt/말티푸.png}" id="dog-img">
+                            </a>                        
+                            <div id="dog-kind" th:text="${dog.dogName}"></div>
+                        </div>
                     </div>
-                </div>
+                </th:block>
             </div>
 
             <div class="regits">
-                <!-- <a th:if="${session.loginMember}" class="regits-btn" th:href="@{#}">등록하기</a> -->
-                <a class="regits-btn" th:href="@{/adopt/dogRegistration}">등록하기</a>
+                <a th:if="${session.loginMember}" class="regits-btn" th:href="@{/adopt/dogRegistration}">등록하기</a>
             </div>
 
             <!-- <div class="pagination-area" th:if="${#lists.size(dogList) > 0}"> -->
