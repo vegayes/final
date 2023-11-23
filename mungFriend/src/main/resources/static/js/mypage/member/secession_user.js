@@ -8,7 +8,7 @@ if(memberDeleteForm != null) {
 	const checkbox = document.getElementById("checkbox");
 	
 	memberDeleteForm.addEventListener("submit", e=> {
-		
+
 		if(secessionPw.value == "") { // 비밀번호 미작성
 			alert("비밀번호를 입력해주세요.");
 			e.preventDefault();
@@ -28,6 +28,13 @@ if(memberDeleteForm != null) {
 			e.preventDefault();
 			checkbox.focus();
 			return;
+		}
+		
+		if(secessionPw.value != secessionPw2.value) {
+			alert("비밀번호가 일치하지 않습니다.");
+			e.preventDefault();
+			secessionPw2.focus();
+	        return;
 		}
 		
 		if(!confirm("정말 탈퇴 하시겠습니까?")) { // 취소 클릭 시
