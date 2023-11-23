@@ -14,6 +14,7 @@ public class MainController {
 	public String mainForward(Model model) {
 		
 		model.addAttribute("name", "홍길동");
+
 		return "common/main";
 	}
 	
