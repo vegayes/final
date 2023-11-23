@@ -14,20 +14,8 @@ public class MainController {
 	public String mainForward(Model model) {
 		
 		model.addAttribute("name", "홍길동");
-		
 
-
-//		return "adoptReview/ReviewUpdate";  
-//		return "mypage/admin/DonationStatus";
-//		return "member/findId";
-//		return "adopt/dogRegistration";		
-//		return "mypage/admin/myPageReservationList_admin";
-//    return "centerInfo/map";
-//		return "admissionApply/freeAdmission";  
-//		return "mypage/admin/DogStatus";
-//	return "member/findId";
 		return "common/main";
-//		return "mypage/member/myPageReservationList_user";
 	}
 	
 	
