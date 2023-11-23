@@ -35,8 +35,8 @@
                 </div>
                 
 
-
-                <form action = "#" method = "POST" name ="admissionApplyForm" class = "admissionApplyForm">
+				<!--@{insert}   name ="admissionApplyForm"-->
+                <form th:action="@{insert}" method = "POST"  class = "admissionApplyForm" enctype = "multipart/form-data">
 
                     <div class = "formElement">
                         <div class = "formElementTitle">
@@ -47,7 +47,7 @@
 
                         <div class = "formElementContent">
                             <fieldset class = "applyFieldset">
-                                <input type = "text" name = "applyName" id = "applyName" class = "applyInput">
+                                <input type = "text" name = "admName" id = "applyName" class = "applyInput">
                             </fieldset>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                         <div class = "formElementContent formBtnStart">
                         
                             <label>
-                                <input type="file" id="admissionDogProfile" name="applyProfileImage" accept="image/*"/>
+                                <input type="file" id="admissionDogProfile" name="admProfile" accept="image/*"/>
                                 <div class = "formFont formDogBtn formDogImgeUploadBtn">
                                     강아지 사진 업로드
                                 </div>
@@ -86,7 +86,7 @@
 
                         <div class = "formElementContent">
                             <fieldset class = "applyFieldset">
-                                <input type = "text"  name = "applyPhone" id = "applyPhone" class = "applyInput">
+                                <input type = "text"  name = "admPhone" id = "applyPhone" class = "applyInput">
                             </fieldset>
                         </div>
                     </div>
@@ -100,7 +100,7 @@
 
                         <div class = "formElementContent">
                             <fieldset class = "applyFieldset">
-                                <input type = "text"  name = "applyBreed" id = "applyBreed" class = "applyInput">
+                                <input type = "text"  name = "admBreed" id = "applyBreed" class = "applyInput">
                             </fieldset>
                         </div>
                     </div>
@@ -128,14 +128,14 @@
 
                         <div class = "formElementContent">
                             <label class = "applyFieldset admissionTwoBtn">
-                                <input type = "radio" name = "gender" value="남아">
+                                <input type = "radio" name = "admGender" value="남아">
                                 <div id = "admissionGenderM" class ="formFont ">
                                     남아
                                 </div>
                             </label>
     
                             <label class = "applyFieldset admissionTwoBtn">
-                                <input type = "radio" name = "gender" value="여아">
+                                <input type = "radio" name = "admGender" value="여아">
                                 <div id = "admissionGenderF" class = "formFont">
                                     여아
                                 </div>
@@ -153,14 +153,14 @@
 
                         <div class = "formElementContent">
                             <label class = "applyFieldset admissionTwoBtn">
-                                <input type = "radio" name = "neutering" value="Y">
+                                <input type = "radio" name = "admNeuteringYN" value="Y">
                                 <div class = "formFont">
                                     O
                                 </div>
                             </label>
     
                             <label class = "applyFieldset admissionTwoBtn">
-                                <input type = "radio" name = "neutering" value="N">
+                                <input type = "radio" name = "admNeuteringYN" value="N">
                                 <div class = "formFont">
                                     X
                                 </div>
@@ -168,6 +168,30 @@
 
 
                         </div>
+                    </div>
+                    
+                    <div class = "formElement">
+                        <div class = "formElementTitle">
+                            <div class = "formElementBox">
+                                접종 여부
+                            </div>
+                        </div>
+
+                        <div class = "formElementContent">
+                            <label class = "applyFieldset admissionTwoBtn">
+                                <input type = "radio" name = "admVaccineYN" value="Y">
+                                <div class = "formFont">
+                                    완료
+                                </div>
+                            </label>
+    
+                            <label class = "applyFieldset admissionTwoBtn">
+                                <input type = "radio" name = "admVaccineYN" value="N">
+                                <div class = "formFont">
+                                    미완료
+                                </div>
+                            </label>
+                        </div>	
                     </div>
 
 
@@ -181,7 +205,7 @@
                         </div>
 
                         <div class = "formElementContent">
-                            <textarea class = "applyFieldset" placeholder="필수입력란이 아닙니다.">
+                            <textarea class = "applyFieldset" placeholder="필수입력란이 아닙니다." name = "admSignificant">
                             </textarea>
                         </div>
                     </div>
@@ -196,7 +220,7 @@
 
                         <div class = "formElementContent">
                             <fieldset class = "applyFieldset">
-                                <input type = "text"  name = "applyHopeDate" id = "applyHopeDate" class = "applyInput">
+                                <input type = "text"  name = "admHopeDate" id = "applyHopeDate" class = "applyInput">
                             </fieldset>
                         </div>
                     </div>

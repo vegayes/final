@@ -17,12 +17,16 @@
             <ul class="menu-items">
                 <li><a>절차 및 관리</a>
                     <ul>
-                        <li><a th:href="@{/}">무료입양 절차</a></li>
+                        <li><a th:href="@{/}">무료 입양절차</a></li>
                         <li><a th:href="@{/}">활동일지</a></li>
                     </ul> 
                 </li>
-                <li><a th:href="@{/freeAdmission}">무료 입소 신청</a></li>
-                <li><a th:href="@{/adopt/dogList}">입양하기</a></li>
+                <li><a>입양 및 입소</a>
+                    <ul>
+                        <li><a th:href="@{/adopt/dogList}">무료 입양하기</a></li>
+                        <li><a th:href="@{/freeAdmission}">입소신청</a></li>
+                    </ul> 
+				</li>
                 <li><a th:href="@{/}">병원, 훈련소</a></li>
                 <li><a th:href="@{/}">입양 후기</a></li>
                 
@@ -30,6 +34,11 @@
                     <a th:unless="${session.loginMember}" th:href="@{/member/login}">로그인</a>
                     <a th:if="${session.loginMember}" th:href="@{/}">마이페이지</a>
                 </li>
+                
+                <li th:if ="${session.loginMember}">
+					<a th:if="${session.loginMember}" th:href="@{/}">로그아웃</a>
+				</li>
+                
             </ul>
         </nav>
     </header>
