@@ -131,7 +131,7 @@ header{
 .header-bar li:hover ul{
     display:block;
     /* transition-timing-function: linear; */
-
+	background-color: white;
     height: 90%;
     width:140px;
     overflow:hidden;

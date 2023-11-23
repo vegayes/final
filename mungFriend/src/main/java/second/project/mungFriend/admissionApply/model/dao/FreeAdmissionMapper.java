@@ -13,4 +13,5 @@ public interface FreeAdmissionMapper {
 	 */
 	int admissionInsert(Admission admission);
 
+
 }

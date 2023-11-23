@@ -94,7 +94,7 @@ function showButton(message) {
 $(function () {
     $(".form-inline").on('submit', function (e) {
         e.preventDefault();     //form 태그의 페이지 이동 기능을 막음
-    });
+    }); 
 
     $("#chat-image").click(function (e) {
         e.preventDefault();

@@ -23,5 +23,3 @@ radioButtons.forEach(function(radio) {
 });
 
 
-
-
