@@ -55,21 +55,21 @@
                     <div class = "formElement heightPadding">
                         <div class = "formElementTitle formDogFlex">
                             <div class = "formDogProfile">
-                                <img th:src="@{/images/admissionApply/jjangu.png}">
+                                <img th:src="@{/images/admissionApply/강아지.jpg}" id = "admissionProfileImg">
                             </div>
                         </div>
 
                         <div class = "formElementContent formBtnStart">
                         
                             <label>
-                                <input type="file" id="admissionDogProfile"  name="admissionProfile" accept="image/*"/>
+                                <input type="file" id="admissionProfileInput"  name="admissionProfile" accept="image/*"/>
                                 <div class = "formFont formDogBtn formDogImgeUploadBtn">
                                     강아지 사진 업로드
                                 </div>
                             </label>
 
 
-                            <div class = "formFont formDogBtn formDogImgeDelBtn">
+                            <div class = "formFont formDogBtn formDogImgeDelBtn" id = "deleteImage">
                                 이미지 삭제
                             </div>
 
@@ -205,8 +205,7 @@
                         </div>
 
                         <div class = "formElementContent">
-                            <textarea class = "applyFieldset" placeholder="필수입력란이 아닙니다." name = "admSignificant">
-                            </textarea>
+                            <textarea class = "applyFieldset" placeholder="필수입력란이 아닙니다." name = "admSignificant"></textarea>
                         </div>
                     </div>
 

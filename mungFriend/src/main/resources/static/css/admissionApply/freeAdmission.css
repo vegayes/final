@@ -223,7 +223,7 @@ main{
     flex-basis: 100%;
     border: 5px solid #FEE4D6;
     border-radius: 10px;
-    padding : 2px;
+    padding : 5px 10px;
  }
 
  /*생일 입력창 줄이기*/
@@ -270,7 +270,7 @@ main{
 .formDogProfile>img{
     /*너무 큰거 같아서 일단 padding 줌. 
      진짜 사진넣을때는 없애야함.*/
-    /*padding: 5px;*/
+    padding: 5px 0px;
     width: 100%;
 }
 
@@ -282,7 +282,7 @@ main{
 }
 
 /*강아지 사진 업로드 파일 noen*/
-#admissionDogProfile{
+#admissionProfileInput{
     display: none;
 }
 
