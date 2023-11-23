@@ -10,6 +10,7 @@ public class MapController {
 
     @GetMapping("/map")
     public String mapPage() {
-        return "centerInfo/map"; // map.html을 반환
+        return "centerInfo/map"; 
     }
+    
 }
