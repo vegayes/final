@@ -70,7 +70,7 @@
 	        </table>
 	
 	
-	        <button id="writeReview">글쓰기</button>
+	        <button  th:if="@{session.loginMember}"  id="writeReview">글쓰기</button>
 	
 	
 	        <div id="searchContainer"> 
@@ -82,8 +82,77 @@
 	            <input type="text" name="searchContent" id="searchContent" placeholder="검색어를 입력해주세요.">
 	            <button id="searchButton">검색</button>
 	        </div>
-	
-	        <div class="pagination">
+			
+			
+			<!-- 게시글이 있을 때만 페이지네이션 보이기 -->
+            <div th:if="${#lists.size(boardList) > 0 }" class="pagination-area">
+
+
+                <ul th:unless="${param.query}" class="pagination">
+                
+                    <!-- 첫 페이지로 이동 -->
+					<li><a th:href="@{/board/{boardCode}(boardCode=${boardCode}, cp=1)}">&lt;&lt;</a></li>
+			
+                    <!-- 이전 목록 마지막 번호로 이동 -->
+                  	<li><a th:href="@{/board/{boardCode}(boardCode=${boardCode}, cp=${pagination.prevPage})}">&lt;</a></li>
+
+					
+                    <!-- 특정 페이지로 이동 -->
+                    <!-- #numbers.sequence(시작,끝[,step]) : 시작 이상 끝 이하까지 step 만큼 증가하는 숫자를 발생시켜 리스트로 반환 -->
+                    <th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
+                	
+            			<!-- 현재 보고있는 페이지 -->
+            			<li th:if="${i== pagination.currentPage}">
+							<a class="current" th:text="${i}">현재 페이지</a>
+						</li>
+            		
+            		
+            			<!-- 현재 페이지를 제외한 나머지 -->		
+            			<li th:unless ="${i== pagination.currentPage}">
+							<a th:href="@{/board/{boardCode}(boardCode=${boardCode}, cp=${i})}" th:text="${i}">나머지 페이지</a>
+						</li>
+                    		
+                    
+                    </th:block>
+                    
+                    <!-- 다음 목록 시작 번호로 이동 -->
+                   	<li><a th:href="@{/board/{boardCode}(boardCode=${boardCode}, cp=${pagination.nextPage})}">&gt;</a></li>
+
+                    <!-- 끝 페이지로 이동 -->
+                   	<li><a th:href="@{/board/{boardCode}(boardCode=${boardCode}, cp=${pagination.maxPage})}">&gt;&gt;</a></li>
+
+                </ul>
+            
+               <!-- 검색 O인 경우의 페이지네이션 -->
+               <ul th:if="${param.query}" class="pagination">
+              
+                   <!-- 첫 페이지로 이동 -->
+                   <li><a th:href="@{/board/{boardCode}(boardCode=${boardCode}, cp=1, key=${param.key}, query=${param.query})}">&lt;&lt;</a></li>
+                   <!-- 이전 목록 마지막 번호로 이동 -->
+                   <li><a th:href="@{/board/{boardCode}(boardCode=${boardCode}, cp=${pagination.prevPage}, key=${param.key}, query=${param.query})}">&lt;</a></li>
+                   <!-- #numbers.sequence(시작, 끝 [,step]) -->
+                   <!-- 특정 페이지로 이동 -->
+                   <th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
+                       <!-- 현재 보고있는 페이지 -->
+                       <li th:if="${i == pagination.currentPage}">
+                           <a class="current" th:text="${i}">현재 페이지</a>
+                       </li>
+                       <!-- 현재 페이지를 제외한 나머지 -->
+                       <li th:unless="${i == pagination.currentPage}">
+                           <a th:href="@{/board/{boardCode}(boardCode=${boardCode}, cp=${i}, key=${param.key}, query=${param.query})}" th:text="${i}">현재 페이지</a>
+                       </li>
+                   </th:block>
+                   <!-- 다음 목록 시작 번호로 이동 -->
+                   <li><a th:href="@{/board/{boardCode}(boardCode=${boardCode}, cp=${pagination.nextPage}, key=${param.key}, query=${param.query})}">&gt;</a></li>
+                   <!-- 끝 페이지로 이동 -->
+                   <li><a th:href="@{/board/{boardCode}(boardCode=${boardCode}, cp=${pagination.maxPage}, key=${param.key}, query=${param.query})}">&gt;&gt;</a></li>
+               </ul>
+
+            </div>
+
+
+
+	        <!-- <div class="pagination">
 	            <a th:href="@{/}" style="letter-spacing: -7px;">&lt;&lt;</a> 
 	            <a th:href="@{/}">&lt;</a>
 	            <a th:href="@{/}">1</a>
@@ -99,7 +168,7 @@
 	            <a th:href="@{/}">&gt;</a>
 	            <a th:href="@{/}" style="letter-spacing: -7px;">&gt;&gt;</a>
 	        </div>
-	    </div>		
+	    </div>		 -->
 		
 		
 	</main>
