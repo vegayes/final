@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -50,7 +51,8 @@ public class ReviewController {
 				
 				Map<String, Object> map = service.selectSearchReviewList(searchType,searchContent,cp);
 				
-				
+				map.put("searchType", searchType);
+				map.put("searchContent", searchContent);
 				model.addAttribute("map", map);
 				
 			}
@@ -58,6 +60,17 @@ public class ReviewController {
 		
 			return"adoptReview/ReviewList";
 	}
+	
+	
+	@GetMapping("/reviewDetail/{reviewNo}")
+	public String reviewDetail(@PathVariable("reviewNo") int reviewNo,
+			Model model) {
+			
+		System.out.println("reviewNo : " + reviewNo);
+		
+		return"adoptReview/ReviewDetail";
+	}
+	
 	
 	
 }

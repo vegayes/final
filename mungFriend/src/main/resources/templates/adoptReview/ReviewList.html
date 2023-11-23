@@ -13,7 +13,7 @@
 	
 	<th:block th:replace="~{common/header}"></th:block>
 
-	<main th:with="pagination=${map.pagination}, reviewList=${map.reviewList}">
+	<main th:with="pagination=${map.pagination}, reviewList=${map.reviewList}, searchType=${map.searchType}, searchContent=${map.searchContent}" >
 
 	    <div class="mainContainer">
 	        <div>입양후기</div>
@@ -40,7 +40,7 @@
 	                </tr>
 	            </thead>
 				
-				<!-- <tbody>
+				<tbody>
                     	
 					
 					<th:block th:if="${#lists.size(reviewList)} == 0">
@@ -57,24 +57,25 @@
 								<td th:text="${board.reviewNo}">게시글 번호</td>
 								<td> 
 
-									<a th:unless="${param.query}" th:href="@{/board/{boardCode}/{boardNo}(boardCode=${boardCode}, boardNo=${board.boardNo}, cp=${pagination.currentPage})}" th:text="${board.boardTitle}">게시글 제목</a> 
+									<a th:unless="${param.query}" th:href="@{/adoptReview/reviewDetail/{reviewNo}(reviewNo=${board.reviewNo}, cp=${pagination.currentPage})}" th:text="${board.reviewTitle}">게시글 제목</a> 
 								   
-									<a th:if="${param.query}" th:href="@{/adoptReview/{boardCode}/{boardNo}(boardCode=${boardCode}, boardNo=${board.boardNo}, cp=${pagination.currentPage}, key=${param.key}, query=${param.query})}" th:text="${board.boardTitle}">게시글 제목</a>  
-									   <th:block th:text="|[${board.reviewCount}]|">조회 수</th:block>
+									<a th:if="${param.query}" th:href="@{/adoptReview/reviewDetail/{reviewNo}(reviewNo=${board.reviewNo}, cp=${pagination.currentPage}, key=${param.key}, query=${searchContent})}" th:text="${board.reviewTitle}">게시글 제목</a> 
+
+									<th:block th:text="|[${board.reviewCount}]|">조회수</th:block>
 																																									  
 								</td>
 								
 								<td th:text="${board.memberNickname}"></td>
-								<td th:text="${board.boardCreateDate}"></td>
-								
-								<td th:text="${board.likeCount}"></td>
+								<td th:text="${board.reviewDate}"></td>
+								<th:block th:text="|[${board.reviewCount}]|">조회수</th:block>
+							
 							</tr>
 							
 					</th:block>
 				
 			
 				
-				</tbody> -->
+				</tbody>
 
 
 
