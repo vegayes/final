@@ -26,7 +26,7 @@ public class MainController {
 //		return "admissionApply/freeAdmission";  
 //		return "mypage/admin/DogStatus";
 //	return "member/findId";
-		return "common/header";
+		 return "centerInfo/map";
 //		return "mypage/member/myPageReservationList_user";
 	}
 	
@@ -56,6 +56,8 @@ public class MainController {
 		return "donation/donation";
 	}
 	
+	
+ 
 	
 	
 }
