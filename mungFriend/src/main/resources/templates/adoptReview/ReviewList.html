@@ -13,7 +13,7 @@
 	
 	<th:block th:replace="~{common/header}"></th:block>
 
-	<main>
+	<main th:with="pagination=${map.pagination}, reviewList=${map.reviewList}">
 
 	    <div class="mainContainer">
 	        <div>입양후기</div>
@@ -39,7 +39,45 @@
 	                    <td class="boardRectangle"></td>
 	                </tr>
 	            </thead>
-	            
+				
+				<!-- <tbody>
+                    	
+					
+					<th:block th:if="${#lists.size(reviewList)} == 0">
+						
+						 <tr>
+							 <th colspan="6">게시글이 존재하지 않습니다.</th>
+						 </tr>
+					</th:block>
+					
+					<th:block th:unless="${#lists.size(reviewList)} == 0">
+					
+							
+							<tr th:each="board : ${reviewList}" > 
+								<td th:text="${board.reviewNo}">게시글 번호</td>
+								<td> 
+
+									<a th:unless="${param.query}" th:href="@{/board/{boardCode}/{boardNo}(boardCode=${boardCode}, boardNo=${board.boardNo}, cp=${pagination.currentPage})}" th:text="${board.boardTitle}">게시글 제목</a> 
+								   
+									<a th:if="${param.query}" th:href="@{/adoptReview/{boardCode}/{boardNo}(boardCode=${boardCode}, boardNo=${board.boardNo}, cp=${pagination.currentPage}, key=${param.key}, query=${param.query})}" th:text="${board.boardTitle}">게시글 제목</a>  
+									   <th:block th:text="|[${board.reviewCount}]|">조회 수</th:block>
+																																									  
+								</td>
+								
+								<td th:text="${board.memberNickname}"></td>
+								<td th:text="${board.boardCreateDate}"></td>
+								
+								<td th:text="${board.likeCount}"></td>
+							</tr>
+							
+					</th:block>
+				
+			
+				
+				</tbody> -->
+
+
+
 	            <tbody>
 	                <tr class="boardContent">
 	                    <td>3</td> <td>저희 모카 잘 지내고 있어요~</td> <td>이쁜이</td> <td>23.11.15</td> <td>1</td>
@@ -83,73 +121,7 @@
 	            <button id="searchButton">검색</button>
 	        </div>
 			
-			
-			<!-- 게시글이 있을 때만 페이지네이션 보이기 -->
-            <div th:if="${#lists.size(boardList) > 0 }" class="pagination-area">
-
-
-                <ul th:unless="${param.query}" class="pagination">
-                
-                    <!-- 첫 페이지로 이동 -->
-					<li><a th:href="@{/board/{boardCode}(boardCode=${boardCode}, cp=1)}">&lt;&lt;</a></li>
-			
-                    <!-- 이전 목록 마지막 번호로 이동 -->
-                  	<li><a th:href="@{/board/{boardCode}(boardCode=${boardCode}, cp=${pagination.prevPage})}">&lt;</a></li>
-
-					
-                    <!-- 특정 페이지로 이동 -->
-                    <!-- #numbers.sequence(시작,끝[,step]) : 시작 이상 끝 이하까지 step 만큼 증가하는 숫자를 발생시켜 리스트로 반환 -->
-                    <th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
-                	
-            			<!-- 현재 보고있는 페이지 -->
-            			<li th:if="${i== pagination.currentPage}">
-							<a class="current" th:text="${i}">현재 페이지</a>
-						</li>
-            		
-            		
-            			<!-- 현재 페이지를 제외한 나머지 -->		
-            			<li th:unless ="${i== pagination.currentPage}">
-							<a th:href="@{/board/{boardCode}(boardCode=${boardCode}, cp=${i})}" th:text="${i}">나머지 페이지</a>
-						</li>
-                    		
-                    
-                    </th:block>
-                    
-                    <!-- 다음 목록 시작 번호로 이동 -->
-                   	<li><a th:href="@{/board/{boardCode}(boardCode=${boardCode}, cp=${pagination.nextPage})}">&gt;</a></li>
-
-                    <!-- 끝 페이지로 이동 -->
-                   	<li><a th:href="@{/board/{boardCode}(boardCode=${boardCode}, cp=${pagination.maxPage})}">&gt;&gt;</a></li>
-
-                </ul>
-            
-               <!-- 검색 O인 경우의 페이지네이션 -->
-               <ul th:if="${param.query}" class="pagination">
-              
-                   <!-- 첫 페이지로 이동 -->
-                   <li><a th:href="@{/board/{boardCode}(boardCode=${boardCode}, cp=1, key=${param.key}, query=${param.query})}">&lt;&lt;</a></li>
-                   <!-- 이전 목록 마지막 번호로 이동 -->
-                   <li><a th:href="@{/board/{boardCode}(boardCode=${boardCode}, cp=${pagination.prevPage}, key=${param.key}, query=${param.query})}">&lt;</a></li>
-                   <!-- #numbers.sequence(시작, 끝 [,step]) -->
-                   <!-- 특정 페이지로 이동 -->
-                   <th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
-                       <!-- 현재 보고있는 페이지 -->
-                       <li th:if="${i == pagination.currentPage}">
-                           <a class="current" th:text="${i}">현재 페이지</a>
-                       </li>
-                       <!-- 현재 페이지를 제외한 나머지 -->
-                       <li th:unless="${i == pagination.currentPage}">
-                           <a th:href="@{/board/{boardCode}(boardCode=${boardCode}, cp=${i}, key=${param.key}, query=${param.query})}" th:text="${i}">현재 페이지</a>
-                       </li>
-                   </th:block>
-                   <!-- 다음 목록 시작 번호로 이동 -->
-                   <li><a th:href="@{/board/{boardCode}(boardCode=${boardCode}, cp=${pagination.nextPage}, key=${param.key}, query=${param.query})}">&gt;</a></li>
-                   <!-- 끝 페이지로 이동 -->
-                   <li><a th:href="@{/board/{boardCode}(boardCode=${boardCode}, cp=${pagination.maxPage}, key=${param.key}, query=${param.query})}">&gt;&gt;</a></li>
-               </ul>
-
-            </div>
-
+		
 
 
 	        <!-- <div class="pagination">
