@@ -232,6 +232,9 @@ a:hover{
     margin-right: 5px;
 }
 
+.secessionProcessCheck > label > input:hover {
+	cursor: pointer;	
+}
 
 /*탈퇴하기 버튼*/
 .secessionButtonArea{
@@ -243,7 +246,12 @@ a:hover{
 
 .secessionButtonBox{
     flex-basis: 80%;
-    border-radius: 10px;
+}
+
+#secession-btn {
+	width: 100%;
+	border: none;
+	border-radius: 10px;
     background: #FEE4D6;
     padding : 20px 30px;
 
@@ -254,6 +262,10 @@ a:hover{
 
     display: flex;
     justify-content: center;
+}
+
+#secession-btn:hover {
+	cursor: pointer;
 }
 
 /* 오른쪽 하단 후원, 챗봇 아이콘 */
