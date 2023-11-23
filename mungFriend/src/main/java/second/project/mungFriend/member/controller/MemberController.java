@@ -83,7 +83,7 @@ public class MemberController {
 			
 		} else { // 아이디찾기 실패
 			path = "redirect:" + referer;
-			ra.addFlashAttribute("message", "아이디찾기 실패했습니다.");
+			ra.addFlashAttribute("message", "존재하지 않는 아이디입니다.");
 			
 		}
 		
