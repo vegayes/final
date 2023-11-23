@@ -59,7 +59,10 @@ public class DBConfig {
 			//별칭을 지정해야하는 DTO가 모여있는 패키지 지정
 			//-> 해당 패키지에 있는 모든 클래스가 클래스명으로 별칭이 지정됨
 
-			sessionFactoryBean.setTypeAliasesPackage("second.project.mungFriend.member.model.dto, second.project.mungFriend.adopt.model.dto");
+			sessionFactoryBean.setTypeAliasesPackage("second.project.mungFriend.member.model.dto," 
+													+ "second.project.mungFriend.adopt.model.dto,"
+													+ "second.project.mungFriend.admissionApply.model.dto");
+
 
 //			sessionFactoryBean.setTypeAliasesPackage("edu.kh.project.member.model.dto");
 			//마이바티스 설정 파일 경로 지정

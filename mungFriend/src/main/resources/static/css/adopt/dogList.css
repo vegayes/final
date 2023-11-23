@@ -71,8 +71,8 @@ main{
 
 
 /* filter */
-.filter{
-    margin: 60px 0 30px 0;
+.filter {
+    margin: 60px 0 40px 0;
 }
 
 .filter > form{
@@ -111,11 +111,11 @@ form > button > img{
 
 
 /* dog-list */
-.dog{
+.dog {
     display: flex;
     justify-content: center;
-    align-items: center;
-
+    align-items: start;
+    min-height: 300px;
     margin: 0 30px 60px 30px;
 }
 
