@@ -63,6 +63,7 @@ public class DBConfig {
 													+ "second.project.mungFriend.adopt.model.dto,"
 													+ "second.project.mungFriend.admissionApply.model.dto");
 
+
 //			sessionFactoryBean.setTypeAliasesPackage("edu.kh.project.member.model.dto");
 			//마이바티스 설정 파일 경로 지정
 			sessionFactoryBean.setConfigLocation(applicationContext.getResource("classpath:mybatis-config.xml"));
