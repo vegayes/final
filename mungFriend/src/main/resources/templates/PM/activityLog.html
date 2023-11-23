@@ -100,7 +100,13 @@
                 <!-- 등록하기 영역 -->
                 <div id="register-sec">
                     <a th:href="@{/pm/activityLogRegister}">
-						<button th:if="${session.loginMember.adminYn == 'Y'}" type="button" id="register-btn">등록하기</button>
+						<!-- session.loginMember가 null 일 경우 -->
+						<th:block th:if="${session.loginMember == null}"></th:block>
+						
+						<!-- session.loginMember가 null 이 아닐 경우 -->
+						<th:block th:if="${session.loginMember}">
+							<button th:if="${session.loginMember.adminYn == 'Y'}" type="button" id="register-btn">등록하기</button>
+						</th:block>
 					</a>
                 </div>
             </div>

@@ -1,46 +1,9 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>사용자 nav</title>
-    <link rel="stylesheet" href="/FinalProject/css/nav_user.css">
-    <script src="https://kit.fontawesome.com/ac58eafae7.js" crossorigin="anonymous"></script>
-    
-</head>
-<body>
-
-    <main>
-        <!-- 사용자 마이페이지 타이틀 영역-->
-        <section class = "userIntroArea">
-            <div class = "userIntroTitle">
-                쿠폰함
-            </div>
-            <hr>
-        </section>
-
-        <!-- 사용자 마이페이지 내용 영역-->
-        <section class = "userContentArea">
-
-            <!-- nav 자리-->
-            <nav class = "navUser">
-                <ul>
-                    <li> <a href = "#"> 찜한 목록</a> </li>
-                    <li> <a href = "#"> 예약 내역</a> </li>
-                    <li> <a href = "#"> 후원 내역</a> </li>
-                    <li> <a href = "#"> 1:1 문의</a></li>
-                    <li> <a href = "#"> 쿠폰함</a></li>
-                    <li> <a href = "#"> 정보 수정</a></li>
-                    <li> <a href = "#"> 회원 탈퇴</a></li>
-                </ul>
-            </nav>
-
-            <!-- 내용 작성영역-->
-            <div class = "userContentContainer">
-                <!-- 이 안에 작성하면 될 거 같아요 div 잡구-->
-   
-            </div>
-        </section>
-    </main>
-</body>
-</html>
+<ul>
+    <li> <a th:href = "@{/}"> 찜한 목록</a> </li>
+    <li> <a th:href = "@{/}"> 예약 내역</a> </li>
+    <li> <a th:href = "@{/}"> 후원 내역</a> </li>
+    <li> <a th:href = "@{/}"> 1:1 문의</a></li>
+    <li> <a th:href = "@{/}"> 쿠폰함</a></li>
+    <li> <a th:href = "@{/mypage/member/updateInfoUser}"> 정보 수정</a></li>
+    <li> <a th:href = "@{/mypage/member/secessionUser}"> 회원 탈퇴</a></li>
+</ul>
