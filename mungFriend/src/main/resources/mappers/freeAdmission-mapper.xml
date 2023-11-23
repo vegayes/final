@@ -22,10 +22,15 @@
 		
 	</resultMap>
 	
-<!--
+
+	<!-- 무료 입소신청 진행하기 --> 
 	<insert id = "admissionInsert">
-		
+		INSERT INTO ADMISSION 
+		VALUES(SEQ_ADM_NO.NEXTVAL, #{admProfile}, #{admName}, TO_DATE(#{admBirthday}, 'YYYY-MM-DD'), 
+    			#{admPhone}, #{admBreed},  #{admGender},  #{admNeuteringYN}, #{admVaccineYN}, #{admSignificant}, 
+     			SYSDATE, TO_DATE(#{admHopeDate}, 'YYYY-MM-DD'), DEFAULT, #{admMemberNo}) 
 	</insert>
--->	
+	
+
 
 </mapper>

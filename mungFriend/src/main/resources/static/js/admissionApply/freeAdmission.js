@@ -24,3 +24,9 @@ radioButtons.forEach(function(radio) {
 
 
 
+
+const btn = document.getElementById("admissionSubmitBtn");
+
+btn.addEventListener("click", function(){
+  console.log("안녕");
+})

@@ -36,7 +36,7 @@
                 
 
 				<!--@{insert}   name ="admissionApplyForm"-->
-                <form th:action="@{insert}" method = "POST"  class = "admissionApplyForm" enctype = "multipart/form-data">
+                <form th:action="@{/freeAdmission/insert}" method="POST"  class = "admissionApplyForm" enctype = "multipart/form-data">
 
                     <div class = "formElement">
                         <div class = "formElementTitle">
@@ -62,7 +62,7 @@
                         <div class = "formElementContent formBtnStart">
                         
                             <label>
-                                <input type="file" id="admissionDogProfile" name="admProfile" accept="image/*"/>
+                                <input type="file" id="admissionDogProfile"  name="admissionProfile" accept="image/*"/>
                                 <div class = "formFont formDogBtn formDogImgeUploadBtn">
                                     강아지 사진 업로드
                                 </div>
@@ -114,7 +114,7 @@
 
                         <div class = "formElementContent">
                             <fieldset class = "applyFieldset ">
-                                <input type = "text"  name = "applyBirthday" id = "applyBirthday" class = "applyInput ">
+                                <input type = "text"  name = "admBirthday" id = "applyBirthday" class = "applyInput ">
                             </fieldset>
                         </div>
                     </div>
@@ -226,7 +226,7 @@
                     </div>
 
                     <div class = "admissionSubmit">
-                        <button class = "admissionSubmitBtn">
+                        <button type="submit" class = "admissionSubmitBtn" id = "admissionSubmitBtn">
                             제출하기
                         </button>
                     </div>
@@ -243,7 +243,7 @@
         
 
         <a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
-		    <a th:href="@{#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
+		<a th:href="@{#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
 
 
         

@@ -27,20 +27,19 @@ public class FreeAdmissionController {
 	@PostMapping("/insert")
 	public String admissionInsert(  
 			Admission admission, 
-			@RequestParam("admProfile") MultipartFile admProfile, 
+			@RequestParam(value ="admissionProfile", required = false) MultipartFile admissionProfile, 
 			@SessionAttribute(value ="loginMember", required = false) Member loginMember,
 			RedirectAttributes ra
 			) throws IllegalStateException, IOException {
 		
 		// 파라미터 : 내용, 프로필 이미지 파일
 		// 파일 저장 경로 : HttpSession
+		System.out.println("admission 값 : " + admission);		
+		System.out.println("프로필 : " +  admissionProfile);
 		
-		System.out.println("안녕");
-
-		System.out.println("admission 값 : " + admission);
-		
-		System.out.println("admission name : " + admission.getAdmName());
-		
+		if(admission.getAdmSignificant() != null) {
+			 admission.setAdmSignificant("특이사항 없음");
+		}
 		
 		// 1. 로그인한 회원 번호를 얻어와 admission에 대입
 		if(loginMember != null) {
@@ -48,8 +47,8 @@ public class FreeAdmissionController {
 		}
 		
 		// 무료 입소 신청 삽입
-		int admissionCheck = service.admissionInsert(admission, admProfile);
-		
+		int admissionCheck = service.admissionInsert(admission, admissionProfile);
+
 		
 		// 게시글 삽입 성공 시
 		// -> 방금 삽입한 게시글의 상세 조회 페이지로 리다이렉트 
@@ -62,7 +61,7 @@ public class FreeAdmissionController {
 			path += "/" ;
 		}else {
 			message = "게시글 등록이 실패되었습니다.";
-			path += "insert";
+			path += "/";
 		}
 		
 		
