@@ -18,6 +18,7 @@ header{
     width: auto;
     height: 70px;
     display: flex;
+    z-index: 10;
 }
 
 .header-img{
@@ -29,7 +30,7 @@ header{
 	align-items: center;
 }
 
-.header-img > img{
+.header-img img{
 
     width: 200px;
     height: 85px;

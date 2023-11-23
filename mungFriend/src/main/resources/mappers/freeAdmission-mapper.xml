@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="second.project.mungFriend.admissionApply.model.dao.FreeAdmissionMapper">
+	
+	<!-- Admission resultMap -->
+	<resultMap type="Admission" id="admission_rm">
+		<id property="admNo" column="ADM_NO"/>
+		
+		<result property="admProfile" column="ADM_PROFILE"/>
+		<result property="admName" column="ADM_NAME"/>
+		<result property="admBirthday" column="ADM_BIRTHDAY"/>
+		<result property="admPhone" column="ADM_PHONE"/>
+		<result property="admBreed" column="ADM_BREED"/>		
+		<result property="admGender" column="ADM_GENDER"/>
+		<result property="admNeuteringYN" column="ADM_NEUTERING_YN"/>
+		<result property="admVaccineYN" column="ADM_VACCINE_YN"/>
+		<result property="admSignificant" column="ADM_SIGNIFICANT"/>
+		<result property="admApplyDate" column="ADM_APPLY_DATE"/>
+		<result property="admHopeDate" column="ADM_HOPE_DATE"/>
+		<result property="admYN" column="ADM_YN"/>
+		<result property="admMemberNo" column="ADM_MEMBER_NO"/>
+		
+	</resultMap>
+	
+<!--
+	<insert id = "admissionInsert">
+		
+	</insert>
+-->	
+
+</mapper>
