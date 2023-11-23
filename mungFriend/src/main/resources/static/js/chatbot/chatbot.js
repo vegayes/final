@@ -92,7 +92,7 @@ function showButton(message) {
 
 
 $(function () {
-    $("form").on('submit', function (e) {
+    $(".form-inline").on('submit', function (e) {
         e.preventDefault();     //form 태그의 페이지 이동 기능을 막음
     });
 
