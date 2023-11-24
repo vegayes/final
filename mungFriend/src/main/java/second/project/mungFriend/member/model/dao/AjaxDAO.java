@@ -17,4 +17,20 @@ public class AjaxDAO {
 		return mapper.checkId(id);
 	}
 
+	/** 이메일 중복검사
+	 * @param email
+	 * @return int
+	 */
+	public int checkEmail(String email) {
+		return mapper.checkEmail(email);
+	}
+
+	/** 닉네임 중복검사
+	 * @param nickname
+	 * @return int
+	 */
+	public int checkNickname(String nickname) {
+		return mapper.checkNickname(nickname);
+	}
+
 }

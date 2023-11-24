@@ -96,7 +96,7 @@ a:hover{
     flex-basis: 70%;
 
     display: flex;
-
+  
     /* border : 2px solid pink; */
 }
 
@@ -106,6 +106,8 @@ a:hover{
 
     display: flex;
     flex-direction: column;
+    
+    min-height : 615px;
 
     /* border : 2px solid yellow; */
 }
@@ -159,8 +161,8 @@ a:hover{
 .admissionCardBoxArea{
     flex-basis: 50%;
 
-    height: 220px;
-
+    height: 240px;
+	/*진행완료된 경우는 220px로 줄이기*/
     padding : 10px 4%;
 
     display: flex;
@@ -181,7 +183,7 @@ a:hover{
 
 /*프로필 사진*/
 .cardProfile{
-    flex-basis:30%;
+    flex-basis:35%;
     display: flex;
     justify-content: center;
     padding-top: 15px;
@@ -209,7 +211,7 @@ a:hover{
 
 /*입소신청 자격증 내용*/
 .cardInfo{
-    flex-basis: 70%;
+    flex-basis: 65%;
     padding : 15px 0px;
 }
 
@@ -217,8 +219,37 @@ a:hover{
 
     padding :5px 15px;
 
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 400;
+}
+
+.registArea{
+	display: flex;
+	justify-content: end;
+	padding-top : 10px;
+
+}
+
+/*등록하기 버튼*/
+.admissionRegist{
+	
+    padding : 7px 25px;
+    border-radius: 5px;
+    background: #FEE4D6; 
+    
+    margin-right: 10px;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.admissionRegist:hover{
+	background-color : #f9c9b0a2; 
+	
+	transform: scale( 1.01 );
+	transition: transform 0.2s;
 }
 
 
@@ -229,7 +260,7 @@ a:hover{
     position: fixed;
     right: 10px;
     z-index: 100;
-    width: 50px;
+    width : 50px;
 }
 
 .fixed-image:hover {
@@ -246,7 +277,17 @@ a:hover{
 
 
 
-
+/*************************************************
+                list가 존재하지 않는 경우
+*************************************************/
+.allNotList{
+	width : 100%; 
+	height : 615px; 
+	display: flex; 
+	justify-content: center; 
+	padding:10px;  
+	border:2px solid red;
+}
 
 
 

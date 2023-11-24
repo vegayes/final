@@ -256,7 +256,16 @@ input[name="amount"]:checked + div{
 
 
 
+/*************************************************
+                직접입력창
+*************************************************/
+#inputAmountArea{
+	display: none;
+}
 
+input[value="input"]:checked #inputAmountArea{
+	display : block;
+}
 
 
 

@@ -5,10 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>입소신청 내역 (관리자)</title>
         <link rel="stylesheet" th:href="@{/css/mypage/admin/admissionList_admin.css}">
-        <!--
-        <link rel="stylesheet" href="../page_footer/footer.css">
-        <link rel="stylesheet" href="../page_header/header.css">
-        -->
     </head>
     <body>
 	    <th:block th:replace="~{common/header}"></th:block>
@@ -20,294 +16,104 @@
                 <hr>
             </section>
 
-            <section class = "adminContentArea">
-
+            <section class = "adminContentArea" th:object="${admissionList}">
                 <!-- nav 자리-->
                 <nav class = "navAdmission">
-                    <ul>
-                        <li> <a href = "#"> 1:1 문의함 </a> </li>
-                        <li> <a href = "#"> 예약 내역 </a> </li>
-                        <li> <a href = "#"> 후원 내역 </a> </li>
-                        <li> <a href = "#"> 입소신청 내역 </a></li>
-                        <li> <a href = "#"> 회원 관리 </a></li>
-                        <li> <a href = "#"> 관리 현황 </a></li>
-                    </ul>
+    				<th:block th:replace="~{common/nav_admin}"></th:block>
                 </nav>
 
                 <!-- 입소 신청된 내용 영역-->
                 <div class = "adminContentContainer">
+					
+	       			<th:block th:if="${#lists.size(admissionList)} == 0">
+						<div class = "allNotList" >
+							입소 신청된 내용이 존재하지 않습니다.                   										
+						</div>
+	       			</th:block>
+	       			<th:block th:unless="${#lists.size(admissionList)} == 0">
+	                    <!-- 입소 진행 사항 버튼 영역-->
+	                    <div class = "admissionStatusBtnArea">
+	                        <div class = "statusBtn" id = "admissionNBtn">
+	                            입소 진행 중
+	                        </div>
+	                        <div class = "statusBtn" id = "admissionYBtn">
+	                            입소 진행 완료
+	                        </div>  
+	                    </div>			
+	                    <!-- 입소 신청된 내역 자격증 카드 형태 영역 -->
+	                    <div class = "admissionCardArea">
+							
+	                        <!-- 카드 한 개 -->
+	                        <div class = "admissionCardBoxArea"  th:each = "admission : ${admissionList}">
+	                            <div class = "admissionCardBox">
+	                                <div class = "cardProfile">
+	                                    <div class = "cardProfileWrapper">
+	                                        <img th:src="${admission.admProfile}">
+	                                    </div>
+	                                </div>
+	    
+	                                <div class = "cardInfo">
+	                                    <div class = "cardInfoContent">
+	                                        이름 : [[${admission.admName}]]
+	                                    </div>
+	
+	                                    <div class = "cardInfoContent">
+	                                        연락처 : [[${admission.admPhone}]]
+	                                    </div>
+	
+	                                    <div class = "cardInfoContent">
+	                                        견종 : [[${admission.admBreed}]]
+	                                    </div>
+	
+	                                    <div class = "cardInfoContent">
+	                                        성별 : [[${admission.admGender}]]
+	                                    </div>
+	
+	                                    <div class = "cardInfoContent">
+	                                        나이 : [[${admission.age}]]
+	                                    </div>
+	
+	                                    <div class = "cardInfoContent">
+	                                        특이사항 : [[${admission.admSignificant}]]
+	                                    </div>
+	
+	                                    <div class = "cardInfoContent">
+	                                        입소희망일 : [[${admission.admHopeDate}]]
+	                                    </div>
+	                                    
+                    	       			<th:block th:if="${admission.admYN} == 'N'">
+		                                    <div class = "cardInfoContent registArea">
+												<a th:src = "@{/}">
+													<div class = "admissionRegist">
+														등록하기
+													</div>	
+												</a>
 
-                    <!-- 입소 진행 사항 버튼 영역-->
-                    <div class = "admissionStatusBtnArea">
-                        <div class = "statusBtn">
-                            입소 진행 중
-                        </div>
-                        <div class = "statusBtn">
-                            입소 진행 완료
-                        </div>  
-                    </div>
+											</div>
+										</th:block>
+	                                </div>
+	                            </div>
+	                        </div>
 
-
-                    <!-- 입소 신청된 내역 자격증 카드 형태 영역 -->
-                    <div class = "admissionCardArea">
-                        <!-- 카드 한 개 -->
-                        <div class = "admissionCardBoxArea">
-                            <div class = "admissionCardBox">
-                                <div class = "cardProfile">
-                                    <div class = "cardProfileWrapper">
-                                        <!-- <img src = "../images/dog.svg"> -->
-                                        <img src = "../images/포메.jpg">
-                                    </div>
-                                </div>
-    
-                                <div class = "cardInfo">
-                                    <div class = "cardInfoContent">
-                                        이름 : 짱구
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        연락처 : 010-4444-1113
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        견종 : 포메라니안
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        성별 : 남아
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        나이 : 1세
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        특이사항 : 잘먹어요
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        입소희망일 : 2023-11-15
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class = "admissionCardBoxArea">
-                            <div class = "admissionCardBox">
-                                <div class = "cardProfile">
-                                    <div class = "cardProfileWrapper">
-                                        <!-- <img src = "../images/dog.svg"> -->
-                                        <img src = "../images/포메.jpg">
-                                    </div>
-                                </div>
-    
-                                <div class = "cardInfo">
-                                    <div class = "cardInfoContent">
-                                        이름 : 짱구
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        연락처 : 010-4444-1113
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        견종 : 포메라니안
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        성별 : 남아
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        나이 : 1세
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        특이사항 : 잘먹어요
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        입소희망일 : 2023-11-15
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class = "admissionCardBoxArea">
-                            <div class = "admissionCardBox">
-                                <div class = "cardProfile">
-                                    <div class = "cardProfileWrapper">
-                                        <!-- <img src = "../images/dog.svg"> -->
-                                        <img src = "../images/포메.jpg">
-                                    </div>
-                                </div>
-    
-                                <div class = "cardInfo">
-                                    <div class = "cardInfoContent">
-                                        이름 : 짱구
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        연락처 : 010-4444-1113
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        견종 : 포메라니안
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        성별 : 남아
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        나이 : 1세
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        특이사항 : 잘먹어요
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        입소희망일 : 2023-11-15
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class = "admissionCardBoxArea">
-                            <div class = "admissionCardBox">
-                                <div class = "cardProfile">
-                                    <div class = "cardProfileWrapper">
-                                        <!-- <img src = "../images/dog.svg"> -->
-                                        <img src = "../images/포메.jpg">
-                                    </div>
-                                </div>
-    
-                                <div class = "cardInfo">
-                                    <div class = "cardInfoContent">
-                                        이름 : 짱구
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        연락처 : 010-4444-1113
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        견종 : 포메라니안
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        성별 : 남아
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        나이 : 1세
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        특이사항 : 잘먹어요
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        입소희망일 : 2023-11-15
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class = "admissionCardBoxArea">
-                            <div class = "admissionCardBox">
-                                <div class = "cardProfile">
-                                    <div class = "cardProfileWrapper">
-                                        <!-- <img src = "../images/dog.svg"> -->
-                                        <img src = "../images/포메.jpg">
-                                    </div>
-                                </div>
-    
-                                <div class = "cardInfo">
-                                    <div class = "cardInfoContent">
-                                        이름 : 짱구
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        연락처 : 010-4444-1113
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        견종 : 포메라니안
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        성별 : 남아
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        나이 : 1세
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        특이사항 : 잘먹어요
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        입소희망일 : 2023-11-15
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class = "admissionCardBoxArea">
-                            <div class = "admissionCardBox">
-                                <div class = "cardProfile">
-                                    <div class = "cardProfileWrapper">
-                                        <!-- <img src = "../images/dog.svg"> -->
-                                        <img src = "../images/포메.jpg">
-                                    </div>
-                                </div>
-    
-                                <div class = "cardInfo">
-                                    <div class = "cardInfoContent">
-                                        이름 : 짱구
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        연락처 : 010-4444-1113
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        견종 : 포메라니안
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        성별 : 남아
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        나이 : 1세
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        특이사항 : 잘먹어요
-                                    </div>
-
-                                    <div class = "cardInfoContent">
-                                        입소희망일 : 2023-11-15
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+	                    </div>
+	                </div>
+	       		</th:block>
             </section>
         </main>
 
-		<a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
-        <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>      
+        <a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+		<a th:href="@{#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
 
 
 	    <th:block th:replace="~{common/footer}"></th:block>
+	    
+		<script th:inline = "javascript">
+			var admissionArr = /*[[${admissionList}]]*/ "입소신청 리스트";
+			console.log(admissionArr);
+			console.log(admissionArr[0]);
+		</script>
+	    
+	    <script th:src="@{/js/mypage/admin/admissionList_admin.js}"></script>
 
     </body>
 </html>
