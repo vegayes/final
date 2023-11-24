@@ -20,6 +20,7 @@
 		<result property="dogAdmissionDate" column="DOG_ADMISSION_DATE"/>
 		<result property="dogAdoptFl" column="DOG_ADOPT_FL"/>
 		
+		<result property="breedName" column="BREED_NAME"/>
 		<result property="thumbnail" column="THUMBNAIL"/>
 		
 		<collection property="imageList" 
@@ -31,7 +32,7 @@
 	</resultMap>
 	
 	<!-- DogImage resultMap -->
-	<resultMap type="DogImage" id="DogImage_rm">
+	<resultMap type="DogImage" id="dogImage_rm">
 		<id property="imageNo" column="IMG_NO"/>
 		
 		<result property="dogNo" column="DOG_NO"/>
@@ -49,10 +50,73 @@
 	
 	
 	<select id="selectDogList" resultMap="dog_rm">
-		SELECT DOG_NAME FROM DOG
+		SELECT DOG_NAME, DOG_NO,
+			(SELECT IMG_PATH || IMG_RENAME FROM DOG_IMG I
+			WHERE I.DOG_NO = D.DOG_NO
+			AND IMG_ORDER = 0) THUMBNAIL
+		FROM DOG D
 		WHERE DOG_ADOPT_FL = 'N'
 		ORDER BY DOG_ADMISSION_DATE DESC
 	</select>
+	
+	<!-- 게시글 한 개 조회 -->
+	<select id="selectDogDetail" resultMap="dog_rm">
+		SELECT D.DOG_NO, D.BREED_NO, DB.BREED_NAME, D.DOG_NAME,
+			<![CDATA[
+			NVL(
+		        CASE WHEN MONTHS_BETWEEN(SYSDATE, D.DOG_BIRTHDAY) <= 12
+		            THEN ROUND(MONTHS_BETWEEN(SYSDATE, D.DOG_BIRTHDAY)) || '개월'
+		            ELSE ROUND(MONTHS_BETWEEN(SYSDATE, D.DOG_BIRTHDAY) / 12) || '세'
+		        END,
+		        '알 수 없음'
+		    ) DOG_BIRTHDAY,
+		    ]]>
+			D.DOG_GENDER, D.DOG_SIZE, D.DOG_PERSONALITY,
+			CASE WHEN D.DOG_NEUTERING_YN = 'Y' THEN '완료' ELSE '미완료' END AS DOG_NEUTERING_YN,
+			CASE WHEN D.DOG_VACCINE_YN = 'Y' THEN '완료' ELSE '미완료' END AS DOG_VACCINE_YN,
+			D.DOG_LIKE, D.DOG_HATE, 
+			CASE WHEN D.DOG_SIGNIFICANT IS NULL THEN '-' ELSE DOG_SIGNIFICANT END AS DOG_SIGNIFICANT,
+			TO_CHAR(D.DOG_ADMISSION_DATE, 'YYYY"년" MM"월" DD"일"') DOG_ADMISSION_DATE			
+		FROM "DOG" D
+		JOIN DOG_BREED DB ON D.BREED_NO = DB.BREED_NO
+		WHERE D.DOG_ADOPT_FL = 'N'
+		AND D.DOG_NO = #{dogNo}
+	</select>
+
+	<!-- 특정 게시글 이미지 조회 -->
+	<select id="selectImageList" resultMap="dogImage_rm">
+		SELECT * FROM DOG_IMG
+		WHERE DOG_NO = #{dogNo}
+		ORDER BY IMG_ORDER
+	</select>
+	
+	<!-- 좋아요 여부 확인 -->
+	<select id="dogLikeCheck" resultType="_int">
+		SELECT COUNT(*) FROM DOG_LIKE
+		WHERE DOG_NO = #{dogNo}
+		AND MEMBER_NO = #{memberNo}
+	</select>
+	
+	
+	<!-- 좋아요 처리 -->
+	<!-- 좋아요 테이블 삽입 -->
+	<insert id="insertDogLike">
+		INSERT INTO "DOG_LIKE" VALUES (#{dogNo}, #{memberNo})
+	</insert>
+	
+	<!-- 좋아요 삭제 -->
+	<delete id="deleteDogLike">
+		DELETE FROM "DOG_LIKE"
+		WHERE DOG_NO = #{dogNo}
+		AND MEMBER_NO = #{memberNo}
+	</delete>
+	
+	
+	
+	
+	<!-- ************************************************************************************ -->
+	<!--  -->
+	
 	
 
 </mapper>

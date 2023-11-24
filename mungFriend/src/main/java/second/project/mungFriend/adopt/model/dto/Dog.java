@@ -28,6 +28,9 @@ public class Dog {
 	private String dogAdmissionDate;
 	private String dogAdoptFl;
 	
+	// DOG_BREED 테이블 join
+	private String breedName;
+
 	// DOG_IMG 테이블 join
 	private String thumbnail;
 	

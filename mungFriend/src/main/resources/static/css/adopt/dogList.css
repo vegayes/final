@@ -119,24 +119,32 @@ form > button > img{
     margin: 0 30px 60px 30px;
 }
 
-.dog-list{
+.dog-list {
     display: grid;
-    width: 90%;
+    width: 85%;
     grid-template-columns: repeat(4, 1fr);
     grid-column-gap: 0px;
-    grid-row-gap: 10px;
+    grid-row-gap: 20px;
+}
+
+#dog-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 #dog-img{
-    max-width: 230px;
-    max-height: 230px;
+    width: 200px;
+    height: 200px;
+    margin-bottom: 5px;
 }
 
 #dog-kind{
     border: 2px solid #FEE4D6;
     border-radius: 8px;
 
-    width: 225px;
+    width: 200px;
     height: 30px;
 
     display: flex;

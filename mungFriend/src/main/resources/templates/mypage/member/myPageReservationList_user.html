@@ -26,15 +26,7 @@
 
             <!-- nav 자리-->
             <nav class = "navUser">
-                <ul>
-                    <li> <a th:href = "@{#}"> 찜한 목록</a> </li>
-                    <li> <a th:href = "@{#}"> 예약 내역</a> </li>
-                    <li> <a th:href = "@{#}"> 후원 내역</a> </li>
-                    <li> <a th:href = "@{#}"> 1:1 문의</a></li>
-                    <li> <a th:href = "@{#}"> 쿠폰함</a></li>
-                    <li> <a th:href = "@{#}"> 정보 수정</a></li>
-                    <li> <a th:href = "@{#}"> 회원 탈퇴</a></li>
-                </ul>
+                <th:block th:replace="~{common/nav_user}"></th:block>
             </nav>
 
             <!-- 내용 작성영역-->

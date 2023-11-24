@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import second.project.mungFriend.adopt.model.dao.AdoptMapper;
 import second.project.mungFriend.adopt.model.dto.Dog;
@@ -50,5 +51,66 @@ public class AdoptServiceImpl implements AdoptService{
 		
 		return map;
 	}
+
+	// 게시글만 상세조회
+	@Override
+	public Dog selectDogDetail(Map<String, Object> map) {
+
+		return mapper.selectDogDetail(map);
+	}
+
+	// DB이미지 파일 목록 조회	
+	@Override
+	public List<String> selectImageList() {
+		
+		return mapper.selectImageList();
+	}
+	
+	// 좋아요 여부 확인
+	@Override
+	public int dogLikeCheck(Map<String, Object> map) {
+		
+		return mapper.dogLikeCheck(map);
+	}
+	
+	// 좋아요 처리
+	@Override
+	@Transactional(rollbackFor =  Exception.class)
+	public int like(Map<String, Integer> paraMap) {
+
+		// check == 0 / 1
+		// check값이 무엇이냐에 따라서 DOG_LIKE 테이블에 INSERT / DELETE 정해라
+		// DOG_LIKE 테이블 INSERT ( insertDogLike() ) 호출
+		// DOG_LIKE 테이블 DELETE ( deleteDogLike() ) 호출
+		
+		int result = 0;
+		
+		int check = paraMap.get("check");
+		
+		if(check == 0) { // 좋아요 x
+			
+			result = mapper.insertDogLike(paraMap);
+			
+		}else{ // 좋아요 o
+			
+			result = mapper.deleteDogLike(paraMap);
+		}
+		
+		if(result == 0) return -1; // 실패 시 -> transaction	
+		
+		return result;
+	}
+	
+//	**********************************************************************************************
+	
+	// 게시글 삽입
+	@Override
+	public int dogRegiInsert(int memberNo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	
+	
 
 }
