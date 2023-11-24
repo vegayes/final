@@ -35,7 +35,7 @@ public class MemberController {
 		
 		Member loginMember = service.login(inputMember);
 		
-		// System.out.println(loginMember);
+		System.out.println(loginMember);
 		
 		String path = "redirect:";
 		

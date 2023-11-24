@@ -22,18 +22,20 @@ public class MemberServiceImpl implements MemberService{
 		
 		Member loginMember = dao.login(inputMember);
 		
-//		if(loginMember != null) {
-//			
-//			if(bcrypt.matches(inputMember.getMemberPw(), loginMember.getMemberPw())) {
-//				
-//				loginMember.setMemberPw(null);
-//				
-//			} else {
-//				
-//				loginMember = null;
-//				
-//			}
-//		}
+		// System.out.println(bcrypt.encode(inputMember.getMemberPw()));
+		
+		if(loginMember != null) {
+			
+			if(bcrypt.matches(inputMember.getMemberPw(), loginMember.getMemberPw())) {
+				
+				loginMember.setMemberPw(null);
+				
+			} else {
+				
+				loginMember = null;
+				
+			}
+		}
 		
 		return loginMember;
 	}

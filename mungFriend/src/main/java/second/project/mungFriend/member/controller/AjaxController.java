@@ -19,5 +19,19 @@ public class AjaxController {
 	public int checkId(String id) {
 		return service.checkId(id);
 	}
+	
+	// 이메일 중복검사
+	@GetMapping("/dupCheck/email")
+	@ResponseBody
+	public int checkEmail(String email) {
+		return service.checkEmail(email);
+	}
+	
+	// 닉네임 중복검사
+	@GetMapping("/dupCheck/nickname")
+	@ResponseBody
+	public int checkNickname(String nickname) {
+		return service.checkNickname(nickname);
+	}
 
 }
