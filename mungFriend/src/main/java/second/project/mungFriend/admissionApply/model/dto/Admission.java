@@ -28,5 +28,8 @@ public class Admission {
 	private String admYN;
 	private int admMemberNo;
 	
-
+	// 나이 
+	private String age;
+	
+	
 }

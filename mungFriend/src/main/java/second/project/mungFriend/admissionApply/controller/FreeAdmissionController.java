@@ -24,6 +24,7 @@ public class FreeAdmissionController {
 	@Autowired
 	private FreeAdmissionService service; 
 
+
 	@PostMapping("/insert")
 	public String admissionInsert(  
 			Admission admission, 
@@ -37,7 +38,7 @@ public class FreeAdmissionController {
 		System.out.println("admission 값 : " + admission);		
 		System.out.println("프로필 : " +  admissionProfile);
 		
-		if(admission.getAdmSignificant() != null) {
+		if(admission.getAdmSignificant() == null) {
 			 admission.setAdmSignificant("특이사항 없음");
 		}
 		

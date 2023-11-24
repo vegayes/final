@@ -30,6 +30,7 @@ function checkDonation(){
     var donationAmount = document.querySelector('input[name="amount"]:checked');
 	var donationCheck = document.querySelectorAll('.donationProcessCheck input[type="checkbox"]:checked');
 	
+	console.log(donationAmount);
 	console.log(donationCheck);
 	
 	if(donationType == null){ // 후원하기 주기가 체크가 되지 않았다면 다시 실행하게 하기
@@ -49,19 +50,20 @@ function checkDonation(){
 	
 	console.log("추출 : " + donationType.value);
 	console.log("금액 : " + donationAmount.value);
-	
-	
-	
 }
 
 
+/* 직접입력 창 display */
+const donationInputBtn = document.querySelector('input[value="input"]');
+const donationInputArea = document.getElementById("inputAmountArea");
 
-
-
-
-
-
-
+donationInputBtn.addEventListener('click', function() {
+	
+	console.log("누름");
+	
+	donationInputArea.style.display = "block";
+	
+})
 
 
 
