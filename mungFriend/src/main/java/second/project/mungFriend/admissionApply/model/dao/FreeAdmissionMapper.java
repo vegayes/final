@@ -1,5 +1,7 @@
 package second.project.mungFriend.admissionApply.model.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import second.project.mungFriend.admissionApply.model.dto.Admission;
@@ -12,6 +14,18 @@ public interface FreeAdmissionMapper {
 	 * @return
 	 */
 	int admissionInsert(Admission admission);
+
+	
+	
+	
+	
+	/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+	 					마이페이지 관리자
+	 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+	/**입소신청 내역 조회
+	 * @return
+	 */
+	List<Admission> selectAdmissionList();
 
 
 }
