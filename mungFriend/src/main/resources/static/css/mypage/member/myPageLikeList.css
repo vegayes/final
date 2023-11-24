@@ -19,8 +19,8 @@ button{
 }
 
 main{
-    min-height: 1080px;
-    width: 1920px;
+    min-height: 800px;
+    width: 100%;
 
     display: flex;
     flex-direction: column;
@@ -172,4 +172,26 @@ a:hover{
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+
+/* donation, chat */
+
+.fixed-image {
+    position: fixed;
+    right: 10px;
+    z-index: 100;
+    width: 50px;
+}
+
+.fixed-image:hover {
+    cursor: pointer;
+}
+
+#chat-image {
+    bottom: 10px;
+}
+
+#donate-image {
+    bottom: 70px;
 }

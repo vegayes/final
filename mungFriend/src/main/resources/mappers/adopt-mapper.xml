@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="second.project.mungFriend.adopt.model.dao.AdoptMapper">
+	
+	<!-- Dog resultMap -->
+	<resultMap type="Dog" id="dog_rm">
+		<id property="dogNo" column="DOG_NO"/>
+		
+		<result property="breedNo" column="BREED_NO"/>
+		<result property="dogName" column="DOG_NAME"/>
+		<result property="dogBirthDay" column="DOG_BIRTHDAY"/>
+		<result property="dogGender" column="DOG_GENDER"/>
+		<result property="dogSize" column="DOG_SIZE"/>		
+		<result property="dogPersonality" column="DOG_PERSONALITY"/>
+		<result property="dogNeutering" column="DOG_NEUTERING_YN"/>
+		<result property="dogVaccine" column="DOG_VACCINE_YN"/>
+		<result property="dogLike" column="DOG_LIKE"/>
+		<result property="dogHate" column="DOG_HATE"/>
+		<result property="dogSpecialNote" column="DOG_SIGNIFICANT"/>
+		<result property="dogAdmissionDate" column="DOG_ADMISSION_DATE"/>
+		<result property="dogAdoptFl" column="DOG_ADOPT_FL"/>
+		
+		<result property="breedName" column="BREED_NAME"/>
+		<result property="thumbnail" column="THUMBNAIL"/>
+		
+		<collection property="imageList" 
+					select="selectImageList"
+					column="DOG_NO"
+					javaType="java.util.ArrayList"
+					ofType="DogImage"
+		/>
+	</resultMap>
+	
+	<!-- DogImage resultMap -->
+	<resultMap type="DogImage" id="dogImage_rm">
+		<id property="imageNo" column="IMG_NO"/>
+		
+		<result property="dogNo" column="DOG_NO"/>
+		<result property="imagePath" column="IMG_PATH"/>
+		<result property="imageReName" column="IMG_RENAME"/>
+		<result property="imageOriginal" column="IMG_ORIGINAL"/>
+		<result property="imageOrder" column="IMG_ORDER"/>
+	</resultMap>
+	
+	<!-- 삭제되지않은 강아지 수 조회 -->
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*) FROM DOG
+		WHERE DOG_ADOPT_FL = 'N'
+	</select>	
+	
+	
+	<select id="selectDogList" resultMap="dog_rm">
+		SELECT DOG_NAME, DOG_NO,
+			(SELECT IMG_PATH || IMG_RENAME FROM DOG_IMG I
+			WHERE I.DOG_NO = D.DOG_NO
+			AND IMG_ORDER = 0) THUMBNAIL
+		FROM DOG D
+		WHERE DOG_ADOPT_FL = 'N'
+		ORDER BY DOG_ADMISSION_DATE DESC
+	</select>
+	
+	<!-- 게시글 한 개 조회 -->
+	<select id="selectDogDetail" resultMap="dog_rm">
+		SELECT D.DOG_NO, D.BREED_NO, DB.BREED_NAME, D.DOG_NAME,
+			<![CDATA[
+			NVL(
+		        CASE WHEN MONTHS_BETWEEN(SYSDATE, D.DOG_BIRTHDAY) <= 12
+		            THEN ROUND(MONTHS_BETWEEN(SYSDATE, D.DOG_BIRTHDAY)) || '개월'
+		            ELSE ROUND(MONTHS_BETWEEN(SYSDATE, D.DOG_BIRTHDAY) / 12) || '세'
+		        END,
+		        '알 수 없음'
+		    ) DOG_BIRTHDAY,
+		    ]]>
+			D.DOG_GENDER, D.DOG_SIZE, D.DOG_PERSONALITY,
+			CASE WHEN D.DOG_NEUTERING_YN = 'Y' THEN '완료' ELSE '미완료' END AS DOG_NEUTERING_YN,
+			CASE WHEN D.DOG_VACCINE_YN = 'Y' THEN '완료' ELSE '미완료' END AS DOG_VACCINE_YN,
+			D.DOG_LIKE, D.DOG_HATE, 
+			CASE WHEN D.DOG_SIGNIFICANT IS NULL THEN '-' ELSE DOG_SIGNIFICANT END AS DOG_SIGNIFICANT,
+			TO_CHAR(D.DOG_ADMISSION_DATE, 'YYYY"년" MM"월" DD"일"') DOG_ADMISSION_DATE			
+		FROM "DOG" D
+		JOIN DOG_BREED DB ON D.BREED_NO = DB.BREED_NO
+		WHERE D.DOG_ADOPT_FL = 'N'
+		AND D.DOG_NO = #{dogNo}
+	</select>
+
+	<!-- 특정 게시글 이미지 조회 -->
+	<select id="selectImageList" resultMap="dogImage_rm">
+		SELECT * FROM DOG_IMG
+		WHERE DOG_NO = #{dogNo}
+		ORDER BY IMG_ORDER
+	</select>
+	
+	<!-- 좋아요 여부 확인 -->
+	<select id="dogLikeCheck" resultType="_int">
+		SELECT COUNT(*) FROM DOG_LIKE
+		WHERE DOG_NO = #{dogNo}
+		AND MEMBER_NO = #{memberNo}
+	</select>
+	
+	
+	<!-- 좋아요 처리 -->
+	<!-- 좋아요 테이블 삽입 -->
+	<insert id="insertDogLike">
+		INSERT INTO "DOG_LIKE" VALUES (#{dogNo}, #{memberNo})
+	</insert>
+	
+	<!-- 좋아요 삭제 -->
+	<delete id="deleteDogLike">
+		DELETE FROM "DOG_LIKE"
+		WHERE DOG_NO = #{dogNo}
+		AND MEMBER_NO = #{memberNo}
+	</delete>
+	
+	
+	
+	
+	<!-- ************************************************************************************ -->
+	<!--  -->
+	
+	
+
+</mapper>

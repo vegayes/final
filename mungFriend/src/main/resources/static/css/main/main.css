@@ -1,0 +1,152 @@
+/* 글꼴 */
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+.nanumgothic * {
+ font-family: 'Nanum Gothic', sans-serif;
+}
+
+/* 기본 스타일 */
+* {
+    box-sizing: border-box;
+    list-style: none; 
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    font-family: 'NanumGothic', 'serif';
+}
+
+/* 메인 컨테이너 */
+main {
+    min-height: 1080px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0px 20%;
+   
+}
+
+
+/* 검색 아이콘 위치 조정 */
+.search-icon {
+	  width: 25px; /* 너비 조정 */
+    height: 25px; /* 높이 조정 */
+    position: relative; /* 상대 위치 지정 */
+    top: 355px; /* 상단에서 5픽셀 아래로 */
+    left:260px; /* 왼쪽에서 5픽셀 오른쪽으로 */
+    /* 추가적인 스타일 설정 */
+     cursor: pointer; /* 마우스 오버시 커서 변경 */
+}
+
+#search-box {
+    width: 500px; /* 너비 */
+    height: 40px; /* 높이 */
+    border: 3px solid #FEE4D6; /* 테두리 */
+    border-radius: 4px; /* 테두리 둥글게 */
+    padding: 5px 10px; /* 내부 여백 */
+    font-size: 16px; /* 글자 크기 */
+    margin-top: 10px; /* 상단 마진을 50px로 설정 */
+    z-index: 0;
+    position: relative; /* 상대 위치 지정 */
+    top: 350px; /* 상단에서 20픽셀 아래로 */
+    left : 300px
+   
+}
+
+/* 포커스 시 스타일 변경 */
+#search-box:focus {
+    
+    outline: none; /* 기본 아웃라인 제거 */
+}
+
+
+.dog-photo-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 197px);
+    gap: 32px;
+    margin-top: 400px;
+    margin-left: 100px;
+    cursor: pointer;
+    z-index: 0;
+}
+
+.dog-photo-grid .dog-photo img {
+    width: 190px;
+    height: 190px;
+    border-radius: 120px;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 0;
+}
+
+.dog-photo {
+    position: relative;
+}
+
+.dog-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 190px;
+    height: 190px;
+    border-radius: 120px;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+    bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.dog-photo:hover .dog-info {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* 버튼의 클래스 이름이 'more-button'일 때 */
+.more-button {
+    padding: 10px 5px; /* 내부 여백 */
+    max-width: 70px;
+    margin-top: 55px;
+    margin-left:515px;
+    background-color: white; /* 배경색 */
+  
+    color: black; /* 글자색 */
+   border: 3px solid #FEE4D6; 
+    border-radius: 4px; /* 테두리 둥글게 */
+    cursor: pointer; /* 마우스 오버시 커서 변경 */
+    font-size: 14px; /* 폰트 크기 */
+    transition: all 0.3s; /* 모든 변화에 대한 애니메이션 */
+}
+
+.more-button:hover {
+	  
+    background-color:#FEE4D6; /* 마우스 오버시 배경색 변경 */
+}
+.fixed-image {
+    position: fixed;
+    right: 10px;
+    z-index: 100;
+    width: 50px;
+}
+
+.fixed-image:hover {
+    cursor: pointer;
+}
+
+#chat-image {
+    bottom: 10px;
+}
+
+#donate-image {
+    bottom: 70px;
+}
+
+
+
+

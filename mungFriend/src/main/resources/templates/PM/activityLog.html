@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>활동 일지</title>
 
-    <link rel="stylesheet" href="activityLog.css">
+    <link rel="stylesheet" th:href="@{/css/PM/activityLog.css}">
 
-    <script src="https://kit.fontawesome.com/f821b57119.js" crossorigin="anonymous"></script>
+    <script th:src="@{https://kit.fontawesome.com/f821b57119.js}" crossorigin="anonymous"></script>
 </head>
 <body>
     <section>
         <!-- 헤더 -->
-        <div id="header"></div>
+        <th:block th:replace="~{common/header}"></th:block>
 
         <!-- 내용 -->
         <div id="content">
@@ -24,7 +24,7 @@
                 <!-- 제목 영역 -->
                 <div id="title-section">
                     <div id="bone-section">
-                        <img src="img/bone.png" id="bone">
+                        <img th:src="@{/images/PM/bone.png}" id="bone">
                     </div>
                     <div id="title-sec">
                         오늘의 활동 일지
@@ -38,13 +38,13 @@
                     </div>
                     <div id="one">
                         <div class="img1">
-                            <img src="img/activityLog/1.png" class="imgs">
+                            <img th:src="@{/images/PM/activityLog/1.png}" class="imgs">
                         </div>
                         <div class="heart1">
                             <button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn"></button>
                         </div>
                         <div class="img2">
-                            <img src="img/activityLog/5.png" class="imgs">
+                            <img th:src="@{/images/PM/activityLog/5.png}" class="imgs">
                         </div>
                         <div class="heart2">
                             <button class="fa-solid fa-heart" style="color: #f55c91;" id="fullHeart-btn"></button>
@@ -52,13 +52,13 @@
                     </div>
                     <div id="two">
                         <div class="img1">
-                            <img src="img/activityLog/2.png" class="imgs">
+                            <img th:src="@{/images/PM/activityLog/2.png}" class="imgs">
                         </div>
                         <div class="heart1">
                             <button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn"></button>
                         </div>
                         <div class="img2">
-                            <img src="img/activityLog/6.png" class="imgs">
+                            <img th:src="@{/images/PM/activityLog/6.png}" class="imgs">
                         </div>
                         <div class="heart2">
                             <button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn"></button>
@@ -66,13 +66,13 @@
                     </div>
                     <div id="three">
                         <div class="img1">
-                            <img src="img/activityLog/3.png" class="imgs">
+                            <img th:src="@{/images/PM/activityLog/3.png}" class="imgs">
                         </div>
                         <div class="heart1">
                             <button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn"></button>
                         </div>
                         <div class="img2">
-                            <img src="img/activityLog/7.png" class="imgs">
+                            <img th:src="@{/images/PM/activityLog/7.png}" class="imgs">
                         </div>
                         <div class="heart2">
                             <button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn"></button>
@@ -80,13 +80,13 @@
                     </div>
                     <div id="four">
                         <div class="img1">
-                            <img src="img/activityLog/4.png" class="imgs">
+                            <img th:src="@{/images/PM/activityLog/4.png}" class="imgs">
                         </div>
                         <div class="heart1">
                             <button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn"></button>
                         </div>
                         <div class="img2">
-                            <img src="img/activityLog/8.png" class="imgs">
+                            <img th:src="@{/images/PM/activityLog/8.png}" class="imgs">
                         </div>
                         <div class="heart2">
                             <button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn"></button>
@@ -99,21 +99,29 @@
 
                 <!-- 등록하기 영역 -->
                 <div id="register-sec">
-                    <a href="#"><button type="button" id="register-btn">등록하기</button></a>
+                    <a th:href="@{/pm/activityLogRegister}">
+						<!-- session.loginMember가 null 일 경우 -->
+						<th:block th:if="${session.loginMember == null}"></th:block>
+						
+						<!-- session.loginMember가 null 이 아닐 경우 -->
+						<th:block th:if="${session.loginMember}">
+							<button th:if="${session.loginMember.adminYn == 'Y'}" type="button" id="register-btn">등록하기</button>
+						</th:block>
+					</a>
                 </div>
             </div>
 
             <!-- 오른쪽 여백 -->
             <div id="right-gap">
-                <a href="#"><img src="img/chat.png" class="fixed-image" id="chat-image"></a>
-                <img src="img/donate.png" class="fixed-image" id="donate-image">
+                <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
+                <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
             </div>
         </div>
 
         <!-- 풋터 -->
-        <div id="footer"></div>
+        <th:block th:replace="~{common/footer}"></th:block>
     </section>
 
-    <script src="activityLog.js"></script>
+    <script th:src="@{js/PM/activityLog.js}"></script>
 </body>
 </html>

@@ -9,7 +9,7 @@
         
     </head>
     <body>
-
+    	<th:block th:replace="~{common/header}"></th:block>
         <main>
             <section class = "userIntroArea">
                 <div class = "userIntroTitle">
@@ -22,15 +22,7 @@
 
                 <!-- nav 자리-->
                 <nav class = "navUser">
-                    <ul>
-                        <li> <a href = "#"> 찜한 목록</a> </li>
-                        <li> <a href = "#"> 예약 내역 </a> </li>
-                        <li> <a href = "#"> 후원 내역 </a> </li>
-                        <li> <a href = "#"> 1:1 문의 </a></li>
-                        <li> <a href = "#"> 쿠폰함 </a></li>
-                        <li> <a href = "#"> 정보 수정 </a></li>
-                        <li> <a href = "#"> 회원 탈퇴 </a></li>
-                    </ul>
+    				<th:block th:replace="~{common/nav_user}"></th:block>
                 </nav>
 
                 <!-- 쿠폰함 내용 영역-->
@@ -82,5 +74,11 @@
                 </div>
             </section>
         </main>
+        
+        <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
+        <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+       
+        
+	    <th:block th:replace="~{common/footer}"></th:block>
     </body>
 </html>

@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마이 페이지(관리자) - 예약내역 있을 때</title>
-    <link rel="stylesheet" href="/FinalProject/css/myPageReservationList_admin.css">
-    <script src="https://kit.fontawesome.com/ac58eafae7.js" crossorigin="anonymous"></script>
-    
+    <link rel="stylesheet" th:href="@{/css/mypage/admin/myPageReservationList_admin.css}">
+    <script th:src="@{https://kit.fontawesome.com/ac58eafae7.js}" crossorigin="anonymous"></script>
 </head>
 <body>
+
+    <th:block th:replace="~{common/header}"></th:block>
 
     <main>
         <!-- 타이틀 변경-->
@@ -24,14 +25,7 @@
 
             <!-- nav 자리-->
             <nav class = "navAdmission">
-                <ul>
-                    <li> <a href = "#"> 1:1 문의함</a> </li>
-                    <li> <a href = "#"> 예약 내역</a> </li>
-                    <li> <a href = "#"> 후원 내역</a> </li>
-                    <li> <a href = "#"> 입소신청 내역</a></li>
-                    <li> <a href = "#"> 회원 관리</a></li>
-                    <li> <a href = "#"> 관리 현황</a></li>
-                </ul>
+                <th:block th:replace="~{common/nav_admin}"></th:block>
             </nav>
 
             <!-- 내용 영역-->
@@ -40,7 +34,7 @@
                 <form action="#">
                     <div class="search-area">
                         <input type="search" id="search" placeholder="강아지 이름 검색">
-                        <img src="/FinalProject/final-img/jieun/finder.png" id="finder-img">
+                        <img th:src="@{/images/adopt/finder.png}" id="finder-img">
                     </div>
                 </form>
 
@@ -84,6 +78,11 @@
             </div>
         </section>
     </main>
+    <div class="main-right">
+        <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
+        <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+    </div>
+    <th:block th:replace="~{common/footer}"></th:block>
 </body>
 
 <script>

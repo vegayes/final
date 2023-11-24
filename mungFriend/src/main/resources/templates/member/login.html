@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인</title>
 
-    <link rel="stylesheet" href="login.css">
+	<link rel="stylesheet" th:href="@{/css/member/login.css}">
 </head>
 <body>
     <section>
-        <!-- 헤더 -->
-        <div id="header"></div>
+		<!-- 헤더 -->
+        <th:block th:replace="~{common/header}"></th:block>
 
         <!-- 내용 -->
         <div id="content">
@@ -21,28 +21,28 @@
             <div id="login-section">
                 <!-- 로고 영역 -->
                 <div id="logo-section">
-                    <img src="img/logo.png" id="logo">
+                    <img th:src="@{/images/member/logo.png}" id="logo">
                 </div>
 
                 <!-- 로그인 form 영역 -->
                 <div id="form-section">
-                    <form action="#" method="">
+                    <form th:action="@{/member/login}" method="POST" id="loginForm">
                         <div id="id-section">
                             아이디 <br>
-                            <input type="text" id="id" name="id">
+                            <input type="text" id="id" name="memberId">
                         </div>
                         <div id="pw-section">
                             비밀번호 <br>
-                            <input type="password" id="pw" name="pw">
+                            <input type="password" id="pw" name="memberPw">
                         </div>
                         <div id="link-section">
                             <div id="find-section">
-                                <a href="#">아이디</a>
+                                <a th:href="@{/member/findId}">아이디</a>
                                 &nbsp;/&nbsp;
-                                <a href="#">비밀번호찾기</a>
+                                <a th:href="@{/member/findPw}">비밀번호찾기</a>
                             </div>
                             <div id="signUp-section">
-                                <a href="#">회원가입</a>
+                                <a th:href="@{/member/signUp}">회원가입</a>
                             </div>
                         </div>
                         <div id="loginBtn-section">
@@ -55,22 +55,24 @@
                 <div id="sns-section">
                     <div id="hr"><hr></div>
                     <div id="sns">
-                        <img src="img/kakao.png" id="kakao">
-                        <img src="img/naver.png" id="naver">
-                        <img src="img/google.png" id="google">
+                        <img th:src="@{/images/member/kakao.png}" id="kakao">
+                        <img th:src="@{/images/member/naver.png}" id="naver">
+                        <img th:src="@{/images/member/google.png}" id="google">
                     </div>
                 </div>
             </div>
 
             <!-- 오른쪽 여백 -->
             <div id="right-gap">
-                <a href="#"><img src="img/chat.png" class="fixed-image" id="chat-image"></a>
-                <img src="img/donate.png" class="fixed-image" id="donate-image">
+                <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
+                <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
             </div>
         </div>
 
-        <!-- 풋터 -->
-        <div id="footer"></div>
+		<!-- 풋터 -->
+        <th:block th:replace="~{common/footer}"></th:block>
     </section>
+    
+    <script th:src="@{/js/member/login.js}"></script>
 </body>
 </html>

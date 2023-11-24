@@ -206,3 +206,25 @@ a:hover{
     color: white !important;
     letter-spacing: 0 !important;
 }
+
+/*************************************************
+                우측 nav 
+*************************************************/
+.fixed-image {
+    position: fixed;
+    right: 10px;
+    z-index: 100;
+    width: 50px;
+}
+
+.fixed-image:hover {
+    cursor: pointer;
+}
+
+#chat-image {
+    bottom: 10px;
+}
+
+#donate-image {
+    bottom: 70px;
+}

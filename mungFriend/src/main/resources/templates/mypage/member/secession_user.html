@@ -1,103 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>회원탈퇴 (사용자)</title>
-        <link rel="stylesheet" href="secession_user.css">
-        <script src="https://kit.fontawesome.com/ac58eafae7.js" crossorigin="anonymous"></script>
-        
-    </head>
-    <body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원탈퇴 (사용자)</title>
+    
+    <link rel="stylesheet" th:href="@{/css/mypage/member/secession_user.css}">
+    
+    <script th:src="@{https://kit.fontawesome.com/ac58eafae7.js}" crossorigin="anonymous"></script>   
+</head>
+<body>
+	<!-- 헤더 -->
+    <th:block th:replace="~{common/header}"></th:block>
+	
+    <main>
+        <!-- 사용자 마이페이지 타이틀 영역-->
+        <section class = "userIntroArea">
+            <div class = "userIntroTitle">
+                회원 탈퇴
+            </div>
+            <hr>
+        </section>
 
-        <main>
-            <!-- 사용자 마이페이지 타이틀 영역-->
-            <section class = "userIntroArea">
-                <div class = "userIntroTitle">
-                    회원 탈퇴
-                </div>
-                <hr>
-            </section>
+        <!-- 사용자 마이페이지 내용 영역-->
+        <section class = "userContentArea">
 
-            <!-- 사용자 마이페이지 내용 영역-->
-            <section class = "userContentArea">
+            <!-- nav 자리-->
+            <nav class = "navUser">
+                <th:block th:replace="~{common/nav_user}"></th:block>
+            </nav>
 
-                <!-- nav 자리-->
-                <nav class = "navUser">
-                    <ul>
-                        <li> <a href = "#"> 찜한 목록</a> </li>
-                        <li> <a href = "#"> 예약 내역 </a> </li>
-                        <li> <a href = "#"> 후원 내역 </a> </li>
-                        <li> <a href = "#"> 1:1 문의 </a></li>
-                        <li> <a href = "#"> 쿠폰함 </a></li>
-                        <li> <a href = "#"> 정보 수정 </a></li>
-                        <li> <a href = "#"> 회원 탈퇴 </a></li>
-                    </ul>
-                </nav>
+            <!-- 내용 작성영역-->
+            <div class = "userContentContainer">
+                
+                <form th:action = "@{/mypage/member/secessionUser}" method = "POST" name ="secessionForm" class = "secessionForm" id="memberDeleteForm">
 
-                <!-- 내용 작성영역-->
-                <div class = "userContentContainer">
+                    <div class = "secessionElement">
+
+                        <div class = "secessionTitle">
+                            비밀번호
+                        </div>
+
+                        <div class = "secessionInput">
+                            <fieldset class = "secessionFieldset">
+                                <input type = "password" name = "memberPw" id = "secessionPw" class = "secessionPw">
+                            </fieldset>
+                        </div>
+
+                    </div>
+
+                    <div class = "secessionElement">
+
+                        <div class = "secessionTitle">
+                            비밀번호 확인
+                        </div>
+
+                        <div class = "secessionInput">
+                            <fieldset class = "secessionFieldset">
+                                <input type = "password" name = "secessionPw" id = "secessionPw2" class = "secessionPw">
+                            </fieldset>
+                        </div>
+
+                    </div>
+
+
+                    <div class = "secessionElementContent">
+                        <div class = "secessionProcessBox">
+                            사용하고 계신 아이디는 탈퇴할 경우 재사용 및 복구가 불가능합니다.<br>
+                            탈퇴 후 회원정보 및 개인형 서비스 이용기록은 모두 삭제되며,<br>
+                            기존에 있던 쿠폰도 사용 불가능합니다.<br>
+                            탈퇴 후에도 서비스에 등록한 게시물은 그대로 남아 있습니다.
+                        </div>
+                    </div>
+
+                    <div class = "secessionProcessCheck">    
+                        <label>
+                            <input type = "checkbox" id="checkbox">
+                            안내 사항을 모두 확인하였으며, 이에 동의합니다.
+                        </label>
+                    </div>
+
+
+                    <div class = "secessionButtonArea">
+                        <div class = "secessionButtonBox">
+                            <button type="submit" id="secession-btn">탈퇴하기</button>
+                        </div>
+                    </div>
                     
-                    <form action = "#" method = "POST" name ="secessionForm" class = "secessionForm">
-
-                        <div class = "secessionElement">
-
-                            <div class = "secessionTitle">
-                                비밀번호
-                            </div>
-
-                            <div class = "secessionInput">
-                                <fieldset class = "secessionFieldset">
-                                    <input type = "password" name = "secessionPw" id = "secessionPw" class = "secessionPw">
-                                </fieldset>
-                            </div>
-
-                        </div>
-
-                        <div class = "secessionElement">
-
-                            <div class = "secessionTitle">
-                                비밀번호 확인
-                            </div>
-
-                            <div class = "secessionInput">
-                                <fieldset class = "secessionFieldset">
-                                    <input type = "password" name = "secessionPw" id = "secessionPw" class = "secessionPw">
-                                </fieldset>
-                            </div>
-
-                        </div>
-
-
-                        <div class = "secessionElementContent">
-                            <div class = "secessionProcessBox">
-                                사용하고 계신 아이디는 탈퇴할 경우 재사용 및 복구가 불가능합니다.<br>
-                                탈퇴 후 회원정보 및 개인형 서비스 이용기록은 모두 삭제되며,<br>
-                                기존에 있던 쿠폰도 사용 불가능합니다.<br>
-                                탈퇴 후에도 서비스에 등록한 게시물은 그대로 남아 있습니다.
-                            </div>
-                        </div>
-
-                        <div class = "secessionProcessCheck">    
-                            <label>
-                                <input type = "checkbox">
-                                안내 사항을 모두 확인하였으며, 이에 동의합니다.
-                            </label>
-                        </div>
-
-
-                        <div class = "secessionButtonArea">
-                            <div class = "secessionButtonBox">
-                                탈퇴하기
-                            </div>
-                        </div>
-
-
-
-
-                    </form>
-                </div>
-            </section>
-        </main>
-    </body>
+                </form>
+                
+            </div>
+            
+        </section>
+    </main>
+    
+    <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
+    <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+    
+    <!-- 풋터 -->
+    <th:block th:replace="~{common/footer}"></th:block>
+    
+    <script th:src="@{js/mypage/member/secession_user.js}"></script>
+</body>
 </html>

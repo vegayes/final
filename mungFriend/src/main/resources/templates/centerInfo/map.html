@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+
+<head>
+	<title>병원,훈련소</title>
+
+	<link rel="stylesheet" th:href="@{/css/centerInfo/map.css}">
+	<!-- 카카오 지도 API 스크립트 추가 -->
+	<!-- 855eb579cf7374ef539f6790b74a0238 -->
+</head>
+
+
+<body>
+
+	<th:block th:replace="~{common/header}"></th:block>
+
+
+
+	<div class="map-header">
+		<h2>병원, 훈련소 소개</h2>
+		<p>"행복한 반려생활을 더욱 안전하게 시작해 보세요!"</p>
+	</div>
+	<div class="map_wrap">
+		<div id="map" style="width:750px; height:500px; position:relative; overflow:hidden;
+  margin:auto ;
+  margin-top: 300px; "></div>
+
+
+		<div id="menu_wrap" class="bg_white">
+			<div class="option">
+				<div>
+					<form onsubmit="searchPlaces(); return false;">
+						<input type="text" value="을지로 동물병원	" id="keyword" size="15">
+						<button type="submit">검색</button>
+					</form>
+				</div>
+			</div>
+			<hr>
+			<ul id="placesList"></ul>
+			<div id="pagination"></div>
+		</div>
+	</div>
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=855eb579cf7374ef539f6790b74a0238&libraries=services,clusterer,drawing"></script>
+
+
+	<a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
+	<a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+
+	<script th:src="@{/js/centerInfo/map.js}"></script>
+</body>
+
+<th:block th:replace="~{common/footer}"></th:block>
+
+</html>

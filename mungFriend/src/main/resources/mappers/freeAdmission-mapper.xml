@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="second.project.mungFriend.admissionApply.model.dao.FreeAdmissionMapper">
+	
+	<!-- Admission resultMap -->
+	<resultMap type="Admission" id="admission_rm">
+		<id property="admNo" column="ADM_NO"/>
+		
+		<result property="admProfile" column="ADM_PROFILE"/>
+		<result property="admName" column="ADM_NAME"/>
+		<result property="admBirthday" column="ADM_BIRTHDAY"/>
+		<result property="admPhone" column="ADM_PHONE"/>
+		<result property="admBreed" column="ADM_BREED"/>		
+		<result property="admGender" column="ADM_GENDER"/>
+		<result property="admNeuteringYN" column="ADM_NEUTERING_YN"/>
+		<result property="admVaccineYN" column="ADM_VACCINE_YN"/>
+		<result property="admSignificant" column="ADM_SIGNIFICANT"/>
+		<result property="admApplyDate" column="ADM_APPLY_DATE"/>
+		<result property="admHopeDate" column="ADM_HOPE_DATE"/>
+		<result property="admYN" column="ADM_YN"/>
+		<result property="admMemberNo" column="ADM_MEMBER_NO"/>
+		
+		<result property="age" column="AGE"/>
+		
+	</resultMap>
+	
+
+	<!-- 무료 입소신청 진행하기 --> 
+	<insert id = "admissionInsert">
+		INSERT INTO ADMISSION 
+		VALUES(SEQ_ADM_NO.NEXTVAL, #{admProfile}, #{admName}, TO_DATE(#{admBirthday}, 'YYYY-MM-DD'), 
+    			#{admPhone}, #{admBreed},  #{admGender},  #{admNeuteringYN}, #{admVaccineYN}, #{admSignificant}, 
+     			SYSDATE, TO_DATE(#{admHopeDate}, 'YYYY-MM-DD'), DEFAULT, #{admMemberNo}) 
+	</insert>
+	
+	
+	<!-- 무료입소 신청 조회하기 (마이페이지/관리자)-->
+	<select id = "selectAdmissionList" resultMap = "admission_rm">
+		SELECT ADM_NO, ADM_PROFILE , ADM_NAME, 
+			<![CDATA[ 
+			   CASE WHEN TRUNC(SYSDATE) - ADM_BIRTHDAY <= 30 THEN
+		                 1 || '개월 미만'
+		             WHEN MONTHS_BETWEEN(TRUNC(SYSDATE), ADM_BIRTHDAY) < 12 THEN
+		                 TRUNC(MONTHS_BETWEEN(TRUNC(SYSDATE), ADM_BIRTHDAY)) || '개월'
+		             ELSE
+		                 TRUNC(MONTHS_BETWEEN(TRUNC(SYSDATE), ADM_BIRTHDAY) / 12 ) || '세'
+		    
+		       END AGE,
+		    ]]> 
+		       ADM_PHONE,
+		       ADM_BREED,
+		       ADM_GENDER,
+		       ADM_NEUTERING_YN,
+		       ADM_VACCINE_YN,
+		       ADM_SIGNIFICANT,
+		       ADM_APPLY_DATE,
+		       TO_CHAR(ADM_HOPE_DATE, 'YYYY-MM-DD') AS ADM_HOPE_DATE ,
+		       ADM_YN,
+		       ADM_MEMBER_NO
+		FROM ADMISSION
+		ORDER BY ADM_APPLY_DATE DESC
+	</select>
+	
+
+
+</mapper>

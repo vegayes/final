@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>입양 절차 안내</title>
 
-    <link rel="stylesheet" href="adoptProcedure.css">
+    <link rel="stylesheet" th:href="@{/css/PM/adoptProcedure.css}">
 </head>
 <body>
     <section>
         <!-- 헤더 -->
-        <div id="header"></div>
+        <th:block th:replace="~{common/header}"></th:block>
 
         <!-- 내용 -->
         <div id="content">
@@ -19,18 +19,18 @@
 
             <!-- 콘텐츠 영역 -->
             <div id="content-section">
-                <img src="img/adoptProcedure.png" id="adoptProcedure">
+                <img th:src="@{/images/PM/adoptProcedure.png}" id="adoptProcedure">
             </div>
 
             <!-- 오른쪽 여백 -->
             <div id="right-gap">
-                <a href="#"><img src="img/chat.png" class="fixed-image" id="chat-image"></a>
-                <img src="img/donate.png" class="fixed-image" id="donate-image">
+                <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
+                <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
             </div>
         </div>
 
         <!-- 풋터 -->
-        <div id="footer"></div>
+        <th:block th:replace="~{common/footer}"></th:block>
     </section>
 </body>
 </html>

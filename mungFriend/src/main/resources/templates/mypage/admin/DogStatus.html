@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combined Bar and Line Chart</title>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/chart.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/mypage/admin/DogStatus.css}">
+  	<script th:src="@{https://kit.fontawesome.com/ac58eafae7.js}" crossorigin="anonymous"></script>
+</head>
+<body style="overflow-x: hidden">
+	
+	<th:block th:replace="~{common/header}"></th:block>
+		
+    <main>
+        <!-- 타이틀 변경-->
+        <section class = "adminIntroArea">
+            <div class = "adminIntroTitle">
+                관리 현황
+            </div>
+            <hr>
+        </section>
+
+        <!-- nav + 내용작성 -->
+        <section class = "adminContentArea">
+
+            <!-- nav 자리-->
+            <nav class = "navAdmission">
+                <ul>
+                    <li> <a th:href = "@{/}"> 1:1 문의함 </a> </li>
+                    <li> <a th:href = "@{/}"> 예약 내역 </a> </li>
+                    <li> <a th:href = "@{/}"> 후원 내역 </a> </li>
+                    <li> <a th:href = "@{/}"> 입소신청 내역 </a></li>
+                    <li> <a th:href = "@{/}"> 회원 관리 </a></li>
+                    <li class="hasSubmenu"> <a th:href="@{#}" class="toggleSubmenu">관리 현황 </a>
+                        <ul class="submenu">
+                            <li><a th:href = "@{/}">유기견 현황</a></li>
+                            <li><a th:href = "@{/}">후원 현황</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- 내용 영역-->
+            <div class = "adminContentContainer">
+                <div id="chartContainer">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+        </section>
+    </main>
+        
+ 	<th:block th:replace="~{common/footer}"></th:block>
+    
+
+    <script>
+        const months = ["9월", "10월", "11월", "12월"];
+        const adoptions = [20, 25, 35, 32];
+        const admissions = [15, 24, 36, 30];
+    
+        const ctx = document.getElementById('myChart').getContext('2d');
+    
+        const chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: months,
+                datasets: [
+
+                    {
+                        label: '입양(마리)',
+                        type: 'line',
+                        data: adoptions,
+                        fill: false,
+                        backgroundColor: 'rgba(244, 168, 93, 0.5)',
+                        borderColor: 'rgba(244, 168, 93, 1)',
+                        borderWidth: 2,
+                        pointRadius: 5,
+                        showInLegend: false // 범례에 표시하지 않음
+                        
+
+                    },
+                    {   
+                        label: '입소(마리)',
+                        type: 'line',
+                        data: admissions,
+                        fill: false,
+                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 2,
+                        pointRadius: 5,
+                        showInLegend: false // 범례에 표시하지 않음
+                        
+                    },
+                    {
+                        label: '',
+                        data: adoptions,
+                        backgroundColor: 'rgba(254, 228, 214, 1)',
+                        borderColor: 'rgba(254, 228, 214, 0.5)',
+                        borderWidth: 1,
+                        categoryPercentage: 0.8,
+                        barPercentage: 0.8,
+                        showInLegend: false // 범례에 표시하지 않음
+                    },
+                    {
+                        label: '',
+                        data: admissions,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 0.5)',
+                        borderWidth: 1,
+                        categoryPercentage: 0.8,
+                        barPercentage: 0.8,
+                        showInLegend: false // 범례에 표시하지 않음
+                       
+                    },
+                    
+                   
+                ]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                        boxWidth: 25,
+                        fontSize: 12,
+                        fontColor: 'rgba(0, 0, 0, 1)'
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        display: true,
+                        maxLines: 1,
+                        offset: true,
+                        grid: {
+                            display: false // x 축 그리드 없애기
+                        },
+                        offset: true, // 축 이동 허용
+                    },
+                    y: {
+                        beginAtZero: true,
+                        max: 50,
+                        stepSize: 5,
+                        display: true,
+
+                        title: {
+                            display: true,
+                            text: '마리',
+                            padding: { top: 10, bottom: 10 }
+                        },
+
+                        grid: {
+                            display: false // y 축 그리드 없애기
+                        }
+
+                    }
+                }
+            }
+        });
+
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const submenuItems = document.querySelectorAll('.hasSubmenu');
+
+            submenuItems.forEach(function (item) {
+                item.addEventListener('click', function () {
+                    const submenu = this.querySelector('.submenu');
+                    submenu.classList.toggle('active');
+                });
+            });
+        });
+
+
+    </script>
+    
+    
+    
+
+</body>
+</html>
+
+

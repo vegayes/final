@@ -9,6 +9,7 @@
         
     </head>
     <body>
+	    <th:block th:replace="~{common/header}"></th:block>
 
         <main>
             <section class = "adminIntroArea">
@@ -22,14 +23,7 @@
 
                 <!-- nav 자리-->
                 <nav class = "navAdmission">
-                    <ul>
-                        <li> <a href = "#"> 1:1 문의함 </a> </li>
-                        <li> <a href = "#"> 예약 내역 </a> </li>
-                        <li> <a href = "#"> 후원 내역 </a> </li>
-                        <li> <a href = "#"> 입소신청 내역 </a></li>
-                        <li> <a href = "#"> 회원 관리 </a></li>
-                        <li> <a href = "#"> 관리 현황 </a></li>
-                    </ul>
+    				<th:block th:replace="~{common/nav_admin}"></th:block>
                 </nav>
 
                 <!-- 후원 내용 영역-->
@@ -158,5 +152,10 @@
                 </div>
             </section>
         </main>
+        
+        <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
+        <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+    
+	    <th:block th:replace="~{common/footer}"></th:block>
     </body>
 </html>

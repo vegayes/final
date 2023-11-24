@@ -8,9 +8,9 @@
         
     </head>
     <body>
+	    <th:block th:replace="~{common/header}"></th:block>
 
         <main>
-
             <section class = "admissionIntro">
                 <div class = "admissionIntroTitle">
                     멍프랜드만의 특별함
@@ -33,9 +33,10 @@
                         무료 입소 신청하기
                     </div>
                 </div>
+                
 
-
-                <form action = "#" method = "POST" name ="admissionApplyForm" class = "admissionApplyForm">
+				<!--@{insert}   name ="admissionApplyForm"-->
+                <form th:action="@{/freeAdmission/insert}" method="POST"  class = "admissionApplyForm" enctype = "multipart/form-data">
 
                     <div class = "formElement">
                         <div class = "formElementTitle">
@@ -46,7 +47,7 @@
 
                         <div class = "formElementContent">
                             <fieldset class = "applyFieldset">
-                                <input type = "text" name = "applyName" id = "applyName" class = "applyInput">
+                                <input type = "text" name = "admName" id = "applyName" class = "applyInput">
                             </fieldset>
                         </div>
                     </div>
@@ -54,21 +55,21 @@
                     <div class = "formElement heightPadding">
                         <div class = "formElementTitle formDogFlex">
                             <div class = "formDogProfile">
-                                <img th:src="@{/images/admissionApply/jjangu.png}">
+                                <img th:src="@{/images/admissionApply/dog.svg}" id = "admissionProfileImg">
                             </div>
                         </div>
 
                         <div class = "formElementContent formBtnStart">
                         
                             <label>
-                                <input type="file" id="admissionDogProfile" name="applyProfileImage" accept="image/*"/>
+                                <input type="file" id="admissionProfileInput"  name="admissionProfile" accept="image/*"/>
                                 <div class = "formFont formDogBtn formDogImgeUploadBtn">
                                     강아지 사진 업로드
                                 </div>
                             </label>
 
 
-                            <div class = "formFont formDogBtn formDogImgeDelBtn">
+                            <div class = "formFont formDogBtn formDogImgeDelBtn" id = "deleteImage">
                                 이미지 삭제
                             </div>
 
@@ -85,7 +86,7 @@
 
                         <div class = "formElementContent">
                             <fieldset class = "applyFieldset">
-                                <input type = "text"  name = "applyPhone" id = "applyPhone" class = "applyInput">
+                                <input type = "text"  name = "admPhone" id = "applyPhone" class = "applyInput" placeholder="'-' 제외">
                             </fieldset>
                         </div>
                     </div>
@@ -99,7 +100,7 @@
 
                         <div class = "formElementContent">
                             <fieldset class = "applyFieldset">
-                                <input type = "text"  name = "applyBreed" id = "applyBreed" class = "applyInput">
+                                <input type = "text"  name = "admBreed" id = "applyBreed" class = "applyInput">
                             </fieldset>
                         </div>
                     </div>
@@ -113,7 +114,7 @@
 
                         <div class = "formElementContent">
                             <fieldset class = "applyFieldset ">
-                                <input type = "text"  name = "applyBirthday" id = "applyBirthday" class = "applyInput ">
+                                <input type = "text"  name = "admBirthday" id = "applyBirthday" class = "applyInput " placeholder="ex) 2023-11-24">
                             </fieldset>
                         </div>
                     </div>
@@ -127,14 +128,14 @@
 
                         <div class = "formElementContent">
                             <label class = "applyFieldset admissionTwoBtn">
-                                <input type = "radio" name = "gender" value="남아">
+                                <input type = "radio" name = "admGender" value="남아">
                                 <div id = "admissionGenderM" class ="formFont ">
                                     남아
                                 </div>
                             </label>
     
                             <label class = "applyFieldset admissionTwoBtn">
-                                <input type = "radio" name = "gender" value="여아">
+                                <input type = "radio" name = "admGender" value="여아">
                                 <div id = "admissionGenderF" class = "formFont">
                                     여아
                                 </div>
@@ -152,14 +153,14 @@
 
                         <div class = "formElementContent">
                             <label class = "applyFieldset admissionTwoBtn">
-                                <input type = "radio" name = "neutering" value="Y">
+                                <input type = "radio" name = "admNeuteringYN" value="Y">
                                 <div class = "formFont">
                                     O
                                 </div>
                             </label>
     
                             <label class = "applyFieldset admissionTwoBtn">
-                                <input type = "radio" name = "neutering" value="N">
+                                <input type = "radio" name = "admNeuteringYN" value="N">
                                 <div class = "formFont">
                                     X
                                 </div>
@@ -167,6 +168,30 @@
 
 
                         </div>
+                    </div>
+                    
+                    <div class = "formElement">
+                        <div class = "formElementTitle">
+                            <div class = "formElementBox">
+                                접종 여부
+                            </div>
+                        </div>
+
+                        <div class = "formElementContent">
+                            <label class = "applyFieldset admissionTwoBtn">
+                                <input type = "radio" name = "admVaccineYN" value="Y">
+                                <div class = "formFont">
+                                    완료
+                                </div>
+                            </label>
+    
+                            <label class = "applyFieldset admissionTwoBtn">
+                                <input type = "radio" name = "admVaccineYN" value="N">
+                                <div class = "formFont">
+                                    미완료
+                                </div>
+                            </label>
+                        </div>	
                     </div>
 
 
@@ -180,8 +205,7 @@
                         </div>
 
                         <div class = "formElementContent">
-                            <textarea class = "applyFieldset" placeholder="필수입력란이 아닙니다.">
-                            </textarea>
+                            <textarea class = "applyFieldset" placeholder="필수입력란이 아닙니다." name = "admSignificant"></textarea>
                         </div>
                     </div>
 
@@ -195,13 +219,13 @@
 
                         <div class = "formElementContent">
                             <fieldset class = "applyFieldset">
-                                <input type = "text"  name = "applyHopeDate" id = "applyHopeDate" class = "applyInput">
+                                <input type = "text"  name = "admHopeDate" id = "applyHopeDate" class = "applyInput" placeholder="ex) 2023-11-24">
                             </fieldset>
                         </div>
                     </div>
 
                     <div class = "admissionSubmit">
-                        <button class = "admissionSubmitBtn">
+                        <button type="submit" class = "admissionSubmitBtn" id = "admissionSubmitBtn" >
                             제출하기
                         </button>
                     </div>
@@ -209,28 +233,23 @@
                 </form>
 
 
-
+                
             </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            <th:block th:replace="~{common/chatbot}"></th:block>
+            
         </main>
+        
 
+        <a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+		<a th:href="@{#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
+
+
+        
+        
+	    <th:block th:replace="~{common/footer}"></th:block>
+	    
+	    <script th:src="@{/js/admissionApply/freeAdmission.js}"></script>
+		
     </body>
 </html>

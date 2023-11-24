@@ -8,20 +8,45 @@
 </head>
 <body>
     <header>
-        <img class="image3" src="@{/images/로고.png}" alt="로고" class="image3">
+		<div class ="header-img">
+			<a th:href = "@{/}">
+	       	 	<img class="image3" th:src="@{/images/로고.png}" alt="로고">						
+			</a>
+		</div>
         <nav class="header-bar">
             <ul class="menu-items">
-                <li><a th:href="#절차및관리">절차 및 관리</a></li>
-                <li><a th:href="#무료입소신청">무료 입소 신청</a></li>
-                <li><a th:href="@{/adopt/dogList}">입양하기</a></li>
-                <li><a th:href="#병원">병원, 훈련소</a></li>
-                <li><a th:href="#입양후기">입양 후기</a></li>
+                <li><a>절차 및 관리</a>
+                    <ul>
+                        <li><a th:href="@{/pm/adoptProcedure}">무료입양 절차</a></li>
+                        <li><a th:href="@{/pm/activityLog}">활동일지</a></li>
+                    </ul> 
+                </li>
+                <li><a>입양 및 입소</a>
+                    <ul>
+                        <li><a th:href="@{/adopt/dogList}">무료 입양하기</a></li>
+                        <li><a th:href="@{/freeAdmission}">입소신청</a></li>
+                    </ul> 
+				        </li>
+                <li><a th:href="@{/centerInfo/map}">병원, 훈련소</a></li>
+
+                <li><a th:href="@{/adoptReview/reviewList/1}">입양 후기</a></li>
                 
-                <li><a th:if="${loginMember}" th:href="#로그인">마이페이지</a></li>
-                <li><a th:unless="${loginMember}" th:href="#로그인">로그인</a></li>
+                <li>
+                    <a th:unless="${session.loginMember}" th:href="@{/member/login}">로그인</a>
+                    <a th:if="${session.loginMember}" th:href="@{/mypage/member/myPageLikeList}">마이페이지</a>
+                </li>
+                
+                <li th:if ="${session.loginMember}">
+					<a th:if="${session.loginMember}" th:href="@{/member/logout}">로그아웃</a>
+				</li>
+                
             </ul>
         </nav>
     </header>
-
+    
+    <script th:inline="javascript">
+		const message = /*[[${message}]]*/ "전달 받은 메세지";
+		if(message != null) alert(message);
+	</script>
 </body>
 </html>

@@ -14,10 +14,8 @@ public class MainController {
 	public String mainForward(Model model) {
 		
 		model.addAttribute("name", "홍길동");
-		
-//		return "common/main_test";
-//		return "common/header";
-		return "admissionApply/freeAdmission";
+
+		return "common/main";
 	}
 	
 	
@@ -29,6 +27,25 @@ public class MainController {
 		return "redirect:/";
 	}
 	
+	
+	/** 무료입소신청 페이지 이동
+	 * @return
+	 */
+	@GetMapping("/freeAdmission")
+	public String freeAdmissionPage() {
+		return "admissionApply/freeAdmission";
+	}
+	
+	/** 후원하기 페이지 이동
+	 * @return
+	 */
+	@GetMapping("/donation")
+	public String donationPage() {
+		return "donation/donation";
+	}
+	
+	
+ 
 	
 	
 }

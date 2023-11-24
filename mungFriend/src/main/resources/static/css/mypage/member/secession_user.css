@@ -18,12 +18,13 @@
 main{
     /* min-height: 1080px; */
     height: auto;
-    width: 1920px;
+    width: 100%;
 
     display: flex;
     flex-direction: column;
 
     padding: 0px 20%;
+    padding-bottom: 40px;
 }
 
 hr{
@@ -231,6 +232,9 @@ a:hover{
     margin-right: 5px;
 }
 
+.secessionProcessCheck > label > input:hover {
+	cursor: pointer;	
+}
 
 /*탈퇴하기 버튼*/
 .secessionButtonArea{
@@ -242,7 +246,12 @@ a:hover{
 
 .secessionButtonBox{
     flex-basis: 80%;
-    border-radius: 10px;
+}
+
+#secession-btn {
+	width: 100%;
+	border: none;
+	border-radius: 10px;
     background: #FEE4D6;
     padding : 20px 30px;
 
@@ -253,4 +262,28 @@ a:hover{
 
     display: flex;
     justify-content: center;
+}
+
+#secession-btn:hover {
+	cursor: pointer;
+}
+
+/* 오른쪽 하단 후원, 챗봇 아이콘 */
+.fixed-image {
+    position: fixed;
+    right: 10px;
+    z-index: 100;
+    width: 50px;
+}
+
+.fixed-image:hover {
+    cursor: pointer;
+}
+
+#chat-image {
+    bottom: 10px;
+}
+
+#donate-image {
+    bottom: 70px;
 }

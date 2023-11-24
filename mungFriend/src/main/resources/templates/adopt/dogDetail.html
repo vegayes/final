@@ -4,31 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>유기견 상세페이지(조회)</title>
-    <link rel="stylesheet" th:href="@{/css/dogDetail.css}">
+    <link rel="stylesheet" th:href="@{/css/adopt/dogDetail.css}">
+    <script th:src="@{https://kit.fontawesome.com/f7459b8054.js}" crossorigin="anonymous"></script>
 </head>
 <body>
+
+    <th:block th:replace="~{common/header}"></th:block>
+
     <main>
         <div class="main-left"></div>
 
         <div class="main-center">
             <div class="intro">
                 <div id="img-wrap">
-                    <img th:src="@{/images/adopt/시바사진.png}" id="dog-img">
+                    <img th:src="|${thumbnail.imagePath}${thumbnail.imageReName}|" id="dog-img">
                 </div>
                 <div id="dog-info">
                     <div id="dog-info-1">
-                        <div id="name">코코</div>
-                        <div id="age">12개월</div>
+                        <div id="name">[[${dog.dogName}]]</div>
+                        <div id="age">[[${dog.dogBirthDay}]]</div>
                         <div> / </div>
-                        <div id="gender">남아</div>
-                        <button id="like">
-                            <img th:src="@{/images/adopt/빈하트.png}" id="like-img">
-                        </button>
+                        <div id="gender">[[${dog.dogGender}]]</div>
+
+                        <!-- 좋아요 하트 -->
+                        <i class="fa-heart" 
+							th:classappend="${likeCheck} ? fa-solid : fa-regular"
+						id="boardLike"></i>
+
                     </div>
-                    <p id="kind">웰시코기</p>
+                    <p id="kind">[[${dog.breedName}]]</p>
                     <div id="dog-info-2">
                         <button id="regist">
-                            <img th:src="@{/images/adopt/예약하기.png}" id="calendedr-img">  예약하기
+                            <a th:href="@{/adopt/dogList}"><img th:src="@{/images/adopt/예약하기.png}" id="calendedr-img">  예약하기</a>
                         </button>
                         
                     </div>
@@ -39,40 +46,42 @@
                 <table width="520" height="150" style="font-size: 13px;">
                     <tr>
                         <td bgcolor="#FEE4D6" width="130">성격</td>
-                        <td colspan="3" bgcolor="#FCFCFC">활발함</td>
+                        <td colspan="3" bgcolor="#FCFCFC">[[${dog.dogPersonality}]]</td>
                     </tr>
                     <tr>
                         <td bgcolor="#FEE4D6" width="130">중성화</td>
-                        <td width="130" bgcolor="#FCFCFC">미완료</td>
+                        <td width="130" bgcolor="#FCFCFC">[[${dog.dogNeutering}]]</td>
                         <td bgcolor="#FEE4D6" width="130">접종유무</td>
-                        <td width="130" bgcolor="#FCFCFC">2차 완료</td>
+                        <td width="130" bgcolor="#FCFCFC">[[${dog.dogVaccine}]]</td>
                     </tr>
                     <tr>
                         <td bgcolor="#FEE4D6" width="130">좋아하는 것</td>
-                        <td width="130" bgcolor="#FCFCFC">-</td>
+                        <td width="130" bgcolor="#FCFCFC">[[${dog.dogLike}]]</td>
                         <td bgcolor="#FEE4D6" width="130">싫어하는 것</td>
-                        <td width="130" bgcolor="#FCFCFC">-</td>
+                        <td width="130" bgcolor="#FCFCFC">[[${dog.dogHate}]]</td>
                     </tr>
                     <tr>
                         <td bgcolor="#FEE4D6" width="130">특이 사항</td>
-                        <td colspan="3" bgcolor="#FCFCFC">눈물이 많음</td>
+                        <td colspan="3" bgcolor="#FCFCFC">[[${dog.dogSpecialNote}]]</td>
                     </tr>
                 </table>
             </div>
 
             <div class="dog-explane">
                 <p>보호자분의 케어불가로 멍프랜드에 입소하게된
-                    웰시코기 코코를 소개합니다!
-                    코코를 사랑으로 보듬어 줄 수 있는
+                    [[${dog.breedName}]] [[${dog.dogName}]]를 소개합니다!
+                    [[${dog.dogName}]]를 사랑으로 보듬어 줄 수 있는
                     새로운 가족을 찾습니다.
-                    멍프랜드를 방문하셔서 코코를 직접 만나보세요!
+                    멍프랜드를 방문하셔서 [[${dog.dogName}]]를 직접 만나보세요!
                 </p>
 
                 <div id="content-text">
                     <div class="img-box">
-                        <img src="/FinalProject/final-img/jieun/상세이미지1.png" style="max-width: 500px; max-height: 375px;">   
-                        <img src="/FinalProject/final-img/jieun/상세이미지2.png" style="max-width: 500px; max-height: 375px;">   
-                        <img src="/FinalProject/final-img/jieun/상세이미지3.png" style="max-width: 500px; max-height: 375px;">   
+                        <th:block th:each="i : ${#numbers.sequence(start, #lists.size(dog.imageList)-1, 1)}">
+							<div class="dogImg" th:with="path=|${dog.imageList[i].imagePath}${dog.imageList[i].imageReName}|">								
+								<img th:src="${path}" style="width: 500px; height: 375px;">
+							</div>
+						</th:block>
                     </div>
                 </div>
 
@@ -81,11 +90,38 @@
                     또 다른 파양동물들의 관리 비용에 사용되고있습니다.
                     아이들의 평생을 결정하는 선택, 신중히 생각해 보신 후에 연락주세요.
                 </p>
+            </div>
 
+            <div class="btn-area">
+                <th:block th:if="${session.loginMember?.adminYn == 'Y'}">
+                    <button id="updateBtn">수정하기</button>
+                    <button id="deleteBtn">삭제하기</button>
+                </th:block>
             </div>
         </div>
 
-        <div class="main-right"></div>
+        <div class="main-right">
+            <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
+            <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+        </div>
     </main>
+
+    <th:block th:replace="~{common/footer}"></th:block>
+
+
+    <script th:inline="javascript">
+		console.log(/*[[${dog}]]*/ "dog객체");
+
+		const boardNo = /*[[${dog.dogNo}]]*/ "게시글 번호";
+		
+		const loginMemberNo = /*[[${session.loginMember?.memberNo}]]*/ "로그인 회원번호";
+		
+		if(loginMemberNo == null) loginMemberNo = "";
+
+		console.log(boardNo);	
+		console.log(loginMemberNo);
+	</script>
+
+    <script th:src="@{/js/adopt/dogDetail.js}"></script>
 </body>
 </html> 

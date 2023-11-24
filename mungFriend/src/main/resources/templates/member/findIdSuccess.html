@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>아이디 찾기 성공</title>
 
-    <link rel="stylesheet" href="findIdSuccess.css">
+    <link rel="stylesheet" th:href="@{/css/member/findIdSuccess.css}">
 </head>
 <body>
     <section>
         <!-- 헤더 -->
-        <div id="header"></div>
+        <th:block th:replace="~{common/header}"></th:block>
 
         <!-- 내용 -->
         <div id="content">
@@ -21,30 +21,30 @@
             <div id="findId-section">
                 <!-- 로고 영역 -->
                 <div id="logo-section">
-                    <img src="img/logo.png" id="logo">
+                    <img th:src="@{/images/member/logo.png}" id="logo">
                 </div>
 
                 <!-- 아이디 찾기 설명 영역 -->
                 <div id="findIdInfo-section">
                     <div id="title">아이디 찾기</div>
-                    <div id="info">회원가입 시 사용한 아이디는 <b>user01</b> 입니다.</div>
+                    <div id="info">회원가입 시 사용한 아이디는 <b th:text="${memberId}">회원 아이디</b> 입니다.</div>
                 </div>
 
                 <!-- 로그인 버튼 영역 -->
                 <div id="form-section">
-                    <a href="login.html"><button type="button" id="loginMove-btn">로그인 화면으로 돌아가기</button></a>
+                    <a th:href="@{/member/login}"><button type="button" id="loginMove-btn">로그인 화면으로 돌아가기</button></a>
                 </div>
             </div>
 
             <!-- 오른쪽 여백 -->
             <div id="right-gap">
-                <a href="#"><img src="img/chat.png" class="fixed-image" id="chat-image"></a>
-                <img src="img/donate.png" class="fixed-image" id="donate-image">
+                <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
+                <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
             </div>
         </div>
 
         <!-- 풋터 -->
-        <div id="footer"></div>
+        <th:block th:replace="~{common/footer}"></th:block>
     </section>
 </body>
 </html>

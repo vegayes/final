@@ -8,9 +8,7 @@
     </head>
     <body>
 
-<!--
-		<th:block th:replace="~{common/header}"></th:block>
--->
+	    <th:block th:replace="~{common/header}"></th:block>
  	 	
         <main>
             <section class = "donationIntro">
@@ -63,43 +61,56 @@
                         </div>
                         <div class = "donationProcessArea ">
                             <label class = "donationButton">
-                                <input type = "radio" name = "amount">
+                                <input type = "radio" name = "amount" value = "10000">
                                 <div class = "donation">
                                     10,000원
                                 </div>
                             </label>
     
                             <label class = "donationButton">
-                                <input type = "radio" name = "amount">
+                                <input type = "radio" name = "amount" value = "30000">
                                 <div class = "donation">
                                     30,000원
                                 </div>
                             </label>
     
                             <label class = "donationButton">
-                                <input type = "radio" name = "amount">
+                                <input type = "radio" name = "amount" value = "50000">
                                 <div class = "donation">
                                     50,000원
                                 </div>
                             </label>
     
                             <label class = "donationButton">
-                                <input type = "radio" name = "amount">
+                                <input type = "radio" name = "amount" value = "100000">
                                 <div class = "donation">
                                     100,000원
                                 </div>                          
                             </label>
     
                             <label class = "donationButton">
-                                <input type = "radio" name = "amount">
+                                <input type = "radio" name = "amount" value = "input" id = "inputDonationBtn">
                                 <div class = "donation">
                                     <!-- 이거 누르면 밑에 input 값 생기게 해야하나?-->
                                    직접입력
                                 </div>
                             </label>
-    
                         </div>
                     </div>
+                    
+                    <div class = "donationProcess" id = "inputAmountArea">
+                        <div class = "donationProcessTitle">
+                        </div>
+                        <div class = "donationProcessArea">
+							<input type = "text" name = "amount"  class="inputAmount" value="0">
+							<button id="btn_add" a href="#add_one">5,000</button>
+							<button id="btn_add2" a href="#add_one">10,000</button>
+							<button id="btn_add3" a href="#add_one">50,000</button>
+							<button id="btn_add4" a href="#add_one">100,000</button>
+							<button id="btn_add5" a href="#add_one">100,000</button>
+                        </div>
+				
+					</div>
     
                     <div class = "donationProcess">
                         <div class = "donationProcessTitle">
@@ -133,18 +144,20 @@
                     </div>
     
                     <div class = "donationButtonArea">
-                        <div class = "donationButtonBox">
+                        <div class = "donationButtonBox" th:onclick="checkDonation()">
                             후원하기
                         </div>
                     </div>
 
                 </div>
             </section>
-            
-
-
-
-
         </main>
+        
+        <a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+		<a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
+      
+	    <th:block th:replace="~{common/footer}"></th:block>
+	    
+	    <script th:src="@{/js/donation/donation.js}"></script>
     </body>
 </html>

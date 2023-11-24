@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>활동 일지 등록</title>
 
-    <link rel="stylesheet" href="activityLogRegister_admin.css">
+    <link rel="stylesheet" th:href="@{/css/PM/activityLogRegister_admin.css}">
 
-    <script src="https://kit.fontawesome.com/f821b57119.js" crossorigin="anonymous"></script>
+    <script th:src="@{https://kit.fontawesome.com/f821b57119.js}" crossorigin="anonymous"></script>
 </head>
 <body>
     <section>
         <!-- 헤더 -->
-        <div id="header"></div>
+        <th:block th:replace="~{common/header}"></th:block>
 
         <!-- 내용 -->
         <div id="content">
@@ -24,7 +24,7 @@
                 <!-- 제목 영역 -->
                 <div id="title-section">
                     <div id="bone-section">
-                        <img src="img/bone.png" id="bone">
+                        <img th:src="@{/images/PM/bone.png}" id="bone">
                     </div>
                     <div id="title-sec">
                         오늘의 활동 일지
@@ -33,14 +33,14 @@
 
                 <!-- 내용 영역 -->
                 <div id="cont-section">
-                    <form action="#" method="" id="register-form">
+                    <form th:action="@{/#}" method="" id="register-form">
                         <!-- 사진 영역 -->
                         <div id="photoLine-up"></div>
                         <div id="photo-title">사진</div>
                         <div id="photoLine-bottom"></div>
                         <div id="photo-section">
                             <div id="photo-upload-sec">
-                                <img src="img/noImage.png" id="noImage">
+                                <img th:src="@{/images/PM/noImage.png}" id="noImage">
                             </div>
                             <div id="upload-btn-sec">
                                 <label for="uploadInput">사진 업로드</label>
@@ -69,13 +69,13 @@
 
             <!-- 오른쪽 여백 -->
             <div id="right-gap">
-                <a href="#"><img src="img/chat.png" class="fixed-image" id="chat-image"></a>
-                <img src="img/donate.png" class="fixed-image" id="donate-image">
+                <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
+                <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
             </div>
         </div>
 
         <!-- 풋터 -->
-        <div id="footer"></div>
+        <th:block th:replace="~{common/footer}"></th:block>
     </section>
 </body>
 </html>

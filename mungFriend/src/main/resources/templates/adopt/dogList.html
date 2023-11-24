@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>입양하기(리스트)</title>
-    <link rel="stylesheet" href="/FinalProject/css/dogList.css">
+    <link rel="stylesheet" th:href="@{/css/adopt/dogList.css}">
 </head>
+
 <body>
-    <main>
+
+    <th:block th:replace="~{common/header}"></th:block>
+
+    <main th:with="pagination=${map.pagination}, dogList=${map.dogList}">
         <div class="main-left"></div>
 
         <div class="main-center">
@@ -15,11 +20,11 @@
             <div class="explane">"이 작은 발걸음이 여러분 가정에 큰 사랑으로 다가오길 바랍니다.
                 새로운 가족 구성원을 환영하면서, 그들의 행복한 삶을 위해 함께 노력해 주세요."
             </div>
-            
+
             <div class="filter">
                 <form name="filter" multiple required action="#">
                     <div class="filter-age">
-                        <select id="age" name="age">
+                        <select id="age" name="age" onchange="onchangeEvent();">
                             <option value="none">나이</option>
                         </select>
                     </div>
@@ -44,12 +49,6 @@
                             <option value="large">대형</option>
                         </select>
                     </div>
-                    <div class="filter-character">
-                        <select id="character" name="character">                            
-                            <option value="none">성격</option>
-                            <option value="male"></option>
-                        </select>
-                    </div>
                     <div class="filter-surgery">
                         <select id="surgery" name="surgery">
                             <option value="none">중성화 여부</option>
@@ -58,120 +57,73 @@
                         </select>
                     </div>
                     <button type="submit" value="Submit">
-                        <img src="/FinalProject/final-img/jieun/finder.png" id="finder-img">
+                        <img th:src="@{/images/adopt/finder.png}" id="finder-img">
                     </button>
                 </form>
             </div>
 
             <div class="dog">
-                <div class="dog-list">
-                    <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
+                <th:block th:if="${dogList.isEmpty()}">
+                    <div class="dog-list" th:each="dog : ${dogList}">
+                        <p style="font-size: 12px;">입양리스트가 존재하지 않습니다.</p>
                     </div>
-                    <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
+                </th:block>
+                <th:block th:unless="${dogList.isEmpty()}">
+                    <div class="dog-list" >
+                        <div id="dog-list" th:each="dog : ${dogList}">
+                            <a th:href="@{/adopt/dogList/{dogNo}(dogNo=${dog.dogNo})}">
+                                <img th:src="${dog.thumbnail}" id="dog-img">
+                            </a>                        
+                            <div id="dog-kind" th:text="${dog.dogName}"></div>
+                        </div>
                     </div>
-                    <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
-                    </div>
-                    <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
-                    </div>
-                    <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
-                    </div>
-                    <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
-                    </div>
-                    <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
-                    </div>
-                    <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
-                    </div>
-                    <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
-                    </div>
-                    <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
-                    </div>
-                    <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
-                    </div>
-                    <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
-                    </div>
-                    <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
-                    </div>
-                    <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
-                    </div>
-                    <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
-                    </div>
-                    <div id="dog-list">
-                        <img src="/FinalProject/final-img/jieun/말티푸.png" id="dog-img">
-                        <div id="dog-kind">말티푸</div>
-                    </div>
-                </div>
+                </th:block>
             </div>
 
             <div class="regits">
-                <a class="regits-btn" href="#">등록하기</a>
+                <a th:if="${session.loginMember}" class="regits-btn" th:href="@{/adopt/dogRegistration}">등록하기</a>
             </div>
 
-            <div class="pagination-area">
+            <div class="pagination-area" th:unless="${dogList.isEmpty()}">
                 <ul class="pagination">
-           
+
                     <!-- 첫 페이지로 이동 -->
-                    <li><a href="/link/dogList?cp=1${kq}">&lt;&lt;</a></li>
+                    <li><a th:href="@{/adopt/dogList?cp=1}">&lt;&lt;</a></li>
 
                     <!-- 이전 목록 마지막 번호로 이동 -->
-                    <li><a href="/link/dogList?cp=${pagination.prevPage}${kq}">&lt;</a></li>
+                    <li><a th:href="@{/adopt/dogList(cp=${pagination.prevPage})}">&lt;</a></li>
 
                     <!-- 특정 페이지로 이동 -->
-                    <c:forEach var ="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
+                    <th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
                         <c:choose>
-                            <!-- 현재 보고있는 페이지 -->
-                            <c:when test="${i == pagination.currentPage}">
-                                <li><a class="current">${i}</a></li>
-                            </c:when>
-                            
-                            <!-- 현재 페이지를 제외한 나머지 페이지 -->
-                            <c:otherwise>
-                                <li><a href="/link/dogList?cp=${i}${kq}">${i}</a></li>
-                            </c:otherwise>
+                            <li th:if="${i == pagination.currentPage}">
+                                <a class="current" th:href="@{/adopt/dogList(cp=${i})}" th:text="${i}">현재 페이지</a>
+                            </li>
+                    		
+                            <li th:unless="${i == pagination.currentPage}">
+                                <a th:href="@{/board/{code}(code=${boardCode}, cp=${i})}" th:text="${i}">나머지 페이지</a>
+                            </li>
                         </c:choose>
-                    </c:forEach>
-                    
+                    </th:block>
+
                     <!-- 다음 목록 시작 번호로 이동 -->
-                    <li><a href="/link/dogList?cp=${pagination.nextPage}${kq}">&gt;</a></li>
+                    <li><a th:href="@{/adopt/dogList(cp=${pagination.nextPage})}">&gt;</a></li>
 
                     <!-- 끝 페이지로 이동 -->
-                    <li><a href="/link/dogList?cp=${pagination.maxPage}${kq}">&gt;&gt;</a></li>
+                    <li><a th:href="@{/adopt/dogList(cp=${pagination.maxPage})}">&gt;&gt;</a></li>
 
                 </ul>
             </div>
 
         </div>
 
-        <div class="main-right"></div>
+        <div class="main-right">
+            <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
+            <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+        </div>
     </main>
+
+    <th:block th:replace="~{common/footer}"></th:block>
 </body>
+
 </html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>1:1 문의</title>
+	<link rel="stylesheet" th:href="@{/css/mypage/admin/adminInquiry.css}">
+	<script src="https://kit.fontawesome.com/ac58eafae7.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+<th:block th:replace="~{common/header}"></th:block>
+	<main>
+		<!-- 사용자 마이페이지 타이틀 영역-->
+		<section class="userIntroArea">
+			<div class="userIntroTitle">
+				1:1 문의
+			</div>
+			<hr>
+		</section>
+
+		<!-- 사용자 마이페이지 내용 영역-->
+		<section class="userContentArea">
+
+			<!-- nav 자리-->
+			<nav class="navUser">
+				<ul>
+					<li> <a href="#"> 1:1 문의함</a> </li>
+					<li> <a href="#"> 예약 내역 </a> </li>
+					<li> <a href="#"> 후원 내역</a> </li>
+					<li> <a href="#"> 입소 신청 내역</a></li>
+					<li> <a href="#"> 회원 관리</a></li>
+					<li> <a href="#"> 관리 현황</a></li>
+
+				</ul>
+			</nav>
+
+			<!-- 내용 작성영역-->
+			<div class="userContentContainer">
+
+				<div class="fixedLabel">닉네임</div>
+				<input type="text" id="nickname" class="inputBox" value="동민" readonly>
+
+				<div class="fixedLabel">제목</div>
+				<input type="text" id="title" class="inputBox" value="너무 힘들어요" readonly>
+
+				<div class="fixedLabel">내용</div>
+				<textarea id="content" class="inputBox textareaBox" readonly>집 가고 싶어요</textarea>
+
+				<div class="fixedLabel">문의답변</div>
+				<textarea id="inquiry" class="inputBox textareaBox"></textarea>
+
+				<button class="inputBox buttonBox">답변하기</button>
+			</div>
+
+			</div>
+		</section>
+		<a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
+		<a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+</body>
+</main>
+	<th:block th:replace="~{common/footer}"></th:block>
+</body>
+
+</html>

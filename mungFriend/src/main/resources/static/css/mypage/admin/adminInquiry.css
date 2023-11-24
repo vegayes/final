@@ -1,0 +1,152 @@
+@font-face {
+    font-family: 'NanumGothic';
+    src: url('/fonts/NanumGothic.eot');
+    src: url('/fonts/NanumGothic.eot') format('embedded-opentype'),
+         url('/fonts/NanumGothic.woff') format('woff');
+}
+
+/* 기본 스타일 */
+* {
+    box-sizing: border-box;
+    list-style: none; 
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    font-family: 'NanumGothic', 'serif';
+}
+
+/* 메인 컨테이너 */
+main {
+    min-height: 1080px;
+    width: 1920px;
+    display: flex;
+    flex-direction: column;
+    padding: 0px 20%;
+}
+
+/* 구분선 스타일 */
+hr {
+    border: 1px solid #151615;
+    width: 85%;
+}
+
+/* 사용자 소개 영역 */
+.userIntroArea {
+    flex-basis: 30%;
+    padding-left: 13%;
+    display: flex;
+    flex-direction: column;
+}
+
+.userIntroTitle {
+    padding-left: 3%;
+    padding-top: 10%;
+    padding-bottom: 1.2%;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* 네비게이션 바 */
+nav {
+    flex-basis: 13%;
+}
+
+nav li {
+    padding: 15px 0px;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+a {
+    color: black;
+    cursor: pointer;
+}
+
+a:hover {
+    color: red;
+}
+
+/* 사용자 콘텐츠 영역 */
+.userContentArea {
+    flex-basis: 70%;
+    display: flex;
+}
+
+/* 사용자 콘텐츠 컨테이너 */
+.userContentContainer {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    margin-left: 40px;
+    justify-content: center;
+}
+
+/* 입력 필드 스타일 */
+.inputBox, .textareaBox, .buttonBox {
+    width: 65%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 2px solid #fee4d6;
+    border-radius: 10px;
+    background: none;
+    box-shadow: none;
+    outline: none; 
+}
+
+.textareaBox {
+    height: 100px;
+    resize: vertical;
+}
+
+.buttonBox {
+    padding: 10px 20px;
+    background-color: #fee4d6;
+    color: #333;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+/* 플레이스홀더 스타일 */
+::placeholder {
+    color: #aaa;
+}
+
+/* 특정 필드의 크기 조정 */
+#nickname {
+    width: 10%;
+}
+
+#inquiry {
+    height: 300px;
+}
+
+/* 고정 레이블 스타일 */
+.fixedLabel, .label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+.fixed-image {
+    position: fixed;
+    right: 10px;
+    z-index: 100;
+    width: 50px;
+}
+
+.fixed-image:hover {
+    cursor: pointer;
+}
+
+#chat-image {
+    bottom: 10px;
+}
+
+#donate-image {
+    bottom: 70px;
+}
+
+
