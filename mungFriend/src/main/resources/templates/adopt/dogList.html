@@ -24,7 +24,7 @@
             <div class="filter">
                 <form name="filter" multiple required action="#">
                     <div class="filter-age">
-                        <select id="age" name="age">
+                        <select id="age" name="age" onchange="onchangeEvent();">
                             <option value="none">나이</option>
                         </select>
                     </div>
@@ -69,10 +69,10 @@
                     </div>
                 </th:block>
                 <th:block th:unless="${dogList.isEmpty()}">
-                    <div class="dog-list" th:each="dog : ${dogList}">
-                        <div id="dog-list">
-                            <a th:href="@{/adopt/{dogNo}(dogNo=${dog.dogNo}, cp=${pagination.currentPage})}">
-                                <img th:src="@{/images/adopt/말티푸.png}" id="dog-img">
+                    <div class="dog-list" >
+                        <div id="dog-list" th:each="dog : ${dogList}">
+                            <a th:href="@{/adopt/dogList/{dogNo}(dogNo=${dog.dogNo})}">
+                                <img th:src="${dog.thumbnail}" id="dog-img">
                             </a>                        
                             <div id="dog-kind" th:text="${dog.dogName}"></div>
                         </div>
@@ -84,36 +84,33 @@
                 <a th:if="${session.loginMember}" class="regits-btn" th:href="@{/adopt/dogRegistration}">등록하기</a>
             </div>
 
-            <!-- <div class="pagination-area" th:if="${#lists.size(dogList) > 0}"> -->
-            <div class="pagination-area">
+            <div class="pagination-area" th:unless="${dogList.isEmpty()}">
                 <ul class="pagination">
 
                     <!-- 첫 페이지로 이동 -->
-                    <li><a th:href="@{/link/dogList?cp=1${kq}}">&lt;&lt;</a></li>
+                    <li><a th:href="@{/adopt/dogList?cp=1}">&lt;&lt;</a></li>
 
                     <!-- 이전 목록 마지막 번호로 이동 -->
-                    <li><a th:href="@{/link/dogList?cp=${pagination.prevPage}${kq}}">&lt;</a></li>
+                    <li><a th:href="@{/adopt/dogList(cp=${pagination.prevPage})}">&lt;</a></li>
 
                     <!-- 특정 페이지로 이동 -->
-                    <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
+                    <th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
                         <c:choose>
-                            <!-- 현재 보고있는 페이지 -->
-                            <c:when test="${i == pagination.currentPage}">
-                                <li><a class="current">${i}</a></li>
-                            </c:when>
-
-                            <!-- 현재 페이지를 제외한 나머지 페이지 -->
-                            <c:otherwise>
-                                <li><a href="/link/dogList?cp=${i}${kq}">${i}</a></li>
-                            </c:otherwise>
+                            <li th:if="${i == pagination.currentPage}">
+                                <a class="current" th:href="@{/adopt/dogList(cp=${i})}" th:text="${i}">현재 페이지</a>
+                            </li>
+                    		
+                            <li th:unless="${i == pagination.currentPage}">
+                                <a th:href="@{/board/{code}(code=${boardCode}, cp=${i})}" th:text="${i}">나머지 페이지</a>
+                            </li>
                         </c:choose>
-                    </c:forEach>
+                    </th:block>
 
                     <!-- 다음 목록 시작 번호로 이동 -->
-                    <li><a th:href="@{/link/dogList?cp=${pagination.nextPage}${kq}}">&gt;</a></li>
+                    <li><a th:href="@{/adopt/dogList(cp=${pagination.nextPage})}">&gt;</a></li>
 
                     <!-- 끝 페이지로 이동 -->
-                    <li><a th:href="@{/link/dogList?cp=${pagination.maxPage}${kq}}">&gt;&gt;</a></li>
+                    <li><a th:href="@{/adopt/dogList(cp=${pagination.maxPage})}">&gt;&gt;</a></li>
 
                 </ul>
             </div>

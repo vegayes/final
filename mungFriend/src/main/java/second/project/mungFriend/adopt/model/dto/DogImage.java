@@ -11,11 +11,11 @@ import lombok.ToString;
 @NoArgsConstructor
 public class DogImage {
 
-	int imageNo;
-	int dogNo;
-	String imagePath;
-	String imageReName;
-	String imageOriginal;
-	String imageOrder;
+	private int imageNo;
+	private int dogNo;
+	private String imagePath;
+	private String imageReName;
+	private String imageOriginal;
+	private int imageOrder;
 	
 }

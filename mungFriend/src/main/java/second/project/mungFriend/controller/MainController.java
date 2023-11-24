@@ -15,8 +15,7 @@ public class MainController {
 		
 		model.addAttribute("name", "홍길동");
 
-//		return "common/main";
-		return "mypage/admin/donationList_admin";
+		return "common/main";
 	}
 	
 	
