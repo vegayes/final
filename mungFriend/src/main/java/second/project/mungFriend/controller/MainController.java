@@ -15,8 +15,8 @@ public class MainController {
 		
 		model.addAttribute("name", "홍길동");
 
-//		return "common/main";
-		return "mypage/member/secession_user";
+		return "common/main";
+	//	return "mypage/member/secession_user";
 	}
 	
 	

@@ -28,10 +28,10 @@ main {
 
 /* 검색 아이콘 위치 조정 */
 .search-icon {
-	  width: 30px; /* 너비 조정 */
-    height: 30px; /* 높이 조정 */
+	  width: 25px; /* 너비 조정 */
+    height: 25px; /* 높이 조정 */
     position: relative; /* 상대 위치 지정 */
-    top: 357px; /* 상단에서 5픽셀 아래로 */
+    top: 355px; /* 상단에서 5픽셀 아래로 */
     left:260px; /* 왼쪽에서 5픽셀 오른쪽으로 */
     /* 추가적인 스타일 설정 */
      cursor: pointer; /* 마우스 오버시 커서 변경 */
@@ -40,7 +40,7 @@ main {
 #search-box {
     width: 500px; /* 너비 */
     height: 40px; /* 높이 */
-    border: 2px solid #FEE4D6; /* 테두리 */
+    border: 3px solid #FEE4D6; /* 테두리 */
     border-radius: 4px; /* 테두리 둥글게 */
     padding: 5px 10px; /* 내부 여백 */
     font-size: 16px; /* 글자 크기 */
@@ -117,10 +117,10 @@ main {
     background-color: white; /* 배경색 */
   
     color: black; /* 글자색 */
-   border: 1px solid #FEE4D6; 
+   border: 3px solid #FEE4D6; 
     border-radius: 4px; /* 테두리 둥글게 */
     cursor: pointer; /* 마우스 오버시 커서 변경 */
-    font-size: 12px; /* 폰트 크기 */
+    font-size: 14px; /* 폰트 크기 */
     transition: all 0.3s; /* 모든 변화에 대한 애니메이션 */
 }
 
