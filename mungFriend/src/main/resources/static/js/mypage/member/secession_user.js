@@ -30,7 +30,7 @@ if(memberDeleteForm != null) {
 			return;
 		}
 		
-		if(secessionPw.value != secessionPw2.value) {
+		if(secessionPw.value != secessionPw2.value) { // 비밀번호, 비밀번호 확인 불일치
 			alert("비밀번호가 일치하지 않습니다.");
 			e.preventDefault();
 			secessionPw2.focus();

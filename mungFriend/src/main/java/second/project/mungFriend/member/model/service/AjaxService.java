@@ -8,4 +8,16 @@ public interface AjaxService {
 	 */
 	int checkId(String id);
 
+	/** 이메일 중복검사
+	 * @param email
+	 * @return int
+	 */
+	int checkEmail(String email);
+
+	/** 닉네임 중복검사
+	 * @param nickname
+	 * @return int
+	 */
+	int checkNickname(String nickname);
+
 }
