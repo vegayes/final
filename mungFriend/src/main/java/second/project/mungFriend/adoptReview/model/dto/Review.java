@@ -19,6 +19,7 @@ public class Review {
 	private int reviewCount;
 	private String reviewDate;
 	private char reviewDelYN;
+	private String memberNickname;
 	
 	
 	

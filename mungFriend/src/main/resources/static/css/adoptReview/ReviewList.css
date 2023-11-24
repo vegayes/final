@@ -9,6 +9,15 @@
     font-family: 'NanumGothic', 'serif';
 }
 
+a {
+    text-decoration: none;
+    color: black;
+} 
+
+a:hover {
+    color: goldenrod;
+}
+
 /* 전체 컨테이너 */
 .mainContainer {
     width: 45%;
@@ -201,7 +210,7 @@
     width: 575px;
     display: flex;
     margin-left: 17%;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
 }
 
 /* select */
@@ -233,6 +242,17 @@
     background: #FEE4D6;
     cursor: pointer;
     border-radius: 5px;
+}
+
+
+
+/* ============================ pagination ============================== */
+.current{
+    font-weight: bold;
+    background-color: #FEE4D6;
+    border-radius: 50%;
+    color: black !important;
+    letter-spacing: 0 !important;
 }
 
 

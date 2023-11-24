@@ -12,6 +12,7 @@
 		<result property="reviewCount" column="REVIEW_VIEWS_COUNT"/>
 		<result property="reviewDate" column="REVIEW_DATE"/>		
 		<result property="reviewDelYN" column="REVIEW_YN"/>
+		<result property="memberNickname" column="MEMBER_NICKNAME"/>
 		
 		<!-- 
 		<collection property="imageList"
@@ -55,46 +56,152 @@
 	</resultMap>
 	
 	
-	<!-- 삭제되지 않은 후기 개수 조회 -->
+	<!-- 삭제되지 않은 게시글 개수 조회 -->
 	<select id="getListCount" resultType="_int">
 		SELECT COUNT(*) FROM REVIEW
 		WHERE REVIEW_YN = 'N'
 	</select>	
 	
-	
+	<!-- 삭제되지 않은 게시글 리스트 조회 -->
 	<select id="selectReviewList" resultMap="review_rm">
-		SELECT * FROM REVIEW
+		SELECT REVIEW_NO, MEMBER_NO, REVIEW_TITLE, REVIEW_VIEWS_COUNT, TO_CHAR(REVIEW_DATE, 'YYYY-MM-DD') REVIEW_DATE, MEMBER_NICKNAME 
+		FROM REVIEW
+		JOIN "MEMBER" m USING (MEMBER_NO)
 		WHERE REVIEW_YN = 'N'
 		ORDER BY REVIEW_DATE DESC
 	</select>
 	
 	
 	
-	<!-- 이미지 가져오기 
-  	<select id="selectImageList" resultMap = "boardImage_rm">
-  		SELECT * FROM BOARD_IMG
-		WHERE BOARD_NO = #{boardNo}
-		ORDER BY IMG_ORDER
-  	</select>
-  	-->
-  
-  	
-  	<!-- 댓글조회
-  	<select id="selectCommentList" resultMap = "comment_rm">
-  	SELECT C.* 
-  	FROM  
-		(SELECT COMMENT_NO, COMMENT_CONTENT,
-		TO_CHAR(C_CREATE_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') C_CREATE_DATE,
-		BOARD_NO, MEMBER_NO, MEMBER_NICKNAME, PROFILE_IMG, PARENT_NO, COMMENT_DEL_FL
-		FROM "COMMENT"
-		JOIN MEMBER USING(MEMBER_NO)
-		WHERE BOARD_NO = #{boardNo}) C
-	WHERE COMMENT_DEL_FL = 'N'
-	START WITH PARENT_NO IS NULL
-	CONNECT BY PRIOR COMMENT_NO = PARENT_NO 
-	ORDER SIBLINGS BY COMMENT_NO  
-  	</select>
-	-->
+		<!--검색어가 있는 경우 삭제되지 않은  게시글 개수 조회 -->
+		<select id="getSearchListCount" resultType="_int">
+		    SELECT COUNT(*) FROM REVIEW
+		    
+		    <if test='searchType == "writer"'>
+  				JOIN "MEMBER" USING(MEMBER_NO)
+  			</if>
+		    
+		    WHERE REVIEW_YN = 'N'
+		    
+		    
+		    <choose>
+				
+		        <when test='searchType == "title"'>
+		            AND REVIEW_TITLE LIKE  '%${searchContent}%'
+		        </when>
+		        
+		        <when test='searchType == "content"'>
+		            AND BOARD_CONTENT LIKE '%${searchContent}%'
+		        </when>
+		        
+		        <when test='searchType == "writer"'>
+		            AND MEMBER_NICKNAME LIKE '%${searchContent}%'
+		        </when>
+		        
+		    </choose>
+		</select>
+
+
+		<!-- 검색어가 있는 경우 게시글 검색 결과 조회-->
+		<select id="selectSearchReviewList" resultMap="review_rm">
+			SELECT REVIEW_NO, MEMBER_NO, REVIEW_TITLE, REVIEW_VIEWS_COUNT, TO_CHAR(REVIEW_DATE, 'YYYY-MM-DD') REVIEW_DATE, MEMBER_NICKNAME 
+			FROM REVIEW
+			JOIN "MEMBER" m USING (MEMBER_NO)
+			WHERE REVIEW_YN = 'N'
+			
+			
+		    <choose>
+				
+		        <when test='searchType == "title"'>
+		            AND REVIEW_TITLE LIKE  '%${searchContent}%'
+		        </when>
+		        
+		        <when test='searchType == "content"'>
+		            AND BOARD_CONTENT LIKE '%${searchContent}%'
+		        </when>
+		        
+		        <when test='searchType == "writer"'>
+		            AND MEMBER_NICKNAME LIKE '%${searchContent}%'
+		        </when>
+		        
+		    </choose>
+			
+			
+			ORDER BY REVIEW_DATE DESC
+		</select>
+	
+	
+		
+		<!-- 이미지 가져오기 
+	  	<select id="selectImageList" resultMap = "boardImage_rm">
+	  		SELECT * FROM BOARD_IMG
+			WHERE BOARD_NO = #{boardNo}
+			ORDER BY IMG_ORDER
+	  	</select>
+	  	-->
+	  
+	  	
+	  	<!-- 댓글조회
+	  	<select id="selectCommentList" resultMap = "comment_rm">
+	  	SELECT C.* 
+	  	FROM  
+			(SELECT COMMENT_NO, COMMENT_CONTENT,
+			TO_CHAR(C_CREATE_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') C_CREATE_DATE,
+			BOARD_NO, MEMBER_NO, MEMBER_NICKNAME, PROFILE_IMG, PARENT_NO, COMMENT_DEL_FL
+			FROM "COMMENT"
+			JOIN MEMBER USING(MEMBER_NO)
+			WHERE BOARD_NO = #{boardNo}) C
+		WHERE COMMENT_DEL_FL = 'N'
+		START WITH PARENT_NO IS NULL
+		CONNECT BY PRIOR COMMENT_NO = PARENT_NO 
+		ORDER SIBLINGS BY COMMENT_NO  
+	  	</select>
+		-->
+		
+		
+		<!-- review 테이블에 게시글 삽입 : 시퀀스인 reviewNo 반환-->
+		<insert id="reviewInsert" parameterType="Review"  useGeneratedKeys="true">
+	
+			<selectKey order="BEFORE" resultType="_int"  keyProperty="reviewNo">
+				SELECT SEQ_REVIEW_NO.NEXTVAL FROM DUAL
+			</selectKey>
+		
+		INSERT INTO REVIEW
+			VALUES (
+			#{reviewNo},
+			#{memberNo},
+			#{reviewTitle},
+			#{reviewContent},
+			DEFAULT,
+			DEFAULT,
+			DEFAULT)
+		</insert>
+	
+	
+	
+	  <!-- 이미지 리스트 여려개 삽입 -->
+	  <insert id="insertImageList" parameterType="list">
+	  	INSERT INTO "REVIEW_IMG"
+	  	SELECT SEQ_REVIEW_IMG_NO.NEXTVAL, A.*
+	  	FROM (
+	  		
+	  		<foreach collection="list" item="img" separator= " UNION ALL ">
+				SELECT 	#{img.imageNo}	REVIEW_NO,
+						#{img.imagePath} IMG_PATH,
+						#{img.imageReName} IMG_RENAME,
+						#{img.imageOriginal} IMG_ORIGINAL,
+						#{img.imageOrder} 	IMG_ORDER
+				FROM DUAL	
+	  		</foreach>
+	  	) A
+	  	
+	  </insert>
+	
+	
+
+	
+	
+	
 	
 
 </mapper>
