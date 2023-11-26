@@ -71,17 +71,58 @@ public class ReviewController {
 	}
 	
 	
+	
+	/** 게시글 상세조회
+	 * @param reviewNo
+	 * @param model
+	 * @param ra
+	 * @return
+	 */
 	@GetMapping("/reviewDetail/{reviewNo}")
 	public String reviewDetail(@PathVariable("reviewNo") int reviewNo,
-			Model model) {
+			Model model, RedirectAttributes ra) {
 			
-		System.out.println("reviewNo : " + reviewNo);
+		Review review = service.selectReview(reviewNo);
+		System.out.println("review : " + review);
+		String path = null;
 		
-		return"adoptReview/ReviewDetail";
+		
+		if(review != null) {
+			path = "adoptReview/reviewDetail";   
+			
+			int result = service.updateCount(reviewNo);
+			if(result > 0) {
+				review.setReviewCount(review.getReviewCount()+1);
+			}
+			model.addAttribute("review",review); 
+			
+			Member loginMember = (Member) model.getAttribute("loginMember");
+			System.out.println("로그인한 회원 : " + loginMember);
+			
+			 if(loginMember != null ) {
+				 
+				model.addAttribute("loginMember", loginMember);
+				 
+			 }
+			 
+			 
+			}else { //조회결과 없으면
+				
+				path = "redirect:/adoptReview/ReviewList"; //없으면 게시판의 첫페이지로 리다이렉트
+				ra.addFlashAttribute("message","해당 게시글이 존재하지 않습니다");
+			}
+			
+			
+		return path;
+
 	}
 	
 	
 	
+	
+	/** 게시글 삽입 페이지 이동
+	 * @return
+	 */
 	@GetMapping("/reviewInsert")
 	public String reviewInsert() {
 		
@@ -89,6 +130,15 @@ public class ReviewController {
 	}
 	
 	
+	
+	/** 게시글 삽입
+	 * @param review
+	 * @param images
+	 * @param loginMember
+	 * @param ra
+	 * @return
+	 * @throws Exception
+	 */
 	@PostMapping("/reviewInsert")
 	public String reviewInsert( Review review
 			, @RequestParam(value="images", required = false) List<MultipartFile> images
@@ -103,6 +153,12 @@ public class ReviewController {
 		review.setMemberNickname(loginMember.getMemberNickname());
 		
 		int insertResult = service.reviewInsert(review,images);
+		
+		if(insertResult > 0) {
+			ra.addFlashAttribute("message","등록에 성공했습니다");
+		}else {
+			ra.addFlashAttribute("message","등록에 실패했습니다");
+		}
 		
 		
 		return"redirect:reviewList/1";

@@ -14,7 +14,7 @@
 		<result property="reviewDelYN" column="REVIEW_YN"/>
 		<result property="memberNickname" column="MEMBER_NICKNAME"/>
 		
-		<!-- 
+		
 		<collection property="imageList"
 					select = "selectImageList"
 					column = "REVIEW_NO"
@@ -29,7 +29,7 @@
 					ofType = "ReviewComment"
 		/>
 		
-		-->
+	
 	</resultMap>
 	
 	<!-- ReviewImage resultMap -->
@@ -53,6 +53,7 @@
 		<result property="commentDate" column="COMMENT_DATE"/>
 		<result property="parentComment" column="PARENT_COMMENT"/>
 		<result property="commentDelYN" column="COMMENT_YN"/>
+		<result property="memberNickname" column="MEMBER_NICKNAME"/>
 	</resultMap>
 	
 	
@@ -132,31 +133,6 @@
 	
 	
 		
-		<!-- 이미지 가져오기 
-	  	<select id="selectImageList" resultMap = "boardImage_rm">
-	  		SELECT * FROM BOARD_IMG
-			WHERE BOARD_NO = #{boardNo}
-			ORDER BY IMG_ORDER
-	  	</select>
-	  	-->
-	  
-	  	
-	  	<!-- 댓글조회
-	  	<select id="selectCommentList" resultMap = "comment_rm">
-	  	SELECT C.* 
-	  	FROM  
-			(SELECT COMMENT_NO, COMMENT_CONTENT,
-			TO_CHAR(C_CREATE_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') C_CREATE_DATE,
-			BOARD_NO, MEMBER_NO, MEMBER_NICKNAME, PROFILE_IMG, PARENT_NO, COMMENT_DEL_FL
-			FROM "COMMENT"
-			JOIN MEMBER USING(MEMBER_NO)
-			WHERE BOARD_NO = #{boardNo}) C
-		WHERE COMMENT_DEL_FL = 'N'
-		START WITH PARENT_NO IS NULL
-		CONNECT BY PRIOR COMMENT_NO = PARENT_NO 
-		ORDER SIBLINGS BY COMMENT_NO  
-	  	</select>
-		-->
 		
 		
 		<!-- review 테이블에 게시글 삽입 : 시퀀스인 reviewNo 반환-->
@@ -199,9 +175,53 @@
 	
 	
 
+	<!-- 게시글 상세조회 -->
+	<select id="selectReview" resultMap="review_rm">
+  	
+	  	SELECT REVIEW_NO, MEMBER_NO, REVIEW_TITLE,
+	  		REVIEW_CONTENT, REVIEW_VIEWS_COUNT,
+			REVIEW_DATE, MEMBER_NICKNAME 
+			FROM REVIEW
+			JOIN MEMBER USING(MEMBER_NO)
+	  	WHERE REVIEW_NO = #{reviewNo}
+	  	AND REVIEW_YN = 'N'
+  	
+  	</select>
+  	
+  	
+  	
+  	<!-- 이미지 가져오기  -->
+  	<select id="selectImageList" resultMap = "image_rm">
+  		SELECT * FROM REVIEW_IMG
+		WHERE REVIEW_NO = #{reviewNo}
+		ORDER BY IMG_ORDER
+  	</select>
+
+  	
+  	
+  	<!-- 댓글조회 -->
+  	<select id="selectCommentList" resultMap = "comment_rm">
+	  	SELECT C.* 
+	  	FROM  
+			(SELECT COMMENT_NO, COMMENT_CONTENT,
+			COMMENT_DATE, REVIEW_NO, MEMBER_NO, MEMBER_NICKNAME, 
+			MEMBER_PROFILE, PARENT_COMMENT, COMMENT_YN
+			FROM "REVIEW_COMMENT"
+			JOIN MEMBER USING(MEMBER_NO)
+			WHERE REVIEW_NO = #{reviewNo}) C
+		WHERE COMMENT_YN = 'N'
+		START WITH PARENT_COMMENT IS NULL
+		CONNECT BY PRIOR COMMENT_NO = PARENT_COMMENT 
+		ORDER SIBLINGS BY COMMENT_NO  
+  	</select>
+
 	
-	
-	
-	
+	<!-- 조회수 증가  -->
+  	<update id="updateCount">
+  		UPDATE "REVIEW" SET
+  		REVIEW_VIEWS_COUNT = REVIEW_VIEWS_COUNT + 1
+  		WHERE REVIEW_NO = #{reviewNo}
+  	
+  	</update>
 
 </mapper>
