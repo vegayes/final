@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="second.project.mungFriend.member.model.dao.MemberMapper">
+<mapper namespace="second.project.mungFriend.mypage.admin.model.dao.MemberAdminMapper">
 	
 	<resultMap type="Member" id="member_rm">
 		
@@ -20,40 +20,18 @@
 		
 	</resultMap>
 	
-	<!-- 로그인 -->
-	<select id="login" resultMap="member_rm">
+	<!-- 회원리스트 조회하기 -->
+	<select id="selectMemberList" resultMap="member_rm">
 		SELECT MEMBER_NO, MEMBER_ID, MEMBER_PW, MEMBER_EMAIL, MEMBER_NAME, MEMBER_TEL, MEMBER_NICKNAME, MEMBER_ADDRESS, MEMBER_PROFILE, 
 		TO_CHAR(MEMBER_ENROLL_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') AS MEMBER_ENROLL_DATE, ADMIN_YN, MEMBER_DEL_YN
 		FROM "MEMBER"
-		WHERE MEMBER_DEL_YN = 'N'
-		AND MEMBER_ID = #{memberId}
 	</select>
 	
-	<!-- 회원가입 -->
-	
-	<!-- 아이디찾기 -->
-	<select id="findId" resultType="string">
-		SELECT MEMBER_ID
-		FROM "MEMBER"
-		WHERE MEMBER_NAME = #{memberName}
-		AND MEMBER_EMAIL = #{memberEmail}
-		AND MEMBER_DEL_YN = 'N'
-	</select>
-	
-	
-	<!-- 네이버 회원정보로 로그인 정보 찾기 -->
-	<select id="loginNaver" resultMap="member_rm">
-		SELECT MEMBER_NO, MEMBER_ID, MEMBER_PW, MEMBER_EMAIL, MEMBER_NAME, MEMBER_TEL, MEMBER_NICKNAME, MEMBER_ADDRESS, MEMBER_PROFILE, 
-		TO_CHAR(MEMBER_ENROLL_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') AS MEMBER_ENROLL_DATE, ADMIN_YN, MEMBER_DEL_YN
-		FROM "MEMBER"
-		WHERE MEMBER_DEL_YN = 'N'
-		AND API_AUTH_ID = #{naverId}
-	</select>
-	
-	<insert id="loginNaverInsert">
-		INSERT INTO MEMBER 
-		VALUES(SEQ_MEMBER_NO.NEXTVAL, #{naverEmail}, #{naverPw}, #{naverEmail}, #{naverName}, #{mobile}, #{naverNickName}, 
-			NULL, NULL, DEFAULT, 'Y', DEFAULT, #{naverId},'N')
-	</insert>	
+	<!-- 관리자 회원 탈퇴하기 -->
+	<update id="memberDel" parameterType="_int">
+		UPDATE "MEMBER" SET
+		MEMBER_DEL_YN = 'Y'
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
 	
 </mapper>

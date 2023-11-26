@@ -6,6 +6,8 @@
     <title>로그인</title>
 
 	<link rel="stylesheet" th:href="@{/css/member/login.css}">
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 </head>
 <body>
     <section>
@@ -55,9 +57,28 @@
                 <div id="sns-section">
                     <div id="hr"><hr></div>
                     <div id="sns">
-                        <img th:src="@{/images/member/kakao.png}" id="kakao">
-                        <img th:src="@{/images/member/naver.png}" id="naver">
-                        <img th:src="@{/images/member/google.png}" id="google">
+						<!--
+						<div id="naver_id_login"></div>
+						    <script type="text/javascript">
+						        var naver_id_login = new naver_id_login("8n9tS4ylVHe09LIMLS7E", "http://localhost/member/oauth2/code/naver");
+						        var state = naver_id_login.getUniqState();
+						        naver_id_login.setButton("white", 2,40);
+						        naver_id_login.setDomain("http://localhost");
+						        naver_id_login.setState(state);
+						        naver_id_login.setPopup();
+						        naver_id_login.init_naver_id_login();
+						    </script>
+						  </div>
+	                    <a th:href="@{|${naverUrl}|}"><img th:src="@{/images/member/naver.png}" id="naver"></a>
+	                    <a th:href="#"><img th:src="@{/images/member/kakao.png}" id="kakao"></a>
+	                    <a th:href="#"><img th:src="@{/images/member/google.png}" id="google"></a>
+	                        <img th:src="@{/images/member/kakao.png}" id="kakao">
+	                        <img th:src="@{/images/member/naver.png}" id="naver">
+	                        <img th:src="@{/images/member/google.png}" id="google">
+						-->
+	                        <a th:href="@{|${naverUrl}|}"><img th:src="@{/images/member/naver.png}" id="naver"></a>
+	                        <a th:href="@{|${kakaoUrl}|}"><img th:src="@{/images/member/kakao.png}" id="kakao"></a>
+	                        <a th:href="@{|${googleUrl}|}"><img th:src="@{/images/member/google.png}" id="google"></a>
                     </div>
                 </div>
             </div>
