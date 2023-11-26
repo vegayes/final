@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="second.project.mungFriend.donation.model.dao.DonationMapper">
+	
+	<resultMap type="Donation" id="donation_rm">
+		<id property="donationNo" column="DONATION_NO"/>
+		
+		<result property="memberNo" column="MEMBER_NO"/>
+		<result property="donationContent" column="DONATION_CONTENT"/>
+		<result property="donationType" column="DONATION_TYPE"/>
+		<result property="donationAmount" column="DONATION_AMOUNT"/>
+		<result property="DonationDate" column="DONATION_DATE"/>		
+		<result property="DonationStatus" column="DONATION_STATUS"/>
+	</resultMap>
+	
+	<insert id = "donationMemberPay">
+		INSERT INTO TEST_DONATION  
+		VALUES(SEQ_DONATION_NO.NEXTVAL, #{memberNo},  
+		       #{donationContent}, #{donationType}, #{donationAmount}, SYSDATE, #{status})	
+	</insert>
+	
+
+</mapper>

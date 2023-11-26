@@ -62,7 +62,8 @@ public class DBConfig {
 			sessionFactoryBean.setTypeAliasesPackage("second.project.mungFriend.member.model.dto," 
 													+ "second.project.mungFriend.adopt.model.dto,"
 													+ "second.project.mungFriend.admissionApply.model.dto,"
-													+ "second.project.mungFriend.adoptReview.model.dto");
+													+ "second.project.mungFriend.adoptReview.model.dto,"
+													+ "second.project.mungFriend.donation.model.dto");
 
 
 //			sessionFactoryBean.setTypeAliasesPackage("edu.kh.project.member.model.dto");

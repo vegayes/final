@@ -270,18 +270,28 @@ input[value="input"]:checked #inputAmountArea{
 #inputAmountBtnArea{
 	display : flex;
     justify-content: end;
-
+    align-items: center;
+	padding-right: 20px;
     border : 2px solid red;
 }
 
 #inputAmountBtnArea *{
 	    
     margin-left : 20px;
+   
+}
+
+#inputAmountBtnArea > input[type="number"]{
+	height: 70%;
+	padding : 5px 10px;
+
+	text-align: end;
 }
 
 #inputAmountBtnArea button{
     border-radius: 10px;
     border: 5px solid #FEE4D6;
+    background-color: white;
     padding : 5px 7px;
 
     display: flex;
@@ -291,13 +301,31 @@ input[value="input"]:checked #inputAmountArea{
     font-size : 12px;
 }
 
+#inputAmountBtnArea button:active{
+	border : 5px solid red;
+}
+
 .selected {
     border: 5px solid #F95353;
 }
 
 
+/*************************************************
+                비회원인 경우 정보 입력
+*************************************************/
+.donationFieldset{
+    flex-basis: 40%;
+    border: 5px solid #FEE4D6;
+    border-radius: 10px;
+    padding : 5px 10px;
+}
 
-
+.donationFieldset input{
+    width: 100%;
+    border : none; 
+    outline : 0;
+    font-size: 12px;
+}
 
 
 
