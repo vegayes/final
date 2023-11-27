@@ -20,7 +20,8 @@
 		
 	</resultMap>
 	
-	<!-- 회원리스트 조회하기 -->
+	<!-- 현재 페이지에 해당하는 부분에 대한 회원리스트 조회하기 -->
+	<!-- CDATA 태그 : 해당 태그 내부에 작성된 것은 모두 문자로 취급 -->
 	<select id="selectMemberList" resultMap="member_rm">
 		SELECT MEMBER_NO, MEMBER_ID, MEMBER_PW, MEMBER_EMAIL, MEMBER_NAME, MEMBER_TEL, MEMBER_NICKNAME, MEMBER_ADDRESS, MEMBER_PROFILE, 
 		TO_CHAR(MEMBER_ENROLL_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') AS MEMBER_ENROLL_DATE, ADMIN_YN, MEMBER_DEL_YN
@@ -33,5 +34,11 @@
 		MEMBER_DEL_YN = 'Y'
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
+	
+	<!-- 탈퇴하지 않은 회원 리스트 수 조회 -->
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*) FROM "MEMBER"
+		WHERE MEMBER_DEL_YN = 'N'
+	</select>
 	
 </mapper>

@@ -63,7 +63,7 @@ public class MemberServiceImpl implements MemberService{
 		
 		Member loginMember = dao.login(inputMember);
 		
-		// System.out.println(bcrypt.encode(inputMember.getMemberPw()));
+		System.out.println(bcrypt.encode(inputMember.getMemberPw()));
 		
 		if(loginMember != null) {
 			

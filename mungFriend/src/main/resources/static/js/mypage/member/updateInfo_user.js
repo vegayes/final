@@ -262,6 +262,27 @@ memberNickname.addEventListener("input", () => {
 	
 });
 
+// 정보수정 form 태그가 제출 되었을 때
+document.getElementById("updateForm").addEventListener("submit", e=> {
+	
+	const updatePw = document.getElementById("updatePw");
+	const updatePwCheck = document.getElementById("updatePwCheck");
+	
+	if(updatePw.value.trim().length == 0) {
+		alert("수정할 비밀번호를 입력해주세요");
+		e.preventDefault();
+		updatePw.focus();
+		return;
+	}
+	
+	if(updatePwCheck.value.trim().length == 0) {
+		alert("비밀번호를 재입력해주세요");
+		e.preventDefault();
+		updatePwCheck.focus();
+		return;
+	}
+	
+});
 
 
 

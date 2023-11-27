@@ -32,7 +32,7 @@
 
                 <!-- 비밀번호 찾기 form 영역 -->
                 <div id="form-section">
-                    <form th:action="@{/#}" method="">
+                    <form th:action="@{/#}" method="" id="findPwForm">
                         <div id="id-section">
                             아이디 <br>
                             <input type="text" id="id" name="id">
@@ -58,5 +58,7 @@
         <!-- 풋터 -->
         <th:block th:replace="~{common/footer}"></th:block>
     </section>
+    
+    <script th:src="@{/js/member/findPw.js}"></script>
 </body>
 </html>

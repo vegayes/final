@@ -370,6 +370,7 @@ a:hover{
 
 .updateButtonBox{
     flex-basis: 50%;
+    border: none;
     border-radius: 10px;
     background: #FEE4D6;
     padding : 15px 30px;

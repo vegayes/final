@@ -1,11 +1,15 @@
 package second.project.mungFriend.mypage.admin.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import second.project.mungFriend.adopt.model.dto.Pagination;
 import second.project.mungFriend.member.model.dto.Member;
 import second.project.mungFriend.mypage.admin.model.dao.MemberAdminDAO;
 
@@ -17,9 +21,43 @@ public class MemberAdminServiceImpl implements MemberAdminService{
 
 	// 회원리스트 조회하기
 	@Override
-	public List<Member> selectMemberList() {
+	public Map<String, Object> selectMemberList(int cp) {
 		
-		return dao.selectMemberList();
+		// 1. 탈퇴하지 않은 회원 리스트 수 조회
+		int listCount = dao.getListCount();
+		
+		// 2. 1번 조회 결과 + cp 를 이용해서 Pagination 객체 생성
+		// -> 내부 필드가 모두 계산되어 초기화됨
+		Pagination pagination = new Pagination(listCount, cp);
+		
+		// 3. 현재 페이지에 해당하는 부분에 대한 회원 리스트 조회
+		// ex) 100개
+		//     10개 씩 보여준다
+		//     1page -> 100 ~ 91
+		//     2page -> 90  ~ 81
+		// 몇페이지(pagination.currentPage)에 대한
+		// 회원 리스트가 몇개(pagination.limit)인지 조회
+		
+		// RowBounds 객체
+		// - 마이바티스에서 페이징처리를 위해 제공하는 객체
+		// - offset 만큼 건너뛰고
+		// 그 다음 지정된 행 개수만큼(limit) 만큼 조회
+		
+		// 1) offset 계산
+		int offset
+			= (pagination.getCurrentPage() - 1) * pagination.getLimit();
+		
+		// 2) RowBounds 객체 생성
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		
+		List<Member> memberList = dao.selectMemberList(rowBounds);
+		
+		// 4. pagination, memberList를 Map에 담아서 반환
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pagination", pagination);
+		map.put("memberList", memberList);
+		
+		return map;
 	}
 
 	// 관리자 회원 탈퇴하기
