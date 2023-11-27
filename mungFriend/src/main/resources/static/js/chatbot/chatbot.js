@@ -109,7 +109,6 @@ $(function () {
 
     $("#communicate").on("click", ".selectButton", function() {
         var selectedButtonText = $(this).text(); // 버튼의 텍스트 가져오기
-        console.log("selectedButtonText : ", selectedButtonText);
         sendButton(selectedButtonText);
     });
 });

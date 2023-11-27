@@ -30,6 +30,12 @@ public interface ReviewMapper {
 	// 이미지 삽입
 	int insertImageList(List<ReviewImage> uploadList);
 
+	// 게시글 상세조회
+	Review selectReview(int reviewNo);
+
+	// 조회수 증가
+	int updateCount(int reviewNo);
+
 	
 
 }

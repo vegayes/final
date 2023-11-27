@@ -18,6 +18,12 @@ public interface ReviewService {
 	
 	// 게시글 삽입
 	int reviewInsert(Review review, List<MultipartFile> images) throws Exception;
+
+	// 게시글 조회
+	Review selectReview(int reviewNo);
+
+	// 조회수 증가
+	int updateCount(int reviewNo);
 	
 	
 

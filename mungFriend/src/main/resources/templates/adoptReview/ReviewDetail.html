@@ -19,18 +19,32 @@
             <div>안락사 없는 동물보호소 멍프랜드에서 행복한 입양 후기를 남겨주세요~</div>
     
             <div>입양리뷰 인증게시판</div> 
-            <span style="text-align: end;">조회수 : 11</span>
+            <span style="text-align: end;" th:text="|조회수 : ${review.reviewCount} |">조회수</span>
     
             <section class="titleContainer"> 
                 <div class="boardRectangle"></div>
                 <div>제목</div>
                 <div class="boardRectangle"></div>
-                <div class="titleContent">봄이를 입양했어요 :)</div>
-                <div class="boardImage">
-                   <img th:src="@{/images/review/image24.png}" alt="">
-                   <img th:src="@{/images/review/image25.png}" alt="">
-                   <img th:src="@{/images/review/image26.png}" alt="">
-                </div>
+                <div class="titleContent" th:text="${review.reviewTitle}">봄이를 입양했어요 :)</div>
+
+                <th:block th:if="${#lists.size(review.imageList) > 0 }">
+				
+					<div class="boardImage">
+						
+						<th:block th:each="i : ${#numbers.sequence(0, #lists.size(review.imageList)-1, 1)}" >
+
+							<div th:with="path=|${review.imageList[i].imagePath}${review.imageList[i].imageReName}|">
+								
+								<img th:src="${path}">
+								           
+							</div>
+								
+						</th:block>
+		
+					</div>
+								
+				</th:block>
+              
             </section>
     
             <section class="contentContainer">
@@ -38,13 +52,61 @@
                 <div class="boardRectangle"></div>
                 <div class="contentTitle">내용</div>
                 <div class="boardRectangle"></div>
-                <p id="boardContent">
+                <p id="boardContent" th:text="${review.reviewContent}">
                     봄이를 입양했는데 너무너무 잘 적응하고 잘 지내네요 ~ 
                     좋은 인연 만들어주셔서 감사합니다!!!
                 </p>
                 <div class="boardRectangle"></div>
     
-                <div class="commentContainer">
+            
+		
+                <!-- 부모/자식 댓글 -->
+                <div 
+                    th:each="comment : ${review.commentList} " 
+                    th:classappend="${comment.parentComment} != 0 ? replyContainer : commentContainer"
+                    th:object = "${comment}" >
+
+                        <!-- 닉네임 -->
+                        <p>[[*{memberNickname}]]</p>
+                        
+
+                        <!-- 댓글 내용 -->
+                        <p class="comment-content">[[*{commentContent}]]</p>
+
+
+                        <!-- 작성일 -->
+                        <p class="comment-date">[[*{commentDate}]]</p>
+                   
+                    
+                    <!-- 버튼 영역 -->
+                    <div class="comment-btn-area">
+                        <button th:onclick="|showInsertComment(${comment.parentComment}, this)|">답글</button>   
+                            
+                        <th:block th:if="${session.loginMember?.memberNo == comment.memberNo}">
+                    
+                            <button th:onclick="|showUpdateComment(${comment.commentNo}, this)|">수정</button>	
+                            <button th:onclick="|deleteComment(${comment.commentNo})|">삭제</button>
+                    
+                        </th:block> 
+                        
+                    </div>
+
+                  
+                </div>
+
+
+                <!-- 댓글 작성 부분 -->
+                <div class="comment-write-area">
+                    <textarea id="commentContent"></textarea>
+                    <button id="addComment">
+                        댓글<br>
+                        등록
+                    </button>
+            
+                </div>
+                    
+                    
+                <!-- <div class="commentContainer">
                     <p> 유저공공</p>   <p>봄이 산책하는 모습이 너무 행복해보여요~~</p>   <p>2023-11-14 16:24:00</p> 
                 </div>      
     
@@ -66,7 +128,7 @@
                     <p>유저공공</p>   <p>봄이 산책하는 모습이 너무 행복해보여요~~</p>     <p>2023-11-14 16:24:00</p>   
                 </div>
                  
-                <div class="boardRectangle_1"></div>
+                <div class="boardRectangle_1"></div> -->
             </section>
     
     
@@ -89,6 +151,6 @@
     <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
 
    <th:block th:replace="~{common/footer}"></th:block>    
-
+   <script th:src="@{/js/adoptReview/comment.js}"></script>
 </body>
 </html>

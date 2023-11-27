@@ -29,10 +29,10 @@ public class ReviewServiceImpl implements ReviewService{
 	@Autowired
 	private ReviewMapper mapper;
 
-	@Value("${my.adopt.webpath}")
+	@Value("${my.review.webpath}")
 	private String webPath;
 	
-	@Value("${my.adopt.location}")
+	@Value("${my.review.location}")
 	private String filePath;
 	
 	
@@ -122,7 +122,7 @@ public class ReviewServiceImpl implements ReviewService{
 		
 		if(result == 0 ) {return 0;}
 		
-		int reviewNo = review.getReviewNo();
+		int reviewNo = review.getReviewNo(); //insert 이후 반환된 reviewNo
 		
 		//게시글 삽입 성공 시 업로드된 이미지가 있다면 Review_Img 테이블에 삽입
 				if(reviewNo > 0) { 
@@ -185,6 +185,31 @@ public class ReviewServiceImpl implements ReviewService{
 				}
 				
 		return 0;
+	}
+
+
+
+
+	/**
+	 * 게시글 상세조회
+	 */
+	@Override
+	public Review selectReview(int reviewNo) {
+		
+		return mapper.selectReview(reviewNo);
+		
+	}
+
+
+
+
+	/**
+	 * 게시글 조회수 증가
+	 */
+	@Override
+	public int updateCount(int reviewNo){
+		
+		return mapper.updateCount(reviewNo);
 	}
 
 }

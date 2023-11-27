@@ -17,4 +17,5 @@ public class ReviewComment {
 	private String commentDate;
 	private int parentComment;
 	private char commentDelYN;
+	private String memberNickname;
 }
