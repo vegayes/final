@@ -29,9 +29,13 @@
                 <!-- 후원 내용 영역-->
                 <div class = "adminContentContainer">
 
-                    <!-- 후원 검색 창-->
+                    <!-- 후원 검색 창
+                    	★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+                    	     나중에 시간있으면 ajax로 변환하기 
+                    	★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+                    -->
                     <div class = "adminSearchArea">
-                        <form action="#" name="adminDonationSearch">
+                        <form th:action="@{/mypage/admin/donationSearch}" name="adminDonationSearch">
                             <fieldset class = "adminSearch">
                                 <input type="search" id="donationSearch" name="donationSearch" class = "applyInput"
                                 autocomplete="on" placeholder="후원자 이름 검색">
@@ -71,36 +75,8 @@
 	                                    <td>[[${donation.donationType}]]</td>
 	                                    <td>[[${donation.donationDate}]]</td>
 	                                    <td>[[${donation.donationAmount}]]원</td>
-	                                </tr> 	
-	                                <!--
-	                                <tr class = "donationTBodyTr">
-	                                    <td>2</td>
-	                                    <td>이유진</td>
-	                                    <td>aaaa@naver.com</td>
-	                                    <td>일시</td>
-	                                    <td>2023-11-13-13:30</td>
-	                                    <td>1,000,000원</td>
-	                                </tr>                                 
-	
-	                                <tr class = "donationTBodyTr">
-	                                    <td>3</td>
-	                                    <td>유은서</td>
-	                                    <td>bbbb@naver.com</td>
-	                                    <td>일시</td>
-	                                    <td>2023-11-13-14:30</td>
-	                                    <td>10,000원</td>
-	                                </tr>   
-	
-	                                <tr class = "donationTBodyTr">
-	                                    <td>4</td>
-	                                    <td>유은서</td>
-	                                    <td>bbbb@naver.com</td>
-	                                    <td>일시</td>
-	                                    <td>2023-11-15-13:30</td>
-	                                    <td>50,000원</td>
-	                                </tr>   
-	                                -->                               
-	
+	                                </tr> 	 
+	                                                             
 	                            </tbody>
 	                        </table>
 	                    </div>

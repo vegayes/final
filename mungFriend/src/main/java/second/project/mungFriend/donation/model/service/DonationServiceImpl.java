@@ -24,11 +24,9 @@ public class DonationServiceImpl implements DonationService {
 		
 		if(donation.getMemberNo() != 0) {  // 회원인 경우
 			return mapper.donationMemberPay(donation);
+		}else { // 비회원의 경우
+			return mapper.donationNonMemberPay(donation);
 		}
-		
-		
-		//return mapper.donationPay(donation);
-		return 0;
 	}
 	
 

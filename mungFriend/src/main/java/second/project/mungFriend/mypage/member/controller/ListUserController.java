@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import second.project.mungFriend.donation.model.dto.Donation;
+import second.project.mungFriend.event.model.dto.Coupon;
 import second.project.mungFriend.member.model.dto.Member;
 import second.project.mungFriend.mypage.member.model.service.ListUserService;
 
@@ -46,6 +47,27 @@ public class ListUserController {
 			return "mypage/member/donationList_user";
 		}	  
 	
-	
+		/** 쿠폰 내역 페이지 이동
+		 * @param model
+		 * @param loginMember
+		 * @return
+		 */
+		@GetMapping("/couponList")
+		public String couponPage(Model model
+				,@SessionAttribute("loginMember") Member loginMember) {
+			
+			// 1) 쿠폰 내역 가져오기
+			List<Coupon> selectCouponList = service.selectCouponList(loginMember.getMemberNo());
+			
+			for(Coupon  coupon : selectCouponList) {
+				System.out.println("후원 출력 : " + coupon);
+			}
+			
+			model.addAttribute("couponList", selectCouponList);				
+			
+			return "mypage/member/couponBox_user";
+		}
+		
+		
 
 }

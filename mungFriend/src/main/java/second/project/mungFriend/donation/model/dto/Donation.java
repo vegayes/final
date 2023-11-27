@@ -30,5 +30,6 @@ public class Donation {
 	private String card_name; // 카드사 이름
 	private String paid_at; // 결제 승인 시각
 	private String status; // 결제 승인 상태
+	private String billingKey; // 빌링키 
 	
 }

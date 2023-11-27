@@ -27,20 +27,38 @@ radioButtons.forEach(function(radio) {
 
 
 
-
-
-
 /* 직접입력 창 display */
+const donationRadio = document.querySelectorAll('input[type = "radio"]:not([value="input"])'); // 다른 후원 금액
 const donationInputBtn = document.querySelector('input[value="input"]');
 const donationInputArea = document.getElementById("inputAmountArea");
+var inputFlag = false; // 안열린 상태
 
 donationInputBtn.addEventListener('click', function() {
 	
 	console.log("누름");
+	console.log(donationInputBtn.value);
+	console.log(typeof donationInputBtn.value);
 	
-	donationInputArea.style.display = "flex";
+	if(!inputFlag){
+		donationInputArea.style.display = "flex";		
+		inputFlag = true;
+	}
 	
 })
+
+for(let i = 0; i <donationRadio.length; i++){
+	
+	donationRadio[i].addEventListener('click', function() {
+		console.log("다른 버튼 눌림");
+		
+		if(inputFlag){
+			donationInputArea.style.display = "none";		
+			inputFlag = false;
+		}
+		
+		
+	});
+}
 
 
 // 결제 진행 
@@ -103,39 +121,71 @@ function requestPay() {
 		return;	
 	}
 	
+	/* 직접입력의 경우*/	
+	if(donationAmount.value == 'input'){
+		console.log("금액이 input으로 눌림");	
+		
+		/* 재사용 */
+		donationAmount = document.querySelector('#inputAmount'); // 입력된 후원 금액 
+		
+		console.log("입력된 후원 금액 : " + donationAmount.value);	
+		
+		if(donationAmount == 0){
+			alert("후원 금액을 입력해주세요!");
+			donationAmount.focus();
+			return ;
+		}
+		
+	}	
+	
+	
+	console.log("나 그냥 직접입력 그거 안하고 갈거임");
+	
 	
 	if(!donationFlag){
 		console.log("후원 진입불가");	
 		return;
-		
 	}else{
 		
         // 결제정보를 결제api 진행하면서 넣어야 하는거 아니야? 왜 미리 넣어?
         // => 미리 넣는다고 했을 때 loginMember의 정보를 넣음
 	    console.log("type : " + donationType.value);
 	    console.log("amount : " + donationAmount.value);
-	
-		var IMP = window.IMP;
-	    IMP.init("imp82107782");
-	
-	    IMP.request_pay({
+	    
+	    // 결제 정보
+	    var paymentData = {
 	             pg: "html5_inicis",		//KG이니시스 pg파라미터 값
 				//pg: "kakaopay",
 	            pay_method: "card",		//결제 방법
 	            merchant_uid: "donation_" + new Date().getTime(),//주문번호 전달 
 		        // 라디오 버튼에서 선택한 값을 결제 정보에 추가
 		        name: '멍프랜드 ' + (donationType.value === '일시' ? '일시 후원' : '정기 후원'),
-		        amount: parseInt(donationAmount.value), // 문자열을 숫자로 변환하여 저장
+		        amount: parseInt(donationAmount.value), // 문자열을 숫자로 변환하여 저장	  
+		        //customer_uid : "123456",   
 		        // 구매자 정보
 		        buyer_name : donationName,
 		        buyer_email : donationEmail
+		        
+		        
 	            //customer_uid : "CUSTOMER_UID", //customer_uid 파라메터가 있어야 빌링키 발급을 시도합니다.★★★
 				//customer_uid : /*buyer_name +*/ new Date().getTime(),
 	    		//buyer_email : email,
 	    		//buyer_name : buyer_name,
 	    		//buyer_tel : hp,
 	    		//buyer_addr : addr,
-	        },
+		};
+
+	    // '정기'인 경우에만 빌링키 추가
+	   /*
+	    if (donationType.value === '정기') {
+			requestIssueBillingKey();
+	    }
+	    */
+		
+		var IMP = window.IMP;
+	    IMP.init("imp82107782");
+	
+	    IMP.request_pay(paymentData,
 	        function (rsp) {
 				
 		        if (rsp.success) { // 결제 성공
@@ -157,6 +207,8 @@ function requestPay() {
 		            msg += '거래 상태 : ' +rsp.status;
 		            
 		            msg += '카드사 정보 : ' + rsp.card_name;
+
+		            msg += '빌링키 : ' + rsp.customer_uid;
 		            
 		            var donation = {
                         imp_uid: rsp.imp_uid,
@@ -168,8 +220,9 @@ function requestPay() {
                         
                         donationContent : donationContent.value,
 						donationType : donationType.value,
-						donationAmount : rsp.paid_amount
+						donationAmount : rsp.paid_amount,
 						//donationDate: rsp.paid_at
+						billingKey : rsp.customer_uid
 						
 		            };
 
@@ -214,4 +267,30 @@ function requestPay() {
 	  }
 }
 
+
+/* 금액 합산 */
+$('#btn_add').click(function(evt) {
+    $('.inputAmount').each(function(idx, ele) {
+        $(ele).val(parseInt($(ele).val())+100);
+    });
+    evt.preventDefault();
+});
+$('#btn_add2').click(function(evt) {
+    $('.inputAmount').each(function(idx, ele) {
+        $(ele).val(parseInt($(ele).val())+1000);
+    });
+    evt.preventDefault();
+});
+$('#btn_add3').click(function(evt) {
+    $('.inputAmount').each(function(idx, ele) {
+        $(ele).val(parseInt($(ele).val())+50000);
+    });
+    evt.preventDefault();
+});
+$('#btn_add4').click(function(evt) {
+    $('.inputAmount').each(function(idx, ele) {
+        $(ele).val(parseInt($(ele).val())+100000);
+    });
+    evt.preventDefault();
+});
 
