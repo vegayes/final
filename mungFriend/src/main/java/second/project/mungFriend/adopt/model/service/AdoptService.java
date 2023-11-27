@@ -1,7 +1,10 @@
 package second.project.mungFriend.adopt.model.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import second.project.mungFriend.adopt.model.dto.Dog;
 
@@ -22,12 +25,11 @@ public interface AdoptService {
 	// 좋아요 처리
 	int like(Map<String, Integer> paraMap);
 
-	
+
 //	**********************************************************************************************
 
-	
-	// 게시글 삽입
-	int dogRegiInsert(int memberNo);
+	// 강아지 insert
+	int dogRegiInsert(Dog dog, List<MultipartFile> images) throws IllegalStateException, IOException;
 
 
 }

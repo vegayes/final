@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 
 import second.project.mungFriend.adopt.model.dto.Dog;
+import second.project.mungFriend.adopt.model.dto.DogImage;
 
 @Mapper
 public interface AdoptMapper {
@@ -31,11 +32,14 @@ public interface AdoptMapper {
 
 	// 좋아요 삭제
 	public int deleteDogLike(Map<String, Integer> paraMap);
-
-
-	
 	
 //	**********************************************************************************************
+	
+	// 강아지 정보 삽입
+	public int insertDog(Dog dog);
+
+	// 업로드된 이미지 삽입
+	public int insertImage(List<DogImage> uploadList);
 
 	
 	

@@ -1,5 +1,6 @@
 package second.project.mungFriend.adopt.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,9 +25,9 @@ import second.project.mungFriend.adopt.model.dto.DogImage;
 import second.project.mungFriend.adopt.model.service.AdoptService;
 import second.project.mungFriend.member.model.dto.Member;
 
-@SessionAttributes("{loginMember}")
-@RequestMapping("/adopt")
 @Controller
+@RequestMapping("/adopt")
+@SessionAttributes("{loginMember}")
 public class AdoptController {
 	
 	@Autowired
@@ -96,9 +97,7 @@ public class AdoptController {
 			
 		}
 		
-		System.out.println("dog::" + dog);
-		System.out.println("imageList::" + dog.getImageList());
-		
+	
 		return path;
 		
 	}
@@ -115,15 +114,21 @@ public class AdoptController {
 	
 //	**********************************************************************************************
 	
+	// 게시글 작성 화면 전환
+	@GetMapping("/dogRegistration")
+	public String dogInsert() {
+		
+		return "adopt/dogRegistration";
+	}
 	
 	// 강아지 insert
-	@PostMapping("/dogRegistration/insert")
+	@PostMapping("/dogRegistration")
 	public String dogRegiInsert(Dog dog,
 								@RequestParam(value="images", required = false) List<MultipartFile> images, 
 								@SessionAttribute("loginMember") Member loginMember,
-								RedirectAttributes ra) {
+								RedirectAttributes ra) throws IllegalStateException, IOException {
 		
-		int dogNo = service.dogRegiInsert(loginMember.getMemberNo());
+		int dogNo = service.dogRegiInsert(dog, images);
 		
 		String message = null;
 		String path = "redirect:";
@@ -132,13 +137,15 @@ public class AdoptController {
 			
 			message = "게시글 등록이 완료되었습니다.";
 			path += "/adopt/dogList/" + dogNo;
+			
 		}else {
 			message = "게시글 등록을 실패하였습니다.";
 			path += "insert";
 		}
 		
-		return "adopt/dogRegistration";
+		return path;
 	}
+	
 	
 	// 강아지 update
 	

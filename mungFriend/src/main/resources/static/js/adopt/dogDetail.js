@@ -20,9 +20,9 @@ like.addEventListener("click", e => {
     }
 
     // ajax로 서버로 제출할 파라미터를 모아둔 JS 객체
-    const data =   {"dogNo" : dogNo , 
+    const data =   {"dogNo" : dogNo, 
                     "memberNo" : loginMemberNo,
-                    "check" : check };
+                    "check" : check};
 
     // ajax 코드 작성
     fetch("/adopt/like", {
@@ -44,10 +44,6 @@ like.addEventListener("click", e => {
         // toggle() : 클래스가 있으면 없애고, 없으면 추가하고
         e.target.classList.toggle("fa-regular");
         e.target.classList.toggle("fa-solid");
-
-        // 현재 게시글의 좋아요 수를 화면에 출력
-        e.target.nextElementSibling.innerText = count;
-
 
     }) // 파싱된 데이터를 받아서 처리하는 코드 작성
 
