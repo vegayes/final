@@ -39,123 +39,130 @@
                             </fieldset>
                         </form>	 
                     </div>
+                    
+	       			<th:block th:if="${#lists.size(donationList)} == 0">
+						<div class = "allNotList" >
+							후원된 기록이 존재하지 않습니다.                   										
+						</div>
+	       			</th:block>
 
-
-                    <!-- 후원 내역 리스트 -->
-                    <div class = "adminDonationContainer">
-
-                        <table class="donationTable">
-                
-                            <thead>
-                                <tr class = "donationTheadTr">
-                                    <th>번호</th>
-                                    <th>후원자</th>
-                                    <th>후원자 이메일</th>
-                                    <th>일시/정기</th>
-                                    <th>결제 일시 </th>
-                                    <th>후원 금액</th>
-                                </tr>
-                            </thead>
-        
-                            <tbody>
-                                
-                                <tr class = "donationTBodyTr">
-                                    <td>1</td>
-                                    <td>이유진</td>
-                                    <td>aaaa@naver.com</td>
-                                    <td>정기</td>
-                                    <td>2023-11-11-12:00</td>
-                                    <td>120,000원</td>
-                                </tr> 	
-                                
-                                <tr class = "donationTBodyTr">
-                                    <td>2</td>
-                                    <td>이유진</td>
-                                    <td>aaaa@naver.com</td>
-                                    <td>일시</td>
-                                    <td>2023-11-13-13:30</td>
-                                    <td>1,000,000원</td>
-                                </tr>                                 
-
-                                <tr class = "donationTBodyTr">
-                                    <td>3</td>
-                                    <td>유은서</td>
-                                    <td>bbbb@naver.com</td>
-                                    <td>일시</td>
-                                    <td>2023-11-13-14:30</td>
-                                    <td>10,000원</td>
-                                </tr>   
-
-                                <tr class = "donationTBodyTr">
-                                    <td>4</td>
-                                    <td>유은서</td>
-                                    <td>bbbb@naver.com</td>
-                                    <td>일시</td>
-                                    <td>2023-11-15-13:30</td>
-                                    <td>50,000원</td>
-                                </tr>                                  
-
-                            </tbody>
-                        </table>
-                    </div>
-
-
-                    <!-- 페이지 네이션 -->
-                    <div class="paginationArea">
-                        <ul class="pagination">
-                        
-                            <!-- 첫 페이지로 이동 -->
-                            <li><a href="#">&lt;&lt;</a></li>
-        
-                            <!-- 이전 목록 마지막 번호로 이동 -->
-                            <li><a href="#">&lt;</a></li>
-        
-                            
-                            <!-- 특정 페이지로 이동 -->
-                            <!-- jsp 코드 
-                            <c:forEach var="i" begin="${pagination.startPage}" end = "${pagination.endPage}" step="1">
-                                
-                                <c:choose>
-                                    <c:when test="${i == pagination.currentPage }">
-                                        <li><a class="current">${i}</a></li>
-                                    </c:when>
-                                    
-                                    <c:otherwise>
-                                        <li><a href="/board/${boardCode}/?cp=${i}${kq}">${i}</a></li>                  		
-                                    </c:otherwise>
-                                </c:choose>
-                                
-                            </c:forEach>
-                            -->
-                            <li><a class = "current">1</a></li>
-                            <li><a href = "#">2</a></li>
-                            <li><a href = "#">3</a></li>
-                            <li><a href = "#">4</a></li>
-                            <li><a href = "#">5</a></li>
-                            <li><a href = "#">6</a></li>
-                            <li><a href = "#">7</a></li>
-                            <li><a href = "#">8</a></li>
-                            <li><a href = "#">9</a></li>
-                            <li><a href = "#">10</a></li>
-
-                            
-                            
-                            <!-- 다음 목록 시작 번호로 이동 -->
-                            <li><a href="#">&gt;</a></li>
-        
-                            <!-- 끝 페이지로 이동 -->
-                            <li><a href="#">&gt;&gt;</a></li>
-        
-                        </ul>
-                    </div>
+					<th:block th:unless="${#lists.size(donationList)} == 0">
+	                    <!-- 후원 내역 리스트 -->
+	                    <div class = "adminDonationContainer">
+	                        <table class="donationTable">
+	                
+	                            <thead>
+	                                <tr class = "donationTheadTr">
+	                                    <th>번호</th>
+	                                    <th>후원자</th>
+	                                    <th>후원자 이메일</th>
+	                                    <th>일시/정기</th>
+	                                    <th>결제 일시 </th>
+	                                    <th>후원 금액</th>
+	                                </tr>
+	                            </thead>
+	        
+	                            <tbody>
+	                                
+	                                <tr class = "donationTBodyTr" th:each="donation, donationState:${donationList}">
+	                                    <td>[[${donationState.count}]]</td>
+	                                    <td>[[${donation.memberName}]]</td>
+	                                    <td>[[${donation.memberEmail}]]</td>
+	                                    <td>[[${donation.donationType}]]</td>
+	                                    <td>[[${donation.donationDate}]]</td>
+	                                    <td>[[${donation.donationAmount}]]원</td>
+	                                </tr> 	
+	                                <!--
+	                                <tr class = "donationTBodyTr">
+	                                    <td>2</td>
+	                                    <td>이유진</td>
+	                                    <td>aaaa@naver.com</td>
+	                                    <td>일시</td>
+	                                    <td>2023-11-13-13:30</td>
+	                                    <td>1,000,000원</td>
+	                                </tr>                                 
+	
+	                                <tr class = "donationTBodyTr">
+	                                    <td>3</td>
+	                                    <td>유은서</td>
+	                                    <td>bbbb@naver.com</td>
+	                                    <td>일시</td>
+	                                    <td>2023-11-13-14:30</td>
+	                                    <td>10,000원</td>
+	                                </tr>   
+	
+	                                <tr class = "donationTBodyTr">
+	                                    <td>4</td>
+	                                    <td>유은서</td>
+	                                    <td>bbbb@naver.com</td>
+	                                    <td>일시</td>
+	                                    <td>2023-11-15-13:30</td>
+	                                    <td>50,000원</td>
+	                                </tr>   
+	                                -->                               
+	
+	                            </tbody>
+	                        </table>
+	                    </div>
+	
+	
+	                    <!-- 페이지 네이션 -->
+	                    <div class="paginationArea">
+	                        <ul class="pagination">
+	                        
+	                            <!-- 첫 페이지로 이동 -->
+	                            <li><a href="#">&lt;&lt;</a></li>
+	        
+	                            <!-- 이전 목록 마지막 번호로 이동 -->
+	                            <li><a href="#">&lt;</a></li>
+	        
+	                            
+	                            <!-- 특정 페이지로 이동 -->
+	                            <!-- jsp 코드 
+	                            <c:forEach var="i" begin="${pagination.startPage}" end = "${pagination.endPage}" step="1">
+	                                
+	                                <c:choose>
+	                                    <c:when test="${i == pagination.currentPage }">
+	                                        <li><a class="current">${i}</a></li>
+	                                    </c:when>
+	                                    
+	                                    <c:otherwise>
+	                                        <li><a href="/board/${boardCode}/?cp=${i}${kq}">${i}</a></li>                  		
+	                                    </c:otherwise>
+	                                </c:choose>
+	                                
+	                            </c:forEach>
+	                            -->
+	                            <li><a class = "current">1</a></li>
+	                            <li><a href = "#">2</a></li>
+	                            <li><a href = "#">3</a></li>
+	                            <li><a href = "#">4</a></li>
+	                            <li><a href = "#">5</a></li>
+	                            <li><a href = "#">6</a></li>
+	                            <li><a href = "#">7</a></li>
+	                            <li><a href = "#">8</a></li>
+	                            <li><a href = "#">9</a></li>
+	                            <li><a href = "#">10</a></li>
+	
+	                            
+	                            
+	                            <!-- 다음 목록 시작 번호로 이동 -->
+	                            <li><a href="#">&gt;</a></li>
+	        
+	                            <!-- 끝 페이지로 이동 -->
+	                            <li><a href="#">&gt;&gt;</a></li>
+	        
+	                        </ul>
+	                    </div>
+                    </th:block>
 
                 </div>
             </section>
         </main>
         
-        <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
-        <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
-    
+        <a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+		<a th:href="@{#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
+
 	    <th:block th:replace="~{common/footer}"></th:block>
     </body>
 </html>

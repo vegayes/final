@@ -228,3 +228,14 @@ a:hover{
 #donate-image {
     bottom: 70px;
 }
+
+/*************************************************
+                list가 존재하지 않는 경우
+*************************************************/
+.allNotList{
+	width : 100%; 
+	height : 615px; 
+	display: flex; 
+	justify-content: center; 
+	padding:10px;  
+}

@@ -9,15 +9,51 @@
 		<result property="donationContent" column="DONATION_CONTENT"/>
 		<result property="donationType" column="DONATION_TYPE"/>
 		<result property="donationAmount" column="DONATION_AMOUNT"/>
-		<result property="DonationDate" column="DONATION_DATE"/>		
-		<result property="DonationStatus" column="DONATION_STATUS"/>
+		<result property="donationDate" column="DONATION_DATE"/>		
+		<result property="donationStatus" column="DONATION_STATUS"/>
+		
+		<result property="memberName" column="MEMBER_NAME"/>		
+		<result property="memberEmail" column="MEMBER_EMAIL"/>		
+	
 	</resultMap>
 	
+	<!-- 회원 후원 등록 -->
 	<insert id = "donationMemberPay">
 		INSERT INTO TEST_DONATION  
 		VALUES(SEQ_DONATION_NO.NEXTVAL, #{memberNo},  
 		       #{donationContent}, #{donationType}, #{donationAmount}, SYSDATE, #{status})	
 	</insert>
+	
+	
+	
+	<!-- 후원 내역 확인 ( 마이페이지/ 관리자 --> 
+	<select id = "selectDonationList" resultMap = "donation_rm">
+		SELECT DONATION_NO , MEMBER_NAME, MEMBER_EMAIL, DONATION_CONTENT, 
+		    CASE 
+		        WHEN DONATION_TYPE = 'O' THEN '일시' 
+		        WHEN DONATION_TYPE = 'R' THEN '정기' 
+		        ELSE DONATION_TYPE 
+		    END AS DONATION_TYPE
+		    ,DONATION_AMOUNT , DONATION_DATE , DONATION_STATUS 
+		FROM TEST_DONATION
+		LEFT JOIN "MEMBER" USING(MEMBER_NO)
+	</select>
+	
+	
+	
+	<!-- 후원 내역 확인 ( 마이페이지/ 관리자 --> 
+	<select id = "userDonationList" resultMap = "donation_rm">
+		SELECT DONATION_NO , MEMBER_NAME, MEMBER_EMAIL, DONATION_CONTENT, 
+		    CASE 
+		        WHEN DONATION_TYPE = 'O' THEN '일시' 
+		        WHEN DONATION_TYPE = 'R' THEN '정기' 
+		        ELSE DONATION_TYPE 
+		    END AS DONATION_TYPE
+		    ,DONATION_AMOUNT , DONATION_DATE , DONATION_STATUS 
+		FROM TEST_DONATION
+		LEFT JOIN "MEMBER" USING(MEMBER_NO)
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
 	
 
 </mapper>

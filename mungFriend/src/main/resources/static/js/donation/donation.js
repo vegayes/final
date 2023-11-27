@@ -189,8 +189,13 @@ function requestPay() {
 		            .then(result => {
 		                if (result === "y") {
 		                    alert(msg);
+		                    
+		                    if(loginMember != null){
+								location.href = '/mypage/member/donationList';
+								 // 로그인되면 후원 내역으로 넘어가기 
+							}
 		                    location.href = '/';
-		                    // 로그인되면 후원 내역으로 넘어가기 
+		                   
 		                } else {
 		                    alert("DB 후원 정보 입력 실패");
 		                    return false;

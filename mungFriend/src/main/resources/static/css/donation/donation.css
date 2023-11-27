@@ -149,11 +149,12 @@ input[name="amount"]:checked + div{
 
 /* textarea*/
 .donationContent{
-    height : 201px;
+   /* height : 201px;*/
+   	height : 110px;
     flex-basis : 100%;
 
 
-    padding : 10px 5px;
+    padding : 10px 15px;
     
     border : none;
     border-radius: 10px;

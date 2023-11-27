@@ -7,19 +7,32 @@ import org.springframework.stereotype.Service;
 
 import second.project.mungFriend.admissionApply.model.dao.FreeAdmissionMapper;
 import second.project.mungFriend.admissionApply.model.dto.Admission;
+import second.project.mungFriend.donation.model.dao.DonationMapper;
+import second.project.mungFriend.donation.model.dto.Donation;
 
 @Service
 public class ListAdminServiceImpl implements ListAdminServcie{
 	
 	@Autowired
-	private FreeAdmissionMapper mapper;
+	private FreeAdmissionMapper mapperAdm;
 	// xml파일 안에서 mapper 여러개 쓸 수 없기 때문에 이전에 작업했던 mapper안에 사용함
+	
+	@Autowired
+	private DonationMapper mapperDonation;
+	
+	
 	/**
 	 * 무료입소 신청 내역 조회하기
 	 */
 	@Override
 	public List<Admission> selectAdmissionList() {
-		return mapper.selectAdmissionList();
+		return mapperAdm.selectAdmissionList();
+	}
+	
+	
+	@Override
+	public List<Donation> selectDonationList() {
+		return mapperDonation.selectDonationList();
 	}
 
 	
