@@ -114,7 +114,7 @@
 
                         <div class = "formElementContent">
                             <fieldset class = "applyFieldset ">
-                                <input type = "text"  name = "admBirthday" id = "applyBirthday" class = "applyInput " placeholder="ex) 2023-11-24">
+                                <input type = "date"  name = "admBirthday" id = "applyBirthday" class = "applyInput " placeholder='날짜를 선택해주세요.' max = "" >
                             </fieldset>
                         </div>
                     </div>
@@ -219,7 +219,7 @@
 
                         <div class = "formElementContent">
                             <fieldset class = "applyFieldset">
-                                <input type = "text"  name = "admHopeDate" id = "applyHopeDate" class = "applyInput" placeholder="ex) 2023-11-24">
+                                <input type = "date"  name = "admHopeDate" id = "applyHopeDate" class = "applyInput" placeholder='날짜를 선택해주세요.' min = "">
                             </fieldset>
                         </div>
                     </div>
@@ -242,10 +242,7 @@
         
 
         <a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
-		<a th:href="@{#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
-
-
-        
+		<a th:href="@{#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>        
         
 	    <th:block th:replace="~{common/footer}"></th:block>
 	    

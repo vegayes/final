@@ -28,6 +28,33 @@
 
             <section class = "donationProcessBoxArea">
                 <div class = "donationProcessBox">
+					
+		 		  <th:block th:if="${session.loginMember == null}">
+	                	<div class = "donationProcess">
+	                        <div class = "donationProcessTitle">
+	                            후원자 이름
+	                        </div>
+	                        <div class = "donationProcessArea">
+	                        	<fieldset class = "donationFieldset">
+									<input type = "text" name = "donationName"  class="donationInput">
+	                            </fieldset>
+	                        </div>
+	                    </div>
+	                    
+	                	<div class = "donationProcess">
+	                        <div class = "donationProcessTitle">
+	                            후원자 이메일
+	                        </div>
+	                        <div class = "donationProcessArea">
+	                        	<fieldset class = "donationFieldset">
+									<input type = "email" name = "donationEmail"  class="donationInput" >
+	                            </fieldset>
+	
+	                        </div>
+	                    </div>
+		 			</th:block>
+					
+					
                     <div class = "donationProcess">
                         <div class = "donationProcessTitle">
                             후원 주기
@@ -39,19 +66,19 @@
                             </div> -->
     
                             <label class = "donationButton">
-                                <input type = "radio" name = "cycle" value="일시">
+                                <input type = "radio" name = "donationType" value="일시">
                                 <div id = "donationCycleOne" class = "donation">
                                     일시
                                 </div>
                             </label>
-    
-                            <label class = "donationButton">
-                                <input type = "radio" name = "cycle" value="정기">
-                                <div  id = "donationCycleRecycle" class = "donation">
-                                    정기
-                                </div>
-                            </label>
-    
+	    					<th:block th:if="${session.loginMember != null}">
+	                            <label class = "donationButton">
+	                                <input type = "radio" name = "donationType" value="정기">
+	                                <div  id = "donationCycleRecycle" class = "donation">
+	                                    정기
+	                                </div>
+	                            </label>
+	                        </th:block>
                         </div>
                     </div>
     
@@ -61,37 +88,36 @@
                         </div>
                         <div class = "donationProcessArea ">
                             <label class = "donationButton">
-                                <input type = "radio" name = "amount" value = "10000">
+                                <input type = "radio" name = "donationAmount" value = "100">
                                 <div class = "donation">
                                     10,000원
                                 </div>
                             </label>
     
                             <label class = "donationButton">
-                                <input type = "radio" name = "amount" value = "30000">
+                                <input type = "radio" name = "donationAmount" value = "30000">
                                 <div class = "donation">
                                     30,000원
                                 </div>
                             </label>
     
                             <label class = "donationButton">
-                                <input type = "radio" name = "amount" value = "50000">
+                                <input type = "radio" name = "donationAmount" value = "50000">
                                 <div class = "donation">
                                     50,000원
                                 </div>
                             </label>
     
                             <label class = "donationButton">
-                                <input type = "radio" name = "amount" value = "100000">
+                                <input type = "radio" name = "donationAmount" value = "100000">
                                 <div class = "donation">
                                     100,000원
                                 </div>                          
                             </label>
     
                             <label class = "donationButton">
-                                <input type = "radio" name = "amount" value = "input" id = "inputDonationBtn">
+                                <input type = "radio" name = "donationAmount" value = "input" id = "inputDonationBtn">
                                 <div class = "donation">
-                                    <!-- 이거 누르면 밑에 input 값 생기게 해야하나?-->
                                    직접입력
                                 </div>
                             </label>
@@ -101,13 +127,12 @@
                     <div class = "donationProcess" id = "inputAmountArea">
                         <div class = "donationProcessTitle">
                         </div>
-                        <div class = "donationProcessArea">
-							<input type = "text" name = "amount"  class="inputAmount" value="0">
-							<button id="btn_add" a href="#add_one">5,000</button>
+                        <div class = "donationProcessArea" id = "inputAmountBtnArea">
+							<input type = "number" name = "donationAmount"  class="inputAmount" value="0">
+							<button id="btn_add" a href="#add_one">100</button>
 							<button id="btn_add2" a href="#add_one">10,000</button>
 							<button id="btn_add3" a href="#add_one">50,000</button>
 							<button id="btn_add4" a href="#add_one">100,000</button>
-							<button id="btn_add5" a href="#add_one">100,000</button>
                         </div>
 				
 					</div>
@@ -117,8 +142,7 @@
                             후원자 한마디
                         </div>
                         <div class = "donationProcessArea">
-                            <textarea class = "donationContent">
-                            </textarea>
+                            <textarea class = "donationContent"></textarea>
                         </div>
                     </div>
     
@@ -144,7 +168,7 @@
                     </div>
     
                     <div class = "donationButtonArea">
-                        <div class = "donationButtonBox" th:onclick="checkDonation()">
+                        <div class = "donationButtonBox" th:onclick="requestPay()">
                             후원하기
                         </div>
                     </div>
@@ -157,6 +181,23 @@
 		<a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
       
 	    <th:block th:replace="~{common/footer}"></th:block>
+	    
+	    <!-- 회원 정보 넘기기 -->
+		<script th:inline = "javascript">
+			//var loginMember = /*[[${session.loginMember}]]*/ null;
+			//var loginMember = /*[[${session.loginMember != null ? session.loginMember : null}]]*/ null;
+			 var loginMember = /*[[${session.loginMember}]]*/ null;
+  		    //var donationName = /*[[${session.loginMember != null ? session.loginMember.memberName : ''}]]*/ '후원자 이름';
+ 			//var donationEmail = /*[[${session.loginMember != null ? session.loginMember.memberEmail  : ''}]]*/ '후원자 이메일';
+ 			
+ 			console.log("로그인 정보 " + loginMember);
+		</script>
+	    
+	    
+        <!-- 결제 모달창 --> 
+        <script  type="text/javascript" th:src="@{https://cdn.iamport.kr/v1/iamport.js}"></script>
+        <!--<script type="text/javascript" th:src="@{https://cdn.iamport.kr/js/iamport.payment-1.1.5.js}"></script>-->	 
+		<script type="text/javascript" th:src="@{https://code.jquery.com/jquery-1.12.4.min.js}" ></script>		
 	    
 	    <script th:src="@{/js/donation/donation.js}"></script>
     </body>

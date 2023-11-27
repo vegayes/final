@@ -8,8 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import jakarta.servlet.http.HttpServletRequest;
 import second.project.mungFriend.admissionApply.model.dto.Admission;
+import second.project.mungFriend.donation.model.dto.Donation;
 import second.project.mungFriend.mypage.admin.model.service.ListAdminServcie;
 
 @Controller
@@ -36,6 +36,26 @@ public class ListAdminController {
 		model.addAttribute("admissionList", selectAdmissionList);	
 		
 		return "mypage/admin/admissionList_admin";
+	}
+	
+	
+	/** 후원 내역 페이지 이동
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/donationList")
+	public String donationPage(Model model) {
+		
+		// 1) 후원 내역 가져오기
+		List<Donation> selectDonationList = service.selectDonationList();
+		
+		for(Donation donation : selectDonationList) {
+			System.out.println("후원 출력 : " + donation);
+		}
+		
+		model.addAttribute("donationList", selectDonationList);	
+		
+		return "mypage/admin/donationList_admin";
 	}
 	
 	

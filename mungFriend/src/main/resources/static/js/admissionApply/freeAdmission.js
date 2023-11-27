@@ -7,21 +7,24 @@
 
 /* 부모요소 선택된 값 스타일 바꾸기 */
 function changeParentBorderStyle(radio) {
-  var parentElement = radio.closest('.formElement');
+  var radioGroup = document.querySelectorAll('input[name="' + radio.getAttribute('name') + '"]');
   
-  console.log("closet:" + parentElement);
+  radioGroup.forEach(function(radioButton) {
+    var parentElement = radioButton.parentElement;
+    
+    if (parentElement) {
+      parentElement.classList.remove('selected'); // 모든 버튼의 선택 상태 제거
+    }
+  });
   
   var parent = radio.parentElement;
-  console.log("parentElemtn:" + parent);
   
   if (parent) {
-    
-    parent.style.border = '5px solid blue'; 
-    
+    parent.classList.add('selected'); // 선택된 버튼에 선택 상태 추가
   }
 }
 
-var radioButtons = document.querySelectorAll('.applyFieldset input[type="radio"]');
+var radioButtons = document.querySelectorAll('.admissionTwoBtn input[type="radio"]');
 
 radioButtons.forEach(function(radio) {
   radio.addEventListener('change', function() {
@@ -207,3 +210,28 @@ if(imageInput != null){ // 화면에 imageInput이 있을 경우 ( if 굳이 안
 	    return true;
     });
 }
+
+
+// 현재 날짜를 가져오는 함수
+function getCurrentDate() {
+    const now = new Date();
+    const year = now.getFullYear();
+    let month = now.getMonth() + 1;
+    let day = now.getDate();
+
+    // 월이나 일이 한 자리 수인 경우 두 자리로 표시하기 위해 0을 추가
+    month = month < 10 ? '0' + month : month;
+    day = day < 10 ? '0' + day : day;
+
+    return `${year}-${month}-${day}`;
+}
+
+// input 요소의 max 속성에 현재 날짜를 설정
+const applyBirthdayInput = document.getElementById('applyBirthday');
+const applyHopeDateInput = document.getElementById('applyHopeDate');
+applyBirthdayInput.setAttribute('max', getCurrentDate());
+applyHopeDateInput.setAttribute('min', getCurrentDate());
+
+
+
+
