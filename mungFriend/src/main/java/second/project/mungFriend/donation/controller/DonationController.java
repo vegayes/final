@@ -27,12 +27,13 @@ public class DonationController {
 			@SessionAttribute(value ="loginMember", required = false) Member loginMember) throws Exception{
 
 		
-		int result = 0;
+	
 		
 		System.out.println("결제 성공");
 		
 		System.out.println("donation : " + donation);
 		System.out.println("donation Type : " + donation.getDonationType() );
+		System.out.println("billingKey : " + donation.getBillingKey() );
 		
 		// 후원 주기 선택
 		if(donation.getDonationType().equals("정기")) {
@@ -52,15 +53,12 @@ public class DonationController {
 		}
 		
 		
-		
-		
 		if(loginMember != null) { // 로그인이 된 경우
 			System.out.println("로그인  회원 정보 : "+  loginMember.getMemberNo());
 			donation.setMemberNo(loginMember.getMemberNo());
-		
-			result = service.donationPay(donation);
 		}
         
+		int result = service.donationPay(donation);
 		
 		if(result > 0) {
 			System.out.println("결제 성공 인서트하고 이제 y 보낼거임. ");

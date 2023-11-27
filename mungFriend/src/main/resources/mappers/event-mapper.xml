@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="second.project.mungFriend.event.model.dao.EventMapper">
+	
+	<resultMap type="Coupon" id="coupon_rm">
+		<id property="couponNo" column="COUPON_NO"/>
+		
+		<result property="memberNo" column="MEMBER_NO"/>
+		<result property="couponContentNo" column="COUPON_CONTENT_NO"/>
+		<result property="couponDate" column="COUPON_DATE"/>
+		<result property="couponStatus" column="COUPON_STATUS"/>
+		
+		<result property="couponContent" column="COUPON_CONTENT"/>		
+		<result property="couponImg" column="COUPON_IMG"/>
+		<result property="correctMin" column="CORRECT_MIN"/>		
+		<result property="correctMax" column="CORRECT_MAX"/>		
+	</resultMap>
+	
+
+	<!-- 쿠폰 내역 가져오기 (마이페이지 / 사용자) -->
+	<select id = "selectCouponList"  resultMap = "coupon_rm">
+		SELECT COUPON_NO, MEMBER_NO, COUPON_CONTENT_NO, COUPON_DATE, COUPON_STATUS, COUPON_CONTENT, COUPON_IMG
+		FROM TEST_COUPON
+		LEFT JOIN MEMBER USING(MEMBER_NO)
+		LEFT JOIN TEST_COUPON_CONTENT USING(COUPON_CONTENT_NO)
+		WHERE COUPON_STATUS = 'N' 
+		AND MEMBER_NO = #{memberNo}			
+	</select>
+
+
+	
+
+</mapper>

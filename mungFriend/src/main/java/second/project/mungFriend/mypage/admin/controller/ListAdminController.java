@@ -1,12 +1,14 @@
 package second.project.mungFriend.mypage.admin.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import second.project.mungFriend.admissionApply.model.dto.Admission;
 import second.project.mungFriend.donation.model.dto.Donation;
@@ -57,7 +59,25 @@ public class ListAdminController {
 		
 		return "mypage/admin/donationList_admin";
 	}
-	
+
+	/** 후원 검색 조회
+	 * @param model
+	 * @param donationSearch
+	 * @return
+	 */
+	@GetMapping("/donationSearch")
+	public String donationSearch(Model model, 
+			 					@RequestParam String donationSearch) {
+		
+		System.out.println("검색 내용 : " + donationSearch);
+		
+		// 1) 후원 내역 가져오기
+		List<Donation> searchDonationList = service.searchDonationList(donationSearch);
+		
+		model.addAttribute("donationList", searchDonationList);	
+		
+		return "mypage/admin/donationList_admin";
+	}
 	
 
 }

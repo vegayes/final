@@ -17,4 +17,10 @@ public interface ListAdminServcie {
 	 */
 	List<Donation> selectDonationList();
 
+	/** 검색 후원 내역 가져오기
+	 * @param donationSearch
+	 * @return
+	 */
+	List<Donation> searchDonationList(String donationSearch);
+
 }

@@ -21,7 +21,7 @@ var admissionBtnFlag = true; // 입소신청 진행중을 기본설정
 					입소 신청 카드 
  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/ 
 const admissionCard = document.querySelectorAll(".admissionCardBoxArea");
-const admissionCardBoxArea = document.querySelectorAll(".admissionCardBoxArea");
+//const admissionCardBoxArea = document.querySelectorAll(".admissionCardBoxArea");
 
 
 /* 처음에 들어왔을 때 */
@@ -59,8 +59,8 @@ admissionNBtn.addEventListener("click" ,function(){
 		if(admYN == 'Y'){
 			admissionCard[i].style.display = "none";
 		}else{
-			admissionCard[i].style.display = "block";
-			admissionCardBoxArea[i].style.height  = "240px";
+			admissionCard[i].style.display = "flex";
+			admissionCard[i].style.height  = "240px";
 		}
 	}
 });
@@ -83,7 +83,7 @@ admissionYBtn.addEventListener("click" ,function(){
 		var admYN = admissionArr[i].admYN;
 		if(admYN == 'Y'){
 			admissionCard[i].style.display = "block";
-			admissionCardBoxArea[i].style.height  = "220px";
+			admissionCard[i].style.height  = "220px";
 			
 		}else{
 			admissionCard[i].style.display = "none";

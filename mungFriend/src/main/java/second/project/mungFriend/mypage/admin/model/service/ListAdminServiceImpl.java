@@ -30,9 +30,21 @@ public class ListAdminServiceImpl implements ListAdminServcie{
 	}
 	
 	
+	/**
+	 * 후원 내역 조회하기
+	 */
 	@Override
 	public List<Donation> selectDonationList() {
 		return mapperDonation.selectDonationList();
+	}
+
+
+	/**
+	 * 검색한 후원 내역 조회하기
+	 */
+	@Override
+	public List<Donation> searchDonationList(String donationSearch) {
+		return mapperDonation.searchDonationList(donationSearch);
 	}
 
 	

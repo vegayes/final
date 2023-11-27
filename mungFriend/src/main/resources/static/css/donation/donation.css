@@ -261,19 +261,22 @@ input[name="amount"]:checked + div{
                 직접입력창
 *************************************************/
 #inputAmountArea{
-	display: flex;
+	display: none;
+	
+	 transition-duration: 1s;
 }
 
+/*
 input[value="input"]:checked #inputAmountArea{
 	display : block;
 }
+*/
 
 #inputAmountBtnArea{
 	display : flex;
     justify-content: end;
     align-items: center;
 	padding-right: 20px;
-    border : 2px solid red;
 }
 
 #inputAmountBtnArea *{

@@ -16,9 +16,11 @@ public interface DonationMapper {
 	 */
 	int donationMemberPay(Donation donation);
 	
-	//int donationPay(Donation donation);
-		
-	
+	/** 비회원 후원
+	 * @param donation
+	 * @return
+	 */
+	int donationNonMemberPay(Donation donation);
 	
 	
 	
@@ -33,7 +35,12 @@ public interface DonationMapper {
 	 * @return
 	 */
 	List<Donation> selectDonationList();
-	
+
+	/** 검색한 후원내역 
+	 * @param donationSearch
+	 * @return
+	 */
+	List<Donation> searchDonationList(String donationSearch);	
 	
 	
 	/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
@@ -44,5 +51,8 @@ public interface DonationMapper {
 	 * @return
 	 */
 	List<Donation> userDonationList(int memberNo);
+
+	
+
 	
 }
