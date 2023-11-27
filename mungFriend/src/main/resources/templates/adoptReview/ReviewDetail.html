@@ -25,8 +25,9 @@
                 <div class="boardRectangle"></div>
                 <div>제목</div>
                 <div class="boardRectangle"></div>
-                <div class="titleContent" th:text="${review.reviewTitle}">봄이를 입양했어요 :)</div>
+                <div class="titleContent" th:text="${review.reviewTitle}">제목</div>
 
+                <!-- 이미지 출력(반복문) -->
                 <th:block th:if="${#lists.size(review.imageList) > 0 }">
 				
 					<div class="boardImage">
@@ -53,15 +54,17 @@
                 <div class="contentTitle">내용</div>
                 <div class="boardRectangle"></div>
                 <p id="boardContent" th:text="${review.reviewContent}">
-                    봄이를 입양했는데 너무너무 잘 적응하고 잘 지내네요 ~ 
-                    좋은 인연 만들어주셔서 감사합니다!!!
+                    내용
                 </p>
                 <div class="boardRectangle"></div>
     
             
 		
                 <!-- 부모/자식 댓글 -->
-                <div 
+                <ul  id="commentList" >
+
+
+                    <li class="comment-row" 
                     th:each="comment : ${review.commentList} " 
                     th:classappend="${comment.parentComment} != 0 ? replyContainer : commentContainer"
                     th:object = "${comment}" >
@@ -78,21 +81,22 @@
                         <p class="comment-date">[[*{commentDate}]]</p>
                    
                     
-                    <!-- 버튼 영역 -->
-                    <div class="comment-btn-area">
-                        <button th:onclick="|showInsertComment(${comment.parentComment}, this)|">답글</button>   
-                            
-                        <th:block th:if="${session.loginMember?.memberNo == comment.memberNo}">
-                    
-                            <button th:onclick="|showUpdateComment(${comment.commentNo}, this)|">수정</button>	
-                            <button th:onclick="|deleteComment(${comment.commentNo})|">삭제</button>
-                    
-                        </th:block> 
+                        <!-- 버튼 영역 -->
+                        <div class="comment-btn-area">
+                            <th:block th:if="${session.loginMember?.memberNo == comment.memberNo}">
+
+                                <button th:onclick="|showInsertComment(${comment.parentComment}, this)|">답글</button>   
+                                <button th:onclick="|showUpdateComment(${comment.commentNo}, this)|">수정</button>	
+                                <button th:onclick="|deleteComment(${comment.commentNo})|">삭제</button>
                         
-                    </div>
+                            </th:block> 
+                            
+                        </div>
 
                   
-                </div>
+                    </li>
+                </ul>
+                
 
 
                 <!-- 댓글 작성 부분 -->
@@ -106,39 +110,21 @@
                 </div>
                     
                     
-                <!-- <div class="commentContainer">
-                    <p> 유저공공</p>   <p>봄이 산책하는 모습이 너무 행복해보여요~~</p>   <p>2023-11-14 16:24:00</p> 
-                </div>      
-    
-                <div class="boardRectangle_1"></div>
-    
-                <div class="replyContainer">
-                    <p>보미미</p>    <p>하루하루 귀여워지고 있어요!!</p>   <p>2023-11-14 16:24:00</p>
-                </div>
-    
-                <div class="boardRectangle_1"></div>
-    
-                <div class="replyContainer">
-                    <p>콩탄이</p>    <p>봄이 너무 예뻐요ㅠㅠㅠ </p>    <p>2023-11-14 16:24:00</p>
-                </div>
-            
-                <div class="boardRectangle_1"></div>
-    
-                <div class="commentContainer">
-                    <p>유저공공</p>   <p>봄이 산책하는 모습이 너무 행복해보여요~~</p>     <p>2023-11-14 16:24:00</p>   
-                </div>
-                 
-                <div class="boardRectangle_1"></div> -->
             </section>
     
     
         </div>
        
 
-        <section class="buttons">   
-            <button id="updateReview">수정하기</button>
-            <button id="deleteReview">삭제하기</button>
-            <button id="toList">목록으로</button>
+        <section class="buttons">
+
+            <th:block th:if="${session.loginMember?.memberNo == review.memberNo}">
+                <button id="updateReview"><a th:href="@{/adoptReview/updateReview/{reviewNo} (reviewNo = ${review.reviewNo}, cp=${cp})}">수정하기</a></button>
+                <button id="deleteReview">삭제하기</button>
+            </th:block>
+
+            <button id="toList"><a th:href="@{/adoptReview/reviewList/{cp}(cp = ${cp})}">목록으로</a></button>
+            
         </section>
 
         
@@ -150,7 +136,21 @@
     <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
     <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
 
+    <script th:inline="javascript">
+	
+		
+		const reviewNo = /*[[${review.reviewNo}]]*/ "게시글 번호";
+		
+		const loginMemberNo = /*[[${session.loginMember?.memberNo}]]*/ "로그인 회원번호";
+		
+		if(loginMemberNo == null){
+			loginMemberNo = "";
+		}
+		
+	
+	</script>
+
    <th:block th:replace="~{common/footer}"></th:block>    
-   <script th:src="@{/js/adoptReview/comment.js}"></script>
+   <script th:src="@{/js/adoptReview/ReviewDetail.js}"></script>
 </body>
 </html>

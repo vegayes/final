@@ -24,6 +24,9 @@ public interface ReviewService {
 
 	// 조회수 증가
 	int updateCount(int reviewNo);
+
+	// 게시글 수정
+	int reviewUpdate(Review review, List<MultipartFile> images, String deleteList) throws Exception;
 	
 	
 
