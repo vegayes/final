@@ -1,20 +1,36 @@
 package second.project.mungFriend.adopt.model.service;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import second.project.mungFriend.admissionApply.model.exception.FileUploadException;
 import second.project.mungFriend.adopt.model.dao.AdoptMapper;
 import second.project.mungFriend.adopt.model.dto.Dog;
+import second.project.mungFriend.adopt.model.dto.DogImage;
 import second.project.mungFriend.adopt.model.dto.Pagination;
+import second.project.mungFriend.common.utility.Util;
 
 @Service
+@PropertySource("classpath:/config.properties")
 public class AdoptServiceImpl implements AdoptService{
+	
+	@Value("${my.adopt.webpath}")
+	private String webPath;
+	
+	@Value("${my.adopt.location}")
+	private String filePath;
 	
 	@Autowired
 	private AdoptMapper mapper;
@@ -100,15 +116,83 @@ public class AdoptServiceImpl implements AdoptService{
 		
 		return result;
 	}
-	
+
 //	**********************************************************************************************
 	
-	// 게시글 삽입
+	// 강아지 insert
 	@Override
-	public int dogRegiInsert(int memberNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int dogRegiInsert(Dog dog, List<MultipartFile> images) throws IllegalStateException, IOException {
+		
+		// 1. DOG 테이블 INSERT 하기(입력사항들)
+		// -> dogNo(시퀀스로 생성한 번호) 반환 받기
+		int result = mapper.insertDog(dog);
+		
+		// 실패 시 서비스 종료
+		if(result == 0) return 0;
+		
+		// 얻어온 셋팅값 얻어오기
+		int dogNo = dog.getDogNo();
+		
+		// 2. 게시글 삽입 성공 시
+		// 업로드된 이미지가 있다면 DOG_IMG테이블에 삽입하는 dao 호출
+		if(dogNo > 0) {
+			
+			// 실제 업로드된 파일의 정보를 기록할 List
+			List<DogImage> uploadList = new ArrayList<DogImage>();
+			
+			// images에 담겨있는 파일 중 실제 업로드된 파일만 분류
+			for(int i = 0; i < images.size(); i++) {
+				
+				// i번째 요소에 업로드된 파일이 있다면
+				if(images.get(i).getSize() > 0) {
+					
+					DogImage img = new DogImage();
+					
+					img.setImagePath(webPath); // 웹 접근 경로
+					img.setDogNo(dogNo); // 강아지 번호
+					img.setImageOrder(i); // 이미지순서
+					
+					String fileName = images.get(i).getOriginalFilename();
+					
+					img.setImageOriginal(fileName); // 원본명
+					img.setImageReName( Util.fileRename(fileName) ); // 변경명
+					
+					uploadList.add(img);
+				}
+				
+			} // 분류작업 종료
+			
+			// 분류작업 후 uploadList가 있는 경우
+			if(!uploadList.isEmpty()) {
+				
+				// DOG_IMG테이블에 insert -> 삽입된 행의 갯수 반환
+				result = mapper.insertImage(uploadList);
+				
+				if(result == uploadList.size()) {
+					
+					// 서버에 파일 저장
+					for(int i = 0; i < uploadList.size(); i++) {
+						
+						int index = uploadList.get(i).getImageOrder();
+						
+						String rename = uploadList.get(i).getImageReName();
+						
+						images.get(index).transferTo( new File(filePath + rename) );
+					}
+				}else { // 일부 또는 전체 insert 실패 -> rollback을 위한 예외 발생
+					
+					throw new FileUploadException();
+					
+				}
+				
+			}
+			
+		}
+		
+		return dogNo;
 	}
+	
+
 
 	
 	

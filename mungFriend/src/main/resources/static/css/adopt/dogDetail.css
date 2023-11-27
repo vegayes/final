@@ -92,24 +92,22 @@ main{
     margin-bottom: 50px;
 }
 
-#boardLike {
+#like {
     font-size: 1.4em;
     color: #FA7575;
     cursor: pointer;
     line-height: 30px;
 }
 
-
-
-
+/* 
 #like {
     background-color: white;
     border: none;
     font-size: 15px;
     line-height: 38px;
-}
+} */
 
-#calendedr-img, #like-img {
+#calendedr-img{
     width: 25px;
     height: 25px;
 }
