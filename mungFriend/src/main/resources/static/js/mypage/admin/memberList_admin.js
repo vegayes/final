@@ -8,6 +8,25 @@ function memberDel(memberNo) {
 	
 }
 
+// --------------------- 회원검색 창 유효성 검사 ---------------------
+
+if(memberSearchForm != null) {
+	
+	const memberSearchForm = document.getElementById("memberSearchForm");
+	const memberSearch = document.getElementById("memberSearch");
+	
+	memberSearchForm.addEventListener("submit", e => {
+		
+		if(memberSearch.value == "") { // 회원검색 창 미작성
+			alert("검색어 입력 후 검색버튼을 눌러주세요.");
+			e.preventDefault();
+			memberSearch.focus();
+			return;
+		}
+		
+	});
+	
+}
 
 
 

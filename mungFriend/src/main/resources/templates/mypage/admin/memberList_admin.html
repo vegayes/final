@@ -13,7 +13,7 @@
 	<!-- 헤더 -->
     <th:block th:replace="~{common/header}"></th:block>
 	
-    <main>
+    <main th:with="pagination=${map.pagination}, memberList=${map.memberList}">
         <section class = "adminIntroArea">
             <div class = "adminIntroTitle">
                 회원 관리
@@ -33,7 +33,7 @@
 
                 <!-- 회원 검색 창-->
                 <div class = "adminSearchArea">
-                    <form th:action="@{/#}" name="adminMemberSearch">
+                    <form th:action="@{/#}" name="adminMemberSearch" id="memberSearchForm">
                         <fieldset class = "adminSearch">
                             <input type="search" id="memberSearch" name="memberSearch" class = "applyInput"
                             autocomplete="on" placeholder="회원 검색">
@@ -97,15 +97,16 @@
                 </div>
 
 
-                <!-- 페이지 네이션 -->
-                <div class="paginationArea">
+                <!-- 페이지네이션 -->
+                <!-- 회원리스트가 있을 때만 페이지네이션 보이기 -->
+                <div class="paginationArea" th:if="${#lists.size(memberList) > 0}">
                     <ul class="pagination">
                     
                         <!-- 첫 페이지로 이동 -->
-                        <li><a th:href="@{/#}">&lt;&lt;</a></li>
+                        <li><a th:href="@{/mypage/admin/memberListAdmin(cp=1)}">&lt;&lt;</a></li>
     
                         <!-- 이전 목록 마지막 번호로 이동 -->
-                        <li><a th:href="@{/#}">&lt;</a></li>
+                        <li><a th:href="@{/mypage/admin/memberListAdmin(cp=${pagination.prevPage})}">&lt;</a></li>
     
                         
                         <!-- 특정 페이지로 이동 -->
@@ -124,24 +125,27 @@
                             
                         </c:forEach>
                         -->
-                        <li><a class = "current">1</a></li>
-                        <li><a th:href = "@{/#}">2</a></li>
-                        <li><a th:href = "@{/#}">3</a></li>
-                        <li><a th:href = "@{/#}">4</a></li>
-                        <li><a th:href = "@{/#}">5</a></li>
-                        <li><a th:href = "@{/#}">6</a></li>
-                        <li><a th:href = "@{/#}">7</a></li>
-                        <li><a th:href = "@{/#}">8</a></li>
-                        <li><a th:href = "@{/#}">9</a></li>
-                        <li><a th:href = "@{/#}">10</a></li>
-
                         
+                        <!-- 특정 페이지로 이동 -->
+                        <!-- #numbers.sequence(시작, 끝, [,step]) : 시작 이상, 끝 이하 까지 step 만큼 증가하는 숫자를 발생시켜 리스트로 반환 -->
+                        <th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
+							
+							<li th:if="${i == pagination.currentPage}">
+								<a class="current" th:text="${i}">현재 페이지</a>
+							</li>
+							
+							<li th:unless="${i == pagination.currentPage}">
+	                            <a th:href="@{/board/{code}(code=${boardCode}, cp=${i})}"
+	                                th:text="${i}">나머지 페이지</a>
+                        	</li>
+							
+						</th:block>
                         
                         <!-- 다음 목록 시작 번호로 이동 -->
-                        <li><a th:href = "@{/#}">&gt;</a></li>
+                        <li><a th:href = "@{/mypage/admin/memberListAdmin(cp=${pagination.nextPage})}">&gt;</a></li>
     
                         <!-- 끝 페이지로 이동 -->
-                        <li><a th:href = "@{/#}">&gt;&gt;</a></li>
+                        <li><a th:href = "@{/mypage/admin/memberListAdmin(cp=${pagination.maxPage})}">&gt;&gt;</a></li>
     
                     </ul>
                 </div>

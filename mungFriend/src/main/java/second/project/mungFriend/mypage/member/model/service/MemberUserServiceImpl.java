@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import second.project.mungFriend.member.model.dto.Member;
 import second.project.mungFriend.mypage.member.model.dao.MemberUserMapper;
 
 @Service
@@ -15,6 +16,13 @@ public class MemberUserServiceImpl implements MemberUserService{
 	@Autowired
 	private BCryptPasswordEncoder bcrypt;
 
+	// 정보수정
+	@Override
+	public int updateInfoUser(Member updateMember) {
+		
+		return mapper.updateInfoUser(updateMember);
+	}
+	
 	// 회원탈퇴
 	@Override
 	public int secessionUser(String memberPw, int memberNo) {
@@ -32,6 +40,7 @@ public class MemberUserServiceImpl implements MemberUserService{
 		return 0;
 		
 	}
+
 	
 	
 

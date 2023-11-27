@@ -32,7 +32,7 @@
 
             <!-- 내용 작성영역-->
             <div class = "userContentContainer">
-                <form th:action = "@{/#}" method = "POST" name ="updateForm" class = "updateForm">
+                <form th:action = "@{/mypage/member/updateInfoUser}" th:object="${session.loginMember}" method = "POST" name ="updateForm" id="updateForm" class = "updateForm">
 					
                     <div class = "updateElement">
                         <div class = "updateTitle formDogFlex">
@@ -66,7 +66,7 @@
 
                         <div class = "updateInput">
                             <fieldset class = "updateFieldset" id = "updateId">
-                                <input type = "text" name = "updateId" id = "updateId" class = "updateId" value = "user01" readonly>
+                                <input type = "text" name = "memberId" id = "updateId" class = "updateId" th:value = "*{memberId}" readonly>
                             </fieldset>
                         </div>
 
@@ -83,7 +83,7 @@
 
                         <div class = "updateInput">
                             <fieldset class = "updateFieldset">
-                                <input type = "password" name = "updatePw" id = "updatePw" class = "updatePw" >
+                                <input type = "password" name = "memberPw" id = "updatePw" class = "updatePw" >
                             </fieldset>
                         </div>
 
@@ -124,7 +124,7 @@
 
                         <div class = "updateInput">
                             <fieldset class = "updateFieldset" id = "updateName">
-                                <input type = "text" name = "updateName" id = "updateName" class = "updateName" value = "김유저" readonly>
+                                <input type = "text" name = "memberName" id = "updateName" class = "updateName" th:value = "*{memberName}" readonly>
                             </fieldset>
                         </div>
 
@@ -141,7 +141,7 @@
 
                         <div class = "updateInput">
                             <fieldset class = "updateFieldset">
-                                <input type = "text" name = "updatePhone" id = "updatePhone" class = "updatePhone" value = "010-1234-1212">
+                                <input type = "text" name = "memberTel" id = "updatePhone" class = "updatePhone" th:value = "*{memberTel}">
                             </fieldset>
                         </div>
 
@@ -165,7 +165,7 @@
 
                         <div class = "updateInput">
                             <fieldset class = "updateFieldset">
-                                <input type = "email" name = "updateEmail" id = "updateEmail" class = "updateEmail">
+                                <input type = "email" name = "memberEmail" id = "updateEmail" class = "updateEmail" th:value = "*{memberEmail}">
                             </fieldset>
                         </div>
 
@@ -217,7 +217,7 @@
 
                         <div class = "updateInput">
                             <fieldset class = "updateFieldset">
-                                <input type = "text" name = "updateNickname" id = "updateNickname" class = "updateNickname" value = "김유저">
+                                <input type = "text" name = "memberNickname" id = "updateNickname" class = "updateNickname" th:value = "*{memberNickname}">
                             </fieldset>
                         </div>
 
@@ -262,9 +262,9 @@
 
 
                     <div class = "updateButtonArea">
-                        <div class = "updateButtonBox">
+                        <button class = "updateButtonBox">
                             수정하기
-                        </div>
+                        </button>
                     </div>
 
 
@@ -308,6 +308,26 @@
 	            }
 	        }).open();
 	    }
+	</script>
+	
+	<script th:inline="javascript">
+		// th:inline="javascript"
+		// - 타임리프를 script에서 사용 가능
+		// - 타임리프에서 출력되는 값을 JS 에 맞는 자료형으로 변경 // 타임리프도 결국엔 java..
+		
+		// Natural Template
+		// 1) js 문법 에러 발생 X
+		// 2) html 파일만 단독으로 열었을 때 발생하는 에러 방지
+		const loginMember = /*[[${session.loginMember}]]*/ "로그인한 회원정보"; // -> 이 형식으로 작성하면 js에서 타임리프 쓸 때 컴파일 에러 안남!
+		
+		if(loginMember.memberAddress != null) {
+			const arr = loginMember.memberAddress.split("^^^");
+			
+			document.querySelectorAll("input[name='memberAddress']").forEach( (item, i) => {
+				item.value = arr[i];
+			} )
+		}
+		
 	</script>
 	
 	<script th:src="@{/js/mypage/member/updateInfo_user.js}"></script>
