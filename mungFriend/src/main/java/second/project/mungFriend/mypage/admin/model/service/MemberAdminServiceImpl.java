@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import second.project.mungFriend.adopt.model.dto.Pagination;
+import second.project.mungFriend.mypage.admin.model.dto.Pagination;
 import second.project.mungFriend.member.model.dto.Member;
 import second.project.mungFriend.mypage.admin.model.dao.MemberAdminDAO;
 
