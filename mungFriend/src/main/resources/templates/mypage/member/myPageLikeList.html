@@ -26,7 +26,15 @@
 
             <!-- nav 자리-->
             <nav class = "navUser">
-                <th:block th:replace="~{common/nav_user}"></th:block>
+				<!-- 관리자인 경우 -->
+				<th:block th:if="${session.loginMember.adminYn == 'Y'}">
+                	<th:block th:replace="~{common/nav_admin}"></th:block>
+                </th:block>
+                
+                <!-- 일반사용자인 경우 -->
+                <th:block th:unless="${session.loginMember.adminYn == 'Y'}">
+                	<th:block th:replace="~{common/nav_user}"></th:block>
+                </th:block>
             </nav>
 
             <!-- 내용 작성영역-->
