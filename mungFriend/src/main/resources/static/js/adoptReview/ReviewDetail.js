@@ -16,7 +16,7 @@ function selectCommentList(){
         console.log(cList);
 
         // 화면에 출력되어 있는 댓글 목록 삭제
-        const commentList = document.getElementById("commentList"); // ul태그
+        const commentList = document.getElementById("commentList"); 
         commentList.innerHTML = "";
 
         // cList에 저장된 요소를 하나씩 접근
@@ -27,43 +27,36 @@ function selectCommentList(){
             commentRow.classList.add("comment-row");
 
             // 답글일 경우 child-comment 클래스 추가
-            if(comment.parentNo != 0)  commentRow.classList.add("child-comment");
-
-
-            // 작성자
-            const commentWriter = document.createElement("p");
-            commentWriter.classList.add("comment-writer");
-
-            // 프로필 이미지
-            const profileImage = document.createElement("img");
-
-            if( comment.profileImage != null ){ // 프로필 이미지가 있을 경우
-                profileImage.setAttribute("src", comment.profileImage);
-            }else{ // 없을 경우 == 기본이미지
-                profileImage.setAttribute("src", "/resources/images/user.png");
+            if(comment.parentNo != 0)  {
+                commentRow.classList.add("replyContainer");
+            }else{
+                commentRow.classList.add("commentContainer");
             }
 
+
             // 작성자 닉네임
-            const memberNickname = document.createElement("span");
+            const memberNickname = document.createElement("p");
             memberNickname.innerText = comment.memberNickname;
             
-            // 작성일
-            const commentDate = document.createElement("span");
-            commentDate.classList.add("comment-date");
-            commentDate.innerText =  "(" + comment.commentCreateDate + ")";
-
-            // 작성자 영역(p)에 프로필,닉네임,작성일 마지막 자식으로(append) 추가
-            commentWriter.append(profileImage , memberNickname , commentDate);
-
-            
-
             // 댓글 내용
             const commentContent = document.createElement("p");
             commentContent.classList.add("comment-content");
             commentContent.innerHTML = comment.commentContent;
 
-            // 행에 작성자, 내용 추가
-            commentRow.append(commentWriter, commentContent);
+
+            // 작성일
+            const commentDate = document.createElement("p");
+            commentDate.classList.add("comment-date");
+            commentDate.innerText =  "(" + comment.commentCreateDate + ")";
+
+
+            // // 작성자 영역(p)에 프로필,닉네임,작성일 마지막 자식으로(append) 추가
+            // commentWriter.append(profileImage , memberNickname , commentDate);
+
+            
+
+            // // 행에 작성자, 내용 추가
+            // commentRow.append(commentWriter, commentContent);
 
             
             // 로그인이 되어있는 경우 답글 버튼 추가

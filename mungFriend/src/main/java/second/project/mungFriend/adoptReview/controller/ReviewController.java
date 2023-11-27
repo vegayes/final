@@ -34,11 +34,14 @@ public class ReviewController {
 	public String selectReviewList(
 			@PathVariable(value="cp", required = false) int cp,
 			@RequestParam Map<String, Object> paramMap,
+			@SessionAttribute(value = "loginMember", required = false) Member loginMember,
 			Model model
 			) {
 			
 			System.out.println("현재페이지 : " + cp);
 			
+			System.out.println("loginMember : " + loginMember);
+			//if(loginMember != null) {model.addAttribute("loginMember", loginMember);}
 			
 			if(paramMap.get("searchContent") == null) { // 검색어가 없을 때 
 				
@@ -80,10 +83,12 @@ public class ReviewController {
 	 */
 	@GetMapping("/reviewDetail/{reviewNo}")
 	public String reviewDetail(@PathVariable("reviewNo") int reviewNo,
-			Model model, RedirectAttributes ra) {
+			Model model, RedirectAttributes ra,
+			@RequestParam(value="cp", required = false, defaultValue = "1" ) int cp) {
 			
 		Review review = service.selectReview(reviewNo);
 		System.out.println("review : " + review);
+	
 		String path = null;
 		
 		
@@ -95,7 +100,7 @@ public class ReviewController {
 				review.setReviewCount(review.getReviewCount()+1);
 			}
 			model.addAttribute("review",review); 
-			
+			model.addAttribute("cp",cp); 
 			Member loginMember = (Member) model.getAttribute("loginMember");
 			System.out.println("로그인한 회원 : " + loginMember);
 			
@@ -153,6 +158,7 @@ public class ReviewController {
 		review.setMemberNickname(loginMember.getMemberNickname());
 		
 		int insertResult = service.reviewInsert(review,images);
+		System.out.println("게시글 등록결과 : " + insertResult);
 		
 		if(insertResult > 0) {
 			ra.addFlashAttribute("message","등록에 성공했습니다");
@@ -164,6 +170,53 @@ public class ReviewController {
 		return"redirect:reviewList/1";
 	}
 	
+	
+	@GetMapping("/updateReview/{reviewNo}")
+	public String reviewUpdate(
+			@PathVariable ("reviewNo") int reviewNo,
+			@RequestParam(value="cp", required = false, defaultValue = "1" ) int cp,
+			Model model
+			) {
+		
+		Review review = service.selectReview(reviewNo);
+		model.addAttribute("review", review);
+		model.addAttribute("cp", cp);
+		
+		return "adoptReview/ReviewUpdate";
+	}
+	
+	
+	@PostMapping("/updateReview/{reviewNo}")
+	public String reviewUpdate(
+			@PathVariable ("reviewNo") int reviewNo,
+			Review review,
+			Model model,
+			@RequestParam(value="images", required = false) List<MultipartFile> images,
+			@RequestParam(value = "deleteList",required = false) String deleteList, // 삭제할 이미지 순서
+			@RequestParam(value="cp", required = false, defaultValue = "1" ) int cp,
+			RedirectAttributes ra
+			) throws Exception {
+		
+		review.setReviewNo(reviewNo);
+		System.out.println("삭제할 이미지 순서 : " + deleteList);
+		
+		
+		int rowCount = service.reviewUpdate(review,images,deleteList);
+		
+		String message = null;
+		
+		if(rowCount >0) {
+			message = "게시글이 수정되었습니다";
+		
+		}else {
+			message = "게시글 수정 실패";
+		}
+		
+		ra.addFlashAttribute("message",message);
+		
+		
+		return "redirect:/adoptReview/reviewDetail/" + reviewNo + "?cp=" + cp;
+	}
 	
 	
 	

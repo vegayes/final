@@ -184,7 +184,7 @@ public class ReviewServiceImpl implements ReviewService{
 					
 				}
 				
-		return 0;
+		return result;
 	}
 
 
@@ -210,6 +210,97 @@ public class ReviewServiceImpl implements ReviewService{
 	public int updateCount(int reviewNo){
 		
 		return mapper.updateCount(reviewNo);
+	}
+
+
+
+	/**
+	 * 게시글 수정
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int reviewUpdate(Review review, List<MultipartFile> images, String deleteList) throws Exception{
+
+		int rowCount = mapper.reviewUpdate(review);
+		
+		
+		if(rowCount > 0) {
+			
+			if(!deleteList.equals("")) { //삭제할 이미지가 있다면
+				
+				// 3.delteList 에 작성된 이미지 모두 삭제
+				Map<String,Object> deleteMap = new HashMap<String,Object>();
+				deleteMap.put("reviewNo", review.getReviewNo());
+				deleteMap.put("deleteList", deleteList);
+				
+				rowCount = mapper.imageDelete(deleteMap);
+				
+				if(rowCount == 0) { // 이미지 삭제 실패 시 예외 발생시킴 -> rollback
+					
+					throw new Exception();
+					
+					}
+				}
+			
+				//새로 업로드된 이미지 분류 작업
+				
+				// images : 실제 파일이 담긴 List
+				//         -> input type="file" 개수만큼 요소가 존재
+				//         -> 제출된 파일이 없어도 MultipartFile 객체가 존재
+				
+				List<ReviewImage> uploadList = new ArrayList<>();
+				
+				for(int i=0 ; i<images.size(); i++) {
+					
+					if(images.get(i).getSize() > 0) { // 업로드된 파일이 있을 경우
+						
+						// BoardImage 객체를 만들어 값 세팅 후 
+						// uploadList에 추가
+						ReviewImage img = new ReviewImage();
+						
+						// img에 파일 정보를 담아서 uploadList에 추가
+						img.setImagePath(webPath); // 웹 접근 경로
+						img.setReviewNo(review.getReviewNo()); // 게시글 번호
+						img.setImageOrder(i); // 이미지 순서
+						
+						// 파일 원본명
+						String fileName = images.get(i).getOriginalFilename();
+						
+						img.setImageOriginal(fileName); // 원본명
+						img.setImageReName( Util.fileRename(fileName) ); // 변경명    
+						
+						uploadList.add(img);
+						
+						// 오라클은 다중 UPDATE를 지원하지 않기 때문에
+						// 하나씩 UPDATE 수행
+						
+						rowCount = mapper.imageUpdate(img);
+						
+						if(rowCount == 0) {
+							// 수정 실패 == DB에 이미지가 없었다 
+							// -> 이미지를 삽입
+							rowCount = mapper.imageInsert(img);
+						}
+					}
+				}
+				
+				
+				// 5. uploadList에 있는 이미지들만 서버에 저장(transferTo())
+				if(!uploadList.isEmpty()) {
+					for(int i=0 ; i< uploadList.size(); i++) {
+						
+						int index = uploadList.get(i).getImageOrder();
+						
+						// 파일로 변환
+						String rename = uploadList.get(i).getImageReName();
+						
+						images.get(index).transferTo( new File(filePath + rename)  );                    
+					}
+				}
+
+		}
+		
+		return rowCount;
 	}
 
 }

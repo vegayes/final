@@ -18,6 +18,11 @@ a:hover {
     color: goldenrod;
 }
 
+input, textarea {
+    border: none; /* 테두리 없애기 */
+    outline: none; /* 클릭 시 발생하는 외곽선 제거 */
+}
+
 /* 전체 컨테이너 */
 .mainContainer {
     width: 45%;
@@ -60,7 +65,7 @@ a:hover {
     font-weight: 700;
     line-height: 50px;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     
 }
 
@@ -199,7 +204,7 @@ a:hover {
     font-weight: 700;
     line-height: normal;
     cursor: pointer;
-    margin-top: 650px;
+    
     margin-bottom: 70px;
     border: 1px solid #000;
 }
@@ -210,6 +215,7 @@ a:hover {
     width: 575px;
     display: flex;
     margin-left: 17%;
+   
     margin-bottom: 25px;
 }
 
