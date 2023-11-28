@@ -31,5 +31,11 @@ public interface AdoptService {
 	// 강아지 insert
 	int dogRegiInsert(Dog dog, List<MultipartFile> images) throws IllegalStateException, IOException;
 
+	
+	
+	
+	// 강아지 delete
+	int dogDelete(Map<String, Object> map);
+
 
 }

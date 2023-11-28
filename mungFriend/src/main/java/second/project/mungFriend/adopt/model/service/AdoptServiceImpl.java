@@ -123,8 +123,19 @@ public class AdoptServiceImpl implements AdoptService{
 	@Override
 	public int dogRegiInsert(Dog dog, List<MultipartFile> images) throws IllegalStateException, IOException {
 		
+		// DOG_BREED에 BREED_NAME이 있는지 확인 분기처리
+		// 견종확인
+		String breedConfirm = mapper.breedConfirm(dog);
+		
+		if(breedConfirm  == null) {
+			
+			// 견종 추가
+			mapper.breedAdd(dog);
+		}
+		
 		// 1. DOG 테이블 INSERT 하기(입력사항들)
 		// -> dogNo(시퀀스로 생성한 번호) 반환 받기
+		
 		int result = mapper.insertDog(dog);
 		
 		// 실패 시 서비스 종료
@@ -190,6 +201,14 @@ public class AdoptServiceImpl implements AdoptService{
 		}
 		
 		return dogNo;
+	}
+
+	
+	// 강아지 delete
+	@Override
+	public int dogDelete(Map<String, Object> map) {
+		
+		return mapper.dogDelete(map);
 	}
 	
 

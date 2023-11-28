@@ -37,5 +37,4 @@ public class Dog {
 	// 이미지목록
 	private List<DogImage> imageList;
 	
-	
 }

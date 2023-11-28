@@ -34,12 +34,27 @@ public interface AdoptMapper {
 	public int deleteDogLike(Map<String, Integer> paraMap);
 	
 //	**********************************************************************************************
+
+	// 견종확인
+	public String breedConfirm(Dog dog);
 	
+	// 견종 추가
+	public void breedAdd(Dog dog);
+
 	// 강아지 정보 삽입
 	public int insertDog(Dog dog);
 
 	// 업로드된 이미지 삽입
 	public int insertImage(List<DogImage> uploadList);
+
+	
+	// 강아지 update
+	
+	
+	// 강아지 delete
+	public int dogDelete(Map<String, Object> map);
+
+
 
 	
 	
