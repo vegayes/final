@@ -20,4 +20,10 @@ public class EventServiceImpl implements EventService {
 		return mapper.countExpiration(formatedNow);
 	}
 
+	@Override
+	public int updateCountExpiration(String formatedNow) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

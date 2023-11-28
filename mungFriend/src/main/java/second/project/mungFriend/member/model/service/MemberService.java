@@ -1,6 +1,7 @@
 package second.project.mungFriend.member.model.service;
 
 import second.project.mungFriend.member.model.dto.Member;
+import second.project.mungFriend.member.model.dto.MemberKakao;
 import second.project.mungFriend.member.model.dto.MemberNaver;
 
 public interface MemberService {
@@ -39,11 +40,18 @@ public interface MemberService {
 	 * @param N/A
 	 * @return String
 	 */
-	Object getKakaoLogin();
+	String getKakaoLogin();
+	
+	/** 네이버 로그인 후 인증번호로 토큰 및 회원정보 가져오기
+	 * @param token(String)
+	 * @return MemberNaver(VO)
+	 */
+	MemberKakao getKakaoInfo(String parameter) throws Exception;
 	
 	/** 구글 로그인
 	 * @param N/A
 	 * @return String
 	 */
-	Object getGoogleUrlLogin();
+	String getGoogleUrlLogin();
+
 }

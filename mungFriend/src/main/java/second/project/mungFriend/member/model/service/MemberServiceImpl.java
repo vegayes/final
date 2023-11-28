@@ -23,6 +23,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import second.project.mungFriend.member.model.dao.MemberDAO;
 import second.project.mungFriend.member.model.dto.Member;
+import second.project.mungFriend.member.model.dto.MemberKakao;
 import second.project.mungFriend.member.model.dto.MemberNaver;
 
 @Service
@@ -54,6 +55,15 @@ public class MemberServiceImpl implements MemberService{
     private String NAVER_API_URL;
 
 	// 카카오톡 프로퍼티 불러오기
+    @Value("${kakao.client.id}")
+    private String KAKAO_CLIENT_ID;
+    
+    @Value("${kakao.auth.url}")
+    private String KAKAO_AUTH_URL;
+
+    @Value("${kakao.redirect.url}")
+    private String KAKAO_REDIRECT_URL;
+    
 
 	// 구글 프로퍼티 불러오기
 
@@ -161,27 +171,67 @@ public class MemberServiceImpl implements MemberService{
             throw new Exception("API call failed");
         }
 
-        return getUserInfoWithToken(accessToken);
+        return getUserInfoWithTokenNaver(accessToken);
 	}
 
 	//카카오톡 로그인
 	@Override
-	public Object getKakaoLogin() {
-		String kakaoUrl = "";
+	public String getKakaoLogin() {
+		String kakaoUrl = KAKAO_AUTH_URL + "?client_id=" + KAKAO_CLIENT_ID+ "&redirect_uri=" + KAKAO_REDIRECT_URL+ "&response_type=code";
 		
 		return kakaoUrl;
 	}
 
+	//카카오 로그인 후 카카오 서버에서 토큰 및 회원정보 가져오기 
+	@Override
+	public MemberKakao getKakaoInfo(String code) throws Exception {
+		if (code == null) throw new Exception("Failed get authorization code");
+
+	    String accessToken = "";
+	    String refreshToken = "";
+	        
+	    try {
+	        HttpHeaders headers = new HttpHeaders();
+	        headers.add("Content-type", "application/x-www-form-urlencoded");
+	
+	        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+	        params.add("grant_type"   , "authorization_code");
+	        params.add("client_id"    , KAKAO_CLIENT_ID);
+	        params.add("code"         , code);
+	        params.add("redirect_uri" , KAKAO_REDIRECT_URL);
+	
+	        RestTemplate restTemplate = new RestTemplate();
+	        HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(params, headers);
+	
+	        ResponseEntity<String> response = restTemplate.exchange(
+	        		NAVER_AUTH_TOKEN,
+	                HttpMethod.POST,
+	                httpEntity,
+	                String.class
+	        );
+	
+	        JSONParser jsonParser = new JSONParser();
+	        JSONObject jsonObj = (JSONObject) jsonParser.parse(response.getBody());
+	
+	        accessToken  = (String) jsonObj.get("access_token");
+	        refreshToken = (String) jsonObj.get("refresh_token");
+	    } catch (Exception e) {
+	        throw new Exception("API call failed");
+	    }
+	
+	    return getUserInfoWithTokenKakao(accessToken);
+	}
+
 	//구글 로그인
 	@Override
-	public Object getGoogleUrlLogin() {
+	public String getGoogleUrlLogin() {
 		String googleUrl = "";
 		
 		return googleUrl;
 	}
 	
 	//네이버 로그인 후 토큰을 이용한 회원정보를 가져오기 위한 메소드에 호출 상세 메소드
-	private MemberNaver getUserInfoWithToken(String accessToken) throws Exception {
+	private MemberNaver getUserInfoWithTokenNaver(String accessToken) throws Exception {
         //HttpHeader 생성
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer " + accessToken);
@@ -220,5 +270,47 @@ public class MemberServiceImpl implements MemberService{
         memberNaver.setMobile(mobile);
         
         return memberNaver;
+    }
+	
+	//카카오 로그인 후 토큰을 이용한 회원정보를 가져오기 위한 메소드에 호출 상세 메소드
+	private MemberKakao getUserInfoWithTokenKakao(String accessToken) throws Exception {
+        //HttpHeader 생성
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Bearer " + accessToken);
+        headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+
+        //HttpHeader 담기
+        RestTemplate rt = new RestTemplate();
+        HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(headers);
+        ResponseEntity<String> response = rt.exchange(
+                NAVER_API_URL,
+                HttpMethod.POST,
+                httpEntity,
+                String.class
+        );
+
+        //Response 데이터 파싱
+        JSONParser jsonParser = new JSONParser();
+        JSONObject jsonObj    = (JSONObject) jsonParser.parse(response.getBody());
+        JSONObject account = (JSONObject) jsonObj.get("response");
+        
+        System.out.println(account.toJSONString());
+
+        String id = String.valueOf(account.get("id"));
+        String email = String.valueOf(account.get("email"));
+        String name = String.valueOf(account.get("name"));
+        String nickName = String.valueOf(account.get("nickname"));
+        String mobile = String.valueOf(account.get("mobile"));
+
+
+        MemberKakao memberKakao = new MemberKakao();
+
+//        memberNaver.setNaverId(id);
+//        memberNaver.setNaverEmail(email);
+//        memberNaver.setNaverName(name);
+//        memberNaver.setNaverNickName(nickName);
+//        memberNaver.setMobile(mobile);
+        
+        return memberKakao;
     }
 }
