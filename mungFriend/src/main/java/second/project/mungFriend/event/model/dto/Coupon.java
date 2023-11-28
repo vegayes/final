@@ -16,10 +16,13 @@ public class Coupon {
 	private int couponContentNo; // (쿠폰 내용 테이블) 외래키
 	private String couponDate;
 	private String couponStatus;
-		
+	private String couponExpiration;
+	
+	
 	private String couponContent;
 	private String couponImg;	
 	private int correctMin;	
 	private int correctMax;	
+	
 
 }

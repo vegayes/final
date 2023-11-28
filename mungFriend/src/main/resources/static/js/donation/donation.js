@@ -154,9 +154,10 @@ function requestPay() {
 	    
 	    // 결제 정보
 	    var paymentData = {
-	             pg: "html5_inicis",		//KG이니시스 pg파라미터 값
+	            pg: "html5_inicis",		//KG이니시스 pg파라미터 값
 				//pg: "kakaopay",
 	            pay_method: "card",		//결제 방법
+			
 	            merchant_uid: "donation_" + new Date().getTime(),//주문번호 전달 
 		        // 라디오 버튼에서 선택한 값을 결제 정보에 추가
 		        name: '멍프랜드 ' + (donationType.value === '일시' ? '일시 후원' : '정기 후원'),
@@ -164,7 +165,7 @@ function requestPay() {
 		        //customer_uid : "123456",   
 		        // 구매자 정보
 		        buyer_name : donationName,
-		        buyer_email : donationEmail
+		        buyer_email : donationEmail,
 		        
 		        
 	            //customer_uid : "CUSTOMER_UID", //customer_uid 파라메터가 있어야 빌링키 발급을 시도합니다.★★★
@@ -176,11 +177,10 @@ function requestPay() {
 		};
 
 	    // '정기'인 경우에만 빌링키 추가
-	   /*
 	    if (donationType.value === '정기') {
-			requestIssueBillingKey();
+			paymentData.customer_uid = 'CUSTOMER_UID'; // 빌링키 발급 시도
 	    }
-	    */
+	    
 		
 		var IMP = window.IMP;
 	    IMP.init("imp82107782");
@@ -294,3 +294,11 @@ $('#btn_add4').click(function(evt) {
     evt.preventDefault();
 });
 
+// 직접입력 금액 초기화 
+const inputAmount = document.getElementById("inputAmount");
+document.getElementById("inputReset").addEventListener('click', function(){
+	
+	inputAmount.value = 0;
+	
+	
+});

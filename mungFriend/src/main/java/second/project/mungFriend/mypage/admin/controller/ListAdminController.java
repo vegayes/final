@@ -46,16 +46,30 @@ public class ListAdminController {
 	 * @return
 	 */
 	@GetMapping("/donationList")
-	public String donationPage(Model model) {
+	public String donationPage(Model model,
+							@RequestParam(value="cp", required = false, defaultValue = "1") int cp,
+							@RequestParam(value="donationSearch", required = false)String donationSearch) {
+		
 		
 		// 1) 후원 내역 가져오기
-		List<Donation> selectDonationList = service.selectDonationList();
+		// List<Donation> selectDonationList = service.selectDonationList();
+		//Map<String, Object> selectDonationList = service.selectDonationList(cp);
 		
-		for(Donation donation : selectDonationList) {
-			System.out.println("후원 출력 : " + donation);
+		if(donationSearch == null) { // 검색어가 없을 때 (검색 X) 
+			
+			// 게시글 목록 조회 서비스 호출
+			Map<String, Object> selectDonationList = service.selectDonationList(cp);
+			
+			// 조회 결과를 request scope에 세팅 후 forward
+			model.addAttribute("map", selectDonationList);
+				
+		}else { // 검색어가 있을 떄 ( 검색 O) 
+			System.out.println("검색 내용 :" + donationSearch);
+			 Map<String, Object> searchDonationList = service.searchDonationList(donationSearch, cp);
+			
+			 model.addAttribute("map", searchDonationList);
+			
 		}
-		
-		model.addAttribute("donationList", selectDonationList);	
 		
 		return "mypage/admin/donationList_admin";
 	}
@@ -64,7 +78,7 @@ public class ListAdminController {
 	 * @param model
 	 * @param donationSearch
 	 * @return
-	 */
+	 
 	@GetMapping("/donationSearch")
 	public String donationSearch(Model model, 
 			 					@RequestParam String donationSearch) {
@@ -72,12 +86,12 @@ public class ListAdminController {
 		System.out.println("검색 내용 : " + donationSearch);
 		
 		// 1) 후원 내역 가져오기
-		List<Donation> searchDonationList = service.searchDonationList(donationSearch);
+		//List<Donation> searchDonationList = service.searchDonationList(donationSearch);
 		
-		model.addAttribute("donationList", searchDonationList);	
+		//model.addAttribute("donationList", searchDonationList);	
 		
 		return "mypage/admin/donationList_admin";
 	}
-	
+	*/
 
 }

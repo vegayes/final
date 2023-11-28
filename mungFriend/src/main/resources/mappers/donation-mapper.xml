@@ -32,6 +32,17 @@
 
 	</insert>
 	
+	<!-- 후원 내역 개수 ( 마이페이지/ 관리자 ) --> 
+	<select id = "countDonationList" resultType = "_int">
+		SELECT COUNT(*)
+		FROM (SELECT DONATION_NO 
+				FROM TEST_DONATION
+				LEFT JOIN "MEMBER" USING(MEMBER_NO)
+				UNION ALL
+			SELECT NON_DONATION_NO 
+				FROM TEST_NON_DONATION)
+	</select>
+	
 	
 	<!-- 후원 내역 확인 ( 마이페이지/ 관리자 ) --> 
 	<select id = "selectDonationList" resultMap = "donation_rm">
@@ -56,6 +67,20 @@
 		ORDER BY DONATION_DATE DESC
 	</select>
 	
+	
+	<!-- 후원 내역 검색 개수 ( 마이페이지/ 관리자 ) --> 
+	<select id = "countSearchDonationList" resultType = "_int">
+		SELECT COUNT(*)
+		FROM (SELECT DONATION_NO ,MEMBER_NAME
+				FROM TEST_DONATION
+				LEFT JOIN "MEMBER" USING(MEMBER_NO)
+				UNION ALL
+			SELECT NON_DONATION_NO ,MEMBER_NAME
+				FROM TEST_NON_DONATION)
+		WHERE MEMBER_NAME LIKE '%${donationSearch}%'
+	</select>
+	
+	
 	<!-- 후원 내역 검색 확인 (마이페이지 / 관리자 ) -->
 	<select id = "searchDonationList" resultMap = "donation_rm">
 		SELECT *
@@ -76,10 +101,19 @@
 				    END AS DONATION_TYPE
 				    ,DONATION_AMOUNT , DONATION_DATE , DONATION_STATUS 
 		FROM TEST_NON_DONATION)
-		WHERE MEMBER_NAME LIKE '%' || #{donationSearch} || '%'
+		WHERE MEMBER_NAME LIKE '%${donationSearch}%'
 		ORDER BY DONATION_DATE DESC
 	</select>
 	
+	
+	<!-- 후원 내역 개수 확인 ( 마이페이지/ 유저  ) --> 
+	<select id = "countUserDonation" resultType = "_int">
+		SELECT COUNT(DONATION_NO)  
+		FROM TEST_DONATION
+		LEFT JOIN "MEMBER" USING(MEMBER_NO)
+		WHERE MEMBER_NO = #{memberNo}
+		ORDER BY DONATION_DATE DESC
+	</select>	
 	
 	<!-- 후원 내역 확인 ( 마이페이지/ 유저  ) --> 
 	<select id = "userDonationList" resultMap = "donation_rm">

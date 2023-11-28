@@ -1,12 +1,14 @@
 package second.project.mungFriend.mypage.member.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -29,20 +31,19 @@ public class ListUserController {
 		 * @return
 		 */
 		@GetMapping("/donationList")
-		public String donationPage(Model model
-									,@SessionAttribute("loginMember") Member loginMember) {
+		public String donationPage(Model model,
+									@SessionAttribute("loginMember") Member loginMember,
+									@RequestParam(value="cp", required = false, defaultValue = "1") int cp) {
 			
 			
 			System.out.println("로그인 멤버 : " + loginMember.getMemberNo());
 			
 			// 1) 후원 내역 가져오기
-			List<Donation> selectDonationList = service.userDonationList(loginMember.getMemberNo());
+			//List<Donation> selectDonationList = service.userDonationList(loginMember.getMemberNo());
+			Map<String, Object> userDonationList = service.userDonationList(loginMember.getMemberNo(), cp);
+
 			
-			for(Donation donation : selectDonationList) {
-				System.out.println("후원 출력 : " + donation);
-			}
-			
-			model.addAttribute("donationList", selectDonationList);	
+			model.addAttribute("map", userDonationList);	
 			
 			return "mypage/member/donationList_user";
 		}	  

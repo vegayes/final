@@ -19,7 +19,6 @@ public class MemberAdminDAO {
 	 * @return List
 	 */
 	public List<Member> selectMemberList(RowBounds rowBounds) {
-		
 		return mapper.selectMemberList(rowBounds);
 	}
 
