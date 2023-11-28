@@ -33,10 +33,10 @@
 
                 <!-- 회원 검색 창-->
                 <div class = "adminSearchArea">
-                    <form th:action="@{/#}" name="adminMemberSearch" id="memberSearchForm">
+                    <form th:action="@{/mypage/admin/memberListAdmin}" name="adminMemberSearch" id="memberSearchForm" method="GET">
                         <fieldset class = "adminSearch">
                             <input type="search" id="memberSearch" name="memberSearch" class = "applyInput"
-                            autocomplete="on" placeholder="회원 검색">
+                            autocomplete="on" placeholder="회원 정보 검색">
                             <button id="searchBtn" class="fa-solid fa-magnifying-glass"></button>
                         </fieldset>
                     </form>	 
@@ -135,7 +135,7 @@
 							</li>
 							
 							<li th:unless="${i == pagination.currentPage}">
-	                            <a th:href="@{/board/{code}(code=${boardCode}, cp=${i})}"
+	                            <a th:href="@{/mypage/admin/memberListAdmin(cp=${i})}"
 	                                th:text="${i}">나머지 페이지</a>
                         	</li>
 							

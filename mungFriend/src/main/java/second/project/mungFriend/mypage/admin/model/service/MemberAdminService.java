@@ -20,4 +20,11 @@ public interface MemberAdminService {
 	 */
 	int memberDel(int memberNo);
 
+	/** 회원리스트 조회하기 (검색)
+	 * @param cp
+	 * @param memberSearch
+	 * @return Map
+	 */
+	Map<String, Object> selectMemberList(int cp, String memberSearch);
+
 }

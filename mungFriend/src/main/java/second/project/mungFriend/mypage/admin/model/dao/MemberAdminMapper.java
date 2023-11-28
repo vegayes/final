@@ -27,4 +27,17 @@ public interface MemberAdminMapper {
 	 */
 	int getListCount();
 
+	/** 탈퇴하지 않은 회원 리스트 수 조회 (검색)
+	 * @param memberSearch
+	 * @return int
+	 */
+	int getSearchListCount(String memberSearch);
+
+	/** 회원 리스트 조회 (검색)
+	 * @param memberSearch
+	 * @param rowBounds
+	 * @return List
+	 */
+	List<Member> selectSearchMemberList(String memberSearch, RowBounds rowBounds);
+
 }

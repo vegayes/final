@@ -22,16 +22,29 @@ public class MemberAdminController {
 	// 회원관리 화면 전환
 	@GetMapping("/memberListAdmin")
 	public String memberListAdminPage(Model model,
-									  @RequestParam(value="cp", required = false, defaultValue = "1") int cp) {
+									  @RequestParam(value="cp", required = false, defaultValue = "1") int cp,
+									  String memberSearch /* 검색 값 */) {
 		
-		// 회원리스트 조회하기
-		Map<String, Object> map = service.selectMemberList(cp);
-		
-		// System.out.println(memberList);
-		
-		model.addAttribute("map", map);
+		if(memberSearch == null) { // 검색어가 없을 때
+			
+			// 회원리스트 조회하기
+			Map<String, Object> map = service.selectMemberList(cp);
+			
+			// System.out.println(memberList);
+			
+			model.addAttribute("map", map);
+			
+		} else { // 검색어가 있을 때
+			
+			// 회원리스트 조회하기
+			Map<String, Object> map = service.selectMemberList(cp, memberSearch);
+			
+			model.addAttribute("map", map);
+			
+		}
 		
 		return "mypage/admin/memberList_admin";
+		
 	}
 	
 	// 관리자 회원 탈퇴하기

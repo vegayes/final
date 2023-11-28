@@ -40,4 +40,23 @@ public class MemberAdminDAO {
 		return mapper.getListCount();
 	}
 
+	/** 탈퇴하지 않은 회원 리스트 수 조회 (검색)
+	 * @param memberSearch
+	 * @return int
+	 */
+	public int getSearchListCount(String memberSearch) {
+		
+		return mapper.getSearchListCount(memberSearch);
+	}
+
+	/** 회원 리스트 조회 (검색)
+	 * @param memberSearch
+	 * @param rowBounds
+	 * @return List
+	 */
+	public List<Member> selectSearchMemberList(String memberSearch, RowBounds rowBounds) {
+		
+		return mapper.selectSearchMemberList(memberSearch, rowBounds);
+	}
+
 }
