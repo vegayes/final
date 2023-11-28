@@ -41,7 +41,7 @@ public class CommentServiceImpl implements CommentService{
 			return result;
 		}else {
 			
-			throw new FileUploadException();
+			throw new Exception();
 		}
 	}
 
@@ -60,16 +60,17 @@ public class CommentServiceImpl implements CommentService{
 			return result;
 		}else {
 			
-			throw new FileUploadException();
+			throw new Exception();
 		}
 	}
 
 	
 	/**
 	 * 댓글 수정
+	 * @throws Exception 
 	 */
 	@Override
-	public int updateComment(ReviewComment comment) {
+	public int updateComment(ReviewComment comment) throws Exception {
 		
 		int result = mapper.updateComment(comment);
 		
@@ -78,7 +79,7 @@ public class CommentServiceImpl implements CommentService{
 			return result;
 		}else {
 			
-			throw new FileUploadException();
+			throw new Exception();
 		}
 	}
 

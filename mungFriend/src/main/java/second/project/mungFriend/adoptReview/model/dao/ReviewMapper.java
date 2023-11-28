@@ -47,6 +47,8 @@ public interface ReviewMapper {
 	int imageInsert(ReviewImage img);
 	// 이미지 삭제(게시글 수정시)
 	int imageDelete(Map<String, Object> deleteMap);
+	// 게시글 삭제
+	int deleteReview(int reviewNo);
 	
 	//===================================================================================================//
 	
@@ -61,6 +63,8 @@ public interface ReviewMapper {
 
 	// 댓글수정
 	int updateComment(ReviewComment comment);
+
+	
 
 	
 

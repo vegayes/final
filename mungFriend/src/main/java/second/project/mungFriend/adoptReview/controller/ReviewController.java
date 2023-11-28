@@ -171,6 +171,12 @@ public class ReviewController {
 	}
 	
 	
+	/** 게시글 수정 페이지로 이동
+	 * @param reviewNo
+	 * @param cp
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/updateReview/{reviewNo}")
 	public String reviewUpdate(
 			@PathVariable ("reviewNo") int reviewNo,
@@ -186,6 +192,18 @@ public class ReviewController {
 	}
 	
 	
+	
+	/** 게시글 수정
+	 * @param reviewNo
+	 * @param review
+	 * @param model
+	 * @param images
+	 * @param deleteList
+	 * @param cp
+	 * @param ra
+	 * @return
+	 * @throws Exception
+	 */
 	@PostMapping("/updateReview/{reviewNo}")
 	public String reviewUpdate(
 			@PathVariable ("reviewNo") int reviewNo,
@@ -216,6 +234,31 @@ public class ReviewController {
 		
 		
 		return "redirect:/adoptReview/reviewDetail/" + reviewNo + "?cp=" + cp;
+	}
+	
+	
+	@GetMapping("deleteReview/{reviewNo}")
+	public String deleteReview(
+			@PathVariable ("reviewNo") int reviewNo,
+			@RequestParam(value="cp", required = false, defaultValue = "1" ) int cp,
+			RedirectAttributes ra
+			) throws Exception {
+		
+		int deleteResult = service.deleteReview(reviewNo);
+		
+		String message = null;
+		
+		if(deleteResult >0) {
+			message = "게시글이 삭제되었습니다";
+		
+		}else {
+			message = "게시글 삭제 실패";
+		}
+		
+		ra.addFlashAttribute("message",message);
+		
+		
+		return "redirect:/adoptReview/reviewList/"+cp;
 	}
 	
 	

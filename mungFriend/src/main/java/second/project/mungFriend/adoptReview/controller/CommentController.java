@@ -34,9 +34,7 @@ public class CommentController {
 	@PostMapping("/insert")
 	public int insertComment(@RequestBody ReviewComment comment) throws Exception {
 		
-		
 		int result = service.insertComment(comment);
-		System.out.println("댓글 삽입결과 : " + result);
 		return result;
 	}
 	
@@ -56,9 +54,7 @@ public class CommentController {
 	@PostMapping("/update")
 	public int updateComment(@RequestBody ReviewComment comment) throws Exception {
 			
-		System.out.println("comment : " + comment);
 		int result = service.updateComment(comment);
-		System.out.println("댓글 수정결과 : " + result);
 		return result;
 			
 	}

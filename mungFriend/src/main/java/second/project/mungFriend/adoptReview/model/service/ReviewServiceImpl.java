@@ -303,4 +303,20 @@ public class ReviewServiceImpl implements ReviewService{
 		return rowCount;
 	}
 
+
+
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int deleteReview(int reviewNo) throws Exception{
+		
+		int deleteResult = mapper.deleteReview(reviewNo);
+		
+		if(deleteResult > 0) {
+			return deleteResult;
+		}else {
+			throw new Exception();
+		}
+		
+	}
+
 }

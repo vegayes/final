@@ -10,10 +10,10 @@ function selectCommentList(){
 	// 지정된 자원에 대한 CRUD 진행
 	
 
-    fetch("/comment?boardNo="+boardNo)
+    fetch("/comment?reviewNo="+reviewNo)
     .then(response => response.json())
     .then(cList => {
-        console.log(cList);
+        console.log("댓글목록 : ", cList);
 
         // 화면에 출력되어 있는 댓글 목록 삭제
         const commentList = document.getElementById("commentList"); 
@@ -22,18 +22,19 @@ function selectCommentList(){
         // cList에 저장된 요소를 하나씩 접근
         for(let comment of cList){
 
+            console.log("작성자 : ", comment.memberNickname);
+
             // 행
             const commentRow = document.createElement("li");
             commentRow.classList.add("comment-row");
 
             // 답글일 경우 child-comment 클래스 추가
-            if(comment.parentNo != 0)  {
+            if(comment.parentComment != 0)  {
                 commentRow.classList.add("replyContainer");
             }else{
                 commentRow.classList.add("commentContainer");
             }
-
-
+            
             // 작성자 닉네임
             const memberNickname = document.createElement("p");
             memberNickname.innerText = comment.memberNickname;
@@ -47,16 +48,11 @@ function selectCommentList(){
             // 작성일
             const commentDate = document.createElement("p");
             commentDate.classList.add("comment-date");
-            commentDate.innerText =  "(" + comment.commentCreateDate + ")";
+            commentDate.innerText =  comment.commentDate;
 
 
             // // 작성자 영역(p)에 프로필,닉네임,작성일 마지막 자식으로(append) 추가
-            // commentWriter.append(profileImage , memberNickname , commentDate);
-
-            
-
-            // // 행에 작성자, 내용 추가
-            // commentRow.append(commentWriter, commentContent);
+            commentRow.append(memberNickname, commentContent, commentDate);
 
             
             // 로그인이 되어있는 경우 답글 버튼 추가
@@ -140,7 +136,7 @@ addComment.addEventListener("click", e => { // 댓글 등록 버튼이 클릭이
     // 3) AJAX를 이용해서 댓글 내용 DB에 저장(INSERT)
    	const data = {"commentContent" : commentContent.value,
    					"memberNo" : loginMemberNo,
-   					"boardNo" : boardNo
+   					"reviewNo" : reviewNo
    					};
    
    
@@ -173,7 +169,7 @@ function deleteComment(commentNo){
 
     if( confirm("정말로 삭제 하시겠습니까?") ){
 
-        fetch("/comment/delete?commentNo="+commentNo)
+        fetch("/delete?commentNo="+commentNo)
         .then(resp => resp.text())
         .then(result => {
             if(result > 0){
@@ -208,7 +204,7 @@ function showUpdateComment(commentNo, btn){
 
         if(confirm("다른 댓글이 수정 중입니다. 현재 댓글을 수정 하시겠습니까?")){ // 확인
 
-            temp[0].parentElement.innerHTML = beforeCommentRow;
+            temp[0].parentElement.innerText = beforeCommentRow;
             // comment-row                       // 백업한 댓글
             // 백업 내용으로 덮어 씌워 지면서 textarea 사라짐
        
@@ -223,19 +219,19 @@ function showUpdateComment(commentNo, btn){
 
     // 2. 행 내용 삭제 전 현재 상태를 저장(백업) (문자열)
     //    (전역변수 이용)
-    beforeCommentRow = commentRow.innerHTML;
+    beforeCommentRow = commentRow.innerText;
 
 
     // 3. 댓글에 작성되어 있던 내용만 얻어오기 -> 새롭게 생성된 textarea 추가될 예정
     
-    let beforeContent = commentRow.children[1].innerHTML;
+    let beforeContent = commentRow.children[1].innerText;
 
     // 이것도 가능!
     //let beforeContent = btn.parentElement.previousElementSibling.innerHTML;
 
 
     // 4. 댓글 행 내부 내용을 모두 삭제
-    commentRow.innerHTML = "";
+    //commentRow.innerHTML = "";
 
     // 5. textarea 요소 생성 + 클래스 추가  +  **내용 추가**
     const textarea = document.createElement("textarea");
@@ -285,7 +281,7 @@ function updateCancel(btn){
     // 전역변수 beforeCommentRow : 수정 전 원래 행(댓글)을 저장한 변수
 
     if(confirm("댓글 수정을 취소하시겠습니까?")){
-        btn.parentElement.parentElement.innerHTML = beforeCommentRow;
+        selectCommentList();
     }
 }
 
@@ -296,13 +292,17 @@ function updateComment(commentNo, btn){
     // 새로 작성된 댓글 내용 얻어오기
     const commentContent = btn.parentElement.previousElementSibling.value;
 
+    console.log("commentNo : ", commentNo );
+    console.log("commentContent : ", commentContent );
     
     const data = {
         "commentNo" : commentNo,
         "commentContent" : commentContent
     }
 
-    fetch("/comment/update", {
+    
+
+    fetch("/update", {
         method : "POST",
         headers : {"Content-Type" : "application/json"},
         body : JSON.stringify(data)
@@ -390,7 +390,7 @@ function insertChildComment(parentNo, btn){
 
     // 누가?                loginMemberNo(로그인한 회원의 memberNo )(전역변수)
     // 어떤 내용?           textarea에 작성된 내용
-    // 몇번 게시글?         현재 게시글 boardNo (전역변수)
+    // 몇번 게시글?         현재 게시글 reviewNo (전역변수)
     // 부모 댓글은 누구?    parentNo (매개변수)
 
     // 답글 내용
@@ -406,8 +406,8 @@ function insertChildComment(parentNo, btn){
     
 	const data = {"commentContent" : commentContent,
 				"memberNo" : loginMemberNo,
-				"boardNo" : boardNo,
-				"parentNo" : parentNo };
+				"reviewNo" : reviewNo,
+				"parentComment" : parentNo };
    
 
 	fetch("/reply", {
@@ -431,3 +431,16 @@ function insertChildComment(parentNo, btn){
 }
 
 
+function deleteConfirm(revewNo,cp) {
+
+    if(confirm("정말로 삭제하시겠습니까?")){
+        window.location.href = `/adoptReview/deleteReview/` + revewNo + `?cp=` + cp;
+    }
+}
+
+    
+
+
+
+
+ 
