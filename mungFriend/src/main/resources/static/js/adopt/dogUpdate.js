@@ -14,6 +14,12 @@ const inputImage = document.getElementsByClassName("inputImage");
 // x버튼 5개
 const deleteImage = document.getElementsByClassName("delete-image"); 
 
+
+// 게시글 수정 시 삭제된 이미지의 순서를 기록할 Set 객체 생성
+const deleteSet = new Set(); // 순서x, 중복x
+// -> X버튼 클릭 시 순서를 한 번만 저장하는 용도
+
+
 // -> 위에 얻어온 요소들의 개수가 같음 == 인덱스가 일치함
 
 for(let i=0 ; i< inputImage.length ; i++){
@@ -36,6 +42,8 @@ for(let i=0 ; i< inputImage.length ; i++){
                 preview[i].style.width = '100%';
                 preview[i].style.height = '100%';
                 preview[i].style.objectFit = 'cover';
+
+                deleteSet.delete(i);
             }
 
         } else { // 선택 후 취소 되었을 때
@@ -57,6 +65,9 @@ for(let i=0 ; i< inputImage.length ; i++){
             // input type="file" 태그의 value를 삭제
             // **  input type="file" 의 value는 ""(빈칸)만 대입 가능 **
             inputImage[i].value = "";
+
+            // deleteSet에 삭제된 이미지 순서(i) 추가
+            deleteSet.add(i);
         }
 
         // 기본이미지로 재설정

@@ -122,12 +122,13 @@ public class AdoptController {
 	}
 	
 	// 강아지 insert
-	@PostMapping("/dogRegistration")
+	@PostMapping("/dogRegistration/insert")
 	public String dogRegiInsert(Dog dog,
 								@RequestParam(value="images", required = false) List<MultipartFile> images, 
 								@SessionAttribute("loginMember") Member loginMember,
 								RedirectAttributes ra) throws IllegalStateException, IOException {
 		
+
 		int dogNo = service.dogRegiInsert(dog, images);
 		
 		String message = null;
@@ -143,16 +144,60 @@ public class AdoptController {
 			path += "insert";
 		}
 		
+		ra.addFlashAttribute("message", message);
 		return path;
+		
 	}
 	
+	// 강아지 update 화면 전환 및 상세페이지 재조회
+	@GetMapping("/dogList/{dogNo}/update")
+	public String dogUpdate(@PathVariable("dogNo")int dogNo,
+							Model model) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("dogNo", dogNo);
+		
+		// 기존 상세조회 메서드 재사용
+		Dog dog = service.selectDogDetail(map);		
+		
+		model.addAttribute("dog", dog);
+		
+		return "adopt/dogUpdate";
+		
+	}
 	
 	// 강아지 update
 	
 	
-	
 
 	// 강아지 delete
+	@GetMapping("/dogList/{dogNo}/delete")
+	public String dogDelete(@PathVariable("dogNo") int dogNo,
+							RedirectAttributes ra) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("dogNo", dogNo);
+		
+		int result = service.dogDelete(map);
+		
+		String message = null;
+		String path = "redirect:";
+		
+		if(result > 0) {
+			
+			message = "게시글이 삭제되었습니다";
+			path += "/adopt/dogList";
+		}else {
+			
+			message = "게시글 삭제 실패";
+			path += "/adopt/dogList/" + dogNo;
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		return path;
+		
+	}
 
 
 }

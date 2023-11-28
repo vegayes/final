@@ -60,11 +60,14 @@ like.addEventListener("click", e => {
 document.getElementById("updateBtn").addEventListener("click", () => {
 	
 	location.href 
-		= "/adopt/dogRegiUpdate"
-			+ location.search
+		= `/adopt/dogList/${dogNo}/update`;
+
 });
 
+// 게시글 삭제 버튼 클릭 시
+document.getElementById("deleteBtn").addEventListener("click", () => {
 
+    location.href 
+        = `/adopt/dogList/${dogNo}/delete`;
 
-
-
+});
