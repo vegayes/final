@@ -178,18 +178,17 @@
 	<!--=================게시판 수정============================== -->
 	
 	<update id="reviewUpdate">
-  	UPDATE "BOARD" SET
-  	BOARD_TITLE = #{boardTitle},
-  	BOARD_CONTENT = #{boardContent},
-  	B_UPDATE_DATE = SYSDATE
-  	WHERE BOARD_CODE = #{boardCode}
-  	AND BOARD_NO = #{boardNo}
-  </update>
+	  	UPDATE "REVIEW" SET
+	  	REVIEW_TITLE = #{reviewTitle},
+	  	REVIEW_CONTENT = #{reviewContent},
+	  	REVIEW_DATE = SYSDATE
+	  	WHERE REVIEW_NO = #{reviewNo}
+  	</update>
   
   
   <delete id="imageDelete">
-  	DELETE FROM "BOARD_IMG"
-  	WHERE BOARD_NO = #{boardNo}
+  	DELETE FROM "REVIEW_IMG"
+  	WHERE REVIEW_NO = #{reviewNo}
   	AND IMG_ORDER IN ( ${deleteList} )
   
   </delete>
@@ -197,11 +196,11 @@
   
   <!-- 이미지 수정 -->
 	<update id="imageUpdate">
-		UPDATE "BOARD_IMG" SET
+		UPDATE "REVIEW_IMG" SET
 		IMG_PATH = #{imagePath},
 		IMG_ORIGINAL = #{imageOriginal},
 		IMG_RENAME = #{imageReName}
-		WHERE BOARD_NO = #{boardNo}
+		WHERE REVIEW_NO = #{reviewNo}
 		AND IMG_ORDER = #{imageOrder}
 	</update>
   
@@ -210,12 +209,19 @@
   
   <!-- 이미지 삽입 -->
 	<insert id="imageInsert">
-		INSERT INTO "BOARD_IMG"
-		VALUES(SEQ_IMG_NO.NEXTVAL, #{imagePath}, #{imageReName},
-			#{imageOriginal}, #{imageOrder}, #{boardNo}
+		INSERT INTO "REVIEW_IMG"
+		VALUES(SEQ_REVIEW_IMG_NO.NEXTVAL, #{reviewNo}, #{imagePath}, 
+		#{imageReName}, #{imageOriginal}, #{imageOrder}
 		)
 	</insert>
 	
+	
+	<!-- 게시글 삭제 -->
+	<update id="deleteReview">
+		UPDATE REVIEW SET 
+		REVIEW_YN = 'Y'
+		WHERE REVIEW_NO = #{reviewNo}
+	</update>
 	
 	
 	<!--=================게시판 수정============================== -->	
@@ -225,6 +231,7 @@
 
 
 	<!--=================게시글 조회============================== -->	
+	
 	<!-- 게시글 상세조회 -->
 	<select id="selectReview" resultMap="review_rm">
   	
@@ -274,6 +281,56 @@
   	
   	</update>
 
-
+	
+	
+	<!--=================댓글 수정============================== -->	
+	
+	<update id="updateComment">
+		UPDATE REVIEW_COMMENT SET
+		COMMENT_CONTENT = #{commentContent}, COMMENT_DATE = SYSDATE
+		WHERE COMMENT_NO = #{commentNo}
+	</update>
+	
+	
+	<insert id="insertComment">
+		INSERT INTO REVIEW_COMMENT VALUES
+		(SEQ_REVIEW_COMMENT_NO.NEXTVAL,#{reviewNo},#{memberNo},
+		#{commentContent},SYSDATE,
+		CASE WHEN #{parentComment} > 0 THEN #{parentComment} ELSE NULL END, DEFAULT)
+	</insert>
+	
+	
+	<update id="deleteComment">
+		UPDATE REVIEW_COMMENT SET
+		COMMENT_YN = 'Y'
+		WHERE COMMENT_NO = #{commentNo} OR 
+		PARENT_COMMENT = #{commentNo}
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 </mapper>

@@ -56,12 +56,13 @@
                 <p id="boardContent" th:text="${review.reviewContent}">
                     내용
                 </p>
+
                 <div class="boardRectangle"></div>
     
             
 		
                 <!-- 부모/자식 댓글 -->
-                <ul  id="commentList" >
+                <ul id="commentList" >
 
 
                     <li class="comment-row" 
@@ -83,9 +84,10 @@
                     
                         <!-- 버튼 영역 -->
                         <div class="comment-btn-area">
-                            <th:block th:if="${session.loginMember?.memberNo == comment.memberNo}">
+                            <button th:onclick="|showInsertComment(${comment.parentComment}, this)|">답글</button> 
 
-                                <button th:onclick="|showInsertComment(${comment.parentComment}, this)|">답글</button>   
+                            <th:block th:if="${session.loginMember?.memberNo == comment.memberNo}">  
+                                
                                 <button th:onclick="|showUpdateComment(${comment.commentNo}, this)|">수정</button>	
                                 <button th:onclick="|deleteComment(${comment.commentNo})|">삭제</button>
                         
@@ -120,7 +122,7 @@
 
             <th:block th:if="${session.loginMember?.memberNo == review.memberNo}">
                 <button id="updateReview"><a th:href="@{/adoptReview/updateReview/{reviewNo} (reviewNo = ${review.reviewNo}, cp=${cp})}">수정하기</a></button>
-                <button id="deleteReview">삭제하기</button>
+                <button id="deleteReview" th:onclick="|deleteConfirm(${review.reviewNo},${cp})|">삭제하기</button>
             </th:block>
 
             <button id="toList"><a th:href="@{/adoptReview/reviewList/{cp}(cp = ${cp})}">목록으로</a></button>
@@ -143,6 +145,8 @@
 		
 		const loginMemberNo = /*[[${session.loginMember?.memberNo}]]*/ "로그인 회원번호";
 		
+        console.log("로그인 회원번호 : ", loginMemberNo)
+
 		if(loginMemberNo == null){
 			loginMemberNo = "";
 		}
