@@ -33,7 +33,7 @@
 
                 <!-- 회원 검색 창-->
                 <div class = "adminSearchArea">
-                    <form th:action="@{/#}" name="adminMemberSearch" id="memberSearchForm">
+                    <form th:action="@{/mypage/admin/memberListAdmin}" name="adminMemberSearch" id="memberSearchForm" method="GET">
                         <fieldset class = "adminSearch">
                             <input type="search" id="memberSearch" name="memberSearch" class = "applyInput"
                             autocomplete="on" placeholder="회원 정보 검색">
