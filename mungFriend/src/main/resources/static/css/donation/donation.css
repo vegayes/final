@@ -279,17 +279,31 @@ input[value="input"]:checked #inputAmountArea{
 	padding-right: 20px;
 }
 
-#inputAmountBtnArea *{
+#inputAmountBtnArea > button{
 	    
-    margin-left : 20px;
+    margin-left : 15px;
    
 }
 
-#inputAmountBtnArea > input[type="number"]{
+#inputArea{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	
+}
+
+#inputArea > input[type="number"]{
 	height: 70%;
 	padding : 5px 10px;
 
 	text-align: end;
+}
+
+#inputReset{
+	font-size : 11px;
+	padding-left: 5px;
+	
+	cursor: pointer;
 }
 
 #inputAmountBtnArea button{

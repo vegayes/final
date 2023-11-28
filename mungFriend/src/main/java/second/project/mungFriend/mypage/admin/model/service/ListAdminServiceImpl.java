@@ -1,7 +1,10 @@
 package second.project.mungFriend.mypage.admin.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +12,7 @@ import second.project.mungFriend.admissionApply.model.dao.FreeAdmissionMapper;
 import second.project.mungFriend.admissionApply.model.dto.Admission;
 import second.project.mungFriend.donation.model.dao.DonationMapper;
 import second.project.mungFriend.donation.model.dto.Donation;
+import second.project.mungFriend.mypage.admin.model.dto.Pagination;
 
 @Service
 public class ListAdminServiceImpl implements ListAdminServcie{
@@ -32,20 +36,70 @@ public class ListAdminServiceImpl implements ListAdminServcie{
 	
 	/**
 	 * 후원 내역 조회하기
-	 */
+	 
 	@Override
 	public List<Donation> selectDonationList() {
 		return mapperDonation.selectDonationList();
+	}*/
+	@Override
+	public Map<String, Object> selectDonationList(int cp) {
+		
+		 int listCount = mapperDonation.countDonationList(cp);
+		
+		 Pagination pagination = new Pagination(listCount, cp);
+	
+		 int offset = (pagination.getCurrentPage()-1) * pagination.getLimit();
+		
+		 RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+	
+		 List<Donation> donationList = mapperDonation.selectDonationList(rowBounds);
+		
+		  
+		  // 4. pagination , boardList를 Map에 담아서 반환
+		  Map<String, Object> map = new HashMap<String, Object>();
+		  map.put("pagination", pagination);
+		  map.put("donationList", donationList);
+		
+		return map;
 	}
 
 
 	/**
 	 * 검색한 후원 내역 조회하기
-	 */
+	 
 	@Override
 	public List<Donation> searchDonationList(String donationSearch) {
 		return mapperDonation.searchDonationList(donationSearch);
 	}
+
+*/
+	@Override
+	public Map<String, Object> searchDonationList(String donationSearch, int cp) {
+		System.out.println("donationSearch : " + donationSearch);
+		int listCount = mapperDonation.countSearchDonationList(donationSearch);
+		
+		System.out.println("list Count : " + listCount);
+
+		Pagination pagination = new Pagination(listCount, cp);
+
+		int offset = (pagination.getCurrentPage()-1) * pagination.getLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+
+		List<Donation> searchDonationList = mapperDonation.searchDonationList(donationSearch, rowBounds);
+		
+		  
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pagination", pagination);
+	    map.put("donationList", searchDonationList);
+
+		return map;
+	}
+
+
+
+
+
 
 	
 	

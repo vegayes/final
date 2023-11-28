@@ -9,6 +9,8 @@
 		<result property="couponContentNo" column="COUPON_CONTENT_NO"/>
 		<result property="couponDate" column="COUPON_DATE"/>
 		<result property="couponStatus" column="COUPON_STATUS"/>
+		<result property="couponExpiration" column="COUPON_EXPIRATION"/>
+		
 		
 		<result property="couponContent" column="COUPON_CONTENT"/>		
 		<result property="couponImg" column="COUPON_IMG"/>
@@ -19,14 +21,23 @@
 
 	<!-- 쿠폰 내역 가져오기 (마이페이지 / 사용자) -->
 	<select id = "selectCouponList"  resultMap = "coupon_rm">
-		SELECT COUPON_NO, MEMBER_NO, COUPON_CONTENT_NO, COUPON_DATE, COUPON_STATUS, COUPON_CONTENT, COUPON_IMG
+		SELECT COUPON_NO, MEMBER_NO, COUPON_CONTENT_NO, COUPON_DATE,  TO_CHAR(COUPON_DATE+30, 'YYYY-MM-DD')AS COUPON_EXPIRATION,
+				COUPON_STATUS, COUPON_CONTENT, COUPON_IMG
 		FROM TEST_COUPON
 		LEFT JOIN MEMBER USING(MEMBER_NO)
 		LEFT JOIN TEST_COUPON_CONTENT USING(COUPON_CONTENT_NO)
-		WHERE COUPON_STATUS = 'N' 
+		WHERE COUPON_STATUS = 'Y' 
 		AND MEMBER_NO = #{memberNo}			
 	</select>
 
+		<!-- 쿠폰 내역 가져오기 (마이페이지 / 사용자) -->
+	<select id = "countExpiration" resultType= "_int">
+		SELECT COUNT(*)
+		FROM TEST_COUPON 
+		LEFT JOIN TEST_COUPON_CONTENT USING(COUPON_CONTENT_NO)
+		WHERE COUPON_STATUS = 'Y'
+		AND COUPON_DATE+30 >= TO_DATE(#{formateNow}, 'YYYY-MM-DD')		
+	</select>
 
 	
 

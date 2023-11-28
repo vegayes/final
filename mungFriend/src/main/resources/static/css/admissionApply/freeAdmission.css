@@ -209,6 +209,7 @@ main{
     font-weight: 400;
 }
 
+
 /*input 값 없애기*/
 .applyInput{
     width: 100%;
@@ -233,7 +234,7 @@ main{
 
 /*성별/ 중성화 버튼 사이즈 줄이기*/
 .admissionTwoBtn{
-    flex-basis : 17%;
+    flex-basis : 19%;
     
     display: flex;
     justify-content: center;
@@ -243,7 +244,6 @@ main{
 
     padding : 2px 5px;
 }
-
 
 .formElementContent > textarea{
     height: 200px;
