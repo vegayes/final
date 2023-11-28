@@ -23,16 +23,9 @@
 		<section class="adminContentArea">
 
 			<!-- nav 자리-->
-			<nav class="navAdmission">
-				<ul>
-					<li> <a href="#"> 1:1 문의함 </a> </li>
-					<li> <a href="#"> 예약 내역 </a> </li>
-					<li> <a href="#"> 후원 내역 </a> </li>
-					<li> <a href="#"> 입소신청 내역 </a></li>
-					<li> <a href="#"> 회원 관리 </a></li>
-					<li> <a href="#"> 관리 현황 </a></li>
-				</ul>
-			</nav>
+			<nav class = "navAdmission">
+    				<th:block th:replace="~{common/nav_admin}"></th:block>
+                </nav>
 
 			<!-- 후원 내용 영역-->
 			<div class="adminContentContainer">
@@ -59,6 +52,7 @@
 						<tbody>
 
 							<tr class="donationTBodyTr">
+								<a href="http://localhost/mypage/member/adminInquiry" ></a>
 								<td>1</td>
 								<td>뽀삐</td>
 								<td>이유진 울보래요</td>
@@ -88,7 +82,20 @@
 						</tbody>
 					</table>
 				</div>
-
+          
+          
+               <div style="margin-top: 380px; margin-left: -40px;"> 
+				
+				<form th:action="@{/adminInquiry/reviewList/1}" method="get" id="searchContainer">
+					<select name="searchType" id="searchType">
+						<option value="title">제목</option>
+						<option value="content">내용</option>
+						<option value="writer">작성자</option>
+					</select>
+					<input type="text" name="searchContent" id="searchContent" placeholder="검색어를 입력해주세요.">
+					<button id="searchButton">검색</button>
+				</form>
+	        </div>
 
 				<!-- 페이지 네이션 -->
 				<div class="paginationArea">
@@ -141,6 +148,8 @@
 
 			</div>
 		</section>
+		
+		   
 		<a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
 		<a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
 </body>
