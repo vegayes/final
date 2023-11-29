@@ -76,8 +76,8 @@
     <th:block th:replace="~{common/chatbot}"></th:block>
     
 
-    <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
-    <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+    <img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image">
+    <a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
     <th:block th:replace="~{common/footer}"></th:block>
 
     <script th:src="@{/js/adoptReview/ReviewCreate.js}"></script>
