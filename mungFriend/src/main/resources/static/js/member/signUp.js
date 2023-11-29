@@ -491,6 +491,78 @@ memberNickname.addEventListener("input", () => {
 
 
 
+// 회원 가입 form 태그가 제출 되었을 때
+document.getElementById("signUp-form").addEventListener("submit", e=>{
+	
+	// checkObj에 모든 value가 true인지 검사
+	
+	// (배열용 for문)
+	// for ... of : 향상된 for문
+	// -> iterator(반복자) 속성을 지닌 배열, 유사 배열 사용 가능
+	
+	// (객체용 for문)
+	// ** for ... in 구문 ***
+	// -> JS 객체가 가지고 있는 key를 순서대로 하나씩 꺼내는 반복문
+	
+	for(let key in checkObj) {
+		
+		if(!checkObj[key]) { // 각 key에 대한 value(true/false)를 얻어와
+							 // false인 경우 == 유효하지 않다!
+							 
+			switch(key) {
+				case "memberId":
+					alert("아이디가 유효하지 않습니다"); 
+					// 유효하지 않은 input 태그로 focus 이동
+					document.getElementById("id").focus();
+					break;
+					
+				case "memberPw":
+					alert("비밀번호가 유효하지 않습니다"); 
+					document.getElementById("pw").focus();
+					break;
+					
+				case "memberPwConfirm":
+					alert("비밀번호가 확인되지 않았습니다"); 
+					document.getElementById("pw-confir").focus();
+					break;
+					
+				case "memberName":
+					alert("이름이 유효하지 않습니다"); 
+					document.getElementById("name").focus();
+					break;
+					
+				case "memberTel":
+					alert("전화번호가 유효하지 않습니다"); 
+					document.getElementById("phone").focus();
+					break;
+					
+				case "memberEmail":
+					alert("이메일이 유효하지 않습니다"); 
+					document.getElementById("email").focus();
+					break;
+					
+				case "authKey":
+					alert("이메일 인증번호가 확인되지 않았습니다"); 
+					document.getElementById("authNum").focus();
+					break;
+					
+				case "memberNickname":
+					alert("닉네임이 유효하지 않습니다"); 
+					document.getElementById("nickName").focus();
+					break;
+			}
+			
+			e.preventDefault(); // form 태그 기본 이벤트 제거
+			return; // 함수 종료
+			
+		}
+		
+	}
+	
+});
+
+
+
 
 
 
