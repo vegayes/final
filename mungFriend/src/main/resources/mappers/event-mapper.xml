@@ -30,15 +30,25 @@
 		AND MEMBER_NO = #{memberNo}			
 	</select>
 
-		<!-- 쿠폰 내역 가져오기 (마이페이지 / 사용자) -->
+	<!-- 유효기간이 지난 쿠폰 개수 확인 (스케쥴링) -->
 	<select id = "countExpiration" resultType= "_int">
 		SELECT COUNT(*)
 		FROM TEST_COUPON 
 		LEFT JOIN TEST_COUPON_CONTENT USING(COUPON_CONTENT_NO)
 		WHERE COUPON_STATUS = 'Y'
-		AND COUPON_DATE+30 >= TO_DATE(#{formateNow}, 'YYYY-MM-DD')		
+		<![CDATA[ 
+		AND COUPON_DATE+30 <= TO_DATE(#{formateNow}, 'YYYY-MM-DD')	
+		]]>	
 	</select>
 
-	
+	<!-- 유효기간이 지난 쿠폰 update하기 (스케쥴링) -->
+	<update id = "updateCountExpiration">
+		UPDATE TEST_COUPON 
+		SET COUPON_STATUS = 'N'
+		WHERE COUPON_STATUS = 'Y'
+		<![CDATA[ 
+		AND COUPON_DATE+30 <= TO_DATE(#{formateNow}, 'YYYY-MM-DD')	
+		]]>	
+	</update>	
 
 </mapper>

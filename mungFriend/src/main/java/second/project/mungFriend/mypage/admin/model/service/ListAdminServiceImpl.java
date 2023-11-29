@@ -13,6 +13,7 @@ import second.project.mungFriend.admissionApply.model.dto.Admission;
 import second.project.mungFriend.donation.model.dao.DonationMapper;
 import second.project.mungFriend.donation.model.dto.Donation;
 import second.project.mungFriend.mypage.admin.model.dto.Pagination;
+import second.project.mungFriend.mypage.admin.model.dto.Pagination10;
 
 @Service
 public class ListAdminServiceImpl implements ListAdminServcie{
@@ -46,7 +47,7 @@ public class ListAdminServiceImpl implements ListAdminServcie{
 		
 		 int listCount = mapperDonation.countDonationList(cp);
 		
-		 Pagination pagination = new Pagination(listCount, cp);
+		 Pagination10 pagination = new Pagination10(listCount, cp);
 	
 		 int offset = (pagination.getCurrentPage()-1) * pagination.getLimit();
 		

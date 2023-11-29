@@ -186,7 +186,7 @@ a:hover{
 /*테이블 전체*/
 .donationTable{
     flex-basis: 100%;
-    padding : 10px 25px;
+    padding : 15px 25px;
     /* border : 2px solid red; */
 
     border-top: 5px solid #FEE4D6;
@@ -208,7 +208,7 @@ a:hover{
 .donationTBodyTr td{
     /*가운데 정렬*/
     text-align: center; 
-    padding : 13px 10px;
+    padding : 16px 10px;
     border-bottom: 3px solid #D2D2D2;
 
     font-size: 12px;
@@ -226,6 +226,7 @@ a:hover{
 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★*/
 .paginationArea{
     margin-top: auto; /*★나중에 필요 없을 듯★*/
+    margin-bottom: 10px;
 }
 
 
