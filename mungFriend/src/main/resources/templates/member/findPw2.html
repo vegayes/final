@@ -32,12 +32,12 @@
 
                 <!-- 비밀번호 찾기 form 영역 -->
                 <div id="form-section">
-                    <form th:action="@{/#}" method="">
+                    <form th:action="@{/member/findPw3}" method="POST" id="findPwForm2">
                         <div id="authNumber-section">
                             인증번호 입력 <br>
                             <input type="text" id="authNumber" name="authNumber" placeholder="인증번호 입력 (유효시간 5분)">
                         </div>
-                        <div id="time-section">4:49</div>
+                        <div id="time-section"></div>
                         <div id="next-section">
                             <button type="submit" id="next-btn">다음</button>
                         </div>
@@ -55,5 +55,7 @@
         <!-- 풋터 -->
         <th:block th:replace="~{common/footer}"></th:block>
     </section>
+    
+    <script th:src="@{/js/member/findPw.js}"></script>
 </body>
 </html>

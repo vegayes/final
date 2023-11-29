@@ -170,7 +170,7 @@
                         </div>
 
                         <div class = "updateBtn">
-                            <div class = "updateEmailBtn">
+                            <div class = "updateEmailBtn" id="sendAuthKeyBtn">
                                 인증번호<br> 받기
                             </div>
                         </div>
@@ -198,14 +198,15 @@
                         </div>
 
                         <div class = "updateBtn">
+							<div class = "updateEmailBtn" id="checkAuthKeyBtn">
+                                인증번호<br> 확인
+                            </div>
                         </div>
                     </div>
 
                     <!-- 인증번호 유효성 검사 -->
                     <div class = "updateValidationElement">
-                        <div class = "updateProcessBox">
-                            인증번호가 일치하지 않습니다.
-                        </div>
+                        <div class = "updateProcessBox" id="authKeyMessage"></div>
                     </div>
 
 

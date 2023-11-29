@@ -120,6 +120,18 @@ public class MemberController {
 		return "member/findPw";
 	}
 	
+	// 비밀번호찾기2 화면 전환
+	@PostMapping("/findPw2")
+	public String findPw2Page() {
+		return "member/findPw2";
+	}
+	
+	// 비밀번호찾기3 화면 전환
+	@PostMapping("/findPw3")
+	public String findPw3Page() {
+		return "member/findPw3";
+	}
+	
 	// 네이버 로그인 확인 후 자동으로 콜백
 	@GetMapping("/oauth2/code/naver")
 	 public String callback(HttpServletRequest request, Model model, RedirectAttributes ra)  throws Exception {
@@ -145,4 +157,5 @@ public class MemberController {
 		
 		 return path;
     }
+	
 }
