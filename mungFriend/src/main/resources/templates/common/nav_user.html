@@ -1,9 +1,12 @@
-<ul>
-    <li> <a th:href = "@{/mypage/member/myPageLikeList}"> 찜한 목록</a> </li>
-    <li> <a th:href = "@{/}"> 예약 내역</a> </li>
-    <li> <a th:href = "@{/mypage/member/donationList}"> 후원 내역</a> </li>
-    <li> <a th:href = "@{/mypage/member/userInquiryBox}"> 1:1 문의</a></li>
-    <li> <a th:href = "@{/mypage/member/couponList}"> 쿠폰함</a></li>
-    <li> <a th:href = "@{/mypage/member/updateInfoUser}"> 정보 수정</a></li>
-    <li> <a th:href = "@{/mypage/member/secessionUser}"> 회원 탈퇴</a></li>
-</ul>
+<!-- 일반사용자인 경우 -->
+<th:block th:unless="${session.loginMember.adminYn == 'Y'}">
+    <ul>
+        <li> <a th:href = "@{/mypage/member/myPageLikeList}"> 찜한 목록</a> </li>
+        <li> <a th:href = "@{/}"> 예약 내역</a> </li>
+        <li> <a th:href = "@{/mypage/member/donationList}"> 후원 내역</a> </li>
+        <li> <a th:href = "@{/mypage/member/userInquiryBox}"> 1:1 문의</a></li>
+        <li> <a th:href = "@{/mypage/member/couponList}"> 쿠폰함</a></li>
+        <li> <a th:href = "@{/mypage/member/updateInfoUser}"> 정보 수정</a></li>
+        <li> <a th:href = "@{/mypage/member/secessionUser}"> 회원 탈퇴</a></li>
+    </ul>
+</th:block>

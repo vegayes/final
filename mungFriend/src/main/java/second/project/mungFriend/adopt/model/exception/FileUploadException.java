@@ -1,4 +1,4 @@
-package second.project.mungFriend.admissionApply.model.exception;
+package second.project.mungFriend.adopt.model.exception;
 
 // unchecked exception : 예외처리 선택 (RuntimeException)
 // checked exception : 예외처리 필수

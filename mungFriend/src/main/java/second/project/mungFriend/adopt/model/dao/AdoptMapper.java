@@ -11,6 +11,8 @@ import second.project.mungFriend.adopt.model.dto.DogImage;
 
 @Mapper
 public interface AdoptMapper {
+	
+//	*****************조회******************
 
 	// 삭제되지않은 강아지 수 조회
 	public int getListCount();
@@ -33,8 +35,9 @@ public interface AdoptMapper {
 	// 좋아요 삭제
 	public int deleteDogLike(Map<String, Integer> paraMap);
 	
-//	**********************************************************************************************
-
+	
+//	*****************insert******************
+	
 	// 견종확인
 	public String breedConfirm(Dog dog);
 	
@@ -46,11 +49,26 @@ public interface AdoptMapper {
 
 	// 업로드된 이미지 삽입
 	public int insertImage(List<DogImage> uploadList);
+	
+//	*****************update******************
 
+	// 수정화면 띄우기용 게시글 상세조회
+	public Dog selectDogDetailForUpdate(Map<String, Object> map);
 	
 	// 강아지 update
+	public int dogUpdate(Dog dog);
 	
+	// 이미지 삭제
+	public int imageDelete(Map<String, Object> deleteMap);
 	
+	// 이미지 수정
+	public int imageUpdate(DogImage img);
+	
+	// 이미지 삽입
+	public int imageInsert(DogImage img);
+	
+//	*****************delte******************
+
 	// 강아지 delete
 	public int dogDelete(Map<String, Object> map);
 
@@ -83,6 +101,10 @@ public interface AdoptMapper {
 	
 	// 강아지 검색결과 
 	public List<Dog> selectChatbotDogList(RowBounds rowBounds, String breedName);
+
+
+
+
 
 
 
