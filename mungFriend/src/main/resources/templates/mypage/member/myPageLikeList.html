@@ -12,7 +12,7 @@
 
     <th:block th:replace="~{common/header}"></th:block>
 
-    <main>
+    <main th:with="likeList=${map.likeList}">
         <!-- 사용자 마이페이지 타이틀 영역-->
         <section class = "userIntroArea">
             <div class = "userIntroTitle">
@@ -26,21 +26,36 @@
 
             <!-- nav 자리-->
             <nav class = "navUser">
-				<!-- 관리자인 경우 -->
-				<th:block th:if="${session.loginMember.adminYn == 'Y'}">
-                	<th:block th:replace="~{common/nav_admin}"></th:block>
-                </th:block>
-                
-                <!-- 일반사용자인 경우 -->
-                <th:block th:unless="${session.loginMember.adminYn == 'Y'}">
-                	<th:block th:replace="~{common/nav_user}"></th:block>
-                </th:block>
+                <th:block th:replace="~{common/nav_user}"></th:block>
             </nav>
 
             <!-- 내용 작성영역-->
             <div class = "userContentContainer">
                 <button id="prevBtn" type="button"><</button>
                 <div class="like-dog-list">
+                    <th:block th:if="${likeList.isEmpty()}">
+                        <div class="like-dog" th:each="like : ${likeList}">
+                            <p style="font-size: 12px;">찜한 목록이 없습니다.</p>
+                        </div>
+                    </th:block>
+                    <th:block th:unless="${likeList.isEmpty()}">
+                        <div class="like-dog" th:each="like : ${likeList}">
+                            <div class="top">
+                                <div id="dog-name" th:value="${like.dogName}"></div>
+                                <button type="button">X</button>
+                            </div>
+                            <div class="image">
+                                <div id="img-wrap">
+                                    <img th:src="@{/images/adopt/시바사진.png}" id="dog-img">
+                                </div>
+                            </div>
+                            <div id="dog-info">[[${like.dogBirthDay}]] / [[${like.dogGender}]]</div>
+                            <div id="dog-kind">[[${like.breedName}]]</div>
+                        </div>
+                    </th:block>
+                </div>
+<!-- 
+
                     <div class="like-dog">
                         <div class="top">
                             <div id="dog-name">코코</div>
@@ -92,8 +107,8 @@
                         </div>
                         <div id="dog-info">12개월 / 남아</div>
                         <div id="dog-kind">웰시코기</div>
-                    </div>
-                </div>                    
+                    </div> -->
+                
                 <button id="nextBtn" type="button">></button>
             </div>
         </section>

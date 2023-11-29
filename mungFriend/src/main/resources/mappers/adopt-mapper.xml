@@ -114,6 +114,9 @@
 	
 	<!-- ************************************************************************************ -->
 
+
+	<!-- *****************insert****************** -->
+	
 	<!-- 견종확인 -->
 	<select id="breedConfirm" resultType="string">
 		SELECT COALESCE(BREED_NO, -1) FROM DOG_BREED WHERE BREED_NAME = #{breedName}
@@ -166,11 +169,67 @@
 	</insert>
 	
 	
+	<!-- *****************update****************** -->
+	
+	<!-- 수정화면 띄우기용 게시글 상세조회 -->
+	<select id="selectDogDetailForUpdate" resultMap="dog_rm">
+		SELECT D.DOG_NO, D.BREED_NO, DB.BREED_NAME, D.DOG_NAME,
+			TO_CHAR(D.DOG_BIRTHDAY, 'YYYY-MM-DD') AS DOG_BIRTHDAY,
+			D.DOG_GENDER, D.DOG_SIZE, D.DOG_PERSONALITY,
+			D. DOG_NEUTERING_YN,
+			D. DOG_VACCINE_YN,
+			D.DOG_LIKE, D.DOG_HATE, 
+			CASE WHEN D.DOG_SIGNIFICANT IS NULL THEN '-' ELSE DOG_SIGNIFICANT END AS DOG_SIGNIFICANT,
+			TO_CHAR(D.DOG_ADMISSION_DATE, 'YYYY"년" MM"월" DD"일"') DOG_ADMISSION_DATE			
+		FROM "DOG" D
+		JOIN DOG_BREED DB ON D.BREED_NO = DB.BREED_NO
+		WHERE D.DOG_ADOPT_FL = 'N'
+		AND D.DOG_NO = #{dogNo}
+	</select>
+	
 	<!-- 강아지 수정 -->
+	<update id="dogUpdate">
+		UPDATE "DOG" SET
+			BREED_NO = (SELECT BREED_NO FROM DOG_BREED WHERE BREED_NAME = #{breedName}),
+			DOG_NAME = #{dogName}, 
+			DOG_BIRTHDAY = #{dogBirthDay}, 
+			DOG_GENDER = #{dogGender},
+			DOG_SIZE = #{dogSize},
+			DOG_PERSONALITY = #{dogPersonality},
+			DOG_NEUTERING_YN = #{dogNeutering},
+			DOG_VACCINE_YN = #{dogVaccine},
+			DOG_LIKE = #{dogLike},
+			DOG_HATE = #{dogHate},
+			DOG_SIGNIFICANT = #{dogSpecialNote}
+		WHERE DOG_NO = #{dogNo}
+	</update>
 	
+	<!-- 이미지 삭제 -->
+	<delete id="imageDelete">
+		DELETE FROM "DOG_IMG"
+		WHERE DOG_NO = #{dogNo}
+		AND IMG_ORDER IN( ${deleteList} )
+	</delete>
+		
+	<!-- 이미지 수정 -->
+	<update id="imageUpdate">
+		UPDATE "DOG_IMG" SET
+		IMG_PATH = #{imagePath},
+		IMG_ORIGINAL = #{imageOriginal},
+		IMG_RENAME = #{imageReName}
+		WHERE DOG_NO = #{dogNo}
+		AND IMG_ORDER = #{imageOrder}
+	</update>
 	
-	
-	
+	<!-- 이미지 삽입 -->
+	<insert id="imageInsert">
+		INSERT INTO "DOG_IMG"
+		VALUES(SEQ_DOG_IMG_NO.NEXTVAL, #{dogNo}, #{imagePath}, #{imageReName},
+			#{imageOriginal}, #{imageOrder}
+		)
+	</insert>	
+
+	<!-- *****************delte****************** -->
 	
 	<!-- 강아지 삭제 -->
 	<update id="dogDelete">
