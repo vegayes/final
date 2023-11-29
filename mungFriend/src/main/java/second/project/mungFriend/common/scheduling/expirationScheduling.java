@@ -10,10 +10,6 @@ import org.springframework.stereotype.Component;
 
 import second.project.mungFriend.event.model.service.EventService;
 
-// 스프링이 일정 시간마다 해당 객체를 이용해서 코드를 수행
-// == 스프링이 해당 클래스를 객체로 만들어서 관리를 해야 함. 
-// == Bean 등록 
-
 // @Controller, @Service, @Repository의 부모 어노테이션
 @Component // Bean 등록을 하겠다고 명시하는 어노테이션
 public class expirationScheduling {
@@ -23,8 +19,8 @@ public class expirationScheduling {
 
 	
 	//cron = "초 분 시 일 월 요일 [년도]" - 요일 : 1(SUN) ~ 7(SAT)
-	@Scheduled(cron = "0,30 * * * * *") // 매 분 0초, 30초 마다 수행
-//	@Scheduled(cron = "0 0 * * * *") // 매 정시 (*시 0분 0초)
+	//@Scheduled(cron = "0,30 * * * * *") // 매 분 0초, 30초 마다 수행
+	@Scheduled(cron = "0 0 0 * * *") // 매일 자정
 	public void couponExpiration() { 
 			
 		System.out.println("=======DB 스케쥴링 진행 ==========");
@@ -49,57 +45,15 @@ public class expirationScheduling {
 		System.err.println("updateCount : " + updateCount);
 		
 		if(updateCount > 0) { // DB에서 유효기간이 지난 쿠폰
+			System.out.println("유효기간이 지난 쿠폰이 있음");
 			int updateCountExpiration = service.updateCountExpiration(formatedNow);
 			
-		}
-		
-
-		
-		// 4) 서버에 파일 목록이 있을 경우에 비교 시작
-		/*
-		if(!serverImageList.isEmpty()) {
-			
-			// 5) 서버 파일 목록을 순차 접근
-			for(File server : serverImageList) {
-				
-				// 6) 서버에 존재하는 파일이
-				// DB(dbImageList)에 없다면 삭제
-				
-				// server.toString();
-				//~~~~~~~~~~~~\이미지명.jpg
-				
-				// List.indexOf(객체) = 객체가 List에 있으면 해당 인덱스 반환, 없으면 -1반환
-				if(dbImageList.indexOf(server.getName()) == -1) {
-					
-					// 서버에 있는 이미지 명이랑 DB에 있는 리스트 명이랑 비교해서 없으면 -1 
-					
-					System.out.println(server.getName() + "삭제");
-					
-					server.delete(); // File.delete() : 파일 삭제 
-					
-					
-					
-				}
-				
+			if(updateCountExpiration > 0) {
+				System.out.println("쿠폰 상태 변경 완료");
 			}
-			
-			
 		}
-		*/
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
 
 /*
