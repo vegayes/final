@@ -30,6 +30,10 @@ public interface ReviewService {
 
 	// 게시글 삭제
 	int deleteReview(int reviewNo) throws Exception;
+
+	
+	// 챗봇 추천 견종 조회
+	Map<String, Object> selectDogList(int cp, String breedName);
 	
 	
 
