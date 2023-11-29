@@ -21,4 +21,10 @@ public interface EventMapper {
 	 */
 	int countExpiration(String formatedNow);
 
+	/** 유효기간이 지난 쿠폰
+	 * @param formatedNow
+	 * @return
+	 */
+	int updateCountExpiration(String formatedNow);
+
 }

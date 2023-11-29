@@ -7,8 +7,7 @@
         <link rel="stylesheet" th:href="@{/css/mypage/admin/admissionList_admin.css}">
         
         <!-- swiper-->
-		<link rel="stylesheet" th:href="@{https://unpkg.com/swiper/swiper-bundle.min.css}">
-		<script th:src="@{https://unpkg.com/swiper/swiper-bundle.min.js}"></script>
+	    <link rel="stylesheet" th:href="@{https://unpkg.com/swiper/swiper-bundle.min.css}"/>
 
     </head>
     <body>
@@ -47,62 +46,71 @@
 	                    </div>			
 	                    <!-- 입소 신청된 내역 자격증 카드 형태 영역 -->
 	                    <div class = "admissionCardArea">
+							<div class="swiper mySwiper">
+								<div class="swiper-wrapper">
+			                        <!-- 카드 한 개 -->
+			                        <div class = "admissionCardBoxArea swiper-slide"  th:each = "admission : ${admissionList}">
+			                            <div class = "admissionCardBox">
+			                                <div class = "cardProfile">
+			                                    <div class = "cardProfileWrapper">
+			                                        <img th:src="${admission.admProfile}">
+			                                    </div>
+			                                </div>
+			    
+			                                <div class = "cardInfo">
+			                                    <div class = "cardInfoContent">
+			                                        이름 : [[${admission.admName}]]
+			                                    </div>
+			
+			                                    <div class = "cardInfoContent">
+			                                        연락처 : [[${admission.admPhone}]]
+			                                    </div>
+			
+			                                    <div class = "cardInfoContent">
+			                                        견종 : [[${admission.admBreed}]]
+			                                    </div>
+			
+			                                    <div class = "cardInfoContent">
+			                                        성별 : [[${admission.admGender}]]
+			                                    </div>
+			
+			                                    <div class = "cardInfoContent">
+			                                        나이 : [[${admission.age}]]
+			                                    </div>
+			
+			                                    <div class = "cardInfoContent">
+			                                        특이사항 : [[${admission.admSignificant}]]
+			                                    </div>
+			
+			                                    <div class = "cardInfoContent">
+			                                        입소희망일 : [[${admission.admHopeDate}]]
+			                                    </div>
+			                                    
+		                    	       			<th:block th:if="${admission.admYN} == 'N'">
+				                                    <div class = "cardInfoContent registArea">
+														<a th:src = "@{/}">
+															<div class = "admissionRegist">
+																등록하기
+															</div>	
+														</a>
+		
+													</div>
+												</th:block>
+			                                </div>
+			                            </div>
+			                        </div>
+								</div>
+								
+					            <div class="swiper-button-prev"></div>
+					            <div class="swiper-button-next"></div>
+								
+													
+								
+							</div>
 							
-	                        <!-- 카드 한 개 -->
-	                        <div class = "admissionCardBoxArea"  th:each = "admission : ${admissionList}">
-	                            <div class = "admissionCardBox">
-	                                <div class = "cardProfile">
-	                                    <div class = "cardProfileWrapper">
-	                                        <img th:src="${admission.admProfile}">
-	                                    </div>
-	                                </div>
-	    
-	                                <div class = "cardInfo">
-	                                    <div class = "cardInfoContent">
-	                                        이름 : [[${admission.admName}]]
-	                                    </div>
-	
-	                                    <div class = "cardInfoContent">
-	                                        연락처 : [[${admission.admPhone}]]
-	                                    </div>
-	
-	                                    <div class = "cardInfoContent">
-	                                        견종 : [[${admission.admBreed}]]
-	                                    </div>
-	
-	                                    <div class = "cardInfoContent">
-	                                        성별 : [[${admission.admGender}]]
-	                                    </div>
-	
-	                                    <div class = "cardInfoContent">
-	                                        나이 : [[${admission.age}]]
-	                                    </div>
-	
-	                                    <div class = "cardInfoContent">
-	                                        특이사항 : [[${admission.admSignificant}]]
-	                                    </div>
-	
-	                                    <div class = "cardInfoContent">
-	                                        입소희망일 : [[${admission.admHopeDate}]]
-	                                    </div>
-	                                    
-                    	       			<th:block th:if="${admission.admYN} == 'N'">
-		                                    <div class = "cardInfoContent registArea">
-												<a th:src = "@{/}">
-													<div class = "admissionRegist">
-														등록하기
-													</div>	
-												</a>
-
-											</div>
-										</th:block>
-	                                </div>
-	                            </div>
-	                        </div>
-
 	                    </div>
-	                </div>
-	       		</th:block>
+		       		</th:block>
+                </div>
             </section>
         </main>
 
@@ -117,8 +125,11 @@
 			console.log(admissionArr);
 			console.log(admissionArr[0]);
 		</script>
+
+    	<script th:src="@{https://unpkg.com/swiper/swiper-bundle.min.js}"></script>
 	    
 	    <script th:src="@{/js/mypage/admin/admissionList_admin.js}"></script>
+	    
 
     </body>
 </html>

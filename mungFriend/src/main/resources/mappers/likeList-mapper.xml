@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="second.project.mungFriend.mypage.member.model.dao.LikeListMapper">
+	
+	<!-- DogLike resultMap -->
+	<resultMap type="DogLike" id="like_rm">
+		<id property="likeNo" column="LIKE_NO"/>
+		
+		<result property="dogNo" column="DOG_NO"/>
+		<result property="memberNo" column="MEMBER_NO"/>
+		
+		<result property="dogName" column="DOG_NAME"/>
+		<result property="dogBirthDay" column="DOG_BIRTHDAY"/>
+		<result property="dogGender" column="DOG_GENDER"/>
+		
+		<result property="thumbnail" column="THUMBNAIL"/>
+	</resultMap>
+	
+	<select id="selectLikeList" resultMap="like_rm">
+		SELECT LIKE_NO, DOG_NO, MEMBER_NO, DOG_NAME,
+			<![CDATA[
+			NVL(
+		        CASE WHEN MONTHS_BETWEEN(SYSDATE, DOG_BIRTHDAY) <= 12
+		            THEN ROUND(MONTHS_BETWEEN(SYSDATE, DOG_BIRTHDAY)) || '개월'
+		            ELSE ROUND(MONTHS_BETWEEN(SYSDATE, DOG_BIRTHDAY) / 12) || '세'
+		        END,
+		        '알 수 없음'
+		    ) DOG_BIRTHDAY,
+		    ]]>
+		    DOG_GENDER
+		FROM DOG_LIKE 
+		LEFT JOIN MEMBER USING(MEMBER_NO)
+		LEFT JOIN DOG USING(DOG_NO)
+		WHERE MEMBER_NO = #{memberNo}
+		AND DOG_ADOPT_FL = 'N'
+	</select>
+	
+
+</mapper>

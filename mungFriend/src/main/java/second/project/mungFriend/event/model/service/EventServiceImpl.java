@@ -20,10 +20,12 @@ public class EventServiceImpl implements EventService {
 		return mapper.countExpiration(formatedNow);
 	}
 
+	/**
+	 * 유효기간이 지난 쿠폰 
+	 */
 	@Override
 	public int updateCountExpiration(String formatedNow) {
-		// TODO Auto-generated method stub
-		return 0;
+		return mapper.updateCountExpiration(formatedNow);
 	}
 
 }
