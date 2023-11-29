@@ -23,12 +23,12 @@ public class expirationScheduling {
 	@Scheduled(cron = "0 0 0 * * *") // 매일 자정
 	public void couponExpiration() { 
 			
-		System.out.println("=======DB 스케쥴링 진행 ==========");
+		//System.out.println("=======DB 스케쥴링 진행 ==========");
         // 현재 날짜/시간
         Date now = new Date();
        
         // 현재 날짜/시간 출력
-        System.out.println("현재 시간 :" + now); // Thu May 03 14:43:32 KST 2022
+        //System.out.println("현재 시간 :" + now); // Thu May 03 14:43:32 KST 2022
         
         // 포맷팅 정의
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -37,12 +37,12 @@ public class expirationScheduling {
         String formatedNow = formatter.format(now);
         
         // 포맷팅 현재 날짜/시간 출력
-        System.out.println("포맷팅 시간 :" +formatedNow); // 2022년 05월 03일 14시 43분 32초
+        //System.out.println("포맷팅 시간 :" +formatedNow); // 2022년 05월 03일 14시 43분 32초
 		
 		// 1) DB에서 유효기간 지나면 update진행해야하는 사항이 있는지 파악
 		int updateCount = service.countExpiration(formatedNow);
 		
-		System.err.println("updateCount : " + updateCount);
+		//System.err.println("updateCount : " + updateCount);
 		
 		if(updateCount > 0) { // DB에서 유효기간이 지난 쿠폰
 			System.out.println("유효기간이 지난 쿠폰이 있음");
