@@ -38,9 +38,9 @@ public class ReviewController {
 			Model model
 			) {
 			
-			System.out.println("현재페이지 : " + cp);
+			//System.out.println("현재페이지 : " + cp);
 			
-			System.out.println("loginMember : " + loginMember);
+			//System.out.println("loginMember : " + loginMember);
 			//if(loginMember != null) {model.addAttribute("loginMember", loginMember);}
 			
 			if(paramMap.get("searchContent") == null) { // 검색어가 없을 때 
@@ -102,7 +102,7 @@ public class ReviewController {
 			model.addAttribute("review",review); 
 			model.addAttribute("cp",cp); 
 			Member loginMember = (Member) model.getAttribute("loginMember");
-			System.out.println("로그인한 회원 : " + loginMember);
+			//System.out.println("로그인한 회원 : " + loginMember);
 			
 			 if(loginMember != null ) {
 				 
@@ -216,8 +216,7 @@ public class ReviewController {
 			) throws Exception {
 		
 		review.setReviewNo(reviewNo);
-		System.out.println("삭제할 이미지 순서 : " + deleteList);
-		
+		//System.out.println("삭제할 이미지 순서 : " + deleteList);
 		
 		int rowCount = service.reviewUpdate(review,images,deleteList);
 		
@@ -237,6 +236,13 @@ public class ReviewController {
 	}
 	
 	
+	/** 게시글 삭제
+	 * @param reviewNo
+	 * @param cp
+	 * @param ra
+	 * @return
+	 * @throws Exception
+	 */
 	@GetMapping("deleteReview/{reviewNo}")
 	public String deleteReview(
 			@PathVariable ("reviewNo") int reviewNo,
@@ -261,6 +267,24 @@ public class ReviewController {
 		return "redirect:/adoptReview/reviewList/"+cp;
 	}
 	
+	
+	
+	/** 챗봇에서 추천한 강아지 검색
+	 * @param cp
+	 * @param breedName
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("searchDogList/{breedName}")
+	public String selectDogList(@RequestParam(value="cp", required= false, defaultValue="1") int cp,
+			@PathVariable ("breedName") String breedName,
+			Model model) {
+		
+		Map<String, Object> map = service.selectDogList(cp,breedName);
+		model.addAttribute("map", map);
+		
+		return "adopt/dogList";
+	}
 	
 	
 }

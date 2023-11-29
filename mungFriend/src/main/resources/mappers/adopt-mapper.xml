@@ -240,4 +240,57 @@
 	
 	
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ===============================챗봇==============================================  -->
+
+
+
+	<!-- 검색한 강아지 마리수 조회 -->
+	<select id="getSearchDogListCount" resultType="_int">
+		SELECT COUNT(*) FROM DOG
+		JOIN DOG_BREED db USING(BREED_NO)
+		WHERE DOG_ADOPT_FL = 'N' AND 
+		BREED_NAME = #{breedName}
+	</select>
+	
+	
+	<select id="selectChatbotDogList"  resultMap="dog_rm">
+		SELECT DOG_NAME, DOG_NO,
+			(SELECT IMG_PATH || IMG_RENAME FROM DOG_IMG I
+			WHERE I.DOG_NO = D.DOG_NO
+			AND IMG_ORDER = 0) THUMBNAIL
+		FROM DOG D
+		JOIN DOG_BREED db USING(BREED_NO)
+		WHERE DOG_ADOPT_FL = 'N' AND 
+		BREED_NAME = #{breedName}
+		ORDER BY DOG_ADMISSION_DATE DESC
+	</select>
+	
+	
 </mapper>

@@ -72,6 +72,36 @@ public interface AdoptMapper {
 	// 강아지 delete
 	public int dogDelete(Map<String, Object> map);
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//	*****************************챗봇에서 사용*****************************************************************
+	// 검색한 강아지 마리 수 조회
+	public int getSearchDogListCount(String breedName);
+	
+	// 강아지 검색결과 
+	public List<Dog> selectChatbotDogList(RowBounds rowBounds, String breedName);
+
 
 
 

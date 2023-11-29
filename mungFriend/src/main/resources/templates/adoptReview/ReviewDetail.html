@@ -84,7 +84,7 @@
                     
                         <!-- 버튼 영역 -->
                         <div class="comment-btn-area">
-                            <button th:onclick="|showInsertComment(${comment.parentComment}, this)|">답글</button> 
+                            <button th:onclick="|showInsertComment(${comment.commentNo}, this)|">답글</button> 
 
                             <th:block th:if="${session.loginMember?.memberNo == comment.memberNo}">  
                                 
@@ -135,8 +135,8 @@
     <th:block th:replace="~{common/chatbot}"></th:block>
     
 
-    <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
-    <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+    <img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image">
+    <a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
 
     <script th:inline="javascript">
 	
