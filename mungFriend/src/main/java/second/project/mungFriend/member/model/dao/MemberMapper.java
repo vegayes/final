@@ -3,6 +3,7 @@ package second.project.mungFriend.member.model.dao;
 import org.apache.ibatis.annotations.Mapper;
 
 import second.project.mungFriend.member.model.dto.Member;
+import second.project.mungFriend.member.model.dto.MemberKakao;
 import second.project.mungFriend.member.model.dto.MemberNaver;
 
 @Mapper
@@ -31,5 +32,18 @@ public interface MemberMapper {
 	 * @return int
 	 */
 	int loginNaverInsert(MemberNaver naverInfo);
+	
+
+	/** 카카오 로그인 후 가져온 회원정보로 없으면 인서트 있으면 셀렉트  
+	 * @param Member(id, email,nickname,name)
+	 * @return Member(VO)
+	 */
+	Member loginKakao(MemberKakao kakaoInfo);
+
+	/** 카카오 로그인 후 가져온 회원정보로 없으면 인서트하는 로직  
+	 * @param kakaoInfo
+	 * @return int
+	 */
+	int loginKakaoInsert(MemberKakao kakaoInfo);
 
 }
