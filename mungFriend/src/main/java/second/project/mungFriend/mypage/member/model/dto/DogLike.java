@@ -20,7 +20,11 @@ public class DogLike {
 	private String dogBirthDay;
 	private String dogGender;
 	
+	// DOG_BREED 테이블 join
+	private String breedName;
+	
 	// DOG_IMG 테이블 join
-	private String thumbnail;
+	private String imgPath;
+	private String imgRename;
 	
 }
