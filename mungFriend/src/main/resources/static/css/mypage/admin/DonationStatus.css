@@ -87,6 +87,25 @@ a:hover{
     color : red;
 }
 
+.submenu {
+    display: none;
+    margin-left: 20px;
+   
+}
+
+.submenu li {
+    margin-top: 5px;
+    padding: 5px;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 10px;
+}
+
+.submenu.active {
+    display: block;
+}
+
 /*************************************************
                 관리자 Content
 *************************************************/
