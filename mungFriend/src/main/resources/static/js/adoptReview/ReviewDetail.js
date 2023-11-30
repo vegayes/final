@@ -231,7 +231,7 @@ function showUpdateComment(commentNo, btn){
 
 
     // 4. 댓글 행 내부 내용을 모두 삭제
-    //commentRow.innerHTML = "";
+    commentRow.innerText = "";
 
     // 5. textarea 요소 생성 + 클래스 추가  +  **내용 추가**
     const textarea = document.createElement("textarea");
@@ -347,10 +347,12 @@ function showInsertComment(parentNo, btn){
     // 답글을 작성할 textarea 요소 생성
     const textarea = document.createElement("textarea");
     textarea.classList.add("commentInsertContent");
-    
+
+   
+
     // 답글 버튼의 부모의 뒤쪽에 textarea 추가
     // after(요소) : 뒤쪽에 추가
-    btn.parentElement.after(textarea);
+    btn.parentElement.parentElement.append(textarea);
 
 
     // 답글 버튼 영역 + 등록/취소 버튼 생성 및 추가
