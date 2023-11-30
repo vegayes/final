@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>비밀번호 찾기2</title>
+    <title>비밀번호 찾기3</title>
 
     <link rel="stylesheet" th:href="@{/css/member/findPw2.css}">
 </head>
@@ -27,19 +27,29 @@
                 <!-- 비밀번호 찾기 설명 영역 -->
                 <div id="findPwInfo-section">
                     <div id="title">비밀번호 찾기</div>
-                    <div id="info">asdf****@naver.com 로 인증번호가 발송되었습니다.</div>
+                    <div id="info">새로운 비밀번호로 재설정해주세요.</div>
                 </div>
 
                 <!-- 비밀번호 찾기 form 영역 -->
                 <div id="form-section">
-                    <form th:action="@{/member/findPw3}" method="POST" id="findPwForm2">
-                        <div id="authNumber-section">
-                            인증번호 입력 <br>
-                            <input type="text" id="authNumber" name="authNumber" placeholder="인증번호 입력 (유효시간 5분)">
+                    <form th:action="@{/member/findPw}" method="POST" id="findPwForm2">
+                        <div id="id-section">
+                            아이디 <br>
+                            <div id="id" th:text="${id}">아이디</div>
                         </div>
-                        <div id="time-section"></div>
-                        <div id="next-section">
-                            <button type="submit" id="next-btn">다음</button>
+                        <!-- 아이디 -->
+                        <input type="hidden" id="userId" name="memberId" th:value="${id}">
+                        <div id="newPw-section">
+                            새 비밀번호 <br>
+                            <input type="password" id="newPw" name="memberPw">
+                        </div>
+                        <div id="newPw-confir-section">
+                            새 비밀번호 확인<br>
+                            <input type="password" id="newPw-confir" name="newPw-confir">
+                        </div>
+                        <div id="newPw-effect-sec">영어,숫자,특수문자(!,@,#) 6~20글자 사이</div>
+                        <div id="confirm-section">
+                            <button type="submit" id="confirm-btn">확인</button>
                         </div>
                     </form>
                 </div>
@@ -56,6 +66,6 @@
         <th:block th:replace="~{common/footer}"></th:block>
     </section>
     
-    <script th:src="@{/js/member/findPw.js}"></script>
+    <script th:src="@{/js/member/findPw2.js}"></script>
 </body>
 </html>

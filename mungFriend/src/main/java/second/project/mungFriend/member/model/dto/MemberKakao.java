@@ -14,6 +14,6 @@ public class MemberKakao {
     private String kakaoEmail;
     private String kakaoName;
 	private String kakaoNickName;
-	private String kakaomobile;
+	private String kakaoMobile;
 	private String kakaoPw;
 }
