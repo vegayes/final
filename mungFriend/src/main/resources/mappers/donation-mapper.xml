@@ -12,6 +12,7 @@
 		<result property="donationDate" column="DONATION_DATE"/>		
 		<result property="donationStatus" column="DONATION_STATUS"/>
 		
+		<result property="imp_uid" column="DONATION_ID"/>		
 		<result property="memberName" column="MEMBER_NAME"/>		
 		<result property="memberEmail" column="MEMBER_EMAIL"/>		
 	
@@ -27,7 +28,7 @@
 	<!-- 비회원 후원 등록 -->
 	<insert id = "donationNonMemberPay">
 		INSERT INTO TEST_NON_DONATION 
-		VALUES (SEQ_NON_DONATION_NO.NEXTVAL, #{memberName}, 
+		VALUES (SEQ_NON_DONATION_NO.NEXTVAL, #{imp_uid} , #{memberName}, 
 		       #{memberEmail}, #{donationContent} , #{donationType},  #{donationAmount}, SYSDATE, #{status})
 
 	</insert>

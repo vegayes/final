@@ -190,42 +190,80 @@ function requestPay() {
 				
 		        if (rsp.success) { // 결제 성공
 					alert("결제 성공");
-					
-					console.log("rsp.imp_uid");
-					
-					// 결제검증
-					fetch('/verify_iamport/' + rsp.imp_uid, {
-					    method: 'POST'
-					})
-					.then(function(response) {
-					    return response.json();
-					})
-					.then(function(data) {
-							console.log("들어옴");
-					        fetch("/complete", {
-					            method: "POST",
-					            headers: {
-					                "Content-Type": "application/json"
-					            },
-					            body: requestData
-					        })
-					        .then(response => response.text())
-					        .then(res => {
-					            if (res == "y") {
-					                alert('주문정보 저장 성공');
-					                createPayInfo(uid);
-					            } else {
-					                alert('주문정보 저장 실패');
-					            }
-					        });
-				
-					})
-					.catch(function(error) {
-					    alert("결제에 실패하였습니다.", "에러 내용: " + error, "error");
-					});
-				}
-			});
+		            var msg = '결제가 완료되었습니다.';
+		            msg += '포트워 고유ID : ' + rsp.imp_uid;
+		            msg += '고유주문번호 : ' + rsp.merchant_uid;
+		            msg += '결제 금액 : ' + rsp.paid_amount;
+		            //msg += '카드 승인번호 : ' + rsp.apply_num;  // 신용카드
+		            msg += '구매자 이름 : ' +rsp.buyer_name;
+		            msg += '구매자 이메일 : ' +rsp.buyer_email;
+		            
+		            msg += '구매시각 : ' +rsp.paid_at;
+		            msg += 'Pg사 거래번호 : ' +rsp.pg_tid;
+		            msg += '결제수단 구분코드 : ' +rsp.pay_method;
+		            msg += 'pg사 구분코드 : ' +rsp.pg_provider;
+		            msg += '간편결제 구분코드 : ' +rsp.emb_pg_provider;
+		            msg += '거래 매출전표 URL : ' +rsp.receipt_url;
+		            msg += '거래 상태 : ' +rsp.status;
+		            
+		            msg += '카드사 정보 : ' + rsp.card_name;
 
+		            msg += '빌링키 : ' + rsp.customer_uid;
+		            
+		            var donation = {
+                        imp_uid: rsp.imp_uid,
+                        merchant_uid: rsp.merchant_uid,
+                        status : rsp.status,
+
+						memberName : rsp.buyer_name,
+						memberEmail : rsp.buyer_email,
+                        
+                        donationContent : donationContent.value,
+						donationType : donationType.value,
+						donationAmount : rsp.paid_amount,
+						//donationDate: rsp.paid_at
+						billingKey : rsp.customer_uid
+						
+		            };
+
+					console.log(msg);
+					
+					console.log("donation  정보: "  + donation);
+					
+							            // 컨트롤러에 데이터를 전달하여 DB에 입력하는 로직
+		            fetch("/donation/donationPay", {
+		                method: "POST",
+		                body: JSON.stringify(donation),
+		                headers: {
+		                    "Content-Type": "application/json"
+		                }
+		            })
+		            .then(response => response.text())
+		            .then(result => {
+		                if (result === "y") {
+		                    alert(msg);
+		                    
+		                    if(loginMember != null){
+								location.href = '/mypage/member/donationList';
+								 // 로그인되면 후원 내역으로 넘어가기 
+							}
+		                    location.href = '/';
+		                   
+		                } else {
+		                    alert("DB 후원 정보 입력 실패");
+		                    return false;
+		                }
+		            })
+		            .catch(error => console.error('Error:', error));
+				}else {
+			            var msg = '결제에 실패하였습니다.';
+			            msg += '에러내용 : ' + rsp.error_msg;
+			            alert(msg);
+			            location.href = '/donation';
+		        }
+
+				
+	        });
 	  }
 }
 
