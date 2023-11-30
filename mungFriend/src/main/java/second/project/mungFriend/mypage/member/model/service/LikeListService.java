@@ -7,8 +7,12 @@ import second.project.mungFriend.mypage.member.model.dto.DogLike;
 
 public interface LikeListService {
 
-	Map<String, Object> selectLikeList();
+	// 좋아요 목록 조회
+	Map<String, Object> selectLikeList(int memberNo);
 
-//	public List<DogLike> selectLikeList();
+
+	// 좋아요 목록 삭제
+	int likeDelete(int dogNo, int memberNo);
+
 
 }

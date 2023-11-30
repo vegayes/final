@@ -81,7 +81,7 @@
             </div>
 
             <div class="regits">
-                <a th:if="${session.loginMember}" class="regits-btn" th:href="@{/adopt/dogRegistration}">등록하기</a>
+                <a th:if="${session.loginMember?.adminYn == 'Y'}" class="regits-btn" th:href="@{/adopt/dogRegistration}">등록하기</a>
             </div>
 
             <div class="pagination-area" th:unless="${dogList.isEmpty()}">

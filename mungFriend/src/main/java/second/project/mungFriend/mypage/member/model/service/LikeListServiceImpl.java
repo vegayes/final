@@ -15,25 +15,30 @@ public class LikeListServiceImpl implements LikeListService{
 
 	@Autowired
 	private LikeListMapper mapper;
-//
-//	@Override
-//	public List<DogLike> selectLikeList() {
-//		
-//		return mapper.selectLikeList();
-//		
-//	}
-//	
 
+	// 좋아요 목록 조회
 	@Override
-	public Map<String, Object> selectLikeList() {
+	public Map<String, Object> selectLikeList(int memberNo) {
 		
-		List<DogLike> likeList = mapper.selectLikeList();
+		List<DogLike> likeList = mapper.selectLikeList(memberNo);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("likeList", likeList);
 		
 		return map;
+	}
+
+	// 좋아요 목록 삭제
+	@Override
+	public int likeDelete(int dogNo, int memberNo) {
+		
+		System.out.println("ser dogNo::"+ dogNo);
+		int result = mapper.likeDelete(dogNo, memberNo);
+		
+		System.out.println("result::"+ result);
+		
+		return result;
 	}
 	
 	
