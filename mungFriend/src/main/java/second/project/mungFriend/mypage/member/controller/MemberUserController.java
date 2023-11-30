@@ -5,9 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import second.project.mungFriend.member.model.dto.Member;
@@ -37,9 +39,10 @@ public class MemberUserController {
 	// 정보수정
 	@PostMapping("/updateInfoUser")
 	public String updateInfoUser(@SessionAttribute("loginMember") Member loginMember,
+								@RequestParam("updateProfileImage") MultipartFile profileImage, // 업로드 파일
 								Member updateMember,
 								String[] memberAddress,
-								RedirectAttributes ra) {
+								RedirectAttributes ra) throws Exception{
 		
 		/*
 		 * @SessionAttribute("loginMember") Member loginMember
@@ -70,7 +73,7 @@ public class MemberUserController {
 		
 		
 		// DB 회원 정보 수정 (update) 서비스 호출
-		int result = service.updateInfoUser(updateMember);
+		int result = service.updateInfoUser(profileImage, updateMember, loginMember);
 		
 		String message = null;
 		

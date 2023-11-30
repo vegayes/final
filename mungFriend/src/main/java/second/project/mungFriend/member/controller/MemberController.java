@@ -132,7 +132,7 @@ public class MemberController {
 	
 	// 비밀번호찾기
 	@PostMapping("/findPw")
-	public String findPw(Member updateMember, RedirectAttributes ra) {
+	public String findPw(Member updateMember, Model model, RedirectAttributes ra) {
 		
 		// System.out.println(updateMember);
 		
@@ -140,17 +140,17 @@ public class MemberController {
 		
 		// System.out.println(result);
 		
-		String path = "";
+		String path = "redirect:";
 		String message = null;
 		
 		if(result > 0) { // 비밀번호 변경 성공
 			
-			path = "member/login";
+			path = "/member/login";
 			message = "비밀번호 변경 성공";
 			
 		} else { // 비밀번호 변경 실패
 			
-			path = "redirect:findPw2";
+			path = "/member/findPw2";
 			message = "비밀번호 변경 실패";
 			
 		}
