@@ -20,6 +20,12 @@ public interface MemberMapper {
 	 * @return String
 	 */
 	String findId(Member inputMember);
+	
+	/** 비밀번호찾기
+	 * @param updateMember
+	 * @return int
+	 */
+	int findPw(Member updateMember);
 
 	/** 네이버 로그인 후 가져온 회원정보로 없으면 인서트 있으면 셀렉트  
 	 * @param Member(id, email,nickname,name)

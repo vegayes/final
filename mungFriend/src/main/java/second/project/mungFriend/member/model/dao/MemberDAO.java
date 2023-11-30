@@ -31,6 +31,15 @@ public class MemberDAO {
 		return memberMapper.findId(inputMember);
 	}
 	
+	/** 비밀번호찾기
+	 * @param updateMember
+	 * @return int
+	 */
+	public int findPw(Member updateMember) {
+		
+		return memberMapper.findPw(updateMember);
+	}
+	
 	/** 네이버 로그인 후 가져온 회원정보로 없으면 인서트 있으면 셀렉트  
 	 * @param Member(id, email,nickname,name,mobile)
 	 * @return Member(VO)

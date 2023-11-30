@@ -123,14 +123,42 @@ public class MemberController {
 	
 	// 비밀번호찾기2 화면 전환
 	@PostMapping("/findPw2")
-	public String findPw2Page() {
+	public String findPw2Page(String id, Model model) {
+		
+		model.addAttribute("id", id); // 비밀번호찾기2 화면에서 보여줄 id 가져와서 model에 담기
+		
 		return "member/findPw2";
 	}
 	
-	// 비밀번호찾기3 화면 전환
-	@PostMapping("/findPw3")
-	public String findPw3Page() {
-		return "member/findPw3";
+	// 비밀번호찾기
+	@PostMapping("/findPw")
+	public String findPw(Member updateMember, RedirectAttributes ra) {
+		
+		// System.out.println(updateMember);
+		
+		int result = service.findPw(updateMember);
+		
+		// System.out.println(result);
+		
+		String path = "";
+		String message = null;
+		
+		if(result > 0) { // 비밀번호 변경 성공
+			
+			path = "member/login";
+			message = "비밀번호 변경 성공";
+			
+		} else { // 비밀번호 변경 실패
+			
+			path = "redirect:findPw2";
+			message = "비밀번호 변경 실패";
+			
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		return path;
+		
 	}
 	
 	// 네이버 로그인 확인 후 자동으로 콜백
@@ -158,6 +186,7 @@ public class MemberController {
 		
 		 return path;
     }
+	
 	// 카카오 로그인 확인 후 자동으로 콜백
 	@GetMapping("/oauth2/code/kakao")
 	 public String callbackKakao(HttpServletRequest request, Model model, RedirectAttributes ra)  throws Exception {

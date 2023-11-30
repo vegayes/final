@@ -78,7 +78,7 @@ public class MemberServiceImpl implements MemberService{
 		
 		Member loginMember = dao.login(inputMember);
 		
-		// System.out.println(bcrypt.encode(inputMember.getMemberPw()));
+		System.out.println(bcrypt.encode(inputMember.getMemberPw()));
 		
 		if(loginMember != null) {
 			
@@ -101,6 +101,13 @@ public class MemberServiceImpl implements MemberService{
 	public String findId(Member inputMember) {
 		
 		return dao.findId(inputMember);
+	}
+	
+	// 비밀번호찾기
+	@Override
+	public int findPw(Member updateMember) {
+		
+		return dao.findPw(updateMember);
 	}
 
 	//네이버 로그인
@@ -353,4 +360,5 @@ public class MemberServiceImpl implements MemberService{
         
         return memberKakao;
     }
+
 }

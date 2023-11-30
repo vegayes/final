@@ -18,6 +18,12 @@ public interface MemberService {
 	 */
 	String findId(Member inputMember);
 	
+	/** 비밀번호찾기
+	 * @param updateMember
+	 * @return int
+	 */
+	int findPw(Member updateMember);
+	
 	/** 네이버 로그인
 	 * @param N/A
 	 * @return String
@@ -54,10 +60,10 @@ public interface MemberService {
 	 */
 	Member loginKakao(MemberKakao kakaoInfo);
 	
-	
 	/** 구글 로그인
 	 * @param N/A
 	 * @return String
 	 */
 	Object getGoogleUrlLogin();
+	
 }
