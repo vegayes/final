@@ -30,10 +30,17 @@ function connect() {
 
             var descriptionArray = JSON.parse(message.body);
             
+
            for (var i = 0; i < descriptionArray.length; i++) {
 
+                console.log("i번째 descriptionArray : ", descriptionArray[i]);
                 const breedMatches = descriptionArray[i].match(/'([^']+)'/g);
-               
+
+
+                if(i == 0){
+                    console.log("showMessage");
+                    showMessage(descriptionArray[i]);
+                }
 
                 if(breedMatches != null){
                     // 추출된 문자열에서 따옴표를 제거하고 견종 리스트 생성
@@ -41,19 +48,22 @@ function connect() {
                 
                     // 결과 출력
                     console.log("견종리스트 : ", breedList);
+
                     showMessage("나에게 어울리는 견종 검색하기");
                     for (var i = 0; i < breedList.length; i++){
                         showLink(breedList[i]);
+                        
                     }
+
                 }
-                
-                if(i==0){
-                    showMessage(descriptionArray[i]);
-                }
-                else{
+
+
+                else if(i > 0){
+                    console.log("showButton");
                     showButton(descriptionArray[i]);
                 }
 
+               
             }   
         });
     });

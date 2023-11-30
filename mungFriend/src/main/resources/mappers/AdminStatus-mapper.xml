@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="second.project.mungFriend.mypage.admin.model.dao.AdminStatusMapper">
+	
+	
+
+<!-- 현재 날짜로부터 4개월 내의 강아지 입양 마리수 개월별 조회 -->
+<select id="selectDogList" resultType="java.util.Map">
+	SELECT 
+	    TO_CHAR(TRUNC(DOG_ADMISSION_DATE, 'MONTH'), 'YYYY-MM') AS admission_month,
+	    COUNT(*) AS dog_count
+	FROM DOG
+	WHERE DOG_ADMISSION_DATE >= ADD_MONTHS(TRUNC(SYSDATE, 'MONTH'), -3)
+	GROUP BY TO_CHAR(TRUNC(DOG_ADMISSION_DATE, 'MONTH'), 'YYYY-MM')
+	ORDER BY admission_month
+</select>
+ 
+	
+	
+<!-- 회원 후원내역 월별 조회 -->
+<select id="memberDonationList" resultType="java.util.Map">
+	SELECT 
+	 	TO_CHAR(TRUNC(DONATION_DATE , 'MONTH'), 'YYYY-MM') AS donation_month,
+	    SUM(DONATION_AMOUNT) AS DONATION_AMOUNT
+	FROM TEST_DONATION td
+	WHERE DONATION_DATE >= ADD_MONTHS(TRUNC(SYSDATE, 'MONTH'), -4)
+	GROUP BY TO_CHAR(TRUNC(DONATION_DATE, 'MONTH'), 'YYYY-MM')
+	ORDER BY donation_month
+</select>
+	
+
+<!-- 비회원 후원내역 월별 조회 -->
+<select id="nonMemberDonationList" resultType="java.util.Map">
+	SELECT 
+	 	TO_CHAR(TRUNC(DONATION_DATE , 'MONTH'), 'YYYY-MM') AS donation_month,
+	    SUM(DONATION_AMOUNT) AS DONATION_AMOUNT
+	FROM TEST_NON_DONATION td
+	WHERE DONATION_DATE >= ADD_MONTHS(TRUNC(SYSDATE, 'MONTH'), -4)
+	GROUP BY TO_CHAR(TRUNC(DONATION_DATE, 'MONTH'), 'YYYY-MM')
+	ORDER BY donation_month
+</select>
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

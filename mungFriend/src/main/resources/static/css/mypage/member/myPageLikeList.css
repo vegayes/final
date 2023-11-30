@@ -124,8 +124,7 @@ a:hover{
 
 .like-dog-list{
     display: grid;
-    /* width: 55%; */
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 2fr);
     grid-column-gap: 0px;
     grid-row-gap: 15px;
 }
@@ -143,12 +142,14 @@ a:hover{
     display: flex;
     justify-content: space-between;
     padding: 10px 20px 10px 20px;
+    margin-top: 7px;
 }
 
 .image{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 8px 0 8px 0;
 }
 
 #dog-info, #dog-kind{
@@ -156,7 +157,22 @@ a:hover{
     justify-content: center;
     align-items: center;
 
-    margin: 15px 0 15px 0;
+    margin: 14px 0 14px 0;
+}
+
+
+
+div#dog-name {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+div#dog-info {
+    font-size: 13px;
+}
+
+div#dog-kind {
+    font-size: 15px;
 }
 
 
