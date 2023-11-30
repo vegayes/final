@@ -35,7 +35,7 @@
                     <a th:unless="${session.loginMember}" th:href="@{/member/login}">로그인</a>
                     
 					<a th:if="${session.loginMember != null && session.loginMember.adminYn == 'N'}" th:href="@{/mypage/member/myPageLikeList}">마이페이지</a>
-					<a th:if="${session.loginMember != null && session.loginMember.adminYn == 'Y'}" th:href="@{/mypage/admin/admissionList}">마이페이지</a>
+					<a th:if="${session.loginMember != null && session.loginMember.adminYn == 'Y'}" th:href="@{/mypage/admin/adminInquiryBox}">마이페이지</a>
 
                 </li>
                 
