@@ -267,6 +267,7 @@
 
 
 
+
 <!-- ===============================챗봇==============================================  -->
 
 
@@ -288,7 +289,7 @@
 		FROM DOG D
 		JOIN DOG_BREED db USING(BREED_NO)
 		WHERE DOG_ADOPT_FL = 'N' AND 
-		BREED_NAME = #{breedName}
+		BREED_NAME LIKE '%' || #{breedName} || '%';
 		ORDER BY DOG_ADMISSION_DATE DESC
 	</select>
 	
