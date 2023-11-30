@@ -84,7 +84,11 @@
                     
                         <!-- 버튼 영역 -->
                         <div class="comment-btn-area">
-                            <button th:onclick="|showInsertComment(${comment.commentNo}, this)|">답글</button> 
+
+                            <th:block th:if="${session.loginMember}">
+                                <button th:onclick="|showInsertComment(${comment.commentNo}, this)|">답글</button> 
+                            </th:block>    
+                           
 
                             <th:block th:if="${session.loginMember?.memberNo == comment.memberNo}">  
                                 
@@ -102,15 +106,17 @@
 
 
                 <!-- 댓글 작성 부분 -->
-                <div class="comment-write-area">
-                    <textarea id="commentContent"></textarea>
-                    <button id="addComment">
-                        댓글<br>
-                        등록
-                    </button>
-            
-                </div>
-                    
+              
+                    <div class="comment-write-area">
+                        <textarea id="commentContent"></textarea>
+                        <th:block th:if="${session.loginMember}">
+                            <button id="addComment">
+                                댓글<br>
+                                등록
+                            </button>
+                        </th:block>   
+                    </div>
+                
                     
             </section>
     

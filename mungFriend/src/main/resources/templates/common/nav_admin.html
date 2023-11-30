@@ -6,7 +6,27 @@
         <li> <a th:href = "@{/mypage/admin/donationList}"> 후원 내역</a> </li>
         <li> <a th:href = "@{/mypage/admin/admissionList}"> 입소신청 내역</a></li>
         <li> <a th:href = "@{/mypage/admin/memberListAdmin}"> 회원 관리</a></li>
-        <li> <a th:href = "@{/}"> 관리 현황</a></li>
+        <li class="hasSubmenu"> <a th:href="@{#}" class="toggleSubmenu">관리 현황 </a>
+            <ul class="submenu">
+                <li><a th:href="@{/mypage/admin/dogStatus}">유기견 현황</a></li>
+                <li><a th:href="@{/mypage/admin/donationStatus}">후원 현황</a></li>
+            </ul>
+        </li>
     </ul>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const submenuItems = document.querySelectorAll('.hasSubmenu');
+
+            submenuItems.forEach(function (item) {
+                item.addEventListener('click', function () {
+                    const submenu = this.querySelector('.submenu');
+                    submenu.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+    
 </th:block>
 
