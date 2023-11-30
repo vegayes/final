@@ -324,7 +324,6 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 
-
 	/**
 	 * 챗봇 추천 견종 조회
 	 */

@@ -32,7 +32,7 @@ public class ListAdminController {
 		List<Admission> selectAdmissionList = service.selectAdmissionList();
 		
 		for(Admission adm : selectAdmissionList) {
-			System.out.println("출력 : " + adm);
+			//System.out.println("출력 : " + adm);
 		}
 		
 		model.addAttribute("admissionList", selectAdmissionList);	

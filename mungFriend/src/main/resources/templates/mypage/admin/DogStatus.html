@@ -16,7 +16,7 @@
         <!-- 타이틀 변경-->
         <section class = "adminIntroArea">
             <div class = "adminIntroTitle">
-                관리 현황
+                유기견 현황
             </div>
             <hr>
         </section>
@@ -26,19 +26,7 @@
 
             <!-- nav 자리-->
             <nav class = "navAdmission">
-                <ul>
-                    <li> <a th:href = "@{/}"> 1:1 문의함 </a> </li>
-                    <li> <a th:href = "@{/}"> 예약 내역 </a> </li>
-                    <li> <a th:href = "@{/}"> 후원 내역 </a> </li>
-                    <li> <a th:href = "@{/}"> 입소신청 내역 </a></li>
-                    <li> <a th:href = "@{/}"> 회원 관리 </a></li>
-                    <li class="hasSubmenu"> <a th:href="@{#}" class="toggleSubmenu">관리 현황 </a>
-                        <ul class="submenu">
-                            <li><a th:href = "@{/}">유기견 현황</a></li>
-                            <li><a th:href = "@{/}">후원 현황</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                <th:block th:replace="~{common/nav_admin}"></th:block>
             </nav>
 
             <!-- 내용 영역-->
@@ -53,9 +41,23 @@
  	<th:block th:replace="~{common/footer}"></th:block>
     
 
-    <script>
-        const months = ["9월", "10월", "11월", "12월"];
-        const adoptions = [20, 25, 35, 32];
+    <script th:inline="javascript">
+
+        //유기견 현황
+        const dogStatus = /*[[${dogStatus}]]*/ [];
+
+        // 개월에 해당하는 데이터를 배열로 저장
+        const months = dogStatus.map(function(item) {
+            return item.ADMISSION_MONTH + "월";
+        });
+
+        // 유기견 마리 수에 해당하는 데이터를 배열로 저장
+        const adoptions = dogStatus.map(function(item) {
+         return item.DOG_COUNT;
+        });
+
+       
+
         const admissions = [15, 24, 36, 30];
     
         const ctx = document.getElementById('myChart').getContext('2d');
@@ -67,7 +69,7 @@
                 datasets: [
 
                     {
-                        label: '입양(마리)',
+                        label: '',
                         type: 'line',
                         data: adoptions,
                         fill: false,
@@ -80,7 +82,7 @@
 
                     },
                     {   
-                        label: '입소(마리)',
+                        label: '',
                         type: 'line',
                         data: admissions,
                         fill: false,
@@ -92,7 +94,7 @@
                         
                     },
                     {
-                        label: '',
+                        label: '입소(마리)',
                         data: adoptions,
                         backgroundColor: 'rgba(254, 228, 214, 1)',
                         borderColor: 'rgba(254, 228, 214, 0.5)',
@@ -102,7 +104,7 @@
                         showInLegend: false // 범례에 표시하지 않음
                     },
                     {
-                        label: '',
+                        label: '입양(마리)',
                         data: admissions,
                         backgroundColor: 'rgba(255, 99, 132, 0.2)',
                         borderColor: 'rgba(255, 99, 132, 0.5)',
@@ -136,8 +138,7 @@
                         offset: true,
                         grid: {
                             display: false // x 축 그리드 없애기
-                        },
-                        offset: true, // 축 이동 허용
+                        }
                     },
                     y: {
                         beginAtZero: true,
@@ -161,17 +162,6 @@
         });
 
 
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const submenuItems = document.querySelectorAll('.hasSubmenu');
-
-            submenuItems.forEach(function (item) {
-                item.addEventListener('click', function () {
-                    const submenu = this.querySelector('.submenu');
-                    submenu.classList.toggle('active');
-                });
-            });
-        });
 
 
     </script>
