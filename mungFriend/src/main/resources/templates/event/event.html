@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>event 페이지</title>
+
+        <link rel="stylesheet" th:href="event.css">
+        <script src="https://kit.fontawesome.com/ac58eafae7.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+
+        <button id = "btn" th:onclick="openEvent()">
+            이벤트
+        </button>
+
+        <!-- 이벤트 팝업 -->
+        <div id = "eventModalBox">
+            <div id = "eventContentArea">
+                      
+                <!-- 시작 혹은 끝에서  (모달 안에 모달)-->
+                <div id = "eventSubModalBox" > 
+                    <div id = "eventSubModalArea">
+                        <div class = "modalContent">
+                            <div class = "iconArea">
+                                <i class="fa-solid fa-gamepad"></i>
+                            </div>
+                            <div class = "titleArea">
+                                강아지 맞추기 이벤트
+                            </div>
+                            <div class = "gameArea">
+                                제시된 사진을 보고 10초 안에 <br>강아지 견종을 맞춰보세요~
+                            </div>
+                        </div>
+                        <div class = "modalBtnArea">    
+                            <div class = "modalBtn">
+                                <div class = "settingBtn" id = "main" onclick="closeEvent()">
+                                    메인 페이지
+                                </div>
+                            </div>  
+                            <div class = "modalBtn">
+                                <div class = "settingBtn" id = "gameStart" onclick = "startGame()">
+                                    게임 시작
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+
+                
+
+                <div id = "eventClose" >&times;</div>
+
+                <div class = "eventArea">
+                    <div class = "quizStatus">
+                        <div class = "timeArea" id = "timer">
+                            10
+                        </div>
+                        <div class = "correctArea">
+                            <div class = "correctState">
+                                <img src = "images/origin.jpg">
+                            </div>
+                            <div class = "correctState">
+                                <img src = "images/origin.jpg">
+                            </div>
+                            <div class = "correctState">
+                                <img src = "images/origin.jpg">
+
+                            </div>
+                            <div class = "correctState">
+                                <img src = "images/origin.jpg">
+                            </div>
+                            <div class = "correctState">
+                                <img src = "images/origin.jpg">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class = "quizGame" id = "container" >
+                        
+                        <!--<div class = "correctImg">
+                            <img src="1.jpg">
+                        </div> -->
+                    </div>
+
+                    <div class = "quizArea">
+
+                        <label class = "quizBtnWrap">
+                            <input type = "radio" name = "quizSelect" value = "1">
+                            <div class = "quizBtn">
+                                <div class = "quizNum">
+                                </div>
+
+                                <div class = "quizContent">
+                                </div>
+                            </div>
+
+                        </label>
+                        <label class = "quizBtnWrap">
+                            <input type = "radio" name = "quizSelect" value = "2">
+                            <div class = "quizBtn">
+                                <div class = "quizNum">
+                                </div>
+
+                                <div class = "quizContent">
+                                </div>
+                            </div>
+                        </label>
+                        <label class = "quizBtnWrap">
+                            <input type = "radio" name = "quizSelect" value = "3">
+                            <div class = "quizBtn">
+                                <div class = "quizNum">
+                                </div>
+
+                                <div class = "quizContent">
+                                </div>
+                            </div>
+                        </label>
+                        <label class = "quizBtnWrap">
+                            <input type = "radio" name = "quizSelect" value = "4">
+                            <div class = "quizBtn">
+                                <div class = "quizNum">
+                                </div>
+
+                                <div class = "quizContent">
+                                </div>
+                            </div>
+                        </label>
+
+                    </div>
+
+                    <div class = "quizSubmit">  
+                        <div class = "quizSubmitBtn" id = "submitQuiz">
+                            정답제출
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>    
+      
+        <script src ="event.js"></script>
+
+        <script src="script.js"></script>
+    </body>
+</html>

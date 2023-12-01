@@ -27,6 +27,7 @@ radioButtons.forEach(function(radio) {
 
 
 
+
 /* 직접입력 창 display */
 const donationRadio = document.querySelectorAll('input[type = "radio"]:not([value="input"])'); // 다른 후원 금액
 const donationInputBtn = document.querySelector('input[value="input"]');
