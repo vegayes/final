@@ -54,7 +54,7 @@ public class MemberUserServiceImpl implements MemberUserService{
 		}
 		
 		
-		// 프로필 이미지 수정 DAO 메서드 호출
+		// 프로필 이미지 수정 mapper 메서드 호출
 		int result = mapper.updateInfoUser(updateMember);
 		
 		

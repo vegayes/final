@@ -39,7 +39,7 @@
                             <div class = "formProfile">
 								
 								<!-- 프로필 이미지가 없으면 기본 이미지 -->
-								<img th:unless="*{memberProfile}" th:src="@{/images/member/jjangu.png}" id="profileImage">
+								<img th:unless="*{memberProfile}" th:src="@{/images/member/profile_noImage.png}" id="profileImage">
 								
 								<!-- 프로필 이미지가 있으면 저장된 이미지 -->
                                 <img th:if="*{memberProfile}" th:src="*{memberProfile}" id="profileImage">

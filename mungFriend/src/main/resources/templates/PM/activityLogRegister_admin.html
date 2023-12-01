@@ -33,7 +33,7 @@
 
                 <!-- 내용 영역 -->
                 <div id="cont-section">
-                    <form th:action="@{/#}" method="" id="register-form">
+                    <form th:action="@{/pm/activityLogRegister}" method="POST" id="register-form" enctype="multipart/form-data">
                         <!-- 사진 영역 -->
                         <div id="photoLine-up"></div>
                         <div id="photo-title">사진</div>
@@ -56,7 +56,7 @@
                         <div id="content-title">내용</div>
                         <div id="contentLine-bottom"></div>
                         <div id="contentInsert-section">
-                            <textarea id="textarea" name="textarea" placeholder="내용을 입력해주세요."></textarea>
+                            <textarea id="textarea" name="activityContent" placeholder="내용을 입력해주세요."></textarea>
                         </div>
 
                         <!-- 등록하기 영역 -->
@@ -77,5 +77,7 @@
         <!-- 풋터 -->
         <th:block th:replace="~{common/footer}"></th:block>
     </section>
+    
+    <script th:src="@{/js/PM/activityLogRegister_admin.js}"></script>
 </body>
 </html>

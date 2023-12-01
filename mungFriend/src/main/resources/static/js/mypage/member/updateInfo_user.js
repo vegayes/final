@@ -450,7 +450,7 @@ if(imageInput != null) { // 화면에 imageInput이 있을 경우
 	
 	// 회원 프로필 화면 진입 시
 	// 현재 회원의 프로필 이미지 상태를 확인
-	if(profileImage.getAttribute("src") == "/images/member/jjangu.png") {
+	if(profileImage.getAttribute("src") == "/images/member/profile_noImage.png") {
 		// 기본 이미지인 경우
 		initCheck = false;
 	} else {
@@ -528,7 +528,7 @@ if(imageInput != null) { // 화면에 imageInput이 있을 경우
 	deleteImage.addEventListener('click', () => {
 		imageInput.value = ""; // input type="file"의 value 삭제
 		
-		profileImage.setAttribute("src", "/images/member/jjangu.png");
+		profileImage.setAttribute("src", "/images/member/profile_noImage.png");
 		// 프로필 이미지를 기본 이미지로 변경
 		
 		deleteCheck = 0;
