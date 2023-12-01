@@ -89,6 +89,24 @@ a:hover{
     color : red;
 }
 
+.submenu {
+    display: none;
+    margin-left: 20px;
+   
+}
+
+.submenu li {
+    margin-top: 5px;
+    padding: 5px;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 10px;
+}
+
+.submenu.active {
+    display: block;
+}
 /*************************************************
                 후원내역 (관리자) 검색창
 *************************************************/
@@ -269,5 +287,47 @@ a:hover{
 
 #donate-image {
     bottom: 70px;
+}
+
+
+ /* 검색창 컨테이너 */
+#searchContainer {
+    height: 40px;
+    width: 575px;
+    display: flex;
+    margin-left: 17%;
+   
+    margin-bottom: 25px;
+}
+
+/* select */
+#searchType {
+    width: 90px;
+    height: 39px;
+    border: 1px solid #000;
+    background: #FFF;
+    margin-right: 15px;
+    border-radius: 5px;
+}
+
+/* 검색어 입력창 */
+#searchContent {
+    width: 356px;
+    height: 35px;
+    border: 1px solid #000;
+    background: #FFF;
+    margin-right: 15px;
+    text-indent: 1em;
+    border-radius: 5px;
+}
+
+/* 검색버튼 */
+#searchButton {
+    width: 93px;
+    height: 39px; 
+    border: 1px solid #000;
+    background: #FEE4D6;
+    cursor: pointer;
+    border-radius: 5px;
 }
 

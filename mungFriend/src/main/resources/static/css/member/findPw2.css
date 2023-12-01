@@ -52,7 +52,6 @@ body > section {
     border-radius: 5px;
     align-items: center;
     margin: 90px 580px;
-    margin-bottom: 190px;
     padding: 50px;
 }
 
@@ -95,7 +94,20 @@ body > section {
     margin-top: 15px;
 }
 
-#authNumber {
+#id {
+    width: 330px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    margin: 15px 0px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: lighter;
+}
+
+#newPw {
     width: 330px;
     height: 40px;
     border: none;
@@ -104,13 +116,22 @@ body > section {
     padding-left: 10px;
 }
 
-#time-section {
-    font-weight: lighter;
-    font-size: 13px;
+#newPw-confir {
+    width: 330px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    margin: 15px 0px;
+    padding-left: 10px;
 }
 
-/* 다음 버튼 */
-#next-btn {
+#newPw-effect-sec {
+    font-size: 13px;
+    font-weight: lighter;
+}
+
+/* 이메일 인증하기 버튼 */
+#confirm-btn {
     width: 330px;
     height: 50px;
     border: none;
@@ -121,7 +142,7 @@ body > section {
     font-size: 15px;
 }
 
-#next-btn:hover {
+#confirm-btn:hover {
     cursor: pointer;
 }
 
@@ -154,3 +175,7 @@ body > section {
 #footer {
     flex-basis: 20%;
 }
+
+/* 메세지 색상 지정 */
+.confirm{ color : green; }
+.error{ color : red; }

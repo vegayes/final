@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="second.project.mungFriend.pm.model.dao.PmMapper">
+	
+	<!-- 활동일지 등록하기 -->
+	<insert id="activityLogRegister">
+		INSERT INTO ACTIVITY_LOG VALUES(SEQ_ACTIVITY_NO.NEXTVAL, #{memberNo}, #{acitivityImg}, #{activityContent}, DEFAULT)
+	</insert>
+	
+</mapper>

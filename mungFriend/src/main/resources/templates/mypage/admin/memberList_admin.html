@@ -13,7 +13,7 @@
 	<!-- 헤더 -->
     <th:block th:replace="~{common/header}"></th:block>
 	
-    <main>
+    <main th:with="pagination=${map.pagination}, memberList=${map.memberList}">
         <section class = "adminIntroArea">
             <div class = "adminIntroTitle">
                 회원 관리
@@ -33,10 +33,10 @@
 
                 <!-- 회원 검색 창-->
                 <div class = "adminSearchArea">
-                    <form th:action="@{/#}" name="adminMemberSearch">
+                    <form th:action="@{/mypage/admin/memberListAdmin}" name="adminMemberSearch" id="memberSearchForm" method="GET">
                         <fieldset class = "adminSearch">
                             <input type="search" id="memberSearch" name="memberSearch" class = "applyInput"
-                            autocomplete="on" placeholder="회원 검색">
+                            autocomplete="on" placeholder="회원 정보 검색">
                             <button id="searchBtn" class="fa-solid fa-magnifying-glass"></button>
                         </fieldset>
                     </form>	 
@@ -61,71 +61,52 @@
                         </thead>
     
                         <tbody>
+							
+							<!-- 회원리스트 없을 경우 -->
+							<th:block th:if="${#lists.size(memberList) == 0}">
+								<tr id="no-list">
+									<th colspan="7">회원 목록이 존재하지 않습니다.</th>
+								</tr>
+							</th:block>
                             
-                            <tr class = "memberBodyTr">
-                                <td>1</td>
-                                <td>user01</td>
-                                <td>이유진</td>
-                                <td>aaaa@naver.com</td>
-                                <td>빵빵이</td>
-                                <td>010-4444-4444</td>
-                                <td><button>탈퇴하기</button></td>
-                            </tr> 	
-                            
-                            <tr class = "memberBodyTr">
-                                <td>2</td>
-                                <td>user02</td>
-                                <td>유동민</td>
-                                <td>bbbb@naver.com</td>
-                                <td>빵빵이2</td>
-                                <td>010-7777-7777</td>
-                                <td><button>탈퇴하기</button></td>
-                            </tr>                                 
-
-                            <tr class = "memberBodyTr">
-                                <td>3</td>
-                                <td>user03</td>
-                                <td>유은서</td>
-                                <td>cccc@naver.com</td>
-                                <td>빵빵이3</td>
-                                <td>010-3333-3333</td>
-                                <td><button>탈퇴하기</button></td>
-                            </tr>   
-
-                            <tr class = "memberBodyTr">
-                                <td>4</td>
-                                <td>user04</td>
-                                <td>최지은</td>
-                                <td>dddd@naver.com</td>
-                                <td>빵빵이4</td>
-                                <td>010-1111-1111</td>
-                                <td><button>탈퇴하기</button></td>
-                            </tr>  
-
-                            <tr class = "memberBodyTr">
-                                <td>5</td>
-                                <td>user05</td>
-                                <td>김도연</td>
-                                <td>eeee@naver.com</td>
-                                <td>빵빵이5</td>
-                                <td>010-2222-2222</td>
-                                <td><button>탈퇴하기</button></td>
-                            </tr>                                 
+                            <!-- 회원리스트 있을 경우 -->
+                            <th:block th:unless="${#lists.size(memberList) == 0}">	
+	                            <tr class = "memberBodyTr" th:each="member : ${memberList}">
+	                                <td th:text="${member.memberNo}">회원 번호</td>
+	                                <td th:text="${member.memberId}">회원 아이디</td>
+	                                <td th:text="${member.memberName}">회원 이름</td>
+	                                <td th:text="${member.memberEmail}">회원 이메일</td>
+	                                <td th:text="${member.memberNickname}">회원 닉네임</td>
+	                                <td th:text="${member.memberTel}">
+										회원 전화번호</td>
+										
+									<!-- 탈퇴 안한 사람의 경우 -->	
+                            		<th:block th:if="${member.memberDelYn == 'N'}">	
+	                                	<td><button type="button" th:onclick="|memberDel(${member.memberNo})|">탈퇴하기</button></td>
+	                                </th:block>
+	                                
+	                                <!-- 탈퇴한 사람의 경우 -->	
+                            		<th:block th:if="${member.memberDelYn == 'Y'}">	
+	                                	<td><button id="memberDel-btn">탈퇴완료</button></td>
+	                                </th:block>
+	                            </tr> 	
+							</th:block>                  
 
                         </tbody>
                     </table>
                 </div>
 
 
-                <!-- 페이지 네이션 -->
-                <div class="paginationArea">
+                <!-- 페이지네이션 -->
+                <!-- 회원리스트가 있을 때만 페이지네이션 보이기 -->
+                <div class="paginationArea" th:if="${#lists.size(memberList) > 0}">
                     <ul class="pagination">
                     
                         <!-- 첫 페이지로 이동 -->
-                        <li><a th:href="@{/#}">&lt;&lt;</a></li>
+                        <li><a th:href="@{/mypage/admin/memberListAdmin(cp=1)}">&lt;&lt;</a></li>
     
                         <!-- 이전 목록 마지막 번호로 이동 -->
-                        <li><a th:href="@{/#}">&lt;</a></li>
+                        <li><a th:href="@{/mypage/admin/memberListAdmin(cp=${pagination.prevPage})}">&lt;</a></li>
     
                         
                         <!-- 특정 페이지로 이동 -->
@@ -144,24 +125,27 @@
                             
                         </c:forEach>
                         -->
-                        <li><a class = "current">1</a></li>
-                        <li><a th:href = "@{/#}">2</a></li>
-                        <li><a th:href = "@{/#}">3</a></li>
-                        <li><a th:href = "@{/#}">4</a></li>
-                        <li><a th:href = "@{/#}">5</a></li>
-                        <li><a th:href = "@{/#}">6</a></li>
-                        <li><a th:href = "@{/#}">7</a></li>
-                        <li><a th:href = "@{/#}">8</a></li>
-                        <li><a th:href = "@{/#}">9</a></li>
-                        <li><a th:href = "@{/#}">10</a></li>
-
                         
+                        <!-- 특정 페이지로 이동 -->
+                        <!-- #numbers.sequence(시작, 끝, [,step]) : 시작 이상, 끝 이하 까지 step 만큼 증가하는 숫자를 발생시켜 리스트로 반환 -->
+                        <th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
+							
+							<li th:if="${i == pagination.currentPage}">
+								<a class="current" th:text="${i}">현재 페이지</a>
+							</li>
+							
+							<li th:unless="${i == pagination.currentPage}">
+	                            <a th:href="@{/mypage/admin/memberListAdmin(cp=${i})}"
+	                                th:text="${i}">나머지 페이지</a>
+                        	</li>
+							
+						</th:block>
                         
                         <!-- 다음 목록 시작 번호로 이동 -->
-                        <li><a th:href = "@{/#}">&gt;</a></li>
+                        <li><a th:href = "@{/mypage/admin/memberListAdmin(cp=${pagination.nextPage})}">&gt;</a></li>
     
                         <!-- 끝 페이지로 이동 -->
-                        <li><a th:href = "@{/#}">&gt;&gt;</a></li>
+                        <li><a th:href = "@{/mypage/admin/memberListAdmin(cp=${pagination.maxPage})}">&gt;&gt;</a></li>
     
                     </ul>
                 </div>
@@ -175,5 +159,12 @@
     
     <!-- 풋터 -->
     <th:block th:replace="~{common/footer}"></th:block>
+    
+    <script th:src="@{/js/mypage/admin/memberList_admin.js}"></script>
+    
+    <script th:inline="javascript">
+		const message = /*[[${message}]]*/ "전달 받은 메세지";
+		if(message != null) alert(message);
+	</script>
 </body>
 </html>

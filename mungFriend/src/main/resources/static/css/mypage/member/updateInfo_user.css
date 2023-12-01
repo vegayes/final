@@ -139,7 +139,7 @@ a:hover{
 .updateTitle{
     flex-basis: 30%;
 
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 700;
 
     display: flex;
@@ -370,11 +370,12 @@ a:hover{
 
 .updateButtonBox{
     flex-basis: 50%;
+    border: none;
     border-radius: 10px;
     background: #FEE4D6;
     padding : 15px 30px;
 
-    font-size: 15px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;

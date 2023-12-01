@@ -32,12 +32,18 @@
 
             <!-- 내용 작성영역-->
             <div class = "userContentContainer">
-                <form th:action = "@{/#}" method = "POST" name ="updateForm" class = "updateForm">
+                <form th:action = "@{/mypage/member/updateInfoUser}" th:object="${session.loginMember}" method = "POST" name ="updateForm" id="updateForm" class = "updateForm" enctype="multipart/form-data">
 					
                     <div class = "updateElement">
                         <div class = "updateTitle formDogFlex">
                             <div class = "formProfile">
-                                <img th:src="@{/images/member/jjangu.png}">
+								
+								<!-- 프로필 이미지가 없으면 기본 이미지 -->
+								<img th:unless="*{memberProfile}" th:src="@{/images/member/profile_noImage.png}" id="profileImage">
+								
+								<!-- 프로필 이미지가 있으면 저장된 이미지 -->
+                                <img th:if="*{memberProfile}" th:src="*{memberProfile}" id="profileImage">
+                                
                             </div>
                         </div>
 
@@ -50,7 +56,7 @@
                             </label>
 
 
-                            <div class = "formFont formMemberBtn profileBtnArea">
+                            <div class = "formFont formMemberBtn profileBtnArea" id="imgDelBtn">
                                 이미지 삭제
                             </div>
 
@@ -66,7 +72,7 @@
 
                         <div class = "updateInput">
                             <fieldset class = "updateFieldset" id = "updateId">
-                                <input type = "text" name = "updateId" id = "updateId" class = "updateId" value = "user01" readonly>
+                                <input type = "text" name = "memberId" id = "updateId" class = "updateId" th:value = "*{memberId}" readonly>
                             </fieldset>
                         </div>
 
@@ -78,12 +84,12 @@
                     <div class = "updateElement">
 
                         <div class = "updateTitle">
-                            비밀번호
+                            현재 비밀번호
                         </div>
 
                         <div class = "updateInput">
                             <fieldset class = "updateFieldset">
-                                <input type = "password" name = "updatePw" id = "updatePw" class = "updatePw" >
+                                <input type = "password" name = "memberPw" id = "updatePw" class = "updatePw" >
                             </fieldset>
                         </div>
 
@@ -96,7 +102,7 @@
                     <div class = "updateElement">
 
                         <div class = "updateTitle">
-                            비밀번호 확인
+                            현재 비밀번호 확인
                         </div>
 
                         <div class = "updateInput">
@@ -124,7 +130,7 @@
 
                         <div class = "updateInput">
                             <fieldset class = "updateFieldset" id = "updateName">
-                                <input type = "text" name = "updateName" id = "updateName" class = "updateName" value = "김유저" readonly>
+                                <input type = "text" name = "memberName" id = "updateName" class = "updateName" th:value = "*{memberName}" readonly>
                             </fieldset>
                         </div>
 
@@ -141,7 +147,7 @@
 
                         <div class = "updateInput">
                             <fieldset class = "updateFieldset">
-                                <input type = "text" name = "updatePhone" id = "updatePhone" class = "updatePhone" value = "010-1234-1212">
+                                <input type = "text" name = "memberTel" id = "updatePhone" class = "updatePhone" th:value = "*{memberTel}">
                             </fieldset>
                         </div>
 
@@ -165,12 +171,12 @@
 
                         <div class = "updateInput">
                             <fieldset class = "updateFieldset">
-                                <input type = "email" name = "updateEmail" id = "updateEmail" class = "updateEmail">
+                                <input type = "email" name = "memberEmail" id = "updateEmail" class = "updateEmail" th:value = "*{memberEmail}">
                             </fieldset>
                         </div>
 
                         <div class = "updateBtn">
-                            <div class = "updateEmailBtn">
+                            <div class = "updateEmailBtn" id="sendAuthKeyBtn">
                                 인증번호<br> 받기
                             </div>
                         </div>
@@ -198,14 +204,15 @@
                         </div>
 
                         <div class = "updateBtn">
+							<div class = "updateEmailBtn" id="checkAuthKeyBtn">
+                                인증번호<br> 확인
+                            </div>
                         </div>
                     </div>
 
                     <!-- 인증번호 유효성 검사 -->
                     <div class = "updateValidationElement">
-                        <div class = "updateProcessBox">
-                            인증번호가 일치하지 않습니다.
-                        </div>
+                        <div class = "updateProcessBox" id="authKeyMessage"></div>
                     </div>
 
 
@@ -217,7 +224,7 @@
 
                         <div class = "updateInput">
                             <fieldset class = "updateFieldset">
-                                <input type = "text" name = "updateNickname" id = "updateNickname" class = "updateNickname" value = "김유저">
+                                <input type = "text" name = "memberNickname" id = "updateNickname" class = "updateNickname" th:value = "*{memberNickname}">
                             </fieldset>
                         </div>
 
@@ -262,9 +269,9 @@
 
 
                     <div class = "updateButtonArea">
-                        <div class = "updateButtonBox">
+                        <button class = "updateButtonBox">
                             수정하기
-                        </div>
+                        </button>
                     </div>
 
 
@@ -308,6 +315,26 @@
 	            }
 	        }).open();
 	    }
+	</script>
+	
+	<script th:inline="javascript">
+		// th:inline="javascript"
+		// - 타임리프를 script에서 사용 가능
+		// - 타임리프에서 출력되는 값을 JS 에 맞는 자료형으로 변경 // 타임리프도 결국엔 java..
+		
+		// Natural Template
+		// 1) js 문법 에러 발생 X
+		// 2) html 파일만 단독으로 열었을 때 발생하는 에러 방지
+		const loginMember = /*[[${session.loginMember}]]*/ "로그인한 회원정보"; // -> 이 형식으로 작성하면 js에서 타임리프 쓸 때 컴파일 에러 안남!
+		
+		if(loginMember.memberAddress != null) {
+			const arr = loginMember.memberAddress.split("^^^");
+			
+			document.querySelectorAll("input[name='memberAddress']").forEach( (item, i) => {
+				item.value = arr[i];
+			} )
+		}
+		
 	</script>
 	
 	<script th:src="@{/js/mypage/member/updateInfo_user.js}"></script>

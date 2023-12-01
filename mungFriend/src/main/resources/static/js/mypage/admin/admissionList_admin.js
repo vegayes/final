@@ -21,7 +21,7 @@ var admissionBtnFlag = true; // 입소신청 진행중을 기본설정
 					입소 신청 카드 
  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/ 
 const admissionCard = document.querySelectorAll(".admissionCardBoxArea");
-const admissionCardBoxArea = document.querySelectorAll(".admissionCardBoxArea");
+//const admissionCardBoxArea = document.querySelectorAll(".admissionCardBoxArea");
 
 
 /* 처음에 들어왔을 때 */
@@ -59,8 +59,8 @@ admissionNBtn.addEventListener("click" ,function(){
 		if(admYN == 'Y'){
 			admissionCard[i].style.display = "none";
 		}else{
-			admissionCard[i].style.display = "block";
-			admissionCardBoxArea[i].style.height  = "240px";
+			admissionCard[i].style.display = "flex";
+			admissionCard[i].style.height  = "240px";
 		}
 	}
 });
@@ -83,7 +83,7 @@ admissionYBtn.addEventListener("click" ,function(){
 		var admYN = admissionArr[i].admYN;
 		if(admYN == 'Y'){
 			admissionCard[i].style.display = "block";
-			admissionCardBoxArea[i].style.height  = "220px";
+			admissionCard[i].style.height  = "220px";
 			
 		}else{
 			admissionCard[i].style.display = "none";
@@ -93,8 +93,45 @@ admissionYBtn.addEventListener("click" ,function(){
 
 
 
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+					swiper
+ ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/ 
 
+const mySwiper = new Swiper('.mySwiper', {
+    slidesPerView: 2, // 가로갯수
+    slidesPerColumn: 3,  // 세로갯수
+    grid: {                            //row count of shown slide
+        rows: 3,
+      },  
+    slidesPerGroup :2,
+    spaceBetween: 30,
 
+    pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+    navigation: {                       //navigation(arrows)
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
+    on: {
+      init: function () {},
+      orientationchange: function(){},
+      beforeResize: function(){
+        let vw = window.innerWidth;
+        if(vw > 1000){
+          mySwiper.params.slidesPerView = 2
+            mySwiper.params.slidesPerColumn = 3
+            mySwiper.params.slidesPerGroup = 2;
+        } else {
+          mySwiper.params.slidesPerView = 1
+            mySwiper.params.slidesPerColumn = 3
+            mySwiper.params.slidesPerGroup =1;
+        }
+        mySwiper.init();
+      },
+    },
+});
 
 
 

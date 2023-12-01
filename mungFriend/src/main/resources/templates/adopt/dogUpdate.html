@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>유기견 상세페이지(수정하기)</title>
+    <link rel="stylesheet" th:href="@{/css/adopt/dogUpdate.css}">
+</head>
+<body>
+
+    <th:block th:replace="~{common/header}"></th:block>
+
+    <main>
+        <div class="main-left"></div>
+
+        <div class="main-center">
+            <div>유기견 등록하기</div>
+
+            <form th:action="@{update}" method="POST" enctype="multipart/form-data" id="dogForm">
+                <div class="info-input">
+                    <div class="img-box">
+                        <div class="img-thumbnail">
+                            <span class="delete-image">&times;</span>
+                            <label for="img0" style="cursor: pointer;">
+                                <img width="250" height="250" class="preview">
+                            </label>
+                            <input type="file" name="images" class="inputImage" id="img0" style="display:none;" accept="image/*">
+                        </div>
+                    </div>
+                    <div class="select-box">
+                        <div>
+                            <label for="name">이름</label>
+                            <input type="text" name="dogName" th:value="${dog.dogName}">
+                        </div>
+                        <div>
+                            <label for="birth">생일</label>
+                            <input type="text" id="birthday" name="dogBirthDay" pattern="\d{4}-\d{2}-\d{2}" placeholder="yyyy-mm-dd" th:value="${dog.dogBirthDay}">
+                            <!-- <input type="date"> -->
+                        </div>
+                        <div>
+                            <label for="gender">성별</label>
+                            <select id="gender" name="dogGender">
+                                <option value="남아" th:selected="${dog.dogGender == '남아'}">남아</option>
+                                <option value="여아" th:selected="${dog.dogGender == '여아'}">여아</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="kind">견종</label>
+                            <!-- <option value="breedName"></option> -->
+                            <input type="text" name="breedName" th:value="${dog.breedName}">
+                        </div>
+                        <div>
+                            <label for="size">크기</label>
+                            <select id="size" name="dogSize">
+                                <option value="소형" th:selected="${dog.dogSize == '소형'}">소형</option>
+                                <option value="중형" th:selected="${dog.dogSize == '중형'}">중형</option>
+                                <option value="대형" th:selected="${dog.dogSize == '대형'}">대형</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="character">성격</label>
+                            <input type="text" name="dogPersonality" th:value="${dog.dogPersonality}">
+                        </div>
+                        <div>
+                            <label for="surgery">중성화</label>
+                            <select id="surgery" name="dogNeutering">
+                                <option value="N" th:selected="${dog.dogNeutering == 'N'}">미완료</option>
+                                <option value="Y" th:selected="${dog.dogNeutering == 'Y'}">완료</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="Vaccine">접종유무</label>
+                            <select id="Vaccine" name="dogVaccine">
+                                <option value="N" th:selected="${dog.dogVaccine == 'N'}">미완료</option>
+                                <option value="Y" th:selected="${dog.dogVaccine == 'Y'}">완료</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="likeThings">좋아하는 것</label>
+                            <input type="text" name="dogLike" th:value="${dog.dogLike}">
+                        </div>
+                        <div>
+                            <label for="hateThings">싫어하는 것</label>
+                            <input type="text" name="dogHate" th:value="${dog.dogHate}">
+                        </div>
+                        <div>
+                            <label for="specialNote">특이 사항</label>
+                            <input type="text" name="dogSpecialNote" th:value="${dog.dogSpecialNote}">
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <p id="img-title">[강아지 상세이미지 등록 - 최대 3장까지 가능]</p>
+                    <div class="img-input">
+                        <div class="boardImg">
+                            <span class="delete-image">&times;</span>
+                            <label for="img1" style="cursor: pointer;">
+                                <img th:src="@{/images/adopt/카메라.png}" width="300" height="200" class="preview">
+                            </label>
+                            <input type="file" name="images" class="inputImage" id="img1" style="display:none;" accept="image/*">
+                        </div>
+
+                        <div class="boardImg">
+                            <span class="delete-image">&times;</span>
+                            <label for="img2" style="cursor: pointer;">
+                                <img th:src="@{/images/adopt/카메라.png}" width="300" height="200" class="preview">
+                            </label>
+                            <input type="file" name="images" class="inputImage" id="img2" style="display:none;" accept="image/*">
+                        </div>
+                        
+                        <div class="boardImg">
+                            <span class="delete-image">&times;</span>
+                            <label for="img3" style="cursor: pointer;">
+                                <img th:src="@{/images/adopt/카메라.png}" width="300" height="200" class="preview">
+                            </label>
+                            <input type="file" name="images" class="inputImage" id="img3" style="display:none;" accept="image/*">
+                        </div>
+                    </div>
+                </div>
+
+                <button id="submitBtn" type="submit" style="cursor: pointer;">제출하기</button>
+
+                <!-- 기존 이미지가 있다가 삭제된 이미지의 순서를 기록-->
+                <input type="hidden" name="deleteList" value="">
+
+                <!-- 수정 성공 시 주소(쿼리스트링) 유지용도 -->
+                <input type="hidden" name="cp" th:value="${param.cp}">
+            </form>
+
+        </div>
+
+        <div class="main-right">
+            <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
+            <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+        </div>
+    </main>
+
+    <th:block th:replace="~{common/footer}"></th:block>
+
+    <script th:src="@{/js/adopt/dogUpdate.js}"></script>
+
+    <script th:inline="javascript">
+
+        const imageList = /*[[${dog.imageList}]]*/ [];
+
+        const previewList = document.querySelectorAll("img.preview");
+
+        for(let img of imageList){
+            previewList[img.imageOrder].src = img.imagePath + img.imageReName;
+        }
+    </script>
+    
+</body>
+</html>

@@ -5,9 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import second.project.mungFriend.member.model.dto.Member;
@@ -21,11 +23,11 @@ public class MemberUserController {
   @Autowired
 	private MemberUserService service;
   
-	// 찜한목록 화면 전환
-	@GetMapping("/myPageLikeList")
-	public String myPageLikeList() {
-		return "mypage/member/myPageLikeList";
-	}
+//	// 찜한목록 화면 전환
+//	@GetMapping("/myPageLikeList")
+//	public String myPageLikeList() {
+//		return "mypage/member/myPageLikeList";
+//	}
 
 
 	// 정보수정 화면 전환
@@ -35,6 +37,67 @@ public class MemberUserController {
 	}
 	
 	// 정보수정
+	@PostMapping("/updateInfoUser")
+	public String updateInfoUser(@SessionAttribute("loginMember") Member loginMember,
+								@RequestParam("updateProfileImage") MultipartFile profileImage, // 업로드 파일
+								Member updateMember,
+								String[] memberAddress,
+								RedirectAttributes ra) throws Exception{
+		
+		/*
+		 * @SessionAttribute("loginMember") Member loginMember
+		 *  : Session에서 얻어온 "loginMember"에 해당하는 객체를
+		 *    매개변수 Member loginMember에 저장
+		 * 
+		 * Member updateMember
+		 *  : 수정할 회원 정보 담긴 커맨드 객체
+		 *  
+		 * String[] memberAddress
+		 *  : name="memberAddress"인 input 3개의 값(주소)
+		 * 
+		 * RedirectAttributes ra : 리다이렉트 시 값 전달용 객체
+		 * 
+		 * */
+		
+		// 주소 하나로 합치기(a^^^b^^^c)
+		if(updateMember.getMemberAddress().equals(",,")) {
+			updateMember.setMemberAddress(null);
+		} else {
+			// updateMember 에 주소문자열 세팅
+			String addr = String.join("^^^", memberAddress);
+			updateMember.setMemberAddress(addr);
+		}
+		
+		// 로그인한 회원의 번호를 updateMember에 세팅
+		updateMember.setMemberNo(loginMember.getMemberNo());
+		
+		
+		// DB 회원 정보 수정 (update) 서비스 호출
+		int result = service.updateInfoUser(profileImage, updateMember, loginMember);
+		
+		String message = null;
+		
+		// 결과값으로 성공
+		if(result > 0) {
+			// -> 성공 시 Session에 로그인된 회원 정보도 수정(동기화)
+			loginMember.setMemberTel(updateMember.getMemberTel());
+			loginMember.setMemberEmail(updateMember.getMemberEmail());
+			loginMember.setMemberNickname(updateMember.getMemberNickname());
+			loginMember.setMemberAddress(updateMember.getMemberAddress());
+			
+			message = "회원 정보 수정 성공";
+			
+		} else {
+			// 실패에 따른 처리
+			message = "회원 정보 수정 실패";
+			
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:updateInfoUser"; // 상대경로 (/mypage/member/updateInfoUser)
+		
+	}
 	
 	// 회원탈퇴 화면 전환
 	@GetMapping("/secessionUser")

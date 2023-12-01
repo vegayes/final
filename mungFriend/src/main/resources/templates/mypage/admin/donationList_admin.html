@@ -11,7 +11,7 @@
     <body>
 	    <th:block th:replace="~{common/header}"></th:block>
 
-        <main>
+        <main th:with = "pagination=${map.pagination}, donationList=${map.donationList}">
             <section class = "adminIntroArea">
                 <div class = "adminIntroTitle">
                     후원 내역
@@ -29,9 +29,13 @@
                 <!-- 후원 내용 영역-->
                 <div class = "adminContentContainer">
 
-                    <!-- 후원 검색 창-->
+                    <!-- 후원 검색 창
+                    	★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+                    	     나중에 시간있으면 ajax로 변환하기 
+                    	★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+                    -->
                     <div class = "adminSearchArea">
-                        <form action="#" name="adminDonationSearch">
+                        <form th:action="@{/mypage/admin/donationList}" name="adminDonationSearch">
                             <fieldset class = "adminSearch">
                                 <input type="search" id="donationSearch" name="donationSearch" class = "applyInput"
                                 autocomplete="on" placeholder="후원자 이름 검색">
@@ -39,123 +43,174 @@
                             </fieldset>
                         </form>	 
                     </div>
+                    
+	       			<th:block th:if="${#lists.size(donationList)} == 0">
+						<div class = "allNotList" >
+							후원된 기록이 존재하지 않습니다.                   										
+						</div>
+	       			</th:block>
 
+					<th:block th:unless="${#lists.size(donationList)} == 0">
+	                    <!-- 후원 내역 리스트 -->
+	                    <div class = "adminDonationContainer">
+	                        <table class="donationTable">
+	                
+	                            <thead>
+	                                <tr class = "donationTheadTr">
+	                                    <th>번호</th>
+	                                    <th>후원자</th>
+	                                    <th>후원자 이메일</th>
+	                                    <th>일시/정기</th>
+	                                    <th>결제 일시 </th>
+	                                    <th>후원 금액</th>
+	                                </tr>
+	                            </thead>
+	        
+	                            <tbody>
+	                                
+	                                <tr class = "donationTBodyTr" th:each="donation, donationState:${donationList}">
+	                                    <td>[[${donationState.count}]]</td>
+	                                    <td>[[${donation.memberName}]]</td>
+	                                    <td>[[${donation.memberEmail}]]</td>
+	                                    <td style="cursor: pointer;">[[${donation.donationType}]]</td>
+	                                    <td>[[${donation.donationDate}]]</td>
+	                                    <td>[[${donation.donationAmount}]]원</td>
+	                                </tr> 	 
+	                                              	      
+	                            </tbody>
+	                        </table>
+	                    </div>
+	
+	                    <!-- 페이지 네이션 -->
+	                    <div class="paginationArea" th:if="${#lists.size(donationList) > 0}">
+							<!--검색 X -->
+	                        <ul class="pagination" th:unless = "${param.donationSearch}">
+	                        <!--<ul class="pagination">-->
+	                        
+	                            <!-- 첫 페이지로 이동 -->
+	                            <li><a th:href="@{/mypage/admin/donationList(cp=1)}">&lt;&lt;</a></li>
+	        
+	                            <!-- 이전 목록 마지막 번호로 이동 -->
+	                            <li><a th:href="@{/mypage/admin/donationList(cp=${pagination.prevPage})}" >&lt;</a></li>
+	        
+			                    <!-- 특정 페이지로 이동 -->
+			                    <!-- #numbers.sequence(시작, 끝[,step]) : 시작 이상, 끝 이하 까지 step만큼 증가하는 숫자를 발생시켜 리스트로 반환-->
+			                    <th:block th:each= "i:${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
+			                    	
+			               			<!-- 현재 보고있는 페이지 -->
+			            		 	<li th:if = "${i == pagination.currentPage}">
+										 <a class="current" th:text = "${i}">현재 페이지</a>
+									 </li>
+			                    		
+			                		<!-- 현재 페이지를 제외한 나머지 -->
+			            			<li th:unless = "${i == pagination.currentPage}">
+										<a th:href="@{/mypage/admin/donationList(cp=${i})}" th:text = "${i}">나머지 페이지</a>
+									</li>                  		
+			                   		
+			                    </th:block>
+				
+	                            
+			                            
+		                        <!-- 다음 목록 시작 번호로 이동 -->
+		                        <li><a th:href = "@{/mypage/admin/donationList(cp=${pagination.nextPage})}">&gt;</a></li>
+		    
+		                        <!-- 끝 페이지로 이동 -->
+		                        <li><a th:href = "@{/mypage/admin/donationList(cp=${pagination.maxPage})}">&gt;&gt;</a></li>
+		    
+	                        </ul>
+	                        
+	                        
+            				<!-- 검색 O  페이지 네이션 --> 
+			                <ul class="pagination" th:if = "${param.donationSearch}" >
+			                <!--<ul class="pagination" >-->
 
-                    <!-- 후원 내역 리스트 -->
-                    <div class = "adminDonationContainer">
-
-                        <table class="donationTable">
-                
-                            <thead>
-                                <tr class = "donationTheadTr">
-                                    <th>번호</th>
-                                    <th>후원자</th>
-                                    <th>후원자 이메일</th>
-                                    <th>일시/정기</th>
-                                    <th>결제 일시 </th>
-                                    <th>후원 금액</th>
-                                </tr>
-                            </thead>
-        
-                            <tbody>
-                                
-                                <tr class = "donationTBodyTr">
-                                    <td>1</td>
-                                    <td>이유진</td>
-                                    <td>aaaa@naver.com</td>
-                                    <td>정기</td>
-                                    <td>2023-11-11-12:00</td>
-                                    <td>120,000원</td>
-                                </tr> 	
-                                
-                                <tr class = "donationTBodyTr">
-                                    <td>2</td>
-                                    <td>이유진</td>
-                                    <td>aaaa@naver.com</td>
-                                    <td>일시</td>
-                                    <td>2023-11-13-13:30</td>
-                                    <td>1,000,000원</td>
-                                </tr>                                 
-
-                                <tr class = "donationTBodyTr">
-                                    <td>3</td>
-                                    <td>유은서</td>
-                                    <td>bbbb@naver.com</td>
-                                    <td>일시</td>
-                                    <td>2023-11-13-14:30</td>
-                                    <td>10,000원</td>
-                                </tr>   
-
-                                <tr class = "donationTBodyTr">
-                                    <td>4</td>
-                                    <td>유은서</td>
-                                    <td>bbbb@naver.com</td>
-                                    <td>일시</td>
-                                    <td>2023-11-15-13:30</td>
-                                    <td>50,000원</td>
-                                </tr>                                  
-
-                            </tbody>
-                        </table>
-                    </div>
-
-
-                    <!-- 페이지 네이션 -->
-                    <div class="paginationArea">
-                        <ul class="pagination">
-                        
-                            <!-- 첫 페이지로 이동 -->
-                            <li><a href="#">&lt;&lt;</a></li>
-        
-                            <!-- 이전 목록 마지막 번호로 이동 -->
-                            <li><a href="#">&lt;</a></li>
-        
-                            
-                            <!-- 특정 페이지로 이동 -->
-                            <!-- jsp 코드 
-                            <c:forEach var="i" begin="${pagination.startPage}" end = "${pagination.endPage}" step="1">
-                                
-                                <c:choose>
-                                    <c:when test="${i == pagination.currentPage }">
-                                        <li><a class="current">${i}</a></li>
-                                    </c:when>
-                                    
-                                    <c:otherwise>
-                                        <li><a href="/board/${boardCode}/?cp=${i}${kq}">${i}</a></li>                  		
-                                    </c:otherwise>
-                                </c:choose>
-                                
-                            </c:forEach>
-                            -->
-                            <li><a class = "current">1</a></li>
-                            <li><a href = "#">2</a></li>
-                            <li><a href = "#">3</a></li>
-                            <li><a href = "#">4</a></li>
-                            <li><a href = "#">5</a></li>
-                            <li><a href = "#">6</a></li>
-                            <li><a href = "#">7</a></li>
-                            <li><a href = "#">8</a></li>
-                            <li><a href = "#">9</a></li>
-                            <li><a href = "#">10</a></li>
-
-                            
-                            
-                            <!-- 다음 목록 시작 번호로 이동 -->
-                            <li><a href="#">&gt;</a></li>
-        
-                            <!-- 끝 페이지로 이동 -->
-                            <li><a href="#">&gt;&gt;</a></li>
-        
-                        </ul>
-                    </div>
+			                    <li><a th:href="@{/mypage/admin/donationList(cp=1)}">&lt;&lt;</a></li>
+			
+			                    <li><a th:href="@{/mypage/admin/donationList(cp=${pagination.prevPage})}">&lt;</a></li>
+			
+								
+			                    <!-- 특정 페이지로 이동 -->
+			                    <!-- #numbers.sequence(시작, 끝[,step]) : 시작 이상, 끝 이하 까지 step만큼 증가하는 숫자를 발생시켜 리스트로 반환-->
+			                    <th:block th:each= "i:${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
+			                    	
+			               			<!-- 현재 보고있는 페이지 -->
+			            		 	<li th:if = "${i == pagination.currentPage}">
+										 <a class="current" th:text = "${i}">현재 페이지</a>
+									 </li>
+			                    		
+			                		<!-- 현재 페이지를 제외한 나머지 -->
+			            			<li th:unless = "${i == pagination.currentPage}">
+										<a th:href="@{/mypage/admin/donationList(cp=${i})}" th:text = "${i}">나머지 페이지</a>
+									</li>                  		
+			                   		
+			                    </th:block>
+			                    
+			                    
+			                    
+		                        <!-- 다음 목록 시작 번호로 이동 -->
+		                        <li><a th:href = "@{/mypage/admin/donationList(cp=${pagination.nextPage})}">&gt;</a></li>
+		    
+		                        <!-- 끝 페이지로 이동 -->
+		                        <li><a th:href = "@{/mypage/admin/donationList(cp=${pagination.maxPage})}">&gt;&gt;</a></li>
+			
+			                </ul>	
+	                        
+	                    </div>
+                    </th:block>
+                    
+                    
 
                 </div>
             </section>
         </main>
         
-        <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
-        <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
-    
+        <a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+		<a th:href="@{#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
+
 	    <th:block th:replace="~{common/footer}"></th:block>
+
+
+
+		<!-- <script th:inline="javascript">
+
+			<td>donationType 에 넣어서 사용</td>    th:onclick="|donationDetail(${donationState.count}, this)|"
+
+
+			function donationDetail(donationNo,btn) {
+
+				const area = document.createElement("tr");
+				area.classList.add("donationTBodyTr");
+				area.classList.add("cssTest");
+
+				const test1 = document.createElement("td");
+				const test2 = document.createElement("td");
+				const test3 = document.createElement("td");
+				const test4 = document.createElement("td");
+				const test5 = document.createElement("td");
+
+				test1.innerText = "예시1";
+				test2.innerText = "예시2";
+				test3.innerText = "예시3";
+				test4.innerText = "예시4";
+				test5.innerText = "예시5";
+
+				area.append(test1);
+				area.append(test2);
+				area.append(test3);
+				area.append(test4);
+				area.append(test5);
+
+				btn.parentElement.after(area);
+
+				setTimeout(() => {
+
+					area.classList.add("visible");
+				}, 10); // 약간의 딜레이를 두어 트랜지션 효과가 발동하도록 함
+
+
+			}
+
+		</script> -->
+
     </body>
 </html>

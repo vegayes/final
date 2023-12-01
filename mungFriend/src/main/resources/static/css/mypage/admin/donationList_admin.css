@@ -95,6 +95,25 @@ a:hover{
     color : red;
 }
 
+.submenu {
+    display: none;
+    margin-left: 20px;
+   
+}
+
+.submenu li {
+    margin-top: 5px;
+    padding: 5px;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 10px;
+}
+
+.submenu.active {
+    display: block;
+}
+
 /*************************************************
                 후원내역 (관리자) 검색창
 *************************************************/
@@ -186,7 +205,7 @@ a:hover{
 /*테이블 전체*/
 .donationTable{
     flex-basis: 100%;
-    padding : 10px 25px;
+    padding : 15px 25px;
     /* border : 2px solid red; */
 
     border-top: 5px solid #FEE4D6;
@@ -208,7 +227,7 @@ a:hover{
 .donationTBodyTr td{
     /*가운데 정렬*/
     text-align: center; 
-    padding : 13px 10px;
+    padding : 16px 10px;
     border-bottom: 3px solid #D2D2D2;
 
     font-size: 12px;
@@ -226,6 +245,7 @@ a:hover{
 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★*/
 .paginationArea{
     margin-top: auto; /*★나중에 필요 없을 듯★*/
+    margin-bottom: 10px;
 }
 
 
@@ -277,3 +297,26 @@ a:hover{
 #donate-image {
     bottom: 70px;
 }
+
+/*************************************************
+                list가 존재하지 않는 경우
+*************************************************/
+.allNotList{
+	width : 100%; 
+	height : 615px; 
+	display: flex; 
+	justify-content: center; 
+	padding:10px;  
+}
+
+
+
+
+/* .cssTest {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.cssTest.visible {
+    opacity: 1;
+} */

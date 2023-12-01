@@ -35,8 +35,8 @@ public class FreeAdmissionController {
 		
 		// 파라미터 : 내용, 프로필 이미지 파일
 		// 파일 저장 경로 : HttpSession
-		System.out.println("admission 값 : " + admission);		
-		System.out.println("프로필 : " +  admissionProfile);
+		//System.out.println("admission 값 : " + admission);		
+		//System.out.println("프로필 : " +  admissionProfile);
 		
 		if(admission.getAdmSignificant() == null) {
 			 admission.setAdmSignificant("특이사항 없음");
@@ -70,6 +70,7 @@ public class FreeAdmissionController {
 		
 		return path;
 	}
+	
 	
 	
 	

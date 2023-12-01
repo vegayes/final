@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Date;
 
 import javax.crypto.Mac;
@@ -79,12 +80,20 @@ public class ChatController {
               
                 String description = "";
                 description = (String)data.get("description");
-               
-                descriptionArray = ((String) data.get("description")).split("\n");
+              
+                
+                descriptionArray = ((String) data.get("description")).split("\\s*\\{\\s*|\\s*}\\s*"); // 받은 데이터를 {}를 기준으로 나눔
+               // descriptionArray = ((String) data.get("description")).split("\n"); // 받은 데이터를 엔터키를 기준으로 나눔
+                
+                descriptionArray = Arrays.stream(descriptionArray) //빈 문자열 제거
+                        .filter(s -> !s.isEmpty())
+                        .toArray(String[]::new);
+                
              	chatMessage = description;
              	ObjectMapper objectMapper = new ObjectMapper();
-             	jsonMessage = objectMapper.writeValueAsString(descriptionArray);
              	
+             	jsonMessage = objectMapper.writeValueAsString(descriptionArray);
+             	System.out.println("받은 메시지 : " + jsonMessage);
             } catch (Exception e) {
                 System.out.println("error");
                 e.printStackTrace();

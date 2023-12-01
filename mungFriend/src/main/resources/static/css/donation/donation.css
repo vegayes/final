@@ -18,7 +18,7 @@
 main{
     /* min-height: 1080px; */
     height: auto;
-    width: 1920px;
+    width: 100%;
 
     display: flex;
     flex-direction: column;
@@ -83,7 +83,7 @@ main{
 }
 
 .donationProcessTitle{
-    flex-basis: 15%;
+    flex-basis: 17%;
 
     display: flex;
     justify-content: start;
@@ -149,11 +149,12 @@ input[name="amount"]:checked + div{
 
 /* textarea*/
 .donationContent{
-    height : 201px;
+   /* height : 201px;*/
+   	height : 70px;
     flex-basis : 100%;
 
 
-    padding : 10px 5px;
+    padding : 10px 15px;
     
     border : none;
     border-radius: 10px;
@@ -261,19 +262,88 @@ input[name="amount"]:checked + div{
 *************************************************/
 #inputAmountArea{
 	display: none;
+	
+	 transition-duration: 1s;
 }
 
+/*
 input[value="input"]:checked #inputAmountArea{
 	display : block;
 }
+*/
+
+#inputAmountBtnArea{
+	display : flex;
+    justify-content: end;
+    align-items: center;
+	padding-right: 20px;
+}
+
+#inputAmountBtnArea > button{
+	    
+    margin-left : 15px;
+   
+}
+
+#inputArea{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	
+}
+
+#inputArea > input[type="number"]{
+	height: 70%;
+	padding : 5px 10px;
+
+	text-align: end;
+}
+
+#inputReset{
+	font-size : 11px;
+	padding-left: 5px;
+	
+	cursor: pointer;
+}
+
+#inputAmountBtnArea button{
+    border-radius: 10px;
+    border: 5px solid #FEE4D6;
+    background-color: white;
+    padding : 5px 7px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    font-size : 12px;
+}
+
+#inputAmountBtnArea button:active{
+	border : 5px solid red;
+}
+
+.selected {
+    border: 5px solid #F95353;
+}
 
 
+/*************************************************
+                비회원인 경우 정보 입력
+*************************************************/
+.donationFieldset{
+    flex-basis: 40%;
+    border: 5px solid #FEE4D6;
+    border-radius: 10px;
+    padding : 5px 10px;
+}
 
-
-
-
-
-
+.donationFieldset input{
+    width: 100%;
+    border : none; 
+    outline : 0;
+    font-size: 12px;
+}
 
 
 

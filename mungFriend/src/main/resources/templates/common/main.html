@@ -51,13 +51,19 @@
 					<p>호랑이</p>
 				</div>
 			</div>
-			<div class="dog-photo">
-				<img th:src="@{/images/main/dog5.png}" alt="강아지 1" class="active">
-				<div class="dog-info">
-					<p>바보개</p>
-					<p>호랑이</p>
-				</div>
-			</div>
+			
+			
+			<a href="http://localhost/adopt/dogList/5">
+    <div class="dog-photo">
+        <img src="/images/main/dog5.png" alt="강아지 1" class="active">
+        <div class="dog-info">
+            <p>먹태깡</p>
+            <p>믹스견</p>
+        </div>
+    </div>
+</a>
+			
+			
 			<div class="dog-photo">
 				<img th:src="@{/images/main/dog6.png}" alt="강아지 1" class="active">
 				<div class="dog-info">
@@ -115,7 +121,7 @@
 
 	</main>
 
-
+	<th:block th:replace="~{common/chatbot}"></th:block>
 	<th:block th:replace="~{common/footer}"></th:block>
 
 </body>

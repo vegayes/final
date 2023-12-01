@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>유기견 상세페이지(조회)</title>
     <link rel="stylesheet" th:href="@{/css/adopt/dogDetail.css}">
-    <script th:src="@{https://kit.fontawesome.com/f7459b8054.js}" crossorigin="anonymous"></script>
+    <script th:src="@{https://kit.fontawesome.com/323ba1dcd4.js}" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -27,9 +27,9 @@
                         <div id="gender">[[${dog.dogGender}]]</div>
 
                         <!-- 좋아요 하트 -->
-                        <i class="fa-heart" 
+                        <i class="fa-heart"
 							th:classappend="${likeCheck} ? fa-solid : fa-regular"
-						id="boardLike"></i>
+						id="like"></i>
 
                     </div>
                     <p id="kind">[[${dog.breedName}]]</p>
@@ -79,7 +79,7 @@
                     <div class="img-box">
                         <th:block th:each="i : ${#numbers.sequence(start, #lists.size(dog.imageList)-1, 1)}">
 							<div class="dogImg" th:with="path=|${dog.imageList[i].imagePath}${dog.imageList[i].imageReName}|">								
-								<img th:src="${path}" style="width: 500px; height: 375px;">
+								<img th:src="${path}" style="width: 500px;">
 							</div>
 						</th:block>
                     </div>
@@ -106,19 +106,20 @@
         </div>
     </main>
 
+    <th:block th:replace="~{common/chatbot}"></th:block>
     <th:block th:replace="~{common/footer}"></th:block>
 
 
     <script th:inline="javascript">
 		console.log(/*[[${dog}]]*/ "dog객체");
 
-		const boardNo = /*[[${dog.dogNo}]]*/ "게시글 번호";
+		let dogNo = /*[[${dog.dogNo}]]*/ "강아지 번호";
 		
-		const loginMemberNo = /*[[${session.loginMember?.memberNo}]]*/ "로그인 회원번호";
+		let loginMemberNo = /*[[${session.loginMember?.memberNo}]]*/ "로그인 회원번호";
 		
 		if(loginMemberNo == null) loginMemberNo = "";
 
-		console.log(boardNo);	
+		console.log(dogNo);
 		console.log(loginMemberNo);
 	</script>
 

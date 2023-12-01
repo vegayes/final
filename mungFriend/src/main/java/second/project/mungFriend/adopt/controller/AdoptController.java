@@ -1,5 +1,6 @@
 package second.project.mungFriend.adopt.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,9 +25,9 @@ import second.project.mungFriend.adopt.model.dto.DogImage;
 import second.project.mungFriend.adopt.model.service.AdoptService;
 import second.project.mungFriend.member.model.dto.Member;
 
-@SessionAttributes("{loginMember}")
-@RequestMapping("/adopt")
 @Controller
+@RequestMapping("/adopt")
+@SessionAttributes("{loginMember}")
 public class AdoptController {
 	
 	@Autowired
@@ -34,7 +35,8 @@ public class AdoptController {
 	
 	// 강아지 목록 조회
 	@GetMapping("/dogList")
-	public String selectDogList(@RequestParam(value="cp", required= false, defaultValue="1") int cp,
+	public String selectDogList(
+			@RequestParam(value="cp", required= false, defaultValue="1") int cp,
 			Model model) {
 		
 		Map<String, Object> map = service.selectDogList(cp);
@@ -46,10 +48,11 @@ public class AdoptController {
 	
 	// 강아지 상세 조회
 	@GetMapping("/dogList/{dogNo}") 
-	public String dogDetail(@PathVariable("dogNo") int dogNo,
-							Model model,
-							RedirectAttributes ra,
-							@SessionAttribute(value = "loginMember", required = false) Member loginMember) {
+	public String dogDetail(
+			@PathVariable("dogNo") int dogNo,
+			Model model,
+			RedirectAttributes ra,
+			@SessionAttribute(value = "loginMember", required = false) Member loginMember) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("dogNo", dogNo);
@@ -96,9 +99,7 @@ public class AdoptController {
 			
 		}
 		
-		System.out.println("dog::" + dog);
-		System.out.println("imageList::" + dog.getImageList());
-		
+	
 		return path;
 		
 	}
@@ -115,15 +116,23 @@ public class AdoptController {
 	
 //	**********************************************************************************************
 	
+	// 게시글 작성 화면 전환
+	@GetMapping("/dogRegistration")
+	public String dogInsert() {
+		
+		return "adopt/dogRegistration";
+	}
 	
 	// 강아지 insert
 	@PostMapping("/dogRegistration/insert")
-	public String dogRegiInsert(Dog dog,
-								@RequestParam(value="images", required = false) List<MultipartFile> images, 
-								@SessionAttribute("loginMember") Member loginMember,
-								RedirectAttributes ra) {
+	public String dogRegiInsert(
+			Dog dog,
+			@RequestParam(value="images", required = false) List<MultipartFile> images, 
+			@SessionAttribute("loginMember") Member loginMember,
+			RedirectAttributes ra) throws IllegalStateException, IOException {
 		
-		int dogNo = service.dogRegiInsert(loginMember.getMemberNo());
+
+		int dogNo = service.dogRegiInsert(dog, images);
 		
 		String message = null;
 		String path = "redirect:";
@@ -132,20 +141,104 @@ public class AdoptController {
 			
 			message = "게시글 등록이 완료되었습니다.";
 			path += "/adopt/dogList/" + dogNo;
+			
 		}else {
 			message = "게시글 등록을 실패하였습니다.";
 			path += "insert";
 		}
 		
-		return "adopt/dogRegistration";
+		ra.addFlashAttribute("message", message);
+		return path;
+		
+	}
+	
+	// 강아지 update 화면 전환 및 상세페이지 재조회
+	@GetMapping("/dogList/{dogNo}/update")
+	public String dogUpdate(
+			@PathVariable("dogNo")int dogNo,
+			Model model) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("dogNo", dogNo);
+		
+		// 수정화면 띄우기용 상세조회
+		Dog dog = service.selectDogDetailForUpdate(map);		
+		
+		model.addAttribute("dog", dog);
+		
+		return "adopt/dogUpdate";
+		
 	}
 	
 	// 강아지 update
-	
+	@PostMapping("/dogList/{dogNo}/update")
+	public String dogUpdate(
+			@PathVariable("dogNo")int dogNo,
+			Dog dog,
+			@RequestParam(value="cp", required = false, defaultValue = "1") int cp, // 쿼리스트링 유지
+			@RequestParam(value="images", required = false) List<MultipartFile> images, // 업로드된 파일 리스트
+			@RequestParam(value="deleteList", required = false) String deleteList, // 삭제할 이미지 순서
+			RedirectAttributes ra // 리다이렉트 시 값 전달용
+			) throws IllegalStateException, IOException {
+		
+		// dogNo을 커멘드 객체(dog)에 셋팅
+		dog.setDogNo(dogNo);
+		
+		// 게시글 수정 서비스 호출
+		int rowCount = service.dogUpdate(dog, images, deleteList);
+		
+		// 결과에 따라 분기처리
+		
+		String message = null;
+		String path = "redirect:";
+		
+		if(rowCount > 0) {
+			
+			message = "게시글이 수정되었습니다";
+			path += "/adopt/dogList/" + dogNo;
+			// 경로 맞는지 확인하기
+		}else {
+			
+			message = "게시글 수정 실패";
+			path += "update";
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		return path;
+	}
 	
 	
 
 	// 강아지 delete
+	@GetMapping("/dogList/{dogNo}/delete")
+	public String dogDelete(
+			@PathVariable("dogNo") int dogNo,
+			RedirectAttributes ra) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("dogNo", dogNo);
+		
+		int result = service.dogDelete(map);
+		
+		String message = null;
+		String path = "redirect:";
+		
+		if(result > 0) {
+			
+			message = "게시글이 삭제되었습니다";
+			path += "/adopt/dogList";
+		}else {
+			
+			message = "게시글 삭제 실패";
+			path += "/adopt/dogList/" + dogNo;
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		return path;
+		
+	}
 
 
 }

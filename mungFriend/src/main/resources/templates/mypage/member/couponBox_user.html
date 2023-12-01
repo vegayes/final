@@ -27,50 +27,49 @@
 
                 <!-- 쿠폰함 내용 영역-->
                 <div class = "userContentContainer">
-
-                    <!-- 쿠폰 영역 잡기-->
-                    <div class = "userCouponListArea">
-
-                        <!-- 쿠폰 한개-->
-                        <div class = "userCouponElementArea">
-
-                            <div class = "couponBoxArea">
-                                <div class = "couponBox">
-                                    <div class = "couponImgArea">
-                                        <img src="../images/coupon.png">
-                                    </div>
-                                    <div class = "couponInfoArea">
-                                        <p>방문 시 이벤트 용품 증정</p>
-                                        <p class = "couponInfo">유효기간 : 2023.11.15 까지</p>
-                                    </div>
-                                </div>
-
-                                <div class = "couponBoxPointArea">
-                                    <div class="point"></div>
-                                    <div class="point"></div>
-                                    <div class="point"></div>
-                                    <div class="point"></div>
-                                    <div class="point"></div>
-                                    <div class="point"></div>
-                                </div>
-                            </div>
-							<!--
-                            <div class = "couponInfo">
-                                유효기간 : 2023.11.15 까지
-                            </div>
-							-->
-                        </div>
-
-
-                            <!-- 쿠폰 한개-->
-                            <div class = "userCouponElementArea">
-                                <div>
-    
-                                </div>
-    
-                            </div>
- 
-                    </div>
+					<!--
+	       			<th:block th:if="${#lists.size(couponlist)} == 0">-->
+	       			<th:block th:if="false">
+						<div class = "allNotList" >
+							사용가능한 쿠폰이 존재하지 않습니다.	                  										
+						</div>
+	       			</th:block>
+					<th:block th:unless="false">
+	                    <!-- 쿠폰 영역 잡기-->
+	                    <div class = "userCouponListArea" >
+	
+	                        <!-- 쿠폰 한개-->
+	                        <div class = "userCouponElementArea" th:each="coupon:${couponList}">
+	
+	                            <div class = "couponBoxArea">
+	                                <div class = "couponBox">
+	                                    <div class = "couponImgArea">
+	                                        <img th:src="@{/images/event/coupon.png}">
+	                                    </div>
+	                                    <div class = "couponInfoArea">
+	                                        <p>[[${coupon.couponContent}]]</p>
+	                                        <p class = "couponInfo">유효기간 : [[${coupon.couponExpiration}]] 까지</p>
+	                                    </div>
+	                                </div>
+	
+	                                <div class = "couponBoxPointArea">
+	                                    <div class="point"></div>
+	                                    <div class="point"></div>
+	                                    <div class="point"></div>
+	                                    <div class="point"></div>
+	                                    <div class="point"></div>
+	                                    <div class="point"></div>
+	                                </div>
+	                            </div>
+								<!--
+	                            <div class = "couponInfo">
+	                                유효기간 : 2023.11.15 까지
+	                            </div>
+								-->
+	                        </div>
+	 
+	                    </div>
+	                 </th:block>
                 </div>
             </section>
         </main>

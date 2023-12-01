@@ -18,6 +18,22 @@ public interface ReviewService {
 	
 	// 게시글 삽입
 	int reviewInsert(Review review, List<MultipartFile> images) throws Exception;
+
+	// 게시글 조회
+	Review selectReview(int reviewNo);
+
+	// 조회수 증가
+	int updateCount(int reviewNo);
+
+	// 게시글 수정
+	int reviewUpdate(Review review, List<MultipartFile> images, String deleteList) throws Exception;
+
+	// 게시글 삭제
+	int deleteReview(int reviewNo) throws Exception;
+
+	
+	// 챗봇 추천 견종 조회
+	Map<String, Object> selectDogList(int cp, String breedName);
 	
 	
 

@@ -64,7 +64,7 @@
 
 							<td> 
 
-								<a th:href="@{/adoptReview/reviewDetail/{reviewNo}(reviewNo=${board.reviewNo}, cp=${pagination.currentPage})}" th:text="${board.reviewTitle}">게시글 제목</a> 
+								<a th:href="@{/adoptReview/reviewDetail/{reviewNo}(reviewNo=${board.reviewNo}, cp=${pagination.currentPage} )}" th:text="${board.reviewTitle}">게시글 제목</a> 
 								
 								<!-- <a th:if="${param.query}" th:href="@{/adoptReview/reviewDetail/{reviewNo}(reviewNo=${board.reviewNo}, cp=${pagination.currentPage})}" th:text="${board.reviewTitle}">게시글 제목</a>  -->
 
@@ -91,11 +91,12 @@
 	        </table>
 	
 	
-	        <button  th:if="@{session.loginMember}"  id="writeReview"><a th:href="@{/adoptReview/reviewInsert}">글쓰기</a></button>
+	       
 	
 	
 			<!-- 검색창 -->
-	        <div> 
+	        <div style="margin-top: 200px;"> 
+				<button th:if="${session.loginMember}"  id="writeReview"><a th:href="@{/adoptReview/reviewInsert}">글쓰기</a></button>
 				<form th:action="@{/adoptReview/reviewList/1}" method="get" id="searchContainer">
 					<select name="searchType" id="searchType">
 						<option value="title">제목</option>
@@ -159,8 +160,8 @@
 
 	<th:block th:replace="~{common/chatbot}"></th:block>
 
-    <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
-    <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+    <img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image">
+    <a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
 	
     <th:block th:replace="~{common/footer}"></th:block>
 	

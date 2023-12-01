@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="second.project.mungFriend.mypage.admin.model.dao.MemberAdminMapper">
+	
+	<resultMap type="Member" id="member_rm">
+		
+		<id property="memberNo" column="MEMBER_NO" />
+		
+		<result property="memberId" column="MEMBER_ID" />
+		<result property="memberPw" column="MEMBER_PW" />
+		<result property="memberEmail" column="MEMBER_EMAIL" />
+		<result property="memberName" column="MEMBER_NAME" />
+		<result property="memberTel" column="MEMBER_TEL" />
+		<result property="memberNickname" column="MEMBER_NICKNAME" />
+		<result property="memberAddress" column="MEMBER_ADDRESS" />
+		<result property="memberProfile" column="MEMBER_PROFILE" />
+		<result property="memberEnrollDate" column="MEMBER_ENROLL_DATE" />
+		<result property="adminYn" column="ADMIN_YN" />
+		<result property="memberDelYn" column="MEMBER_DEL_YN" />
+		
+	</resultMap>
+	
+	<!-- 현재 페이지에 해당하는 부분에 대한 회원리스트 조회하기 -->
+	<!-- CDATA 태그 : 해당 태그 내부에 작성된 것은 모두 문자로 취급 -->
+	<select id="selectMemberList" resultMap="member_rm">
+		SELECT MEMBER_NO, MEMBER_ID, MEMBER_PW, MEMBER_EMAIL, MEMBER_NAME, MEMBER_TEL, MEMBER_NICKNAME, MEMBER_ADDRESS, MEMBER_PROFILE, 
+		TO_CHAR(MEMBER_ENROLL_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') AS MEMBER_ENROLL_DATE, ADMIN_YN, MEMBER_DEL_YN
+		FROM "MEMBER"
+	</select>
+	
+	<!-- 관리자 회원 탈퇴하기 -->
+	<update id="memberDel" parameterType="_int">
+		UPDATE "MEMBER" SET
+		MEMBER_DEL_YN = 'Y'
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<!-- 탈퇴하지 않은 회원 리스트 수 조회 -->
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*) FROM "MEMBER"
+		WHERE MEMBER_DEL_YN = 'N'
+	</select>
+	
+	<!-- 탈퇴하지 않았고, 검색 조건이 일치하는 회원리스트 수 조회 -->
+	<select id="getSearchListCount" resultType="_int">
+		SELECT COUNT(*) FROM "MEMBER"
+		WHERE MEMBER_DEL_YN = 'N'
+		AND MEMBER_ID || MEMBER_NAME || MEMBER_EMAIL || MEMBER_NICKNAME || MEMBER_TEL LIKE '%' || #{memberSearch} || '%'
+	</select>
+	
+	<!-- 회원 리스트 조회 (검색) -->
+	<select id="selectSearchMemberList" resultMap="member_rm">
+		SELECT MEMBER_NO, MEMBER_ID, MEMBER_PW, MEMBER_EMAIL, MEMBER_NAME, MEMBER_TEL, MEMBER_NICKNAME, MEMBER_ADDRESS, MEMBER_PROFILE, 
+		TO_CHAR(MEMBER_ENROLL_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') AS MEMBER_ENROLL_DATE, ADMIN_YN, MEMBER_DEL_YN
+		FROM "MEMBER"
+		WHERE MEMBER_ID || MEMBER_NAME || MEMBER_EMAIL || MEMBER_NICKNAME || MEMBER_TEL LIKE '%' || #{memberSearch} || '%'
+	</select>
+	
+</mapper>

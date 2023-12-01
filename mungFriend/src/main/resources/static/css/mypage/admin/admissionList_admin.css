@@ -13,6 +13,7 @@
     margin: 0;
     /* font-family: 'Nanum Gothic', sans-serif; */
     font-family: 'NanumGothic', 'sans-serif';
+
 }
 
 
@@ -89,6 +90,26 @@ a:hover{
     color : red;
 }
 
+.submenu {
+    display: none;
+    margin-left: 20px;
+   
+}
+
+.submenu li {
+    margin-top: 5px;
+    padding: 5px;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 10px;
+}
+
+.submenu.active {
+    display: block;
+}
+
+
 /*************************************************
                 입소신청 내역 (관리자) 버튼
 *************************************************/
@@ -144,28 +165,57 @@ a:hover{
 }
 
 /*************************************************
+            		swiper
+*************************************************/
+
+.swiper {
+    width: 845px;
+    height : 800px;
+  /* margin-left: auto; */
+  /* margin-right: auto; */
+  border : 2px solid red;
+}
+
+.swiper-slide {
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+
+/*************************************************
                 입소신청 내역 (관리자) Content
 *************************************************/
 /*내용 영역*/
 .admissionCardArea{
     flex-basis: 90%;
-
-    /* border : 2px solid green; */
-
+    
+	/*    
     display: flex;
     flex-wrap: wrap;
-    
+    */
 }
 
 
 .admissionCardBoxArea{
-    flex-basis: 50%;
-
-    height: 240px;
+    /*flex-basis: 50%;*/
+    width: 100%;
 	/*진행완료된 경우는 220px로 줄이기*/
-    padding : 10px 4%;
+    /*padding : 10px 4%;*/
 
     display: flex;
+    
+    border :5px solid orange;
 
 }
 
@@ -288,6 +338,7 @@ a:hover{
 	padding:10px;  
 	border:2px solid red;
 }
+
 
 
 

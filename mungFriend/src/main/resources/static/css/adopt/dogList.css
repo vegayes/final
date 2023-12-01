@@ -53,7 +53,7 @@ main{
     justify-content: start;
     align-items: center;
 
-    margin-left: 63px;
+    margin-left: 69px;
     
     white-space: pre-line;
     line-height: 3;
@@ -138,6 +138,7 @@ form > button > img{
     width: 200px;
     height: 200px;
     margin-bottom: 5px;
+    object-fit: cover;
 }
 
 #dog-kind{

@@ -312,6 +312,127 @@ memberEmail.addEventListener("input", () => {
 	
 });
 
+// --------------------- 이메일 인증 ---------------------
+
+// 인증번호 발송
+const sendAuthKeyBtn = document.getElementById("authNum-btn");
+const authKeyMessage = document.getElementById("authNum-center");
+
+let authTimer;
+let authMin = 4;
+let authSec = 59;
+
+// 인증번호를 발송한 이메일 저장
+let tempEmail;
+
+sendAuthKeyBtn.addEventListener("click", function() {
+	
+	authMin = 4;
+	authSec = 59;
+	
+	checkObj.authKey = false;
+	
+	if(checkObj.memberEmail) { // 중복이 아닌 이메일인 경우
+	
+		/* fetch() API 방식 ajax */
+		fetch("/sendEmail/signUp?email=" + memberEmail.value)
+		.then(resp => resp.text())
+		.then(result => {
+			
+			if(result > 0) {
+				console.log("인증 번호가 발송되었습니다.");
+				tempEmail = memberEmail.value;
+				console.log(tempEmail);
+			} else {
+				console.log("인증번호 발송 실패");
+			}
+			
+		})
+		.catch(err=> {
+			
+			console.log("이메일 발송 중 에러 발생");
+			console.log(err);
+			
+		});
+		
+		
+		alert("인증번호가 발송 되었습니다.");
+		
+		
+		authKeyMessage.innerText = "05:00";
+		authKeyMessage.classList.remove("confirm");
+		
+		authTimer = window.setInterval(() => {
+												// 삼항연산자   :   조건   ?   true        :  false
+			authKeyMessage.innerText = "0" + authMin + ":" + (authSec < 10 ? "0" + authSec : authSec);
+			
+			// 남은 시간이 0분 0초인 경우
+			if(authMin == 0 && authSec == 0) {
+				checkObj.authKey = false;
+				clearInterval(authTimer);
+				return;
+			}
+			
+			// 0초인 경우
+			if(authSec == 0) {
+				authSec = 60;
+				authMin--;
+			}
+			
+		
+			authSec--; // 1초 감소
+			
+		}, 1000)
+		
+	} else {
+		
+		alert("중복되지 않은 이메일을 작성해주세요.");
+		memberEmail.focus();
+		
+	}
+	
+});
+
+
+// 인증 확인
+const authKey = document.getElementById("authNum");
+const checkAuthKeyBtn = document.getElementById("authNum-confir-btn");
+
+checkAuthKeyBtn.addEventListener("click", function(){
+	
+	if(authMin > 0 || authSec > 0) { // 시간 제한이 지나지 않은 경우에만 인증번호 검사 진행
+		
+		/* fetch API */
+		const obj = {"inputKey":authKey.value, "email":tempEmail}
+		const query = new URLSearchParams(obj).toString()
+		
+		fetch("/sendEmail/checkAuthKey?" + query)
+		.then(resp => resp.text())
+		.then(result => {
+			
+			if(result > 0) {
+				clearInterval(authTimer);
+				authKeyMessage.innerText = "인증되었습니다.";
+				authKeyMessage.classList.add("confirm");
+				checkObj.authKey = true;
+				
+			} else {
+				alert("인증번호가 일치하지 않습니다.");
+				checkObj.authKey = false;
+				
+			}
+		})
+		.catch(err => console.log(err));
+		
+	} else {
+		
+		alert("인증 시간이 만료되었습니다. 다시 시도해주세요.")
+		
+	}
+	
+});
+
+
 // --------------------- 닉네임 ---------------------
 
 // 닉네임 유효성 검사
@@ -363,6 +484,78 @@ memberNickname.addEventListener("input", () => {
 		nickMessage.classList.add("error");
 		nickMessage.classList.remove("confirm");
 		checkObj.memberNickname = false;
+		
+	}
+	
+});
+
+
+
+// 회원 가입 form 태그가 제출 되었을 때
+document.getElementById("signUp-form").addEventListener("submit", e=>{
+	
+	// checkObj에 모든 value가 true인지 검사
+	
+	// (배열용 for문)
+	// for ... of : 향상된 for문
+	// -> iterator(반복자) 속성을 지닌 배열, 유사 배열 사용 가능
+	
+	// (객체용 for문)
+	// ** for ... in 구문 ***
+	// -> JS 객체가 가지고 있는 key를 순서대로 하나씩 꺼내는 반복문
+	
+	for(let key in checkObj) {
+		
+		if(!checkObj[key]) { // 각 key에 대한 value(true/false)를 얻어와
+							 // false인 경우 == 유효하지 않다!
+							 
+			switch(key) {
+				case "memberId":
+					alert("아이디가 유효하지 않습니다"); 
+					// 유효하지 않은 input 태그로 focus 이동
+					document.getElementById("id").focus();
+					break;
+					
+				case "memberPw":
+					alert("비밀번호가 유효하지 않습니다"); 
+					document.getElementById("pw").focus();
+					break;
+					
+				case "memberPwConfirm":
+					alert("비밀번호가 확인되지 않았습니다"); 
+					document.getElementById("pw-confir").focus();
+					break;
+					
+				case "memberName":
+					alert("이름이 유효하지 않습니다"); 
+					document.getElementById("name").focus();
+					break;
+					
+				case "memberTel":
+					alert("전화번호가 유효하지 않습니다"); 
+					document.getElementById("phone").focus();
+					break;
+					
+				case "memberEmail":
+					alert("이메일이 유효하지 않습니다"); 
+					document.getElementById("email").focus();
+					break;
+					
+				case "authKey":
+					alert("이메일 인증번호가 확인되지 않았습니다"); 
+					document.getElementById("authNum").focus();
+					break;
+					
+				case "memberNickname":
+					alert("닉네임이 유효하지 않습니다"); 
+					document.getElementById("nickName").focus();
+					break;
+			}
+			
+			e.preventDefault(); // form 태그 기본 이벤트 제거
+			return; // 함수 종료
+			
+		}
 		
 	}
 	

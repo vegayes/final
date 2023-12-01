@@ -17,55 +17,106 @@
             <div>안락사 없는 동물보호소 멍프랜드에서 행복한 입양 후기를 남겨주세요~</div>
     
             <div>입양리뷰 인증게시판</div> 
-            <span style="text-align: end;">조회수 : 11</span>
+            <span style="text-align: end;" th:text="|조회수 : ${review.reviewCount} |">조회수</span>
     
-            <form th:action="@{/}" class="formContainer">
+            <form th:action="@{{reviewNo}(reviewNo = ${review.reviewNo}, cp=${cp})}" id="formContainer" method="POST" 
+                enctype="multipart/form-data">
             
                 <div class="boardRectangle"></div>
                 <div>제목</div>
                 <div class="boardRectangle"></div>
-                <input type="text" name="title" class="titleContent" value="봄이를 입양했어요 :)"></input>
-                <div class="boardImage">
-                    <img th:src="@{/images/review/image24.png}" alt="">
-                    <img th:src="@{/images/review/image25.png}" alt="">
-                    <img th:src="@{/images/review/image26.png}" alt="">
+                <input type="text" name="reviewTitle" class="titleContent" th:value="${review.reviewTitle}"></input>
+
+
+                <section id="dogImages">
                     <div class="file-input-container">
                         <label for="dogImage_1" class="file-input-label">
-                            <span class="icon">📷</span> <!-- 여기에 아이콘 또는 이미지를 넣으세요 -->
+                            <img class="icon preview" th:src="@{/images/review/photo_icon.png}"></img>
                         </label>
-                        <input type="file" id="dogImage_1" name="dogImage_1" class="file-input" accept="image/*">
+                        <input type="file" id="dogImage_1" name="images" class="file-input" accept="image/*">
+                        <span class="delete-image">&times;</span>
                     </div>
-                </div>
+    
+                    <div class="file-input-container">
+                        <label for="dogImage_2" class="file-input-label">
+                            <img class="icon preview" th:src="@{/images/review/photo_icon.png}"></img>
+                        </label>
+                        <input type="file" id="dogImage_2" name="images" class="file-input" accept="image/*">
+                        <span class="delete-image">&times;</span>
+                    </div>
+    
+                    <div class="file-input-container">
+                        <label for="dogImage_3" class="file-input-label">
+                            <img class="icon preview" th:src="@{/images/review/photo_icon.png}"></img>
+                        </label>
+                        <input type="file" id="dogImage_3" name="images" class="file-input" accept="image/*">
+                        <span class="delete-image">&times;</span>
+                    </div>
+    
+                    <div class="file-input-container">
+                        <label for="dogImage_4" class="file-input-label">
+                            <img class="icon preview" th:src="@{/images/review/photo_icon.png}"></img>
+                        </label>
+                        <input type="file" id="dogImage_4" name="images" class="file-input" accept="image/*">
+                        <span class="delete-image">&times;</span>
+                    </div>
+                </section>
           
-    
-            
-    
                 <div class="boardRectangle"></div>
                 <div class="contentTitle">내용</div>
                 <div class="boardRectangle"></div>
-                <textarea name="content" id="boardContent"> 봄이를 입양했는데 너무너무 잘 적응하고 잘 지내네요 ~  좋은 인연 만들어주셔서 감사합니다!!! </textarea>
+                <textarea name="reviewContent" id="boardContent" th:text="${review.reviewContent}">내용 입력란</textarea>
               
+                 <!-- 기존 이미지가 있다가 삭제된 이미지의 순서를 기록-->
+                <input type="hidden" name="deleteList" value="">
+
+                <section class="buttons">   
+                    <button id="updateReview" type="submit">수정하기</button>
+                    <button id="toList"><a th:href="@{/adoptReview/reviewList/{cp}(cp = ${cp})}">목록으로</a></button>
+                </section>
+
             </form>   
         </div>
   
-        <section class="buttons">   
-            <button id="updateReview" onclick="submitForm()">수정하기</button>
-            <button id="toList">목록으로</button>
-        </section>
+        <!-- <section class="buttons">   
+            <button id="updateReview" type="submit">수정하기</button>
+            <button id="toList"><a th:href="@{/adoptReview/reviewList/1}">목록으로</a></button>
+        </section> -->
 
     </main>
 
     <th:block th:replace="~{common/chatbot}"></th:block>
 
-    <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
-    <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+    <img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image">
+    <a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
     <th:block th:replace="~{common/footer}"></th:block>
 
-    <script>
+    <!-- <script th:inline="javascript">
         function submitForm() {
             document.querySelector('form').submit();
         }
+    </script> -->
+
+    <script th:inline="javascript">
+        // 이미지 업데이트 부분 : 타임리프나 컨트롤러에서 작업하기에 복잡해서 js로
+
+        // 자바에서 가져온 자료형과 동일하게 설정 권장 : 이미지 배열을 가져와서 
+        // [] 이렇게 설정
+
+        const imageList = /*[[${review.imageList}]]*/ [];
+
+        // img 태그 중 preview 클래스를 갖는 이미지 다 선택
+        const previewList = document.querySelectorAll("img.preview");
+        
+        // for of  반복문
+        // imageOrder 에 해당하는 이미지에 img.imagePath + img.imageReName 이름 넣기
+        for(let img of imageList) {
+            previewList[img.imageOrder].src =  img.imagePath + img.imageReName;  
+            previewList[img.imageOrder].classList.remove("icon");
+        }
+
     </script>
 
+    <script th:src="@{/js/adoptReview/ReviewUpdate.js}"></script>
 </body>
 </html>
