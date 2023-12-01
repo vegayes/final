@@ -25,7 +25,19 @@ if(findPwForm2 != null) {
 			return;
 		}
 		
+		if(checkObj.memberPw == false || checkObj.memberPwConfirm == false) {
+			
+			alert("새 비밀번호 또는 새 비밀번호 확인이 유효하지 않습니다");
+				
+			e.preventDefault(); // form 태그 기본 이벤트 제거
+			return; // 함수 종료
+			
+		}
+		
+		/*
 		for(let key in checkObj) {
+			
+			alert(checkObj[key]);
 			
 			if(!checkObj[key]) { // 각 key에 대한 value(true/false)를 얻어와
 								 // false인 경우 == 유효하지 않다!
@@ -50,6 +62,7 @@ if(findPwForm2 != null) {
 			}
 			
 		}
+		*/
 		
 	})
 }

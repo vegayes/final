@@ -32,12 +32,18 @@
 
             <!-- 내용 작성영역-->
             <div class = "userContentContainer">
-                <form th:action = "@{/mypage/member/updateInfoUser}" th:object="${session.loginMember}" method = "POST" name ="updateForm" id="updateForm" class = "updateForm">
+                <form th:action = "@{/mypage/member/updateInfoUser}" th:object="${session.loginMember}" method = "POST" name ="updateForm" id="updateForm" class = "updateForm" enctype="multipart/form-data">
 					
                     <div class = "updateElement">
                         <div class = "updateTitle formDogFlex">
                             <div class = "formProfile">
-                                <img th:src="@{/images/member/jjangu.png}">
+								
+								<!-- 프로필 이미지가 없으면 기본 이미지 -->
+								<img th:unless="*{memberProfile}" th:src="@{/images/member/profile_noImage.png}" id="profileImage">
+								
+								<!-- 프로필 이미지가 있으면 저장된 이미지 -->
+                                <img th:if="*{memberProfile}" th:src="*{memberProfile}" id="profileImage">
+                                
                             </div>
                         </div>
 
@@ -50,7 +56,7 @@
                             </label>
 
 
-                            <div class = "formFont formMemberBtn profileBtnArea">
+                            <div class = "formFont formMemberBtn profileBtnArea" id="imgDelBtn">
                                 이미지 삭제
                             </div>
 
@@ -78,7 +84,7 @@
                     <div class = "updateElement">
 
                         <div class = "updateTitle">
-                            비밀번호
+                            현재 비밀번호
                         </div>
 
                         <div class = "updateInput">
@@ -96,7 +102,7 @@
                     <div class = "updateElement">
 
                         <div class = "updateTitle">
-                            비밀번호 확인
+                            현재 비밀번호 확인
                         </div>
 
                         <div class = "updateInput">

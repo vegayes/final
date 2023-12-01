@@ -107,6 +107,10 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int findPw(Member updateMember) {
 		
+		// 넘어온 새 비밀번호 암호화
+		String encPw = bcrypt.encode(updateMember.getMemberPw());
+		updateMember.setMemberPw(encPw);
+		
 		return dao.findPw(updateMember);
 	}
 

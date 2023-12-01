@@ -67,5 +67,10 @@
     </section>
     
     <script th:src="@{/js/member/findPw2.js}"></script>
+    
+    <script th:inline="javascript">
+		const message = /*[[${message}]]*/ "전달 받은 메세지";
+		if(message != null) alert(message);
+	</script>
 </body>
 </html>
