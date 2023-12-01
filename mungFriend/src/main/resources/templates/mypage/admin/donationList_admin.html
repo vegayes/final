@@ -72,7 +72,7 @@
 	                                    <td>[[${donationState.count}]]</td>
 	                                    <td>[[${donation.memberName}]]</td>
 	                                    <td>[[${donation.memberEmail}]]</td>
-	                                    <td>[[${donation.donationType}]]</td>
+	                                    <td style="cursor: pointer;">[[${donation.donationType}]]</td>
 	                                    <td>[[${donation.donationDate}]]</td>
 	                                    <td>[[${donation.donationAmount}]]원</td>
 	                                </tr> 	 
@@ -168,5 +168,49 @@
 		<a th:href="@{#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
 
 	    <th:block th:replace="~{common/footer}"></th:block>
+
+
+
+		<!-- <script th:inline="javascript">
+
+			<td>donationType 에 넣어서 사용</td>    th:onclick="|donationDetail(${donationState.count}, this)|"
+
+
+			function donationDetail(donationNo,btn) {
+
+				const area = document.createElement("tr");
+				area.classList.add("donationTBodyTr");
+				area.classList.add("cssTest");
+
+				const test1 = document.createElement("td");
+				const test2 = document.createElement("td");
+				const test3 = document.createElement("td");
+				const test4 = document.createElement("td");
+				const test5 = document.createElement("td");
+
+				test1.innerText = "예시1";
+				test2.innerText = "예시2";
+				test3.innerText = "예시3";
+				test4.innerText = "예시4";
+				test5.innerText = "예시5";
+
+				area.append(test1);
+				area.append(test2);
+				area.append(test3);
+				area.append(test4);
+				area.append(test5);
+
+				btn.parentElement.after(area);
+
+				setTimeout(() => {
+
+					area.classList.add("visible");
+				}, 10); // 약간의 딜레이를 두어 트랜지션 효과가 발동하도록 함
+
+
+			}
+
+		</script> -->
+
     </body>
 </html>
