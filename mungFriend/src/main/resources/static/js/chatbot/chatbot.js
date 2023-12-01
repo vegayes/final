@@ -29,17 +29,21 @@ function connect() {
         stompClient.subscribe('/topic/public', function (message) {
 
             var descriptionArray = JSON.parse(message.body);
-            
+            console.log("descriptionArray : ", descriptionArray);
 
            for (var i = 0; i < descriptionArray.length; i++) {
 
-                console.log("i번째 descriptionArray : ", descriptionArray[i]);
+               
                 const breedMatches = descriptionArray[i].match(/'([^']+)'/g);
-
-
+                
                 if(i == 0){
-                    console.log("showMessage");
-                    showMessage(descriptionArray[i]);
+
+                    const firstMessage = descriptionArray[0].split('\n');
+
+                    for(var j = 0; j< firstMessage.length; j++){
+                        showMessage(firstMessage[j]);
+                    }
+                    
                 }
 
                 if(breedMatches != null){
@@ -101,7 +105,7 @@ function sendButton(selectedButtonText) {
 //=================메시지 출력=========================//
 function showMessage(message) {
 
-    $("#communicate").append("<tr><td><p>" + message + "<br></p><br></td></tr>");
+    $("#communicate").append("<tr><td><div>" + message + "<br></div><br></td></tr>");
     var table = $("#content-container");
     table.scrollTop(table.prop("scrollHeight"));;
     
@@ -123,7 +127,7 @@ function showLink(message) {
     var link = '/adoptReview/searchDogList/' + message;
 
     // 동적으로 생성된 HTML을 추가
-    $("#communicate").append("<tr><td><a href='" + link + "'>" + message + "</a></td></tr><br>");
+    $("#communicate").append("<tr><td><a class='chatLink' href='" + link + "'>" + message + "</a></td></tr><br>");
 
     // 스크롤을 가장 아래로 이동
     var table = $("#content-container");

@@ -21,6 +21,21 @@
 }
 
 
+.chatLink {
+    
+    text-decoration: none; 
+    color: black;
+    margin-bottom: 30px;
+    text-align: center;
+    border-radius: 5px;   
+    font-weight: bolder;
+}
+
+.chatLink:hover {
+    color: goldenrod;
+}
+
+
 
 #content-container {
     max-height: 400px; /* 원하는 최대 높이로 설정 */

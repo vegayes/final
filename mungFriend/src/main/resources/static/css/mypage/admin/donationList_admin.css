@@ -308,3 +308,15 @@ a:hover{
 	justify-content: center; 
 	padding:10px;  
 }
+
+
+
+
+/* .cssTest {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.cssTest.visible {
+    opacity: 1;
+} */
