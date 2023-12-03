@@ -183,11 +183,13 @@ const quizImgData = [
 ];
 
 const quizNumber = ["①", "②", "③", "④"];
+/*
 const quizChoice = [
     ["비글", "치와와", "웰시코기" , "퍼그"],
     ["포메라니안", "시츄", "푸들" , "시바이누"],
     ["비숑", "사모예드", "보더콜리" , "폼피츠"]
 ];
+*/
 
 const quizAnswer = [4, 1, 3];
 
@@ -203,15 +205,15 @@ function scoreUpdate() {
     for(let i= 0 ; i < scoreArr.length; i++){
 
         if(scoreArr[i] == 'O'){
-            scoreState[i].src = "images/success.jpg";
+            scoreState[i].src = "/images/event/quiz/success.jpg";
         }else{
-            scoreState[i].src = "images/fail.jpg";
+            scoreState[i].src = "/images/event/quiz/fail.jpg";
         }
     }
 
-    if(scoreArr.length == quizAnswer.length){
-        scoreArr = [];
-    }
+    // if(scoreArr.length == quizAnswer.length){
+    //     scoreArr = [];
+    // }
 }
 
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
@@ -227,7 +229,7 @@ function loadCurrentImageSet() {
     const scoreState = document.querySelectorAll(".correctState img");
     if(currentIndex == 0){
        for(let i= 0 ; i < scoreState.length; i++){
-         scoreState[i].src = "images/origin.jpg";
+         scoreState[i].src = "/images/event/quiz/origin.jpg";
         }
     }
     /****************************************************************************/
@@ -373,6 +375,24 @@ function displayAnswer() {
             nextQuiz();
         });
 
+        if (currentIndex === quizImgData.length - 1) {
+            const nextQuizButton = document.getElementById("nextQuiz");
+            if (nextQuizButton) {
+                nextQuizButton.style.display = "none";
+
+                const doneDiv = document.createElement("div");
+                doneDiv.classList.add("quizOverBtn"); // 클래스 추가
+                doneDiv.id = "overQuiz";
+                doneDiv.innerText = "게임 종료";
+                quizSubmit.appendChild(doneDiv);
+        
+                doneDiv.addEventListener('click', () => {
+                    doneQuiz();
+                });
+
+            }
+        }
+
         let opacity = 0;
         const fadeInInterval = setInterval(() => {
             opacity += 0.2;
@@ -469,7 +489,168 @@ function nextQuiz() {
     timerInterval = setInterval(updateTimer, 1000);
 
 
+
+
 }
+
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+                 게임 종료 
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+function doneQuiz(){
+
+    subModal.style.display = "flex";
+
+    
+    const totalScore = calculateTotalScore(scoreArr);
+    console.log("게임 종료 점수:", totalScore);
+
+    if (currentIndex === quizImgData.length - 1) { // 마지막 문제의 경우
+        const titleArea = document.querySelector('.titleArea');
+        if (titleArea) {
+            titleArea.style.display = 'none'; 
+
+            const gamepadIcon = document.querySelector('.iconArea .fa-gamepad');
+            gamepadIcon.classList.remove('fa-gamepad');
+            gamepadIcon.classList.add('fa-circle-check');
+
+
+            const gameArea = document.querySelector('.gameArea');  
+        
+
+
+            gameArea.innerText = "User 님의 점수는 " + totalScore + "점 입니다.";
+
+            const gameStart = document.getElementById('gameStart');
+            gameStart.innerText = '쿠폰 확인하러 가기';
+            gameStart.setAttribute('onclick', 'closeEvent()'); 
+            gameStart.id = "couponBtn";
+
+        }
+        
+    } else {
+
+        clearInterval(timerInterval); // 타이머 중지
+
+        const titleArea = document.querySelector('.titleArea');
+        if (titleArea) {
+            titleArea.style.display = 'none'; 
+
+            const gameArea = document.querySelector('.gameArea');
+            gameArea.innerText = '이벤트에 참여하지 않겠습니까?'
+
+            const main = document.getElementById('main');
+            main.innerText = '네';
+
+            const gameStart = document.getElementById('gameStart');
+            gameStart.removeAttribute('onclick');
+            gameStart.innerText = '아니오';
+
+            gameStart.addEventListener('click', function() {
+                subModal.style.display = "none";    
+
+                if(!(timerElement.innerText === '시간 종료 ' || timerElement.innerText === '정답 공개' )){
+                    console.log("정답 화면 아닌 경우");
+                    timerInterval = setInterval(updateTimer, 1000);
+                }
+            });
+        
+
+
+        }
+
+
+    }
+
+
+
+
+
+
+}
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+                 점수 계산
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+function calculateTotalScore(scoreArr) {
+    let totalScore = 0;
+
+    for (let i = 0; i < scoreArr.length; i++) {
+        if (scoreArr[i] === 'O') { 
+            console.log("들어옴");
+            totalScore += 1; 
+        } 
+    }
+
+    return totalScore;
+}
+
+
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+                시작 서브 모달 창
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+function startSubQuery() {
+    const removeSub = document.getElementById('eventSubModalArea');
+    removeSub.remove();
+
+    const eventSubModalBox = document.getElementById('eventSubModalBox');
+
+
+    const eventSubModalArea = document.createElement('div');
+    eventSubModalArea.id = "eventSubModalArea"
+
+    const modalContent = document.createElement('div');
+    modalContent.classList.add('modalContent');
+
+    const iconArea = document.createElement('div');
+    iconArea.classList.add('iconArea');
+    const icon = document.createElement('i');
+    icon.classList.add('fa-solid', 'fa-gamepad');
+
+    const titleArea = document.createElement('div');
+    titleArea.classList.add('titleArea');
+    titleArea.innerText = '강아지 맞추기 이벤트';
+
+    const gameArea = document.createElement('div');
+    gameArea.classList.add('gameArea');
+    gameArea.innerHTML = '제시된 사진을 보고 10초 안에<br>강아지 견종을 맞춰보세요~';
+
+    const modalBtnArea = document.createElement('div');
+    modalBtnArea.classList.add('modalBtnArea');
+
+    const modalBtn1 = document.createElement('div');
+    modalBtn1.classList.add('modalBtn');
+    const settingBtn1 = document.createElement('div');
+    settingBtn1.classList.add('settingBtn');
+    settingBtn1.id = 'main';
+    settingBtn1.setAttribute('onclick', 'closeEvent()');
+    settingBtn1.innerText = '메인 페이지';
+    modalBtn1.appendChild(settingBtn1);
+
+    const modalBtn2 = document.createElement('div');
+    modalBtn2.classList.add('modalBtn');
+    const settingBtn2 = document.createElement('div');
+    settingBtn2.classList.add('settingBtn');
+    settingBtn2.id = 'gameStart';
+    settingBtn2.setAttribute('onclick', 'startGame()');
+    settingBtn2.innerText = '게임 시작';
+    modalBtn2.appendChild(settingBtn2);
+
+    modalBtnArea.appendChild(modalBtn1);
+    modalBtnArea.appendChild(modalBtn2);
+
+    modalContent.appendChild(iconArea);
+    iconArea.appendChild(icon);
+    modalContent.appendChild(titleArea);
+    modalContent.appendChild(gameArea);
+
+    eventSubModalArea.appendChild(modalContent);
+    eventSubModalArea.appendChild(modalBtnArea);
+
+    eventSubModalBox.appendChild(eventSubModalArea);
+}
+
 
 
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
@@ -493,16 +674,30 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 */
 
+document.addEventListener("DOMContentLoaded", () => {
+	closeEvent();
+})
+
 function startGame(){
-    subModal.style.display = "none";
+    console.log("게임 시작");
+    subModal.style.display = "none";    
+
     loadCurrentImageSet(); 
 
     timerInterval = setInterval(updateTimer, 1000);
 
-    quizSubmitBtn = document.querySelector(".quizSubmitBtn");
+    const eventArea = document.querySelector(".eventArea"); 
+    const quizSubmitDiv = document.createElement("div"); 
+    quizSubmitDiv.classList.add("quizSubmit");
+    eventArea.appendChild(quizSubmitDiv);
 
-    quizSubmitBtn.addEventListener("click", function(){
-        console.log("정답 제출 버튼 누름");
+    const submitDiv = document.createElement("div"); 
+    submitDiv.classList.add("quizSubmitBtn"); 
+    submitDiv.id = "submitQuiz"; 
+    submitDiv.innerText = "정답 제출"; 
+    quizSubmitDiv.appendChild(submitDiv);
+    
+    submitDiv.addEventListener('click', function() {
         timerElement.innerText = '정답 공개';
         clearInterval(timerInterval);
         displayAnswer();
@@ -512,4 +707,49 @@ function startGame(){
 }
 
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+                 문제 리셋
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+function resetGame() {
+    // 1. 게임 상태 관련 변수 초기화
+    scoreArr = [];
+    currentIndex = 0;
+    timeLeft = 10;
+
+    // 2. 라디오 버튼 상태 초기화
+    const radioButtons = document.querySelectorAll('input[type="radio"][name="quizSelect"]');
+    if (radioButtons) {
+        radioButtons.forEach(button => {
+            button.checked = false;
+        });
+    }
+
+    // 3. 퀴즈 이미지 및 선택 버튼 관련 초기화
+    const container = document.getElementById("container");
+    container.innerHTML = '';
+    quizBtnWraps.forEach(wrap => {
+        wrap.classList.remove('quizSelect');
+        wrap.classList.remove('answerSelect');
+        wrap.classList.remove('stopHover');
+    });
+
+    // 4. 타이머 및 정답 공개 관련 초기화
+    clearInterval(timerInterval);
+    const timerElement = document.getElementById('timer');
+    if (timerElement) {
+        timerElement.innerText = '10';
+    }
+
+    // 5. 모달창 및 게임 진행 관련 초기화
+    const subModal = document.getElementById("eventSubModalBox");
+    if (subModal) {
+        subModal.style.display = "none";
+    }
+
+    const quizSubmit = document.querySelector(".quizSubmit");
+    if(quizSubmit){
+        quizSubmit.remove();
+    }
+    
+    startSubQuery();
+
+}

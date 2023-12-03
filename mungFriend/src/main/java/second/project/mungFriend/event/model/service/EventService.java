@@ -1,5 +1,9 @@
 package second.project.mungFriend.event.model.service;
 
+import java.util.List;
+
+import second.project.mungFriend.event.model.dto.Quiz;
+
 public interface EventService {
 
 	/**유효기간 지난 값이 몇개인지 확인하기
@@ -13,6 +17,19 @@ public interface EventService {
 	 * @return
 	 */
 	int updateCountExpiration(String formatedNow);
+
+	/** 게임에 참여했는지 확인
+	 * @param memberNo
+	 * @return
+	 */
+	int eventCheck(int memberNo);
+
+	
+	/** 퀴즈 문제 뽑기(5개 랜덤)
+	 * @return
+	 */
+	List<Quiz> chooseQuiz();
+
 	
 	
 }

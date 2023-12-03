@@ -18,6 +18,31 @@
 		<result property="correctMax" column="CORRECT_MAX"/>		
 	</resultMap>
 	
+	
+	<resultMap type="Quiz" id="quiz_rm">
+		<id property="quizNo" column="QUIZ_NO"/>
+		
+		<result property="quizContent" column="QUIZ_CONTENT"/>
+		<result property="quizChoice1" column="QUIZ_CHOICE1"/>
+		<result property="quizChoice2" column="QUIZ_CHOICE2"/>
+		<result property="quizChoice3" column="QUIZ_CHOICE3"/>
+		<result property="quizChoice4" column="QUIZ_CHOICE4"/>
+		
+		
+		<result property="quizAnswerNo" column="QUIZ_ANSWER_NO"/>		
+		<result property="answerNo" column="ANSWER_NO"/>
+		
+		<result property="quizImgNo" column="QUIZ_IMG_NO"/>		
+		<result property="quizDogImg" column="QUIZ_DOG_IMG"/>		
+		<result property="quizEyes" column="QUIZ_EYES"/>		
+		<result property="quizNose" column="QUIZ_NOSE"/>		
+		<result property="quizMouth" column="QUIZ_MOUTH"/>		
+		<result property="quizLeftEar" column="QUIZ_LEFT_EAR"/>		
+		<result property="quizRightEar" column="QUIZ_RIGHT_EAR"/>
+				
+	</resultMap>
+
+	
 
 	<!-- 쿠폰 내역 가져오기 (마이페이지 / 사용자) -->
 	<select id = "selectCouponList"  resultMap = "coupon_rm">
@@ -50,5 +75,34 @@
 		AND COUPON_DATE+30 <= TO_DATE(#{formateNow}, 'YYYY-MM-DD')	
 		]]>	
 	</update>	
+	
+	
+	
+	<!--quiz 문제-->
+	
+	<!-- 게임에 참여했는지 확인--> 	
+	<select id = "eventCheck">
+		SELECT COUNT(*)
+		FROM TEST_COUPON 
+		WHERE MEMBER_NO = 2
+		AND COUPON_STATUS = 'Y'
+	</select>		
+	
+	<!-- 문제 뽑기 (객관식) -->
+	<select id = "chooseQuiz" resultMap = "quiz_rm">
+		SELECT * FROM (
+		    SELECT * 
+		    FROM QUIZ
+			LEFT JOIN QUIZ_ANSWER USING(QUIZ_NO)
+			LEFT JOIN QUIZ_IMG  USING(QUIZ_NO)
+		    ORDER BY DBMS_RANDOM.VALUE()
+		<![CDATA[ ) WHERE ROWNUM <= 2
+		]]>			
+	</select>
+	
+	
+	
+	
+
 
 </mapper>

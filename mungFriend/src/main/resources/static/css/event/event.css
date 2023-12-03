@@ -1,0 +1,472 @@
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+.nanumgothic * {
+ font-family: 'Nanum Gothic', sans-serif;
+}
+
+*{
+    box-sizing: border-box;
+    list-style : none; /* 리스트 스타일 X */
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    font-family: 'NanumGothic', 'sans-serif';
+}
+
+/*************************************************
+                    event 모달
+*************************************************/
+#eventModalBox{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom : 0;
+    right: 0;
+    
+    background-color: rgba(217,217,217,0.7);
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index:50;
+}
+
+#eventContentArea{
+    background-color: white;
+    width: 500px;
+    height: 650px;
+    padding: 10px ;
+    border-radius: 15px;
+    position: relative;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* 그림자 효과 */
+    display: flex;
+    flex-direction: column;
+    z-index:101;
+    opacity: 1; 
+
+
+}
+
+
+
+/*************************************************
+                    event 서브 모달
+*************************************************/
+#eventSubModalBox{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom : 0;
+    right: 0;
+
+    /* display: none; */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+#eventSubModalArea{
+    background-color: white;
+    width: 440px;
+    height: 250px;
+    padding: 10px ;
+    border-radius: 15px;
+    position: absolute;
+    box-shadow: 2px 7px 10px rgba(0, 0, 0, 0.5); 
+    opacity: 1;
+    display: flex;
+    flex-direction: column;
+
+    /* border : 2px solid black; */
+
+    background-color: #FFE3E3;
+}
+
+
+
+.modalContent{
+    flex-basis: 80%;
+    /* border :2px solid red; */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+
+.iconArea{
+    flex-basis: 40%;
+
+    font-size: 50px;
+    display: flex;
+    align-items: end;
+
+}
+
+.titleArea{
+    flex-basis: 30%;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    padding: 8px 0px;
+}
+
+.gameArea{
+    flex-basis: 30%;
+
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing : 1.8px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalBtnArea{
+    flex-basis: 20%;
+    /* border : 2px solid blue; */
+
+    display: flex;
+
+}
+
+.modalBtn{
+
+    flex: 1;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 5px 2px;
+}
+
+.settingBtn{
+
+    width: 180px;
+
+    background-color: white;
+    border-radius: 5px;
+
+    padding : 7px 0px;
+
+    font-weight: 700;
+
+    text-align: center;
+
+    cursor: pointer;
+
+}
+
+.settingBtn:hover{
+    opacity: 0.8;
+}
+
+
+#gameStart{
+    background-color: #fda1a1;
+}
+
+#couponBtn{
+    background-color: yellow;
+}
+
+/*************************************************
+                 이벤트 display
+*************************************************/
+#eventClose{
+    flex-basis: 4%;
+    cursor: pointer;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    align-self: flex-end;
+    display: flex;
+    justify-content: end;
+    padding-right: 5px;
+}
+
+.eventArea{
+    flex-basis: 96%;
+
+    padding:5px 5%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/*************************************************
+                 게임 상태
+*************************************************/
+.quizStatus{
+    flex-basis: 15%;
+    /* border : 2px solid blue; */
+
+    display: flex;
+    flex-direction: column;
+    padding: 0px 10%;
+}
+
+.timeArea{
+    flex-basis: 40%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border : 3px solid pink;
+    border-radius: 5px;
+
+    font-weight: 700;
+}
+
+
+.correctArea{
+    flex-basis: 60%;    
+    display: flex;
+    padding :5px 0px 0px 0px;
+    padding-left: 35%;
+}
+
+.correctState{
+
+    margin-left: 7px;
+    width:38px;
+    height: 38px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    overflow: hidden;
+}
+
+.correctState img{
+    height: 100%;
+}
+
+/*************************************************
+                 그림 날라다는 곳
+*************************************************/
+.quizGame{
+    flex-basis: 60%;
+  
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.gameArea{
+    width: 432px;
+}       
+
+.correctImg{
+    width: 350px;
+    height: 350px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+
+}
+
+.correctImg > img{
+    height: 100%;
+}
+
+.quizGame{
+    width: 432px;
+    height: 386px;
+
+    /* border : 2px solid rebeccapurple; */
+}
+
+
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+
+.imgSize {
+    width: 75px;
+    height: 75px;
+
+    border-radius: 50%;
+    overflow: hidden;
+
+    border: 1px solid gray;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dogImg{
+    height : 100%;
+
+}
+
+
+/*************************************************
+              게임 문제 맞추는 곳 (객관식)
+*************************************************/
+.quizArea{
+    flex-basis: 19%;
+
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.quizBtnWrap{
+    flex-basis: 50%;
+
+    display: flex;
+    padding: 7px 10px 2% 10px;
+
+
+}
+
+.quizBtn{
+    flex-basis: 100%;
+
+    background-color: #EAEAEA;
+
+    border-radius: 5px;
+
+    display: flex;
+    
+    cursor: pointer;
+}
+
+.quizBtn:hover{
+    background-color: #f9c9b0a2;
+}
+
+.stopHover{
+    pointer-events: none;
+}
+
+.quizSelect{
+    background-color: #f9c9b0a2;
+}
+
+.answerSelect{
+    background-color: #ff9b9b;
+}
+
+.quizBtn .quizNum{
+    flex-basis: 15%;
+    font-size: 13px;
+    font-weight: 700;
+
+    padding: 0px 0px 0px 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.quizBtn .quizContent{
+    flex-basis: 85%;
+    font-size: 13px;
+    font-weight: 700;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.quizSubmit{
+    flex-basis: 6%;
+
+    padding: 0px 10px;
+
+    display: flex;
+}
+
+.quizSubmitBtn{
+    flex-basis: 100%;
+    padding : 5px;
+    background-color: #FFE3E3;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 700;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+}
+
+.quizSubmitBtn:hover{
+    background-color: #fda1a1;
+}
+
+
+
+input[type="radio"]{
+    display: none;
+}
+
+/*************************************************
+                문제 정답 색깔
+*************************************************/
+.correct{
+    background-color: #FEE4D6;
+}
+
+.correctColor{
+    background-color: red;
+}
+
+.quizNextBtn {
+    flex-basis: 100%;
+    padding : 5px;
+    background-color: #FFE3E3;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 700;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+}
+
+.quizNextBtn:hover{
+    background-color: rgb(204, 204, 247);
+}
+
+.quizOverBtn{
+    flex-basis: 100%;
+    padding : 5px;
+    background-color: #FFE3E3;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 700;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;   
+}
+
+.quizOverBtn:hover{
+    background-color: rgb(159, 255, 154);
+}

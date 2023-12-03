@@ -14,11 +14,12 @@ function openEvent(){
 function closeEvent(){
     modal.style.display = "none"; 
     subModal.style.display = "none";  
+    resetGame();
 }
 
 
 closeModalBtn.addEventListener("click", function(){
-    closeEvent();
+    doneQuiz();
 });
 
 

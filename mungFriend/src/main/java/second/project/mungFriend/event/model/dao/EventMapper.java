@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import second.project.mungFriend.event.model.dto.Coupon;
+import second.project.mungFriend.event.model.dto.Quiz;
 
 @Mapper
 public interface EventMapper {
@@ -26,5 +27,16 @@ public interface EventMapper {
 	 * @return
 	 */
 	int updateCountExpiration(String formatedNow);
+
+	/** 게임에 참여했는지 확인
+	 * @param memberNo
+	 * @return
+	 */
+	int eventCheck(int memberNo);
+
+	/** 랜덤하게 문제 뽑기
+	 * @return
+	 */
+	List<Quiz> chooseQuiz();
 
 }
