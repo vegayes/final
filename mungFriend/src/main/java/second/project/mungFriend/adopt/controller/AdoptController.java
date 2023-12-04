@@ -123,6 +123,7 @@ public class AdoptController {
 		return "adopt/dogRegistration";
 	}
 	
+	
 	// 강아지 insert
 	@PostMapping("/dogRegistration/insert")
 	public String dogRegiInsert(
@@ -131,7 +132,7 @@ public class AdoptController {
 			@SessionAttribute("loginMember") Member loginMember,
 			RedirectAttributes ra) throws IllegalStateException, IOException {
 		
-
+		System.out.println("images : " + images);
 		int dogNo = service.dogRegiInsert(dog, images);
 		
 		String message = null;
