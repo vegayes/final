@@ -191,10 +191,8 @@ function requestPay() {
 		        if (rsp.success) { // 결제 성공
 					alert("결제 성공");
 					
-					console.log("rsp.imp_uid");
-					
 					// 결제검증
-					fetch('/verify_iamport/' + rsp.imp_uid, {
+					fetch('/verifyIamport/' + rsp.imp_uid, {
 					    method: 'POST'
 					})
 					.then(function(response) {
@@ -202,22 +200,8 @@ function requestPay() {
 					})
 					.then(function(data) {
 							console.log("들어옴");
-					        fetch("/complete", {
-					            method: "POST",
-					            headers: {
-					                "Content-Type": "application/json"
-					            },
-					            body: requestData
-					        })
-					        .then(response => response.text())
-					        .then(res => {
-					            if (res == "y") {
-					                alert('주문정보 저장 성공');
-					                createPayInfo(uid);
-					            } else {
-					                alert('주문정보 저장 실패');
-					            }
-					        });
+							
+							console.log(data);
 				
 					})
 					.catch(function(error) {

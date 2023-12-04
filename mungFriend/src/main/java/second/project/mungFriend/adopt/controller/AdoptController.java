@@ -20,10 +20,13 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import second.project.mungFriend.admissionApply.model.dto.Admission;
+import second.project.mungFriend.admissionApply.model.service.FreeAdmissionService;
 import second.project.mungFriend.adopt.model.dto.Dog;
 import second.project.mungFriend.adopt.model.dto.DogImage;
 import second.project.mungFriend.adopt.model.service.AdoptService;
 import second.project.mungFriend.member.model.dto.Member;
+import second.project.mungFriend.mypage.admin.model.service.ListAdminServcie;
 
 @Controller
 @RequestMapping("/adopt")
@@ -32,6 +35,9 @@ public class AdoptController {
 	
 	@Autowired
 	private AdoptService service;
+	
+	@Autowired
+	private ListAdminServcie admService;
 	
 	// 강아지 목록 조회
 	@GetMapping("/dogList")
@@ -124,15 +130,45 @@ public class AdoptController {
 	}
 	
 	
+
+	/** 입소 신청 정보 가지고 게시글 작성 화면으로 전환
+	 * @return
+	 */
+	@GetMapping("/info/dogRegistration/{admNo}")
+	public String infoRegistration(@PathVariable("admNo") int admNo, Model model) {
+		
+		Admission admissionInfo = admService.selectAdmissionInfo(admNo);
+		System.out.println("입소 신청서에서 가져온 정보 : " + admissionInfo);
+		
+		model.addAttribute("admissionInfo", admissionInfo);	
+		
+		return "adopt/dogRegistration";
+	}
+	
+
 	// 강아지 insert
 	@PostMapping("/dogRegistration/insert")
 	public String dogRegiInsert(
 			Dog dog,
 			@RequestParam(value="images", required = false) List<MultipartFile> images, 
+			@RequestParam(value="admFile", required = false) String admFile, 
 			@SessionAttribute("loginMember") Member loginMember,
 			RedirectAttributes ra) throws IllegalStateException, IOException {
+
+		System.out.println("admFile : " + admFile);
+		String[] parts = admFile.split("/", 4);
+
+		// 세 번째 '/' 이후의 부분 가져오기
+		String imgPath = "/" + parts[1] + "/" + parts[2] + "/" ;
+		String imgRename = parts[3]; 
 		
-		System.out.println("images : " + images);
+		System.out.println("주소:" + imgPath);
+		System.out.println("이름:" + imgRename);
+		
+		dog.setImgPath(imgPath);
+		dog.setImgRename(imgRename);
+		
+	
 		int dogNo = service.dogRegiInsert(dog, images);
 		
 		String message = null;

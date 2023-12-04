@@ -3,16 +3,19 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>event 페이지</title>
+        <title>멍프랜드-!이벤트!</title>
 
-        <link rel="stylesheet" th:href="event.css">
-        <script src="https://kit.fontawesome.com/ac58eafae7.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" th:href="@{/css/event/event.css}">
+        <script th:src="@{https://kit.fontawesome.com/ac58eafae7.js}" crossorigin="anonymous"></script>
     </head>
     <body>
 
-        <button id = "btn" th:onclick="openEvent()">
+		<!--
+        <button id = "btn" onclick="openEvent()">
             이벤트
         </button>
+		-->
+
 
         <!-- 이벤트 팝업 -->
         <div id = "eventModalBox">
@@ -27,19 +30,19 @@
                             </div>
                             <div class = "titleArea">
                                 강아지 맞추기 이벤트
-                            </div>
+                            </div>  
                             <div class = "gameArea">
                                 제시된 사진을 보고 10초 안에 <br>강아지 견종을 맞춰보세요~
                             </div>
                         </div>
                         <div class = "modalBtnArea">    
                             <div class = "modalBtn">
-                                <div class = "settingBtn" id = "main" onclick="closeEvent()">
+                                <div class = "settingBtn" id = "main" th:onclick="closeEvent()">
                                     메인 페이지
                                 </div>
                             </div>  
                             <div class = "modalBtn">
-                                <div class = "settingBtn" id = "gameStart" onclick = "startGame()">
+                                <div class = "settingBtn" id = "gameStart" th:onclick ="startGame()">
                                     게임 시작
                                 </div>
                             </div>  
@@ -58,29 +61,25 @@
                         </div>
                         <div class = "correctArea">
                             <div class = "correctState">
-                                <img src = "images/origin.jpg">
+                                <img th:src = "@{/images/event/quiz/origin.jpg}">
                             </div>
                             <div class = "correctState">
-                                <img src = "images/origin.jpg">
+                                <img th:src = "@{/images/event/quiz/origin.jpg}">
                             </div>
                             <div class = "correctState">
-                                <img src = "images/origin.jpg">
-
+                                <img th:src = "@{/images/event/quiz/origin.jpg}">
                             </div>
                             <div class = "correctState">
-                                <img src = "images/origin.jpg">
+                                <img th:src = "@{/images/event/quiz/origin.jpg}">
                             </div>
                             <div class = "correctState">
-                                <img src = "images/origin.jpg">
+                                <img th:src = "@{/images/event/quiz/origin.jpg}">
                             </div>
                         </div>
                     </div>
 
                     <div class = "quizGame" id = "container" >
                         
-                        <!--<div class = "correctImg">
-                            <img src="1.jpg">
-                        </div> -->
                     </div>
 
                     <div class = "quizArea">
@@ -129,18 +128,11 @@
 
                     </div>
 
-                    <div class = "quizSubmit">  
-                        <div class = "quizSubmitBtn" id = "submitQuiz">
-                            정답제출
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>    
       
-        <script src ="event.js"></script>
-
-        <script src="script.js"></script>
+        <script th:src ="@{/js/event/event.js}"></script>
+        <script th:src="@{/js/event/game.js}"></script>
     </body>
 </html>

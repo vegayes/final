@@ -24,5 +24,7 @@ public class Coupon {
 	private int correctMin;	
 	private int correctMax;	
 	
+	private int totalScore;
+	
 
 }

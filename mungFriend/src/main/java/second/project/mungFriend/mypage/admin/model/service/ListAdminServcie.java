@@ -26,6 +26,12 @@ public interface ListAdminServcie {
 	//List<Donation> searchDonationList(String donationSearch);
 	Map<String, Object> searchDonationList(String donationSearch, int cp);
 
+	/**입소신청 내역 (객체 가져오기)
+	 * @param admNo
+	 * @return
+	 */
+	Admission selectAdmissionInfo(int admNo);
+
 	
 
 	
