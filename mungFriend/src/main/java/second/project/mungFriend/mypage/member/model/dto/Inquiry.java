@@ -14,13 +14,11 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class Inquiry {
-	  private Long inquiryId; // INQUIRY_ID
-	    private String userId; // USER_ID
-	    private String title; // INQUIRY_TITLE
-	    private String content; // INQUIRY_CONTENT
-	    private LocalDateTime inquiryDate; // INQUIRY_DATE
-	    private String status; // INQUIRY_STATUS
-	    private String answerContent; // ANSWER_CONTENT
-	    private LocalDateTime answerDate; // ANSWER_DATE
-
+	private int inquiryNo;
+	private int memberNo;
+	private String inquiryTitle;
+	private String inquiryContent;
+	private String inquiryDate;
+	private String inquiryStatus;
+	private String inquiryCompleteDate;
 }

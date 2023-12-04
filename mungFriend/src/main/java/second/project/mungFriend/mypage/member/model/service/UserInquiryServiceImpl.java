@@ -3,21 +3,30 @@ package second.project.mungFriend.mypage.member.model.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import second.project.mungFriend.mypage.member.model.dao.UserInquiryDAO;
 import second.project.mungFriend.mypage.member.model.dao.UserInquiryMapper;
 import second.project.mungFriend.mypage.member.model.dto.Inquiry;
 
-public class UserInquiryServiceImpl {
-  
+@Service
+public class UserInquiryServiceImpl implements UserInquiryService {
 	
-	 @Autowired
-	    private UserInquiryMapper userInquiryMapper;
+	@Autowired
+	private UserInquiryDAO dao;
 
-	    public void submitInquiry(Inquiry inquiry) {
-	        userInquiryMapper.insertInquiry(inquiry);
-	    }
+	// 1:1 등록
+	@Override
+	public int userInquiry(Inquiry inquiry) {
+		return dao.userInquiry(inquiry);
+	}
 
-//	    public List<Inquiry> getUserInquiries(String userId) {
-//	        return userInquiryMapper.findInquiriesByUserId(userId);
-//	    }
+	// inquiryList 조회하기
+	@Override
+	public List<Inquiry> inquiryList() {
+		return dao.inquiryList();
+	}
+	
+	
+  
 }
