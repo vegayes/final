@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import second.project.mungFriend.common.utility.Util;
@@ -30,6 +31,7 @@ public class MemberUserServiceImpl implements MemberUserService{
 	private BCryptPasswordEncoder bcrypt;
 
 	// 정보수정
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int updateInfoUser(MultipartFile profileImage, Member updateMember, Member loginMember) throws Exception {
 		
@@ -80,6 +82,7 @@ public class MemberUserServiceImpl implements MemberUserService{
 	}
 	
 	// 회원탈퇴
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int secessionUser(String memberPw, int memberNo) {
 		
