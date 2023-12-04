@@ -3,7 +3,7 @@
 // 등록하기 form 태그가 제출 되었을 때
 document.getElementById("register-form").addEventListener("submit", e => {
 	
-	// **** 사진은 not null이고, 내용은 null 이라서 사진 업로드 했는지만 체크하면 될까? ****
+	// **** 사진은 not null이고, 내용은 null 이라서 사진 업로드 했는지만 체크 ****
 	
 	// initCheck
 	// 초기 이미지 상태를 저장하는 변수

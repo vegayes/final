@@ -27,6 +27,7 @@ public class Dog {
 	private String dogSpecialNote;
 	private String dogAdmissionDate;
 	private String dogAdoptFl;
+	private String dogAdoptDate;
 	
 	// DOG_BREED 테이블 join
 	private String breedName;

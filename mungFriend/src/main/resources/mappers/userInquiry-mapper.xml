@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="second.project.mungFriend.mypage.member.model.dao.UserInquiryMapper">
+
+	<resultMap type="Inquiry" id="inquiry_rm">
+		<id property="inquiryNo" column="INQUIRY_NO" />
+		<result property="memberNo" column="MEMBER_NO" />
+		<result property="inquiryTitle" column="INQUIRY_TITLE" />
+		<result property="inquiryContent" column="INQUIRY_CONTENT" />
+		<result property="inquiryDate" column="INQUIRY_DATE" />
+		<result property="inquiryStatus" column="INQUIRY_STATUS" />
+		<result property="inquiryCompleteDate" column="INQUIRY_COMPLETE_DATE" />
+	</resultMap>
+	
+	<!-- 1:1 등록 -->
+	<insert id="userInquiry">
+		INSERT INTO INQUIRY
+		VALUES(SEQ_INQUIRY_NO.NEXTVAL
+		, #{memberNo}
+		, #{inquiryTitle}
+		, #{inquiryContent}
+		, DEFAULT, DEFAULT, DEFAULT)
+	</insert>
+	
+	<!-- inquiryList 조회하기 -->
+	<select id="inquiryList" resultMap="inquiry_rm">
+		SELECT INQUIRY_NO, MEMBER_NO, INQUIRY_TITLE, INQUIRY_CONTENT,
+		TO_CHAR(INQUIRY_DATE, 'YYYY-MM-DD-HH24:MI') AS INQUIRY_DATE, INQUIRY_STATUS, INQUIRY_COMPLETE_DATE
+		FROM INQUIRY
+	</select>
+	
+</mapper>

@@ -130,6 +130,7 @@ public class AdoptController {
 	}
 	
 	
+
 	/** 입소 신청 정보 가지고 게시글 작성 화면으로 전환
 	 * @return
 	 */
@@ -144,8 +145,7 @@ public class AdoptController {
 		return "adopt/dogRegistration";
 	}
 	
-	
-	
+
 	// 강아지 insert
 	@PostMapping("/dogRegistration/insert")
 	public String dogRegiInsert(
@@ -154,7 +154,7 @@ public class AdoptController {
 			@RequestParam(value="admFile", required = false) String admFile, 
 			@SessionAttribute("loginMember") Member loginMember,
 			RedirectAttributes ra) throws IllegalStateException, IOException {
-		
+
 		System.out.println("admFile : " + admFile);
 		String[] parts = admFile.split("/", 4);
 
@@ -168,7 +168,7 @@ public class AdoptController {
 		dog.setImgPath(imgPath);
 		dog.setImgRename(imgRename);
 		
-		
+	
 		int dogNo = service.dogRegiInsert(dog, images);
 		
 		String message = null;

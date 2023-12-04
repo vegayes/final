@@ -149,6 +149,7 @@ public class AdoptServiceImpl implements AdoptService{
 		// 업로드된 이미지가 있다면 DOG_IMG테이블에 삽입하는 dao 호출
 		if(dogNo > 0) {
 			
+			
 			// 실제 업로드된 파일의 정보를 기록할 List
 			List<DogImage> uploadList = new ArrayList<DogImage>();
 			

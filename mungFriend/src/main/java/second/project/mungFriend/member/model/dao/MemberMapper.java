@@ -14,6 +14,12 @@ public interface MemberMapper {
 	 * @return Member
 	 */
 	Member login(Member inputMember);
+	
+	/** 회원가입
+	 * @param inputMember
+	 * @return int
+	 */
+	int signUp(Member inputMember);
 
 	/** 아이디찾기
 	 * @param inputMember

@@ -101,6 +101,14 @@
     border-radius: 5px;
 }
 
+#disconnect {
+    margin-left: 70%;
+    width: 80px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: #FFF0E8;
+}
+
 .selectButton > p {
     margin-left: 10px;
     margin-right: 10px;

@@ -61,7 +61,7 @@ public class PmController {
 		// 결과값으로 성공
 		if(result > 0) {
 			message = "활동일지 등록 성공";
-			path = "PM/activityLog";
+			path = "pm/activityLog";
 			
 		} else {
 			// 실패에 따른 처리
