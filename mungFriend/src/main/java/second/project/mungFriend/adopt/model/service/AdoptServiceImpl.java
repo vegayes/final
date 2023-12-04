@@ -150,6 +150,8 @@ public class AdoptServiceImpl implements AdoptService{
 		if(dogNo > 0) {
 			
 			
+//			if(dog.getImgPath()!= null) 
+			
 			// 실제 업로드된 파일의 정보를 기록할 List
 			List<DogImage> uploadList = new ArrayList<DogImage>();
 			
@@ -172,6 +174,7 @@ public class AdoptServiceImpl implements AdoptService{
 					
 					uploadList.add(img);
 				}
+				
 				
 			} // 분류작업 종료
 			
