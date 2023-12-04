@@ -39,4 +39,16 @@ public interface EventMapper {
 	 */
 	List<Quiz> chooseQuiz();
 
+	/** 쿠폰 선택 (점수)
+	 * @param totalScore
+	 * @return
+	 */
+	int couponSelect(int totalScore);
+
+	/** 쿠폰 증정
+	 * @param newCoupon
+	 * @return
+	 */
+	int couponInsert(Coupon newCoupon);
+
 }

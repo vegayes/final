@@ -48,6 +48,7 @@
 		       END AGE,
 		    ]]> 
 		       ADM_PHONE,
+		       ADM_BIRTHDAY,
 		       ADM_BREED,
 		       ADM_GENDER,
 		       ADM_NEUTERING_YN,
@@ -58,6 +59,35 @@
 		       ADM_YN,
 		       ADM_MEMBER_NO
 		FROM ADMISSION
+		ORDER BY ADM_APPLY_DATE DESC
+	</select>
+	
+	<!-- 무료입소 신청 객체 가져오기 --> 
+	<select id = "selectAdmissionInfo" resultMap = "admission_rm">
+		SELECT ADM_NO, ADM_PROFILE , ADM_NAME, 
+			<![CDATA[ 
+			   CASE WHEN TRUNC(SYSDATE) - ADM_BIRTHDAY <= 30 THEN
+		                 1 || '개월 미만'
+		             WHEN MONTHS_BETWEEN(TRUNC(SYSDATE), ADM_BIRTHDAY) < 12 THEN
+		                 TRUNC(MONTHS_BETWEEN(TRUNC(SYSDATE), ADM_BIRTHDAY)) || '개월'
+		             ELSE
+		                 TRUNC(MONTHS_BETWEEN(TRUNC(SYSDATE), ADM_BIRTHDAY) / 12 ) || '세'
+		    
+		       END AGE,
+		    ]]> 
+		       ADM_PHONE,
+		       ADM_BIRTHDAY,
+		       ADM_BREED,
+		       ADM_GENDER,
+		       ADM_NEUTERING_YN,
+		       ADM_VACCINE_YN,
+		       ADM_SIGNIFICANT,
+		       ADM_APPLY_DATE,
+		       TO_CHAR(ADM_HOPE_DATE, 'YYYY-MM-DD') AS ADM_HOPE_DATE ,
+		       ADM_YN,
+		       ADM_MEMBER_NO
+		FROM ADMISSION
+		WHERE ADM_NO = #{admNo}
 		ORDER BY ADM_APPLY_DATE DESC
 	</select>
 	

@@ -433,6 +433,10 @@ input[type="radio"]{
     background-color: red;
 }
 
+.fail {
+  text-decoration: line-through;
+}
+
 .quizNextBtn {
     flex-basis: 100%;
     padding : 5px;

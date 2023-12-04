@@ -96,11 +96,22 @@
 			LEFT JOIN QUIZ_ANSWER USING(QUIZ_NO)
 			LEFT JOIN QUIZ_IMG  USING(QUIZ_NO)
 		    ORDER BY DBMS_RANDOM.VALUE()
-		<![CDATA[ ) WHERE ROWNUM <= 2
+		<![CDATA[ ) WHERE ROWNUM <= 5
 		]]>			
 	</select>
 	
+	<!-- 쿠폰 선택 (점수) --> 
+	<select id = "couponSelect" resultType = "_int">
+		SELECT COUPON_CONTENT_NO
+		FROM TEST_COUPON_CONTENT 
+		<![CDATA[WHERE CORRECT_MIN <= #{totalScore} AND CORRECT_MAX > #{totalScore}
+		]]>		
+	</select>
 	
+	<insert id = "couponInsert">
+		INSERT INTO TEST_COUPON 
+		VALUES (SEQ_COUPON_NO.NEXTVAL,#{memberNo},#{couponContentNo} ,SYSDATE, DEFAULT)
+	</insert>
 	
 	
 

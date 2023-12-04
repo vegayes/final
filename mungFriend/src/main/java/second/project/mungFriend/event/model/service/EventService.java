@@ -2,6 +2,7 @@ package second.project.mungFriend.event.model.service;
 
 import java.util.List;
 
+import second.project.mungFriend.event.model.dto.Coupon;
 import second.project.mungFriend.event.model.dto.Quiz;
 
 public interface EventService {
@@ -29,6 +30,18 @@ public interface EventService {
 	 * @return
 	 */
 	List<Quiz> chooseQuiz();
+
+	/** 쿠폰 선택 ( 점수 ) 
+	 * @param totalScore
+	 * @return
+	 */
+	int couponSelect(int totalScore);
+
+	/** 쿠폰 증정
+	 * @param newCoupon
+	 * @return
+	 */
+	int couponInsert(Coupon newCoupon);
 
 	
 	

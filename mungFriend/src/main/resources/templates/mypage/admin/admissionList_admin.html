@@ -88,12 +88,14 @@
 			                                    
 		                    	       			<th:block th:if="${admission.admYN} == 'N'">
 				                                    <div class = "cardInfoContent registArea">
-														<a th:src = "@{/}">
-															<div class = "admissionRegist">
+														
+														<a th:href = "@{/adopt/info/dogRegistration/{admNo}(admNo = ${admission.admNo})}">
+															<div class = "admissionRegist" >
 																등록하기
-															</div>	
+															</div>														
 														</a>
 		
+														
 													</div>
 												</th:block>
 			                                </div>
@@ -101,6 +103,7 @@
 			                        </div>
 								</div>
 								
+					            <div class="swiper-pagination"></div>
 					            <div class="swiper-button-prev"></div>
 					            <div class="swiper-button-next"></div>
 								
@@ -122,8 +125,6 @@
 	    
 		<script th:inline = "javascript">
 			var admissionArr = /*[[${admissionList}]]*/ "입소신청 리스트";
-			console.log(admissionArr);
-			console.log(admissionArr[0]);
 		</script>
 
     	<script th:src="@{https://unpkg.com/swiper/swiper-bundle.min.js}"></script>

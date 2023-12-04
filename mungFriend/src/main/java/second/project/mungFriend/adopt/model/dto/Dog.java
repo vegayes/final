@@ -37,4 +37,8 @@ public class Dog {
 	// 이미지목록
 	private List<DogImage> imageList;
 	
+	// 입소 신청 내역에서 가져온 이미지 
+	private String imgPath;
+	private String imgRename;
+	
 }

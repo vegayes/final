@@ -104,83 +104,84 @@ function reflect(incident, normal) {
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
                 퀴즈 이미지 정보
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-const quizImgData = [
+/*quizImgData = [
     [
     {
         variable : "eyes",
-        imgUrl : "images/퍼그 눈.jpg"
+        imgUrl : "images/event/quiz/퍼그 눈.jpg"
     },
     {
         variable : "nose",
-        imgUrl : "images/퍼그 코.jpg"
+        imgUrl : "images/event/quiz/퍼그 코.jpg"
     },
     {
         variable : "mouth",
-        imgUrl : "images/퍼그 입.jpg"
+        imgUrl : "images/event/quiz/퍼그 입.jpg"
     },
     {
         variable : "leftEar",
-        imgUrl : "images/퍼그 왼쪽 귀.jpg"
+        imgUrl : "images/event/quiz/퍼그 왼쪽 귀.jpg"
     },
     {
         variable : "rightEar",
-        imgUrl : "images/퍼그 오른쪽 귀.jpg"
+        imgUrl : "images/event/quiz/퍼그 오른쪽 귀.jpg"
     },
     {
         variable : "answerDog",
-        imgUrl : "images/퍼그.jpg"       
+        imgUrl : "images/event/quiz/퍼그.jpg"       
     }
     ],
     [
         {
             variable : "eyes",
-            imgUrl : "images/포메 눈.jpg"
+            imgUrl : "images/event/quiz/포메 눈.jpg"
         },
         {
             variable : "nose",
-            imgUrl : "images/포메 코.jpg"
+            imgUrl : "images/event/quiz/포메 코.jpg"
         },
         {
             variable : "mouth",
-            imgUrl : "images/포메 입.jpg"
+            imgUrl : "images/event/quiz/포메 입.jpg"
         },
         {
             variable : "leftEar",
-            imgUrl : "images/포메 왼쪽 귀.jpg"
+            imgUrl : "images/event/quiz/포메 왼쪽 귀.jpg"
         },
         {
             variable : "rightEar",
-            imgUrl : "images/포메 오른쪽 귀.jpg"
+            imgUrl : "images/event/quiz/포메 오른쪽 귀.jpg"
         },
         {
             variable : "answerDog",
-            imgUrl : "images/포메.jpg"       
+            imgUrl : "images/event/quiz/포메.jpg"       
         }
     ],
     [
         {
             variable : "eyes",
-            imgUrl : "images/보더콜리 눈.jpg"
+            imgUrl : "images/event/quiz/보더콜리 눈.jpg"
         },
         {
             variable : "nose",
-            imgUrl : "images/보더콜리 코.jpg"
+            imgUrl : "images/event/quiz/보더콜리 코.jpg"
         },
         {
             variable : "leftEar",
-            imgUrl : "images/보더콜리 왼쪽 귀.jpg"
+            imgUrl : "images/event/quiz/보더콜리 왼쪽 귀.jpg"
         },
         {
             variable : "rightEar",
-            imgUrl : "images/보더콜리 오른쪽 귀.jpg"
+            imgUrl : "images/event/quiz/보더콜리 오른쪽 귀.jpg"
         },
         {
             variable : "answerDog",
-            imgUrl : "images/보더콜리.jpg"       
+            imgUrl : "images/event/quiz/보더콜리.jpg"       
         }
     ]
 
 ];
+*/
 
 const quizNumber = ["①", "②", "③", "④"];
 /*
@@ -190,9 +191,9 @@ const quizChoice = [
     ["비숑", "사모예드", "보더콜리" , "폼피츠"]
 ];
 */
-
-const quizAnswer = [4, 1, 3];
-
+/*
+var quizAnswer = [4, 1, 3];
+*/
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
                     퀴즈  점수
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
@@ -238,11 +239,13 @@ function loadCurrentImageSet() {
     const container = document.getElementById('container'); 
     container.innerHTML = '';
     const currentImageSet = quizImgData[currentIndex];
+    
+    console.log("이미지 :" + currentImageSet);
 
     currentImageSet.forEach(data => {
         if (data.variable !== "answerDog") {
             const rectangle = createRectangle(container, data.variable, data.imgUrl);
-            moveRectangle(rectangle, container, 3);
+            moveRectangle(rectangle, container, 4);
         }
     });
 
@@ -301,6 +304,7 @@ function createRectangle(container, id , imageUrl) {
 
 function displayAnswer() {
     var check = document.querySelector('input[name="quizSelect"]:checked');
+    
     var answer = quizAnswer[currentIndex];
     if(check != null){
         if( answer == check.value){ //성공
@@ -313,6 +317,8 @@ function displayAnswer() {
             for(let i = 0; i<quizBtnWraps.length; i++){
                 quizBtnWraps[answer-1].classList.add('answerSelect');
                 quizBtnWraps[i].classList.add('stopHover');
+                quizBtnWraps[check.value-1].classList.add('fail');
+                
             }  
         }
     }else{
@@ -441,6 +447,7 @@ function nextQuiz() {
 
     for(let i = 0; i<quizBtnWraps.length; i++){
         quizBtnWraps[i].classList.remove('stopHover');
+        quizBtnWraps[i].classList.remove('fail');
     }  
 
     if(radioButtons != null){
@@ -453,6 +460,7 @@ function nextQuiz() {
     quizBtnWraps.forEach(wrap => {
         wrap.classList.remove('quizSelect');
         wrap.classList.remove('answerSelect');
+        wrap.classList.remove('fail');
     });
 
 
@@ -460,6 +468,7 @@ function nextQuiz() {
 
     currentIndex = (currentIndex + 1) % quizImgData.length;
     const container = document.getElementById("container");
+    
 
     const nextQuizBtn = document.getElementById("nextQuiz");
     if (nextQuizBtn) {
@@ -520,12 +529,29 @@ function doneQuiz(){
 
 
             gameArea.innerText = "User 님의 점수는 " + totalScore + "점 입니다.";
+            
+            
+            if(totalScore >= 1){
+	        	fetch("/event/coupon/insert?memberNo=" + loginMember.memberNo + "&totalScore="+totalScore)
+	            .then(response => response.json())
+	            .then(data => {
+					console.log(data);
+					
+					if(data > 0){
+						console.log("쿠폰 증정 성공");	
+					}else{
+						console.log("쿠폰 증정 실패");
+					}
+	            })
+	            .catch(error => console.error("쿠폰 증정 오류:", error));   
+	        }
+            
 
             const gameStart = document.getElementById('gameStart');
             gameStart.innerText = '쿠폰 확인하러 가기';
-            gameStart.setAttribute('onclick', 'closeEvent()'); 
+            gameStart.setAttribute('onclick', 'checkCoupon()'); 
             gameStart.id = "couponBtn";
-
+            
         }
         
     } else {
@@ -554,20 +580,17 @@ function doneQuiz(){
                     timerInterval = setInterval(updateTimer, 1000);
                 }
             });
-        
-
-
         }
-
-
     }
-
-
-
-
-
-
 }
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+                 쿠폰 확인하러 가기
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+function checkCoupon(){
+   location.href = "/mypage/member/couponList";
+}
+
 
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
                  점수 계산
@@ -730,6 +753,8 @@ function resetGame() {
         wrap.classList.remove('quizSelect');
         wrap.classList.remove('answerSelect');
         wrap.classList.remove('stopHover');
+        wrap.classList.remove('fail');
+        
     });
 
     // 4. 타이머 및 정답 공개 관련 초기화
@@ -753,3 +778,4 @@ function resetGame() {
     startSubQuery();
 
 }
+

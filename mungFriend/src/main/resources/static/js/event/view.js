@@ -1,6 +1,6 @@
-let quizChoice = [];
-let quizAnswer = [];
-let quizImgData = [];
+var quizChoice = [];
+var quizAnswer = [];
+var quizImgData = [];
 
 document.addEventListener("DOMContentLoaded", () => {
 	
@@ -14,8 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			if(result > 0){
 				
 				console.log("쿠폰 있음 :: 게임 참여 불가");
-								
-				// 퀴즈 선택지 가져오기
+				/*				
 				fetch("/event/quiz/choices")
 				    .then(response => response.json())
 				    .then(data => {
@@ -23,31 +22,47 @@ document.addEventListener("DOMContentLoaded", () => {
 				        
 				        console.log("quiz선택 " + quizChoice);
 				    })
-				    .catch(error => console.error("Error fetching quiz choices:", error));
+				    .catch(error => console.error("퀴즈 선택지 에러:", error));
 
-				// 퀴즈 정답 가져오기
 				fetch("/event/quiz/answers")
 				    .then(response => response.json())
 				    .then(data => {
-				        //quizAnswer = data;
+				        quizAnswer = data;
 				        
 				        console.log("quizAnswer선택 " + quizAnswer);
 				    })
-				    .catch(error => console.error("Error fetching quiz answers:", error));
+				    .catch(error => console.error("퀴즈 정답 에러:", error));
 				
-				// 퀴즈 이미지 가져오기
 				fetch("/event/quiz/images")
 				    .then(response => response.json())
 				    .then(data => {
-				        //quizImgData = data;
+				        quizImgData = data;
 				        
 				        console.log("quizImgData선택 " + quizImgData);
 				    })
-				    .catch(error => console.error("Error fetching quiz images:", error));
+				    .catch(error => console.error("퀴즈 이미지 에러 :", error));
+				    
+			*/
+			
 
-					openEvent();
+		 
 				}else{
 				console.log("쿠폰 없음 :: 게임 참여 가능");
+				
+		        	fetch("/event/quiz/allData")
+		            .then(response => response.json())
+		            .then(data => {
+		                quizChoice = data.quizChoices;
+		                quizAnswer = data.quizAnswers;
+		                quizImgData = data.quizImages;
+		
+		                console.log("quiz선택 ", quizChoice);
+		                console.log("quizAnswer선택 ", quizAnswer);
+		                console.log("quizImgData선택 ", quizImgData);
+		
+		                openEvent();
+		            })
+		            .catch(error => console.error("퀴즈 에러:", error));
 				}
 		})	
 	}
