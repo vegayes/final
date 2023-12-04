@@ -19,7 +19,8 @@
 		<result property="dogSpecialNote" column="DOG_SIGNIFICANT"/>
 		<result property="dogAdmissionDate" column="DOG_ADMISSION_DATE"/>
 		<result property="dogAdoptFl" column="DOG_ADOPT_FL"/>
-		
+		<result property="dogAdoptDate" column="DOG_ADOPT_DATE"/>
+			
 		<result property="breedName" column="BREED_NAME"/>
 		<result property="thumbnail" column="THUMBNAIL"/>
 		
@@ -149,7 +150,7 @@
 				#{dogLike},
 				#{dogHate},
 				#{dogSpecialNote},
-				DEFAULT, DEFAULT )		
+				DEFAULT, DEFAULT, DEFAULT )		
 	</insert>
 	
 	<!-- 이미지 리스트(여러개) 삽입 -->
@@ -234,7 +235,8 @@
 	<!-- 강아지 삭제 -->
 	<update id="dogDelete">
 		UPDATE "DOG" SET
-		DOG_ADOPT_FL = 'Y'
+		DOG_ADOPT_FL = 'Y',
+		DOG_ADOPT_DATE = SYSDATE
 		WHERE DOG_NO = #{dogNo}
 	</update>
 	

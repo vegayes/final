@@ -343,17 +343,26 @@ function showInsertComment(parentNo, btn){
             return; // 함수를 종료시켜 답글이 생성되지 않게함.
         }
     }
+
+    const commentRow =  btn.parentElement.parentElement;
     
+
+    // 4. 댓글 행 내부 내용을 모두 삭제
+    commentRow.innerText = "";
+
     // 답글을 작성할 textarea 요소 생성
     const textarea = document.createElement("textarea");
     textarea.classList.add("commentInsertContent");
 
-   
+    commentRow.append(textarea);
+    
 
     // 답글 버튼의 부모의 뒤쪽에 textarea 추가
     // after(요소) : 뒤쪽에 추가
-    btn.parentElement.parentElement.append(textarea);
+    //btn.parentElement.parentElement.append(textarea);
 
+    //btn.parentElement.parentElement.innerHTML = "";
+    
 
     // 답글 버튼 영역 + 등록/취소 버튼 생성 및 추가
     const commentBtnArea = document.createElement("div");
@@ -380,9 +389,11 @@ function showInsertComment(parentNo, btn){
 
 // 답글 취소
 function insertCancel(btn){
-                    // 취소
-    btn.parentElement.previousElementSibling.remove(); // 취소의 부모의 이전 요소(textarea) 제거
-    btn.parentElement.remove(); // 취소의 부모 요소(comment-btn-area) 제거
+
+    if(confirm("답글 작성을 취소하시겠습니까?")){
+        selectCommentList();
+    }
+  
 }
 
 
