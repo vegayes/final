@@ -168,6 +168,8 @@ function requestPay() {
 		        buyer_email : donationEmail,
 		        
 		        
+		        
+		        
 	            //customer_uid : "CUSTOMER_UID", //customer_uid 파라메터가 있어야 빌링키 발급을 시도합니다.★★★
 				//customer_uid : /*buyer_name +*/ new Date().getTime(),
 	    		//buyer_email : email,
@@ -178,7 +180,26 @@ function requestPay() {
 
 	    // '정기'인 경우에만 빌링키 추가
 	    if (donationType.value === '정기') {
-			paymentData.customer_uid = 'CUSTOMER_UID'; // 빌링키 발급 시도
+			paymentData.customer_uid = 'CUSTOMER_UID' + loginMember.memberNo; // 빌링키 발급 시도
+			
+			
+					// 결제검증
+					fetch('/billingkey/' + paymentData.customer_uid, {
+					    method: 'POST'
+					})
+					.then(function(response) {
+					    return response.json();
+					})
+					.then(function(data) {
+							console.log("들어옴");
+							
+							console.log(data);
+				
+					})
+					.catch(function(error) {
+					    alert("결제에 실패하였습니다.", "에러 내용: " + error, "error");
+					});
+			
 	    }
 	    
 		

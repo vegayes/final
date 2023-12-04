@@ -169,6 +169,17 @@
 		) A
 	</insert>
 	
+	<!-- 입소 신청에서 받아온 이미지 삽입 -->
+	<insert id="insertAdmImg">
+		INSERT INTO DOG_IMG
+		VALUES(SEQ_DOG_IMG_NO.NEXTVAL, 
+				#{dogNo},
+				#{imgPath},
+				#{imgRename},
+				#{imgRename},
+				0)
+	</insert>
+	
 	
 	<!-- *****************update****************** -->
 	

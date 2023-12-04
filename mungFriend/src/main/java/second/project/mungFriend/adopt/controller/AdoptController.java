@@ -134,7 +134,7 @@ public class AdoptController {
 	/** 입소 신청 정보 가지고 게시글 작성 화면으로 전환
 	 * @return
 	 */
-	@GetMapping("/info/dogRegistration/{admNo}")
+	@GetMapping("/dogRegistration/{admNo}")
 	public String infoRegistration(@PathVariable("admNo") int admNo, Model model) {
 		
 		Admission admissionInfo = admService.selectAdmissionInfo(admNo);
@@ -155,10 +155,9 @@ public class AdoptController {
 			@SessionAttribute("loginMember") Member loginMember,
 			RedirectAttributes ra) throws IllegalStateException, IOException {
 
-		System.out.println("admFile : " + admFile);
+		//=============== 입소 신청 이미지 내역 가져오기 =================
 		String[] parts = admFile.split("/", 4);
 
-		// 세 번째 '/' 이후의 부분 가져오기
 		String imgPath = "/" + parts[1] + "/" + parts[2] + "/" ;
 		String imgRename = parts[3]; 
 		
@@ -167,7 +166,7 @@ public class AdoptController {
 		
 		dog.setImgPath(imgPath);
 		dog.setImgRename(imgRename);
-		
+		// ==========================================
 	
 		int dogNo = service.dogRegiInsert(dog, images);
 		

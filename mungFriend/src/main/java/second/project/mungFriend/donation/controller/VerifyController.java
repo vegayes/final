@@ -22,12 +22,12 @@ import lombok.extern.slf4j.Slf4j;
 public class VerifyController {
 
     /** Iamport 결제 검증 컨트롤러 **/
-    private final IamportClient iamportClient;
+    private final IamportClient iamportClient = new IamportClient("3671062186288787", "r6GTetsqPbnI0fLkQvIO2WHufe2vrOdzI8AbvaWINf6pFnph0tFDCkAxKxtRydIzK7Kenx9lHGdVxUy1");
 
     // 생성자를 통해 REST API 와 REST API secret 입력 (나중에 properties에 넣기 )
-    public VerifyController(){
-        this.iamportClient = new IamportClient("3671062186288787", "r6GTetsqPbnI0fLkQvIO2WHufe2vrOdzI8AbvaWINf6pFnph0tFDCkAxKxtRydIzK7Kenx9lHGdVxUy1");
-    }
+//    public VerifyController(){
+//        this.iamportClient = new IamportClient("3671062186288787", "r6GTetsqPbnI0fLkQvIO2WHufe2vrOdzI8AbvaWINf6pFnph0tFDCkAxKxtRydIzK7Kenx9lHGdVxUy1");
+//    }
 
     /** 프론트에서 받은 PG사 결괏값을 통해 아임포트 토큰 발행 **/
     @PostMapping("/{imp_uid}")

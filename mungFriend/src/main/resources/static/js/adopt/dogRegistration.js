@@ -97,15 +97,14 @@ document.getElementById('submitBtn').addEventListener('click', function(event) {
         alert('입력사항들을 모두 입력해주세요.');
     } 
 
-    var sizeOption = document.getElementsByName('dogSize').value;
-    
-    console.log(sizeOption);
-    
-    if(sizeOption === 'none'){
-        event.preventDefault();
-        
-        alert('크기를 선택해주세요!');	
-	}  
+	var sizeOption = document.getElementById('size').value;
+	
+	console.log(sizeOption);
+	
+	if (sizeOption === 'none') {
+	    event.preventDefault();
+	    alert('크기를 선택해주세요!');
+	}
     
     
 });
@@ -139,7 +138,7 @@ if(admissionInfo != null){
    
    //특이사항
    if(admissionInfo.admSignificant != '특이사항 없음'){
-	  textInput[6].value = admissionInfo.admSignificant;
+	  textInput[7].value = admissionInfo.admSignificant;
    }
 
    // 성별

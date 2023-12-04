@@ -80,7 +80,7 @@ admissionNBtn.addEventListener("click" ,function(){
 			admissionCard[i].style.display = "none";
 		}else{
 			admissionCard[i].style.display = "flex";
-			admissionCard[i].style.height  = "240px";
+			admissionCard[i].style.height  = "calc((100% - 0px) / 3)";
 		}
 	}
 });
