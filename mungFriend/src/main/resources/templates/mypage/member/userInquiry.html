@@ -32,16 +32,17 @@
 
 			<!-- 내용 작성영역-->
 			<div class="userContentContainer">
-
-				<div class="fixedLabel">제목</div>
-				<input type="text" id="title" class="inputBox" placeholder="제목을 입력하세요.">
-
-				<div class="fixedLabel">내용</div>
-				<textarea id="content" class="inputBox textareaBox" placeholder="내용을 입력하세요."></textarea>
-
-				<button id="submitBtn" class="buttonBox">문의 등록</button>
-                    
-                   
+			
+				<form th:action="@{/mypage/member/userInquiry}" method="post">
+					<div class="fixedLabel">제목</div>
+					<input type="text" id="title" name="inquiryTitle" class="inputBox" placeholder="제목을 입력하세요.">
+			
+					<div class="fixedLabel">내용</div>
+					<textarea id="content" name="inquiryContent" class="inputBox textareaBox" placeholder="내용을 입력하세요."></textarea>
+			
+					<button type="submit" id="submitBtn" class="buttonBox">문의 등록</button>
+				</form>
+			
 			</div>
 
 
