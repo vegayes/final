@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import second.project.mungFriend.common.utility.Util;
@@ -27,6 +28,7 @@ public class PmServiceImpl implements PmService{
 	private PmMapper mapper;
 
 	// 활동일지 등록하기
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int activityLogRegister(MultipartFile uploadImage, Pm pm) throws Exception {
 		
