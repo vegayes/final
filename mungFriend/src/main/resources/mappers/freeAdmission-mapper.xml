@@ -91,6 +91,13 @@
 		ORDER BY ADM_APPLY_DATE DESC
 	</select>
 	
+	
+	<update id = "updateAdm">
+		UPDATE ADMISSION
+		SET ADM_YN = 'Y'
+		WHERE ADM_NO = #{admNo}
+	</update>
+	
 
 
 </mapper>

@@ -91,22 +91,21 @@ document.getElementById('submitBtn').addEventListener('click', function(event) {
     // 필수 입력 필드 중 하나라도 비어있으면 알림창 표시
     if (!name || !birthday || !gender || !kind || !size || !personality || !neutering || !vaccine || !likeThings || !hateThings || !dogSpecialNote) {
         
-        // 이벤트 기본 동작 중단 (폼이 실제로 제출되지 않도록 함)
-        event.preventDefault();
-        
-        alert('입력사항들을 모두 입력해주세요.');
+	            
+		var sizeOption = document.getElementById('size').value;
+		
+		console.log(sizeOption);
+		
+		if (sizeOption === 'none') {
+		    event.preventDefault();
+		    alert('크기를 선택해주세요!');
+		}else{
+	        // 이벤트 기본 동작 중단 (폼이 실제로 제출되지 않도록 함)
+	        event.preventDefault();
+	        
+	        alert('입력사항들을 모두 입력해주세요.');
+		}
     } 
-
-    var sizeOption = document.getElementsByName('dogSize').value;
-    
-    console.log(sizeOption);
-    
-    if(sizeOption === 'none'){
-        event.preventDefault();
-        
-        alert('크기를 선택해주세요!');	
-	}  
-    
     
 });
 
@@ -131,15 +130,15 @@ if(admissionInfo != null){
     console.log(admissionInfo.admBirthday);
     console.log(textInput[0]);
    // 이름 등록
-   textInput[1].value = admissionInfo.admName;
+   textInput[2].value = admissionInfo.admName;
    // 생일 등록
-   textInput[2].value = admissionInfo.admBirthday.substr(0, 10);
+   textInput[3].value = admissionInfo.admBirthday.substr(0, 10);
    // 견종 등록
-   textInput[3].value = admissionInfo.admBreed;
+   textInput[4].value = admissionInfo.admBreed;
    
    //특이사항
    if(admissionInfo.admSignificant != '특이사항 없음'){
-	  textInput[6].value = admissionInfo.admSignificant;
+	  textInput[8].value = admissionInfo.admSignificant;
    }
 
    // 성별

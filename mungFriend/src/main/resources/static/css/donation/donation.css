@@ -159,6 +159,8 @@ input[name="amount"]:checked + div{
     border : none;
     border-radius: 10px;
     background: #FEE4D6;
+    
+    resize: none;
 }
 
 

@@ -50,6 +50,9 @@ public interface AdoptMapper {
 	// 업로드된 이미지 삽입
 	public int insertImage(List<DogImage> uploadList);
 	
+	// 입소신청 내역에서 가져온 이미지 삽입 
+	public int insertAdmImg(Dog dog);
+	
 //	*****************update******************
 
 	// 수정화면 띄우기용 게시글 상세조회

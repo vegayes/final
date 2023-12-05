@@ -25,6 +25,7 @@ import second.project.mungFriend.admissionApply.model.service.FreeAdmissionServi
 import second.project.mungFriend.adopt.model.dto.Dog;
 import second.project.mungFriend.adopt.model.dto.DogImage;
 import second.project.mungFriend.adopt.model.service.AdoptService;
+import second.project.mungFriend.common.utility.Util;
 import second.project.mungFriend.member.model.dto.Member;
 import second.project.mungFriend.mypage.admin.model.service.ListAdminServcie;
 
@@ -136,11 +137,10 @@ public class AdoptController {
 	/** 입소 신청 정보 가지고 게시글 작성 화면으로 전환
 	 * @return
 	 */
-	@GetMapping("/info/dogRegistration/{admNo}")
+	@GetMapping("/dogRegistration/{admNo}")
 	public String infoRegistration(@PathVariable("admNo") int admNo, Model model) {
 		
 		Admission admissionInfo = admService.selectAdmissionInfo(admNo);
-		System.out.println("입소 신청서에서 가져온 정보 : " + admissionInfo);
 		
 		model.addAttribute("admissionInfo", admissionInfo);	
 		
@@ -154,10 +154,10 @@ public class AdoptController {
 			Dog dog,
 			@RequestParam(value="images", required = false) List<MultipartFile> images, 
 			@RequestParam(value="admFile", required = false) String admFile, 
+			@RequestParam(value="admNo", required = false) int admNo, 
 			@SessionAttribute("loginMember") Member loginMember,
 			RedirectAttributes ra) throws IllegalStateException, IOException {
 
-		System.out.println("admFile : " + admFile);
 		
 		if(admFile != null) {
 			String[] parts = admFile.split("/", 4);
@@ -170,6 +170,21 @@ public class AdoptController {
 		
 		dog.setImgPath(imgPath);
 		dog.setImgRename(imgRename);
+		// ==========================================
+		//   입소 신청 내역을 가져왔지만 프로필을 바꾼 경우
+		if(admFile != null  && images != null) { // 입소 신청 이미지 내역을 가져왔을 때 
+			
+			// 0번째 요소에 업로드된 파일이 있다면
+			if(images.get(0).getSize() > 0) {
+				
+				dog.setImgPath(null);
+				dog.setImgRename(null);
+				
+				System.out.println("setImgPath" + dog.getImgPath());
+			}
+			
+		}
+		// ==========================================
 		
 		}
 	
@@ -179,6 +194,18 @@ public class AdoptController {
 		String path = "redirect:";
 		
 		if(dogNo > 0) {
+			
+			if(admNo >0) {
+				System.out.println("adm에서 가져온 값인경우 성공");
+				int updateAdm = admService.updateAdm(admNo);
+				
+				if(updateAdm >0) {
+					System.out.println("admNo 성공");
+				}else {
+					System.out.println("admNo 실패");
+				}
+			}
+			
 			
 			message = "게시글 등록이 완료되었습니다.";
 			path += "/adopt/dogList/" + dogNo;
