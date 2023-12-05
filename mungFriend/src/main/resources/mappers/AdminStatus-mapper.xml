@@ -4,7 +4,7 @@
 	
 	
 
-<!-- 현재 날짜로부터 4개월 내의 강아지 입양 마리수 개월별 조회 -->
+<!-- 현재 날짜로부터 4개월 내의 강아지 입소 마리수 개월별 조회 -->
 <select id="selectDogList" resultType="java.util.Map">
 	SELECT 
 	    TO_CHAR(TRUNC(DOG_ADMISSION_DATE, 'MONTH'), 'YYYY-MM') AS admission_month,
@@ -15,9 +15,19 @@
 	ORDER BY admission_month
 </select>
  
+ <!-- 현재 날짜로부터 4개월 내의 강아지 입양 마리수 개월별 조회 -->
+ <select id="selectAdoptList" resultType="java.util.Map">
+	 SELECT 
+	    TO_CHAR(TRUNC(DOG_ADOPT_DATE, 'MONTH'), 'YYYY-MM') AS adopt_month,
+	    COUNT(*) AS dog_count
+	FROM DOG
+	WHERE DOG_ADOPT_DATE >= ADD_MONTHS(TRUNC(SYSDATE, 'MONTH'), -3)
+	GROUP BY TO_CHAR(TRUNC(DOG_ADOPT_DATE, 'MONTH'), 'YYYY-MM')
+	ORDER BY adopt_month
+ </select>
 	
 	
-<!-- 회원 후원내역 월별 조회 -->
+<!-- 회원 후원내역 월별 조회(4개월) -->
 <select id="memberDonationList" resultType="java.util.Map">
 	SELECT 
 	 	TO_CHAR(TRUNC(DONATION_DATE , 'MONTH'), 'YYYY-MM') AS donation_month,
@@ -29,7 +39,7 @@
 </select>
 	
 
-<!-- 비회원 후원내역 월별 조회 -->
+<!-- 비회원 후원내역 월별 조회(4개월) -->
 <select id="nonMemberDonationList" resultType="java.util.Map">
 	SELECT 
 	 	TO_CHAR(TRUNC(DONATION_DATE , 'MONTH'), 'YYYY-MM') AS donation_month,

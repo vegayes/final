@@ -82,10 +82,12 @@ public class AdoptController {
 			
 			path = "adopt/dogDetail";
 			
-			model.addAttribute("dog", dog);
+			System.out.println("상세조회한 개 정보 : " + dog);
+			model.addAttribute("dog", dog); 
 			
-			if(dog.getImageList() != null) { // 강아지 이미지가 있을 경우				
+			if(dog.getImageList().size() != 0) { // 강아지 이미지가 있을 경우				
 				
+				System.out.println("개 이미지 있음");
 				DogImage thumbnail = null;
 				
 				if(dog.getImageList().get(0).getImageOrder() == 0) {
@@ -156,18 +158,20 @@ public class AdoptController {
 			RedirectAttributes ra) throws IllegalStateException, IOException {
 
 		System.out.println("admFile : " + admFile);
-		String[] parts = admFile.split("/", 4);
-
-		// 세 번째 '/' 이후의 부분 가져오기
-		String imgPath = "/" + parts[1] + "/" + parts[2] + "/" ;
-		String imgRename = parts[3]; 
 		
+		if(admFile != null) {
+			String[] parts = admFile.split("/", 4);
+			String imgPath = "/" + parts[1] + "/" + parts[2] + "/" ;
+			String imgRename = parts[3]; 
+		
+		// 세 번째 '/' 이후의 부분 가져오기
 		System.out.println("주소:" + imgPath);
 		System.out.println("이름:" + imgRename);
 		
 		dog.setImgPath(imgPath);
 		dog.setImgRename(imgRename);
 		
+		}
 	
 		int dogNo = service.dogRegiInsert(dog, images);
 		

@@ -53,12 +53,17 @@
         });
 
         // 유기견 마리 수에 해당하는 데이터를 배열로 저장
-        const adoptions = dogStatus.map(function(item) {
+        const admissions = dogStatus.map(function(item) {
          return item.DOG_COUNT;
         });
 
        
-        const admissions = [2,1,3,3,5];
+        const adoptStatus = /*[[${adoptStatus}]]*/ [];
+
+        // 유기견 마리 수에 해당하는 데이터를 배열로 저장
+        const adoptions = adoptStatus.map(function(item) {
+         return item.DOG_COUNT;
+        });
         
         const maxArr = [
             ...adoptions,
@@ -80,7 +85,7 @@
                     {
                         label: '입소(마리)',
                         type: 'line',
-                        data: adoptions,
+                        data: admissions,
                         fill: false,
                         backgroundColor: 'rgba(244, 228, 214, 1)',
                         borderColor: 'rgba(254, 168, 93, 0.6)',
@@ -93,7 +98,7 @@
                     {   
                         label: '입양(마리)',
                         type: 'line',
-                        data: admissions,
+                        data: adoptions,
                         fill: false,
                         backgroundColor: 'rgba(255, 99, 132, 0.4)',
                         borderColor: 'rgba(255, 99, 132, 0.5)',
@@ -104,7 +109,7 @@
                     },
                     {
                         label: '',
-                        data: adoptions,
+                        data: admissions,
                         backgroundColor: 'rgba(254, 228, 214, 1)',
                         borderColor: 'rgba(254, 228, 214, 0.5)',
                         borderWidth: 1,
@@ -114,7 +119,7 @@
                     },
                     {
                         label: '',
-                        data: admissions,
+                        data: adoptions,
                         backgroundColor: 'rgba(255, 99, 132, 0.2)',
                         borderColor: 'rgba(255, 99, 132, 0.5)',
                         borderWidth: 1,
