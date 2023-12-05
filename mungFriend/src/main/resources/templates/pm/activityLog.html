@@ -10,6 +10,7 @@
     <script th:src="@{https://kit.fontawesome.com/f821b57119.js}" crossorigin="anonymous"></script>
 </head>
 <body>
+    <main th:with="pagination=${map.pagination}, pmList=${map.pmList}">
     <section>
         <!-- 헤더 -->
         <th:block th:replace="~{common/header}"></th:block>
@@ -36,62 +37,71 @@
                     <div id="leftMove-section">
                         <button class="fa-solid fa-chevron-left" style="color: #6b6b6b;" id="leftMove-btn"></button>
                     </div>
-                    <div id="one">
-                        <div class="img1">
-                            <img th:src="@{/images/PM/activityLog/1.png}" class="imgs">
-                        </div>
-                        <div class="heart1">
-                            <button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn"></button>
-                        </div>
-                        <div class="img2">
-                            <img th:src="@{/images/PM/activityLog/5.png}" class="imgs">
-                        </div>
-                        <div class="heart2">
-                            <button class="fa-solid fa-heart" style="color: #f55c91;" id="fullHeart-btn"></button>
-                        </div>
-                    </div>
-                    <div id="two">
-                        <div class="img1">
-                            <img th:src="@{/images/PM/activityLog/2.png}" class="imgs">
-                        </div>
-                        <div class="heart1">
-                            <button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn"></button>
-                        </div>
-                        <div class="img2">
-                            <img th:src="@{/images/PM/activityLog/6.png}" class="imgs">
-                        </div>
-                        <div class="heart2">
-                            <button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn"></button>
-                        </div>
-                    </div>
-                    <div id="three">
-                        <div class="img1">
-                            <img th:src="@{/images/PM/activityLog/3.png}" class="imgs">
-                        </div>
-                        <div class="heart1">
-                            <button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn"></button>
-                        </div>
-                        <div class="img2">
-                            <img th:src="@{/images/PM/activityLog/7.png}" class="imgs">
-                        </div>
-                        <div class="heart2">
-                            <button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn"></button>
-                        </div> 
-                    </div>
-                    <div id="four">
-                        <div class="img1">
-                            <img th:src="@{/images/PM/activityLog/4.png}" class="imgs">
-                        </div>
-                        <div class="heart1">
-                            <button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn"></button>
-                        </div>
-                        <div class="img2">
-                            <img th:src="@{/images/PM/activityLog/8.png}" class="imgs">
-                        </div>
-                        <div class="heart2">
-                            <button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn"></button>
-                        </div> 
-                    </div>
+                    
+					<th:block th:if="${#lists.size(pmList) == 0}">
+						<div>활동일지 내역이 존재하지 않습니다.</div>
+					</th:block>
+                    <th:block th:unless="${#lists.size(pmList) == 0}">	
+						<th:block th:each="pmList, pm : ${pmList}">	
+			                <div id="one">
+		                        <div class="img1">
+		                            <img th:src="@{/images/PM/activityLog/1.png}" class="imgs">
+		                        </div>
+		                        <div class="heart1">
+		                            <button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn"></button>
+		                        </div>
+		                        <div class="img2">
+		                            <img th:src="@{/images/PM/activityLog/5.png}" class="imgs">
+		                        </div>
+		                        <div class="heart2">
+		                            <button class="fa-solid fa-heart" style="color: #f55c91;" id="fullHeart-btn"></button>
+		                        </div>
+		                    </div>
+		                    <div id="two">
+		                        <div class="img1">
+		                            <img th:src="@{/images/PM/activityLog/2.png}" class="imgs">
+		                        </div>
+		                        <div class="heart1">
+		                            <button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn"></button>
+		                        </div>
+		                        <div class="img2">
+		                            <img th:src="@{/images/PM/activityLog/6.png}" class="imgs">
+		                        </div>
+		                        <div class="heart2">
+		                            <button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn"></button>
+		                        </div>
+		                    </div>
+		                    <div id="three">
+		                        <div class="img1">
+		                            <img th:src="@{/images/PM/activityLog/3.png}" class="imgs">
+		                        </div>
+		                        <div class="heart1">
+		                            <button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn"></button>
+		                        </div>
+		                        <div class="img2">
+		                            <img th:src="@{/images/PM/activityLog/7.png}" class="imgs">
+		                        </div>
+		                        <div class="heart2">
+		                            <button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn"></button>
+		                        </div> 
+		                    </div>
+		                    <div id="four">
+		                        <div class="img1">
+		                            <img th:src="@{/images/PM/activityLog/4.png}" class="imgs">
+		                        </div>
+		                        <div class="heart1">
+		                            <button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn"></button>
+		                        </div>
+		                        <div class="img2">
+		                            <img th:src="@{/images/PM/activityLog/8.png}" class="imgs">
+		                        </div>
+		                        <div class="heart2">
+		                            <button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn"></button>
+		                        </div> 
+		                    </div>
+						</th:block> 
+					</th:block>     
+                    
                     <div id="rightMove-section">
                         <button class="fa-solid fa-chevron-right" style="color: #6b6b6b;" id="leftMove-btn"></button>
                     </div>
