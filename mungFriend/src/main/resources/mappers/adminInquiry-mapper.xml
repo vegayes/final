@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="second.project.mungFriend.mypage.admin.model.dao.AdminInquiryMapper">
+
+	<resultMap type="Inquiry" id="inquiry_rm">
+		<id property="inquiryNo" column="INQUIRY_NO" />
+		<result property="memberNo" column="MEMBER_NO" />
+		<result property="inquiryTitle" column="INQUIRY_TITLE" />
+		<result property="inquiryContent" column="INQUIRY_CONTENT" />
+		<result property="inquiryDate" column="INQUIRY_DATE" />
+		<result property="inquiryStatus" column="INQUIRY_STATUS" />
+		<result property="inquiryCompleteDate" column="INQUIRY_COMPLETE_DATE" />
+	</resultMap>
+	 
+	<select id="adminInquiryBox" resultMap="inquiry_rm">
+        SELECT * FROM INQUIRY
+    </select>
+	
+</mapper>
