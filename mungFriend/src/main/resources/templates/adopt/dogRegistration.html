@@ -24,11 +24,12 @@
                             <label for="img0" style="cursor: pointer;">
                                 <img th:src="@{/images/adopt/카메라.png}" width="50" height="50" class="preview">
                             </label>
-                            <th:block th:if = "${admissionInfo == null}">
-	                            <input type="file" name="images" class="inputImage" id="img0" style="display:none;" accept="image/*">								
-							</th:block>
+                            
+                            <input type="file" name="images" class="inputImage" id="img0" style="display:none;" accept="image/*">								
+							
                             <th:block th:unless = "${admissionInfo == null}">
-	                            <input type="text" name="admFile"  th:value = "*{admProfile}" class="inputImage" id="img0" style="display:none;" accept="image/*">								
+	                            <input type="text" name="admFile"  th:value = "*{admProfile}" style="display:none;" accept="image/*">								
+	                            <input type="text" name="admNo"  th:value = "*{admNo}" style="display:none;">								
 							</th:block>
 							
                         </div>

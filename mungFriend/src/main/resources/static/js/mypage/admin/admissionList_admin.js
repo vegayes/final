@@ -27,6 +27,22 @@ const mySwiper = new Swiper('.mySwiper', {
 });
 
 
+/*
+var swiper = new Swiper(".mySwiper", {
+  slidesPerView: 3,
+  grid: {
+    rows: 2,
+  },
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+  },
+  navigation: {                       //navigation(arrows)
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    }
+});
+*/
 
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 					입소 신청 버튼 
@@ -106,7 +122,8 @@ admissionYBtn.addEventListener("click" ,function(){
 		var admYN = admissionArr[i].admYN;
 		if(admYN == 'Y'){
 			admissionCard[i].style.display = "block";
-			admissionCard[i].style.height  = "220px";
+			/*admissionCard[i].style.height  = "220px";*/
+			admissionCard[i].style.height = "calc((100% - 0px) / 3)";
 			checkY++;
 			
 		}else{

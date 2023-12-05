@@ -38,4 +38,12 @@ public interface FreeAdmissionMapper {
 	Admission selectAdmissionInfo(int admNo);
 
 
+
+	/**입소신청 내역을 토대로 강아지 등록 완료 후
+	 * @param admNo
+	 * @return
+	 */
+	int updateAdm(int admNo);
+
+
 }

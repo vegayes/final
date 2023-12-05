@@ -25,10 +25,12 @@ public class Donation {
 	
 	
 	// 결제 
-	private String imp_uid;  // 포트원 고유 결제 번호
-	private String merchant_uid; // 주문번호 
-	private String card_name; // 카드사 이름
-	private String paid_at; // 결제 승인 시각
+	private String impUid;  // 포트원 고유 결제 번호
+	private String applyNum; // 승인번호
+	private String merchantUid; // 주문번호 
+	private String cardName; // 카드사 이름
+	private String paidAt; // 결제 승인 시각
+	private String receiptUrl; // 영수증
 	private String status; // 결제 승인 상태
 	private String billingKey; // 빌링키 
 	
