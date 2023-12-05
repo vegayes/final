@@ -49,7 +49,6 @@
 		WHERE DOG_ADOPT_FL = 'N'
 	</select>	
 	
-	
 	<select id="selectDogList" resultMap="dog_rm">
 		SELECT DOG_NAME, DOG_NO,
 			(SELECT IMG_PATH || IMG_RENAME FROM DOG_IMG I

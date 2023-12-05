@@ -29,17 +29,29 @@
                         <div id="gender">[[${dog.dogGender}]]</div>
 
                         <!-- 좋아요 하트 -->
-                        <i class="fa-heart"
-							th:classappend="${likeCheck} ? fa-solid : fa-regular"
-						id="like"></i>
+                        <i class="fa-heart" th:classappend="${likeCheck} ? fa-solid : fa-regular" id="like"></i>
 
                     </div>
                     <p id="kind">[[${dog.breedName}]]</p>
                     <div id="dog-info-2">
-                        <button id="regist">
-                            <a th:href="@{/adopt/dogList}"><img th:src="@{/images/adopt/예약하기.png}" id="calendedr-img">  예약하기</a>
+
+                        <button id="regist" onclick="showCalendar()">
+                            <img th:src="@{/images/adopt/예약하기.png}" id="calendedr-img">  예약하기
                         </button>
                         
+                        <div id="calendar-container" style="display: none;">
+                            <!-- 달력을 나타낼 부분 -->
+                            <label id="dateInfo" for="dateInput">예약 날짜 선택 : </label>
+                            <input type="date" id="dateInput" min="" required>
+                            <button id="cancelBtn" onclick="hideCalendar()">X</button>
+                        </div>
+
+                        <div id="time-container" style="display: none;">
+                            <button value="11:00">11:00</button>
+                            <button value="13:00">13:00</button>
+                            <button value="15:00">15:00</button>
+                            <button value="17:00">17:00</button>
+                        </div>
                     </div>
                 </div>  
             </div>
@@ -129,5 +141,6 @@
 	</script>
 
     <script th:src="@{/js/adopt/dogDetail.js}"></script>
+    <script th:src="@{/js/adopt/dogReservation.js}"></script>
 </body>
 </html> 
