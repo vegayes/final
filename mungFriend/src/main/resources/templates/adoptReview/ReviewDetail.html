@@ -90,7 +90,7 @@
                             </th:block>    
                            
 
-                            <th:block th:if="${session.loginMember?.memberNo == comment.memberNo}">  
+                            <th:block th:if="${session.loginMember?.memberNo == comment.memberNo or session.loginMember?.adminYn == 'Y'}">  
                                 
                                 <button th:onclick="|showUpdateComment(${comment.commentNo}, this)|">수정</button>	
                                 <button th:onclick="|deleteComment(${comment.commentNo})|">삭제</button>
@@ -126,7 +126,7 @@
 
         <section class="buttons">
 
-            <th:block th:if="${session.loginMember?.memberNo == review.memberNo}">
+            <th:block th:if="${session.loginMember?.memberNo == review.memberNo or session.loginMember?.adminYn == 'Y'}">
                 <button id="updateReview"><a th:href="@{/adoptReview/updateReview/{reviewNo} (reviewNo = ${review.reviewNo}, cp=${cp})}">수정하기</a></button>
                 <button id="deleteReview" th:onclick="|deleteConfirm(${review.reviewNo},${cp})|">삭제하기</button>
             </th:block>

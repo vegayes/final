@@ -14,5 +14,7 @@ public interface AdminStatusMapper {
 	List<Map<String, Object>> memberDonationList();
 	
 	List<Map<String, Object>> nonMemberDonationList();
+
+	List<Map<String, Object>> selectAdoptList();
 	
 }

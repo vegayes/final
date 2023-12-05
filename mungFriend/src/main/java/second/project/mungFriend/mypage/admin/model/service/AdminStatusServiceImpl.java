@@ -46,6 +46,17 @@ public class AdminStatusServiceImpl implements AdminStatusService{
 		return mapper.selectDogList();
 	}
 
+	
+	
+	/**
+	 * 입양된 개 마리수 개월별 조회
+	 */
+	@Override
+	public List<Map<String, Object>> selectAdoptList() {
+		
+		return mapper.selectAdoptList();
+	}
+
 
 
 	

@@ -44,9 +44,13 @@ public class AdminStatusController {
 		public String dogStatus(Model model) {
 			
 			List<Map<String,Object>> dogStatus = service.selectDogList();
-			System.out.println("유기견 현황 : " + dogStatus);
+			
+			
+			List<Map<String,Object>> adoptStatus = service.selectAdoptList();
+			System.out.println("입양 현황 : " + adoptStatus);
 			
 			model.addAttribute("dogStatus", dogStatus);
+			model.addAttribute("adoptStatus", adoptStatus);
 			
 			return"mypage/admin/DogStatus";
 		}
