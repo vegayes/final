@@ -71,3 +71,4 @@ document.getElementById("deleteBtn").addEventListener("click", () => {
         = `/adopt/dogList/${dogNo}/delete`;
 
 });
+

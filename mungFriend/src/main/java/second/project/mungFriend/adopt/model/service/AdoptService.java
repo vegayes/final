@@ -40,6 +40,11 @@ public interface AdoptService {
 	// 강아지 delete
 	int dogDelete(Map<String, Object> map);
 
+//	**********************************************************************************************
+
+	// 강아지 예약하기
+	String dogReservation();
+
 
 
 }

@@ -309,6 +309,13 @@ public class AdoptServiceImpl implements AdoptService{
 		
 		return mapper.dogDelete(map);
 	}
+	
+	// 강아지 예약하기
+	@Override
+	public String dogReservation() {
+		
+		return mapper.dogReservation();
+	}
 
 	
 	

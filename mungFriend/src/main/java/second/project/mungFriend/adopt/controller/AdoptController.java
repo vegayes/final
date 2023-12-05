@@ -239,6 +239,18 @@ public class AdoptController {
 		return path;
 		
 	}
+	
+	
+//	**********************************************************************************************
+
+	// 예약하기
+	@PostMapping("/dogReservation")
+	@ResponseBody // 반환되는 값이 비동기 요청한 곳으로 돌아가게 함
+	public String dogReservation() {
+		
+		return service.dogReservation();
+		
+	}
 
 
 }
