@@ -51,31 +51,17 @@
 
 						<tbody>
 
-							<tr class="donationTBodyTr">
-								<a href="http://localhost/mypage/member/adminInquiry" ></a>
-								<td>1</td>
-								<td>뽀삐</td>
-								<td>이유진 울보래요</td>
-								<td>2023-11-11-12:00</td>
-								<td>답변완료</td>
-							</tr>
-
-							<tr class="donationTBodyTr">
-								<td>1</td>
-								<td>삐뽀</td>
-								<td>울보 이유진</td>
-								<td>2023-11-13-13:30</td>
-								<td>답변 미완료</td>
-							</tr>
-
-							<tr class="donationTBodyTr">
-								<td>1</td>
-								<td>뽀삐뽀</td>
-								<td>이유진 11-17 뜬끔없이 울다.</td>
-								<td>2023-11-13-13:30</td>
-								<td>답변 미완료</td>
-							</tr>
-
+						<tbody>
+							
+							
+								<tr th:each="inquiry : ${inquiryList}" class="donationTBodyTr">
+									<td th:text="${inquiry.inquiryNo}"></td>
+									<!--<td th:text="${inquiry.memberNickname}"></td>  -->
+									<td th:text="${inquiry.inquiryTitle}"></td>
+									<td th:text="${inquiry.inquiryDate}"></td>
+									<td th:text="${inquiry.inquiryStatus}"></td>
+								</tr>
+								</tbody>
 
 
 
