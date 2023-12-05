@@ -27,6 +27,23 @@
 		SELECT INQUIRY_NO, MEMBER_NO, INQUIRY_TITLE, INQUIRY_CONTENT,
 		TO_CHAR(INQUIRY_DATE, 'YYYY-MM-DD-HH24:MI') AS INQUIRY_DATE, INQUIRY_STATUS, INQUIRY_COMPLETE_DATE
 		FROM INQUIRY
+		WHERE MEMBER_NO = #{memberNo}
 	</select>
+
+
+	<!-- 1:1 문의 상세 조회 -->
+	<select id="selectInquiryDetail" resultMap="inquiry_rm">
+		SELECT * FROM INQUIRY WHERE INQUIRY_NO = #{inquiryNo}
+	</select>
+
+      <!--  문의 삭제-->
+	 <delete id="deleteInquiry" parameterType="int" >
+	 	DELETE FROM INQUIRY WHERE INQUIRY_NO = #{inquiryNo}
+	 </delete>
+	 
+	  
+	 <select id="getAllInquiries" resultType="Inquiry">
+        SELECT * FROM INQUIRY
+    </select>
 	
 </mapper>

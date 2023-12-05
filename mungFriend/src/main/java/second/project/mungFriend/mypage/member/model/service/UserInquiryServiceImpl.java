@@ -12,6 +12,13 @@ import second.project.mungFriend.mypage.member.model.dto.Inquiry;
 @Service
 public class UserInquiryServiceImpl implements UserInquiryService {
 	
+	
+	  private final UserInquiryMapper mapper;
+
+	    @Autowired
+	    public UserInquiryServiceImpl(UserInquiryMapper mapper) {
+	        this.mapper = mapper;
+	    }
 	@Autowired
 	private UserInquiryDAO dao;
 
@@ -23,10 +30,23 @@ public class UserInquiryServiceImpl implements UserInquiryService {
 
 	// inquiryList 조회하기
 	@Override
-	public List<Inquiry> inquiryList() {
-		return dao.inquiryList();
+	public List<Inquiry> inquiryList(int memberNo) {
+		return dao.inquiryList(memberNo);
 	}
+
+	@Override
+	public Inquiry selectInquiryDetail(int inquiryNo) {
+		return dao.selectInquiryDetail(inquiryNo);
+	}
+     
+	// 문의 삭제
+	@Override
+	public int deleteInquiry(int inquiryNo) {
+		 return mapper.deleteInquiry(inquiryNo);
+	}
+
 	
+
 	
   
 }

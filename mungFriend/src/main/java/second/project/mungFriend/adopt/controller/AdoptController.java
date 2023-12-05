@@ -83,10 +83,12 @@ public class AdoptController {
 			
 			path = "adopt/dogDetail";
 			
-			model.addAttribute("dog", dog);
+			System.out.println("상세조회한 개 정보 : " + dog);
+			model.addAttribute("dog", dog); 
 			
-			if(dog.getImageList() != null) { // 강아지 이미지가 있을 경우				
+			if(dog.getImageList().size() != 0) { // 강아지 이미지가 있을 경우				
 				
+				System.out.println("개 이미지 있음");
 				DogImage thumbnail = null;
 				
 				if(dog.getImageList().get(0).getImageOrder() == 0) {
@@ -156,12 +158,13 @@ public class AdoptController {
 			@SessionAttribute("loginMember") Member loginMember,
 			RedirectAttributes ra) throws IllegalStateException, IOException {
 
-		//=============== 입소 신청 이미지 내역 가져오기 =================
-		String[] parts = admFile.split("/", 4);
-
-		String imgPath = "/" + parts[1] + "/" + parts[2] + "/" ;
-		String imgRename = parts[3]; 
 		
+		if(admFile != null) {
+			String[] parts = admFile.split("/", 4);
+			String imgPath = "/" + parts[1] + "/" + parts[2] + "/" ;
+			String imgRename = parts[3]; 
+		
+		// 세 번째 '/' 이후의 부분 가져오기
 		System.out.println("주소:" + imgPath);
 		System.out.println("이름:" + imgRename);
 		
@@ -183,6 +186,7 @@ public class AdoptController {
 		}
 		// ==========================================
 		
+		}
 	
 		int dogNo = service.dogRegiInsert(dog, images);
 		
@@ -301,6 +305,18 @@ public class AdoptController {
 		ra.addFlashAttribute("message", message);
 		
 		return path;
+		
+	}
+	
+	
+//	**********************************************************************************************
+
+	// 예약하기
+	@PostMapping("/dogReservation")
+	@ResponseBody // 반환되는 값이 비동기 요청한 곳으로 돌아가게 함
+	public String dogReservation() {
+		
+		return service.dogReservation();
 		
 	}
 

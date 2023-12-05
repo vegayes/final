@@ -70,13 +70,14 @@ public interface AdoptMapper {
 	// 이미지 삽입
 	public int imageInsert(DogImage img);
 	
-//	*****************delte******************
+//	*****************delete******************
 
 	// 강아지 delete
 	public int dogDelete(Map<String, Object> map);
 
+//	*****************강아지 예약하기******************
 	
-	
+	public String dogReservation();
 	
 	
 	

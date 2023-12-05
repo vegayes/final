@@ -57,9 +57,21 @@
 								<th:block th:unless="${#lists.size(inquiryList)} == 0">
 									<tr th:each="inquiry : ${inquiryList}" class="donationTBodyTr">
 										<td>[[${inquiry.inquiryNo}]]</td>
-										<td>[[${inquiry.inquiryTitle}]]</td>
+										<td>
+											<a th:href="@{/mypage/member/userInquiryscs/{inquiryNo}(inquiryNo=${inquiry.inquiryNo})}"
+												th:text="${inquiry.inquiryTitle}">제목</a>
+										</td>
+									
 										<td>[[${inquiry.inquiryDate}]]</td>
-										<td>[[${inquiry.inquiryStatus}]]</td>
+										
+										<th:block th:if="${inquiry.inquiryStatus == 'N'}">
+											<td>처리중</td>
+										</th:block>
+										
+										<th:block th:if="${inquiry.inquiryStatus == 'Y'}">
+											<td>답변 완료</td>
+										</th:block>
+										
 									</tr>
 								</th:block>
 							</tbody>
@@ -70,7 +82,7 @@
 				</div>
 
 				<div class="buttonArea">
-					<a href="http://localhost/mypage/member/userInquiry" class="buttonBox" style="background-color: antiquewhite; font-size: 16px; border-radius: 5px;">문의 등록</a>
+					<a href="http://localhost/mypage/member/userInquiry" class="buttonBox" style=" width: 150px; height: 30px; background-color: #FEE4D6; font-size: 14px; border-radius: 5px;">문의 등록</a>
 				</div>
 
 
@@ -126,7 +138,7 @@
 			</div>
 		</section>
 		<a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
-		<a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>s
+		<a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
 </body>
 </main>
 	<th:block th:replace="~{common/footer}"></th:block>

@@ -24,8 +24,19 @@ public class UserInquiryDAO {
 	/** inquiryList 조회하기
 	 * @return List
 	 */
-	public List<Inquiry> inquiryList() {
-		return mapper.inquiryList();
+	public List<Inquiry> inquiryList(int memberNo) {
+		return mapper.inquiryList(memberNo);
 	}
+	
+	/** 1:1 문의 상세 조회
+	 * @param inquiryNo
+	 * @return Inquiry
+	 */
+	public Inquiry selectInquiryDetail(int inquiryNo) {
+	    return mapper.selectInquiryDetail(inquiryNo);
+	}
+	
+
+
 
 }
