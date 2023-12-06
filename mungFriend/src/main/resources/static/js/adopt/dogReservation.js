@@ -28,13 +28,13 @@ function showCalendar() {
     // x버튼 스타일 적용
     const cancelBtn = document.getElementById('cancelBtn');
     cancelBtn.style.border = 'none';
-    cancelBtn.style.backgroundColor = 'white';
-    
+    cancelBtn.style.backgroundColor = 'white';    
 
     // 스타일 직접 추가
     dateInput.style.width = '150px';
     dateInput.style.height = '25px';
     dateInput.style.marginRight = '7px';
+
 
     dateInput.addEventListener('input', function () {
         // 현재 날짜를 가져오는 함수
@@ -59,9 +59,17 @@ function showCalendar() {
         const currentDate = getCurrentDate();
 
         // 선택한 날짜가 현재 날짜 이전이라면 경고 메시지 출력 및 선택 취소
-        if (selectedDate < currentDate) {
-            alert('오늘 이전의 날짜는 선택할 수 없습니다.');
+        if (selectedDate < currentDate || selectedDate == currentDate) {
+            alert('오늘 이후의 날짜만 선택 가능합니다.');
             this.value = '';
+
+            timeContainer.style.display = 'none';
+
+            // 예약하기 버튼을 감추기
+            const reserveBtn = document.getElementById('reserveBtn');
+            reserveBtn.style.display = 'none';
+
+            return; // 함수 종료
         }
 
         // 선택된 날짜에 따라 시간 옵션을 업데이트
@@ -69,6 +77,10 @@ function showCalendar() {
 
         // 달력을 보여줄 때 동시에 시간을 보여주도록 토글
         timeContainer.style.display = 'block';
+
+        // 예약하기 버튼을 보이도록 변경
+        const reserveBtn = document.getElementById('reserveBtn');
+        reserveBtn.style.display = 'block';
     });
 
     // #calendedr-img 클래스 추가
@@ -98,6 +110,10 @@ function hideCalendar() {
     // 달력을 감춤과 동시에 시간을 감춤
     const timeContainer = document.getElementById('time-container');
     timeContainer.style.display = 'none';
+
+    // 예약하기 버튼 감춤
+    const reserveBtn = document.getElementById("reserveBtn");
+    reserveBtn.style.display = 'none';
 }
 
 
@@ -136,7 +152,7 @@ function updateAvailableTimes(selectedDate) {
             button.value = time;
             button.textContent = time;
 
-            button.style.margin = '10px 10px 0 0';
+            button.style.margin = '10px 10px 10px 0px';
             button.style.width = '58px';
             button.style.height = '25px';
             button.style.backgroundColor = 'white';
@@ -149,12 +165,13 @@ function updateAvailableTimes(selectedDate) {
     }
 }
 
-
 function handleTimeButtonClick(event) {
+
     // 이전에 선택된 버튼이 있으면 원래 색상으로 되돌리기
     const previouslySelectedButton = document.querySelector('.selected-time-button');
     if (previouslySelectedButton) {
         previouslySelectedButton.style.backgroundColor = 'white'; // 이전 색상으로 변경
+        previouslySelectedButton.style.border = '1px solid black'; 
         previouslySelectedButton.classList.remove('selected-time-button');
     }
 
@@ -162,17 +179,42 @@ function handleTimeButtonClick(event) {
     const selectedTime = event.target.value;
     console.log(`Selected time: ${selectedTime}`);
     event.target.style.backgroundColor = '#FA7575'; // 새로운 색상으로 변경
+    event.target.style.border = 'none'; // 새로운 색상으로 변경
+
     event.target.classList.add('selected-time-button');
 
-    // 이후의 동작을 추가하시면 됩니다.
+    // 예약하기 버튼 보이도록 변경
+    const reserveBtn = document.getElementById('reserveBtn');
+    reserveBtn.style.display = 'block';
 }
 
 
 
 
+// 선택된 날짜, 시간 java로 보내기
+function submitReservation() {
+    // 선택된 날짜와 시간을 가져오기
+    const selectedDate = document.getElementById('dateInput').value;
+    const selectedTimeButton = document.querySelector('.selected-time-button');
+    const selectedTime = selectedTimeButton ? selectedTimeButton.value : '';
 
-// java로 보내기
+    // 날짜와 시간이 선택되었는지 확인
+    if (!selectedDate || !selectedTime) {
+        alert('날짜와 시간을 선택해주세요.');
+        return;
+    }
+
+    // 선택된 날짜와 시간을 서버로 전송
+    sendReservationData(selectedDate, selectedTime);
+
+    // // 예약하기 버튼 감추기
+    // const reserveBtn = document.getElementById('reserveBtn');
+    // reserveBtn.style.display = 'none';
+}
+
+
 function sendReservationData(selectedDate, selectedTime) {
+
     const reservationData = {
         date: selectedDate,
         time: selectedTime
@@ -185,9 +227,10 @@ function sendReservationData(selectedDate, selectedTime) {
     })
     .then(response => response.json())
     .then(data => {
-        console.log('Reservation successful:', data);
+        console.log('Reservation successful:', reservationData);
     })
     .catch(error => {
         console.error('Error during reservation:', error);
     });
+    
 }

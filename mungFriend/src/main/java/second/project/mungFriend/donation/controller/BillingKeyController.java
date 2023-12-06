@@ -25,11 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 @PropertySource("classpath:/config.properties")
 public class BillingKeyController {
 	
-//	@Value("${iamport.imp.key}")
-//	private String key;
-//
-//	@Value("${iamport.imp.secret}")
-//	private String secret;
+
 
 	
 	 /** Iamport 결제 검증 컨트롤러 **/
