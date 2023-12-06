@@ -20,4 +20,11 @@ public class AdminInquiryServiceImpl implements AdminInquiryService {
 		return mapper.adminInquiryBox();
 		
 	}
+
+
+
+	@Override
+	public Inquiry adminInquiryDetail(int inquiryNo) {
+		return mapper.adminInquiryDetail(inquiryNo);
+	}
 }
