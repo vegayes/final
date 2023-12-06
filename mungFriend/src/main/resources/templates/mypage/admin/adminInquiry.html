@@ -32,19 +32,19 @@
 			<!-- 내용 작성영역-->
 			<div class="userContentContainer">
 
-				<div class="fixedLabel">닉네임</div>
-				<input type="text" id="nickname" class="inputBox" value="뽀삐" readonly>
+			<div class="fixedLabel">닉네임</div>
+		    <input type="text" id="nickname" class="inputBox" th:value="${inquiry.memberNickname}" readonly>
+		
+		    <div class="fixedLabel">제목</div>
+		    <input type="text" id="title" class="inputBox" th:value="${inquiry.inquiryTitle}" readonly>
+		
+		    <div class="fixedLabel">내용</div>
+		    <textarea id="content" class="inputBox textareaBox" readonly th:text="${inquiry.inquiryContent}"></textarea>
+		
+		    <div class="fixedLabel">문의답변</div>
+		    <textarea id="inquiry" class="inputBox textareaBox"></textarea>
 
-				<div class="fixedLabel">제목</div>
-				<input type="text" id="title" class="inputBox" value="이유진 울보래요" readonly>
-
-				<div class="fixedLabel">내용</div>
-				<textarea id="content" class="inputBox textareaBox" readonly>집 가고 싶어요	</textarea>
-
-				<div class="fixedLabel">문의답변</div>
-				<textarea id="inquiry" class="inputBox textareaBox"></textarea>
-
-				<button class="inputBox buttonBox">답변하기</button>
+			<button class="inputBox buttonBox">답변하기</button>
 			</div>
 
 			</div>
