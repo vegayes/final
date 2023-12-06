@@ -86,7 +86,7 @@ public class PmServiceImpl implements PmService{
 	// 활동일지 조회하기
 	@Override
 	public Map<String, Object> selectPmList(int cp) {
-		// 1. 탈퇴하지 않은 회원 리스트 수 조회
+		// 1. 활동일지 전체 리스트 수 조회
 		int listCount = mapper.getListCount();
 		
 		// 2. 1번 조회 결과 + cp 를 이용해서 Pagination 객체 생성

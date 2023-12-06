@@ -38,9 +38,12 @@
                         <button class="fa-solid fa-chevron-left" style="color: #6b6b6b;" id="leftMove-btn"></button>
                     </div>
                     
+                    <!-- 활동일지 내역이 없을 경우 -->
 					<th:block th:if="${#lists.size(pmList) == 0}">
 						<div>활동일지 내역이 존재하지 않습니다.</div>
 					</th:block>
+					
+					<!-- 활동일지 내역이 있을 경우 -->
                     <th:block th:unless="${#lists.size(pmList) == 0}">	
 						<th:block th:each="pmList, pm : ${pmList}">	
 			                <div id="one">
