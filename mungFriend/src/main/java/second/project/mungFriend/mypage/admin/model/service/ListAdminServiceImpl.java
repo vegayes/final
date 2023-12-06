@@ -98,6 +98,24 @@ public class ListAdminServiceImpl implements ListAdminServcie{
 	}
 
 
+	/**
+	 * 입소신청 내역 객체 가져오기
+	 */
+	@Override
+	public Admission selectAdmissionInfo(int admNo) {
+		return mapperAdm.selectAdmissionInfo(admNo);
+	}
+
+
+	/**
+	 * 입소신청 내역을 토대로 강아지 등록 완료 후
+	 */
+	@Override
+	public int updateAdm(int admNo) {
+		return mapperAdm.updateAdm(admNo);
+	}
+
+
 
 
 

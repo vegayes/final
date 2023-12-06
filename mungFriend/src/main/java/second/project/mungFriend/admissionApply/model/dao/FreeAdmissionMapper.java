@@ -28,4 +28,22 @@ public interface FreeAdmissionMapper {
 	List<Admission> selectAdmissionList();
 
 
+
+
+
+	/** 입소신청 내역  객체 가져오기
+	 * @param admNo
+	 * @return
+	 */
+	Admission selectAdmissionInfo(int admNo);
+
+
+
+	/**입소신청 내역을 토대로 강아지 등록 완료 후
+	 * @param admNo
+	 * @return
+	 */
+	int updateAdm(int admNo);
+
+
 }

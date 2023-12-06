@@ -84,7 +84,7 @@ public class MemberUserController {
 			loginMember.setMemberEmail(updateMember.getMemberEmail());
 			loginMember.setMemberNickname(updateMember.getMemberNickname());
 			loginMember.setMemberAddress(updateMember.getMemberAddress());
-			
+			loginMember.setMemberProfile(updateMember.getMemberProfile());			
 			message = "회원 정보 수정 성공";
 			
 		} else {

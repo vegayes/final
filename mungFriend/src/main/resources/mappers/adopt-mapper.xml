@@ -19,7 +19,8 @@
 		<result property="dogSpecialNote" column="DOG_SIGNIFICANT"/>
 		<result property="dogAdmissionDate" column="DOG_ADMISSION_DATE"/>
 		<result property="dogAdoptFl" column="DOG_ADOPT_FL"/>
-		
+		<result property="dogAdoptDate" column="DOG_ADOPT_DATE"/>
+			
 		<result property="breedName" column="BREED_NAME"/>
 		<result property="thumbnail" column="THUMBNAIL"/>
 		
@@ -47,7 +48,6 @@
 		SELECT COUNT(*) FROM DOG
 		WHERE DOG_ADOPT_FL = 'N'
 	</select>	
-	
 	
 	<select id="selectDogList" resultMap="dog_rm">
 		SELECT DOG_NAME, DOG_NO,
@@ -149,7 +149,7 @@
 				#{dogLike},
 				#{dogHate},
 				#{dogSpecialNote},
-				DEFAULT, DEFAULT )		
+				DEFAULT, DEFAULT, DEFAULT )		
 	</insert>
 	
 	<!-- 이미지 리스트(여러개) 삽입 -->
@@ -166,6 +166,17 @@
 				FROM DUAL
 			</foreach>
 		) A
+	</insert>
+	
+	<!-- 입소 신청에서 받아온 이미지 삽입 -->
+	<insert id="insertAdmImg">
+		INSERT INTO DOG_IMG
+		VALUES(SEQ_DOG_IMG_NO.NEXTVAL, 
+				#{dogNo},
+				#{imgPath},
+				#{imgRename},
+				#{imgRename},
+				0)
 	</insert>
 	
 	
@@ -234,7 +245,8 @@
 	<!-- 강아지 삭제 -->
 	<update id="dogDelete">
 		UPDATE "DOG" SET
-		DOG_ADOPT_FL = 'Y'
+		DOG_ADOPT_FL = 'Y',
+		DOG_ADOPT_DATE = SYSDATE
 		WHERE DOG_NO = #{dogNo}
 	</update>
 	

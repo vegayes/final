@@ -20,22 +20,18 @@
 			<hr>
 		</section>
 
-		<section class="adminContentArea">
+		<section class="adminContentArea" th:object = "${inquiryList}">
 
 			<!-- nav 자리-->
 		    <nav class = "navUser">
                 <th:block th:replace="~{common/nav_user}"></th:block>
             </nav>
-
-
-			<!-- 후원 내용 영역-->
+	
 			<div class="adminContentContainer">
 
-				<!-- 후원 검색 창-->
 
 
 
-				<!-- 후원 내역 리스트 -->
 				<div class="adminDonationContainer">
 					<div class="tableFix">
 						<table class="donationTable">
@@ -43,36 +39,41 @@
 							<thead>
 								<tr class="donationTheadTr">
 									<th>번호</th>
-									<th>닉네임</th>
 									<th>제목</th>
 									<th>작성일</th>
 									<th>처리 상황</th>
 								</tr>
 							</thead>
 
-							<tbody>
-
-								<tr class="donationTBodyTr">
-									<td>1</td>
-									<td>뽀삐</td>
-									<td>이유진 울보래요</td>
-									<td>2023-11-11-12:00</td>
-									<td>답변완료</td>
-								</tr>
-
-								<tr class="donationTBodyTr">
-									<td>1</td>
-									<td>삐뽀</td>
-									<td>울보 이유진</td>
-									<td>2023-11-13-13:30</td>
-									<td>처리중</td>
-								</tr>
-
+							<tbody>	
+								<!-- 1:1 문의가 없을 경우 -->
+								<th:block th:if="${#lists.size(inquiryList)} == 0">
+									<tr>
+										<th colspan="4">1:1 문의가 존재하지 않습니다.</th>
+									</tr>
+								</th:block>
 								
-								
-
-
-
+								<!-- 1:1 문의가 있을 경우 -->
+								<th:block th:unless="${#lists.size(inquiryList)} == 0">
+									<tr th:each="inquiry : ${inquiryList}" class="donationTBodyTr">
+										<td>[[${inquiry.inquiryNo}]]</td>
+										<td>
+											<a th:href="@{/mypage/member/userInquiryscs/{inquiryNo}(inquiryNo=${inquiry.inquiryNo})}"
+												th:text="${inquiry.inquiryTitle}">제목</a>
+										</td>
+									
+										<td>[[${inquiry.inquiryDate}]]</td>
+										
+										<th:block th:if="${inquiry.inquiryStatus == 'N'}">
+											<td>처리중</td>
+										</th:block>
+										
+										<th:block th:if="${inquiry.inquiryStatus == 'Y'}">
+											<td>답변 완료</td>
+										</th:block>
+										
+									</tr>
+								</th:block>
 							</tbody>
 						</table>
 					</div>
@@ -81,7 +82,7 @@
 				</div>
 
 				<div class="buttonArea">
-					<a href="http://localhost/mypage/member/userInquiry" class="buttonBox" style="background-color: antiquewhite; font-size: 16px; border-radius: 5px;">문의 등록</a>
+					<a href="http://localhost/mypage/member/userInquiry" class="buttonBox" style=" width: 150px; height: 30px; background-color: #FEE4D6; font-size: 14px; border-radius: 5px;">문의 등록</a>
 				</div>
 
 
@@ -136,8 +137,10 @@
 
 			</div>
 		</section>
-		<a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
-		<a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>s
+		<th:block th:replace="~{common/chatbot}"></th:block>
+		<img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image">
+		<a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+		
 </body>
 </main>
 	<th:block th:replace="~{common/footer}"></th:block>

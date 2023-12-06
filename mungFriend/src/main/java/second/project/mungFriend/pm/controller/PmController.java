@@ -1,7 +1,10 @@
 package second.project.mungFriend.pm.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,9 +32,18 @@ public class PmController {
 		return "PM/adoptProcedure";
 	}
 	
-	// 활동일지 화면 전환
+	// 활동일지 화면 전환 
+	// 화면 전환 시 데이터를 가져와서 뿌려줌.
 	@GetMapping("/activityLog")
-	public String activityLogPage() {
+	public String activityLogPage(Model model, @RequestParam(value="cp", required = false, defaultValue = "1") int cp) {
+		
+		// 활동일지 조회하기(페이지네이션과 활동일지 목록을 가져와야 되기때문에 Map으로 받음 => admin 회원관리 참조)
+		Map<String, Object> map = service.selectPmList(cp);
+		
+		 System.out.println(map);
+		
+		model.addAttribute("map", map);
+		
 		return "PM/activityLog";
 	}
 	
@@ -61,7 +73,7 @@ public class PmController {
 		// 결과값으로 성공
 		if(result > 0) {
 			message = "활동일지 등록 성공";
-			path = "PM/activityLog";
+			path = "pm/activityLog";
 			
 		} else {
 			// 실패에 따른 처리

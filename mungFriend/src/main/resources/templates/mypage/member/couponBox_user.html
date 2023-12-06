@@ -9,6 +9,7 @@
         
     </head>
     <body>
+
     	<th:block th:replace="~{common/header}"></th:block>
         <main>
             <section class = "userIntroArea">
@@ -17,6 +18,7 @@
                 </div>
                 <hr>
             </section>
+            
 
             <section class = "userContentArea">
 
@@ -72,12 +74,30 @@
 	                 </th:block>
                 </div>
             </section>
+            
         </main>
         
-        <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
-        <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+		<script th:inline = "javascript">
+			 var loginMember = /*[[${session.loginMember}]]*/ null;
+			 
+		</script>
+		
+        
+        <script th:src ="@{/js/event/view.js}"></script>
+        
+        <th:block th:replace="~{event/event}"></th:block>
+		
+        
+        
+		<th:block th:replace="~{common/chatbot}"></th:block>
+		<img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image">
+		<a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+		
        
         
 	    <th:block th:replace="~{common/footer}"></th:block>
+	    
+	    
+	     
     </body>
 </html>

@@ -20,10 +20,14 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import second.project.mungFriend.admissionApply.model.dto.Admission;
+import second.project.mungFriend.admissionApply.model.service.FreeAdmissionService;
 import second.project.mungFriend.adopt.model.dto.Dog;
 import second.project.mungFriend.adopt.model.dto.DogImage;
 import second.project.mungFriend.adopt.model.service.AdoptService;
+import second.project.mungFriend.common.utility.Util;
 import second.project.mungFriend.member.model.dto.Member;
+import second.project.mungFriend.mypage.admin.model.service.ListAdminServcie;
 
 @Controller
 @RequestMapping("/adopt")
@@ -32,6 +36,9 @@ public class AdoptController {
 	
 	@Autowired
 	private AdoptService service;
+	
+	@Autowired
+	private ListAdminServcie admService;
 	
 	// 강아지 목록 조회
 	@GetMapping("/dogList")
@@ -76,10 +83,12 @@ public class AdoptController {
 			
 			path = "adopt/dogDetail";
 			
-			model.addAttribute("dog", dog);
+			System.out.println("상세조회한 개 정보 : " + dog);
+			model.addAttribute("dog", dog); 
 			
-			if(dog.getImageList() != null) { // 강아지 이미지가 있을 경우				
+			if(dog.getImageList().size() != 0) { // 강아지 이미지가 있을 경우				
 				
+				System.out.println("개 이미지 있음");
 				DogImage thumbnail = null;
 				
 				if(dog.getImageList().get(0).getImageOrder() == 0) {
@@ -123,21 +132,80 @@ public class AdoptController {
 		return "adopt/dogRegistration";
 	}
 	
+	
+
+	/** 입소 신청 정보 가지고 게시글 작성 화면으로 전환
+	 * @return
+	 */
+	@GetMapping("/dogRegistration/{admNo}")
+	public String infoRegistration(@PathVariable("admNo") int admNo, Model model) {
+		
+		Admission admissionInfo = admService.selectAdmissionInfo(admNo);
+		
+		model.addAttribute("admissionInfo", admissionInfo);	
+		
+		return "adopt/dogRegistration";
+	}
+	
+
 	// 강아지 insert
 	@PostMapping("/dogRegistration/insert")
 	public String dogRegiInsert(
 			Dog dog,
 			@RequestParam(value="images", required = false) List<MultipartFile> images, 
+			@RequestParam(value="admFile", required = false) String admFile, 
+			@RequestParam(value="admNo", required = false) int admNo, 
 			@SessionAttribute("loginMember") Member loginMember,
 			RedirectAttributes ra) throws IllegalStateException, IOException {
-		
 
+		
+		if(admFile != null) {
+			String[] parts = admFile.split("/", 4);
+			String imgPath = "/" + parts[1] + "/" + parts[2] + "/" ;
+			String imgRename = parts[3]; 
+		
+		// 세 번째 '/' 이후의 부분 가져오기
+		System.out.println("주소:" + imgPath);
+		System.out.println("이름:" + imgRename);
+		
+		dog.setImgPath(imgPath);
+		dog.setImgRename(imgRename);
+		// ==========================================
+		//   입소 신청 내역을 가져왔지만 프로필을 바꾼 경우
+		if(admFile != null  && images != null) { // 입소 신청 이미지 내역을 가져왔을 때 
+			
+			// 0번째 요소에 업로드된 파일이 있다면
+			if(images.get(0).getSize() > 0) {
+				
+				dog.setImgPath(null);
+				dog.setImgRename(null);
+				
+				System.out.println("setImgPath" + dog.getImgPath());
+			}
+			
+		}
+		// ==========================================
+		
+		}
+	
 		int dogNo = service.dogRegiInsert(dog, images);
 		
 		String message = null;
 		String path = "redirect:";
 		
 		if(dogNo > 0) {
+			
+			if(admNo >0) {
+				System.out.println("adm에서 가져온 값인경우 성공");
+				int updateAdm = admService.updateAdm(admNo);
+				
+				if(updateAdm >0) {
+					System.out.println("admNo 성공");
+				}else {
+					System.out.println("admNo 실패");
+				}
+			}
+			
 			
 			message = "게시글 등록이 완료되었습니다.";
 			path += "/adopt/dogList/" + dogNo;
@@ -237,6 +305,18 @@ public class AdoptController {
 		ra.addFlashAttribute("message", message);
 		
 		return path;
+		
+	}
+	
+	
+//	**********************************************************************************************
+
+	// 예약하기
+	@PostMapping("/dogReservation")
+	@ResponseBody // 반환되는 값이 비동기 요청한 곳으로 돌아가게 함
+	public String dogReservation(@RequestBody HashMap<String, Object> map) {
+		
+		return service.dogReservation(map);
 		
 	}
 

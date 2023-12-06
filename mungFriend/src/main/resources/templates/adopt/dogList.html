@@ -101,7 +101,7 @@
                             </li>
                     		
                             <li th:unless="${i == pagination.currentPage}">
-                                <a th:href="@{/board/{code}(code=${boardCode}, cp=${i})}" th:text="${i}">나머지 페이지</a>
+                                <a th:href="@{/adopt/dogList(cp=${i})}" th:text="${i}">나머지 페이지</a>
                             </li>
                         </c:choose>
                     </th:block>
@@ -118,8 +118,10 @@
         </div>
 
         <div class="main-right">
-            <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
-            <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+            <th:block th:replace="~{common/chatbot}"></th:block>
+            <img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image">
+            <a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+    
         </div>
     </main>
 

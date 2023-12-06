@@ -10,13 +10,13 @@
 
     <th:block th:replace="~{common/header}"></th:block>
 
-    <main>
+    <main th:object = "${admissionInfo}">
         <div class="main-left"></div>
 
         <div class="main-center">
             <div>유기견 등록하기</div>
 
-            <form th:action="@{dogRegistration/insert}" method="POST" enctype="multipart/form-data" id="dogForm">
+            <form th:action="@{/adopt/dogRegistration/insert}" method="POST" enctype="multipart/form-data" id="dogForm">
                 <div class="info-input">
                     <div class="img-box">
                         <div class="img-thumbnail">
@@ -24,7 +24,14 @@
                             <label for="img0" style="cursor: pointer;">
                                 <img th:src="@{/images/adopt/카메라.png}" width="50" height="50" class="preview">
                             </label>
-                            <input type="file" name="images" class="inputImage" id="img0" style="display:none;" accept="image/*">
+                            
+                            <input type="file" name="images" class="inputImage" id="img0" style="display:none;" accept="image/*">								
+							
+                            <th:block th:unless = "${admissionInfo == null}">
+	                            <input type="text" name="admFile"  th:value = "*{admProfile}" style="display:none;" accept="image/*">								
+	                            <input type="text" name="admNo"  th:value = "*{admNo}" style="display:none;">								
+							</th:block>
+							
                         </div>
                     </div>
                     <div class="select-box">
@@ -52,6 +59,7 @@
                         <div>
                             <label for="size">크기</label>
                             <select id="size" name="dogSize">
+								<option value = "none">크기를 선택해주세요!</option>
                                 <option value="소형">소형</option>
                                 <option value="중형">중형</option>
                                 <option value="대형">대형</option>
@@ -126,12 +134,20 @@
         </div>
 
         <div class="main-right">
-            <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
-            <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+            <th:block th:replace="~{common/chatbot}"></th:block>
+            <img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image">
+            <a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+            
         </div>
     </main>
 
     <th:block th:replace="~{common/footer}"></th:block>
+    
+	<script th:inline = "javascript">
+		var admissionInfo = /*[[${admissionInfo}]]*/ "입소신청 객체";
+		
+		console.log("입소신청"  + admissionInfo);
+	</script>
 
 
     <script th:src="@{/js/adopt/dogRegistration.js}"></script>

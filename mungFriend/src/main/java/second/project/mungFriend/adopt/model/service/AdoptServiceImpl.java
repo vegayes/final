@@ -149,6 +149,15 @@ public class AdoptServiceImpl implements AdoptService{
 		// 업로드된 이미지가 있다면 DOG_IMG테이블에 삽입하는 dao 호출
 		if(dogNo > 0) {
 			
+			// admission에서 받아온 프로필 값
+			if(dog.getImgPath()!= null && dog.getImgRename() != null) {
+				
+				dog.setDogNo(dogNo);
+				
+				int insertAdmImg  = mapper.insertAdmImg(dog);
+			}		
+			
+			
 			// 실제 업로드된 파일의 정보를 기록할 List
 			List<DogImage> uploadList = new ArrayList<DogImage>();
 			
@@ -172,8 +181,10 @@ public class AdoptServiceImpl implements AdoptService{
 					uploadList.add(img);
 				}
 				
+				
 			} // 분류작업 종료
 			
+
 			// 분류작업 후 uploadList가 있는 경우
 			if(!uploadList.isEmpty()) {
 				
@@ -308,6 +319,13 @@ public class AdoptServiceImpl implements AdoptService{
 	public int dogDelete(Map<String, Object> map) {
 		
 		return mapper.dogDelete(map);
+	}
+	
+	// 강아지 예약하기
+	@Override
+	public String dogReservation() {
+		
+		return mapper.dogReservation();
 	}
 
 	

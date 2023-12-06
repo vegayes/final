@@ -160,9 +160,9 @@ a {
     border-radius: 10px;
     border: 5px solid #FEE4D6;
     background: #FFF;
-    line-height: 50px;
-    text-indent: 1em;
-    padding-top: 20px;
+    line-height: 30px;
+   
+    padding: 20px;
     margin-top: 10px;
 }
 
@@ -173,12 +173,13 @@ a {
     flex-direction: row;
     align-items: center;
     border-bottom: 1.5px solid #F9C9B0;
+    justify-content: center;
     /* justify-content: space-around;  */
 }
 
 /* 이름 */
 .commentContainer p:nth-child(1) {
-    flex-basis: 10%;
+    flex-basis: 7%;
     text-align: center;
     font-weight: 700;
 }
@@ -186,16 +187,16 @@ a {
 /* 내용 */
 .commentContainer p:nth-child(2) {
 
-    flex-basis: 50%;
-    margin-left: 5%;
+    flex-basis: 63%;
+    margin-left: 3%;
+   
 }
 
 /* 작성일시 */
 .commentContainer p:nth-child(3) {
-    flex-basis: 15%;
+    flex-basis: 10%;
     font-size: 12px;
-    
-    margin-right: 1%;
+    margin-left: 2%;
 }
 
 
@@ -212,23 +213,24 @@ a {
 
 /* 이름 */
 .replyContainer p:nth-child(1) {
-    flex-basis: 10%;
+    flex-basis: 7%;
     text-align: center;
     font-weight: 700;
 }
 
 /* 내용 */
 .replyContainer p:nth-child(2) {
-    flex-basis: 50%;
+    flex-basis: 63%;
     margin-left: 5%;
 }
 
 /* 작성일시 */
 .replyContainer p:nth-child(3) {
-    flex-basis: 15%;
-    font-size: 12px;
-    text-align: end;
+    flex-basis: 10%;
+    font-size: 11px;
+    
     margin-right: 1%;
+    margin-left: 2%;
 }
 
 
@@ -290,9 +292,10 @@ a {
 /* ===============답글 작성 영역 ===============*/
 
 .comment-btn-area { 
-    flex-basis: 25%;
+    flex-basis: 20%;
 	display: flex;
     justify-content: flex-end;
+    margin-right: 7px;
    
 	
 }
@@ -334,7 +337,7 @@ a {
 	min-height: 50px;
 	justify-content: center;
 	align-items: center;
-	margin: 30px 0;
+	margin: 30px 0 30px 70px;
 }
 
 .comment-write-area > textarea{

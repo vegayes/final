@@ -111,7 +111,7 @@ a:hover{
     flex-basis: 74%;
 
     /*페이지네이션 내리기 위해서 일단 임의로 잡아둠*/
-    min-height: 700px; /*★나중에 필요 없을 듯★*/
+    min-height: 650px; /*★나중에 필요 없을 듯★*/
 
     display: flex;
     flex-direction: column;
@@ -122,7 +122,7 @@ a:hover{
 }
 
 /*************************************************************
-                후원 내역 (관리자) Content - 테이블
+                후원 내역 (사용자) Content - 테이블
 **************************************************************/
 /*내용 영역*/
 .userDonationContainer{
@@ -159,16 +159,39 @@ a:hover{
 .donationTBodyTr td{
     /*가운데 정렬*/
     text-align: center; 
-    padding : 16px 10px;
+    padding : 14px 10px;
     border-bottom: 3px solid #D2D2D2;
 
     font-size: 12px;
 }
 
+.donationTBodyTr td:nth-of-type(5){
+	padding-left: 3%;
+}
 
+.donationInfoCheck{
+	width: 80%;
+	height: 20px;
+	
+	
+	border-radius: 5px;
+	
+	background-color: #FEE4D6;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+}
+
+.donationInfoCheck:hover{
+	background-color: #FFE3E3;
+	
+	cursor: pointer;
+}
 
 /*************************************************************
-                후원 내역 (관리자) Content - 페이지네이션
+                후원 내역 (사용자) Content - 페이지네이션
 **************************************************************/
 /*★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
           데이터가 많이 없어서,, 페이지네이션 내릴려고 설정한것.. 

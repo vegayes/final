@@ -6,7 +6,43 @@
 	4) 등록버튼을 누르면 다른 페이지에 값을 저장해서 보이게하기 
 ◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆ */
 
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+					swiper
+ ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/ 
 
+const mySwiper = new Swiper('.mySwiper', {
+    slidesPerView: 2, // 가로갯수
+    slidesPerColumn: 3,  // 세로갯수
+    grid: {                            //row count of shown slide
+        rows: 3,
+      },
+    pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+    navigation: {                       //navigation(arrows)
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    }
+});
+
+
+/*
+var swiper = new Swiper(".mySwiper", {
+  slidesPerView: 3,
+  grid: {
+    rows: 2,
+  },
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+  },
+  navigation: {                       //navigation(arrows)
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    }
+});
+*/
 
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 					입소 신청 버튼 
@@ -60,7 +96,7 @@ admissionNBtn.addEventListener("click" ,function(){
 			admissionCard[i].style.display = "none";
 		}else{
 			admissionCard[i].style.display = "flex";
-			admissionCard[i].style.height  = "240px";
+			admissionCard[i].style.height  = "calc((100% - 0px) / 3)";
 		}
 	}
 });
@@ -77,83 +113,27 @@ admissionYBtn.addEventListener("click" ,function(){
 
     admissionBtnFlag = true; 
     
+    var checkY = 0;
+    var checkN = 0;
+    
     /* 입소신청내역 완료만 display */
 	for(let i = 0; i < admissionArr.length; i++){
 	
 		var admYN = admissionArr[i].admYN;
 		if(admYN == 'Y'){
 			admissionCard[i].style.display = "block";
-			admissionCard[i].style.height  = "220px";
+			/*admissionCard[i].style.height  = "220px";*/
+			admissionCard[i].style.height = "calc((100% - 0px) / 3)";
+			checkY++;
 			
 		}else{
 			admissionCard[i].style.display = "none";
+			checkN++;
 		}
 	}
+	
+	if(checkY < 6){
+
+	}
 });
-
-
-
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-					swiper
- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/ 
-
-const mySwiper = new Swiper('.mySwiper', {
-    slidesPerView: 2, // 가로갯수
-    slidesPerColumn: 3,  // 세로갯수
-    grid: {                            //row count of shown slide
-        rows: 3,
-      },  
-    slidesPerGroup :2,
-    spaceBetween: 30,
-
-    pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
-    navigation: {                       //navigation(arrows)
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-    },
-    on: {
-      init: function () {},
-      orientationchange: function(){},
-      beforeResize: function(){
-        let vw = window.innerWidth;
-        if(vw > 1000){
-          mySwiper.params.slidesPerView = 2
-            mySwiper.params.slidesPerColumn = 3
-            mySwiper.params.slidesPerGroup = 2;
-        } else {
-          mySwiper.params.slidesPerView = 1
-            mySwiper.params.slidesPerColumn = 3
-            mySwiper.params.slidesPerGroup =1;
-        }
-        mySwiper.init();
-      },
-    },
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

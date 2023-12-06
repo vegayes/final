@@ -1,5 +1,7 @@
 package second.project.mungFriend.member.model.service;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import second.project.mungFriend.member.model.dto.Member;
 import second.project.mungFriend.member.model.dto.MemberKakao;
 import second.project.mungFriend.member.model.dto.MemberNaver;
@@ -11,6 +13,13 @@ public interface MemberService {
 	 * @return Member
 	 */
 	Member login(Member inputMember);
+	
+	/** 회원가입
+	 * @param profileImage
+	 * @param inputMember
+	 * @return int
+	 */
+	int signUp(MultipartFile profileImage, Member inputMember) throws Exception;
 
 	/** 아이디찾기
 	 * @param inputMember

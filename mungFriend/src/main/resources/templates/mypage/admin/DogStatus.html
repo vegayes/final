@@ -45,6 +45,7 @@
 
         //유기견 현황
         const dogStatus = /*[[${dogStatus}]]*/ [];
+        
 
         // 개월에 해당하는 데이터를 배열로 저장
         const months = dogStatus.map(function(item) {
@@ -52,14 +53,27 @@
         });
 
         // 유기견 마리 수에 해당하는 데이터를 배열로 저장
-        const adoptions = dogStatus.map(function(item) {
+        const admissions = dogStatus.map(function(item) {
          return item.DOG_COUNT;
         });
 
        
+        const adoptStatus = /*[[${adoptStatus}]]*/ [];
 
-        const admissions = [15, 24, 36, 30];
-    
+        // 유기견 마리 수에 해당하는 데이터를 배열로 저장
+        const adoptions = adoptStatus.map(function(item) {
+         return item.DOG_COUNT;
+        });
+        
+        const maxArr = [
+            ...adoptions,
+            ...admissions
+        ]
+       
+
+        const maxValue =  Math.max(...maxArr) + 10;
+
+        
         const ctx = document.getElementById('myChart').getContext('2d');
     
         const chart = new Chart(ctx, {
@@ -69,12 +83,12 @@
                 datasets: [
 
                     {
-                        label: '',
+                        label: '입소(마리)',
                         type: 'line',
-                        data: adoptions,
+                        data: admissions,
                         fill: false,
-                        backgroundColor: 'rgba(244, 168, 93, 0.5)',
-                        borderColor: 'rgba(244, 168, 93, 1)',
+                        backgroundColor: 'rgba(244, 228, 214, 1)',
+                        borderColor: 'rgba(254, 168, 93, 0.6)',
                         borderWidth: 2,
                         pointRadius: 5,
                         showInLegend: false // 범례에 표시하지 않음
@@ -82,20 +96,20 @@
 
                     },
                     {   
-                        label: '',
+                        label: '입양(마리)',
                         type: 'line',
-                        data: admissions,
+                        data: adoptions,
                         fill: false,
-                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.4)',
+                        borderColor: 'rgba(255, 99, 132, 0.5)',
                         borderWidth: 2,
                         pointRadius: 5,
                         showInLegend: false // 범례에 표시하지 않음
                         
                     },
                     {
-                        label: '입소(마리)',
-                        data: adoptions,
+                        label: '',
+                        data: admissions,
                         backgroundColor: 'rgba(254, 228, 214, 1)',
                         borderColor: 'rgba(254, 228, 214, 0.5)',
                         borderWidth: 1,
@@ -104,8 +118,8 @@
                         showInLegend: false // 범례에 표시하지 않음
                     },
                     {
-                        label: '입양(마리)',
-                        data: admissions,
+                        label: '',
+                        data: adoptions,
                         backgroundColor: 'rgba(255, 99, 132, 0.2)',
                         borderColor: 'rgba(255, 99, 132, 0.5)',
                         borderWidth: 1,
@@ -142,8 +156,8 @@
                     },
                     y: {
                         beginAtZero: true,
-                        max: 50,
-                        stepSize: 5,
+                        max: maxValue,
+                        stepSize: 6,
                         display: true,
 
                         title: {

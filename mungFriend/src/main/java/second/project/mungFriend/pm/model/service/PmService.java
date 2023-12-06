@@ -1,5 +1,7 @@
 package second.project.mungFriend.pm.model.service;
 
+import java.util.Map;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import second.project.mungFriend.member.model.dto.Member;
@@ -14,5 +16,11 @@ public interface PmService {
 	 * @throws Exception
 	 */
 	int activityLogRegister(MultipartFile uploadImage, Pm pm) throws Exception;
+	
+	/** 활동일지 조회하기
+	 * @param cp
+	 * @return map
+	 */
+	Map<String, Object> selectPmList(int cp);
 
 }

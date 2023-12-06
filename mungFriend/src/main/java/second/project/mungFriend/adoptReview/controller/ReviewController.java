@@ -101,14 +101,7 @@ public class ReviewController {
 			}
 			model.addAttribute("review",review); 
 			model.addAttribute("cp",cp); 
-			Member loginMember = (Member) model.getAttribute("loginMember");
-			//System.out.println("로그인한 회원 : " + loginMember);
-			
-			 if(loginMember != null ) {
-				 
-				model.addAttribute("loginMember", loginMember);
-				 
-			 }
+
 			 
 			 
 			}else { //조회결과 없으면

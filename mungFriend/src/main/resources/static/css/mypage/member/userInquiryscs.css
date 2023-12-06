@@ -98,6 +98,7 @@ a:hover {
 .textareaBox {
     height: 160px;
     resize: vertical;
+    resize: none;
 }
 
 .buttonBox {
@@ -148,4 +149,23 @@ a:hover {
 
 #donate-image {
     bottom: 70px;
+}
+
+#deleteReview {
+    border: 2px solid #fee4d6;
+    height: 30px;
+    width: 80px;
+    border-radius: 5px;
+    background: #fee4d6;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    cursor: pointer;
+   
+ 
+        position: relative;
+    left: -400px;   /* 왼쪽으로부터 50px */
+    bottom: -600px; /* 아래쪽으로부터 -60px (위로 60px) */
+
 }

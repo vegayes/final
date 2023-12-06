@@ -31,23 +31,35 @@
             </nav>
 
 			<!-- 내용 작성영역-->
-			<div class="userContentContainer">
+		 <div class="userContentContainer">
+                <div class="fixedLabel">제목</div>
+                <input type="text" id="title" class="inputBox" th:value="${inquiry.inquiryTitle}" readonly>
 
-				<div class="fixedLabel">제목</div>
-				<input type="text" id="title" class="inputBox" value="집 가고 싶어요" readonly>
+                <div class="fixedLabel">문의 내용</div>
+                <textarea id="content" class="inputBox textareaBox" th:text="${inquiry.inquiryContent}" readonly></textarea>
 
-				<div class="fixedLabel">문의 내용</div>
-				<textarea id="content" class="inputBox textareaBox" readonly>6시가 됐으면 좋겠다....</textarea>
-
-				<div class="fixedLabel">답변 내용</div>
-				<textarea id="content" class="inputBox textareaBox" readonly>얼른 집 가세요</textarea>
-
-
-			</div>
-		</section>
-		<a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
-		<a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
-</body>
+                <div class="fixedLabel">답변 내용</div>
+                <textarea id="response" class="inputBox textareaBox" readonly></textarea>
+            </div>
+            
+			<!-- 삭제 버튼 -->
+			<form th:action="@{/mypage/member/deleteInquiry/{inquiryNo}(inquiryNo=${inquiry.inquiryNo})}" method="post">
+				<button type="submit" id="deleteReview">삭제하기</button>
+			</form>
+			
+			<script>
+				document.getElementById('deleteInquiryButton').addEventListener('click', function (event) {
+					var confirmDeletion = confirm('정말 문의 내용을 삭제하시겠습니까?');
+					if (!confirmDeletion) {
+						event.preventDefault();
+					}
+				});
+			</script>
+	
+	<th:block th:replace="~{common/chatbot}"></th:block>
+    <img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image">
+    <a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+    
 </main>
 	<th:block th:replace="~{common/footer}"></th:block>
 </body>

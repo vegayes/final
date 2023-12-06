@@ -86,12 +86,92 @@ document.getElementById('submitBtn').addEventListener('click', function(event) {
     var hateThings = document.getElementsByName('dogHate')[0].value;
     var dogSpecialNote = document.getElementsByName('dogSpecialNote')[0].value;
     
+
+    
     // 필수 입력 필드 중 하나라도 비어있으면 알림창 표시
     if (!name || !birthday || !gender || !kind || !size || !personality || !neutering || !vaccine || !likeThings || !hateThings || !dogSpecialNote) {
         
-        // 이벤트 기본 동작 중단 (폼이 실제로 제출되지 않도록 함)
-        event.preventDefault();
-        
-        alert('입력사항들을 모두 입력해주세요.');
+	            
+		var sizeOption = document.getElementById('size').value;
+		
+		console.log(sizeOption);
+		
+		if (sizeOption === 'none') {
+		    event.preventDefault();
+		    alert('크기를 선택해주세요!');
+		}else{
+	        // 이벤트 기본 동작 중단 (폼이 실제로 제출되지 않도록 함)
+	        event.preventDefault();
+	        
+	        alert('입력사항들을 모두 입력해주세요.');
+		}
     } 
+    
 });
+
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+        		입소신청 객체
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
+if(admissionInfo != null){
+	
+	console.log("입소신청 등록하기에서 온 경우");
+	console.log("admissionInfo.admProfile :" +admissionInfo.admProfile);
+
+   // 썸네일 등록
+   preview[0].setAttribute("src", admissionInfo.admProfile);
+   preview[0].style.width = '100%';
+   preview[0].style.height = '100%';
+   preview[0].style.objectFit = 'cover'; 
+   
+   
+   var textInput = document.querySelectorAll('input[type="text"]');
+    console.log(admissionInfo.admBirthday);
+    console.log(textInput[0]);
+   // 이름 등록
+   textInput[2].value = admissionInfo.admName;
+   // 생일 등록
+   textInput[3].value = admissionInfo.admBirthday.substr(0, 10);
+   // 견종 등록
+   textInput[4].value = admissionInfo.admBreed;
+   
+   //특이사항
+   if(admissionInfo.admSignificant != '특이사항 없음'){
+	  textInput[8].value = admissionInfo.admSignificant;
+   }
+
+   // 성별
+   if(admissionInfo.admGender == '여아'){
+	    var genderSelect = document.getElementById("gender");
+	    
+	    genderSelect.options[1].selected = true;
+   }
+   
+  // 중성화
+  if(admissionInfo.admNeuteringYN == 'Y'){
+	    var surgerySelect = document.getElementById("surgery");
+	    
+	    surgerySelect.options[1].selected = true;
+   }
+   
+   // 접종 유무
+  if(admissionInfo.admVaccineYN == 'Y'){
+	    var vaccineSelect = document.getElementById("Vaccine");
+	    
+	    vaccineSelect.options[1].selected = true;
+   }
+   
+}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -65,8 +65,9 @@ public class DBConfig {
 													+ "second.project.mungFriend.adoptReview.model.dto,"
 													+ "second.project.mungFriend.donation.model.dto,"
 													+ "second.project.mungFriend.event.model.dto,"
-													+ "second.project.mungFriend.mypage.member.model.dto");
-
+													+ "second.project.mungFriend.mypage.member.model.dto,"
+													+ "second.project.mungFriend.pm.model.dto");
+ 
 
 //			sessionFactoryBean.setTypeAliasesPackage("edu.kh.project.member.model.dto");
 			//마이바티스 설정 파일 경로 지정

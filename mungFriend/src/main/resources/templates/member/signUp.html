@@ -26,12 +26,12 @@
 
                 <!-- 회원가입 form 영역 -->
                 <div id="form-section">
-                    <form th:action="@{/#}" method="POST" id="signUp-form">
+                    <form th:action="@{/member/signUp}" method="POST" id="signUp-form" enctype="multipart/form-data">
                         <!-- 아이디 -->
                         <div id="id-sec">
                             <div id="id-tit">아이디</div>
                             <div id="id-input">
-                                <input type="text" id="id" name="id" placeholder="아이디">
+                                <input type="text" id="id" name="memberId" placeholder="아이디">
                             </div>
                             <div id="id-blank"></div>
                         </div>
@@ -46,7 +46,7 @@
                         <div id="pw-sec">
                             <div id="pw-tit">비밀번호</div>
                             <div id="pw-input">
-                                <input type="password" id="pw" name="pw" placeholder="비밀번호">
+                                <input type="password" id="pw" name="memberPw" placeholder="비밀번호">
                             </div>
                             <div id="pw-blank"></div>
                         </div>
@@ -69,7 +69,7 @@
                         <div id="name-sec">
                             <div id="name-tit">이름</div>
                             <div id="name-input">
-                                <input type="text" id="name" name="name" placeholder="이름">
+                                <input type="text" id="name" name="memberName" placeholder="이름">
                             </div>
                             <div id="name-blank"></div>
                         </div>
@@ -84,7 +84,7 @@
                         <div id="phone-sec">
                             <div id="phone-tit">전화번호</div>
                             <div id="phone-input">
-                                <input type="tel" id="phone" name="phone" placeholder="전화번호">
+                                <input type="tel" id="phone" name="memberTel" placeholder="전화번호">
                             </div>
                             <div id="phone-blank"></div>
                         </div>
@@ -99,7 +99,7 @@
                         <div id="email-sec">
                             <div id="email-tit">이메일</div>
                             <div id="email-input">
-                                <input type="email" id="email" name="email" placeholder="이메일">
+                                <input type="email" id="email" name="memberEmail" placeholder="이메일">
                             </div>
                             <div id="authNum-section">
                                 <button type="button" id="authNum-btn">인증번호 받기</button>
@@ -132,7 +132,7 @@
                         <div id="nickName-sec">
                             <div id="nickName-tit">닉네임</div>
                             <div id="nickName-input">
-                                <input type="text" id="nickName" name="nickName"  placeholder="닉네임">
+                                <input type="text" id="nickName" name="memberNickname"  placeholder="닉네임">
                             </div>
                             <div id="nickName-blank"></div>
                         </div>
@@ -148,7 +148,7 @@
                             <div id="addr-tit">주소</div>
                             <div id="addr-input">
 								<!-- 우편번호 -->
-                                <input type="text" id="sample6_postcode" name="addr1" placeholder="우편번호">
+                                <input type="text" id="sample6_postcode" name="memberAddress" placeholder="우편번호">
                             </div>
                             <div id="addr-btn-sec">
                                 <button type="button" id="search-btn" onclick="sample6_execDaumPostcode()">검색</button>
@@ -165,7 +165,7 @@
                             <div id="addr-left-blank1"></div>
                             <div id="addr-input">
 								<!-- 도로명/지번주소 -->
-                                <input type="text" id="sample6_address" name="addr2" placeholder="도로명/지번 주소">
+                                <input type="text" id="sample6_address" name="memberAddress" placeholder="도로명/지번 주소">
                             </div>
                             <div id="addr-right-blank1"></div>
                         </div>
@@ -180,7 +180,7 @@
                             <div id="addr-left-blank2"></div>
                             <div id="addr-input">
 								<!-- 상세주소 -->
-                                <input type="text" id="sample6_detailAddress" name="addr3" placeholder="상세 주소">
+                                <input type="text" id="sample6_detailAddress" name="memberAddress" placeholder="상세 주소">
                             </div>
                             <div id="addr-right-blank2"></div>
                         </div>
@@ -194,7 +194,7 @@
                         <!-- 프로필 -->
                         <div id="profile-sec">
                             <div id="profile-upload-sec">
-                                <img th:src="@{/images/member/profile_noImage.png}" id="profile_noImage">
+                            	<img th:src="@{/images/member/profile_noImage.png}" id="profile_noImage">
                             </div>
                             <div id="upload-btn-sec">
                                 <label for="uploadInput">프로필 사진 업로드</label>
@@ -215,8 +215,9 @@
 
             <!-- 오른쪽 여백 -->
             <div id="right-gap">
-                <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
-                <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+                <th:block th:replace="~{common/chatbot}"></th:block>
+                <img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image">
+                <a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
             </div>
         </div>
 

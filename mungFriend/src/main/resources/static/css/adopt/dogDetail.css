@@ -79,6 +79,15 @@ main{
     height: 38px;
 }
 
+#reserveBtn {
+    background-color: #FEE4D6;
+    border-radius: 5px;
+    border: none;
+    font-size: 14px;
+    width: 100px;
+    height: 30px;
+}
+
 #regist > a {
     cursor: pointer;
     /* line-height: 29px; */
@@ -98,6 +107,9 @@ main{
     cursor: pointer;
     line-height: 30px;
 }
+
+
+
 
 /* 
 #like {
@@ -123,7 +135,10 @@ main{
 }
 
 
+
+
 /* dog-detail */
+
 .dog-detail{
     display: flex;
     justify-content: center;
