@@ -33,7 +33,7 @@
 			<div class="userContentContainer">
 
 			<div class="fixedLabel">닉네임</div>
-		    <input type="text" id="nickname" class="inputBox" th:value="${inquiry.memberNickname}" readonly>
+		    <input type="text" id="nickname" class="inputBox" style="text-align: center;" th:value="${inquiry.memberNickname}" readonly>
 		
 		    <div class="fixedLabel">제목</div>
 		    <input type="text" id="title" class="inputBox" th:value="${inquiry.inquiryTitle}" readonly>
@@ -42,9 +42,12 @@
 		    <textarea id="content" class="inputBox textareaBox" readonly th:text="${inquiry.inquiryContent}"></textarea>
 		
 		    <div class="fixedLabel">문의답변</div>
-		    <textarea id="inquiry" class="inputBox textareaBox"></textarea>
-
-			<button class="inputBox buttonBox">답변하기</button>
+		   
+					    <form th:action="@{/mypage/admin/admninInquiryBox}" method="post">
+						<input type="hidden" name="inquiryNo" th:value="${inquiry.inquiryNo}">
+						<textarea name="adminReply" id="inquiry" class="inputBox textareaBox" th:text="${inquiry.adminReply}"></textarea>
+						<button type="submit" class="inputBox buttonBox">답변하기</button>
+					</form>
 			</div>
 
 			</div>
