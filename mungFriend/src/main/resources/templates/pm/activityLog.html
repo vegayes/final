@@ -111,13 +111,12 @@
                 </div>
             </div>
 
-            <!-- 오른쪽 여백 -->
-            <div id="right-gap">
-                <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
-                <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
-            </div>
         </div>
 
+        <th:block th:replace="~{common/chatbot}"></th:block>
+        <img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image">
+        <a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+        
         <!-- 풋터 -->
         <th:block th:replace="~{common/footer}"></th:block>
     </section>
