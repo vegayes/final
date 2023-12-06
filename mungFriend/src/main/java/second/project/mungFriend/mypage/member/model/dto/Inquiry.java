@@ -1,4 +1,4 @@
-package second.project.mungFriend.mypage.member.model.dto;
+package second.project.mungFriend.mypage.member.model.dto; 
 
 import java.time.LocalDateTime;
 
@@ -22,4 +22,5 @@ public class Inquiry {
 	private String inquiryStatus;
 	private String inquiryCompleteDate;
 	private String memberNickname;
+	private String  adminReply;
 }

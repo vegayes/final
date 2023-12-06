@@ -7,7 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import second.project.mungFriend.mypage.admin.model.service.AdminInquiryService;
 import second.project.mungFriend.mypage.member.model.dto.Inquiry;
@@ -44,6 +47,31 @@ public class AdminInquiryController {
 			model.addAttribute("inquiry", inquiryDetail);
 			return "mypage/admin/adminInquiry";
 		}
+		
+		
+		@PostMapping("/admninInquiryBox")
+		public String completeAnswer(int inquiryNo, @RequestParam String adminReply, RedirectAttributes redirectAttributes, Model model) {
+		    int result = adminInquiryService.completeAnswer(inquiryNo, adminReply);
+		    
+		    System.out.println(result);
+		    
+		    String path = null;
+		    
+		    if(result > 0) {
+		    	redirectAttributes.addFlashAttribute("successMessage", "답변이 완료되었습니다.");
+		    	path = "mypage/admin/adminInquiryBox";
+		    	List<Inquiry> inquiryList = adminInquiryService.adminInquiryBox();
+		    	
+		    	model.addAttribute("inquiryList",inquiryList);
+//		    	Inquiry inquiryDetail = adminInquiryService.adminInquiryDetail(inquiryNo);
+		    } else {
+		    	redirectAttributes.addFlashAttribute("successMessage", "답변 실패");
+		    	path = "redirect:/completeAnswer/{inquiryNo}";
+		    }
+		    return path;
+		}
+		
+	
 
 }
 
