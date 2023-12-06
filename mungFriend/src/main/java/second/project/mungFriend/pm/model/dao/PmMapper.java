@@ -17,7 +17,7 @@ public interface PmMapper {
 	 */
 	int activityLogRegister(Pm pm);
 	
-	/**활동일지 전체 리스트 수 조회
+	/** 활동일지 전체 리스트 수 조회
 	 * @return int
 	 */
 	int getListCount();
