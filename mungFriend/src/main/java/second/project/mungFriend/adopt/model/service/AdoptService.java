@@ -43,7 +43,7 @@ public interface AdoptService {
 //	**********************************************************************************************
 
 	// 강아지 예약하기
-	String dogReservation();
+	//String dogReservation();
 
 
 

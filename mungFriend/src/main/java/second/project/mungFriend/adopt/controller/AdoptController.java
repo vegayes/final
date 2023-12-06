@@ -312,13 +312,13 @@ public class AdoptController {
 //	**********************************************************************************************
 
 	// 예약하기
-	@PostMapping("/dogReservation")
-	@ResponseBody // 반환되는 값이 비동기 요청한 곳으로 돌아가게 함
-	public String dogReservation(@RequestBody HashMap<String, Object> map) {
-		
-		return service.dogReservation(map);
-		
-	}
+//	@PostMapping("/dogReservation")
+//	@ResponseBody // 반환되는 값이 비동기 요청한 곳으로 돌아가게 함
+//	public String dogReservation(@RequestBody HashMap<String, Object> map) {
+//		
+//		return service.dogReservation(map);
+//		
+//	}
 
 
 }
