@@ -99,7 +99,15 @@ function paymentInfoCheck(){
 	}else if(donationType.value === '정기'){
 		console.log("정기는 카드 번호 입력해야함");
 
+		var codeHH = billingKeyCreate();
+
+		console.log("codeHH" + JSON.stringify(codeHH));
+
+
 		customer_uid = 'CUSTOMER_UID' + loginMember.memberNo;
+
+		
+
 
 		var cardData = {
 			pg : 'html5_inicis',
@@ -109,6 +117,12 @@ function paymentInfoCheck(){
 			birth : "010328",
 			pwd2Digit : "65",
 		}
+
+		
+		
+
+		
+
 
 		console.log(JSON.stringify(cardData));
 					
@@ -141,7 +155,19 @@ function paymentInfoCheck(){
 }
 
 
+// 빌링키 발급 진행
+function billingKeyCreate(){
 
+	var hh = {
+		pg : 'html5_inicis',
+		cardNumber : "5107-3792-7333-9589",
+		cardExpiry : "2028-08",
+		birth : "010328",
+		pwd2Digit : "65",
+	}
+
+	return hh;
+}
 
 
 
