@@ -528,7 +528,7 @@ function doneQuiz(){
         
 
 
-            gameArea.innerText = "User 님의 점수는 " + totalScore + "점 입니다.";
+            gameArea.innerText = memberNickname + "님의 점수는 " + totalScore + "점 입니다.";
             
             
             if(totalScore >= 1){

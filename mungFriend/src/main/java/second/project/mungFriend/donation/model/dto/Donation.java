@@ -12,6 +12,7 @@ import lombok.ToString;
 public class Donation {
 	
 	private int donationNo;
+	private int donationInfoNo; // 이게 진짜임.
 	private int memberNo; // (회원 테이블) 외래키
 	private String donationContent;
 	private String donationType;	

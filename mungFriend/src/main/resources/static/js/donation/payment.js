@@ -1,6 +1,5 @@
-// 결제 진행 
-function requestPay() {
-
+// 결제 진행 정보 확인 (일반 결제 , 정기 결제 구분)
+function paymentInfoCheck(){
 	var donationFlag = true;
 	
 	var donationType = document.querySelector('input[name="donationType"]:checked'); // 후원 주기
@@ -75,10 +74,9 @@ function requestPay() {
 		
 	}	
 	
-	if(!donationFlag){	
+	if(!donationFlag){	// 결제창 못감. 
 		return;
 	}else{
-		
         // 결제정보를 결제api 진행하면서 넣어야 하는거 아니야? 왜 미리 넣어?
         // => 미리 넣는다고 했을 때 loginMember의 정보를 넣음
 	    console.log("type : " + donationType.value);
@@ -87,52 +85,80 @@ function requestPay() {
 	    // 결제 정보
 	    var paymentData = {
 	            pg: "html5_inicis",		//KG이니시스 pg파라미터 값
-				//pg: "kakaopay",
 	            pay_method: "card",		//결제 방법
-			
-	            merchant_uid: "donation_" + new Date().getTime(),//주문번호 전달 
+	            merchant_uid: "donation_" + new Date().getTime(),//주문번호 전달
 		        // 라디오 버튼에서 선택한 값을 결제 정보에 추가
 		        name: '멍프랜드 ' + (donationType.value === '일시' ? '일시 후원' : '정기 후원'),
 		        amount: parseInt(donationAmount.value), // 문자열을 숫자로 변환하여 저장	  
-		        //customer_uid : "123456",   
-		        // 구매자 정보
 		        buyer_name : donationName,
 		        buyer_email : donationEmail,
 		};
-
-	    // '정기'인 경우에만 빌링키 추가
-	    if (donationType.value === '정기') {
-					//paymentData.customer_uid = 'CUSTOMER_UID' + loginMember.memberNo; // 빌링키 발급 시도
-			
-					customer_uid = 'CUSTOMER_UID' + loginMember.memberNo;
-					
-					// 결제검증
-					fetch('/billingkey/' + customer_uid, {
-					    method: 'POST'
-					})
-					.then(function(response) {
-					    return response.json();
-					})
-					.then(function(data) {
-							console.log("들어옴");
-							
-							console.log(data);
-					})
-					.catch(function(error) {
-					    alert("결제에 실패하였습니다.", "에러 내용: " + error, "error");
-					});
-			
-	    }
-	    
 		
-		var IMP = window.IMP;
+	if(donationType.value === '일시'){
+		requestPay(paymentData);
+	}else if(donationType.value === '정기'){
+		console.log("정기는 카드 번호 입력해야함");
+
+		customer_uid = 'CUSTOMER_UID' + loginMember.memberNo;
+
+		var cardData = {
+			pg : 'html5_inicis',
+			customer_uid : customer_uid,
+			cardNumber : "5107-3792-7333-9589",
+			cardExpiry : "2028-08",
+			birth : "010328",
+			pwd2Digit : "65",
+		}
+
+		console.log(JSON.stringify(cardData));
+					
+		// 결제검증
+		fetch('/billingkey/' + customer_uid, {
+			method:"POST",
+			body: JSON.stringify(cardData),
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
+		.then(function(response) {
+			return response.json();
+		})
+		.then(function(data) {
+				console.log("들어옴");
+				console.log(data);
+		})
+		.catch(function(error) {
+			alert("결제에 실패하였습니다.", "에러 내용: " + error, "error");
+		});
+
+
+	}else {
+		console.log("뭔가 잘못됨.");
+	}
+	
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+// 결제 진행 
+function requestPay(paymentData) {
+	var IMP = window.IMP;
 	    IMP.init("imp82107782");
 	
 	    IMP.request_pay(paymentData,
 	        function (rsp) {
 				
 		        if (rsp.success) { // 결제 성공
-					alert("!결제 성공");
+					alert("결제 성공");
 					
 					console.log("결제 성공 후 imp_uid 값 : " + rsp.imp_uid);
 					
@@ -143,14 +169,6 @@ function requestPay() {
 					    return response.json();
 					})
 					.then(function(data) {
-							console.log("들어옴 일반결제??");
-							console.log(data);
-							console.log(data.response);
-							console.log(data.response.amount);
-							console.log(data.response.impUid);
-							console.log(data.response.applyNum);
-							console.log(data.response.buyerEmail);
-							console.log(data.response.buyerName);
 							
 			            var donation = {
 							
@@ -172,8 +190,6 @@ function requestPay() {
 							
 			            };
 				
-				
-						console.log("가져가야 할 값 : " + donation);
 						
 			            // 컨트롤러에 데이터를 전달하여 DB에 입력하는 로직
 			            fetch("/donation/donationPay", {
@@ -186,11 +202,13 @@ function requestPay() {
 			            .then(response => response.text())
 			            .then(result => {
 			                if (result === "y") {
-			                    alert(msg);
-			                    
+								console.log("안녕 나 결제 DB 성공하고 들어옴.")
+			                
 			                    if(loginMember != null){
+									console.log("넘어갈거임.")
 									location.href = '/mypage/member/donationList';
-									 // 로그인되면 후원 내역으로 넘어가기 
+									 // 로그인되면 후원 내역으로 넘어가기
+									 return; 
 								}
 			                    location.href = '/';
 			                   
@@ -199,7 +217,9 @@ function requestPay() {
 			                    return false;
 			                }
 			            })
-			            .catch(error => console.error('Error:', error));				
+			            .catch(function(error) {
+					    	alert("오류가 발생하였습니다.", "에러 내용: " + error, "error");
+						});				
 				
 					})
 					.catch(function(error) {
