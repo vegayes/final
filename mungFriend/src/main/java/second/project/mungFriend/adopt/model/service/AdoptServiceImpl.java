@@ -19,6 +19,7 @@ import second.project.mungFriend.adopt.model.dao.AdoptMapper;
 import second.project.mungFriend.adopt.model.dto.Dog;
 import second.project.mungFriend.adopt.model.dto.DogImage;
 import second.project.mungFriend.adopt.model.dto.Pagination;
+import second.project.mungFriend.adopt.model.dto.Reservation;
 import second.project.mungFriend.adopt.model.exception.FileUploadException;
 import second.project.mungFriend.adopt.model.exception.ImageDeleteException;
 import second.project.mungFriend.common.utility.Util;
@@ -88,6 +89,13 @@ public class AdoptServiceImpl implements AdoptService{
 	public int dogLikeCheck(Map<String, Object> map) {
 		
 		return mapper.dogLikeCheck(map);
+	}
+	
+	// 강아지 예약여부 확인
+	@Override
+	public int reserveCheck(Map<String, Object> map) {
+
+		return mapper.reserveCheck(map);
 	}
 	
 	// 좋아요 처리
@@ -320,13 +328,17 @@ public class AdoptServiceImpl implements AdoptService{
 		
 		return mapper.dogDelete(map);
 	}
-	
+
+
 	// 강아지 예약하기
 	@Override
-	public String dogReservation() {
-		
-		return mapper.dogReservation();
+	public int dogReservation(Reservation reservationData, int dogNo, int memberNo) {
+
+		return mapper.dogReservation(reservationData, dogNo, memberNo);
 	}
+
+
+
 
 	
 	

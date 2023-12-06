@@ -20,10 +20,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import jakarta.servlet.http.HttpSession;
 import second.project.mungFriend.admissionApply.model.dto.Admission;
 import second.project.mungFriend.admissionApply.model.service.FreeAdmissionService;
 import second.project.mungFriend.adopt.model.dto.Dog;
 import second.project.mungFriend.adopt.model.dto.DogImage;
+import second.project.mungFriend.adopt.model.dto.Reservation;
 import second.project.mungFriend.adopt.model.service.AdoptService;
 import second.project.mungFriend.common.utility.Util;
 import second.project.mungFriend.member.model.dto.Member;
@@ -58,6 +60,7 @@ public class AdoptController {
 	public String dogDetail(
 			@PathVariable("dogNo") int dogNo,
 			Model model,
+			HttpSession session,
 			RedirectAttributes ra,
 			@SessionAttribute(value = "loginMember", required = false) Member loginMember) {
 		
@@ -75,9 +78,12 @@ public class AdoptController {
 				map.put("memberNo", loginMember.getMemberNo());
 				
 				// 좋아요 여부 확인
-				int result = service.dogLikeCheck(map);
-				
+				int result = service.dogLikeCheck(map);				
 				if(result > 0) model.addAttribute("likeCheck", "on");
+				
+				// 강아지 예약 여부 확인
+				int reserveCheck = service.reserveCheck(map);				
+				if(reserveCheck > 0) model.addAttribute("reserveCheck", "on");
 				
 			}
 			
@@ -85,6 +91,7 @@ public class AdoptController {
 			
 			System.out.println("상세조회한 개 정보 : " + dog);
 			model.addAttribute("dog", dog); 
+			session.setAttribute("dog", dog); 
 			
 			if(dog.getImageList().size() != 0) { // 강아지 이미지가 있을 경우				
 				
@@ -313,12 +320,31 @@ public class AdoptController {
 
 	// 예약하기
 	@PostMapping("/dogReservation")
-	@ResponseBody // 반환되는 값이 비동기 요청한 곳으로 돌아가게 함
-	public String dogReservation(@RequestBody HashMap<String, Object> map) {
+	@ResponseBody
+	public Map<String, Object> dogReservation(
+			@RequestBody Reservation reservationData,
+			@SessionAttribute("loginMember") Member loginMember,
+			HttpSession session,
+			RedirectAttributes ra) {
 		
-		return service.dogReservation(map);
+		// 세션에서 dog 객체 가져오기
+		Dog dog = (Dog) session.getAttribute("dog");
+	    
+		int dogNo = dog.getDogNo();
+		int memberNo = loginMember.getMemberNo();
 		
-	}
+		int result = service.dogReservation(reservationData, dogNo, memberNo); 
+		
+		Map<String, Object> response = new HashMap<>();
+		response.put("result", result);
+		
+		return response;
+		
+	}	
+	
+	// 예약조회
+	
+	
 
 
 }

@@ -92,6 +92,7 @@ function showCalendar() {
 }
 
 function hideCalendar() {
+
     // 예약하기 버튼 보이기
     const registButton = document.getElementById('regist');
     registButton.style.display = 'flex'; // display를 flex로 변경
@@ -114,7 +115,44 @@ function hideCalendar() {
     // 예약하기 버튼 감춤
     const reserveBtn = document.getElementById("reserveBtn");
     reserveBtn.style.display = 'none';
+
 }
+
+function reserveDone() {
+    // 예약완료 보이기
+    const reserveDone = document.getElementById('reserveDone');
+
+    // 예약완료 엘리먼트가 정상적으로 가져와지면 스타일 변경
+    if (reserveDone) {
+        reserveDone.style.display = 'flex';
+    } else {
+        console.error('Error: reserveDone element not found.');
+    }
+    
+    // 예약하기 버튼 감추기
+    const registButton = document.getElementById('regist');
+    registButton.style.display = 'none';
+
+    // 달력 감추기
+    const calendarContainer = document.getElementById('calendar-container');
+    calendarContainer.style.display = 'none';
+
+    // #calendedr-img 클래스 제거
+    const calendedrImg = document.getElementById('calendedr-img');
+    calendedrImg.classList.remove('calendedr-img');
+
+    // 예약하기 버튼에 기존 스타일 클래스를 다시 추가
+    registButton.classList.add('your-existing-style-class');
+
+    // 달력을 감춤과 동시에 시간을 감춤
+    const timeContainer = document.getElementById('time-container');
+    timeContainer.style.display = 'none';
+
+    // 예약하기 버튼 감춤
+    const reserveBtn = document.getElementById("reserveBtn");
+    reserveBtn.style.display = 'none';
+}
+
 
 
 function updateAvailableTimes(selectedDate) {
@@ -227,10 +265,20 @@ function sendReservationData(selectedDate, selectedTime) {
     })
     .then(response => response.json())
     .then(data => {
-        console.log('Reservation successful:', reservationData);
+        
+        const result = data.result;
+
+        if(result > 0){
+            alert("예약이 완료되었습니다.");
+            reserveDone();
+        }else{
+            alert("예약을 실패하였습니다. 다시 시도해주세요.");
+        }
+        
     })
     .catch(error => {
         console.error('Error during reservation:', error);
     });
     
+
 }
