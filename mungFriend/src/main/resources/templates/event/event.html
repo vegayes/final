@@ -130,7 +130,16 @@
 
                 </div>
             </div>
-        </div>    
+        </div>
+        
+		<script th:inline = "javascript">
+			var loginMember = /*[[${session.loginMember}]]*/ null;
+			if(loginMember != null){
+				
+				var memberNickname = loginMember.memberNickname;
+			}
+			
+		</script>  
       
         <script th:src ="@{/js/event/event.js}"></script>
         <script th:src="@{/js/event/game.js}"></script>

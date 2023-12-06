@@ -44,6 +44,7 @@
 	                                    <th>일시/정기</th>
 	                                    <th>결제 일시 </th>
 	                                    <th>후원 금액</th>
+	                                    <th>상세조회</th>
 	                                </tr>
 	                            </thead>
 	        
@@ -54,7 +55,11 @@
 	                                    <td>[[${donation.donationType}]]</td>
 	                                    <td>[[${donation.donationDate}]]</td>
 	                                    <td>[[${donation.donationAmount}]]원</td>
-	                                </tr> 	      
+	                                    <td><div class = "donationInfoCheck" th:onclick="donationInfoCheck([[${donation.receiptUrl}]], [[${session.loginMember.memberNo}]])">조회</div></td>
+	                                </tr> 
+
+	                                
+      
 	                                
 	                            </tbody>
 	                        </table>
@@ -109,5 +114,7 @@
     
      
 	    <th:block th:replace="~{common/footer}"></th:block>
+	    
+	    <script th:src="@{/js/mypage/member/donationList_user.js}"></script>
     </body>
 </html>
