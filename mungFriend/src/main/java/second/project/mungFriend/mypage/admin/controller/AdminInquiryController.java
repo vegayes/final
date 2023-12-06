@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import second.project.mungFriend.mypage.admin.model.service.AdminInquiryService;
@@ -28,5 +29,22 @@ public class AdminInquiryController {
 	        model.addAttribute("inquiryList", inquiryList);
 	        return "mypage/admin/adminInquiryBox";
 	    }
+
+	    
+	 // 1:1 게시글 상세 조회
+		@GetMapping("/adminInquiry/{inquiryNo}")
+		public String adminInquiryDetail(@PathVariable("inquiryNo") int inquiryNo, Model model) {
+			
+			System.out.println("상세 조회 No :" + inquiryNo);
+			
+			Inquiry inquiryDetail = adminInquiryService.adminInquiryDetail(inquiryNo);
+			
+			System.out.println("상세 조회 :" + inquiryDetail);
+			
+			model.addAttribute("inquiry", inquiryDetail);
+			return "mypage/admin/adminInquiry";
+		}
+
 }
+
 	

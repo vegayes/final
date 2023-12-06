@@ -11,7 +11,7 @@
 </head>
 
 <body>
-<th:block th:replace="~{common/header}"></th:block>
+	<th:block th:replace="~{common/header}"></th:block>
 	<main>
 		<section class="adminIntroArea">
 			<div class="adminIntroTitle">
@@ -23,9 +23,9 @@
 		<section class="adminContentArea">
 
 			<!-- nav 자리-->
-			<nav class = "navAdmission">
-    				<th:block th:replace="~{common/nav_admin}"></th:block>
-                </nav>
+			<nav class="navAdmission">
+				<th:block th:replace="~{common/nav_admin}"></th:block>
+			</nav>
 
 			<!-- 후원 내용 영역-->
 			<div class="adminContentContainer">
@@ -43,7 +43,7 @@
 							<tr class="donationTheadTr">
 								<th>번호</th>
 								<th>닉네임</th>
-								<th>제목</th>
+									<th>제목</th>
 								<th>작성일</th>
 								<th>처리 상황</th>
 							</tr>
@@ -52,36 +52,47 @@
 						<tbody>
 
 						<tbody>
-							
-							
-								<tr th:each="inquiry : ${inquiryList}" class="donationTBodyTr">
-									<td th:text="${inquiry.inquiryNo}"></td>
-									<!--<td th:text="${inquiry.memberNickname}"></td>  -->
-									<td th:text="${inquiry.inquiryTitle}"></td>
-									<td th:text="${inquiry.inquiryDate}"></td>
-									<td th:text="${inquiry.inquiryStatus}"></td>
-								</tr>
-								</tbody>
+
+
+							<tr th:each="inquiry : ${inquiryList}" class="donationTBodyTr">
+								<td th:text="${inquiry.inquiryNo}"></td>
+								<td th:text="${inquiry.memberNickname}"></td>
+								<td>
+									<a th:href="@{/mypage/admin/adminInquiry/{inquiryNo}(inquiryNo=${inquiry.inquiryNo})}"
+										th:text="${inquiry.inquiryTitle}">제목</a>
+
+								</td>
+								<td th:text="${inquiry.inquiryDate}"></td>
+								<th:block th:if="${inquiry.inquiryStatus == 'N'}">
+									<td>처리중</td>
+								</th:block>
+
+								<th:block th:if="${inquiry.inquiryStatus == 'Y'}">
+									<td>답변 완료</td>
+								</th:block>
+
+							</tr>
+						</tbody>
 
 
 
 						</tbody>
 					</table>
 				</div>
-          
-          
-               <div style="margin-top: 380px; margin-left: -40px;"> 
-				
-				<form th:action="@{/adminInquiry/reviewList/1}" method="get" id="searchContainer">
-					<select name="searchType" id="searchType">
-						<option value="title">제목</option>
-						<option value="content">내용</option>
-						<option value="writer">작성자</option>
-					</select>
-					<input type="text" name="searchContent" id="searchContent" placeholder="검색어를 입력해주세요.">
-					<button id="searchButton">검색</button>
-				</form>
-	        </div>
+
+
+				<div style="margin-top: 380px; margin-left: -40px;">
+
+					<form th:action="@{/adminInquiry/reviewList/1}" method="get" id="searchContainer">
+						<select name="searchType" id="searchType">
+							<option value="title">제목</option>
+							<option value="content">내용</option>
+							<option value="writer">작성자</option>
+						</select>
+						<input type="text" name="searchContent" id="searchContent" placeholder="검색어를 입력해주세요.">
+						<button id="searchButton">검색</button>
+					</form>
+				</div>
 
 				<!-- 페이지 네이션 -->
 				<div class="paginationArea">
@@ -134,13 +145,13 @@
 
 			</div>
 		</section>
-		
-		   
+
+
 		<a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
 		<a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
 </body>
 </main>
-	<th:block th:replace="~{common/footer}"></th:block>
+<th:block th:replace="~{common/footer}"></th:block>
 </body>
 
 </html>
