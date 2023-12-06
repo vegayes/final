@@ -52,6 +52,9 @@
                             <button value="15:00">15:00</button>
                             <button value="17:00">17:00</button>
                         </div>
+
+                        <button id="reserveBtn" type="button" onclick="submitReservation()" style="display: none;">예약하기</button>
+
                     </div>
                 </div>  
             </div>
@@ -118,12 +121,13 @@
         </div>
 
         <div class="main-right">
-            <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
-            <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+            <th:block th:replace="~{common/chatbot}"></th:block>
+            <img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image">
+            <a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+    
         </div>
     </main>
 
-    <th:block th:replace="~{common/chatbot}"></th:block>
     <th:block th:replace="~{common/footer}"></th:block>
 
 

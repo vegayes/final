@@ -9,5 +9,14 @@ public interface AdminInquiryService {
 	
 
 	List<Inquiry> adminInquiryBox();
+	
+	
+	/**1:1 문의 상세 조회
+	 * 
+	 * @param inquiryNo
+	 * @return
+	 */
+	Inquiry adminInquiryDetail(int inquiryNo);
+    
 
 }

@@ -4,6 +4,7 @@
 	
 	<resultMap type="Donation" id="donation_rm">
 		<id property="donationNo" column="DONATION_NO"/>
+		<result property="donationInfoNo" column="DONATION_INFO_NO"/>
 		
 		<result property="memberNo" column="MEMBER_NO"/>
 		<result property="donationContent" column="DONATION_CONTENT"/>
@@ -11,19 +12,39 @@
 		<result property="donationAmount" column="DONATION_AMOUNT"/>
 		<result property="donationDate" column="DONATION_DATE"/>		
 		<result property="donationStatus" column="DONATION_STATUS"/>
-		
-		<result property="imp_uid" column="DONATION_ID"/>		
+			
 		<result property="memberName" column="MEMBER_NAME"/>		
 		<result property="memberEmail" column="MEMBER_EMAIL"/>		
+		
+		<result property="impUid" column="DONATION_UID"/>
+		<result property="applyNum" column="DONATION_APPLY_NUM"/>
+		
+		<result property="cardName" column="DONATION_CARD"/>
+			
+		<result property="receiptUrl" column="DONATION_RECEIPT"/>			
+		<result property="billingKey" column="BILLINGKEY"/>		
+		
 	
 	</resultMap>
 	
-	<!-- 회원 후원 등록 -->
+	<!-- 회원 후원 등록
 	<insert id = "donationMemberPay">
 		INSERT INTO TEST_DONATION  
 		VALUES(SEQ_DONATION_NO.NEXTVAL, #{memberNo},  
 		       #{donationContent}, #{donationType}, #{donationAmount}, SYSDATE, #{status})	
-	</insert>
+	</insert>-->
+	
+	<insert id = "donationMemberPay">
+		INSERT INTO DONATION_INFO 
+		VALUES (SEQ_DONATION_INFO_NO.NEXTVAL, 
+					#{memberNo}, #{impUid}, #{donationAmount}, #{cardName},
+					#{applyNum}, #{donationType},  #{billingKey}, #{receiptUrl}, 
+					#{donationContent}, SYSDATE, #{status})
+	</insert>	
+	
+	
+	
+	
 	
 	<!-- 비회원 후원 등록 -->
 	<insert id = "donationNonMemberPay">
@@ -32,6 +53,12 @@
 		       #{memberEmail}, #{donationContent} , #{donationType},  #{donationAmount}, SYSDATE, #{status})
 
 	</insert>
+	
+	
+	
+	
+	
+	
 	
 	<!-- 후원 내역 개수 ( 마이페이지/ 관리자 ) --> 
 	<select id = "countDonationList" resultType = "_int">
@@ -107,25 +134,25 @@
 	</select>
 	
 	
-	<!-- 후원 내역 개수 확인 ( 마이페이지/ 유저  ) --> 
+	<!-- 후원 내역 개수 확인 ( 마이페이지/ 유저  )  새롭게 바꿈--> 
 	<select id = "countUserDonation" resultType = "_int">
-		SELECT COUNT(DONATION_NO)  
-		FROM TEST_DONATION
+		SELECT COUNT(DONATION_INFO_NO)  
+		FROM DONATION_INFO
 		LEFT JOIN "MEMBER" USING(MEMBER_NO)
 		WHERE MEMBER_NO = #{memberNo}
 		ORDER BY DONATION_DATE DESC
 	</select>	
 	
-	<!-- 후원 내역 확인 ( 마이페이지/ 유저  ) --> 
+	<!-- 후원 내역 확인 ( 마이페이지/ 유저  ) 새롭게 바꿈 --> 
 	<select id = "userDonationList" resultMap = "donation_rm">
-		SELECT DONATION_NO , MEMBER_NAME, MEMBER_EMAIL, DONATION_CONTENT, 
+		SELECT DONATION_INFO_NO , MEMBER_NAME, MEMBER_EMAIL, DONATION_UID, DONATION_CARD, DONATION_CONTENT, 
 		    CASE 
 		        WHEN DONATION_TYPE = 'O' THEN '일시' 
 		        WHEN DONATION_TYPE = 'R' THEN '정기' 
 		        ELSE DONATION_TYPE 
 		    END AS DONATION_TYPE
-		    ,DONATION_AMOUNT , DONATION_DATE , DONATION_STATUS 
-		FROM TEST_DONATION
+		    ,DONATION_AMOUNT ,BILLINGKEY, DONATION_RECEIPT,   DONATION_DATE , DONATION_STATUS 
+		FROM DONATION_INFO  
 		LEFT JOIN "MEMBER" USING(MEMBER_NO)
 		WHERE MEMBER_NO = #{memberNo}
 		ORDER BY DONATION_DATE DESC

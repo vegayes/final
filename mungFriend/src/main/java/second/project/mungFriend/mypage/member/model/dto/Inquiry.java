@@ -21,4 +21,5 @@ public class Inquiry {
 	private String inquiryDate;
 	private String inquiryStatus;
 	private String inquiryCompleteDate;
+	private String memberNickname;
 }
