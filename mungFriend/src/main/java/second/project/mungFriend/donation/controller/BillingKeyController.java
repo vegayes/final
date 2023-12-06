@@ -40,8 +40,8 @@ public class BillingKeyController {
     @PostMapping("/{customerUid}")
     public IamportResponse<BillingCustomer> postBillingCustomer(@PathVariable String customerUid /*, BillingCustomerData billingData*/) throws IOException, IamportResponseException {
     	System.out.println("Hello. World");
-    	System.out.println("key : " + key);
-    	System.out.println("secret : " + secret);
+//    	System.out.println("key : " + key);
+//    	System.out.println("secret : " + secret);
     	
     	BillingCustomerData bcd = new BillingCustomerData("customer_1234",
 														"5107-3792-7333-9589",

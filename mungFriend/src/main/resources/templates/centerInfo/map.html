@@ -44,8 +44,10 @@
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=855eb579cf7374ef539f6790b74a0238&libraries=services,clusterer,drawing"></script>
 
 
-	<a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
-	<a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+	<th:block th:replace="~{common/chatbot}"></th:block>
+	<img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image">
+	<a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+		
 
 	<script th:src="@{/js/centerInfo/map.js}"></script>
 </body>
