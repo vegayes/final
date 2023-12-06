@@ -2,9 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="second.project.mungFriend.pm.model.dao.PmMapper">
 	
+	<resultMap type="Pm" id="pm_rm">
+		
+		<id property="activityNo" column="ACTIVITY_NO" />
+		
+		<result property="memberNo" column="MEMBER_NO" />
+		<result property="acitivityImg" column="ACTIVITY_IMG" />
+		<result property="activityContent" column="ACTIVITY_CONTENT" />
+		<result property="activityDate" column="ACTIVITY_DATE" />
+		
+	</resultMap>
+	
 	<!-- 활동일지 등록하기 -->
 	<insert id="activityLogRegister">
 		INSERT INTO ACTIVITY_LOG VALUES(SEQ_ACTIVITY_NO.NEXTVAL, #{memberNo}, #{acitivityImg}, #{activityContent}, DEFAULT)
 	</insert>
+	
+	<!-- 활동일지 전체 리스트 수 조회 -->
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*) FROM "ACTIVITY_LOG"
+	</select>
+	
+	<select id="selectPmList" resultMap="pm_rm">
+		SELECT ACTIVITY_NO, MEMBER_NO, ACTIVITY_IMG, ACTIVITY_CONTENT, 
+			   TO_CHAR(ACTIVITY_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') AS ACTIVITY_DATE
+		FROM "ACTIVITY_LOG"
+	</select>
 	
 </mapper>

@@ -27,7 +27,7 @@ import second.project.mungFriend.donation.model.dto.CardInfo;
 @RequestMapping("/billingkey")
 @PropertySource("classpath:/config.properties")
 public class BillingKeyController {
-
+  
 //	@Value("${iamport.imp.key}")
 //	private String key;
 //
