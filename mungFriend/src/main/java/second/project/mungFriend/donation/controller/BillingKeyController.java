@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,19 +29,20 @@ import second.project.mungFriend.donation.model.dto.CardInfo;
 @PropertySource("classpath:/config.properties")
 public class BillingKeyController {
   
-//	@Value("${iamport.imp.key}")
-//	private String key;
-//
-//	@Value("${iamport.imp.secret}")
-//	private String secret;
+	@Value("${iamport.imp.key}")
+	private String key;
 
-
+	@Value("${iamport.imp.secret}")
+	private String secret;
 	
-	 /** Iamport 결제 검증 컨트롤러 **/
+	
+    /** Iamport 결제 검증 컨트롤러 **/
+//    private final IamportClient iamportClient;
 //    private final IamportClient iamportClient = new IamportClient(key, secret);
     private final IamportClient iamportClient = new IamportClient("3671062186288787", "r6GTetsqPbnI0fLkQvIO2WHufe2vrOdzI8AbvaWINf6pFnph0tFDCkAxKxtRydIzK7Kenx9lHGdVxUy1");
     
     
+    /*빌링키 발급*/
     @PostMapping("/{customerUid}")
     public IamportResponse<BillingCustomer> postBillingCustomer(@PathVariable String customerUid ,
     															@RequestBody CardInfo cardData
@@ -54,11 +56,21 @@ public class BillingKeyController {
 														cardData.getBirth());
     	
     	bcd.setPg(cardData.getPg());
-//    	bcd.setPwd2Digit(cardData.getPwd2Digit());
+    	bcd.setPwd2Digit(cardData.getPwd2Digit());
     	
-    	System.out.println("정기결제 :" + bcd);
         return iamportClient.postBillingCustomer(customerUid, bcd);
     }
+    
+    /*빌링키 조회*/
+    @GetMapping("/{customerUid}")
+    public IamportResponse<BillingCustomer> getBillingCustomer(@PathVariable String customerUid) throws IOException, IamportResponseException {
+        return iamportClient.getBillingCustomer(customerUid);
+    }
+    
+    
+    
+    
+    
     
 //    @PostMapping("/{customerUid}")
 //    public IamportResponse<Payment> onetimePayment(/*OnetimePaymentData onetimeData*/) throws IamportResponseException, IOException {

@@ -19,7 +19,7 @@
 		, #{memberNo}
 		, #{inquiryTitle}
 		, #{inquiryContent}
-		, DEFAULT, DEFAULT, DEFAULT)
+		, DEFAULT, DEFAULT, DEFAULT, NULL)
 	</insert>
 	
 	<!-- inquiryList 조회하기 -->

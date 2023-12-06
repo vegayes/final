@@ -39,23 +39,16 @@
                 <textarea id="content" class="inputBox textareaBox" th:text="${inquiry.inquiryContent}" readonly></textarea>
 
                 <div class="fixedLabel">답변 내용</div>
-                <textarea id="response" class="inputBox textareaBox" readonly></textarea>
+                <textarea id="response" class="inputBox textareaBox" th:text=${inquiry.adminReply} readonly></textarea>
             </div>
+            
             
 			<!-- 삭제 버튼 -->
 			<form th:action="@{/mypage/member/deleteInquiry/{inquiryNo}(inquiryNo=${inquiry.inquiryNo})}" method="post">
 				<button type="submit" id="deleteReview">삭제하기</button>
 			</form>
 			
-			<script>
-				document.getElementById('deleteInquiryButton').addEventListener('click', function (event) {
-					var confirmDeletion = confirm('정말 문의 내용을 삭제하시겠습니까?');
-					if (!confirmDeletion) {
-						event.preventDefault();
-					}
-				});
-			</script>
-	
+		
 	<th:block th:replace="~{common/chatbot}"></th:block>
     <img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image">
     <a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>

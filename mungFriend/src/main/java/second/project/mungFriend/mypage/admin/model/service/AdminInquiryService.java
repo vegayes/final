@@ -17,6 +17,10 @@ public interface AdminInquiryService {
 	 * @return
 	 */
 	Inquiry adminInquiryDetail(int inquiryNo);
-    
 
+
+	int completeAnswer(int inquiryNo, String adminReply);
+
+
+	
 }

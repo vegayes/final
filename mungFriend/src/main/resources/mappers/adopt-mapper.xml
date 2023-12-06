@@ -43,6 +43,19 @@
 		<result property="imageOrder" column="IMG_ORDER"/>
 	</resultMap>
 	
+	<!-- Reservation resultMap -->
+	<resultMap type="Reservation" id="reserve_rm">
+		<id property="reserveNo" column="RESERVE_NO"/>
+		
+		<result property="dogNo" column="DOG_NO"/>
+		<result property="memberNo" column="MEMBER_NO"/>
+		<result property="reserveDate" column="RESERVE_DATE"/>
+		<result property="reserveTime" column="RESERVE_TIME"/>
+		<result property="reserveFl" column="RESERVE_YN"/>
+		<result property="applicationDate" column="APPLICATION_DATE"/>
+	</resultMap>
+
+
 	<!-- 삭제되지않은 강아지 수 조회 -->
 	<select id="getListCount" resultType="_int">
 		SELECT COUNT(*) FROM DOG
@@ -97,6 +110,12 @@
 		AND MEMBER_NO = #{memberNo}
 	</select>
 	
+	<!-- 예약여부 확인 -->
+	<select id="reserveCheck" resultType ="_int">
+		SELECT COUNT(*) FROM DOG_RESERVATION
+		WHERE MEMBER_NO = #{memberNo}
+		AND DOG_NO = #{dogNo}
+	</select>
 	
 	<!-- 좋아요 처리 -->
 	<!-- 좋아요 테이블 삽입 -->
@@ -250,6 +269,18 @@
 		WHERE DOG_NO = #{dogNo}
 	</update>
 	
+	
+	<!-- *****************강아지 예약하기****************** -->
+	
+
+	
+	<!-- 예약하기 -->
+	<insert id="dogReservation">
+		INSERT INTO DOG_RESERVATION
+		VALUES(SEQ_RESERVE_NO.NEXTVAL, 
+				#{dogNo}, #{memberNo}, #{reservationData.reserveDate}, #{reservationData.reserveTime}, 
+				DEFAULT, DEFAULT)
+	</insert>
 	
 
 

@@ -33,14 +33,14 @@ public class PmController {
 	}
 	
 	// 활동일지 화면 전환 
-	// 화면 전환 시 데이터를 가져와서 뿌려줌.
+	// 화면 전환 시 데이터를 가져와서 뿌려줌
 	@GetMapping("/activityLog")
 	public String activityLogPage(Model model, @RequestParam(value="cp", required = false, defaultValue = "1") int cp) {
 		
 		// 활동일지 조회하기(페이지네이션과 활동일지 목록을 가져와야 되기때문에 Map으로 받음 => admin 회원관리 참조)
 		Map<String, Object> map = service.selectPmList(cp);
 		
-		 System.out.println(map);
+		System.out.println(map);
 		
 		model.addAttribute("map", map);
 		

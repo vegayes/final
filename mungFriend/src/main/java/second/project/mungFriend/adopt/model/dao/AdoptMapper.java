@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
 import second.project.mungFriend.adopt.model.dto.Dog;
 import second.project.mungFriend.adopt.model.dto.DogImage;
+import second.project.mungFriend.adopt.model.dto.Reservation;
 
 @Mapper
 public interface AdoptMapper {
@@ -28,6 +30,9 @@ public interface AdoptMapper {
 	
 	// 좋아요 여부 확인
 	public int dogLikeCheck(Map<String, Object> map);
+	
+	// 강아지 예약여부 확인
+	public int reserveCheck(Map<String, Object> map);
 
 	// 좋아요 삽입
 	public int insertDogLike(Map<String, Integer> paraMap);
@@ -75,9 +80,14 @@ public interface AdoptMapper {
 	// 강아지 delete
 	public int dogDelete(Map<String, Object> map);
 
-//	*****************강아지 예약하기******************
+//	*****************강아지 예약******************
+
 	
-	public String dogReservation();
+	// 강아지 예약하기
+	public int dogReservation(
+			@Param("reservationData") Reservation reservationData, 
+			@Param("dogNo") int dogNo, 
+			@Param("memberNo") int memberNo);
 	
 	
 	
@@ -105,6 +115,10 @@ public interface AdoptMapper {
 	
 	// 강아지 검색결과 
 	public List<Dog> selectChatbotDogList(RowBounds rowBounds, String breedName);
+
+
+
+
 
 
 
