@@ -33,7 +33,7 @@ public class PmController {
 	}
 	
 	// 활동일지 화면 전환 
-	// 화면 전환 시 데이터를 가져와서 뿌려줌
+	// 화면 전환 시 데이터를 가져와서 뿌려줌.
 	@GetMapping("/activityLog")
 	public String activityLogPage(Model model, @RequestParam(value="cp", required = false, defaultValue = "1") int cp) {
 		
