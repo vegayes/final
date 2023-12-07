@@ -49,7 +49,24 @@
 	                    <div id="img-section">
 							<div id="img-sectionArea" th:each="pm : ${pmList}">
 		                        <div class="img1">
-		                            <img th:src="${pm.acitivityImg}" class="imgs" th:activityNo="${pm.activityNo}" th:onclick="onUpdateClick(this.getAttribute('activityNo'))" th:onmouseover="onMouseOver()">
+									
+									<!-- 관리자일 경우에만 수정화면 전환될 수 있도록 -->
+									<th:block th:if = "${session.loginMember != null}">
+										<th:block th:if="${session.loginMember.adminYn == 'Y'}">
+		                            		<img th:src="${pm.acitivityImg}" class="imgs" th:activityNo="${pm.activityNo}" th:onclick="onUpdateClick(this.getAttribute('activityNo'))" th:onmouseover="onMouseOver()">
+		                        		</th:block>
+		                        
+			                        	<!-- 일반회원일 경우 -->
+			                        	<th:block th:unless="${session.loginMember.adminYn == 'Y'}">
+			                        		<img th:src="${pm.acitivityImg}" class="imgs" th:onmouseover="onMouseOver()">
+			                        	</th:block>		
+									</th:block>
+								
+									<!-- 비회원일 경우 -->
+									<th:block th:unless = "${session.loginMember != null}">
+										<img th:src="${pm.acitivityImg}" class="imgs" th:onmouseover="onMouseOver()">	
+									</th:block>
+		                        
 		                        </div>
 		                        <div th:text="${pm.activityContent}" style="display: none;">활동일지 내용</div>
 		                        <div class="heart1">
@@ -64,7 +81,7 @@
 									<th:block th:if="${session.loginMember}">
 			                            <th:block th:if="${session.loginMember.adminYn == 'Y'}">
 				                            <div id="xBtn-sec">
-				                            	<button type="button" id="x-btn">X</button>
+				                            	<button type="button" id="x-btn" th:activityNo="${pm.activityNo}" th:onclick="onDeleteClick(this.getAttribute('activityNo'))">X</button>
 				                        	</div>
 			                        	</th:block>
 		                        	</th:block>

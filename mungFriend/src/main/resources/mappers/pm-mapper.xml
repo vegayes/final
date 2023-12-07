@@ -31,4 +31,29 @@
 		ORDER BY ACTIVITY_NO DESC
 	</select>
 	
+	<!-- 활동일지 상세 조회하기 -->
+	<select id="activityLogSelectDetail" resultMap="pm_rm">
+		SELECT ACTIVITY_NO, MEMBER_NO, ACTIVITY_IMG, ACTIVITY_CONTENT, 
+			   TO_CHAR(ACTIVITY_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') AS ACTIVITY_DATE
+		FROM ACTIVITY_LOG
+		WHERE ACTIVITY_NO = #{activityNo}
+	</select>
+	
+	<!-- 활동일지 수정하기 -->
+	<update id="activityLogUpdate">
+		UPDATE ACTIVITY_LOG SET
+	    MEMBER_NO = #{memberNo},
+	    ACTIVITY_CONTENT = #{activityContent},
+	    ACTIVITY_DATE = SYSDATE
+	    <if test="acitivityImg != null and acitivityImg != ''">
+	        ,ACTIVITY_IMG = #{acitivityImg}
+	    </if>
+	    WHERE ACTIVITY_NO = #{activityNo}
+	</update>
+	
+	<!-- 활동일지 삭제하기 -->
+	<delete id="activityLogDelete">
+		DELETE FROM ACTIVITY_LOG WHERE ACTIVITY_NO = #{activityNo}
+	</delete>
+	
 </mapper>

@@ -122,6 +122,72 @@ public class PmServiceImpl implements PmService{
 		
 		return map;
 	}
+
+	// 활동일지 상세 조회하기
+	@Override
+	public Pm activityLogSelectDetail(int activityNo) {
+		return mapper.activityLogSelectDetail(activityNo);
+	}
+
+	// 활동일지 수정하기
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int activityLogUpdate(MultipartFile updateImage, Pm pm) throws Exception {
+		
+		// System.out.println("수정하기 들어옴?" );
+		
+		// 활동사진 이미지 변경 실패 대비
+		String temp = pm.getAcitivityImg(); // 기존에 가지고 있던 이전 이미지 저장
+		
+		String rename = null; // 변경 이름 저장 변수
+		
+		if(updateImage.getSize() > 0) { // 수정된 이미지가 있을 경우
+			
+			// 1) 파일 이름 변경
+			rename = Util.fileRename(updateImage.getOriginalFilename());
+			
+			System.out.println("수정 Img : " + webPath + rename);
+			// 2) 바뀐 이미지 이름 setting
+			pm.setAcitivityImg(webPath + rename);
+			
+			
+			
+		} else { // 수정된 이미지가 없는 경우 (이미지 삭제 버튼)
+			
+			pm.setAcitivityImg(null);
+			
+		}
+		
+		System.out.println("수정 전 pm  : " + pm);
+		
+		// 활동사진 수정 mapper 메서드 호출
+		int result = mapper.activityLogUpdate(pm);
+		
+		if(result > 0) { // DB에 이미지 경로 업데이트 성공했다면
+			
+			// 업로드된 새 이미지가 있을 경우
+			if(rename != null) {
+				
+				// 메모리에 임시 저장되어있는 파일을 서버에 진짜로 저장하는 것
+				updateImage.transferTo(new File(filePath + rename));
+				pm.setAcitivityImg(webPath + rename);
+			}
+			
+		} else {
+			
+			// 이전 이미지로 다시 세팅
+			pm.setAcitivityImg(temp);
+			
+		}
+		
+		return result;
+	}
+
+	// 활동일지 삭제하기
+	@Override
+	public int activityLogDelete(int activityNo) {
+		return mapper.activityLogDelete(activityNo);
+	}
 	
 
 }

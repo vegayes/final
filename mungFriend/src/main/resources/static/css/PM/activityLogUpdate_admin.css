@@ -85,7 +85,7 @@ body > section {
     flex-basis: 90%;
 }
 
-#register-form {
+#update-form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -207,24 +207,39 @@ body > section {
     margin: 10px 0px;
 }
 
-/* 등록하기 영역 */
-#register-section {
+/* 수정하기 및 목록으로 영역 */
+#btn-section {
     flex-basis: 10%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#register-btn {
+#update-btn {
     width: 130px;
     height: 40px;
     background-color: #FEE4D6;
     font-weight: bold;
     border: none;
+    border-radius: 5px;
 }
 
-#register-btn:hover {
+#update-btn:hover {
     cursor: pointer;
+}
+
+#list-btn {
+	width: 130px;
+    height: 40px;
+    background-color: #FEE4D6;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    margin-left: 50px;
+}
+
+#list-btn {
+	cursor: pointer;
 }
 
 /* 오른쪽 여백 */
