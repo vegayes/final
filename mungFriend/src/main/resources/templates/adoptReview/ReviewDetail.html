@@ -12,12 +12,16 @@
 	<th:block th:replace="~{common/header}"></th:block>
      
     
-    <main>
+    <main>  
 
-        <div class="mainContainer">
-            <div>입양후기</div>
-            <div>안락사 없는 동물보호소 멍프랜드에서 행복한 입양 후기를 남겨주세요~</div>
+
+        <div class="titleSection">
+			<div>입양후기</div>
+	        <div>안락사 없는 동물보호소 멍프랜드에서 행복한 입양 후기를 남겨주세요~</div>
+		</div>
     
+        <div class="mainContainer">
+            
             <div>입양리뷰 인증게시판</div> 
             <span style="text-align: end;" th:text="|조회수 : ${review.reviewCount} |">조회수</span>
     
@@ -89,10 +93,12 @@
                                 <button th:onclick="|showInsertComment(${comment.commentNo}, this)|">답글</button> 
                             </th:block>    
                            
+                            <th:block th:if="${session.loginMember?.memberNo == comment.memberNo}"> 
+                                <button th:onclick="|showUpdateComment(${comment.commentNo}, this)|">수정</button>
+                            </th:block> 
 
                             <th:block th:if="${session.loginMember?.memberNo == comment.memberNo or session.loginMember?.adminYn == 'Y'}">  
-                                
-                                <button th:onclick="|showUpdateComment(${comment.commentNo}, this)|">수정</button>	
+                                   	
                                 <button th:onclick="|deleteComment(${comment.commentNo})|">삭제</button>
                         
                             </th:block> 
@@ -126,8 +132,12 @@
 
         <section class="buttons">
 
-            <th:block th:if="${session.loginMember?.memberNo == review.memberNo or session.loginMember?.adminYn == 'Y'}">
+            <th:block th:if="${session.loginMember?.memberNo == review.memberNo}"> 
                 <button id="updateReview"><a th:href="@{/adoptReview/updateReview/{reviewNo} (reviewNo = ${review.reviewNo}, cp=${cp})}">수정하기</a></button>
+            </th:block> 
+
+            <th:block th:if="${session.loginMember?.memberNo == review.memberNo or session.loginMember?.adminYn == 'Y'}">
+               
                 <button id="deleteReview" th:onclick="|deleteConfirm(${review.reviewNo},${cp})|">삭제하기</button>
             </th:block>
 
