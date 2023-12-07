@@ -29,11 +29,11 @@ import second.project.mungFriend.donation.model.dto.CardInfo;
 @PropertySource("classpath:/config.properties")
 public class BillingKeyController {
   
-	@Value("${iamport.imp.key}")
-	private String key;
-
-	@Value("${iamport.imp.secret}")
-	private String secret;
+//	@Value("${iamport.imp.key}")
+//	private String key;
+//
+//	@Value("${iamport.imp.secret}")
+//	private String secret;
 	
 	
     /** Iamport 결제 검증 컨트롤러 **/
