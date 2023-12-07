@@ -27,4 +27,8 @@ public class Reservation {
 	private String applicationDate;
 	
 	
+	private String dogName;
+	private String memberName;
+	private String memberEmail;
+	
 }

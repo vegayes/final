@@ -342,9 +342,6 @@ public class AdoptController {
 		
 	}	
 	
-	// 예약조회
-	
-	
 
 
 }
