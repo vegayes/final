@@ -317,3 +317,8 @@ a:hover{
 #donate-image {
     bottom: 70px;
 }
+
+
+.submenu a.underline {
+    text-decoration: underline;
+}
