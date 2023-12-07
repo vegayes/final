@@ -1,8 +1,12 @@
 package second.project.mungFriend.mypage.admin.model.service;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import second.project.mungFriend.member.model.dto.Member;
 import second.project.mungFriend.mypage.admin.model.dao.AdminInquiryMapper;
+import second.project.mungFriend.mypage.admin.model.dto.Pagination;
 import second.project.mungFriend.mypage.member.model.dto.Inquiry;
 
 import java.util.HashMap;
@@ -41,5 +45,15 @@ public class AdminInquiryServiceImpl implements AdminInquiryService {
 		return mapper.completeAnswer(map);
 	}
 
+
+
+	@Override
+	public List<Inquiry> searchInquiries(String keyword) {
+		 return mapper.searchInquiries(keyword);
+	}
+
+
+
+	
 
 }

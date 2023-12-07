@@ -33,7 +33,6 @@ public class BillingKeyController {
 //	@Value("${iamport.imp.secret}")
 //	private String secret;
 	
-	
     /** Iamport 결제 검증 컨트롤러 **/
 //	 private final IamportClient iamportClient;
     //private final IamportClient iamportClient = new IamportClient(key, secret);

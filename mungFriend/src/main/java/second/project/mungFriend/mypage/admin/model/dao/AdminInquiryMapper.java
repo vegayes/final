@@ -24,6 +24,15 @@ public interface AdminInquiryMapper {
 
 
 	int completeAnswer(Map<String, Object> map);
+
+
+
+    /**
+     * 검색
+     * @param keyword
+     * @return
+     */
+	List<Inquiry> searchInquiries(String keyword);
 	
 	
 	
