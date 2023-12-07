@@ -161,7 +161,7 @@ public class AdoptController {
 			Dog dog,
 			@RequestParam(value="images", required = false) List<MultipartFile> images, 
 			@RequestParam(value="admFile", required = false) String admFile, 
-			@RequestParam(value="admNo", required = false) int admNo, 
+			@RequestParam(value="admNo", required = false, defaultValue= "0") int admNo, 
 			@SessionAttribute("loginMember") Member loginMember,
 			RedirectAttributes ra) throws IllegalStateException, IOException {
 
@@ -200,9 +200,9 @@ public class AdoptController {
 		String message = null;
 		String path = "redirect:";
 		
-		if(dogNo > 0) {
+		if(dogNo != 0) {
 			
-			if(admNo >0) {
+			if(admNo > 0) {
 				System.out.println("adm에서 가져온 값인경우 성공");
 				int updateAdm = admService.updateAdm(admNo);
 				
@@ -341,9 +341,6 @@ public class AdoptController {
 		return response;
 		
 	}	
-	
-	// 예약조회
-	
 	
 
 

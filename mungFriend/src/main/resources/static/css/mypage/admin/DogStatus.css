@@ -41,7 +41,7 @@ hr{
 .adminIntroTitle{
     padding-left: 3%;
     padding-top : 10%;
-    padding-bottom: 1.2%;
+   
 
     font-size: 20px;
     font-weight: 700;
@@ -110,9 +110,7 @@ a:hover{
     /* border : 2px solid pink; */
 }
 
-.adminIntroArea  > hr {
-    margin-bottom: 50px;
-} 
+
 
 /*nav바 13% 위치*/
 .adminContentContainer{
@@ -146,4 +144,8 @@ a:hover{
 
 .submenu.active {
     display: block;
+}
+
+.submenu a.underline {
+    text-decoration: underline;
 }

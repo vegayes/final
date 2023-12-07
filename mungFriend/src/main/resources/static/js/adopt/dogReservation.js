@@ -3,10 +3,10 @@
 function showCalendar() {
 
     // 로그인 여부 검사
-    // if(loginMemberNo == ""){
-    //     alert("로그인 후 이용해주세요")
-    //     return;
-    // }
+    if(loginMemberNo == ""){
+        alert("로그인 후 이용해주세요")
+        return;
+    }
 
     // 예약하기 버튼 숨기기
     const registButton = document.getElementById('regist');

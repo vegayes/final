@@ -10,13 +10,12 @@
     <script th:src="@{https://kit.fontawesome.com/f821b57119.js}" crossorigin="anonymous"></script>
 </head>
 <body>
-    <main th:with="pagination=${map.pagination}, pmList=${map.pmList}">
     <section>
         <!-- 헤더 -->
         <th:block th:replace="~{common/header}"></th:block>
 
         <!-- 내용 -->
-        <div id="content">
+        <div id="content" th:with="pagination=${map.pagination}, pmList=${map.pmList}">
             <!-- 왼쪽 여백 -->
             <div id="left-gap"></div>
 
@@ -35,78 +34,64 @@
                 <!-- 내용 영역 -->
                 <div id="cont-section">
                     <div id="leftMove-section">
-                        <button class="fa-solid fa-chevron-left" style="color: #6b6b6b;" id="leftMove-btn"></button>
+                        <a th:href="@{/pm/activityLog(cp=${pagination.prevPage})}"><button class="fa-solid fa-chevron-left" style="color: #6b6b6b;" id="leftMove-btn"></button></a>
                     </div>
                     
-                    <!-- 활동일지 내역이 없을 경우 -->
-					<th:block th:if="${#lists.size(pmList) == 0}">
-						<div>활동일지 내역이 존재하지 않습니다.</div>
+                    <!-- 활동일지 내역 없을 경우-->
+                    <th:block th:if="${#lists.size(pmList) == 0}">
+	                    <div id="img-section">
+							활동일지 내역이 존재하지 않습니다.
+						</div>
 					</th:block>
-					
-					<!-- 활동일지 내역이 있을 경우 -->
-                    <th:block th:unless="${#lists.size(pmList) == 0}">	
-						<th:block th:each="pmList, pm : ${pmList}">	
-			                <div id="one">
+                    
+                    <!-- 활동일지 내역 있을 경우 -->
+                    <th:block th:unless="${#lists.size(pmList) == 0}">
+	                    <div id="img-section">
+							<div id="img-sectionArea" th:each="pm : ${pmList}">
 		                        <div class="img1">
-		                            <img th:src="@{/images/PM/activityLog/1.png}" class="imgs">
+									
+									<!-- 관리자일 경우에만 수정화면 전환될 수 있도록 -->
+									<th:block th:if = "${session.loginMember != null}">
+										<th:block th:if="${session.loginMember.adminYn == 'Y'}">
+		                            		<img th:src="${pm.acitivityImg}" class="imgs" th:activityNo="${pm.activityNo}" th:onclick="onUpdateClick(this.getAttribute('activityNo'))" th:onmouseover="onMouseOver()">
+		                        		</th:block>
+		                        
+			                        	<!-- 일반회원일 경우 -->
+			                        	<th:block th:unless="${session.loginMember.adminYn == 'Y'}">
+			                        		<img th:src="${pm.acitivityImg}" class="imgs" th:onmouseover="onMouseOver()">
+			                        	</th:block>		
+									</th:block>
+								
+									<!-- 비회원일 경우 -->
+									<th:block th:unless = "${session.loginMember != null}">
+										<img th:src="${pm.acitivityImg}" class="imgs" th:onmouseover="onMouseOver()">	
+									</th:block>
+		                        
 		                        </div>
+		                        <div th:text="${pm.activityContent}" style="display: none;">활동일지 내용</div>
 		                        <div class="heart1">
-		                            <button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn"></button>
+									<div id="heart-sec">
+		                            	<button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn"></button>
+		                            </div>
+		                            
+									<!-- session.loginMember가 null 일 경우 -->
+									<th:block th:if="${session.loginMember == null}"></th:block>
+									
+									<!-- session.loginMember가 null 이 아닐 경우 -->
+									<th:block th:if="${session.loginMember}">
+			                            <th:block th:if="${session.loginMember.adminYn == 'Y'}">
+				                            <div id="xBtn-sec">
+				                            	<button type="button" id="x-btn" th:activityNo="${pm.activityNo}" th:onclick="onDeleteClick(this.getAttribute('activityNo'))">X</button>
+				                        	</div>
+			                        	</th:block>
+		                        	</th:block>
 		                        </div>
-		                        <div class="img2">
-		                            <img th:src="@{/images/PM/activityLog/5.png}" class="imgs">
-		                        </div>
-		                        <div class="heart2">
-		                            <button class="fa-solid fa-heart" style="color: #f55c91;" id="fullHeart-btn"></button>
-		                        </div>
-		                    </div>
-		                    <div id="two">
-		                        <div class="img1">
-		                            <img th:src="@{/images/PM/activityLog/2.png}" class="imgs">
-		                        </div>
-		                        <div class="heart1">
-		                            <button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn"></button>
-		                        </div>
-		                        <div class="img2">
-		                            <img th:src="@{/images/PM/activityLog/6.png}" class="imgs">
-		                        </div>
-		                        <div class="heart2">
-		                            <button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn"></button>
-		                        </div>
-		                    </div>
-		                    <div id="three">
-		                        <div class="img1">
-		                            <img th:src="@{/images/PM/activityLog/3.png}" class="imgs">
-		                        </div>
-		                        <div class="heart1">
-		                            <button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn"></button>
-		                        </div>
-		                        <div class="img2">
-		                            <img th:src="@{/images/PM/activityLog/7.png}" class="imgs">
-		                        </div>
-		                        <div class="heart2">
-		                            <button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn"></button>
-		                        </div> 
-		                    </div>
-		                    <div id="four">
-		                        <div class="img1">
-		                            <img th:src="@{/images/PM/activityLog/4.png}" class="imgs">
-		                        </div>
-		                        <div class="heart1">
-		                            <button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn"></button>
-		                        </div>
-		                        <div class="img2">
-		                            <img th:src="@{/images/PM/activityLog/8.png}" class="imgs">
-		                        </div>
-		                        <div class="heart2">
-		                            <button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn"></button>
-		                        </div> 
-		                    </div>
-						</th:block> 
-					</th:block>     
+	                        </div>
+	                    </div>
+                    </th:block>
                     
                     <div id="rightMove-section">
-                        <button class="fa-solid fa-chevron-right" style="color: #6b6b6b;" id="leftMove-btn"></button>
+                        <a th:href="@{/pm/activityLog(cp=${pagination.nextPage})}"><button class="fa-solid fa-chevron-right" style="color: #6b6b6b;" id="leftMove-btn"></button></a>
                     </div>
                 </div>
 
@@ -124,12 +109,13 @@
                 </div>
             </div>
 
+            <!-- 오른쪽 여백 -->
+            <div id="right-gap">
+                <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
+                <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+            </div>
         </div>
 
-        <th:block th:replace="~{common/chatbot}"></th:block>
-        <img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image">
-        <a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
-        
         <!-- 풋터 -->
         <th:block th:replace="~{common/footer}"></th:block>
     </section>

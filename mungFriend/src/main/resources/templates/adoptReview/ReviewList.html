@@ -15,10 +15,15 @@
 
 	<main th:with="pagination=${map.pagination}, reviewList=${map.reviewList}" >
 
-	    <div class="mainContainer">
-	        <div>입양후기</div>
+		
+		<div class="titleContainer">
+			<div>입양후기</div>
 	        <div>안락사 없는 동물보호소 멍프랜드에서 행복한 입양 후기를 남겨주세요~</div>
-	
+		</div>
+	        
+
+		<div class="mainContainer">
+			
 	        <div>입양리뷰 인증게시판</div> 
 	
 	       
@@ -98,7 +103,7 @@
 	
 	
 			<!-- 검색창 -->
-	        <div style="margin-top: 200px;"> 
+	        <div style="margin-top: 100px;"> 
 				<button th:if="${session.loginMember}"  id="writeReview"><a th:href="@{/adoptReview/reviewInsert}">글쓰기</a></button>
 				<form th:action="@{/adoptReview/reviewList/1}" method="get" id="searchContainer">
 					<select name="searchType" id="searchType">

@@ -1,9 +1,7 @@
 package second.project.mungFriend.donation.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +18,7 @@ import com.siot.IamportRestClient.response.IamportResponse;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import second.project.mungFriend.donation.model.dto.CardInfo;
+import second.project.mungFriend.donation.model.dto.RegularCardInfo;
 
 @Slf4j
 @RestController
@@ -34,21 +32,22 @@ public class BillingKeyController {
 //
 //	@Value("${iamport.imp.secret}")
 //	private String secret;
-//	
 	
     /** Iamport 결제 검증 컨트롤러 **/
-//    private final IamportClient iamportClient;
-//    private final IamportClient iamportClient = new IamportClient(key, secret);
+//	 private final IamportClient iamportClient;
+    //private final IamportClient iamportClient = new IamportClient(key, secret);
     private final IamportClient iamportClient = new IamportClient("3671062186288787", "r6GTetsqPbnI0fLkQvIO2WHufe2vrOdzI8AbvaWINf6pFnph0tFDCkAxKxtRydIzK7Kenx9lHGdVxUy1");
     
+//    public BillingKeyController() {
+//        this.iamportClient = new IamportClient(key, secret);
+//    }
     
     /*빌링키 발급*/
     @PostMapping("/{customerUid}")
     public IamportResponse<BillingCustomer> postBillingCustomer(@PathVariable String customerUid ,
-    															@RequestBody CardInfo cardData
+    															@RequestBody RegularCardInfo cardData
     															/*, BillingCustomerData billingData*/) throws IOException, IamportResponseException {
-    	
-    	System.out.println("cardInfo:" + cardData);
+    	    	
     	
     	BillingCustomerData bcd = new BillingCustomerData(cardData.getCustomer_uid(),
 														cardData.getCardNumber(),
@@ -66,10 +65,6 @@ public class BillingKeyController {
     public IamportResponse<BillingCustomer> getBillingCustomer(@PathVariable String customerUid) throws IOException, IamportResponseException {
         return iamportClient.getBillingCustomer(customerUid);
     }
-    
-    
-    
-    
     
     
 //    @PostMapping("/{customerUid}")

@@ -23,4 +23,23 @@ public interface PmService {
 	 */
 	Map<String, Object> selectPmList(int cp);
 
+	/** 활동일지 상세 조회하기
+	 * @param activityNo
+	 * @return pm
+	 */
+	Pm activityLogSelectDetail(int activityNo);
+
+	/** 활동일지 수정하기
+	 * @param updateImage
+	 * @param pm
+	 * @return int
+	 */
+	int activityLogUpdate(MultipartFile updateImage, Pm pm) throws Exception;
+
+	/** 활동일지 삭제하기
+	 * @param activityNo
+	 * @return int
+	 */
+	int activityLogDelete(int activityNo);
+
 }

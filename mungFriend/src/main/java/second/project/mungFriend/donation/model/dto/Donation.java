@@ -34,5 +34,5 @@ public class Donation {
 	private String receiptUrl; // 영수증
 	private String status; // 결제 승인 상태
 	private String billingKey; // 빌링키 
-	
+		
 }
