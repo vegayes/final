@@ -92,6 +92,8 @@ function paymentInfoCheck(){
 		        amount: parseInt(donationAmount.value), // 문자열을 숫자로 변환하여 저장	  
 		        buyer_name : donationName,
 		        buyer_email : donationEmail,
+		        notice_url : 'https://portone-webhook',//웹훅수신 URL 설정(예: /portone-webhook)
+
 		};
 		
 	if(donationType.value === '일시'){
