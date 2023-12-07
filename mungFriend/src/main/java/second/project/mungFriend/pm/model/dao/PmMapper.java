@@ -28,4 +28,22 @@ public interface PmMapper {
 	 */
 	List<Pm> selectPmList(RowBounds rowBounds);
 
+	/** 활동일지 상세 조회하기
+	 * @param activityNo
+	 * @return pm
+	 */
+	Pm activityLogSelectDetail(int activityNo);
+
+	/** 활동일지 수정하기
+	 * @param pm
+	 * @return int
+	 */
+	int activityLogUpdate(Pm pm);
+
+	/** 활동일지 삭제하기
+	 * @param activityNo
+	 * @return int
+	 */
+	int activityLogDelete(int activityNo);
+
 }

@@ -1,7 +1,16 @@
 // --------------------- 활동일지 등록하기 유효성 검사 ---------------------
 
-// 등록하기 form 태그가 제출 되었을 때
-document.getElementById("register-form").addEventListener("submit", e => {
+// 원본 활동 내용 저장
+const originalContent = document.getElementById("textarea").value;
+let contentChanged = false; // 내용 변경 여부를 나타내는 플래그
+
+// 활동 내용 변경 감지
+document.getElementById("textarea").addEventListener("input", function() {
+    contentChanged = (this.value !== originalContent);
+});
+
+// 수정하기 form 태그가 제출 되었을 때
+document.getElementById("update-form").addEventListener("submit", e => {
 	
 	// **** 사진은 not null이고, 내용은 null 이라서 사진 업로드 했는지만 체크 ****
 	
@@ -22,11 +31,19 @@ document.getElementById("register-form").addEventListener("submit", e => {
 	if(initCheck && deleteCheck == 1) flag = false;
 	
 	// 이전 이미지가 있으면서, 이미지 삭제 버튼을 눌렀다 -> 삭제
-	if(initCheck && deleteCheck == 0) flag = false;
+	if(initCheck && deleteCheck == 0) {
+		flag = false;
+		alert("이미지 삭제 후 수정이 불가합니다");
+		e.preventDefault();
+		return;
+	}
+	
+	if (contentChanged) flag = false; // 내용 변경 감지 시 flag 변경
 	
 	if(flag) { // flag == true -> 제출하면 안되는 경우
 		e.preventDefault(); // form 기본 이벤트 제거
-		alert("활동사진 업로드 후 버튼을 클릭해주세요");
+		alert("활동일지 수정 후 버튼을 클릭해주세요");
+		return;
 	}
 	
 	return true;

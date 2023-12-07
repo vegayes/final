@@ -11,9 +11,9 @@
     font-family: 'Nanum Gothic', sans-serif;
 }
 
-/* section, div {
+section, div {
     border: 1px solid black;
-} */
+}
 
 body {
     margin: 0px;
@@ -48,7 +48,7 @@ body > section {
     flex-basis: 60%;
     display: flex;
     flex-direction: column;
-    padding: 90px 150px;
+    padding: 120px 150px;
     padding-bottom: 190px;
 }
 
@@ -84,6 +84,7 @@ body > section {
 #cont-section {
     flex-basis: 90%;
     display: flex;
+    margin-top: 30px;
 }
 
 #leftMove-section {
@@ -104,13 +105,20 @@ body > section {
     cursor: pointer;
 }
 
-#one, #two, #three, #four {
-    flex-basis: 20%;
+#img-section {
+    flex-basis: 80%;
+    height : 410px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#img-sectionArea {
+    flex-basis: calc(100%/4);
     display: flex;
     flex-direction: column;
 }
 
-.img1, .img2 {
+.img1 {
     flex-basis: 30%;
 }
 
@@ -124,15 +132,36 @@ body > section {
     filter: brightness(40%); /* 이미지의 밝기 감소 */
 }
 
-.heart1, .heart2 {
+.heart1 {
     flex-basis: 20%;
     padding-bottom: 20px;
+    display: flex;
+}
+
+#heart-sec {
+	flex-basis: 10%;
+}
+
+#xBtn-sec {
+	flex-basis: 90%;
 }
 
 #emptyHeart-btn {
     border: none;
     background-color: white;
     font-size: 20px;
+}
+
+#x-btn {
+	border: none;
+	font-size: 15px;
+	font-weight: bold;
+	background-color: transparent;
+	margin-left: 120px;
+}
+
+#x-btn:hover {
+	cursor: pointer;
 }
 
 #fullHeart-btn {
