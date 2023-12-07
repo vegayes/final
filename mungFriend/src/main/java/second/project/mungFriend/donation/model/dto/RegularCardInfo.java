@@ -9,9 +9,8 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class CardInfo {
-
-	// 결제 
+public class RegularCardInfo {
+	// 빌링키 얻어오기
 	private String pg;
 	private String customer_uid;  
 	private String cardNumber; 
@@ -19,4 +18,11 @@ public class CardInfo {
 	private String birth; 
 	private String pwd2Digit; 
 	
+	// 정기결제 
+	private String pay_method;
+	private String merchantUid;
+	private String name;
+	private int amount;
+	private String buyer_name;
+	private String buyer_email;
 }

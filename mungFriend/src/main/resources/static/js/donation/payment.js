@@ -86,7 +86,7 @@ function paymentInfoCheck(){
 	    var paymentData = {
 	            pg: "html5_inicis",		//KG이니시스 pg파라미터 값
 	            pay_method: "card",		//결제 방법
-	            merchant_uid: "donation_" + new Date().getTime(),//주문번호 전달
+	            merchantUid: "donation_" + new Date().getTime(),//주문번호 전달
 		        // 라디오 버튼에서 선택한 값을 결제 정보에 추가
 		        name: '멍프랜드 ' + (donationType.value === '일시' ? '일시 후원' : '정기 후원'),
 		        amount: parseInt(donationAmount.value), // 문자열을 숫자로 변환하여 저장	  
@@ -97,80 +97,95 @@ function paymentInfoCheck(){
 	if(donationType.value === '일시'){
 		requestPay(paymentData);
 	}else if(donationType.value === '정기'){
-		console.log("정기는 카드 번호 입력해야함");
 
-		var codeHH = billingKeyCreate();
+		var cardInfo; 
 
-		console.log("codeHH" + JSON.stringify(codeHH));
+		// 1) 모달창 열기
+		openCardInfo(paymentData.amount); 
 
+		// 2) 제출 버튼 누르면 유효성 검사 후에 값 받아오기
+		var regularBtn = document.getElementById("regularBtn");
 
-		customer_uid = 'CUSTOMER_UID' + loginMember.memberNo;
+		regularBtn.addEventListener("click", function() {
+			cardInfo = regularCardInfoCheck();
 
-		
+			if(cardInfo  !== undefined){
+				console.log("하이");
 
-
-		var cardData = {
-			pg : 'html5_inicis',
-			customer_uid : customer_uid,
-			cardNumber : "5107-3792-7333-9589",
-			cardExpiry : "2028-08",
-			birth : "010328",
-			pwd2Digit : "65",
-		}
-
-		
-		
-
-		
+				var billing = billingKeyCreate(cardInfo,loginMember.memberNo);
 
 
-		console.log(JSON.stringify(cardData));
+				console.log("billing : " + JSON.stringify(billing));
+
+				// 결제검증
+				fetch('/billingkey/' + billing.customer_uid, {
+					method:"POST",
+					body: JSON.stringify(billing),
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+				.then(function(rsp) {
+					return rsp.json();
+				})
+				.then(function(data) {
+					console.log("정기결제 빌링키 발급 들어옴??????");
 					
-		// 결제검증
-		fetch('/billingkey/' + customer_uid, {
-			method:"POST",
-			body: JSON.stringify(cardData),
-			headers: {
-				"Content-Type": "application/json"
+					if(data.code == 0){
+						// 빌링키 발급 조회
+						billingKeyCheck(data.response.customerUid)
+						.then(function(billingCode) {
+							console.log("빌링키 조회  : " + billingCode);
+					
+							if(billingCode === 0){
+								console.log("빌링키 조회 성공! ");
+
+								// 정기결제 고유 번호 (식별 : 날짜 + 회원번호)
+								var newMerchant = "donation_regular_" + new Date().getTime() + "_" + loginMember.memberNo + "1"//주문번호 전달
+
+								paymentData.merchantUid = newMerchant;
+								paymentData.customer_uid = billing.customer_uid;
+								paymentData.cardNumber = billing.cardNumber;
+								paymentData.cardExpiry = billing.cardExpiry;
+								paymentData.birth = billing.birth;
+								paymentData.pwd2Digit = billing.pwd2Digit;
+	
+
+								// 1회 결제
+								regularOnePay(paymentData, donationContent, donationType);
+								
+							}
+						})
+						.catch(function(error) {
+							console.error("빌링키 조회 중 에러 발생:", error);
+							// 에러 처리
+						});
+
+					}else if (data.code == -1){
+						alert("카드정보가 불일치 합니다. 다시 정보를 기입해주세요!");
+					}
+				})
+				.catch(function(error) {
+					alert("결제에 실패하였습니다.", "에러 내용: " + error, "error");
+				});
+
+
+
+
+
+
+	
+			}else{
+				//alert("카드 정보를 정확하게 작성해주세요!");
+				console.log("카드 정보를 정확하게 작성해주세요!");
 			}
 		})
-		.then(function(response) {
-			return response.json();
-		})
-		.then(function(data) {
-				console.log("들어옴");
-				console.log(data);
-		})
-		.catch(function(error) {
-			alert("결제에 실패하였습니다.", "에러 내용: " + error, "error");
-		});
-
-
+	
 	}else {
 		console.log("뭔가 잘못됨.");
 	}
 	
-	
-	
 }
-
-
-// 빌링키 발급 진행
-function billingKeyCreate(){
-
-	var hh = {
-		pg : 'html5_inicis',
-		cardNumber : "5107-3792-7333-9589",
-		cardExpiry : "2028-08",
-		birth : "010328",
-		pwd2Digit : "65",
-	}
-
-	return hh;
-}
-
-
-
 
 
 
@@ -188,16 +203,17 @@ function requestPay(paymentData) {
 					
 					console.log("결제 성공 후 imp_uid 값 : " + rsp.imp_uid);
 					
-					fetch('/verifyIamport/' + rsp.imp_uid, {
+					fetch('/payment/' + rsp.imp_uid, {
 					    method: 'POST'
 					})
 					.then(function(response) {
 					    return response.json();
 					})
 					.then(function(data) {
+
+						console.log(data);
 							
 			            var donation = {
-							
 	                        impUid: data.response.impUid,
 	                        applyNum :data.response.applyNum,
 	                        merchantUid: data.response.merchantUid,
@@ -205,7 +221,6 @@ function requestPay(paymentData) {
 	                        paidAt: data.response.paidAt,
 	                        receiptUrl : data.response.receiptUrl,
 	                        status : data.response.status,
-							//billingKey : rsp.customer_uid
 	
 							memberName : data.response.buyerName,
 							memberEmail : data.response.buyerEmail,
@@ -213,39 +228,42 @@ function requestPay(paymentData) {
 	                        donationContent : donationContent.value,
 							donationType : donationType.value,
 							donationAmount : data.response.amount,
-							
 			            };
-				
+
+						console.log("값 :" + donation);
 						
-			            // 컨트롤러에 데이터를 전달하여 DB에 입력하는 로직
-			            fetch("/donation/donationPay", {
-			                method: "POST",
-			                body: JSON.stringify(donation),
-			                headers: {
-			                    "Content-Type": "application/json"
-			                }
-			            })
-			            .then(response => response.text())
-			            .then(result => {
-			                if (result === "y") {
-								console.log("안녕 나 결제 DB 성공하고 들어옴.")
+						// DB에 값 전달
+						paymentDBInput(donation);
+						
+			            // // 컨트롤러에 데이터를 전달하여 DB에 입력하는 로직
+			            // fetch("/donation/donationPay", {
+			            //     method: "POST",
+			            //     body: JSON.stringify(donation),
+			            //     headers: {
+			            //         "Content-Type": "application/json"
+			            //     }
+			            // })
+			            // .then(response => response.text())
+			            // .then(result => {
+			            //     if (result === "y") {
+						// 		console.log("안녕 나 결제 DB 성공하고 들어옴.")
 			                
-			                    if(loginMember != null){
-									console.log("넘어갈거임.")
-									location.href = '/mypage/member/donationList';
-									 // 로그인되면 후원 내역으로 넘어가기
-									 return; 
-								}
-			                    location.href = '/';
+			            //         if(loginMember != null){
+						// 			console.log("넘어갈거임.")
+						// 			location.href = '/mypage/member/donationList';
+						// 			 // 로그인되면 후원 내역으로 넘어가기
+						// 			 return; 
+						// 		}
+			            //         location.href = '/';
 			                   
-			                } else {
-			                    alert("DB 후원 정보 입력 실패");
-			                    return false;
-			                }
-			            })
-			            .catch(function(error) {
-					    	alert("오류가 발생하였습니다.", "에러 내용: " + error, "error");
-						});				
+			            //     } else {
+			            //         alert("DB 후원 정보 입력 실패");
+			            //         return false;
+			            //     }
+			            // })
+			            // .catch(function(error) {
+					    // 	alert("오류가 발생하였습니다.", "에러 내용: " + error, "error");
+						// });				
 				
 					})
 					.catch(function(error) {
@@ -255,4 +273,37 @@ function requestPay(paymentData) {
 			});
 
 	  }
+}
+
+// DB에 넣는 작업
+function paymentDBInput(donation){
+		// 컨트롤러에 데이터를 전달하여 DB에 입력하는 로직
+		fetch("/donation/donationPay", {
+			method: "POST",
+			body: JSON.stringify(donation),
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
+		.then(response => response.text())
+		.then(result => {
+			if (result === "y") {
+				console.log("안녕 나 결제 DB 성공하고 들어옴.")
+			
+				if(loginMember != null){
+					console.log("넘어갈거임.")
+					location.href = '/mypage/member/donationList';
+						// 로그인되면 후원 내역으로 넘어가기
+						return; 
+				}
+				location.href = '/';
+				
+			} else {
+				alert("DB 후원 정보 입력 실패");
+				return false;
+			}
+		})
+		.catch(function(error) {
+			alert("오류가 발생하였습니다.", "에러 내용: " + error, "error");
+		});	
 }

@@ -24,7 +24,7 @@ public class DonationController {
 	@Autowired
 	private DonationService service;
 	
-	@PostMapping("donationPay")
+	@PostMapping("/donationPay")
 	@ResponseBody
 	public String donationPay(@RequestBody Donation donation,
 			@SessionAttribute(value ="loginMember", required = false) Member loginMember) throws Exception{
