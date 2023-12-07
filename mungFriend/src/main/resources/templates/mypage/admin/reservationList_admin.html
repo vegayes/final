@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이 페이지(관리자) - 예약내역 있을 때</title>
+    <link rel="stylesheet" th:href="@{/css/mypage/admin/myPageReservationList_admin.css}">
+    <script th:src="@{https://kit.fontawesome.com/ac58eafae7.js}" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <th:block th:replace="~{common/header}"></th:block>
+
+    <main th:with="reservationList=${map.reservationList}">
+        <!-- 타이틀 변경-->
+        <section class = "adminIntroArea">
+            <div class = "adminIntroTitle">
+                예약 내역
+            </div>
+            <hr>
+        </section>
+
+        <!-- nav + 내용작성 -->
+        <section class = "adminContentArea">
+
+            <!-- nav 자리-->
+            <nav class = "navAdmission">
+                <th:block th:replace="~{common/nav_admin}"></th:block>
+            </nav>
+
+            <!-- 내용 영역-->
+            <div class = "adminContentContainer">
+
+                <form th:action="@{/mypage/admin/reservationList_admin}" method="get">
+                    <div class="search-area">
+                        <input type="text" name="query" id="search" placeholder="강아지 이름 검색">
+                        <img th:src="@{/images/adopt/finder.png}" id="finder-img">
+                    </div>
+                </form>
+
+                <div class="list-top">
+                    <div>예약번호</div>
+                    <div>강아지 이름</div>
+                    <div>예약자</div>
+                    <div>예약자 이메일</div>
+                    <div>예약 일시</div>
+                    <div>신청 시각</div>
+                    <div>처리상황</div>
+                </div>
+
+                <div id="scroll">
+                    <th:block th:if="${reservationList.isEmpty()}">
+                        현재 예약 내역이 존재하지 않습니다.
+                    </th:block>
+
+                    <th:block th:unless="${reservationList.isEmpty()}">
+                        <div class="list-bottom">
+                            <div id="list" th:each="reserve : ${reservationList}">
+                                <input type="checkbox">
+                                <div id="reserve-no">[[${reserve.reserveNo}]]</div>
+                                <div id="dog-name">[[${reserve.dogName}]]</div>
+                                <div id="reserve-name">[[${reserve.memberName}]]</div>
+                                <div id="reserve-email">[[${reserve.memberEmail}]]</div>
+                                <div id="reserve-date">[[${reserve.reserveDate}]]</div>
+                                <div id="reserve-time">[[${reserve.reserveTime}]]</div>
+                                <div id="reserve-state">[[${reserve.reserveFl}]]</div>
+                            </div>
+                        </div>
+                    </th:block>
+                </div>
+
+                <button type="submit" id="cancle-btn" onclick="cancelReservations()">예약 취소</button>
+
+            </div>
+        </section>
+    </main>
+    <div class="main-right">
+        <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
+        <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+    </div>
+    <th:block th:replace="~{common/footer}"></th:block>
+</body>
+
+<script>
+    // JavaScript를 사용하여 내용이 있는 경우에만 스크롤을 활성화
+    const scroll = document.getElementById('scroll');
+    const hasContent = scroll.scrollHeight > scroll.clientHeight;
+
+    if (!hasContent) {
+        scroll.style.overflowY = 'hidden';
+    }
+</script>
+
+<script th:src="@{/js/mypage/admin/reservationList_admin.js}"></script>
+
+</html>
