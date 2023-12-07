@@ -1,6 +1,6 @@
 package second.project.mungFriend.adopt.model.dto;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,35 +11,24 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class Reservation {
+public class Reservation {	
 
+	private int reserveNo;
 	private int dogNo;
-	private int breedNo;
+	private int memberNo;
+	
+	@JsonProperty("date")
+	private String reserveDate;
+	
+    @JsonProperty("time")
+	private String reserveTime;
+    
+	private String reserveFl;
+	private String applicationDate;
+	
+	
 	private String dogName;
-	private String dogBirthDay;
-	private String dogGender;
-	private String dogSize;
-	private String dogPersonality;
-	private String dogNeutering;
-	private String dogVaccine;
-	private String dogLike;
-	private String dogHate;
-	private String dogSpecialNote;
-	private String dogAdmissionDate;
-	private String dogAdoptFl;
-	private String dogAdoptDate;
-	
-	// DOG_BREED 테이블 join
-	private String breedName;
-
-	// DOG_IMG 테이블 join
-	private String thumbnail;
-	
-	// 이미지목록
-	private List<DogImage> imageList;
-	
-	// 입소 신청 내역에서 가져온 이미지 
-	private String imgPath;
-	private String imgRename;
+	private String memberName;
+	private String memberEmail;
 	
 }

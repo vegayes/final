@@ -35,10 +35,19 @@
                     <p id="kind">[[${dog.breedName}]]</p>
                     <div id="dog-info-2">
 
-                        <button id="regist" onclick="showCalendar()">
-                            <img th:src="@{/images/adopt/예약하기.png}" id="calendedr-img">  예약하기
-                        </button>
+                        <th:block th:unless="${reserveCheck}">
+                            <button id="regist" onclick="showCalendar()">
+                                <img th:src="@{/images/adopt/예약하기.png}" id="calendedr-img">  예약하기
+                            </button>
+                        </th:block>
                         
+                        <th:block th:if="${reserveCheck}">
+                            <div id="reserveDone">예약완료</div>
+                        </th:block>
+                        
+                        <!-- ajax를 위한 중복 코드ㅠ -->
+                        <div id="reserveDone" style="display: none;">예약완료</div>
+
                         <div id="calendar-container" style="display: none;">
                             <!-- 달력을 나타낼 부분 -->
                             <label id="dateInfo" for="dateInput">예약 날짜 선택 : </label>
@@ -54,7 +63,6 @@
                         </div>
 
                         <button id="reserveBtn" type="button" onclick="submitReservation()" style="display: none;">예약하기</button>
-
                     </div>
                 </div>  
             </div>

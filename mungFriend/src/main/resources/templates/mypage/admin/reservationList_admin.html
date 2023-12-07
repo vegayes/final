@@ -11,7 +11,7 @@
 
     <th:block th:replace="~{common/header}"></th:block>
 
-    <main>
+    <main th:with="reservationList=${map.reservationList}">
         <!-- 타이틀 변경-->
         <section class = "adminIntroArea">
             <div class = "adminIntroTitle">
@@ -31,9 +31,9 @@
             <!-- 내용 영역-->
             <div class = "adminContentContainer">
 
-                <form action="#">
+                <form th:action="@{/mypage/admin/reservationList_admin}" method="get">
                     <div class="search-area">
-                        <input type="search" id="search" placeholder="강아지 이름 검색">
+                        <input type="text" name="query" id="search" placeholder="강아지 이름 검색">
                         <img th:src="@{/images/adopt/finder.png}" id="finder-img">
                     </div>
                 </form>
@@ -49,31 +49,27 @@
                 </div>
 
                 <div id="scroll">
-                    <div class="list-bottom">
-                        <div id="list">
-                            <input type="checkbox">
-                            <div id="reserve-no">1</div>
-                            <div id="dog-name">모카</div>
-                            <div id="reserve-name">유은서</div>
-                            <div id="reserve-email">eunseo@naver.com</div>
-                            <div id="reserve-date">2023-11-15</div>
-                            <div id="reserve-time">11:00</div>
-                            <div id="reserve-state">예약 완료</div>
+                    <th:block th:if="${reservationList.isEmpty()}">
+                        현재 예약 내역이 존재하지 않습니다.
+                    </th:block>
+
+                    <th:block th:unless="${reservationList.isEmpty()}">
+                        <div class="list-bottom">
+                            <div id="list" th:each="reserve : ${reservationList}">
+                                <input type="checkbox">
+                                <div id="reserve-no">[[${reserve.reserveNo}]]</div>
+                                <div id="dog-name">[[${reserve.dogName}]]</div>
+                                <div id="reserve-name">[[${reserve.memberName}]]</div>
+                                <div id="reserve-email">[[${reserve.memberEmail}]]</div>
+                                <div id="reserve-date">[[${reserve.reserveDate}]]</div>
+                                <div id="reserve-time">[[${reserve.reserveTime}]]</div>
+                                <div id="reserve-state">[[${reserve.reserveFl}]]</div>
+                            </div>
                         </div>
-                        <div id="list">
-                            <input type="checkbox">
-                            <div id="reserve-no">1</div>
-                            <div id="dog-name">모카</div>
-                            <div id="reserve-name">유은서</div>
-                            <div id="reserve-email">eunseo@naver.com</div>
-                            <div id="reserve-date">2023-11-15</div>
-                            <div id="reserve-time">11:00</div>
-                            <div id="reserve-state">예약 완료</div>
-                        </div>
-                    </div>                            
+                    </th:block>
                 </div>
 
-                <button type="submit" id="cancle-btn">예약 취소</button>
+                <button type="submit" id="cancle-btn" onclick="cancelReservations()">예약 취소</button>
 
             </div>
         </section>
@@ -94,5 +90,7 @@
         scroll.style.overflowY = 'hidden';
     }
 </script>
+
+<script th:src="@{/js/mypage/admin/reservationList_admin.js}"></script>
 
 </html>

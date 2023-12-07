@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 
 import second.project.mungFriend.adopt.model.dto.Dog;
+import second.project.mungFriend.adopt.model.dto.Reservation;
 
 public interface AdoptService {
 
@@ -22,6 +23,9 @@ public interface AdoptService {
 	// 좋아요 여부 확인
 	int dogLikeCheck(Map<String, Object> map);
 
+	// 강아지 예약여부 확인
+	int reserveCheck(Map<String, Object> map);
+	
 	// 좋아요 처리
 	int like(Map<String, Integer> paraMap);
 
@@ -42,8 +46,14 @@ public interface AdoptService {
 
 //	**********************************************************************************************
 
+	
 	// 강아지 예약하기
-	//String dogReservation();
+	int dogReservation(Reservation reservationData, int dogNo, int memberNo);
+
+
+
+	
+
 
 
 

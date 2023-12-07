@@ -11,6 +11,7 @@
 		<result property="inquiryStatus" column="INQUIRY_STATUS" />
 		<result property="inquiryCompleteDate" column="INQUIRY_COMPLETE_DATE" />
 		<result property="memberNickname" column="MEMBER_NICKNAME" />
+		<result property="adminReply" column="ADMINREPLY" />
 	</resultMap>
 	 
 	<select id="adminInquiryBox" resultMap="inquiry_rm">
@@ -21,14 +22,22 @@
     </select>
 	
 	
-	
 	<!-- 1:1 문의 상세 조회 -->
 	<select id="adminInquiryDetail" resultMap="inquiry_rm">
 		SELECT INQUIRY_NO, MEMBER_NO, INQUIRY_TITLE, INQUIRY_CONTENT, 
-		INQUIRY_DATE, INQUIRY_STATUS, INQUIRY_COMPLETE_DATE, MEMBER_NICKNAME
+		INQUIRY_DATE, INQUIRY_STATUS, INQUIRY_COMPLETE_DATE, MEMBER_NICKNAME, ADMINREPLY
 		FROM INQUIRY
 		LEFT JOIN "MEMBER" USING(MEMBER_NO)
 		WHERE INQUIRY_NO = #{inquiryNo}
 	</select>
+
+
+	<update id="completeAnswer" >
+		UPDATE INQUIRY
+		SET ADMINREPLY= #{adminReply},
+		INQUIRY_STATUS = 'Y'
+		WHERE INQUIRY_NO = #{inquiryNo}
+	</update>
+
 	
 </mapper>
