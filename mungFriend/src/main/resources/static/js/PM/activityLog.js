@@ -20,3 +20,15 @@ function onDeleteClick(activityNo) {
 	location.href = "/pm/activityLogDelete?activityNo=" + activityNo;
 	
 }
+
+function onMouseOver(activityNo) {
+	const activityContent = document.getElementById("check_"+activityNo);
+	activityContent.style.display = "";
+	activityContent.style.position = "absolute";
+	activityContent.style.color = "white";
+}
+
+function onMouseOut(activityNo) {
+	const activityContent = document.getElementById("check_"+activityNo);
+	activityContent.style.display = "none";
+}

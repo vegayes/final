@@ -58,7 +58,7 @@
 		                        
 			                        	<!-- 일반회원일 경우 -->
 			                        	<th:block th:unless="${session.loginMember.adminYn == 'Y'}">
-			                        		<img th:src="${pm.acitivityImg}" class="imgs" th:onmouseover="onMouseOver()">
+			                        		<img th:src="${pm.acitivityImg}" class="imgs" th:activityNo="${pm.activityNo}" th:onmouseover="onMouseOver(this.getAttribute('activityNo'))" th:onmouseout="onMouseOut(this.getAttribute('activityNo'))">
 			                        	</th:block>		
 									</th:block>
 								
@@ -68,7 +68,8 @@
 									</th:block>
 		                        
 		                        </div>
-		                        <div th:text="${pm.activityContent}" style="display: none;">활동일지 내용</div>
+		                        <div th:text="${pm.activityContent}" style="display: none;"  th:id = "'check_' + ${pm.activityNo}">활동일지 내용</div>
+		                        <!-- <div th:text="${pm.activityNo}">활동일지 내용</div> -->
 		                        <div class="heart1">
 									<div id="heart-sec">
 		                            	<button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn"></button>
