@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="second.project.mungFriend.common.dao.DogBreedMapper">
+	
+	
+	
+	
+	<resultMap type="DogBreed" id="dog_rm">
+		<id property="dogNo" column="DOG_NO />
+		<result property="dogName" column="DOG_NAME "/>
+		<result property="thumbnail" column="THUMBNAIL"/>
+	   
+		
+	</resultMap>
+	
+	<select id="findDogBreed" resultMap="dog_rm">
+		        SELECT DOG_NAME , DOG_NO , (SELECT IMG_PATH || IMG_RENAME FROM DOG_IMG I
+		WHERE I.DOG_NO = D.DOG_NO
+		AND IMG_ORDER = 0) THUMBNAIL
+		FROM DOG D
+		WHERE DOG_ADOPT_FL = 'N' AND BREED_NO = (SELECT BREED_NO
+												FROM DOG_BREED db 
+												WHERE BREED_NAME  LIKE '#{searchInput}')
+		ORDER BY DOG_ADMISSION_DATE DESC;
+    </select>
+	
+</mapper>

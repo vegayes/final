@@ -1,6 +1,7 @@
 package second.project.mungFriend.mypage.admin.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,10 @@ public class AdminInquiryController {
 	    private AdminInquiryService adminInquiryService;
 
 	    @GetMapping("/adminInquiryBox")
-	    public String adminInquiryBox(Model model) {
+	    public String adminInquiryBox(Model model
+	    		 ) {
+	    	
+	    	
 	    	
 	    	List<Inquiry> inquiryList = adminInquiryService.adminInquiryBox();
 	    	
@@ -69,6 +73,15 @@ public class AdminInquiryController {
 		    	path = "redirect:/completeAnswer/{inquiryNo}";
 		    }
 		    return path;
+		}
+		
+		
+		
+		@GetMapping("/search")
+		public String searchInquiries(@RequestParam String keyword, Model model) {
+		    List<Inquiry> inquiryList = adminInquiryService.searchInquiries(keyword);
+		    model.addAttribute("inquiryList", inquiryList);
+		    return "mypage/admin/adminInquiryBox";
 		}
 		
 	

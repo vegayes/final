@@ -39,5 +39,8 @@
 		WHERE INQUIRY_NO = #{inquiryNo}
 	</update>
 
+
+	
+
 	
 </mapper>

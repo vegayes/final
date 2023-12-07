@@ -1,5 +1,11 @@
 package second.project.mungFriend.mypage.admin.model.dto;
 
+import java.util.List;
+
+import org.apache.ibatis.session.RowBounds;
+
+import second.project.mungFriend.member.model.dto.Member;
+
 // 페이징 처리에 필요한 모든 값들을 저장 하고있는 객체
 public class Pagination {
 	
@@ -173,4 +179,7 @@ public class Pagination {
 		else				   nextPage = endPage + 1;
 		
 	}
+
+
+
 }

@@ -14,6 +14,9 @@
 	<th:block th:replace="~{common/header}"></th:block>
 	<main>
 		<section class="adminIntroArea">
+			
+			
+			
 			<div class="adminIntroTitle">
 				1:1 문의함
 			</div>
@@ -29,10 +32,21 @@
 
 			<!-- 후원 내용 영역-->
 			<div class="adminContentContainer">
+				
+				
 
 				<!-- 후원 검색 창-->
 
-
+              <div class = "adminSearchArea">
+				<form th:action="@{/mypage/admin/search}" name="adminMemberSearch" id="memberSearchForm" method="GET">
+					<fieldset class="adminSearch">
+						<input type="search" id="memberSearch" name="keyword" class="applyInput" autocomplete="on"
+							placeholder="닉네임 또는 제목 검색">
+						<button id="searchBtn" class="fa-solid fa-magnifying-glass"></button>
+					</fieldset>
+				</form>
+                </div>
+				
 
 				<!-- 후원 내역 리스트 -->
 				<div class="adminDonationContainer">
@@ -81,6 +95,9 @@
 				</div>
 
 
+
+
+                <!--버튼 등록 
 				<div style="margin-top: 380px; margin-left: -40px;">
 
 					<form th:action="@{/adminInquiry/reviewList/1}" method="get" id="searchContainer">
@@ -92,7 +109,7 @@
 						<input type="text" name="searchContent" id="searchContent" placeholder="검색어를 입력해주세요.">
 						<button id="searchButton">검색</button>
 					</form>
-				</div>
+				</div>-->
 
 				<!-- 페이지 네이션 -->
 				<div class="paginationArea">
