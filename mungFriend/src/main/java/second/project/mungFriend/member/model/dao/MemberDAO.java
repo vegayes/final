@@ -1,8 +1,11 @@
 package second.project.mungFriend.member.model.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import second.project.mungFriend.common.dto.Alarm;
 import second.project.mungFriend.member.model.dto.Member;
 import second.project.mungFriend.member.model.dto.MemberKakao;
 import second.project.mungFriend.member.model.dto.MemberNaver;
@@ -79,5 +82,7 @@ public class MemberDAO {
 	public int loginKakaoInsert(MemberKakao kakaoInfo) {
 		return memberMapper.loginKakaoInsert(kakaoInfo);
 	}
+
+	
 
 }

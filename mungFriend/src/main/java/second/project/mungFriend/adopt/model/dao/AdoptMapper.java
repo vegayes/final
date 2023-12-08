@@ -92,13 +92,33 @@ public interface AdoptMapper {
 			@Param("dogNo") int dogNo, 
 			@Param("memberNo") int memberNo);
 	
+  
+	// 강아지 입양 시 예약 취소
+	public int updateReservation(int dogNo);
 	
+	// 강아지 입양 시 예약했던 회원번호 조회
+	public List<Object> selectReservation(int dogNo);
+	
+	
+	// 알림 테이블에 insert
+	public int insertAlarm(Map<String, Object> parameterMap);
+	
+
+
 //	*****************************챗봇에서 사용*****************************************************************
 	// 검색한 강아지 마리 수 조회
 	public int getSearchDogListCount(String breedName);
 	
 	// 강아지 검색결과 
 	public List<Dog> selectChatbotDogList(RowBounds rowBounds, String breedName);
+
+
+
+
+
+
+
+
 	
 	
 	

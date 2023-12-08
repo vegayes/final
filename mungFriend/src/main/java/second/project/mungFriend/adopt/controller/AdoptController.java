@@ -327,6 +327,16 @@ public class AdoptController {
 			
 			message = "게시글이 삭제되었습니다";
 			path += "/adopt/dogList";
+			
+			// 강아지 입양 시 예약했던 회원번호 조회
+			List<Object> memberNoList = service.selectReservation(dogNo);
+			System.out.println("예약한 회원번호 : " + memberNoList);
+			
+			if(memberNoList != null) {
+				int resultResult = service.insertAlarm(memberNoList,dogNo);
+				System.out.println("알림테이블 삽입결과 : " + resultResult);
+			}
+			
 		}else {
 			
 			message = "게시글 삭제 실패";

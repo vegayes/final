@@ -292,6 +292,42 @@
 	</update>
 	
 	
+	<!-- 강아지 삭제 해당 예약 취소 -->
+	<update id="updateReservation">
+		UPDATE DOG_RESERVATION SET RESERVE_YN = 'N'
+		WHERE DOG_NO = #{dogNo} 
+	</update>
+	
+	
+	<!-- 강아지 입양 시 예약했던 회원번호 조회 -->	
+	<select id="selectReservation" resultType="_int">
+		SELECT MEMBER_NO
+    	FROM DOG_RESERVATION
+    	WHERE DOG_NO = #{dogNo} AND
+    	RESERVE_YN = 'N'
+	</select>
+	
+	
+	<!-- 알림 테이블 삽입 -->
+	<insert id="insertAlarm" parameterType="map">
+		INSERT INTO ALARM
+		SELECT SEQ_ALARM_NO.NEXTVAL, A.*
+		FROM (
+	  		
+	  		<foreach collection="memberNoList" item="memberNo" separator= " UNION ALL ">
+				SELECT 	#{memberNo}	MEMBER_NO,
+						'N' CHECK_YN,
+						'D' ALARM_CATEGORY,
+						(SELECT IMG_PATH FROM DOG_IMG WHERE DOG_NO = #{dogNo} AND IMG_ORDER = 0) ALARM_IMG_PATH,
+						(SELECT IMG_RENAME FROM DOG_IMG WHERE DOG_NO = #{dogNo} AND IMG_ORDER = 0) 	ALARM_IMG_RENAME
+				FROM DUAL	
+	  		</foreach>
+	  	) A
+		
+	</insert>
+	
+	
+
 	<!-- *****************강아지 예약하기****************** -->
 	
 	<!-- 예약하기 -->

@@ -4,6 +4,7 @@ import java.io.File;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.PatternSyntaxException;
 
@@ -25,7 +26,9 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import second.project.mungFriend.common.dto.Alarm;
 import second.project.mungFriend.common.utility.Util;
+import second.project.mungFriend.member.model.dao.AlarmMapper;
 import second.project.mungFriend.member.model.dao.MemberDAO;
 import second.project.mungFriend.member.model.dto.Member;
 import second.project.mungFriend.member.model.dto.MemberKakao;
@@ -43,6 +46,9 @@ public class MemberServiceImpl implements MemberService{
 	
 	@Autowired
 	private MemberDAO dao;
+	
+	@Autowired
+	private AlarmMapper mapper; 
 	
 	@Autowired
 	private BCryptPasswordEncoder bcrypt;
@@ -431,5 +437,23 @@ public class MemberServiceImpl implements MemberService{
         
         return memberKakao;
     }
+
+	
+	
+	
+	
+	/**
+	 * 로그인 시 알림목록 얻어오기
+	 */
+	@Override
+	public List<Alarm> selectAlarm(int memberNo) {
+		
+		return mapper.selectAlarm(memberNo);
+	}
+	
+	
+	
+	
+	
 
 }

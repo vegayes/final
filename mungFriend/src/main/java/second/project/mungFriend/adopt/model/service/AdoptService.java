@@ -52,5 +52,15 @@ public interface AdoptService {
 	
 	// 강아지 예약하기
 	int dogReservation(Reservation reservationData, int dogNo, int memberNo);
+	
+	// 강아지 입양 시 예약했던 회원번호 조회
+	List<Object> selectReservation(int dogNo);
+
+	// 알림 목록에 insert
+	int insertAlarm(List<Object> memberNoList,int dogNo);
+
+
+
+
 
 }
