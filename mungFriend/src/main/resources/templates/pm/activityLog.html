@@ -53,7 +53,7 @@
 									<!-- 관리자일 경우에만 수정화면 전환될 수 있도록 -->
 									<th:block th:if = "${session.loginMember != null}">
 										<th:block th:if="${session.loginMember.adminYn == 'Y'}">
-		                            		<img th:src="${pm.acitivityImg}" class="imgs" th:activityNo="${pm.activityNo}" th:onclick="onUpdateClick(this.getAttribute('activityNo'))" th:onmouseover="onMouseOver()">
+		                            		<img th:src="${pm.acitivityImg}" class="imgs" th:activityNo="${pm.activityNo}" th:onclick="onUpdateClick(this.getAttribute('activityNo'))" th:onmouseover="onMouseOver(this.getAttribute('activityNo'))" th:onmouseout="onMouseOut(this.getAttribute('activityNo'))">
 		                        		</th:block>
 		                        
 			                        	<!-- 일반회원일 경우 -->
@@ -64,11 +64,11 @@
 								
 									<!-- 비회원일 경우 -->
 									<th:block th:unless = "${session.loginMember != null}">
-										<img th:src="${pm.acitivityImg}" class="imgs" th:onmouseover="onMouseOver()">	
+										<img th:src="${pm.acitivityImg}" class="imgs" th:activityNo="${pm.activityNo}" th:onmouseover="onMouseOver(this.getAttribute('activityNo'))" th:onmouseout="onMouseOut(this.getAttribute('activityNo'))">	
 									</th:block>
 		                        
 		                        </div>
-		                        <div th:text="${pm.activityContent}" style="display: none;"  th:id = "'check_' + ${pm.activityNo}">활동일지 내용</div>
+		                        <div th:text="${pm.activityContent}"  class = "checkContent" th:id = "'check_' + ${pm.activityNo}">활동일지 내용</div>
 		                        <!-- <div th:text="${pm.activityNo}">활동일지 내용</div> -->
 		                        <div class="heart1">
 									<div id="heart-sec">
