@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="second.project.mungFriend.member.model.dao.AlarmMapper">
+	
+	
+	<resultMap type="Alarm" id="alarm_rm">
+		
+		<id property="alarmNo" column="ALARM_NO"/>
+		
+		
+		<result property="memberNo" column="MEMBER_NO"/>
+		
+		<result property="checkYN" column="CHECK_YN"/>
+		<result property="ararmCategory" column="ALARM_CATEGORY"/>
+		<result property="alarmImgPath" column="ALARM_IMG_PATH"/>
+		<result property="alarmImgName" column="ALARM_IMG_RENAME"/>
+	
+	</resultMap>
+	
+		<select id = "selectAlarm" resultMap = "alarm_rm">
+			SELECT * FROM ALARM 
+			WHERE MEMBER_NO = #{memberNo}
+		</select>
+	
+</mapper>

@@ -7,11 +7,13 @@
 	<title>메인 페이지</title>
 
 	<link rel="stylesheet" th:href="@{/css/main/main.css}">
+	<link rel="stylesheet" th:href="@{/css/main/sideAlarm.css}">
 </head>
 
 <body>
 
 	<th:block th:replace="~{common/header}"></th:block>
+	<th:block th:replace="~{common/sideAlarm}"></th:block>
 	<main>
 
 
@@ -125,6 +127,7 @@
 
 	</main>
 
+	
 	<th:block th:replace="~{common/chatbot}"></th:block>
 	<th:block th:replace="~{common/footer}"></th:block>
 

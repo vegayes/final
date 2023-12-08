@@ -95,13 +95,15 @@ public interface AdoptMapper {
 	
 	
 	
+	// 강아지 입양 시 예약 취소
+	public int updateReservation(int dogNo);
+	
+	// 강아지 입양 시 예약했던 회원번호 조회
+	public List<Object> selectReservation(int dogNo);
 	
 	
-	
-	
-	
-	
-	
+	// 알림 테이블에 insert
+	public int insertAlarm(List<Object> memberNoList, int dogNo);
 	
 	
 	
@@ -115,6 +117,14 @@ public interface AdoptMapper {
 	
 	// 강아지 검색결과 
 	public List<Dog> selectChatbotDogList(RowBounds rowBounds, String breedName);
+
+	public int insertAlarm(Map<String, Object> parameterMap);
+
+
+
+
+
+	
 
 
 

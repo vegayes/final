@@ -1,0 +1,56 @@
+.alarmContainer {
+    display: flex;
+    z-index: 5;
+  }
+  
+  .sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    background-color: #fee4d64d;
+    color: rgb(37, 36, 36);
+    margin-left: 1px;
+  }
+  
+  .sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidebar a:hover {
+    color: #f1f1f1;
+  }
+  
+  .sidebar .close-btn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  .content {
+    flex: 1;
+    padding: 16px;
+  }
+  
+  .menu-btn {
+    font-size: 24px;
+    cursor: pointer;
+    margin: 16px;
+    z-index: 3
+;
+  }
+  
+  @media screen and (max-height: 450px) {
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 16px;}
+  }

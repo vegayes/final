@@ -1,6 +1,7 @@
 package second.project.mungFriend.member.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import second.project.mungFriend.common.dto.Alarm;
 import second.project.mungFriend.member.model.dto.Member;
 import second.project.mungFriend.member.model.dto.MemberKakao;
 import second.project.mungFriend.member.model.dto.MemberNaver;
@@ -62,6 +64,10 @@ public class MemberController {
 			path += "/";
 			ra.addFlashAttribute("message", loginMember.getMemberNickname() + "님 환영합니다.");
 			model.addAttribute("loginMember", loginMember);
+			//로그인 시 알림목록 얻어오기
+			List<Alarm> alarmList = service.selectAlarm(loginMember.getMemberNo()); 
+			System.out.println("알림목록 : " +alarmList);
+			model.addAttribute("alarmList", alarmList);
 			
 		} else { // 로그인 실패
 			path += referer;
