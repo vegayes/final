@@ -42,7 +42,7 @@ public class AdoptController {
 	@Autowired
 	private ListAdminServcie admService;
 	
-	// 강아지 목록 조회
+	// 강아지 목록 조회 (일반 전체 조회)
 	@GetMapping("/dogList")
 	public String selectDogList(
 			@RequestParam(value="cp", required= false, defaultValue="1") int cp,
@@ -52,8 +52,32 @@ public class AdoptController {
 		
 		model.addAttribute("map", map);
 		
+		System.out.println("map::" + map);
+		
 		return "adopt/dogList";
 	}
+
+	// 강아지 목록 조회 (필터 조회)
+	@PostMapping("/dogList")
+	@ResponseBody
+	public Map<String, Object> selectDogList(
+	        @RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+	        @RequestBody Dog selectedFilters) {
+		
+		System.out.println("selectedFilters::" + selectedFilters);
+		
+//		String dogGender = selectedFilters.getDogGender();
+//		String breedName = selectedFilters.getBreedName();
+//		String dogSize = selectedFilters.getDogSize();
+//		String dogNeutering = selectedFilters.getDogNeutering();
+		
+	    Map<String, Object> map = service.selectDogList(cp, selectedFilters);
+	    
+	    System.out.println("searchMap::" + map);
+
+	    return map;
+	}
+	
 	
 	// 강아지 상세 조회
 	@GetMapping("/dogList/{dogNo}") 

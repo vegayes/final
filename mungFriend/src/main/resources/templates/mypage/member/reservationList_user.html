@@ -12,7 +12,7 @@
 
     <th:block th:replace="~{common/header}"></th:block>
 
-    <main>
+    <main th:with="reservationList=${map.reservationList}">
         <!-- 사용자 마이페이지 타이틀 영역-->
         <section class = "userIntroArea">
             <div class = "userIntroTitle">
@@ -38,22 +38,29 @@
                     <div>예약일</div>
                 </div>
    
-                <div class="list-bottom">
-                    <div>
-                        <div id="img-wrap">
-                            <img th:src="@{/images/adopt/시바사진.png}" id="dog-img">
-                        </div>
-                    </div>
-                    <div id="dog-info">
-                        <div id="name">코코</div>
-                        <div id="kind">웰시코기</div>
-                        <div id="age">12개월</div>
-                        <div id="gender">남아</div>
-                    </div>
-                    <div id="reserve-date">2023.11.10 15:00</div>
-                    <button id="cancle-btn" type="button">X</button>
+                <th:block th:if="${reservationList.isEmpty()}">
+                    현재 예약 내역이 존재하지 않습니다.
+                </th:block>
 
-                </div>
+                <th:block th:unless="${reservationList.isEmpty()}">
+                    <div class="list-bottom" th:each="reserve : ${reservationList}">
+                        <div>
+                            <a id="img-wrap" th:href="@{/adopt/dogList/{dogNo}(dogNo=${reserve.dogNo})}">
+                                <img th:src="${reserve.imgPath + reserve.imgRename}" id="dog-img">
+                            </a>
+                        </div>
+                        <div id="dog-info">
+                            <div id="name">[[${reserve.dogName}]]</div>
+                            <div id="kind">[[${reserve.breedName}]]</div>
+                            <div id="age">[[${reserve.dogBirthDay}]]</div>
+                            <div id="gender">[[${reserve.dogGender}]]</div>
+                        </div>
+                        <div id="reserve-date">[[${reserve.reserveDate}]] [[${reserve.reserveTime}]]</div>
+                        <button th:onclick="|deleteReserve(${reserve.dogNo})|" id="cancle-btn" type="button">X</button>
+    
+                    </div>
+                </th:block>
+
             </div>
         </section>
     </main>
@@ -64,5 +71,6 @@
     
     <th:block th:replace="~{common/footer}"></th:block>
 
+    <script th:src="@{/js/mypage/member/reservationList_user.js}"></script>
 </body>
 </html>

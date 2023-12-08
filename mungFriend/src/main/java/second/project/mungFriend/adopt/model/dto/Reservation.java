@@ -31,4 +31,12 @@ public class Reservation {
 	private String memberName;
 	private String memberEmail;
 	
+	private String breedName;
+	private String dogBirthDay;
+	private String dogGender;
+
+	private String imgPath;
+	private String imgRename;
+	
+	
 }

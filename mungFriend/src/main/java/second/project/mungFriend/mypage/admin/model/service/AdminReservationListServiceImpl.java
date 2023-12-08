@@ -8,13 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import second.project.mungFriend.adopt.model.dto.Reservation;
-import second.project.mungFriend.mypage.admin.model.dao.ReservationListMapper;
+import second.project.mungFriend.mypage.admin.model.dao.AdminReservationListMapper;
 
 @Service
-public class ReservationListServiceImpl implements ReservationListService{
+public class AdminReservationListServiceImpl implements AdminReservationListService{
 	
 	@Autowired
-	private ReservationListMapper mapper;
+	private AdminReservationListMapper mapper;
 
 	// 검색기능 없는 게시글 목록 조회
 	@Override
@@ -43,7 +43,15 @@ public class ReservationListServiceImpl implements ReservationListService{
 		
 		return map;
 	}
-	
+
+	// 예약 내역 삭제
+	@Override
+	public int cancelReservation(int reserveNo, String memberEmail) {
+
+		return mapper.cancelReservation(reserveNo, memberEmail);
+	}
+
+
 	
 	
 
