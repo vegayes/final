@@ -20,3 +20,24 @@ function onDeleteClick(activityNo) {
 	location.href = "/pm/activityLogDelete?activityNo=" + activityNo;
 	
 }
+
+// -----------------------------------------------------------------------
+
+// 마우스 호버시 내용 나타나도록
+function onMouseOver(activityNo) {
+	const activityContent = document.getElementById("check_" + activityNo);
+	activityContent.style.display = "flex";
+	activityContent.style.transitionDelay = "0s";
+	/*activityContent.style.position = "absolute";
+	activityContent.style.color = "white";
+	activityContent.style.fontSize = "13px";
+	activityContent.style.padding = "10px";
+	activityContent.style.width = "150px";
+	activityContent.style.height = "150px";*/
+}
+
+// 마우스가 이미지 영역 밖으로 나가면 내용 보이지 않도록
+function onMouseOut(activityNo) {
+	const activityContent = document.getElementById("check_" + activityNo);
+	activityContent.style.display = "none";
+}
