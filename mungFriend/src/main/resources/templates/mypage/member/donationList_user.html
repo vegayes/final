@@ -55,7 +55,12 @@
 	                                    <td>[[${donation.donationType}]]</td>
 	                                    <td>[[${donation.donationDate}]]</td>
 	                                    <td>[[${donation.donationAmount}]]원</td>
-	                                    <td><div class = "donationInfoCheck" th:onclick="donationInfoCheck([[${donation.receiptUrl}]], [[${session.loginMember.memberNo}]])">조회</div></td>
+	                                    <th:block th:if = "${donation.donationType} == '일시'">											
+		                                    <td><div class = "donationInfoCheck" th:onclick="donationInfoCheck([[${donation.receiptUrl}]], [[${session.loginMember.memberNo}]])">조회</div></td>
+										</th:block>
+	                                    <th:block th:if = "${donation.donationType} == '정기'">											
+		                                    <td><div class = "donationInfoCheck" th:onclick="donationCancel([[${donation.billingKey}]],[[${donation.receiptUrl}]], [[${session.loginMember.memberNo}]])">조회 및 취소</div></td>
+										</th:block>
 	                                </tr> 
 
 	                                

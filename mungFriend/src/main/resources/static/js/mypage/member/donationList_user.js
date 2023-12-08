@@ -12,3 +12,28 @@ function donationInfoCheck(receiptUrl, memberNo){
 	
 	
 }
+
+
+function donationCancel(billingKey,receiptUrl,memberNo){
+	
+	//1) 취소
+	fetch('/regular/schedule/' , {
+		method:"POST",
+		body: JSON.stringify(billingKey),
+		headers: {
+			"Content-Type": "application/json"
+		}
+	})
+    .then(resp => resp.json())
+    .then(function(result) {
+        console.log("결제 취소 성공?" + JSON.stringify(result));
+    })
+    .catch(err => {
+        throw err; 
+    });
+	
+	
+	
+	
+	
+}
