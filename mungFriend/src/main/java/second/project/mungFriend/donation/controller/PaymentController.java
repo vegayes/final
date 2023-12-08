@@ -75,5 +75,23 @@ public class PaymentController {
     
     
     
+//    @RequestMapping(value="/orderCompleteMobile", produces = "application/text; charset=utf8", method = RequestMethod.GET)
+//	public String orderCompleteMobile(
+//			@RequestParam(required = false) String imp_uid
+//			, @RequestParam(required = false) String merchant_uid
+//			, Model model
+//			, Locale locale
+//			, HttpSession session) throws IamportResponseException, IOException
+//	{
+//		
+//		IamportResponse<Payment> result = api.paymentByImpUid(imp_uid);
+//		
+//		if(result.getResponse().getAmount().compareTo(BigDecimal.valueOf(100)) == 0) {
+//			System.out.println("검증통과");
+//		}
+//		
+//		return "home";
+//	}
+    
 
 }

@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -19,11 +18,12 @@ public class expirationScheduling {
 
 	
 	//cron = "초 분 시 일 월 요일 [년도]" - 요일 : 1(SUN) ~ 7(SAT)
-	//@Scheduled(cron = "0,30 * * * * *") // 매 분 0초, 30초 마다 수행
-	@Scheduled(cron = "0 0 0 * * *") // 매일 자정
+//	@Scheduled(cron = "0,30 * * * * *") // 매 분 0초, 30초 마다 수행
+//	@Scheduled(cron = "0 0 0 * * *") // 매일 자정
+	@Scheduled(cron = "0 0,12 * * * *") // 매일 자정 정오마다
 	public void couponExpiration() { 
 			
-		//System.out.println("=======DB 스케쥴링 진행 ==========");
+		System.out.println("=======DB 스케쥴링 진행 ==========");
         // 현재 날짜/시간
         Date now = new Date();
        
@@ -54,6 +54,9 @@ public class expirationScheduling {
 		}
 		
 	}
+	
+
+	
 }
 
 /*

@@ -9,8 +9,46 @@ function openCardInfo(amount){
     modal.style.display = "flex";
     subModal.style.display = "flex";
 
+    // var nowDate = new Date();
+    // console.log("nowDate :" + nowDate);
+    // nowDate = DateFormating(nowDate);
+    // console.log("nowDate 포멧팅 :" + nowDate);
+
+    // var nextDate = new Date(nowDate);
+    // nextDate.setMonth(nowDate.getMonth() + 1); // 한달
+    // console.log("nextDate 포멧팅 :" + nextDate);
+
+
+    // var yearDate = new Date(nowDate);
+    // console.log("yearDate :" + yearDate);
+    // yearDate.setFullYear(nowDate.getFullYear() + 1);  // 1년
+    // console.log("yearDate 포멧팅 :" + yearDate);
+
+    var nowDate = new Date();
+    console.log("nowDate: " + nowDate);
+    var today = DateFormating(nowDate);
+
+    var nextDate = new Date(nowDate);
+    nextDate.setMonth(nowDate.getMonth() + 1); // 현재 날짜에서 한 달 뒤의 날짜를 얻음
+    console.log("nextDate: " + nextDate);
+    nextDate = DateFormating(nextDate);
+
+    var yearDate = new Date(nowDate);
+    // yearDate.setFullYear(nowDate.getFullYear() + 1 ); // 현재 날짜에서 1년 뒤의 날짜를 얻음
+    yearDate.setMonth(nowDate.getMonth() + 11);
+    console.log("yearDate: " + yearDate);
+    yearDate = DateFormating(yearDate);
+    
+
     const regularAmount = document.getElementById("regularAmount");
     regularAmount.innerText = amount + "원";
+
+    const regularPeriod = document.getElementById("regularPeriod");
+    regularPeriod.innerText = `정기 결제 기간 : ${today} ~ ${yearDate}`;
+
+    const nextPay = document.getElementById("nextPay");
+    nextPay.innerText = `다음 결제일 : ${nextDate}`;
+
 }
 
 /*모달창 닫기 */
@@ -103,6 +141,18 @@ function regularCardInfoCheck() {
 }
 
 
+// 날짜 포멧팅
+function DateFormating(date){
+
+    var year = date.getFullYear();
+    var month = ('0' + (date.getMonth() + 1)).slice(-2);
+    var day = ('0' + date.getDate()).slice(-2);
+
+    var dateString = year + '-' + month  + '-' + day;
+    return dateString;
+}
+
+
 // 빌링키 발급 진행
 function billingKeyCreate(cardInfo,memberNo){
     var customer_uid = 'Billing' + memberNo 
@@ -133,7 +183,7 @@ function billingKeyCheck(customer_uid){
             return billing.code; // Promise 체인을 따라 최종적으로 코드 반환
         })
         .catch(err => {
-            throw err; // 에러를 호출자에게 다시 전달할 수 있습니다.
+            throw err; 
         });
 }
 
@@ -174,7 +224,8 @@ function regularOnePay(paymentData, donationContent, donationType){
                 billingKey : onePay.response.customerUid,
                 
             };
-
+            
+            regularSchduel(onePay); // 스케쥴러 완성하기
             paymentDBInput(donation);
 
         })

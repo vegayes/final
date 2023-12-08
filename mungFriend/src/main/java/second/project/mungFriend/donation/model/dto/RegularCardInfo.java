@@ -1,5 +1,7 @@
 package second.project.mungFriend.donation.model.dto;
 
+import java.util.Map;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,4 +27,9 @@ public class RegularCardInfo {
 	private int amount;
 	private String buyer_name;
 	private String buyer_email;
+	
+	// 스케쥴
+	private long schedule_at;
+	
+//	private Map<String, Object> schedule;
 }

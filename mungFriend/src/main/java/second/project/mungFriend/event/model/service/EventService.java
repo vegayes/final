@@ -44,5 +44,7 @@ public interface EventService {
 	int couponInsert(Coupon newCoupon);
 
 	
+
+	
 	
 }

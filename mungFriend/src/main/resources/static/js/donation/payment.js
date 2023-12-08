@@ -92,9 +92,8 @@ function paymentInfoCheck(){
 		        amount: parseInt(donationAmount.value), // 문자열을 숫자로 변환하여 저장	  
 		        buyer_name : donationName,
 		        buyer_email : donationEmail,
-		        notice_url : 'https://portone-webhook',//웹훅수신 URL 설정(예: /portone-webhook)
-
-		};
+		        notice_url : 'http://43.202.237.39/donation/donationPay',
+		};	
 		
 	if(donationType.value === '일시'){
 		requestPay(paymentData);
@@ -143,7 +142,7 @@ function paymentInfoCheck(){
 								console.log("빌링키 조회 성공! ");
 
 								// 정기결제 고유 번호 (식별 : 날짜 + 회원번호)
-								var newMerchant = "donation_regular_" + new Date().getTime() + "_" + loginMember.memberNo + "1"//주문번호 전달
+								var newMerchant = "donation_regular_" + new Date().getTime() + "_" + loginMember.memberNo + "_" + "1"//주문번호 전달
 
 								paymentData.merchantUid = newMerchant;
 								paymentData.customer_uid = billing.customer_uid;
@@ -309,3 +308,109 @@ function paymentDBInput(donation){
 			alert("오류가 발생하였습니다.", "에러 내용: " + error, "error");
 		});	
 }
+
+// 무조건 웹훅으로 값이 승인되면 dB 진행
+// function webhook() {
+// 	var paymentData = {
+// 		pg: "html5_inicis",		//KG이니시스 pg파라미터 값
+// 		pay_method: "card",		//결제 방법
+// 		merchantUid: "donation_" + new Date().getTime(),//주문번호 전달
+// 		// 라디오 버튼에서 선택한 값을 결제 정보에 추가
+// 		name: '멍프랜드 ' + (donationType.value === '일시' ? '일시 후원' : '정기 후원'),
+// 		amount: parseInt(donationAmount.value), // 문자열을 숫자로 변환하여 저장	  
+// 		buyer_name : donationName,
+// 		buyer_email : donationEmail,
+// 		// notice_url : 'https://portone-webhook',
+// 	};	
+
+//     fetch("/portone-webhook", {
+//         method: "POST",
+//         body: JSON.stringify(donation),
+//         headers: {
+//             "Content-Type": "application/json"
+//         }
+//     })
+//     .then(response => response.json()) // 서버로부터 JSON 형식의 응답을 받을 것으로 가정
+//     .then(result => {
+
+// 		console.log("결과 :" + result);
+//         // 서버에서 받은 결과(result)에 따라 로직 수행
+//         if (result.status === "success") {
+//             console.log("결제 DB 입력 성공");
+//             // 성공 시 로직 수행
+//             if (loginMember != null) {
+//                 location.href = '/mypage/member/donationList';
+//             } else {
+//                 location.href = '/';
+//             }
+//         } else {
+//             alert("DB 후원 정보 입력 실패");
+//             return false;
+//         }
+//     })
+//     .catch(error => {
+//         alert("오류가 발생하였습니다. 에러 내용: " + error);
+//     });
+// }
+
+
+function regularSchduel(onePay){
+	
+	const merchantUid = onePay.response.merchantUid;
+	const new_str = merchantUid.substr(0, merchantUid.length-1);
+
+	console.log("merchant:"+new_str); // 결과 확인
+
+	const cardData = [];
+
+	const currentTimeStamp = Math.floor(Date.now() / 1000); // 현재 시간의 Unix 타임스탬프 
+	const oneMinute = 60; // *********************** 30일을 기준! ******************************
+
+
+	console.log("currentTimeStamp :" +currentTimeStamp);
+	console.log("type :" + typeof currentTimeStamp);
+
+	for (let i = 2; i <= 3; i++) { // *************************************************************12로 바꾸기**************************
+		const data = {
+			customer_uid : onePay.response.customerUid,
+			merchantUid: `${new_str}${i}`,
+			schedule_at: currentTimeStamp + (oneMinute * i), // 현재 시간으로부터 1분씩 증가
+			currency: "KRW",
+			amount: 100,
+			name: onePay.response.name,
+			buyer_name: onePay.response.buyerName,
+			buyer_email: onePay.response.buyerEmail
+		};
+		cardData.push(data);
+	}
+
+	console.log(cardData); // 생성된 데이터 확인
+
+	if(cardData != null){
+
+		fetch('/regular/schedule/' + onePay.response.customerUid, {
+			method:"POST",
+			body: JSON.stringify(cardData),
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
+			.then(resp => resp.json())
+			.then(function(schedule) {
+
+
+				console.log("안녕 나는 스케쥴이야");
+				console.log(schedule);
+
+				if(schedule.code == 0){ // 성공
+
+
+				}
+			})
+			.catch(err => {
+				console.log(err);
+				throw err; 
+			});
+	
+	}
+}	            
