@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="second.project.mungFriend.mypage.member.model.dao.UserReservationListMapper">
+	
+	<!-- Reservation resultMap -->
+	<resultMap type="Reservation" id="reserve_rm">
+		<id property="reserveNo" column="RESERVE_NO"/>
+		
+		<result property="dogNo" column="DOG_NO"/>
+		<result property="memberNo" column="MEMBER_NO"/>
+		<result property="reserveDate" column="RESERVE_DATE"/>
+		<result property="reserveTime" column="RESERVE_TIME"/>
+		<result property="reserveFl" column="RESERVE_YN"/>
+		<result property="applicationDate" column="APPLICATION_DATE"/>
+		
+		<result property="dogName" column="DOG_NAME"/>
+		<result property="memberName" column="MEMBER_NAME"/>
+		<result property="memberEmail" column="MEMBER_EMAIL"/>
+		
+		<result property="breedName" column="BREED_NAME"/>
+		<result property="dogBirthDay" column="DOG_BIRTHDAY"/>
+		<result property="dogGender" column="DOG_GENDER"/>
+		
+		<result property="imgPath" column="IMG_PATH"/>
+		<result property="imgRename" column="IMG_RENAME"/>
+	</resultMap>
+
+
+	<!-- 예약 내역 조회 -->
+	<select id="userSelectReservationList" resultMap="reserve_rm">
+		SELECT
+		    DR.RESERVE_NO,
+		    D.DOG_NAME,
+		    DB.BREED_NAME,
+		    <![CDATA[
+		    NVL(
+		        CASE
+		            WHEN MONTHS_BETWEEN(SYSDATE, D.DOG_BIRTHDAY) <= 12 
+		            THEN ROUND(MONTHS_BETWEEN(SYSDATE, D.DOG_BIRTHDAY)) || '개월'
+		            ELSE ROUND(MONTHS_BETWEEN(SYSDATE, D.DOG_BIRTHDAY) / 12) || '세'
+		        END,
+		        '알 수 없음'
+		    ) AS DOG_BIRTHDAY,
+		    ]]>
+		    D.DOG_GENDER,
+		    TO_CHAR(RESERVE_DATE, 'YYYY-MM-DD') AS RESERVE_DATE,
+		    DR.RESERVE_TIME,
+		    DI.IMG_PATH,
+		    DI.IMG_RENAME,
+		    D.DOG_NO
+		FROM DOG_RESERVATION DR
+		LEFT JOIN DOG D ON DR.DOG_NO = D.DOG_NO
+		LEFT JOIN DOG_BREED DB ON D.BREED_NO = DB.BREED_NO
+		LEFT JOIN DOG_IMG DI ON D.DOG_NO = DI.DOG_NO
+		WHERE DR.MEMBER_NO = 2
+		    AND DR.RESERVE_YN = 'Y'
+		    AND DI.IMG_ORDER = 0
+		ORDER BY DR.RESERVE_DATE
+	</select>
+	
+	
+	<!-- 예약 목록 삭제 -->
+	<update id="userDeleteReservation">
+		UPDATE DOG_RESERVATION
+		SET RESERVE_YN = 'N'
+		WHERE DOG_NO = #{dogNo}
+		AND MEMBER_NO = #{memberNo}
+	</update>
+
+	
+</mapper>

@@ -11,8 +11,11 @@ import second.project.mungFriend.adopt.model.dto.Reservation;
 
 public interface AdoptService {
 
-	// 강아지 목록 조회
+	// 강아지 목록 조회 (일반 전체 조회)
 	Map<String, Object> selectDogList(int cp);
+	
+	// 강아지 목록 조회 (필터 조회)
+	Map<String, Object> selectDogList(int cp, Dog selectedFilters);
 
 	// 강아지 상세 조회
 	Dog selectDogDetail(Map<String, Object> map);
@@ -49,12 +52,5 @@ public interface AdoptService {
 	
 	// 강아지 예약하기
 	int dogReservation(Reservation reservationData, int dogNo, int memberNo);
-
-
-
-	
-
-
-
 
 }

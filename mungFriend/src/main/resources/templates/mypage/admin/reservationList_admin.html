@@ -56,7 +56,7 @@
                     <th:block th:unless="${reservationList.isEmpty()}">
                         <div class="list-bottom">
                             <div id="list" th:each="reserve : ${reservationList}">
-                                <input type="checkbox">
+                                <input type="checkbox" name="selectedReservations">
                                 <div id="reserve-no">[[${reserve.reserveNo}]]</div>
                                 <div id="dog-name">[[${reserve.dogName}]]</div>
                                 <div id="reserve-name">[[${reserve.memberName}]]</div>

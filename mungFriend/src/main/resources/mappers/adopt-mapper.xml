@@ -24,6 +24,9 @@
 		<result property="breedName" column="BREED_NAME"/>
 		<result property="thumbnail" column="THUMBNAIL"/>
 		
+		<result property="imgPath" column="IMG_PATH"/>
+		<result property="imgRename" column="IMG_RENAME"/>
+		
 		<collection property="imageList" 
 					select="selectImageList"
 					column="DOG_NO"
@@ -62,15 +65,34 @@
 		WHERE DOG_ADOPT_FL = 'N'
 	</select>	
 	
+	<!-- 강아지 목록 조회 (일반 전체 조회) -->
 	<select id="selectDogList" resultMap="dog_rm">
 		SELECT DOG_NAME, DOG_NO,
-			(SELECT IMG_PATH || IMG_RENAME FROM DOG_IMG I
-			WHERE I.DOG_NO = D.DOG_NO
-			AND IMG_ORDER = 0) THUMBNAIL
-		FROM DOG D
+				IMG_PATH, IMG_RENAME, BREED_NAME
+		FROM DOG
+		LEFT JOIN DOG_BREED USING(BREED_NO)
+		LEFT JOIN DOG_IMG USING(DOG_NO)
 		WHERE DOG_ADOPT_FL = 'N'
+		AND IMG_ORDER = 0 
 		ORDER BY DOG_ADMISSION_DATE DESC
 	</select>
+	
+	<!-- 강아지 목록 조회 (필터 조회) -->
+	<select id="searchDogList" resultMap="dog_rm">
+		SELECT DOG_NAME, DOG_NO,
+		    IMG_PATH, IMG_RENAME, BREED_NAME
+		FROM DOG
+			LEFT JOIN DOG_BREED USING(BREED_NO)
+			LEFT JOIN DOG_IMG USING(DOG_NO)
+		WHERE DOG_ADOPT_FL = 'N'
+			AND IMG_ORDER = 0
+			AND DOG_GENDER = #{dogGender}
+			AND BREED_NAME = #{breedName}
+			AND DOG_SIZE = #{dogSize}
+			AND DOG_NEUTERING_YN = #{dogNeutering}
+		ORDER BY DOG_ADMISSION_DATE DESC
+	</select>
+	
 	
 	<!-- 게시글 한 개 조회 -->
 	<select id="selectDogDetail" resultMap="dog_rm">

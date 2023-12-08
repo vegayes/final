@@ -42,4 +42,7 @@ public class Dog {
 	private String imgPath;
 	private String imgRename;
 	
+	private String selectedFilters;
+	
+	
 }
