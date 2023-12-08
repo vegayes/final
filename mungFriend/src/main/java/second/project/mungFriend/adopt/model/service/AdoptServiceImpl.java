@@ -337,6 +337,39 @@ public class AdoptServiceImpl implements AdoptService{
 		return mapper.dogReservation(reservationData, dogNo, memberNo);
 	}
 
+	
+	// 강아지 입양 시 예약했던 회원번호 조회
+	@Override
+	public List<Object> selectReservation(int dogNo) {
+		
+		// 강아지 입양 시 예약 취소
+		int updateResult = mapper.updateReservation(dogNo);
+		if(updateResult > 0) {
+			return mapper.selectReservation(dogNo);
+		}else {
+			return null;
+		}
+		
+		
+	}
+
+	@Override
+	@Transactional(rollbackFor =  Exception.class)
+	public int insertAlarm(List<Object> memberNoList, int dogNo) {
+		
+		Map<String, Object> parameterMap = new HashMap<>();
+		parameterMap.put("memberNoList", memberNoList);
+		parameterMap.put("dogNo", dogNo);
+
+		int insertResult = mapper.insertAlarm(parameterMap);
+		
+		if(insertResult < 1) {
+			throw new ImageDeleteException();
+		}
+		
+		return insertResult;
+	}
+
 
 
 
