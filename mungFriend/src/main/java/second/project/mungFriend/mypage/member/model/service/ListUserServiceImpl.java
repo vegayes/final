@@ -1,5 +1,7 @@
 package second.project.mungFriend.mypage.member.model.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +52,14 @@ public class ListUserServiceImpl implements ListUserService {
 		System.out.println("donationList" + donationList);
 		for(Donation donation : donationList) {
 				System.out.println("후원 내 : " + donation);
+				Date date = donation.getDonationDate();
+				
+				SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			    String paidAt = fm.format(date);
+				System.out.println("후원 내 값  date 값 : " + paidAt );
+				donation.setPaidAt(paidAt);
+			    
+				
 		}
 		
 		// 4. pagination, memberList를 Map에 담아서 반환

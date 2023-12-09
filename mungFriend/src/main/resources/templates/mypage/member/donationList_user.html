@@ -53,7 +53,7 @@
 	                                <tr class = "donationTBodyTr" th:each="donation, donationState:${donationList}">
 	                                    <td>[[${donationState.count}]]</td>
 	                                    <td>[[${donation.donationType}]]</td>
-	                                    <td>[[${donation.donationDate}]]</td>
+	                                    <td>[[${donation.paidAt}]]</td>
 	                                    <td>[[${donation.donationAmount}]]원</td>
 	                                    <th:block th:if = "${donation.donationType} == '일시'">											
 		                                    <td><div class = "donationInfoCheck" th:onclick="donationInfoCheck([[${donation.receiptUrl}]], [[${session.loginMember.memberNo}]])">조회</div></td>
@@ -112,6 +112,8 @@
                 </div>
             </section>
         </main>
+        
+        <th:block th:replace="~{mypage/member/donationListRegular}"></th:block>
         
         <th:block th:replace="~{common/chatbot}"></th:block>
 		<img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image">

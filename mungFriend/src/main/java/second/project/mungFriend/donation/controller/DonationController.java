@@ -1,7 +1,9 @@
 package second.project.mungFriend.donation.controller;
 
+import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,14 +41,16 @@ public class DonationController {
 
         // 주어진 문자열을 OffsetDateTime으로 파싱
         if (paidAtString != null) {
-            OffsetDateTime paidAt = OffsetDateTime.parse(paidAtString, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
             
             // 원하는 형식으로 변환
-            String formattedPaidAt = paidAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-            System.out.println("변환된 paidAt: " + formattedPaidAt);
-            
-            // 변환된 문자열을 다시 Donation 객체의 paidAt에 설정할 수 있음
-            donation.setPaidAt(formattedPaidAt);
+
+            OffsetDateTime paidAt = OffsetDateTime.parse(paidAtString, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+
+	         // OffsetDateTime을 java.util.Date로 변환
+	        Instant instant = paidAt.toInstant();
+	        Date date = Date.from(instant);
+	         System.out.println("변환된 paidAt: " + date);
+	         donation.setDonationDate(date);
         }
         
 		
@@ -84,6 +88,8 @@ public class DonationController {
 		}
 	}
 	
+	
+
 	
 	
 

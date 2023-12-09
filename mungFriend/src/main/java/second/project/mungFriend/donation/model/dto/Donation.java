@@ -1,5 +1,7 @@
 package second.project.mungFriend.donation.model.dto;
 
+import java.util.Date;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,7 +19,7 @@ public class Donation {
 	private String donationContent;
 	private String donationType;	
 	private int donationAmount;
-	private String donationDate;
+	private Date donationDate;
 	private String donationStatus;	
 	
 	// 회원 정보

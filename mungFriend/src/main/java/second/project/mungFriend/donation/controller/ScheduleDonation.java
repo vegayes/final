@@ -21,6 +21,7 @@ import com.siot.IamportRestClient.request.ScheduleEntry;
 import com.siot.IamportRestClient.request.UnscheduleData;
 import com.siot.IamportRestClient.response.AccessToken;
 import com.siot.IamportRestClient.response.IamportResponse;
+import com.siot.IamportRestClient.response.Payment;
 import com.siot.IamportRestClient.response.Schedule;
 
 import lombok.RequiredArgsConstructor;
@@ -81,6 +82,8 @@ public class ScheduleDonation {
 //			Date schedule_at = new Date(oneSchedule.getSchedule_at());
 			
 	        BigDecimal amount = new BigDecimal(oneSchedule.getAmount());
+	        
+	        System.out.println("정기결제 예약금액 : " + amount);
 
             ScheduleEntry entry = new ScheduleEntry(oneSchedule.getMerchantUid(), date, amount);
 
@@ -114,6 +117,8 @@ public class ScheduleDonation {
  		return  iamportClient.unsubscribeSchedule(cancelSchedule);
 	}
  	
+ 	
+
  	
  	
  	

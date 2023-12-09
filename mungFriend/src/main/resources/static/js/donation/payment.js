@@ -92,7 +92,8 @@ function paymentInfoCheck(){
 		        amount: parseInt(donationAmount.value), // 문자열을 숫자로 변환하여 저장	  
 		        buyer_name : donationName,
 		        buyer_email : donationEmail,
-		        notice_url : 'http://43.202.237.39/donation/donationPay',
+		        // // notice_url : 'http://43.202.237.39/donation/donationPay',
+				// notice_url : 'https://a51a-116-47-77-52.ngrok-free.app/donation/payment'
 		};	
 		
 	if(donationType.value === '일시'){
@@ -106,7 +107,7 @@ function paymentInfoCheck(){
 
 		// 2) 제출 버튼 누르면 유효성 검사 후에 값 받아오기
 		var regularBtn = document.getElementById("regularBtn");
-
+ 
 		regularBtn.addEventListener("click", function() {
 			cardInfo = regularCardInfoCheck();
 
@@ -293,11 +294,11 @@ function paymentDBInput(donation){
 			
 				if(loginMember != null){
 					console.log("넘어갈거임.")
-					location.href = '/mypage/member/donationList';
+					//location.href = '/mypage/member/donationList';
 						// 로그인되면 후원 내역으로 넘어가기
 						return; 
 				}
-				location.href = '/';
+				//location.href = '/';
 				
 			} else {
 				alert("DB 후원 정보 입력 실패");
@@ -354,6 +355,7 @@ function paymentDBInput(donation){
 // }
 
 
+// 결제 예약하기
 function regularSchduel(onePay){
 	
 	const merchantUid = onePay.response.merchantUid;
@@ -364,7 +366,7 @@ function regularSchduel(onePay){
 	const cardData = [];
 
 	const currentTimeStamp = Math.floor(Date.now() / 1000); // 현재 시간의 Unix 타임스탬프 
-	const oneMinute = 60; // *********************** 30일을 기준! ******************************
+	const oneMinute = 10; // *********************** 30일을 기준! ******************************
 
 
 	console.log("currentTimeStamp :" +currentTimeStamp);
@@ -376,7 +378,7 @@ function regularSchduel(onePay){
 			merchantUid: `${new_str}${i}`,
 			schedule_at: currentTimeStamp + (oneMinute * i), // 현재 시간으로부터 1분씩 증가
 			currency: "KRW",
-			amount: 100,
+			amount: onePay.response.amount,
 			name: onePay.response.name,
 			buyer_name: onePay.response.buyerName,
 			buyer_email: onePay.response.buyerEmail

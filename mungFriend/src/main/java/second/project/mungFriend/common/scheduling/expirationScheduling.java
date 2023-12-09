@@ -20,7 +20,7 @@ public class expirationScheduling {
 	//cron = "초 분 시 일 월 요일 [년도]" - 요일 : 1(SUN) ~ 7(SAT)
 //	@Scheduled(cron = "0,30 * * * * *") // 매 분 0초, 30초 마다 수행
 //	@Scheduled(cron = "0 0 0 * * *") // 매일 자정
-	@Scheduled(cron = "0 0,12 * * * *") // 매일 자정 정오마다
+	@Scheduled(cron = "0 0 0,12 * * *") // 매일 자정 정오마다
 	public void couponExpiration() { 
 			
 		System.out.println("=======DB 스케쥴링 진행 ==========");

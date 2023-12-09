@@ -40,7 +40,7 @@
 		VALUES (SEQ_DONATION_INFO_NO.NEXTVAL, 
 					#{memberNo}, #{impUid}, #{merchantUid}, #{donationAmount}, #{cardName},
 					#{applyNum}, #{donationType},  #{billingKey}, #{receiptUrl}, 
-					#{donationContent}, SYSDATE, #{status}, DEFAULT)
+					#{donationContent}, #{donationDate}, #{status}, DEFAULT)
 	</insert>	
 	
 	

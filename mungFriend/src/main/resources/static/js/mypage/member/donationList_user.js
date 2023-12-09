@@ -15,9 +15,11 @@ function donationInfoCheck(receiptUrl, memberNo){
 
 
 function donationCancel(billingKey,receiptUrl,memberNo){
+
+	console.log("billingkey :" + billingKey);
 	
 	//1) 취소
-	fetch('/regular/schedule/' , {
+	fetch('/regular/schedule' , {
 		method:"POST",
 		body: JSON.stringify(billingKey),
 		headers: {
@@ -27,13 +29,29 @@ function donationCancel(billingKey,receiptUrl,memberNo){
     .then(resp => resp.json())
     .then(function(result) {
         console.log("결제 취소 성공?" + JSON.stringify(result));
+
+		if(result.code == 0){
+			console.log("결제 취소 내역이 있음.");
+
+			// 1) 이후의 결제 내역 취소 
+
+			
+
+
+		}else if(result.code == 1){
+			console.log("결제 취소 내역이 없음.");
+
+
+
+
+		}else{
+			console.log("오류");
+		}
+
+
+
     })
     .catch(err => {
         throw err; 
     });
-	
-	
-	
-	
-	
 }
