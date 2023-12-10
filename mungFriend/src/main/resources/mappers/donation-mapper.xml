@@ -24,6 +24,9 @@
 			
 		<result property="receiptUrl" column="DONATION_RECEIPT"/>			
 		<result property="billingKey" column="BILLINGKEY"/>		
+
+		<result property="cancelYN" column="CANCEL_YN"/>		
+		
 		
 	
 	</resultMap>
@@ -40,7 +43,7 @@
 		VALUES (SEQ_DONATION_INFO_NO.NEXTVAL, 
 					#{memberNo}, #{impUid}, #{merchantUid}, #{donationAmount}, #{cardName},
 					#{applyNum}, #{donationType},  #{billingKey}, #{receiptUrl}, 
-					#{donationContent}, #{donationDate}, #{status}, DEFAULT)
+					#{donationContent}, #{donationDate}, #{status},DEFAULT,  DEFAULT)
 	</insert>	
 	
 	
@@ -152,7 +155,7 @@
 		        WHEN DONATION_TYPE = 'R' THEN '정기' 
 		        ELSE DONATION_TYPE 
 		    END AS DONATION_TYPE
-		    ,DONATION_AMOUNT ,BILLINGKEY, DONATION_RECEIPT,   DONATION_DATE , DONATION_STATUS 
+		    ,DONATION_AMOUNT ,BILLINGKEY, DONATION_RECEIPT,   DONATION_DATE , DONATION_STATUS , CANCEL_YN
 		FROM DONATION_INFO  
 		LEFT JOIN "MEMBER" USING(MEMBER_NO)
 		WHERE MEMBER_NO = #{memberNo}
@@ -169,12 +172,19 @@
 		        WHEN DONATION_TYPE = 'R' THEN '정기' 
 		        ELSE DONATION_TYPE 
 		    END AS DONATION_TYPE
-		    ,DONATION_AMOUNT ,BILLINGKEY, DONATION_RECEIPT,   DONATION_DATE , DONATION_STATUS 
+		    ,DONATION_AMOUNT ,BILLINGKEY, DONATION_RECEIPT,   DONATION_DATE , DONATION_STATUS , CANCEL_YN
 		FROM DONATION_INFO  
 		LEFT JOIN "MEMBER" USING(MEMBER_NO)
 		WHERE DONATION_MERCHANT_UID LIKE '%' || #{extractedValue}||'%'
 		ORDER BY DONATION_DATE DESC
 	</select>
+	
+	<!-- 후원 정기 취소 ( 마이페이지/ 유저  ) --> 
+	<update id = "cancelCheck">
+		UPDATE DONATION_INFO
+		SET CANCEL_YN = 'Y'
+		WHERE DONATION_MERCHANT_UID LIKE '%' || #{merchantData} ||'%'
+	</update>
 	
 
 </mapper>

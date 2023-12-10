@@ -54,6 +54,15 @@ public class DonationServiceImpl implements DonationService {
 		
 		return regularList;
 	}
+
+	/**
+	 * 마이페이지 취소
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int cancelCheck(String merchantData) {
+		return mapper.cancelCheck(merchantData);
+	}
 	
 
 	

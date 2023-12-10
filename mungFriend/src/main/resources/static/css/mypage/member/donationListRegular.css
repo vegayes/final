@@ -25,7 +25,7 @@
 
     background-color: rgba(217,217,217,0.7);
     /* display: none; */
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     z-index: 5;
@@ -125,7 +125,7 @@
 
     flex-direction: column;
 
-    flex-basis: 10%
+    flex-basis: 15%
 }
 
 .regularTitle > img{
@@ -158,16 +158,31 @@
 }
 
 
-.payAmountBox{
+.payAmountBox, .nextBox{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
 }
 
 .payAmountBox >div{
+    flex: 1;
     padding: 0px 0px 10px 0px;
     font-size: 16px;
     font-weight: 700;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nextBox > div{
+    flex : 1;
+    padding: 0px 0px 10px 0px;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .payPeriod {
@@ -192,10 +207,21 @@
                 정기결제 테이블
 *************************************************/
 .regularDetail{
+    flex-basis: 55%;
     display: flex;
     /* border : 2px solid green; */
     flex-direction: column;
     padding : 5px 0px;
+}
+
+.regularDetail > div:nth-of-type(1){
+
+    padding : 5px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 700;   
 }
 
 .regularTable{
@@ -208,6 +234,44 @@
     border-collapse: collapse;
 }
 
+.regularTable tbody{
+    overflow:auto;
+    height:190px;
+}
+
+.regularContent{
+    height: 50px;
+    overflow: scroll;
+    overflow-x: hidden;
+
+    border : 2px solid yellow;
+}
+
+.tableWrapper {
+    max-height: 200px; /* 필요한 높이 설정 */
+    overflow-y: auto; /* 수직 스크롤 설정 */
+    display: flex;
+}
+
+.tableWrapper::-webkit-scrollbar {
+    width: 8px;  /* 스크롤바의 너비 */
+}
+
+.tableWrapper::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #FEE4D6; /* 스크롤바의 색상 */
+    
+    border-radius: 5px;
+}
+
+.tableWrapper::-webkit-scrollbar-track {
+    background: white;  /*스크롤바 뒷 배경 색상*/
+}
+
+.regularTheadTr {
+    height: 30px; /* 원하는 높이 설정 */
+}
+
 /*테이블의 헤더*/
 .regularTheadTr th{
     padding : 7px 10px;
@@ -215,12 +279,6 @@
 
     font-size: 12px;
     font-weight: 700;
-}
-
-
-.regularBody{
-    height: 10px;
-    overflow: scroll;
 }
 
 
@@ -260,23 +318,32 @@
 }
 
 
-.regularFoot{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+.regularFoot > tr >td:nth-of-type(2),
+.regularFoot > tr >td:nth-of-type(3){
+    font-size: 12px;
+    font-weight: 700;
+    text-align: right;
 }
 
-
-.regularFoot td{
-    font-size: 10px;
-
-    text-align: center;
+.regularFoot > tr >td:nth-of-type(3){
+    text-align: start;
 }
 
+#sumAmount{
+    padding-left: 10px;
+}
+
+table.regularTable {
+    height: 200px; /* 원하는 높이 설정 */
+    table-layout: fixed;
+}
 /*************************************************
                 정기 결제 버튼 
 *************************************************/
 .terminationBtnFlex{
+
+    flex-basis: 10%;
     display: flex;
     justify-content: center;
     align-items: center;

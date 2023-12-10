@@ -173,10 +173,6 @@ function paymentInfoCheck(){
 
 
 
-
-
-
-	
 			}else{
 				//alert("카드 정보를 정확하게 작성해주세요!");
 				console.log("카드 정보를 정확하게 작성해주세요!");
@@ -238,36 +234,6 @@ function requestPay(paymentData) {
 						
 						// DB에 값 전달
 						paymentDBInput(donation);
-						
-			            // // 컨트롤러에 데이터를 전달하여 DB에 입력하는 로직
-			            // fetch("/donation/donationPay", {
-			            //     method: "POST",
-			            //     body: JSON.stringify(donation),
-			            //     headers: {
-			            //         "Content-Type": "application/json"
-			            //     }
-			            // })
-			            // .then(response => response.text())
-			            // .then(result => {
-			            //     if (result === "y") {
-						// 		console.log("안녕 나 결제 DB 성공하고 들어옴.")
-			                
-			            //         if(loginMember != null){
-						// 			console.log("넘어갈거임.")
-						// 			location.href = '/mypage/member/donationList';
-						// 			 // 로그인되면 후원 내역으로 넘어가기
-						// 			 return; 
-						// 		}
-			            //         location.href = '/';
-			                   
-			            //     } else {
-			            //         alert("DB 후원 정보 입력 실패");
-			            //         return false;
-			            //     }
-			            // })
-			            // .catch(function(error) {
-					    // 	alert("오류가 발생하였습니다.", "에러 내용: " + error, "error");
-						// });				
 				
 					})
 					.catch(function(error) {
@@ -296,11 +262,11 @@ function paymentDBInput(donation){
 			
 				if(loginMember != null){
 					console.log("넘어갈거임.")
-					//location.href = '/mypage/member/donationList';
+					location.href = '/mypage/member/donationList';
 						// 로그인되면 후원 내역으로 넘어가기
 						return; 
 				}
-				//location.href = '/';
+				location.href = '/';
 				
 			} else {
 				alert("DB 후원 정보 입력 실패");
@@ -311,51 +277,6 @@ function paymentDBInput(donation){
 			alert("오류가 발생하였습니다.", "에러 내용: " + error, "error");
 		});	
 }
-
-// 무조건 웹훅으로 값이 승인되면 dB 진행
-// function webhook() {
-// 	var paymentData = {
-// 		pg: "html5_inicis",		//KG이니시스 pg파라미터 값
-// 		pay_method: "card",		//결제 방법
-// 		merchantUid: "donation_" + new Date().getTime(),//주문번호 전달
-// 		// 라디오 버튼에서 선택한 값을 결제 정보에 추가
-// 		name: '멍프랜드 ' + (donationType.value === '일시' ? '일시 후원' : '정기 후원'),
-// 		amount: parseInt(donationAmount.value), // 문자열을 숫자로 변환하여 저장	  
-// 		buyer_name : donationName,
-// 		buyer_email : donationEmail,
-// 		// notice_url : 'https://portone-webhook',
-// 	};	
-
-//     fetch("/portone-webhook", {
-//         method: "POST",
-//         body: JSON.stringify(donation),
-//         headers: {
-//             "Content-Type": "application/json"
-//         }
-//     })
-//     .then(response => response.json()) // 서버로부터 JSON 형식의 응답을 받을 것으로 가정
-//     .then(result => {
-
-// 		console.log("결과 :" + result);
-//         // 서버에서 받은 결과(result)에 따라 로직 수행
-//         if (result.status === "success") {
-//             console.log("결제 DB 입력 성공");
-//             // 성공 시 로직 수행
-//             if (loginMember != null) {
-//                 location.href = '/mypage/member/donationList';
-//             } else {
-//                 location.href = '/';
-//             }
-//         } else {
-//             alert("DB 후원 정보 입력 실패");
-//             return false;
-//         }
-//     })
-//     .catch(error => {
-//         alert("오류가 발생하였습니다. 에러 내용: " + error);
-//     });
-// }
-
 
 // 결제 예약하기
 function regularSchduel(onePay){
@@ -368,12 +289,12 @@ function regularSchduel(onePay){
 	const cardData = [];
 
 	const currentTimeStamp = Math.floor(Date.now() / 1000); // 현재 시간의 Unix 타임스탬프 
-	const oneMinute = 60; // *********************** 30일을 기준! ******************************
+	const oneMinute = 300; // *********************** 30일을 기준! ******************************
 
 
 	console.log("currentTimeStamp :" +currentTimeStamp);
 
-	for (let i = 2; i <= 3; i++) { // *************************************************************12로 바꾸기**************************
+	for (let i = 2; i <= 12; i++) { // *************************************************************12로 바꾸기**************************
 		const data = {
 			customer_uid : onePay.response.customerUid,
 			merchantUid: `${new_str}${i}`,

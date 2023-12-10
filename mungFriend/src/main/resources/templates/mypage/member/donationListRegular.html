@@ -23,7 +23,7 @@
                         <img th:src = "@{images/member/logo.png}">
                         -->
                         <div>
-                            [[${loginMember.memberNickname}]]님의 정기결제 정보 
+                            [[${loginMember.memberNickname}]]님의 정기결제 내역
                         </div>
 
                     </div>
@@ -36,90 +36,59 @@
                             <div id = "regularCount">
                             </div>
                         </div>
-                        <div class = "payAmountBox">
+                        <div class = "nextBox" id = "nextBox">
                             <div>
                                 다음 결제일 
                             </div>
                             <div id = "nextRegular">
+                                X
                             </div>
                         </div>
                         <hr class = "regularHr">
                         <div class = "payPeriod">
                             <div id = "regularPeriod">
-                                정기 결제 기간 : 2023.12.06 ~ 2024.12.06
                             </div>
-                            <div id = "regularPeriod">
-                                정기 결제 금액 : 1000원
+                            <div id = "regularAmount">
                             </div>
-                            <div id = "regularPeriod">
-                                결제 수단 : 신한카드
-                            </div>
-                            <div id = "nextPay">
-                                
+                            <div id = "regularMethod">
                             </div>
                         </div>
-
                     </div>
 
                     <div class = "regularInfo regularDetail" >
                         <div>
                             정기결제 내역
                         </div>
-						<table class="regularTable">
-                            <thead>
-                                <tr class = "regularTheadTr">
-                                    <th>번호</th>
-                                    <th>결제 일시 </th>
-                                    <th>후원 금액</th>
-                                    <th>상세조회</th>
-                                </tr>
-                            </thead>
-                            
-                            <tbody class = "regularBody">
-                                <tr class = "regularTheadTr">
-                                    <td>1</td>
-                                    <td>2023-12-10 09:23:10</td>
-                                    <td>1000</td>
-                                    <td><div class = "regularInfoCheck" th:onclick="donationInfoCheck()">조회</div></td>
-                                </tr>
-                                <tr class = "regularTheadTr">
-                                    <td>1</td>
-                                    <td>2023-12-10 09:23:10</td>
-                                    <td>1000</td>
-                                    <td><div class = "regularInfoCheck" th:onclick="donationInfoCheck()">조회</div></td>
-                                </tr>
-                                <tr class = "regularTheadTr">
-                                    <td>1</td>
-                                    <td>2023-12-10 09:23:10</td>
-                                    <td>1000</td>
-                                    <td><div class = "regularInfoCheck" th:onclick="donationInfoCheck()">조회</div></td>
-                                </tr>
+                        
+                        <div class = "tableWrapper"> 
+                            <table class="regularTable">
+                                <thead>
+                                    <tr class = "regularTheadTr">
+                                        <th>번호</th>
+                                        <th>결제 일시 </th>
+                                        <th>후원 금액</th>
+                                        <th>상세조회</th>
+                                    </tr>
+                                </thead>
+                                
+                                
+                                <tbody class = "regularBody">
+                                </tbody>
     
-                            </tbody>
+                                <tfoot class = "regularFoot">
+                                    <tr>
+                                        <td></td>
+                                        <td>후원 총 금액 :</td>
+                                        <td id = "sumAmount"></td>
+                                        <td></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
 
-                            <tfoot class = "regularFoot">
-                                <tr>
-                                    <td>
-                                    </td>
-                                    <td>총 후원 금액 :</td>
-                                    <td>300원</td>
-                                    <td>
-                                    </td>
-                                </tr>
-                            </tfoot>
-
-                        </table>
-                    </div>
-
-
-
-
-
-                    <div class = "regularInfo terminationBtnFlex">
-                        <div class = "terminationBtn" id = "terminationBtn">
-                            정기 후원 해지
                         </div>
+                        
                     </div>
+
                 </div>
             </div>
         </div>    

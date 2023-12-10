@@ -14,4 +14,10 @@ public interface DonationService {
 	 */
 	List<Donation> selectRegularList(String extractedValue);
 
+	/** 마이페이지/ 결제 취소 된 내역 DB 변경
+	 * @param merchantData
+	 * @return
+	 */
+	int cancelCheck(String merchantData);
+
 }

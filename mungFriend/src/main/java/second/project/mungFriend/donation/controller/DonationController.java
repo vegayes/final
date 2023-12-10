@@ -103,7 +103,6 @@ public class DonationController {
         // 맨 뒤의 '_' 이전까지의 부분 문자열 추출
         String extractedValue = merchant_uid.substring(1, lastIndex);
 
-        System.out.println("추출 :" + extractedValue );
 		
 		//1) 해당 정기결제와 관련된 결제 정보들 가져오기
 		List<Donation> regularList = service.selectRegularList(extractedValue);
