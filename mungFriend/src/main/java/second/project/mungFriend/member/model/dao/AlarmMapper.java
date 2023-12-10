@@ -11,4 +11,7 @@ public interface AlarmMapper {
 
 	List<Alarm> selectAlarm(int memberNo);
 
+	int deleteAlarm(int alarmNo);
+
+
 }

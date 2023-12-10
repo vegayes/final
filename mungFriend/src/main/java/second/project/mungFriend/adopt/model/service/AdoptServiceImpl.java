@@ -392,6 +392,7 @@ public class AdoptServiceImpl implements AdoptService{
 		
 	}
 
+	// 알림 테이블에 삽입
 	@Override
 	@Transactional(rollbackFor =  Exception.class)
 	public int insertAlarm(List<Object> memberNoList, int dogNo) {
