@@ -137,11 +137,11 @@
 	
 	<!-- 후원 내역 개수 확인 ( 마이페이지/ 유저  )  새롭게 바꿈--> 
 	<select id = "countUserDonation" resultType = "_int">
-		SELECT COUNT(DONATION_INFO_NO)  
+		SELECT COUNT(DONATION_INFO_NO)
 		FROM DONATION_INFO
 		LEFT JOIN "MEMBER" USING(MEMBER_NO)
 		WHERE MEMBER_NO = #{memberNo}
-		ORDER BY DONATION_DATE DESC
+		AND SUBSTR(DONATION_MERCHANT_UID, -2, INSTR(DONATION_MERCHANT_UID, '_')) = '_1'
 	</select>	
 	
 	<!-- 후원 내역 확인 ( 마이페이지/ 유저  ) 새롭게 바꿈 --> 
@@ -156,6 +156,23 @@
 		FROM DONATION_INFO  
 		LEFT JOIN "MEMBER" USING(MEMBER_NO)
 		WHERE MEMBER_NO = #{memberNo}
+		AND SUBSTR(DONATION_MERCHANT_UID, -2, INSTR(DONATION_MERCHANT_UID, '_')) = '_1'
+		ORDER BY DONATION_DATE DESC
+	</select>
+	
+	
+	<!-- 후원 내역 확인 ( 마이페이지/ 유저  ) 새롭게 바꿈 --> 
+	<select id = "selectRegularList" resultMap = "donation_rm">
+		SELECT DONATION_INFO_NO , MEMBER_NAME, MEMBER_EMAIL, DONATION_UID, DONATION_MERCHANT_UID, DONATION_CARD, DONATION_CONTENT, 
+		    CASE 
+		        WHEN DONATION_TYPE = 'O' THEN '일시' 
+		        WHEN DONATION_TYPE = 'R' THEN '정기' 
+		        ELSE DONATION_TYPE 
+		    END AS DONATION_TYPE
+		    ,DONATION_AMOUNT ,BILLINGKEY, DONATION_RECEIPT,   DONATION_DATE , DONATION_STATUS 
+		FROM DONATION_INFO  
+		LEFT JOIN "MEMBER" USING(MEMBER_NO)
+		WHERE DONATION_MERCHANT_UID LIKE '%' || #{extractedValue}||'%'
 		ORDER BY DONATION_DATE DESC
 	</select>
 	

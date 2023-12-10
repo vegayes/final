@@ -51,15 +51,14 @@ public class ListUserServiceImpl implements ListUserService {
 		List<Donation> donationList = mapperDonation.userDonationList(memberNo, rowBounds);
 		System.out.println("donationList" + donationList);
 		for(Donation donation : donationList) {
-				System.out.println("후원 내 : " + donation);
-				Date date = donation.getDonationDate();
-				
-				SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			    String paidAt = fm.format(date);
-				System.out.println("후원 내 값  date 값 : " + paidAt );
-				donation.setPaidAt(paidAt);
-			    
-				
+			System.out.println("후원 내 : " + donation);
+			Date date = donation.getDonationDate();
+			
+			SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		    String paidAt = fm.format(date);
+			System.out.println("후원 내 값  date 값 : " + paidAt );
+			donation.setPaidAt(paidAt);
+			
 		}
 		
 		// 4. pagination, memberList를 Map에 담아서 반환

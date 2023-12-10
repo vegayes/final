@@ -113,7 +113,7 @@ public class WebHookController {
 		 donation.setDonationType("R"); // 일단 무조건 정기임.
 		 donation.setBillingKey(resp.getResponse().getCustomerUid());
 		 donation.setReceiptUrl(resp.getResponse().getReceiptUrl());
-		 donation.setDonationContent(date  + parts[3]+ " 번" +" 정기결제" );
+		 donation.setDonationContent( parts[4]+ " 번째" +" 정기결제" );
 			 
 			 
 		 }
@@ -124,7 +124,7 @@ public class WebHookController {
 		int result = service.donationPay(donation);
 		
 		if(result > 0) {
-			System.out.println("결제 성공 인서트하고 이제 y 보낼거임. ");
+			System.out.println("웹훅 결제 성공 인서트하고 이제 y 보낼거임. ");
 			return "y";
 		}else {
 			
@@ -132,8 +132,5 @@ public class WebHookController {
 		}
 
 	}
-
-	
-
 }
 

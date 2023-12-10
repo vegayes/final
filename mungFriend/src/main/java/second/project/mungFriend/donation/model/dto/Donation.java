@@ -39,5 +39,6 @@ public class Donation {
 	
 	//알림 여부
 	private String alaramYN; 
+	
 		
 }

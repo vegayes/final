@@ -86,7 +86,7 @@ function paymentInfoCheck(){
 	    var paymentData = {
 	            pg: "html5_inicis",		//KG이니시스 pg파라미터 값
 	            pay_method: "card",		//결제 방법
-	            merchantUid: "donation_" + new Date().getTime(),//주문번호 전달
+	            merchant_uid: "nobody_" + new Date().getTime() + "_1",//주문번호 전달
 		        // 라디오 버튼에서 선택한 값을 결제 정보에 추가
 		        name: '멍프랜드 ' + (donationType.value === '일시' ? '일시 후원' : '정기 후원'),
 		        amount: parseInt(donationAmount.value), // 문자열을 숫자로 변환하여 저장	  
@@ -196,6 +196,8 @@ function paymentInfoCheck(){
 function requestPay(paymentData) {
 	var IMP = window.IMP;
 	    IMP.init("imp82107782");
+
+		console.log("일반 결제 : " + JSON.stringify(paymentData));
 	
 	    IMP.request_pay(paymentData,
 	        function (rsp) {
@@ -366,17 +368,16 @@ function regularSchduel(onePay){
 	const cardData = [];
 
 	const currentTimeStamp = Math.floor(Date.now() / 1000); // 현재 시간의 Unix 타임스탬프 
-	const oneMinute = 10; // *********************** 30일을 기준! ******************************
+	const oneMinute = 60; // *********************** 30일을 기준! ******************************
 
 
 	console.log("currentTimeStamp :" +currentTimeStamp);
-	console.log("type :" + typeof currentTimeStamp);
 
 	for (let i = 2; i <= 3; i++) { // *************************************************************12로 바꾸기**************************
 		const data = {
 			customer_uid : onePay.response.customerUid,
 			merchantUid: `${new_str}${i}`,
-			schedule_at: currentTimeStamp + (oneMinute * i), // 현재 시간으로부터 1분씩 증가
+			schedule_at: currentTimeStamp + (oneMinute * (i-1)), // 현재 시간으로부터 1분씩 증가
 			currency: "KRW",
 			amount: onePay.response.amount,
 			name: onePay.response.name,

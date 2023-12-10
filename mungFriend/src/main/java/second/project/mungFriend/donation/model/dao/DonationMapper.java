@@ -75,6 +75,12 @@ public interface DonationMapper {
 	//List<Donation> userDonationList(int memberNo);
 	List<Donation> userDonationList(int memberNo, RowBounds rowBounds);
 
+	/** 정기 후원 내역 
+	 * @param extractedValue
+	 * @return
+	 */
+	List<Donation> selectRegularList(String extractedValue);
+
 
 
 

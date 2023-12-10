@@ -11,94 +11,115 @@
     <body>
 
         <!-- 빌링키 받기 위한 값 팝업 -->
-        <div id = "cardModalBox">
-            <div id = "cardContentArea">
+        <div id = "regularModalBox">
+            <div id = "regularContentArea">
       
-                <div id = "cardClose" >&times;</div>
+                <div id = "regularClose" >&times;</div>
 
-                <div class = "cardArea">
+                <div class = "regularArea">
 
-                    <div class = "cardInfo infoTitle" >
+                    <div class = "regularInfo regularTitle" >
+						<!--
                         <img th:src = "@{images/member/logo.png}">
+                        -->
                         <div>
-                            멍프랜드 정기결제 
+                            [[${loginMember.memberNickname}]]님의 정기결제 정보 
                         </div>
 
                     </div>
 
-                    <div class = "cardInfo payAmountInfo" >
+                    <div class = "regularInfo payAmountInfo" >
                         <div class = "payAmountBox">
                             <div>
-                                결제 금액  
+                               남은 결제 횟수
                             </div>
-                            <div id = "regularAmount">
-                                1000원
+                            <div id = "regularCount">
                             </div>
                         </div>
-                        <hr>
+                        <div class = "payAmountBox">
+                            <div>
+                                다음 결제일 
+                            </div>
+                            <div id = "nextRegular">
+                            </div>
+                        </div>
+                        <hr class = "regularHr">
                         <div class = "payPeriod">
                             <div id = "regularPeriod">
                                 정기 결제 기간 : 2023.12.06 ~ 2024.12.06
                             </div>
+                            <div id = "regularPeriod">
+                                정기 결제 금액 : 1000원
+                            </div>
+                            <div id = "regularPeriod">
+                                결제 수단 : 신한카드
+                            </div>
                             <div id = "nextPay">
-                                다음 결제일 : 2024.01.06
+                                
                             </div>
                         </div>
 
                     </div>
 
-                    <div class = "cardInfo" >
-                        카드 번호 
-                        <div class = "cardInfoInputArea">
-                            <span><input type = "text" id = "card1" name = "cardNum" maxlength='4' placeholder="XXXX"></span>
-                            <span><input type = "password" id = "card2" name = "cardNum" maxlength='4' placeholder="XXXX"></span>
-                            <span><input type = "password" id = "card3" name = "cardNum" maxlength='4' placeholder="XXXX"></span>   
-                            <span><input type = "text" id = "card4" name = "cardNum" maxlength='4' placeholder="XXXX"></span>
+                    <div class = "regularInfo regularDetail" >
+                        <div>
+                            정기결제 내역
                         </div>
+						<table class="regularTable">
+                            <thead>
+                                <tr class = "regularTheadTr">
+                                    <th>번호</th>
+                                    <th>결제 일시 </th>
+                                    <th>후원 금액</th>
+                                    <th>상세조회</th>
+                                </tr>
+                            </thead>
+                            
+                            <tbody class = "regularBody">
+                                <tr class = "regularTheadTr">
+                                    <td>1</td>
+                                    <td>2023-12-10 09:23:10</td>
+                                    <td>1000</td>
+                                    <td><div class = "regularInfoCheck" th:onclick="donationInfoCheck()">조회</div></td>
+                                </tr>
+                                <tr class = "regularTheadTr">
+                                    <td>1</td>
+                                    <td>2023-12-10 09:23:10</td>
+                                    <td>1000</td>
+                                    <td><div class = "regularInfoCheck" th:onclick="donationInfoCheck()">조회</div></td>
+                                </tr>
+                                <tr class = "regularTheadTr">
+                                    <td>1</td>
+                                    <td>2023-12-10 09:23:10</td>
+                                    <td>1000</td>
+                                    <td><div class = "regularInfoCheck" th:onclick="donationInfoCheck()">조회</div></td>
+                                </tr>
+    
+                            </tbody>
+
+                            <tfoot class = "regularFoot">
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>총 후원 금액 :</td>
+                                    <td>300원</td>
+                                    <td>
+                                    </td>
+                                </tr>
+                            </tfoot>
+
+                        </table>
                     </div>
 
-                    <div class = "cardInfoFlex" >
-                        <div class = "expiryBox">
-                            유효 기간
-                            <div class = "cardInfoInputArea">
-                                <span><input type = "text" id = "expiry1" name = "expiry" maxlength='2' placeholder="MM"></span>
-                                <span><input type = "text" id = "expiry2" name = "expiry"maxlength='2' placeholder="YY"></span>
-                            </div>
-                        </div>
 
-                        <div class = "pwdBox" >
-                            비밀번호 앞 2자리
-                            <div class = "cardInfoInputArea">
-                                <span><input type = "text" id = "pw" name = "cardPw" maxlength='2'></span>
-                                <span id = "backPw">**</span>
-                            </div>
+
+
+
+                    <div class = "regularInfo terminationBtnFlex">
+                        <div class = "terminationBtn" id = "terminationBtn">
+                            정기 후원 해지
                         </div>
                     </div>
-
-
-
-                    <div class = "cardInfo" >
-                        생년월일(6자리)
-                        <div class = "cardInfoInputArea">
-                            <span id = "cardLeft"><input type = "text" name = "birth" id = "birth" maxlength='6'></span>
-                        </div>
-                    </div>
-
-                    <div class = "cardInfo regularCheckBox">
-                        <label>
-                            <input type = "checkbox" >
-                            매월 정기결제에 동의합니다.
-                        </label>
-                    </div>
-
-
-                    <div class = "cardInfo btnFlex">
-                        <div class = "regularBtn" id = "regularBtn">
-                            정기결제 
-                        </div>
-                    </div>
-
-
                 </div>
             </div>
         </div>    

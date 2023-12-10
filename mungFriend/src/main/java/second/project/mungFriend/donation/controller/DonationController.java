@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -88,7 +89,28 @@ public class DonationController {
 		}
 	}
 	
-	
+	@PostMapping("/regular/detail")
+	@ResponseBody
+	public List<Donation> regularList(@RequestBody String merchant_uid,
+			@SessionAttribute(value ="loginMember", required = false) Member loginMember) throws Exception{
+		
+		System.out.println("정보 분석");
+		System.out.println("merchnat_uid :" + merchant_uid);
+		
+        // 맨 뒤의 '_'의 인덱스 찾기
+        int lastIndex = merchant_uid.lastIndexOf('_');
+
+        // 맨 뒤의 '_' 이전까지의 부분 문자열 추출
+        String extractedValue = merchant_uid.substring(1, lastIndex);
+
+        System.out.println("추출 :" + extractedValue );
+		
+		//1) 해당 정기결제와 관련된 결제 정보들 가져오기
+		List<Donation> regularList = service.selectRegularList(extractedValue);
+		
+		
+		return regularList;
+	}
 
 	
 	
