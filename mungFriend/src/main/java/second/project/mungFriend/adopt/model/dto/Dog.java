@@ -1,5 +1,6 @@
 package second.project.mungFriend.adopt.model.dto;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import lombok.Getter;
@@ -43,6 +44,10 @@ public class Dog {
 	private String imgRename;
 	
 	private String selectedFilters;
+	
+	private LocalDate toDate;
+	private LocalDate fromDate;
+	
 	
 	
 }

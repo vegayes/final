@@ -170,24 +170,42 @@ form{
     font-weight: bold;
 }
 
-.list-top > div:nth-child(2),
-.list-top > div:nth-child(3),
-.list-top > div:nth-child(6){
-    flex-basis: 10%;
+.list-top > div:nth-child(2){
+    flex-basis: 11%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.list-top > div:nth-child(4),
+.list-top > div:nth-child(3){
+    flex-basis: 9%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.list-top > div:nth-child(4){
+    flex-basis: 19%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .list-top > div:nth-child(5){
-    flex-basis: 20%;
+    flex-basis: 19%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.list-top > div:nth-child(7){
+.list-top > div:nth-child(6){
+    flex-basis: 9%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.list-top > div:nth-child(7) {
     flex-basis: 15%;
     display: flex;
     justify-content: center;
@@ -200,7 +218,7 @@ form{
     justify-content: end;
     align-items: center;
 
-    padding-right: 19px;
+    padding-right: 11px;
 }
 
 /* list-bottom */
@@ -247,7 +265,7 @@ form{
 
 #list > div:nth-child(5),
 #list > div:nth-child(6){
-    flex-basis: 20%;
+    flex-basis: 19%;
     display: flex;
     justify-content: center;
     align-items: center;
