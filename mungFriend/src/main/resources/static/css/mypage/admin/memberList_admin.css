@@ -240,6 +240,7 @@ a:hover{
     background-color: #FA7575;
 
     cursor: pointer;
+    font-size: 12px;
 } 
 
 /*탈퇴완료 버튼*/
@@ -292,7 +293,7 @@ a:hover{
 
 .current{
     font-weight: bold;
-    background-color: #F95353;
+    background-color: #F69C9C;
     border-radius: 50%;
     color: white !important;
     letter-spacing: 0 !important;
