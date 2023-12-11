@@ -69,7 +69,7 @@ public class MemberController {
 			model.addAttribute("loginMember", loginMember);
 			//로그인 시 알림목록 얻어오기
 			List<Alarm> alarmList = service.selectAlarm(loginMember.getMemberNo()); 
-			System.out.println("알림목록 : " +alarmList);
+			//System.out.println("알림목록 : " +alarmList);
 			session.setAttribute("alarmList", alarmList);
 			
 		} else { // 로그인 실패

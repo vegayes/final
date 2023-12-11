@@ -7,6 +7,7 @@ function deleteAlarm(alarmNo,element) {
     .then(result => {
         if(result > 0){
             console.log("삭제완료");
+            element.closest('li').style.display = 'none';
             selectAlarmList(memberNo); // 목록을 다시 조회해서 삭제된 글을 제거
         }else{
             console.log("삭제실패");

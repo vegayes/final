@@ -36,7 +36,7 @@ public class ListUserController {
 									@RequestParam(value="cp", required = false, defaultValue = "1") int cp) {
 			
 			
-			System.out.println("로그인 멤버 : " + loginMember.getMemberNo());
+			//System.out.println("로그인 멤버 : " + loginMember.getMemberNo());
 			
 			// 1) 후원 내역 가져오기
 			//List<Donation> selectDonationList = service.userDonationList(loginMember.getMemberNo());
@@ -61,7 +61,7 @@ public class ListUserController {
 			List<Coupon> selectCouponList = service.selectCouponList(loginMember.getMemberNo());
 			
 			for(Coupon  coupon : selectCouponList) {
-				System.out.println("후원 출력 : " + coupon);
+				//System.out.println("후원 출력 : " + coupon);
 			}
 			
 			model.addAttribute("couponList", selectCouponList);				

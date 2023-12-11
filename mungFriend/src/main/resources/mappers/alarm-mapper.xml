@@ -29,5 +29,30 @@
 		</update>
 		
 		
+		<select id = "selectcouponAlarm" resultMap = "alarm_rm">
+			
+			SELECT MEMBER_NO
+			FROM TEST_COUPON 
+			LEFT JOIN TEST_COUPON_CONTENT USING(COUPON_CONTENT_NO)
+			WHERE COUPON_STATUS = 'Y'
+			AND ALARM_YN = 'N'
+			<![CDATA[ 
+			AND COUPON_DATE+15 <= TO_DATE(#{formateNow}, 'YYYY-MM-DD')	
+			]]>	
+		</select>
+		
+		<insert id="insertAlarm">
+			INSERT INTO ALARM VALUES
+			(SEQ_ALARM_NO.NEXTVAL, #{memberNo}, DEFAULT, 'C', NULL, NULL)
+		</insert>
+		
+		<update id="updateAlarm">
+			UPDATE TEST_COUPON SET ALARM_YN = 'Y'
+			WHERE MEMBER_NO = #{memberNo}
+		</update>
+	
+	
+	
+	
 	
 </mapper>

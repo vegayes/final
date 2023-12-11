@@ -24,9 +24,11 @@ public class MainController {
 	public String mainForward(HttpSession session) {
 		
 		Member loginMember = (Member) session.getAttribute("loginMember");
-		System.out.println("메인에서 멤버 : " + loginMember);
+		//System.out.println("메인에서 멤버 : " + loginMember);
 		if(loginMember != null) {
+			//System.out.println("메인에서 알림 조회");
 			List<Alarm> alarmList = service.selectAlarm(loginMember.getMemberNo()); 
+			//System.out.println("알림정보 : " + alarmList);
 			session.setAttribute("alarmList", alarmList);
 		}
 		
