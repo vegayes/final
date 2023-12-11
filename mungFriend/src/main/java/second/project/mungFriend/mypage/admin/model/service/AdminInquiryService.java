@@ -23,7 +23,13 @@ public interface AdminInquiryService {
 	int completeAnswer(int inquiryNo, String adminReply);
 
 
-	List<Inquiry> searchInquiries(String keyword);
+	List<Inquiry> findInquiriesByNickname(String nickname);
+
+
+	
+
+
+
 
 
 	
