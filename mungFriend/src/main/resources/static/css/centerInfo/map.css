@@ -26,6 +26,17 @@ main {
 }
 
 
+element.style {
+    width: 750px;
+    height: 500px;
+    position: relative;
+    overflow: hidden;
+    margin: 220px 0 0 518px;
+    background: url(http://t1.daumcdn.net/mapjsapi/images/2x/bg_tile.png);
+}
+
+
+
 
 .fixed-image {
 	position: fixed;
@@ -49,10 +60,10 @@ main {
 
 
 .map-header {
-   position: absolute;
-    top: 150px; /* 상단에서부터의 거리 */
-    left: 45%; /* 왼쪽에서부터의 거리 */
-    transform: translateX(-50%); /* X축으로 -50% 만큼 이동시켜 가운데 정렬 */
+    position: absolute;
+    top: 164px;
+    left: 30%;
+    transform: translateX(-50%);
 }
 
 .map-header h2 {
@@ -97,10 +108,11 @@ main {
 
 #menu_wrap {
 	position: absolute;
-	top: -10px;
+	top:250px;
 	right: 30px;
-	left:  308px;
-	bottom: 30px;
+	left:  -65px;
+	bottom: 40px;
+	
 	width: 250px;
 	margin: 10px 0 30px 10px;
 	padding: 5px;
@@ -109,6 +121,8 @@ main {
 	z-index: 1;
 	font-size: 12px;
 	border-radius: 10px;
+	
+    transform: translateY(40px); /* 이 부분을 추가 */
 }
 
 .bg_white {

@@ -11,7 +11,7 @@
 </head>
 
 <body>
-<th:block th:replace="~{common/header}"></th:block>
+	<th:block th:replace="~{common/header}"></th:block>
 	<main>
 		<section class="adminIntroArea">
 			<div class="adminIntroTitle">
@@ -20,24 +20,21 @@
 			<hr>
 		</section>
 
-		<section class="adminContentArea" th:object = "${inquiryList}">
+		<section class="adminContentArea" th:object="${inquiryList}">
 
 			<!-- nav 자리-->
-		    <nav class = "navUser">
-                <th:block th:replace="~{common/nav_user}"></th:block>
-            </nav>
-	
+			<nav class="navUser">
+				<th:block th:replace="~{common/nav_user}"></th:block>
+			</nav>
+
 			<div class="adminContentContainer">
-
-
-
-
+				
 				<div class="adminDonationContainer">
 					<div class="tableFix">
 						<table class="donationTable">
 
 							<thead>
-								<tr class="donationTheadTr">
+								<tr class="donationTheadTr" >
 									<th>번호</th>
 									<th>제목</th>
 									<th>작성일</th>
@@ -45,14 +42,15 @@
 								</tr>
 							</thead>
 
-							<tbody>	
+
+							<tbody style="overflow: auto;">
 								<!-- 1:1 문의가 없을 경우 -->
 								<th:block th:if="${#lists.size(inquiryList)} == 0">
 									<tr>
 										<th colspan="4">1:1 문의가 존재하지 않습니다.</th>
 									</tr>
 								</th:block>
-								
+
 								<!-- 1:1 문의가 있을 경우 -->
 								<th:block th:unless="${#lists.size(inquiryList)} == 0">
 									<tr th:each="inquiry : ${inquiryList}" class="donationTBodyTr">
@@ -61,89 +59,40 @@
 											<a th:href="@{/mypage/member/userInquiryscs/{inquiryNo}(inquiryNo=${inquiry.inquiryNo})}"
 												th:text="${inquiry.inquiryTitle}">제목</a>
 										</td>
-									
+
 										<td>[[${inquiry.inquiryDate}]]</td>
-										
+
 										<th:block th:if="${inquiry.inquiryStatus == 'N'}">
 											<td>처리중</td>
 										</th:block>
-										
+
 										<th:block th:if="${inquiry.inquiryStatus == 'Y'}">
 											<td>답변 완료</td>
 										</th:block>
-										
+
 									</tr>
 								</th:block>
 							</tbody>
 						</table>
 					</div>
-
-
 				</div>
 
 				<div class="buttonArea">
-					<a href="http://localhost/mypage/member/userInquiry" class="buttonBox" style=" width: 150px; height: 30px; background-color: #FEE4D6; font-size: 14px; border-radius: 5px;">문의 등록</a>
+					<a href="http://localhost/mypage/member/userInquiry" class="buttonBox"
+						style=" width: 150px; height: 30px; background-color: #FEE4D6; font-size: 14px; border-radius: 5px;">문의
+						등록</a>
 				</div>
 
 
-				<!-- 페이지 네이션 -->
-				<div class="paginationArea">
-					<ul class="pagination">
 
-						<!-- 첫 페이지로 이동 -->
-						<li><a href="#">&lt;&lt;</a></li>
-
-						<!-- 이전 목록 마지막 번호로 이동 -->
-						<li><a href="#">&lt;</a></li>
-
-
-						<!-- 특정 페이지로 이동 -->
-						<!-- jsp 코드 
-                            <c:forEach var="i" begin="${pagination.startPage}" end = "${pagination.endPage}" step="1">
-                                
-                                <c:choose>
-                                    <c:when test="${i == pagination.currentPage }">
-                                        <li><a class="current">${i}</a></li>
-                                    </c:when>
-                                    
-                                    <c:otherwise>
-                                        <li><a href="/board/${boardCode}/?cp=${i}${kq}">${i}</a></li>                  		
-                                    </c:otherwise>
-                                </c:choose>
-                                
-                            </c:forEach>
-                            -->
-						<li><a class="current">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">5</a></li>
-						<li><a href="#">6</a></li>
-						<li><a href="#">7</a></li>
-						<li><a href="#">8</a></li>
-						<li><a href="#">9</a></li>
-						<li><a href="#">10</a></li>
-
-
-
-						<!-- 다음 목록 시작 번호로 이동 -->
-						<li><a href="#">&gt;</a></li>
-
-						<!-- 끝 페이지로 이동 -->
-						<li><a href="#">&gt;&gt;</a></li>
-
-					</ul>
-				</div>
-
-			</div>
 		</section>
 		<th:block th:replace="~{common/chatbot}"></th:block>
 		<img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image">
 		<a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
-		
+
 </body>
 </main>
-	<th:block th:replace="~{common/footer}"></th:block>
+<th:block th:replace="~{common/footer}"></th:block>
 </body>
 
 </html>

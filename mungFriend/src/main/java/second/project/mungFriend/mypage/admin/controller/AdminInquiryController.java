@@ -26,8 +26,7 @@ public class AdminInquiryController {
 	    private AdminInquiryService adminInquiryService;
 
 	    @GetMapping("/adminInquiryBox")
-	    public String adminInquiryBox(Model model
-	    		 ) {
+	    public String adminInquiryBox(Model model) {
 	    	
 	    	
 	    	
@@ -36,7 +35,6 @@ public class AdminInquiryController {
 	        model.addAttribute("inquiryList", inquiryList);
 	        return "mypage/admin/adminInquiryBox";
 	    }
-
 	    
 	 // 1:1 게시글 상세 조회
 		@GetMapping("/adminInquiry/{inquiryNo}")
@@ -51,6 +49,7 @@ public class AdminInquiryController {
 			model.addAttribute("inquiry", inquiryDetail);
 			return "mypage/admin/adminInquiry";
 		}
+		
 		
 		
 		@PostMapping("/admninInquiryBox")
@@ -76,16 +75,29 @@ public class AdminInquiryController {
 		}
 		
 		
-		
-		@GetMapping("/search")
-		public String searchInquiries(@RequestParam String keyword, Model model) {
-		    List<Inquiry> inquiryList = adminInquiryService.searchInquiries(keyword);
-		    model.addAttribute("inquiryList", inquiryList);
-		    return "mypage/admin/adminInquiryBox";
+		@GetMapping("/searchByNickname")
+		public String searchByNickname(@RequestParam("nickname") String nickname, Model model) {
+		    System.out.println("닉네임 : " + nickname);
+		    List<Inquiry> inquiries = adminInquiryService.findInquiriesByNickname(nickname);
+
+		    System.out.println("출력 :" + inquiries);
+
+		    if (inquiries.isEmpty()) {
+		        model.addAttribute("message", "검색 결과가 없습니다");
+		    } else {
+		        model.addAttribute("inquiryList", inquiries);
+		    }
+		    
+		    return "mypage/admin/adminInquiryBox"; // 뷰 페이지 경로 수정 필요
 		}
+		
+}
+		
+		
+		
 		
 	
 
-}
+
 
 	
