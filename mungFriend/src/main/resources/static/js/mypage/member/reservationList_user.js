@@ -9,11 +9,11 @@ function deleteReserve(dogNo){
             
             console.log("result::", result);
             if(result > 0){
-                alert("찜한 목록이 삭제되었습니다");
+                alert("예약 내역이 삭제되었습니다");
                 selectLikeList(); // 목록을 다시 조회해서 삭제된 글을 제거
                 window.location.reload();
             }else{
-                alert("찜한 목록 삭제를 실패하였습니다");
+                alert("예약 내역 삭제를 실패하였습니다");
                 selectLikeList(); 
             }
         })

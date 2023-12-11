@@ -66,11 +66,6 @@ public class AdoptController {
 		
 		System.out.println("selectedFilters::" + selectedFilters);
 		
-//		String dogGender = selectedFilters.getDogGender();
-//		String breedName = selectedFilters.getBreedName();
-//		String dogSize = selectedFilters.getDogSize();
-//		String dogNeutering = selectedFilters.getDogNeutering();
-		
 	    Map<String, Object> map = service.selectDogList(cp, selectedFilters);
 	    
 	    System.out.println("searchMap::" + map);

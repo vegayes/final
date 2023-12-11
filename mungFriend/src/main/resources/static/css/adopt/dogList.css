@@ -200,10 +200,23 @@ form > button > img{
     font-size: 12px;
     
 	list-style: none;
+
+    line-height: 30px;
 }
 
 .pagination a {
     text-decoration: none;
+}
+
+.pagination a:hover{
+    color : red;
+}
+
+.current{
+    background-color: #F69C9C;
+    border-radius: 50%;
+    color: white !important;
+    letter-spacing: 0 !important;
 }
 
 .pagination a {
