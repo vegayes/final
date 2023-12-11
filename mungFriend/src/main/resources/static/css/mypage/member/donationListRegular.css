@@ -28,7 +28,7 @@
     display: none;
     justify-content: center;
     align-items: center;
-    z-index: 5;
+    z-index: 50;
 }
 
 #regularContentArea{
@@ -142,7 +142,7 @@
 *************************************************/
 
 .payAmountInfo{
-    flex-basis: 30%;
+    flex-basis: 25%;
     padding: 10px 0px;
     display: flex;
     flex-direction: column;
@@ -186,15 +186,15 @@
 }
 
 .payPeriod {
-    padding: 10px 0px 2px 80px;
+    padding: 10px 0px 2px 0px;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: start;
+    align-items: center;
 }
 .payPeriod > div{
-    padding: 5px 0px 0px 0px;
+    padding: 7px 0px 0px 0px;
     font-size: 12px;
     font-weight: 400;
 }
@@ -292,8 +292,8 @@
     font-size: 10px;
 }
 
-.regularTheadTr td:nth-of-type(5){
-	padding-left: 10%;
+.regularTheadTr td:nth-of-type(4){
+	padding-left: 5%;
 }
 
 .regularInfoCheck{
@@ -317,7 +317,9 @@
 	cursor: pointer;
 }
 
-
+.regularFoot td{
+	padding : 10px 0px;	
+}
 
 .regularFoot > tr >td:nth-of-type(2),
 .regularFoot > tr >td:nth-of-type(3){

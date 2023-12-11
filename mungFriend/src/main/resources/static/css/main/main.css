@@ -25,13 +25,27 @@ main {
    
 }
 
+ #searchBtn{
+    flex-basis: 8%;
+
+    line-height: 15px;
+    font-size: 1em;
+    border-radius: 0px 5px 5px 0px   ;
+    border: none;
+    background-color: transparent; /* transparent : 투명 */
+    color: #FF9A62;
+    padding : 3px 0px;
+    padding-right: 7px;
+
+    cursor: pointer;
+ }
 
 /* 검색 아이콘 위치 조정 */
 .search-icon {
-	  width: 25px; /* 너비 조정 */
-    height: 25px; /* 높이 조정 */
+	width: 30px; /* 너비 조정 */
+    height: 30px; /* 높이 조정 */
     position: relative; /* 상대 위치 지정 */
-    top: 355px; /* 상단에서 5픽셀 아래로 */
+    top: 350px; /* 상단에서 5픽셀 아래로 */
     left:260px; /* 왼쪽에서 5픽셀 오른쪽으로 */
     /* 추가적인 스타일 설정 */
      cursor: pointer; /* 마우스 오버시 커서 변경 */

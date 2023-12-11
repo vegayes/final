@@ -1,6 +1,7 @@
 package second.project.mungFriend.mypage.member.model.service;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -58,6 +59,21 @@ public class ListUserServiceImpl implements ListUserService {
 		    String paidAt = fm.format(date);
 			System.out.println("후원 내 값  date 값 : " + paidAt );
 			donation.setPaidAt(paidAt);
+			
+			if(donation.getDonationType().equals("정기")) {
+		        Calendar cal = Calendar.getInstance();
+		        cal.setTime(date); // 기존 날짜 설정
+
+		        // 11개월 추가
+		        cal.add(Calendar.MONTH, 11);
+
+		        // 변경된 날짜를 String 형태로 변환
+		        SimpleDateFormat lastDayFormatter = new SimpleDateFormat("yyyy-MM-dd");
+		        String paidAtRegular = lastDayFormatter.format(cal.getTime());
+		        String paidAtStart = lastDayFormatter.format(date);
+		        System.out.println("정기 기간  : " + paidAtStart + " ~ " + paidAtRegular);
+		        donation.setPaidAt(paidAtStart + " ~ " + paidAtRegular); // 같은 날짜 두 번 출력
+			}
 			
 		}
 		

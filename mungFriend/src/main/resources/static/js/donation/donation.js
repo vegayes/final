@@ -71,7 +71,7 @@ $('#btn_add').click(function(evt) {
 });
 $('#btn_add2').click(function(evt) {
     $('.inputAmount').each(function(idx, ele) {
-        $(ele).val(parseInt($(ele).val())+1000);
+        $(ele).val(parseInt($(ele).val())+10000);
     });
     evt.preventDefault();
 });

@@ -60,15 +60,11 @@
 	
 	
 	
-	
-	
-	
-	
-	<!-- 후원 내역 개수 ( 마이페이지/ 관리자 ) --> 
+	<!-- 후원 내역 개수 ( 마이페이지/ 관리자 )  바꿈.--> 
 	<select id = "countDonationList" resultType = "_int">
 		SELECT COUNT(*)
-		FROM (SELECT DONATION_NO 
-				FROM TEST_DONATION
+		FROM (SELECT DONATION_INFO_NO  
+				FROM DONATION_INFO 
 				LEFT JOIN "MEMBER" USING(MEMBER_NO)
 				UNION ALL
 			SELECT NON_DONATION_NO 
@@ -76,17 +72,17 @@
 	</select>
 	
 	
-	<!-- 후원 내역 확인 ( 마이페이지/ 관리자 ) --> 
+	<!-- 후원 내역 확인 ( 마이페이지/ 관리자 ) 바꿈--> 
 	<select id = "selectDonationList" resultMap = "donation_rm">
 		SELECT *
-		FROM (SELECT DONATION_NO , MEMBER_NAME, MEMBER_EMAIL, DONATION_CONTENT,
+		FROM (SELECT DONATION_INFO_NO , MEMBER_NAME, MEMBER_EMAIL, DONATION_CONTENT,
 				    CASE 
 				        WHEN DONATION_TYPE = 'O' THEN '일시' 
 				        WHEN DONATION_TYPE = 'R' THEN '정기' 
 				        ELSE DONATION_TYPE 
 				    END AS DONATION_TYPE
 				    ,DONATION_AMOUNT , DONATION_DATE , DONATION_STATUS 
-		FROM TEST_DONATION
+		FROM DONATION_INFO 
 		LEFT JOIN "MEMBER" USING(MEMBER_NO)
 		UNION ALL
 		SELECT NON_DONATION_NO , MEMBER_NAME, MEMBER_EMAIL, DONATION_CONTENT,
@@ -100,30 +96,30 @@
 	</select>
 	
 	
-	<!-- 후원 내역 검색 개수 ( 마이페이지/ 관리자 ) --> 
+	<!-- 후원 내역 검색 개수 ( 마이페이지/ 관리자 ) 바꿈 --> 
 	<select id = "countSearchDonationList" resultType = "_int">
 		SELECT COUNT(*)
-		FROM (SELECT DONATION_NO ,MEMBER_NAME
-				FROM TEST_DONATION
+		FROM (SELECT DONATION_INFO_NO ,MEMBER_NAME
+				FROM DONATION_INFO
 				LEFT JOIN "MEMBER" USING(MEMBER_NO)
 				UNION ALL
 			SELECT NON_DONATION_NO ,MEMBER_NAME
 				FROM TEST_NON_DONATION)
-		WHERE MEMBER_NAME LIKE '%${donationSearch}%'
+		WHERE MEMBER_NAME LIKE '%' || #{donationSearch} || '%'
 	</select>
 	
 	
-	<!-- 후원 내역 검색 확인 (마이페이지 / 관리자 ) -->
+	<!-- 후원 내역 검색 확인 (마이페이지 / 관리자 ) 바꿈-->
 	<select id = "searchDonationList" resultMap = "donation_rm">
 		SELECT *
-		FROM (SELECT DONATION_NO , MEMBER_NAME, MEMBER_EMAIL, DONATION_CONTENT,
+		FROM (SELECT DONATION_INFO_NO , MEMBER_NAME, MEMBER_EMAIL, DONATION_CONTENT,
 				    CASE 
 				        WHEN DONATION_TYPE = 'O' THEN '일시' 
 				        WHEN DONATION_TYPE = 'R' THEN '정기' 
 				        ELSE DONATION_TYPE 
 				    END AS DONATION_TYPE
 				    ,DONATION_AMOUNT , DONATION_DATE , DONATION_STATUS 
-		FROM TEST_DONATION
+		FROM DONATION_INFO
 		LEFT JOIN "MEMBER" USING(MEMBER_NO)
 		UNION ALL
 		SELECT NON_DONATION_NO , MEMBER_NAME, MEMBER_EMAIL, DONATION_CONTENT,
@@ -133,7 +129,7 @@
 				    END AS DONATION_TYPE
 				    ,DONATION_AMOUNT , DONATION_DATE , DONATION_STATUS 
 		FROM TEST_NON_DONATION)
-		WHERE MEMBER_NAME LIKE '%${donationSearch}%'
+		WHERE MEMBER_NAME LIKE '%' || #{donationSearch} || '%'
 		ORDER BY DONATION_DATE DESC
 	</select>
 	

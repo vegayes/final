@@ -45,6 +45,7 @@ function paymentInfoCheck(){
 		donationFlag = false;
 		return;
 	}else if(donationAmount == null){
+		
 		alert("후원 금액을 선택해주세요~");
 		donationFlag = false;
 		return;
@@ -58,7 +59,7 @@ function paymentInfoCheck(){
 	}
 	
 	/* 직접입력의 경우*/	
-	if(donationAmount.value == 'input'){
+	if(donationAmount.value === 'input'){
 		console.log("금액이 input으로 눌림");	
 		
 		/* 재사용 */
@@ -66,8 +67,9 @@ function paymentInfoCheck(){
 		
 		console.log("입력된 후원 금액 : " + donationAmount.value);	
 		
-		if(donationAmount == 0){
+		if(donationAmount.value == 0){
 			alert("후원 금액을 입력해주세요!");
+			donationFlag = false;
 			donationAmount.focus();
 			return ;
 		}

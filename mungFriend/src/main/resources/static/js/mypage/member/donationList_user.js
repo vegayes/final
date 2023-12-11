@@ -19,8 +19,6 @@ function openCardInfo(merchant_uid){
     .then(resp => resp.json())
     .then(function(list) {
 
- 		console.log("안녕 :" + JSON.stringify(list));
-		// 설정
 		settingRegularInfo(list);
 
 		// merchant  마지막 값 가져오기
@@ -136,6 +134,8 @@ function settingRegularInfo(list){
 	var count = 12 - list.length;
 
 	const regularCount = document.getElementById("regularCount");
+	const leftTitle = document.getElementById("leftTitle");
+	leftTitle.innerText = '남은 결제 횟수';
 	regularCount.innerText = count + '번';
 
 
@@ -267,8 +267,16 @@ function settingRegularInfo(list){
 		console.log("들어옴");
 		const terminationBtnFlex = document.querySelector(".terminationBtnFlex");
 		terminationBtnFlex.remove();
-
-		nextRegular.innerText = `취소됨`;
+		if(list[list.length - 1].cancelYN == 'Y'){			
+			nextRegular.innerText = `취소됨`;
+		}else if (list.length == 12){
+			nextRegular.innerText = `정기결제 완료`;
+		}
+		
+		var countDonation = list.length;
+		
+		leftTitle.innerText = '결제 된 횟수';
+		regularCount.innerText = countDonation + '번';
 	}
 
 	
@@ -348,6 +356,14 @@ function cancelCheck(merchant){
 	
 			const nextRegular = document.getElementById("nextRegular");
 			nextRegular.innerText = `취소됨`;
+			
+			const leftTitle = document.getElementById("leftTitle");
+			leftTitle.innerText = '결제 된 횟수';
+			
+			const lastParts = merchant.split('_');
+			const lastPart = parts[parts.length - 1];
+			
+			regularCount.innerText = (parseInt(lastPart) - 1) + '번';
 		}else{
 
 		}

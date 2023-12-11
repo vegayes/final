@@ -19,18 +19,22 @@ public class DogBreedServiceImpl implements DogBreedService {
 	@Autowired
 	private DogBreedMapper mapper;
 
-	@Override
-	public List<DogBreed> findDogBreed(String searchInput) {
-		
-		System.out.println("검색 :" + searchInput);
-		return mapper.findDogBreed(searchInput);
-	}
+//	@Override
+//	public List<DogBreed> findDogBreed(String searchInput) {
+//		
+//		System.out.println("검색 :" + searchInput);
+//		return mapper.findDogBreed(searchInput);
+//	}
 
+
+	/**
+	 * 메인페이지 검색
+	 */
 	@Override
-	public Map<String, Object> selectDogList1(String searchInput, int cp) {
+	public Map<String, Object> selectDogList(int cp, String searchInput) {
+		
 		// 1. 삭제되지않은 강아지 수 조회
 		int listCount = mapper.getListCount(searchInput);
-		
 		// 2. 조회결과를 cp를 이용해서 Pagination 객체 생성
 		Pagination pagination = new Pagination(listCount, cp);
 		
@@ -48,15 +52,18 @@ public class DogBreedServiceImpl implements DogBreedService {
 		// 2) RowBounds 객체 생성
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		
-		List<Dog> dogList = mapper.selectDogList1(rowBounds);
+		// 강아지 목록 조회 (일반 전체 조회)
+		List<Dog> dogList = mapper.selectDogList(searchInput,rowBounds);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("pagination", pagination);
 		map.put("dogList", dogList);
 		
-		return map;
+		return map;		
 	}
+
+
 	
 	
   
