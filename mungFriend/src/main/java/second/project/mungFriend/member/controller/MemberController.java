@@ -38,6 +38,9 @@ public class MemberController {
 	@Autowired
 	private MemberService service;
 	
+
+	
+	
 	// 로그인 화면 전환
 	@GetMapping("/login")
 	public String loginPage(Model model) {
@@ -52,7 +55,7 @@ public class MemberController {
 	
 	// 로그인
 	@PostMapping("/login")
-	public String login(Member inputMember, Model model, 
+	public String login(Member inputMember, Model model, HttpSession session,
 						@RequestHeader("referer") String referer, RedirectAttributes ra) {
 		
 		Member loginMember = service.login(inputMember);
@@ -67,8 +70,8 @@ public class MemberController {
 			model.addAttribute("loginMember", loginMember);
 			//로그인 시 알림목록 얻어오기
 			List<Alarm> alarmList = service.selectAlarm(loginMember.getMemberNo()); 
-			System.out.println("알림목록 : " +alarmList);
-			model.addAttribute("alarmList", alarmList);
+			//System.out.println("알림목록 : " +alarmList);
+			session.setAttribute("alarmList", alarmList);
 			
 		} else { // 로그인 실패
 			path += referer;

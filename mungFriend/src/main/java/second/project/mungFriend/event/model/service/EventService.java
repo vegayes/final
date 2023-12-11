@@ -43,6 +43,9 @@ public interface EventService {
 	 */
 	int couponInsert(Coupon newCoupon);
 
+	// 유효기간 1주일 내의 쿠폰 알림
+	int selectcouponAlarm(String formatedNow);
+
 	
 
 	

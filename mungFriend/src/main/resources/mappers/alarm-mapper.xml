@@ -11,7 +11,7 @@
 		<result property="memberNo" column="MEMBER_NO"/>
 		
 		<result property="checkYN" column="CHECK_YN"/>
-		<result property="ararmCategory" column="ALARM_CATEGORY"/>
+		<result property="alarmCategory" column="ALARM_CATEGORY"/>
 		<result property="alarmImgPath" column="ALARM_IMG_PATH"/>
 		<result property="alarmImgName" column="ALARM_IMG_RENAME"/>
 	
@@ -20,6 +20,39 @@
 		<select id = "selectAlarm" resultMap = "alarm_rm">
 			SELECT * FROM ALARM 
 			WHERE MEMBER_NO = #{memberNo}
+			AND CHECK_YN = 'N'
 		</select>
+		
+		<update id="deleteAlarm">
+			UPDATE ALARM SET CHECK_YN ='Y'
+			WHERE ALARM_NO = #{alarmNo}
+		</update>
+		
+		
+		<select id = "selectcouponAlarm" resultMap = "alarm_rm">
+			
+			SELECT MEMBER_NO
+			FROM TEST_COUPON 
+			LEFT JOIN TEST_COUPON_CONTENT USING(COUPON_CONTENT_NO)
+			WHERE COUPON_STATUS = 'Y'
+			AND ALARM_YN = 'N'
+			<![CDATA[ 
+			AND COUPON_DATE+15 <= TO_DATE(#{formateNow}, 'YYYY-MM-DD')	
+			]]>	
+		</select>
+		
+		<insert id="insertAlarm">
+			INSERT INTO ALARM VALUES
+			(SEQ_ALARM_NO.NEXTVAL, #{memberNo}, DEFAULT, 'C', NULL, NULL)
+		</insert>
+		
+		<update id="updateAlarm">
+			UPDATE TEST_COUPON SET ALARM_YN = 'Y'
+			WHERE MEMBER_NO = #{memberNo}
+		</update>
+	
+	
+	
+	
 	
 </mapper>

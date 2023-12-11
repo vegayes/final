@@ -8,9 +8,11 @@
 
 	<link rel="stylesheet" th:href="@{/css/main/main.css}">
 	<link rel="stylesheet" th:href="@{/css/main/sideAlarm.css}">
+	<script th:src="@{https://kit.fontawesome.com/ac58eafae7.js}" crossorigin="anonymous"></script>
 </head>
 
 <body>
+	
 
 	<th:block th:replace="~{common/header}"></th:block>
 	<th:block th:replace="~{common/sideAlarm}"></th:block>
@@ -23,7 +25,8 @@
 				<img th:src="@{/images/main/Vector.png}" alt="검색" class="search-icon">
         	</form>
 		</div>
-		
+
+
 		<div class="dog-photo-grid">
 			<div class="dog-photo">
 				<img th:src="@{/images/main/dog1.png}" alt="강아지 1" class="active">
