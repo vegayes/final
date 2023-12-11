@@ -33,7 +33,7 @@ public class MainController {
 
 
 	@GetMapping("/")
-	public String mainForward(HttpSession session) {
+	public String mainForward(HttpSession session, Model model) {
 		
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		//System.out.println("메인에서 멤버 : " + loginMember);
