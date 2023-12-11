@@ -85,7 +85,7 @@ public class PmServiceImpl implements PmService{
 
 	// 활동일지 조회하기
 	@Override
-	public Map<String, Object> selectPmList(int cp) {
+	public Map<String, Object> selectPmList(int memberNo, int cp) {
 		// 1. 활동일지 전체 리스트 수 조회
 		int listCount = mapper.getListCount();
 		
@@ -113,7 +113,7 @@ public class PmServiceImpl implements PmService{
 		// 2) RowBounds 객체 생성
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 
-		List<Pm> pmList = mapper.selectPmList(rowBounds);
+		List<Pm> pmList = mapper.selectPmList(memberNo, rowBounds);
 		
 		// 4. pagination, memberList를 Map에 담아서 반환
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -187,6 +187,19 @@ public class PmServiceImpl implements PmService{
 	@Override
 	public int activityLogDelete(int activityNo) {
 		return mapper.activityLogDelete(activityNo);
+	}
+
+	// 좋아요 추가 버튼 관련
+	@Override
+	public int insertLike(int loginMemberNo, int activityNo) {
+		// System.out.println("Impl : " + loginMemberNo);
+		return mapper.insertLike(loginMemberNo, activityNo);
+	}
+
+	// 좋아요 삭제 버튼 관련
+	@Override
+	public int deleteLike(int activityLikeNo) {
+		return mapper.deleteLike(activityLikeNo);
 	}
 	
 

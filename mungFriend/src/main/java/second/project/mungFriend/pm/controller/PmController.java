@@ -35,10 +35,18 @@ public class PmController {
 	// 활동일지 화면 전환 
 	// 화면 전환 시 데이터를 가져와서 뿌려줌
 	@GetMapping("/activityLog")
-	public String activityLogPage(Model model, @RequestParam(value="cp", required = false, defaultValue = "1") int cp) {
+	public String activityLogPage(int memberNo, Model model, @RequestParam(value="cp", required = false, defaultValue = "1") int cp) {
+		
+//		int memberNo = 0;
+//		
+//		if(loginMember == null) {
+//			memberNo = -1;
+//		} else {
+//			memberNo = loginMember.getMemberNo();			
+//		}
 		
 		// 활동일지 조회하기(페이지네이션과 활동일지 목록을 가져와야 되기때문에 Map으로 받음 => admin 회원관리 참조)
-		Map<String, Object> map = service.selectPmList(cp);
+		Map<String, Object> map = service.selectPmList(memberNo, cp);
 		
 		System.out.println(map);
 		
@@ -77,8 +85,10 @@ public class PmController {
 			message = "활동일지 등록 성공";
 			path = "pm/activityLog";
 			
+			int memberNo = loginMember.getMemberNo();
+			
 			// 활동일지 재조회하기
-			Map<String, Object> map = service.selectPmList(cp);
+			Map<String, Object> map = service.selectPmList(memberNo, cp);
 			model.addAttribute("map", map);
 			
 		} else {
@@ -159,7 +169,7 @@ public class PmController {
 	
 	// 활동일지 삭제하기
 	@GetMapping("/activityLogDelete")
-	public String activityLogDelete(int activityNo, Model model, RedirectAttributes ra) {
+	public String activityLogDelete(@SessionAttribute("loginMember") Member loginMember, int activityNo, Model model, RedirectAttributes ra) {
 		
 		int result = service.activityLogDelete(activityNo);
 		
@@ -171,8 +181,10 @@ public class PmController {
 			
 			message = "활동일지 삭제 성공";
 			
+			int memberNo = loginMember.getMemberNo();
+			
 			// 활동일지 재조회하기
-			Map<String, Object> map = service.selectPmList(1);
+			Map<String, Object> map = service.selectPmList(memberNo, 1);
 			
 			System.out.println(map);
 			
@@ -193,6 +205,55 @@ public class PmController {
 			return "pm/activityLog";
 			
 		}
+	}
+	
+	// 좋아요 추가 버튼 관련
+	@GetMapping("/insertLike")
+	public String insertLike(@SessionAttribute("loginMember") Member loginMember, int activityNo, Model model) {
+
+		// System.out.println(1);
+		int loginMemberNo = loginMember.getMemberNo();
+		// System.out.println(loginMemberNo);
+		
+		int result = service.insertLike(loginMemberNo, activityNo);
+		// System.out.println(result);
+		
+		if(result > 0) { // 좋아요 추가 성공
+			System.out.println("좋아요 추가 성공");
+			
+			Map<String, Object> map = service.selectPmList(loginMember.getMemberNo(), 1);
+			
+			model.addAttribute("map", map);
+			
+		} else { // 좋아요 추가 실패
+			System.out.println("좋아요 추가 실패");
+			
+		}
+		
+		return "pm/activityLog";
+		
+	}
+	
+	// 좋아요 삭제 버튼 관련
+	@GetMapping("/deleteLike")
+	public String deleteLike(@SessionAttribute("loginMember") Member loginMember, int activityLikeNo, Model model) {
+		
+		int result = service.deleteLike(activityLikeNo);
+		
+		if(result > 0) { // 좋아요 삭제 성공
+			System.out.println("좋아요 삭제 성공");
+			
+			Map<String, Object> map = service.selectPmList(loginMember.getMemberNo(), 1);
+			
+			model.addAttribute("map", map);
+			
+		} else { // 좋아요 삭제 실패
+			System.out.println("좋아요 삭제 실패");
+			
+		}
+		
+		return "pm/activityLog";
+		
 	}
 
 }

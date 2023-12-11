@@ -87,6 +87,8 @@ body > section {
 #id-tit {
     flex-basis: 30%;
     font-weight: bold;
+    font-size: 14px;
+    padding-left: 13px;
 }
 
 #id-input {
@@ -95,7 +97,7 @@ body > section {
 
 #id {
     width: 100%;
-    height: 30px;
+    height: 40px;
     border: none;
     border-radius: 5px;
     padding-left: 10px;
@@ -118,7 +120,7 @@ body > section {
 #id-center {
     flex-basis: 50%;
     font-weight: lighter;
-    font-size: 13px;
+    font-size: 11.2px;
 }
 
 #id-right-blank {
@@ -135,6 +137,8 @@ body > section {
 #pw-tit {
     flex-basis: 30%;
     font-weight: bold;
+    font-size: 14px;
+    padding-left: 13px;
 }
 
 #pw-input {
@@ -143,7 +147,7 @@ body > section {
 
 #pw {
     width: 100%;
-    height: 30px;
+    height: 40px;
     border: none;
     border-radius: 5px;
     padding-left: 10px;
@@ -162,6 +166,8 @@ body > section {
 #pw-confir-tit {
     flex-basis: 30%;
     font-weight: bold;
+    font-size: 14px;
+    padding-left: 13px;
 }
 
 #pw-confir-input {
@@ -170,7 +176,7 @@ body > section {
 
 #pw-confir {
     width: 100%;
-    height: 30px;
+    height: 40px;
     border: none;
     border-radius: 5px;
     padding-left: 10px;
@@ -193,7 +199,7 @@ body > section {
 #pw-center {
     flex-basis: 50%;
     font-weight: lighter;
-    font-size: 13px;
+    font-size: 11.2px;
 }
 
 #pw-right-blank {
@@ -210,6 +216,8 @@ body > section {
 #name-tit {
     flex-basis: 30%;
     font-weight: bold;
+    font-size: 14px;
+    padding-left: 13px;
 }
 
 #name-input {
@@ -218,7 +226,7 @@ body > section {
 
 #name {
     width: 100%;
-    height: 30px;
+    height: 40px;
     border: none;
     border-radius: 5px;
     padding-left: 10px;
@@ -241,7 +249,7 @@ body > section {
 #name-center {
     flex-basis: 50%;
     font-weight: lighter;
-    font-size: 13px;
+    font-size: 11.2px;
 }
 
 #name-right-blank {
@@ -258,6 +266,8 @@ body > section {
 #phone-tit {
     flex-basis: 30%;
     font-weight: bold;
+    font-size: 14px;
+    padding-left: 13px;
 }
 
 #phone-input {
@@ -266,7 +276,7 @@ body > section {
 
 #phone {
     width: 100%;
-    height: 30px;
+    height: 40px;
     border: none;
     border-radius: 5px;
     padding-left: 10px;
@@ -289,7 +299,7 @@ body > section {
 #phone-center {
     flex-basis: 50%;
     font-weight: lighter;
-    font-size: 13px;
+    font-size: 11.2px;
 }
 
 #phone-right-blank {
@@ -305,6 +315,8 @@ body > section {
 #email-tit {
     flex-basis: 30%;
     font-weight: bold;
+    font-size: 14px;
+    padding-left: 13px;
 }
 
 #email-input {
@@ -313,7 +325,7 @@ body > section {
 
 #email {
     width: 100%;
-    height: 30px;
+    height: 40px;
     border: none;
     border-radius: 5px;
     padding-left: 10px;
@@ -325,10 +337,12 @@ body > section {
 
 #authNum-btn {
     width: 70px;
+    height: 40px;
     margin-left: 10px;
     border: none;
     border-radius: 5px;
     background-color: white;
+    font-size: 11px;
 }
 
 #authNum-btn:hover {
@@ -348,7 +362,8 @@ body > section {
 #email-center {
     flex-basis: 50%;
     font-weight: lighter;
-    font-size: 13px;
+    font-size: 11.2px;
+    padding-top: 5px;
 }
 
 #email-right-blank {
@@ -364,6 +379,8 @@ body > section {
 #authNum-tit {
     flex-basis: 30%;
     font-weight: bold;
+    font-size: 14px;
+    padding-left: 13px;
 }
 
 #authNum-input {
@@ -372,7 +389,7 @@ body > section {
 
 #authNum {
     width: 100%;
-    height: 30px;
+    height: 40px;
     border: none;
     border-radius: 5px;
     padding-left: 10px;
@@ -384,10 +401,12 @@ body > section {
 
 #authNum-confir-btn {
     width: 70px;
+    height: 40px;
     margin-left: 10px;
     border: none;
     border-radius: 5px;
     background-color: white;
+    font-size: 11px;
 }
 
 #authNum-confir-btn:hover {
@@ -424,6 +443,8 @@ body > section {
 #nickName-tit {
     flex-basis: 30%;
     font-weight: bold;
+    font-size: 14px;
+    padding-left: 13px;
 }
 
 #nickName-input {
@@ -432,7 +453,7 @@ body > section {
 
 #nickName {
     width: 100%;
-    height: 30px;
+    height: 40px;
     border: none;
     border-radius: 5px;
     padding-left: 10px;
@@ -455,7 +476,7 @@ body > section {
 #nickName-center {
     flex-basis: 50%;
     font-weight: lighter;
-    font-size: 13px;
+    font-size: 11.2px;
 }
 
 #nickName-right-blank {
@@ -471,6 +492,8 @@ body > section {
 #addr-tit {
     flex-basis: 30%;
     font-weight: bold;
+    font-size: 14px;
+    padding-left: 13px;
 }
 
 #addr-input {
@@ -480,7 +503,7 @@ body > section {
 /* 우편번호 */
 #sample6_postcode {
     width: 100%;
-    height: 30px;
+    height: 40px;
     border: none;
     border-radius: 5px;
     padding-left: 10px;
@@ -494,11 +517,12 @@ body > section {
 
 #search-btn {
     width: 50px;
-    height: 30px;
+    height: 35px;
     margin-left: 25px;
     border: none;
     border-radius: 5px;
     background-color: white;
+    font-size: 11px;
 }
 
 #search-btn:hover {
@@ -536,7 +560,7 @@ body > section {
 /* 도로명/지번주소 */
 #sample6_address {
     width: 100%;
-    height: 30px;
+    height: 40px;
     border: none;
     border-radius: 5px;
     padding-left: 10px;
@@ -579,7 +603,7 @@ body > section {
 /* 상세주소 */
 #sample6_detailAddress {
     width: 100%;
-    height: 30px;
+    height: 40px;
     border: none;
     border-radius: 5px;
     padding-left: 10px;
@@ -647,7 +671,8 @@ body > section {
     margin: 14px;
     padding: 5px 0px;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 12px;
+    font-weight: lighter;
 }
 
 #uploadInput {
@@ -669,7 +694,7 @@ body > section {
     text-align: center;
     padding: 3px 0px;
     cursor: pointer;
-    font-weight: bold;
+    font-size: 12px;
 }
 
 /* 회원가입 버튼 */
@@ -688,7 +713,7 @@ body > section {
     border: none;
     border-radius: 5px;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 14px;
 }
 
 #signUp-btn:hover {

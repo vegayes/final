@@ -95,6 +95,10 @@ body > section {
     margin-top: 15px;
 }
 
+#name-section {
+	font-size: 14px;
+}
+
 #name {
     width: 330px;
     height: 40px;
@@ -102,6 +106,10 @@ body > section {
     border-radius: 5px;
     margin: 15px 0px;
     padding-left: 10px;
+}
+
+#email-section {
+	font-size: 14px;
 }
 
 #email {
@@ -122,7 +130,7 @@ body > section {
     margin: 20px 0px;
     background-color: white;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 14px;
 }
 
 #find-btn:hover {

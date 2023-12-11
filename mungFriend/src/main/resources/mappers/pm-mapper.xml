@@ -10,7 +10,8 @@
 		<result property="acitivityImg" column="ACTIVITY_IMG" />
 		<result property="activityContent" column="ACTIVITY_CONTENT" />
 		<result property="activityDate" column="ACTIVITY_DATE" />
-		
+		<result property="activityLikeNo" column="ACTIVITY_LIKE_NO" />
+		<result property="likeMemberNo" column="LIKE_MEMBER_NO" />
 	</resultMap>
 	
 	<!-- 활동일지 등록하기 -->
@@ -25,9 +26,23 @@
 	
 	<!-- 현재 페이지에 해당하는 부분에 대한 활동일지 조회하기 -->
 	<select id="selectPmList" resultMap="pm_rm">
-		SELECT ACTIVITY_NO, MEMBER_NO, ACTIVITY_IMG, ACTIVITY_CONTENT, 
-			   TO_CHAR(ACTIVITY_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') AS ACTIVITY_DATE
-		FROM "ACTIVITY_LOG"
+		SELECT 
+			A.ACTIVITY_NO, A.MEMBER_NO, A.ACTIVITY_IMG, A.ACTIVITY_CONTENT, 
+		    TO_CHAR(A.ACTIVITY_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') AS ACTIVITY_DATE,
+		    B.ACTIVITY_LIKE_NO, B.MEMBER_NO AS LIKE_MEMBER_NO
+		FROM 
+			ACTIVITY_LOG A
+			LEFT OUTER JOIN 
+			(
+				SELECT
+					Z.ACTIVITY_LIKE_NO
+					, Z.MEMBER_NO 
+					, Z.ACTIVITY_NO
+				FROM 
+					ACTIVITY_LOG_LIKE Z
+				WHERE Z.MEMBER_NO  = #{memberNo}
+			) B
+			ON A.ACTIVITY_NO  = B.ACTIVITY_NO
 		ORDER BY ACTIVITY_NO DESC
 	</select>
 	
@@ -54,6 +69,16 @@
 	<!-- 활동일지 삭제하기 -->
 	<delete id="activityLogDelete">
 		DELETE FROM ACTIVITY_LOG WHERE ACTIVITY_NO = #{activityNo}
+	</delete>
+	
+	<!-- 좋아요 추가 버튼 관련 -->
+	<insert id="insertLike">
+		INSERT INTO ACTIVITY_LOG_LIKE VALUES(SEQ_ACTIVITY_LIKE_NO.NEXTVAL, #{loginMemberNo}, #{activityNo})
+	</insert>
+	
+	<!-- 좋아요 삭제 버튼 관련 -->
+	<delete id="deleteLike">
+		DELETE FROM ACTIVITY_LOG_LIKE WHERE ACTIVITY_LIKE_NO = #{activityLikeNo}
 	</delete>
 	
 </mapper>

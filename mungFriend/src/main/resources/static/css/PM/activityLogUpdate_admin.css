@@ -76,7 +76,7 @@ body > section {
     display: flex;
     align-items: center;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 17px;
     padding-left: 10px;
 }
 
@@ -105,6 +105,7 @@ body > section {
     justify-content: center;
     align-items: center;
     font-weight: bold;
+    font-size: 14px;
     padding: 10px;
 }
 
@@ -147,7 +148,7 @@ body > section {
     margin: 14px;
     padding: 5px 0px;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 12px;
 }
 
 #uploadInput {
@@ -169,6 +170,7 @@ body > section {
     text-align: center;
     padding: 3px 0px;
     cursor: pointer;
+    font-size: 12px;
 }
 
 /* 내용 영역 */
@@ -184,6 +186,7 @@ body > section {
     justify-content: center;
     align-items: center;
     font-weight: bold;
+    font-size: 14px;
     padding: 10px;
 }
 
@@ -205,6 +208,7 @@ body > section {
     resize: none;
     padding: 10px;
     margin: 10px 0px;
+    font-size: 12px;
 }
 
 /* 수정하기 및 목록으로 영역 */

@@ -18,7 +18,9 @@
                 <li><a>절차 및 관리</a>
                     <ul>
                         <li><a th:href="@{/pm/adoptProcedure}">무료입양 절차</a></li>
-                        <li><a th:href="@{/pm/activityLog}">활동일지</a></li>
+                        <!-- <li><a th:href="@{/pm/activityLog}">활동일지</a></li> -->
+						<li><a th:if="${session.loginMember}" th:href="@{/pm/activityLog(memberNo=${session.loginMember.memberNo})}">활동일지</a></li>
+						<li><a th:unless="${session.loginMember}" th:href="@{/pm/activityLog(memberNo=-1)}">활동일지</a></li>                        
                     </ul> 
                 </li>
                 <li><a>입양 및 입소</a>
