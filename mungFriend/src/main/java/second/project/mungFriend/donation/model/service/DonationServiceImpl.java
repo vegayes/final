@@ -1,5 +1,9 @@
 package second.project.mungFriend.donation.model.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +31,37 @@ public class DonationServiceImpl implements DonationService {
 		}else { // 비회원의 경우
 			return mapper.donationNonMemberPay(donation);
 		}
+	}
+
+	/**
+	 * 후원내역 가져오기
+	 */
+	@Override
+	public List<Donation> selectRegularList(String extractedValue) {
+		
+		List<Donation> regularList = mapper.selectRegularList(extractedValue);
+		System.out.println("regularList" + regularList);
+		for(Donation regular : regularList) {
+			System.out.println("후원 내 : " + regular);
+			Date date = regular.getDonationDate();
+			
+			SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		    String paidAt = fm.format(date);
+			System.out.println("후원 내 값  date 값 : " + paidAt );
+			regular.setPaidAt(paidAt);
+			
+		}
+		
+		return regularList;
+	}
+
+	/**
+	 * 마이페이지 취소
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int cancelCheck(String merchantData) {
+		return mapper.cancelCheck(merchantData);
 	}
 	
 

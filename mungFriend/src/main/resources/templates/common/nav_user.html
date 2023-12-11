@@ -1,12 +1,36 @@
 <!-- 일반사용자인 경우 -->
 <th:block th:unless="${session.loginMember.adminYn == 'Y'}">
     <ul>
-        <li> <a th:href = "@{/mypage/member/myPageLikeList}"> 찜한 목록</a> </li>
-        <li> <a th:href = "@{/mypage/member/reservationList_user}"> 예약 내역</a> </li>
-        <li> <a th:href = "@{/mypage/member/donationList}"> 후원 내역</a> </li>
-        <li> <a th:href = "@{/mypage/member/userInquiryBox}"> 1:1 문의</a></li>
-        <li> <a th:href = "@{/mypage/member/couponList}"> 쿠폰함</a></li>
-        <li> <a th:href = "@{/mypage/member/updateInfoUser}"> 정보 수정</a></li>
-        <li> <a th:href = "@{/mypage/member/secessionUser}"> 회원 탈퇴</a></li>
+        <li> <a th:href = "@{/mypage/member/myPageLikeList}" id = "myPageLikeList"> 찜한 목록</a> </li>
+        <li> <a th:href = "@{/mypage/member/reservationList_user}" id = "reservationList_user"> 예약 내역</a> </li>
+        <li> <a th:href = "@{/mypage/member/donationList}" id = "donationList"> 후원 내역</a> </li>
+        <li> <a th:href = "@{/mypage/member/userInquiryBox}" id= "userInquiryBox"> 1:1 문의</a></li>
+        <li> <a th:href = "@{/mypage/member/couponList}" id = "couponList"> 쿠폰함</a></li>
+        <li> <a th:href = "@{/mypage/member/updateInfoUser}" id = "updateInfoUser"> 정보 수정</a></li>
+        <li> <a th:href = "@{/mypage/member/secessionUser}" id = "secessionUser"> 회원 탈퇴</a></li>
     </ul>
 </th:block>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        const link = ['myPageLikeList', 'reservationList_user', 'donationList', 'userInquiryBox', 
+                    'couponList', 'updateInfoUser', 'secessionUser'];
+        const href = window.location.href;
+        const lastSegment = href.substring(href.lastIndexOf('/') + 1);
+        console.log(lastSegment);
+    
+        // 링크에 해당하는 클래스를 찾아서 스타일 적용
+        
+        link.forEach(linkId => {
+            if (linkId === lastSegment) {
+                const element = document.getElementById(linkId);
+                if (element) {
+                    element.style.textDecoration = 'underline #FF9B9B 2.5px'; 
+                    element.style.textUnderlineOffset = '10px'; 
+                }
+            }
+        });
+
+       })
+</script>

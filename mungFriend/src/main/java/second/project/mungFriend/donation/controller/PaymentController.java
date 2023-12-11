@@ -3,6 +3,7 @@ package second.project.mungFriend.donation.controller;
 import java.io.IOException;
 import java.math.BigDecimal;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -72,6 +73,24 @@ public class PaymentController {
 		return iamportClient.onetimePayment(onetimeData);
 //    	return null;
 	}
+    
+    
+ 	
+	/** 조회 ( 정기 ) 
+	 * @param impUid
+	 * @return
+	 * @throws IamportResponseException
+	 * @throws IOException
+	 */
+//	@GetMapping("/donationCheck/{imp_uid}")
+//	public IamportResponse<Payment> donationCheckPaymentByImpUid(@PathVariable String imp_uid) throws IamportResponseException, IOException {
+//
+//		System.out.println("정기결제 조회 ");
+//		return iamportClient.paymentByImpUid(imp_uid);
+//	}
+	
+	
+	
     
     
     

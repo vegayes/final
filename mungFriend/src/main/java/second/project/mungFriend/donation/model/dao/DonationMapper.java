@@ -7,6 +7,9 @@ import org.apache.ibatis.session.RowBounds;
 
 import second.project.mungFriend.donation.model.dto.Donation;
 
+/**
+ * 
+ */
 @Mapper
 public interface DonationMapper {
 
@@ -74,6 +77,18 @@ public interface DonationMapper {
 	 */
 	//List<Donation> userDonationList(int memberNo);
 	List<Donation> userDonationList(int memberNo, RowBounds rowBounds);
+
+	/** 정기 후원 내역 
+	 * @param extractedValue
+	 * @return
+	 */
+	List<Donation> selectRegularList(String extractedValue);
+
+	/** 후원 취소 
+	 * @param merchantData
+	 * @return
+	 */
+	int cancelCheck(String merchantData);
 
 
 

@@ -1,5 +1,7 @@
 package second.project.mungFriend.mypage.admin.model.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +56,17 @@ public class ListAdminServiceImpl implements ListAdminServcie{
 		 RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 	
 		 List<Donation> donationList = mapperDonation.selectDonationList(rowBounds);
-		
+		System.out.println("donationList" + donationList);
+		for(Donation donation : donationList) {
+			System.out.println("후원 내 : " + donation);
+			Date date = donation.getDonationDate();
+			
+			SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		    String paidAt = fm.format(date);
+			System.out.println("후원 내 값  date 값 : " + paidAt );
+			donation.setPaidAt(paidAt);
+			
+		}	
 		  
 		  // 4. pagination , boardList를 Map에 담아서 반환
 		  Map<String, Object> map = new HashMap<String, Object>();
@@ -88,7 +100,17 @@ public class ListAdminServiceImpl implements ListAdminServcie{
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 
 		List<Donation> searchDonationList = mapperDonation.searchDonationList(donationSearch, rowBounds);
-		
+		System.out.println("searchDonationList" + searchDonationList);
+		for(Donation donation : searchDonationList) {
+			System.out.println("후원 내 : " + donation);
+			Date date = donation.getDonationDate();
+			
+			SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		    String paidAt = fm.format(date);
+			System.out.println("후원 내 값  date 값 : " + paidAt );
+			donation.setPaidAt(paidAt);
+			
+		}			
 		  
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("pagination", pagination);
@@ -113,6 +135,15 @@ public class ListAdminServiceImpl implements ListAdminServcie{
 	@Override
 	public int updateAdm(int admNo) {
 		return mapperAdm.updateAdm(admNo);
+	}
+
+
+	/**
+	 * 입소신청 진행완료
+	 */
+	@Override
+	public List<Admission> selectDoneAdmissionList() {
+		return mapperAdm.selectDoneAdmissionList();
 	}
 
 

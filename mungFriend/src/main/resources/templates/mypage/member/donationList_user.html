@@ -53,13 +53,13 @@
 	                                <tr class = "donationTBodyTr" th:each="donation, donationState:${donationList}">
 	                                    <td>[[${donationState.count}]]</td>
 	                                    <td>[[${donation.donationType}]]</td>
-	                                    <td>[[${donation.donationDate}]]</td>
+	                                    <td>[[${donation.paidAt}]]</td>
 	                                    <td>[[${donation.donationAmount}]]원</td>
 	                                    <th:block th:if = "${donation.donationType} == '일시'">											
 		                                    <td><div class = "donationInfoCheck" th:onclick="donationInfoCheck([[${donation.receiptUrl}]], [[${session.loginMember.memberNo}]])">조회</div></td>
 										</th:block>
 	                                    <th:block th:if = "${donation.donationType} == '정기'">											
-		                                    <td><div class = "donationInfoCheck" th:onclick="donationCancel([[${donation.billingKey}]],[[${donation.receiptUrl}]], [[${session.loginMember.memberNo}]])">조회 및 취소</div></td>
+		                                    <td><div class = "donationInfoCheck" th:onclick="regularInfo([[${donation.billingKey}]],[[${donation.merchantUid}]], [[${session.loginMember.memberNo}]])">조회 및 취소</div></td>
 										</th:block>
 	                                </tr> 
 
@@ -113,13 +113,23 @@
             </section>
         </main>
         
+        <th:block th:replace="~{mypage/member/donationListRegular}"></th:block>
+        
         <th:block th:replace="~{common/chatbot}"></th:block>
 		<img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image">
 		<a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
-    
+		
+		<script th:inline = "javascript">
+			var loginMember = /*[[${session.loginMember}]]*/ null;
+			if(loginMember != null){
+				
+				var memberNo = loginMember.memberNo;
+			}
+			
+		</script>  
      
 	    <th:block th:replace="~{common/footer}"></th:block>
-	    
+
 	    <script th:src="@{/js/mypage/member/donationList_user.js}"></script>
     </body>
 </html>

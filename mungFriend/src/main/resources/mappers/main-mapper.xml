@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="second.project.mungFriend.common.dao.DogBreedMapper">
+<mapper namespace="second.project.mungFriend.common.dao.MainMapper">
 	
 	<resultMap type="Dog" id="dog_rm">
 		<id property="dogNo" column="DOG_NO"/>
@@ -25,31 +25,21 @@
 		
 		<result property="imgPath" column="IMG_PATH"/>
 		<result property="imgRename" column="IMG_RENAME"/>
+		
+
 	</resultMap>
 	
-	<!-- 견종 검색 값 나오기-->
-	<select id="getListCount" resultType="int">
-		SELECT COUNT(*)
-		FROM DOG D
-		WHERE DOG_ADOPT_FL = 'N' AND BREED_NO IN (SELECT BREED_NO
-												FROM DOG_BREED db 
-												WHERE BREED_NAME  LIKE '%' || #{searchInput} || '%')
-		ORDER BY DOG_ADMISSION_DATE DESC
-    </select>
-    
-    <!--검색한 견종 나오기-->
 	<select id="selectDogList" resultMap="dog_rm">
-		SELECT DOG_NAME, DOG_NO,
-				IMG_PATH, IMG_RENAME, BREED_NAME
+		SELECT * FROM (SELECT DOG_NAME, DOG_NO,
+			IMG_PATH, IMG_RENAME, BREED_NAME
 		FROM DOG
 		LEFT JOIN DOG_BREED USING(BREED_NO)
 		LEFT JOIN DOG_IMG USING(DOG_NO)
 		WHERE DOG_ADOPT_FL = 'N'
 		AND IMG_ORDER = 0 
-		AND BREED_NO IN (SELECT BREED_NO
-						FROM DOG_BREED db 
-						WHERE BREED_NAME  LIKE '%' || #{searchInput} || '%')
-		ORDER BY DOG_ADMISSION_DATE DESC
+		ORDER BY DBMS_RANDOM.VALUE())
+	    <![CDATA[  WHERE ROWNUM <=12]]>
 	</select>
+    
     
 </mapper>

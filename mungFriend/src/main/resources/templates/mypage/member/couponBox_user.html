@@ -29,14 +29,13 @@
 
                 <!-- 쿠폰함 내용 영역-->
                 <div class = "userContentContainer">
-					<!--
-	       			<th:block th:if="${#lists.size(couponlist)} == 0">-->
-	       			<th:block th:if="false">
+					
+	       			<th:block th:if="${#lists.size(couponList)} == 0">
 						<div class = "allNotList" >
 							사용가능한 쿠폰이 존재하지 않습니다.	                  										
 						</div>
 	       			</th:block>
-					<th:block th:unless="false">
+					<th:block th:unless="${#lists.size(couponList)} == 0">
 	                    <!-- 쿠폰 영역 잡기-->
 	                    <div class = "userCouponListArea" >
 	
@@ -80,14 +79,7 @@
 		<script th:inline = "javascript">
 			 var loginMember = /*[[${session.loginMember}]]*/ null;
 			 
-		</script>
-		
-        
-        <script th:src ="@{/js/event/view.js}"></script>
-        
-        <th:block th:replace="~{event/event}"></th:block>
-		
-        
+		</script> 
         
 		<th:block th:replace="~{common/chatbot}"></th:block>
 		<img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image">

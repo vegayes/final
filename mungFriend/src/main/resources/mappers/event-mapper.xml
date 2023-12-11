@@ -108,6 +108,7 @@
 		]]>		
 	</select>
 	
+	<!-- 쿠폰 등록 --> 
 	<insert id = "couponInsert">
 		INSERT INTO TEST_COUPON 
 		VALUES (SEQ_COUPON_NO.NEXTVAL,#{memberNo},#{couponContentNo} ,SYSDATE, DEFAULT, DEFAULT)

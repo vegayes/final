@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>조회 및 취소</title>
+
+        <link rel="stylesheet" th:href="@{/css/mypage/member/donationListRegular.css}">
+        <script th:src="@{https://kit.fontawesome.com/ac58eafae7.js}" crossorigin="anonymous"></script>
+    </head>
+    <body>
+
+        <!-- 빌링키 받기 위한 값 팝업 -->
+        <div id = "regularModalBox">
+            <div id = "regularContentArea">
+      
+                <div id = "regularClose" >&times;</div>
+
+                <div class = "regularArea">
+
+                    <div class = "regularInfo regularTitle" >
+						<!--
+                        <img th:src = "@{images/member/logo.png}">
+                        -->
+                        <div>
+                            [[${loginMember.memberNickname}]]님의 정기결제 내역
+                        </div>
+
+                    </div>
+
+                    <div class = "regularInfo payAmountInfo" >
+                        <div class = "payAmountBox">
+                            <div id = "leftTitle">
+                            </div>
+                            <div id = "regularCount">
+                            </div>
+                        </div>
+                        <div class = "nextBox" id = "nextBox">
+                            <div>
+                                다음 결제일 
+                            </div>
+                            <div id = "nextRegular">
+                                X
+                            </div>
+                        </div>
+                        <hr class = "regularHr">
+                        <div class = "payPeriod">
+                            <div id = "regularPeriod">
+                            </div>
+                            <div id = "regularAmount">
+                            </div>
+                            <div id = "regularMethod">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class = "regularInfo regularDetail" >
+                        <div>
+                            정기결제 내역
+                        </div>
+                        
+                        <div class = "tableWrapper"> 
+                            <table class="regularTable">
+                                <thead>
+                                    <tr class = "regularTheadTr">
+                                        <th>번호</th>
+                                        <th>결제 일시 </th>
+                                        <th>후원 금액</th>
+                                        <th>상세조회</th>
+                                    </tr>
+                                </thead>
+                                
+                                
+                                <tbody class = "regularBody">
+                                </tbody>
+    
+                                <tfoot class = "regularFoot">
+                                    <tr>
+                                        <td></td>
+                                        <td>후원 총 금액 :</td>
+                                        <td id = "sumAmount"></td>
+                                        <td></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+
+                        </div>
+                        
+                    </div>
+
+                </div>
+            </div>
+        </div>    
+      
+    </body>
+</html>

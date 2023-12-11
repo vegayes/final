@@ -2,10 +2,10 @@ package second.project.mungFriend.donation.controller;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,16 +19,13 @@ import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.request.ScheduleData;
 import com.siot.IamportRestClient.request.ScheduleEntry;
 import com.siot.IamportRestClient.request.UnscheduleData;
-import com.siot.IamportRestClient.response.AccessToken;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Schedule;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import retrofit2.Call;
-import retrofit2.HttpException;
-import retrofit2.Response;
 import second.project.mungFriend.donation.model.dto.RegularCardInfo;
+import second.project.mungFriend.donation.model.service.DonationService;
 
 @Slf4j
 @RestController
@@ -37,6 +34,8 @@ import second.project.mungFriend.donation.model.dto.RegularCardInfo;
 @PropertySource("classpath:/config.properties")
 public class ScheduleDonation {
 	
+	@Autowired
+	private DonationService service;
 	
 //	@Value("${iamport.imp.key}")
 //	private String key;
@@ -81,6 +80,8 @@ public class ScheduleDonation {
 //			Date schedule_at = new Date(oneSchedule.getSchedule_at());
 			
 	        BigDecimal amount = new BigDecimal(oneSchedule.getAmount());
+	        
+	        System.out.println("정기결제 예약금액 : " + amount);
 
             ScheduleEntry entry = new ScheduleEntry(oneSchedule.getMerchantUid(), date, amount);
 
@@ -105,15 +106,42 @@ public class ScheduleDonation {
  	 */
  	@PostMapping("/schedule")
  	@ResponseBody
-	public IamportResponse<List<Schedule>> unsubscribeSchedule(@RequestBody String customerUid) throws IamportResponseException, IOException {
+	public IamportResponse<List<Schedule>> unsubscribeSchedule(@RequestBody RegularCardInfo cancelData) throws IamportResponseException, IOException {
 
- 		System.out.println("customerUid :" + customerUid);
+ 		System.out.println("cancelData :" + cancelData);
+ 		System.out.println("빌링키 :" + cancelData.getCustomer_uid());
+ 		System.out.println("list :" + cancelData.getMerchantList());
  		
- 		UnscheduleData cancelSchedule = new UnscheduleData(customerUid);
+ 		UnscheduleData cancelSchedule = new UnscheduleData(cancelData.getCustomer_uid());
+ 		
+ 		if(cancelData != null) {
+ 			for(String cancel : cancelData.getMerchantList()) {
+ 				System.out.println("취소 내용 :" + cancel);
+ 				cancelSchedule.addMerchantUid(cancel);
+ 			}
+ 			
+ 		}
+ 		
  		
  		return  iamportClient.unsubscribeSchedule(cancelSchedule);
 	}
  	
+	/** 예약내역 취소 성공 시, DB 값 바꾸기 
+ 	 * @param customerUid
+ 	 * @return
+ 	 * @throws IamportResponseException
+ 	 * @throws IOException
+ 	 */
+ 	@PostMapping("/cancelCheck")
+ 	@ResponseBody
+	public int cancelCheck(@RequestBody String merchantData) throws IamportResponseException, IOException {
+
+ 		merchantData = merchantData.replace("\"", "");
+
+ 		int result = service.cancelCheck(merchantData);
+
+ 		return result;
+	}
  	
  	
  	
