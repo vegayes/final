@@ -41,3 +41,29 @@ function onMouseOut(activityNo) {
 	const activityContent = document.getElementById("check_" + activityNo);
 	activityContent.style.display = "none";
 }
+
+// -----------------------------------------------------------------------
+
+// 좋아요 삭제 버튼 관련
+function onLikeDeleteClick(activityLikeNo) {
+	// alert(activityLikeNo);
+	
+	if(loginMemberNo == null) {
+		alert("로그인 후 이용해주세요.");
+		return;
+	}
+	
+	location.href = "/pm/deleteLike?activityLikeNo=" + activityLikeNo;
+}
+
+// 좋아요 추가 버튼 관련
+function onLikeInsertClick(activityNo) {
+	// alert(activityNo);
+	
+	if(loginMemberNo == null) {
+		alert("로그인 후 이용해주세요.");
+		return;
+	}
+	
+	location.href = "/pm/insertLike?activityNo=" + activityNo;
+}

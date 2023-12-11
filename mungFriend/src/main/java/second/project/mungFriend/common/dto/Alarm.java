@@ -13,7 +13,7 @@ public class Alarm {
 	private int alarmNo;
 	private int memberNo;
 	private String checkYN;
-	private String ararmCategory;
+	private String alarmCategory;
 	private String alarmImgPath;
 	private String alarmImgName;
 	

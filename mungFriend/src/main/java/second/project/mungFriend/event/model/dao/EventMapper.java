@@ -51,4 +51,6 @@ public interface EventMapper {
 	 */
 	int couponInsert(Coupon newCoupon);
 
+	
+
 }

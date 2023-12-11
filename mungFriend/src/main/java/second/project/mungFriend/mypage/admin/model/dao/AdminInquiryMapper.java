@@ -1,6 +1,8 @@
 package second.project.mungFriend.mypage.admin.model.dao;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.session.RowBounds;
+
 import java.util.List;
 import java.util.Map;
 
@@ -27,13 +29,9 @@ public interface AdminInquiryMapper {
 
 
 
-    /**
-     * 검색
-     * @param keyword
-     * @return
-     */
-	List<Inquiry> searchInquiries(String keyword);
-	
-	
+
+    List<Inquiry> findInquiriesByNickname(String nickname) ;
+
+ 
 	
 }

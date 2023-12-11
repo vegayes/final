@@ -76,7 +76,7 @@ body > section {
     display: flex;
     align-items: center;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 17px;
     padding-left: 10px;
 }
 
@@ -134,6 +134,11 @@ body > section {
     opacity: 1; /* 요소의 투명도 설정 : 1=불투명, 0=투명 */
 }
 
+/* 관리자일때만 */
+#imgAdminHover {
+	cursor: pointer;
+}
+
 .checkContent{
 	display: none;
 	position: absolute;
@@ -142,6 +147,7 @@ body > section {
 	padding: 10px;
 	max-width: 150px; /* 최대 너비 설정 */
     word-wrap: break-word; /* 단어가 넘칠 경우 줄바꿈 */ 
+    pointer-events: none; /* 글자 깜빡임 방지 */
 }
 
 .heart1 {
@@ -164,10 +170,13 @@ body > section {
     font-size: 20px;
 }
 
+#emptyHeart-btn:hover {
+	cursor: pointer;
+}
+
 #x-btn {
 	border: none;
-	font-size: 15px;
-	font-weight: bold;
+	font-size: 14px;
 	background-color: transparent;
 	margin-left: 120px;
 }
@@ -180,6 +189,10 @@ body > section {
     border: none;
     background-color: white;
     font-size: 20px;
+}
+
+#fullHeart-btn:hover {
+	cursor: pointer;
 }
 
 #rightMove-section {

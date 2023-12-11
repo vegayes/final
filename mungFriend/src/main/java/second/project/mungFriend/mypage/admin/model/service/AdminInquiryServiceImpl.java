@@ -16,41 +16,42 @@ import java.util.Map;
 @Service
 public class AdminInquiryServiceImpl implements AdminInquiryService {
 
-    @Autowired
-    private AdminInquiryMapper mapper;
+	 @Autowired
+	    private AdminInquiryMapper mapper;
 
-   
+	   
 
-	@Override
-	public List<Inquiry> adminInquiryBox() {
-		return mapper.adminInquiryBox();
+		@Override
+		public List<Inquiry> adminInquiryBox() {
+			return mapper.adminInquiryBox();
+			
+		}
+
+
+
+		@Override
+		public Inquiry adminInquiryDetail(int inquiryNo) {
+			return mapper.adminInquiryDetail(inquiryNo);
+		}
 		
-	}
+		@Override
+		public int completeAnswer(int inquiryNo, String adminReply) {
+			
+			Map<String, Object> map = new HashMap();
+			
+			map.put("inquiryNo", inquiryNo);
+			map.put("adminReply", adminReply);
+			
+			return mapper.completeAnswer(map);
+		}
 
 
 
-	@Override
-	public Inquiry adminInquiryDetail(int inquiryNo) {
-		return mapper.adminInquiryDetail(inquiryNo);
-	}
-	
-	@Override
-	public int completeAnswer(int inquiryNo, String adminReply) {
-		
-		Map<String, Object> map = new HashMap();
-		
-		map.put("inquiryNo", inquiryNo);
-		map.put("adminReply", adminReply);
-		
-		return mapper.completeAnswer(map);
-	}
+		@Override
+		public List<Inquiry> findInquiriesByNickname(String nickname) {
+			return mapper.findInquiriesByNickname(nickname);
+		}
 
-
-
-	@Override
-	public List<Inquiry> searchInquiries(String keyword) {
-		 return mapper.searchInquiries(keyword);
-	}
 
 
 

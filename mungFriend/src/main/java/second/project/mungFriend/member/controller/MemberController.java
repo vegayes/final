@@ -25,6 +25,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import second.project.mungFriend.common.dto.Alarm;
 import second.project.mungFriend.member.model.dto.Member;
+import second.project.mungFriend.member.model.dto.MemberGoogle;
 import second.project.mungFriend.member.model.dto.MemberKakao;
 import second.project.mungFriend.member.model.dto.MemberNaver;
 import second.project.mungFriend.member.model.service.MemberService;
@@ -37,6 +38,9 @@ public class MemberController {
 	@Autowired
 	private MemberService service;
 	
+
+	
+	
 	// 로그인 화면 전환
 	@GetMapping("/login")
 	public String loginPage(Model model) {
@@ -44,14 +48,14 @@ public class MemberController {
 		// 여기서 네이버,카카오톡,구글 등 기본적으로 가져올꺼 셋팅을 한다.
         model.addAttribute("naverUrl", service.getNaverLogin());
         model.addAttribute("kakaoUrl", service.getKakaoLogin());
-//		model.addAttribute("googleUrl", service.getGoogleUrlLogin());
+		model.addAttribute("googleUrl", service.getGoogleUrlLogin());
 		
 		return "member/login";
 	}
 	
 	// 로그인
 	@PostMapping("/login")
-	public String login(Member inputMember, Model model, 
+	public String login(Member inputMember, Model model, HttpSession session,
 						@RequestHeader("referer") String referer, RedirectAttributes ra) {
 		
 		Member loginMember = service.login(inputMember);
@@ -66,8 +70,8 @@ public class MemberController {
 			model.addAttribute("loginMember", loginMember);
 			//로그인 시 알림목록 얻어오기
 			List<Alarm> alarmList = service.selectAlarm(loginMember.getMemberNo()); 
-			System.out.println("알림목록 : " +alarmList);
-			model.addAttribute("alarmList", alarmList);
+			//System.out.println("알림목록 : " +alarmList);
+			session.setAttribute("alarmList", alarmList);
 			
 		} else { // 로그인 실패
 			path += referer;
@@ -268,7 +272,32 @@ public class MemberController {
 			
 		 System.out.println(loginMember);
 		
-		 String path = "redirect:/";
+		 String path = "redirect:";
+		
+		 if(loginMember != null) { // 로그인 성공
+			 path += "/";
+			 ra.addFlashAttribute("message", loginMember.getMemberNickname() + "님 환영합니다.");
+			 model.addAttribute("loginMember", loginMember);		
+		 } else { // 로그인 실패
+			 path += "member/login";
+			 ra.addFlashAttribute("message", "아이디 또는 비밀번호가 불일치합니다.");
+		 }
+		
+		 return path;
+    }
+	
+	// 구글 로그인 확인 후 자동으로 콜백
+	@GetMapping("/oauth2/code/google")
+	 public String callbackGoogle(HttpServletRequest request, Model model, RedirectAttributes ra)  throws Exception {
+		 MemberGoogle googleInfo = service.getGoogleInfo(request.getParameter("code"));
+		 System.out.println("구글~~~~"+request.getParameter("code"));
+		 
+		 // 디비에 해당 정보를 가지고 로그인 하기
+		 Member loginMember = service.loginGoogle(googleInfo);
+			
+		 System.out.println(loginMember);
+
+		 String path = "redirect:";
 		
 		 if(loginMember != null) { // 로그인 성공
 			 path += "/";

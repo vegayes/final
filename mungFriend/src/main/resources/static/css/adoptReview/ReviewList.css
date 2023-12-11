@@ -272,6 +272,12 @@ input, textarea {
     letter-spacing: 0 !important;
 }
 
+/* .current{
+    background-color: #F69C9C;
+    border-radius: 50%;
+    color: white !important;
+    letter-spacing: 0 !important;
+} */
 
 .pagination{
     list-style: none;

@@ -3,6 +3,7 @@ package second.project.mungFriend.member.model.dao;
 import org.apache.ibatis.annotations.Mapper;
 
 import second.project.mungFriend.member.model.dto.Member;
+import second.project.mungFriend.member.model.dto.MemberGoogle;
 import second.project.mungFriend.member.model.dto.MemberKakao;
 import second.project.mungFriend.member.model.dto.MemberNaver;
 
@@ -33,7 +34,7 @@ public interface MemberMapper {
 	 */
 	int findPw(Member updateMember);
 
-	/** 네이버 로그인 후 가져온 회원정보로 없으면 인서트 있으면 셀렉트  
+	/** 네이버 로그인 후 가져온 회원정보로 셀렉트  
 	 * @param Member(id, email,nickname,name)
 	 * @return Member(VO)
 	 */
@@ -46,7 +47,7 @@ public interface MemberMapper {
 	int loginNaverInsert(MemberNaver naverInfo);
 	
 
-	/** 카카오 로그인 후 가져온 회원정보로 없으면 인서트 있으면 셀렉트  
+	/** 카카오 로그인 후 가져온 회원정보로 셀렉트  
 	 * @param Member(id, email,nickname,name)
 	 * @return Member(VO)
 	 */
@@ -57,5 +58,17 @@ public interface MemberMapper {
 	 * @return int
 	 */
 	int loginKakaoInsert(MemberKakao kakaoInfo);
+
+	/** 구글 로그인 후 가져온 회원정보로 셀렉트  
+	 * @param Member(id, email,nickname,name)
+	 * @return Member(VO)
+	 */
+	Member loginGoogle(MemberGoogle googleInfo);
+
+	/** 구글 로그인 후 가져온 회원정보로 없으면 인서트하는 로직  
+	 * @param googleInfo
+	 * @return int
+	 */
+	int loginGoogleInsert(MemberGoogle googleInfo);
 
 }

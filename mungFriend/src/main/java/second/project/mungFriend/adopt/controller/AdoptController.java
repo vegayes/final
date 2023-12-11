@@ -66,11 +66,6 @@ public class AdoptController {
 		
 		System.out.println("selectedFilters::" + selectedFilters);
 		
-//		String dogGender = selectedFilters.getDogGender();
-//		String breedName = selectedFilters.getBreedName();
-//		String dogSize = selectedFilters.getDogSize();
-//		String dogNeutering = selectedFilters.getDogNeutering();
-		
 	    Map<String, Object> map = service.selectDogList(cp, selectedFilters);
 	    
 	    System.out.println("searchMap::" + map);
@@ -333,8 +328,8 @@ public class AdoptController {
 			System.out.println("예약한 회원번호 : " + memberNoList);
 			
 			if(memberNoList != null) {
-				int resultResult = service.insertAlarm(memberNoList,dogNo);
-				System.out.println("알림테이블 삽입결과 : " + resultResult);
+				int insertResult = service.insertAlarm(memberNoList,dogNo);
+				System.out.println("알림테이블 삽입결과 : " + insertResult);
 			}
 			
 		}else {
@@ -367,6 +362,7 @@ public class AdoptController {
 		int dogNo = dog.getDogNo();
 		int memberNo = loginMember.getMemberNo();
 		
+		System.out.println("reservationData : " + reservationData);
 		int result = service.dogReservation(reservationData, dogNo, memberNo); 
 		
 		Map<String, Object> response = new HashMap<>();
