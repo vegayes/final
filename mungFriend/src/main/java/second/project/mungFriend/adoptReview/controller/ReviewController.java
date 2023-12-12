@@ -1,4 +1,4 @@
-package second.project.mungFriend.adoptReview.controller;
+	package second.project.mungFriend.adoptReview.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -38,7 +38,7 @@ public class ReviewController {
 			Model model
 			) {
 			
-			//System.out.println("현재페이지 : " + cp);
+			//System.out.println("paramMap : " + paramMap);
 			
 			//System.out.println("loginMember : " + loginMember);
 			//if(loginMember != null) {model.addAttribute("loginMember", loginMember);}

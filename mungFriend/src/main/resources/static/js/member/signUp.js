@@ -668,7 +668,9 @@ document.getElementById("signUp-form").addEventListener("submit", e=>{
 			
 		}
 
-		
+
+		}	
+
 	}
 	
 	// 모든 유효성 검사가 통과된 경우에만 성공 메세지 표시

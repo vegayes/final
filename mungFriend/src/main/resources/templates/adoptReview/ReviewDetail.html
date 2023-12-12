@@ -141,7 +141,7 @@
                 <button id="deleteReview" th:onclick="|deleteConfirm(${review.reviewNo},${cp})|">삭제하기</button>
             </th:block>
 
-            <button id="toList"><a th:href="@{/adoptReview/reviewList/{cp}(cp = ${cp})}">목록으로</a></button>
+            <button id="toList" style="color: black;"><a th:href="@{/adoptReview/reviewList/{cp}(cp = ${cp})}">목록으로</a></button>
             
         </section>
 

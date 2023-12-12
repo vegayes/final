@@ -52,7 +52,7 @@
             console.log(lastSegment);
         
             // 링크에 해당하는 클래스를 찾아서 스타일 적용
-            
+            /*
             link.forEach(linkId => {
                 if (linkId === lastSegment) {
                     const element = document.getElementById(linkId);
@@ -67,7 +67,26 @@
                     	submenu.classList.toggle('active');
 					}
                 }
-            });
+            });*/
+            link.forEach(linkId => {
+			    const element = document.getElementById(linkId);
+			    if (element && href.includes(linkId)) {
+			        element.style.textDecoration = 'underline #FF9B9B 2.5px'; 
+			        element.style.textUnderlineOffset = '10px'; 
+			        
+			        if (linkId === 'dogStatus' || linkId === 'donationStatus') {
+			            const submenu = element.closest('.hasSubmenu').querySelector('.submenu');
+			            submenu.classList.add('active');
+			        }
+			    }
+			});
+			
+			if(href.includes("adminInquiry")){
+				const element = document.getElementById("adminInquiryBox");
+		        element.style.textDecoration = 'underline #FF9B9B 2.5px'; 
+		        element.style.textUnderlineOffset = '10px'; 	
+			}
+            
 
    	    });
 

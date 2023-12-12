@@ -41,7 +41,6 @@ public class Donation {
 	//알림 여부
 	private String alaramYN; 
 	
-
-	
+	private String memberYN; // 회원 여부
 		
 }
