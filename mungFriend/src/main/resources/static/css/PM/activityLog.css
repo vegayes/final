@@ -154,6 +154,7 @@ body > section {
     flex-basis: 20%;
     padding-bottom: 20px;
     display: flex;
+    margin-top: 5px;
 }
 
 #heart-sec {
