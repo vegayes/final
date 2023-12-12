@@ -41,10 +41,9 @@ hr{
 .adminIntroTitle{
     padding-left: 3%;
     padding-top : 10%;
-   
-
     font-size: 20px;
     font-weight: 700;
+    padding-bottom: 1.2%;
 }
 
 
@@ -114,7 +113,7 @@ a:hover{
 
 /*nav바 13% 위치*/
 .adminContentContainer{
-    flex-basis: 87%;
+    flex-basis: 77%;
 
     /*페이지네이션 내리기 위해서 일단 임의로 잡아둠*/
     height: 700px; /*★나중에 필요 없을 듯★*/

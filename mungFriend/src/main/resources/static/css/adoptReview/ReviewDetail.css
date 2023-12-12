@@ -180,7 +180,8 @@ a {
 
 /* 댓글 컨테이너 */
 .commentContainer {
-    height: 50px;
+    padding: 3px 0 0 3px;
+    height: auto;
     display: flex;
     flex-direction: row;
     align-items: center;

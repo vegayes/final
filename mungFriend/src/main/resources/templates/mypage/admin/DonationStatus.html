@@ -18,7 +18,7 @@
             <div class = "adminIntroTitle">
                 후원금 현황
             </div>
-            <hr>
+            <hr style="width: 85%;">
         </section>
 
         <!-- nav + 내용작성 -->
@@ -31,14 +31,19 @@
 
             <!-- 내용 영역-->
             <div class = "adminContentContainer">
-                <div id="chartContainer" style="padding: 40px;">
+                <div id="chartContainer" style="padding: 40px 40px 40px 0;">
                     <canvas id="myChart"></canvas>
                 </div>
             </div>
         </section>
         
-      
+        <th:block th:replace="~{common/chatbot}"></th:block>
+        <img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image">
+        <a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+
     </main>
+
+   
     
 	<th:block th:replace="~{common/footer}"></th:block>
     

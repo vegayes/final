@@ -87,7 +87,7 @@ public class ReviewController {
 			@RequestParam(value="cp", required = false, defaultValue = "1" ) int cp) {
 			
 		Review review = service.selectReview(reviewNo);
-		System.out.println("review : " + review);
+		//System.out.println("review : " + review);
 	
 		String path = null;
 		
