@@ -180,7 +180,8 @@ a {
 
 /* 댓글 컨테이너 */
 .commentContainer {
-    padding: 3px 0 0 3px;
+    padding: 3px 0 3px 3px;
+    min-height: 50px;
     height: auto;
     display: flex;
     flex-direction: row;
@@ -192,7 +193,7 @@ a {
 
 /* 이름 */
 .commentContainer p:nth-child(1) {
-    flex-basis: 7%;
+    flex-basis: 9%;
     text-align: center;
     font-weight: 700;
 }
@@ -200,7 +201,7 @@ a {
 /* 내용 */
 .commentContainer p:nth-child(2) {
 
-    flex-basis: 63%;
+    flex-basis: 61%;
     margin-left: 3%;
    
 }
@@ -226,14 +227,14 @@ a {
 
 /* 이름 */
 .replyContainer p:nth-child(1) {
-    flex-basis: 7%;
+    flex-basis: 10%;
     text-align: center;
     font-weight: 700;
 }
 
 /* 내용 */
 .replyContainer p:nth-child(2) {
-    flex-basis: 63%;
+    flex-basis: 60%;
     margin-left: 5%;
 }
 

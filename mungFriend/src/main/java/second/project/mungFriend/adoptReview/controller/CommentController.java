@@ -63,9 +63,9 @@ public class CommentController {
 	@PostMapping("/reply")
 	public int replyComment(@RequestBody ReviewComment comment) throws Exception {
 		
-		System.out.println("comment : " + comment);
+		//System.out.println("comment : " + comment);
 		int result = service.insertComment(comment);
-		System.out.println("답글 입력결과 : " + result);
+		//System.out.println("답글 입력결과 : " + result);
 		return result;
 	
 	}
