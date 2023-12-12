@@ -116,7 +116,7 @@ a:hover{
     display: flex;
     flex-direction: column;
     
-    padding-top : 20px ;
+    padding-top : 40px ;
 
     /* border : 2px solid yellow; */
 }
@@ -147,7 +147,7 @@ a:hover{
 
 /*테이블의 헤더*/
 .donationTheadTr th {
-    padding : 15px 10px;
+    padding : 10px 10px;
     border-bottom: 5px solid #FEE4D6;
 
     font-size: 14px;
@@ -159,7 +159,7 @@ a:hover{
 .donationTBodyTr td{
     /*가운데 정렬*/
     text-align: center; 
-    padding : 14px 10px;
+    padding : 6px 10px;
     border-bottom: 3px solid #D2D2D2;
 
     font-size: 12px;
@@ -171,7 +171,7 @@ a:hover{
 
 .donationInfoCheck{
 	width: 80%;
-	height: 20px;
+	height: 28px;
 	
 	
 	border-radius: 5px;
@@ -211,16 +211,19 @@ a:hover{
     padding: 10px 0px;
 }
 
-.pagination li{
-    width: 20px;
+.pagination li {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
     margin: 0 5px;
     text-align: center;
 }
 
-.pagination a{
+.pagination a {
     display: block;
     width: 100%;
     height: 100%;
+    font-size: 14px;
 }
 
 .current{

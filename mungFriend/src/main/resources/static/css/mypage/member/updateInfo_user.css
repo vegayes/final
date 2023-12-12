@@ -364,12 +364,14 @@ a:hover{
 .updateButtonArea{
     padding : 20px;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
+    margin-top: 40px;
+    margin-left: 130px;
 }
 
 .updateButtonBox{
-    flex-basis: 50%;
+    /* flex-basis: 50%; */
     border: none;
     border-radius: 10px;
     background: #FEE4D6;
@@ -384,6 +386,7 @@ a:hover{
     justify-content: center;
 
     cursor: pointer;
+    width: 350px;
 }
 
 /* 오른쪽 하단 후원, 챗봇 아이콘 */

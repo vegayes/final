@@ -412,6 +412,10 @@ a:hover{
     top: 50%; 
 }
 
+.swiperBtn:hover{
+    cursor: pointer;
+}
+
 #nextBtn {
     right: 0; /* 오른쪽으로 이동 */
 }

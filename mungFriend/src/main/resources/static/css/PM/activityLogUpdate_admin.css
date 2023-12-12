@@ -90,6 +90,7 @@ body > section {
     flex-direction: column;
     align-items: center;
     height: 500px;
+    margin-top: 20px;
 }
 
 /* 사진 영역 */
@@ -130,6 +131,7 @@ body > section {
 #noImage {
     width: 130px;
     height: 130px;
+    object-fit: cover;
 }
 
 #upload-btn-sec {
@@ -146,9 +148,10 @@ body > section {
     height: 30px;
     text-align: center;
     margin: 14px;
-    padding: 5px 0px;
+    /* padding: 5px 0px; */
     cursor: pointer;
     font-size: 12px;
+    line-height: 28px;
 }
 
 #uploadInput {
@@ -239,7 +242,7 @@ body > section {
     font-weight: bold;
     border: none;
     border-radius: 5px;
-    margin-left: 50px;
+    margin-left: 20px;
 }
 
 #list-btn {
