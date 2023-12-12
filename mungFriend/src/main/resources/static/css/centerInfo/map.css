@@ -67,14 +67,14 @@ element.style {
 }
 
 .map-header h2 {
-    font-size: 24px; /* 제목의 글꼴 크기 */
+    font-size: 20px; /* 제목의 글꼴 크기 */
     color: #333; /* 제목의 글꼴 색상 */
     margin-bottom: 20px; /* 제목 아래의 여백 */
 }
 
 .map-header p {
 	margin-left: 20px;
-    font-size: 16px; /* 문단의 글꼴 크기 */
+    font-size: 15px; /* 문단의 글꼴 크기 */
     color: #7C7C7C; /* 문단의 글꼴 색상 */
 }
 
@@ -150,6 +150,19 @@ element.style {
 	margin-left: 5px;
 	border: 1px solid #FEE4D6; 
 	
+}
+
+
+
+
+.custom-info-window {
+    border: 2px solid #FEE4D6; 
+    border-radius: 4px;
+    padding: 5px;
+    background-color: white;
+    font-size: 14px;
+    color: #333;
+    padding: 5px;    
 }
 
   button[type="submit"] {
