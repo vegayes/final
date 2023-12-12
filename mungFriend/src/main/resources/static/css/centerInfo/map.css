@@ -26,14 +26,14 @@ main {
 }
 
 
-element.style {
+/* element.style {
     width: 750px;
     height: 500px;
     position: relative;
     overflow: hidden;
-    margin: 220px 0 0 518px;
+    margin: 200px auto auto;
     background: url(http://t1.daumcdn.net/mapjsapi/images/2x/bg_tile.png);
-}
+} */
 
 
 
@@ -64,18 +64,21 @@ element.style {
     top: 164px;
     left: 30%;
     transform: translateX(-50%);
+	margin-top: 17px;
 }
 
 .map-header h2 {
-    font-size: 24px; /* 제목의 글꼴 크기 */
+    font-size: 20px; /* 제목의 글꼴 크기 */
     color: #333; /* 제목의 글꼴 색상 */
     margin-bottom: 20px; /* 제목 아래의 여백 */
+	margin-left: 30px;
 }
 
 .map-header p {
 	margin-left: 20px;
-    font-size: 16px; /* 문단의 글꼴 크기 */
+    font-size: 15px; /* 문단의 글꼴 크기 */
     color: #7C7C7C; /* 문단의 글꼴 색상 */
+	margin-left: 50px;
 }
 
 .map_wrap {
@@ -108,9 +111,9 @@ element.style {
 
 #menu_wrap {
 	position: absolute;
-	top:250px;
+	top:200px;
 	right: 30px;
-	left:  -65px;
+	left:  -29px;
 	bottom: 40px;
 	
 	width: 250px;
@@ -150,6 +153,19 @@ element.style {
 	margin-left: 5px;
 	border: 1px solid #FEE4D6; 
 	
+}
+
+
+
+
+.custom-info-window {
+    border: 2px solid #FEE4D6; 
+    border-radius: 4px;
+    padding: 5px;
+    background-color: white;
+    font-size: 14px;
+    color: #333;
+    padding: 5px;    
 }
 
   button[type="submit"] {

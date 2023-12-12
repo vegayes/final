@@ -31,7 +31,7 @@ input, textarea {
     display: flex;
     flex-direction: column;
     margin-left: 28%;
-    margin-top: 50px;
+    margin-top: 40px;
     
 }
 
@@ -51,6 +51,7 @@ input, textarea {
     font-weight: bolder;
     line-height: normal;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 /* 안락사 없는~  */
@@ -67,17 +68,16 @@ input, textarea {
 
 /* 입양리뷰 인증게시판 */
 .mainContainer > div:nth-child(1) {
-    height: 35px;
-    width: 25%;
+    height: 40px;
+    width: 20%;
     border-radius: 10px;
     background: #FEE4D6;
-    font-size: 15px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 700;
-    line-height: 35px;
+    line-height: 40px;
     text-align: center;
-    margin-bottom: 30px;
-    
+    margin-bottom: 20px;
 }
 
 /* 게시글 테이블 */
@@ -85,7 +85,6 @@ input, textarea {
     flex-basis: 50%;
     width: 100%;
     border-collapse: collapse;
-
 }
 
 
@@ -110,7 +109,7 @@ input, textarea {
     display: flex;
     flex-direction: row;
     align-items: center;
-    font-size: 15px;
+    font-size: 13px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
@@ -156,7 +155,7 @@ input, textarea {
     display: flex;
     flex-direction: row;
     align-items: center;
-    font-size: 15px;
+    font-size: 13px;
     font-style: normal; 
     font-weight: 400;
     line-height: normal;
@@ -210,14 +209,14 @@ input, textarea {
     border-radius: 3px;
     background: #FEE4D6;
     margin-left: 88%;
-    font-size: 15px;
+    font-size: 13px;
     font-style: normal;
     font-weight: 700;
-    line-height: normal;
+    line-height: 15px;
     cursor: pointer;
     
     margin-bottom: 30px;
-    border: 1px solid #000;
+    border: none;
 }
  
  /* 검색창 컨테이너 */
@@ -233,8 +232,8 @@ input, textarea {
 /* select */
 #searchType {
     width: 90px;
-    height: 39px;
-    border: 1px solid #000;
+    height: 30px;
+    border: 1px solid gray;
     background: #FFF;
     margin-right: 15px;
     border-radius: 5px;
@@ -243,8 +242,8 @@ input, textarea {
 /* 검색어 입력창 */
 #searchContent {
     width: 356px;
-    height: 35px;
-    border: 1px solid #000;
+    height: 30px;
+    border: 1px solid gray;
     background: #FFF;
     margin-right: 15px;
     text-indent: 1em;
@@ -254,8 +253,8 @@ input, textarea {
 /* 검색버튼 */
 #searchButton {
     width: 93px;
-    height: 39px; 
-    border: 1px solid #000;
+    height: 30px; 
+    border: none;
     background: #FEE4D6;
     cursor: pointer;
     border-radius: 5px;
@@ -284,6 +283,8 @@ input, textarea {
     display: flex;
     justify-content: center;
     padding: 0;
+    height: 20px;
+    font-size: 13px;
 }
 
 .pagination li{

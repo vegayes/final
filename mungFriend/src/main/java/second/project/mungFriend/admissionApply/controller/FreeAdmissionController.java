@@ -38,7 +38,9 @@ public class FreeAdmissionController {
 		//System.out.println("admission 값 : " + admission);		
 		//System.out.println("프로필 : " +  admissionProfile);
 		
-		if(admission.getAdmSignificant() == null) {
+		System.out.println("특이사항 :" + admission.getAdmSignificant().equals(""));
+		
+		if(admission.getAdmSignificant().equals("")) {
 			 admission.setAdmSignificant("특이사항 없음");
 		}
 		

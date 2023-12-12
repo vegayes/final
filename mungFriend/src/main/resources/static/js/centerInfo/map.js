@@ -197,14 +197,20 @@ function displayPagination(pagination) {
 	paginationEl.appendChild(fragment);
 }
 
+
+
+
+
 // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 // 인포윈도우에 장소명을 표시합니다
 function displayInfowindow(marker, title) {
-	var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
+	var content =  '<div class="custom-info-window">' + title + '</div>';
 
 	infowindow.setContent(content);
 	infowindow.open(map, marker);
 }
+
+
 
 // 검색결과 목록의 자식 Element를 제거하는 함수입니다
 function removeAllChildNods(el) {
@@ -212,3 +218,31 @@ function removeAllChildNods(el) {
 		el.removeChild(el.lastChild);
 	}
 } akao.maps.Map(container, options);
+
+
+
+
+
+
+// 검색결과 항목을 Element로 반환하는 함수입니다
+function getListItem(index, place) {
+    var el = document.createElement('li'),
+        itemStr = '<span class="markerbg marker_' + (index + 1) + '"></span>' +
+            '<div class="info">' +
+            '   <h5><a href="https://search.naver.com/search.naver?query=' + encodeURIComponent(place.place_name) + '" target="_blank">' + place.place_name + '</a></h5>';
+
+    if (place.road_address_name) {
+        itemStr += '    <span>' + place.road_address_name + '</span>' +
+            '   <span class="jibun gray">' + place.address_name + '</span>';
+    } else {
+        itemStr += '    <span>' + place.address_name + '</span>';
+    }
+
+    itemStr += '  <span class="tel">' + place.phone + '</span>' +
+        '</div>';
+
+    el.innerHTML = itemStr;
+    el.className = 'item';
+
+    return el;
+}
