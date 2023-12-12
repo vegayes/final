@@ -38,7 +38,7 @@
                         <form th:action="@{/mypage/admin/donationList}" name="adminDonationSearch">
                             <fieldset class = "adminSearch">
                                 <input type="search" id="donationSearch" name="donationSearch" class = "applyInput"
-                                autocomplete="on" placeholder="후원자 이름 검색">
+                                autocomplete="on" placeholder="후원자 이름 검색" th:value="${param.donationSearch}">
                                 <button id="searchBtn" class="fa-solid fa-magnifying-glass"></button>
                             </fieldset>
                         </form>	 
@@ -85,7 +85,7 @@
 	                    <div class="paginationArea" th:if="${#lists.size(donationList) > 0}">
 							<!--검색 X -->
 	                        <ul class="pagination" th:unless = "${param.donationSearch}">
-	                        <!--<ul class="pagination">-->
+	                        	<!--<ul class="pagination">-->
 	                        
 	                            <!-- 첫 페이지로 이동 -->
 	                            <li><a th:href="@{/mypage/admin/donationList(cp=1)}">&lt;&lt;</a></li>
@@ -122,11 +122,11 @@
 	                        
             				<!-- 검색 O  페이지 네이션 --> 
 			                <ul class="pagination" th:if = "${param.donationSearch}" >
-			                <!--<ul class="pagination" >-->
+			                	<!--<ul class="pagination" >-->
 
-			                    <li><a th:href="@{/mypage/admin/donationList(cp=1)}">&lt;&lt;</a></li>
+			                    <li><a th:href="@{/mypage/admin/donationList(cp=1, donationSearch = ${param.donationSearch})}">&lt;&lt;</a></li>
 			
-			                    <li><a th:href="@{/mypage/admin/donationList(cp=${pagination.prevPage})}">&lt;</a></li>
+			                    <li><a th:href="@{/mypage/admin/donationList(cp=${pagination.prevPage},donationSearch = ${param.donationSearch})}">&lt;</a></li>
 			
 								
 			                    <!-- 특정 페이지로 이동 -->
@@ -140,7 +140,7 @@
 			                    		
 			                		<!-- 현재 페이지를 제외한 나머지 -->
 			            			<li th:unless = "${i == pagination.currentPage}">
-										<a th:href="@{/mypage/admin/donationList(cp=${i})}" th:text = "${i}">나머지 페이지</a>
+										<a th:href="@{/mypage/admin/donationList(cp=${i},donationSearch = ${param.donationSearch})}" th:text = "${i}">나머지 페이지</a>
 									</li>                  		
 			                   		
 			                    </th:block>
@@ -148,10 +148,10 @@
 			                    
 			                    
 		                        <!-- 다음 목록 시작 번호로 이동 -->
-		                        <li><a th:href = "@{/mypage/admin/donationList(cp=${pagination.nextPage})}">&gt;</a></li>
+		                        <li><a th:href = "@{/mypage/admin/donationList(cp=${pagination.nextPage},donationSearch = ${param.donationSearch})}">&gt;</a></li>
 		    
 		                        <!-- 끝 페이지로 이동 -->
-		                        <li><a th:href = "@{/mypage/admin/donationList(cp=${pagination.maxPage})}">&gt;&gt;</a></li>
+		                        <li><a th:href = "@{/mypage/admin/donationList(cp=${pagination.maxPage},donationSearch = ${param.donationSearch})}">&gt;&gt;</a></li>
 			
 			                </ul>	
 	                        
@@ -213,6 +213,8 @@
 			}
 
 		</script> -->
+
+		
 
     </body>
 </html>
