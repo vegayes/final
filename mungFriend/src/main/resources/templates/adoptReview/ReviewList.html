@@ -103,7 +103,7 @@
 	
 	
 			<!-- 검색창 -->
-	        <div style="margin-top: 40px;"> 
+	        <div style="margin-top: 35px;"> 
 				<button th:if="${session.loginMember}"  id="writeReview"><a th:href="@{/adoptReview/reviewInsert}">글쓰기</a></button>
 				<form th:action="@{/adoptReview/reviewList/1}" method="get" id="searchContainer">
 					<select name="searchType" id="searchType">

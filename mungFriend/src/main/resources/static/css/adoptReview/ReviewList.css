@@ -104,7 +104,6 @@ input, textarea {
 
 /* 게시글 타이틀 */
 .boardTitle {
-
     height: 20%;
     display: flex;
     flex-direction: row;
@@ -114,7 +113,7 @@ input, textarea {
     font-weight: 700;
     line-height: normal;
     text-align: center;
-    margin: 12px 0 12px;
+    margin: 10px 0 10px;
 
 }
 
@@ -150,7 +149,6 @@ input, textarea {
 
 /* 게시글 내용 컨테이너 */
 .boardContent {
-
     height: 20%;
     display: flex;
     flex-direction: row;
@@ -160,7 +158,7 @@ input, textarea {
     font-weight: 400;
     line-height: normal;
     text-align: center;
-    margin: 7px 0 7px 0;
+    margin: 8px 0 8px 0;
 }
 
 
@@ -215,7 +213,7 @@ input, textarea {
     line-height: 15px;
     cursor: pointer;
     
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     border: none;
 }
  
@@ -264,8 +262,8 @@ input, textarea {
 
 /* ============================ pagination ============================== */
 .current{
-    font-weight: bold;
-    background-color: #FEE4D6;
+    /* font-weight: bold; */
+    background-color: #F69C9C;
     border-radius: 50%;
     color: black !important;
     letter-spacing: 0 !important;
@@ -297,6 +295,7 @@ input, textarea {
     display: block;
     width: 100%;
     height: 100%;
+    line-height: 19px;
 }
 
 

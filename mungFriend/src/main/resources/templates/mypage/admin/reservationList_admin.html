@@ -50,7 +50,9 @@
 
                 <div id="scroll">
                     <th:block th:if="${reservationList.isEmpty()}">
-                        현재 예약 내역이 존재하지 않습니다.
+                        <p style="display: flex; align-items: center; justify-content: center; margin-top: 200px">
+                            현재 예약 내역이 존재하지 않습니다.
+                        </p>
                     </th:block>
 
                     <th:block th:unless="${reservationList.isEmpty()}">
