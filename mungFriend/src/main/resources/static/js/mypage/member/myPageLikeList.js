@@ -4,17 +4,36 @@ document.addEventListener("DOMContentLoaded", function() {
     var currentPageIndex = 0; // 현재 페이지의 인덱스를 추적
 
     function showItemsByPage() {
+        var likeDogListElements = document.getElementsByClassName('like-dog-list');
         var likeDogElements = document.querySelectorAll('.like-dog');
         var itemsPerPage = 6;
         var startIndex = currentPageIndex * itemsPerPage;
 
-        for (var i = 0; i < likeDogElements.length; i++) {
-            if (i >= startIndex && i < startIndex + itemsPerPage) {
-                likeDogElements[i].style.display = 'block';
-            } else {
-                likeDogElements[i].style.display = 'none';
+        if(likeDogElements.length != 0){
+            for (var i = 0; i < likeDogElements.length; i++) {
+
+                if (i >= startIndex && i < startIndex + itemsPerPage) {
+                    likeDogElements[i].style.display = 'block';
+                    likeDogElements[i].style.width = '200px';
+                    likeDogElements[i].style.height = '230px';
+                    likeDogElements[i].style.backgroundColor = '#FFF0E8';
+                    likeDogElements[i].style.borderRadius = '20px';
+                    likeDogElements[i].style.margin = '5px 15px 5px 15px';
+    
+                } else {
+                    likeDogElements[i].style.display = 'none';
+                }
             }
+            
+
+        }else{
+            likeDogListElements.style.display = 'block';
+            likeDogListElements.style.display = 'block';
+
         }
+
+        
+        
     }
 
     // 페이지 로드 시 처음 6개의 항목을 보이도록 설정
@@ -62,6 +81,7 @@ function selectLikeList(){
     })
     
 } 
+
 
 function deleteLikeDog(dogNo){
 

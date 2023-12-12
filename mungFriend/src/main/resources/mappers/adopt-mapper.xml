@@ -164,6 +164,7 @@
 		SELECT COUNT(*) FROM DOG_RESERVATION
 		WHERE MEMBER_NO = #{memberNo}
 		AND DOG_NO = #{dogNo}
+		AND RESERVE_YN = 'Y'
 	</select>
 	
 	<!-- 좋아요 처리 -->

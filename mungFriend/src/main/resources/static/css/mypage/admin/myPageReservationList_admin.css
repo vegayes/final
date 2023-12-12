@@ -145,6 +145,7 @@ form{
     border: none;
     width: 250px;
     height: 32px;
+    outline: none;
 }
 
 #finder-img{
