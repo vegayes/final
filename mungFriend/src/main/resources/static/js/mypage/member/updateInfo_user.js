@@ -380,7 +380,7 @@ memberNickname.addEventListener("input", () => {
 // 정보수정 form 태그가 제출 되었을 때
 document.getElementById("updateForm").addEventListener("submit", e=> {
 	
-	const updatePw = document.getElementById("updatePw");
+	/* const updatePw = document.getElementById("updatePw");
 	const updatePwCheck = document.getElementById("updatePwCheck");
 	
 	if(updatePw.value.trim().length == 0) {
@@ -395,7 +395,7 @@ document.getElementById("updateForm").addEventListener("submit", e=> {
 		e.preventDefault();
 		updatePwCheck.focus();
 		return;
-	}
+	} */
 	
 	// initCheck
     // 초기 프로필 이미지 상태를 저장하는 변수
@@ -405,7 +405,7 @@ document.getElementById("updateForm").addEventListener("submit", e=> {
     // 프로필 이미지가 새로 업로드 되거나 삭제 되었음을 나타내는 변수
     // -1 == 초기값 ,  0 == 프로필 삭제(이미지 삭제 버튼),  1 == 새 이미지 업로드
 
-    let flag = true; // 제출하면 안되는 경우의 초기값 플래그 true로 지정
+    /* let flag = true; // 제출하면 안되는 경우의 초기값 플래그 true로 지정
 
     // 이전 프로필 이미지가 없으면서, 새 이미지 업로드를 했다 -> 처음으로 이미지 추가
     if(!initCheck && deleteCheck == 1)  flag = false;
@@ -422,7 +422,7 @@ document.getElementById("updateForm").addEventListener("submit", e=> {
         alert("이미지 변경 후 클릭하세요");
     }
 
-    return true;
+    return true; */
     
 });
 

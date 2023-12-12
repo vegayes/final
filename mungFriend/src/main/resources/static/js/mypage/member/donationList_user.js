@@ -208,8 +208,10 @@ function settingRegularInfo(list){
 
 	// 4) 결제 수단 / 정기 결제 금액 
 	const regularAmount = document.getElementById("regularAmount");
-	regularAmount.innerText = '결제 수단 : ' + list[0].cardName + ' | ' + '정기 결제 금액 : ' + list[0].donationAmount + '원';
-
+	regularAmount.innerText =  '정기 결제 금액 : ' + list[0].donationAmount + '원';
+	
+	const regularMethod = document.getElementById("regularMethod");
+	regularMethod.innerText = '결제 수단 : ' + list[0].cardName ;
 
 
 	// 6) 정기 결제 내역

@@ -69,7 +69,7 @@
 		FROM REVIEW
 		JOIN "MEMBER" m USING (MEMBER_NO)
 		WHERE REVIEW_YN = 'N'
-		ORDER BY REVIEW_DATE DESC
+		ORDER BY REVIEW_DATE DESC ,REVIEW_NO DESC
 	</select>
 	
 	
@@ -89,10 +89,6 @@
 				
 		        <when test='searchType == "title"'>
 		            AND REVIEW_TITLE LIKE  '%${searchContent}%'
-		        </when>
-		        
-		        <when test='searchType == "content"'>
-		            AND BOARD_CONTENT LIKE '%${searchContent}%'
 		        </when>
 		        
 		        <when test='searchType == "writer"'>

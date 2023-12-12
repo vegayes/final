@@ -604,6 +604,8 @@ document.getElementById("signUp-form").addEventListener("submit", e=>{
 	
 	console.log("회원가입");
 	
+	let isValid = true; // 모든 유효성 검사가 통과되었는지 확인하는 변수
+	
 	// checkObj에 모든 value가 true인지 검사
 	
 	// (배열용 for문)
@@ -620,52 +622,60 @@ document.getElementById("signUp-form").addEventListener("submit", e=>{
 							 // false인 경우 == 유효하지 않다!			 
 			switch(key) {
 				case "memberId":
-					alert("아이디가 유효하지 않습니다"); 
+					alert("아이디가 유효하지 않습니다");
 					// 유효하지 않은 input 태그로 focus 이동
 					document.getElementById("id").focus();
 					break;
 					
 				case "memberPw":
-					alert("비밀번호가 유효하지 않습니다"); 
+					alert("비밀번호가 유효하지 않습니다");
 					document.getElementById("pw").focus();
 					break;
 					
 				case "memberPwConfirm":
-					alert("비밀번호가 확인되지 않았습니다"); 
+					alert("비밀번호가 확인되지 않았습니다");
 					document.getElementById("pw-confir").focus();
 					break;
 					
 				case "memberName":
-					alert("이름이 유효하지 않습니다"); 
+					alert("이름이 유효하지 않습니다");
 					document.getElementById("name").focus();
 					break;
 					
 				case "memberTel":
-					alert("전화번호가 유효하지 않습니다"); 
+					alert("전화번호가 유효하지 않습니다");
 					document.getElementById("phone").focus();
 					break;
 					
 				case "memberEmail":
-					alert("이메일이 유효하지 않습니다"); 
+					alert("이메일이 유효하지 않습니다");
 					document.getElementById("email").focus();
 					break;
 					
 				case "authKey":
-					alert("이메일 인증번호가 확인되지 않았습니다"); 
+					alert("이메일 인증번호가 확인되지 않았습니다");
 					document.getElementById("authNum").focus();
 					break;
 					
 				case "memberNickname":
-					alert("닉네임이 유효하지 않습니다"); 
+					alert("닉네임이 유효하지 않습니다");
 					document.getElementById("nickName").focus();
 					break;
 			}
-			
+			isValid = false; // 유효하지 않은 항목이 있으므로 false로 설정
 			e.preventDefault(); // form 태그 기본 이벤트 제거
 			return; // 함수 종료
 			
 		}
-		
+
+
+		}	
+
+	}
+	
+	// 모든 유효성 검사가 통과된 경우에만 성공 메세지 표시
+	if(isValid) {
+		alert("회원가입에 성공했습니다.");
 	}
 	
 });

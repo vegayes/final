@@ -33,7 +33,7 @@
 			<!-- 내용 작성영역-->
 			<div class="userContentContainer">
 			
-				<form th:action="@{/mypage/member/userInquiry}" method="post">
+				<form th:action="@{/mypage/member/userInquiry}" method="post" onsubmit="return validateForm()">
 					<div class="fixedLabel">제목</div>
 					<input type="text" id="title" name="inquiryTitle" class="inputBox" placeholder="제목을 입력하세요.">
 			
@@ -50,6 +50,26 @@
 		</section>
 		
 	</main>
+	
+	<script>
+    function validateForm() {
+        var title = document.getElementById('title').value;
+        var content = document.getElementById('content').value;
+
+        if (title === '') {
+            alert('제목을 입력하세요.');
+            return false;
+        }
+
+        if (content === '') {
+            alert('내용을 입력하세요.');
+            return false;
+        }
+
+        return true;
+    }
+</script>
+
 	
 	<th:block th:replace="~{common/chatbot}"></th:block>
     <img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image">
