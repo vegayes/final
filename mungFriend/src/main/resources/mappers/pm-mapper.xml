@@ -21,7 +21,7 @@
 	
 	<!-- 활동일지 전체 리스트 수 조회 -->
 	<select id="getListCount" resultType="_int">
-		SELECT COUNT(*) FROM "ACTIVITY_LOG"
+		SELECT COUNT(*) FROM "ACTIVITY_LOG" WHERE ACTIVITY_DATE BETWEEN ADD_MONTHS(SYSDATE, -1) AND SYSDATE
 	</select>
 	
 	<!-- 현재 페이지에 해당하는 부분에 대한 활동일지 조회하기 -->

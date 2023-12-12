@@ -604,7 +604,7 @@ document.getElementById("signUp-form").addEventListener("submit", e=>{
 	
 	console.log("회원가입");
 	
-	let isValid = true; // 모든 유효성 검사가 통과되었는지 확인하는 변수
+	/* let isValid = true; // 모든 유효성 검사가 통과되었는지 확인하는 변수 */
 	
 	// checkObj에 모든 value가 true인지 검사
 	
@@ -662,21 +662,18 @@ document.getElementById("signUp-form").addEventListener("submit", e=>{
 					document.getElementById("nickName").focus();
 					break;
 			}
-			isValid = false; // 유효하지 않은 항목이 있으므로 false로 설정
+			/* isValid = false; // 유효하지 않은 항목이 있으므로 false로 설정 */
 			e.preventDefault(); // form 태그 기본 이벤트 제거
 			return; // 함수 종료
 			
 		}
 
-
-		}	
-
 	}
 	
 	// 모든 유효성 검사가 통과된 경우에만 성공 메세지 표시
-	if(isValid) {
+	/* if(isValid) {
 		alert("회원가입에 성공했습니다.");
-	}
+	} */
 	
 });
 
