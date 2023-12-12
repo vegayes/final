@@ -36,8 +36,8 @@
 
 
                         <th:block th:if="${alarm.alarmCategory == 'D'}">
-                            <div class="alarmContent">
-                                <p th:text="|${session.loginMember.memberNickname} 님이 예약하셨던 강아지가 다른 회원분께 입양되었습니다.|"></p>
+                            <div class="alarmContent" >
+                                <p style="padding-bottom: 10px;" th:text="|${session.loginMember.memberNickname} 님이 예약하셨던 강아지가 다른 회원분께 입양되었습니다.|"></p>
                             </div>
                           </th:block>
           

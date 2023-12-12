@@ -214,7 +214,7 @@ a:hover{
 
 /*테이블의 헤더*/
 .memberTheadTr th {
-    padding : 15px 10px;
+    padding : 10px 10px;
     border-bottom: 5px solid #FEE4D6;
 
     font-size: 14px;
@@ -226,7 +226,7 @@ a:hover{
 .memberBodyTr td{
     /*가운데 정렬*/
     text-align: center; 
-    padding : 9px 10px;
+    padding : 8px 10px;
     border-bottom: 3px solid #D2D2D2;
 
     font-size: 12px;
@@ -263,7 +263,7 @@ a:hover{
           되므로 필요 margin 영역 필요 없을 거 같아요 
 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★*/
 .paginationArea{
-    margin-top: auto; /*★나중에 필요 없을 듯★*/
+    margin-top: 50px; /*★나중에 필요 없을 듯★*/
 }
 
 
@@ -292,7 +292,7 @@ a:hover{
 }
 
 .current{
-    font-weight: bold;
+    /* font-weight: bold; */
     background-color: #F69C9C;
     border-radius: 50%;
     color: white !important;
