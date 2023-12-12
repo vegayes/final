@@ -71,8 +71,10 @@ a:hover {
 /* 사용자 콘텐츠 영역 */
 .userContentArea {
     flex-basis: 70%;
-    display: flex;
+
+resize: none;    display: flex;
 }
+
 
 /* 사용자 콘텐츠 컨테이너 */
 .userContentContainer {
@@ -81,6 +83,7 @@ a:hover {
     padding: 20px;
     margin-left: 40px;
     justify-content: center;
+    resize: none;
 }
 
 /* 입력 필드 스타일 */
@@ -93,11 +96,13 @@ a:hover {
     background: none;
     box-shadow: none;
     outline: none; 
+   resize: none;
 }
  
 .textareaBox {
     height: 100px;
-    resize: vertical;
+     resize: none;
+    
 }
 
 .buttonBox {

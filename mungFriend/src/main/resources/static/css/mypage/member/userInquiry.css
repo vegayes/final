@@ -97,11 +97,14 @@ a:hover {
     background: none;
     box-shadow: none;
     outline: none;
+   
+    resize: none;
+    
 }
 
 .textareaBox {
     height: 400px;
-    resize: vertical;
+     resize: none;
 }
 
 .buttonBox {
