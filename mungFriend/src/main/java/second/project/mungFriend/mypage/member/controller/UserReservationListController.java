@@ -33,7 +33,7 @@ public class UserReservationListController {
 		
 		model.addAttribute("map", map);
 
-		System.out.println("map:::" + map);
+		//System.out.println("map:::" + map);
 		
 		return "mypage/member/reservationList_user";
 		

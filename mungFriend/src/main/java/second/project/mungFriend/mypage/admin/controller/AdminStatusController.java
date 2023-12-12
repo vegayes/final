@@ -28,8 +28,8 @@ public class AdminStatusController {
 		//비회원 후원내역
 		List<Map<String,Object>> nonMemberDonationStatus = service. nonMemberDonationList();
 		
-		System.out.println("회원 후원내역 : " + memberDonationStatus);
-		System.out.println("비회원 후원내역 : " + nonMemberDonationStatus);
+		//System.out.println("회원 후원내역 : " + memberDonationStatus);
+		//System.out.println("비회원 후원내역 : " + nonMemberDonationStatus);
 		
 		model.addAttribute("member", memberDonationStatus);
 		model.addAttribute("nonMember", nonMemberDonationStatus);

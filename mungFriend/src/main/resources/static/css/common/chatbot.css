@@ -122,3 +122,29 @@ button {
     display: flex;
     align-items: center;
 }
+
+
+/* 오른쪽 하단 후원, 챗봇 아이콘 */
+.fixed-image {
+    position: fixed;
+    right: 50px;
+    z-index: 100;
+    width: 50px;
+}
+
+.fixed-image:hover {
+    cursor: pointer;
+}
+
+#chat-image {
+    bottom: 10px;
+}
+
+#donate-image {
+    bottom: 70px;
+}
+
+
+.submenu a.underline {
+    text-decoration: underline;
+}
