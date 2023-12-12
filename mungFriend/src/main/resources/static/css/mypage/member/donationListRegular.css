@@ -28,7 +28,7 @@
     display: none;
     justify-content: center;
     align-items: center;
-    z-index: 50;
+    z-index:101;
 }
 
 #regularContentArea{

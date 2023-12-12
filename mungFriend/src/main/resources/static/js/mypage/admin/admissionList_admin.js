@@ -228,7 +228,9 @@ admissionYBtn.addEventListener("click" ,function(){
 
 });
 
-
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+					입소 신청 완료 setting
+ ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/ 
 function settingDonePage(list){
 	
 	console.log("setting Page :" + JSON.stringify(list));
@@ -299,7 +301,9 @@ function settingDonePage(list){
 	
 }
 
-
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+					입소 신청 중 setting
+ ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/ 
 function settingPage(list){
 	
 	console.log("setting Page :" + JSON.stringify(list));

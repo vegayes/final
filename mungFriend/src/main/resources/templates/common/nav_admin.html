@@ -1,15 +1,15 @@
 <!-- 관리자인 경우 -->
 <th:block th:if="${session.loginMember.adminYn == 'Y'}">
     <ul>
-        <li> <a th:href = "@{/mypage/admin/adminInquiryBox}" id="adminInquiryBox" th:onclick="setActiveLink(inquiry)"> 1:1 문의함</a></li>
-        <li> <a th:href = "@{/mypage/admin/reservationList_admin}" id="reservationList_admin" th:onclick="setActiveLink(inquiry)"> 예약 내역</a> </li>
-        <li> <a th:href = "@{/mypage/admin/donationList}" id="donationList" th:onclick="setActiveLink(donationList)"> 후원 내역</a> </li>
-        <li> <a th:href = "@{/mypage/admin/admissionList}" id="admissionList" th:onclick="setActiveLink(admissionList)"> 입소신청 내역</a></li>
-        <li> <a th:href = "@{/mypage/admin/memberListAdmin}" id="memberListAdmin" th:onclick="setActiveLink(memberList)"> 회원 관리</a></li>
-        <li class="hasSubmenu"> <a th:href="@{#}" class="toggleSubmenu" th:onclick="return false;">관리 현황 </a>
+        <li> <a th:href = "@{/mypage/admin/adminInquiryBox}" id="adminInquiryBox"> 1:1 문의함</a></li>
+        <li> <a th:href = "@{/mypage/admin/reservationList_admin}" id="reservationList_admin" > 예약 내역</a> </li>
+        <li> <a th:href = "@{/mypage/admin/donationList}" id="donationList" > 후원 내역</a> </li>
+        <li> <a th:href = "@{/mypage/admin/admissionList}" id="admissionList" > 입소신청 내역</a></li>
+        <li> <a th:href = "@{/mypage/admin/memberListAdmin}" id="memberListAdmin"> 회원 관리</a></li>
+        <li class="hasSubmenu"> <a th:href="@{#}" class="toggleSubmenu">관리 현황 </a>
             <ul class="submenu">
-                <li><a th:href="@{/mypage/admin/dogStatus}" id="dogStatus" th:onclick="setActiveLink(dogStatus)">유기견 현황</a></li>
-                <li><a th:href="@{/mypage/admin/donationStatus}" id="donationStatus" th:onclick="setActiveLink(donationStatus)">후원 현황</a></li>
+                <li><a th:href="@{/mypage/admin/dogStatus}" id="dogStatus">유기견 현황</a></li>
+                <li><a th:href="@{/mypage/admin/donationStatus}" id="donationStatus">후원 현황</a></li>
             </ul>
         </li>
     </ul>
@@ -21,13 +21,27 @@
         document.addEventListener('DOMContentLoaded', function () {
 
             const submenuItems = document.querySelectorAll('.hasSubmenu');
+            const submenuLi = document.querySelectorAll(".submenu li");
+            for(let i = 0; i<submenuLi.length; i++){
+	            submenuLi[i].style.padding = '18px 0px 0px 0px';
+			}
+            
+            const submenuA = document.querySelectorAll(".submenu a");
+            for(let i = 0; i<submenuA.length; i++){
+	            submenuA[i].style.fontSize = '13px';
+			}
+            
+            
 
             submenuItems.forEach(function (item) {
                 item.addEventListener('click', function () {
                     const submenu = this.querySelector('.submenu');
+                    
                     submenu.classList.toggle('active');
                 });
             });
+            
+
         
 
 
@@ -45,7 +59,13 @@
                     if (element) {
                         element.style.textDecoration = 'underline #FF9B9B 2.5px'; 
                         element.style.textUnderlineOffset = '10px'; 
+                        
                     }
+                    
+                    if(lastSegment === 'dogStatus' || lastSegment === 'donationStatus'){
+	                    const submenu = this.querySelector('.submenu');
+                    	submenu.classList.toggle('active');
+					}
                 }
             });
 
