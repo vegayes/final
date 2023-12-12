@@ -25,10 +25,10 @@
 		<result property="receiptUrl" column="DONATION_RECEIPT"/>			
 		<result property="billingKey" column="BILLINGKEY"/>		
 
-		<result property="cancelYN" column="CANCEL_YN"/>		
+		<result property="cancelYN" column="CANCEL_YN"/>	
 		
+		<result property="memberYN" column="MEMBER_YN"/>	
 		
-	
 	</resultMap>
 	
 	<!-- 회원 후원 등록
@@ -63,11 +63,12 @@
 	<!-- 후원 내역 개수 ( 마이페이지/ 관리자 )  바꿈.--> 
 	<select id = "countDonationList" resultType = "_int">
 		SELECT COUNT(*)
-		FROM (SELECT DONATION_INFO_NO  
-				FROM DONATION_INFO 
+		FROM (SELECT DONATION_INFO_NO ,MEMBER_NAME
+				FROM DONATION_INFO
 				LEFT JOIN "MEMBER" USING(MEMBER_NO)
+				WHERE SUBSTR(DONATION_MERCHANT_UID, -2, INSTR(DONATION_MERCHANT_UID, '_')) = '_1'
 				UNION ALL
-			SELECT NON_DONATION_NO 
+				SELECT NON_DONATION_NO ,MEMBER_NAME
 				FROM TEST_NON_DONATION)
 	</select>
 	
@@ -81,16 +82,17 @@
 				        WHEN DONATION_TYPE = 'R' THEN '정기' 
 				        ELSE DONATION_TYPE 
 				    END AS DONATION_TYPE
-				    ,DONATION_AMOUNT , DONATION_DATE , DONATION_STATUS 
+				    ,DONATION_AMOUNT , DONATION_DATE , DONATION_STATUS ,'회원' AS MEMBER_YN
 		FROM DONATION_INFO 
 		LEFT JOIN "MEMBER" USING(MEMBER_NO)
+		WHERE SUBSTR(DONATION_MERCHANT_UID, -2, INSTR(DONATION_MERCHANT_UID, '_')) = '_1'
 		UNION ALL
 		SELECT NON_DONATION_NO , MEMBER_NAME, MEMBER_EMAIL, DONATION_CONTENT,
 				    CASE 
 				        WHEN DONATION_TYPE = 'O' THEN '일시'  
 				        ELSE DONATION_TYPE 
 				    END AS DONATION_TYPE
-				    ,DONATION_AMOUNT , DONATION_DATE , DONATION_STATUS 
+				    ,DONATION_AMOUNT , DONATION_DATE , DONATION_STATUS ,'비회원' AS MEMBER_YN
 		FROM TEST_NON_DONATION)
 		ORDER BY DONATION_DATE DESC
 	</select>
@@ -102,8 +104,9 @@
 		FROM (SELECT DONATION_INFO_NO ,MEMBER_NAME
 				FROM DONATION_INFO
 				LEFT JOIN "MEMBER" USING(MEMBER_NO)
+				WHERE SUBSTR(DONATION_MERCHANT_UID, -2, INSTR(DONATION_MERCHANT_UID, '_')) = '_1'
 				UNION ALL
-			SELECT NON_DONATION_NO ,MEMBER_NAME
+				SELECT NON_DONATION_NO ,MEMBER_NAME
 				FROM TEST_NON_DONATION)
 		WHERE MEMBER_NAME LIKE '%' || #{donationSearch} || '%'
 	</select>
@@ -160,7 +163,7 @@
 	</select>
 	
 	
-	<!-- 후원 내역 확인 ( 마이페이지/ 유저  ) 새롭게 바꿈 --> 
+	<!-- 정기 후원 내역 확인 ( 마이페이지/ 유저  ) 새롭게 바꿈 --> 
 	<select id = "selectRegularList" resultMap = "donation_rm">
 		SELECT DONATION_INFO_NO , MEMBER_NAME, MEMBER_EMAIL, DONATION_UID, DONATION_MERCHANT_UID, DONATION_CARD, DONATION_CONTENT, 
 		    CASE 

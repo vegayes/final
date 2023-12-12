@@ -664,8 +664,7 @@ document.getElementById("signUp-form").addEventListener("submit", e=>{
 			e.preventDefault(); // form 태그 기본 이벤트 제거
 			return; // 함수 종료
 			
-		}
-		
+		}	
 	}
 	
 });

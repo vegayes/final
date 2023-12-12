@@ -142,7 +142,6 @@ a:hover{
 .applyInput{
     /* width: 100%; */
     flex-basis: 92%;
-    border-radius: 10px;
     border : none; 
     outline : 0;
 
@@ -227,7 +226,7 @@ a:hover{
 .donationTBodyTr td{
     /*가운데 정렬*/
     text-align: center; 
-    padding : 13px 10px;
+    padding : 10px 10px;
     border-bottom: 3px solid #D2D2D2;
 
     font-size: 12px;
@@ -244,7 +243,7 @@ a:hover{
           되므로 필요 margin 영역 필요 없을 거 같아요 
 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★*/
 .paginationArea{
-    margin-top: 50px; /*★나중에 필요 없을 듯★*/
+    margin-top: auto; /*★나중에 필요 없을 듯★*/
     margin-bottom: 10px;
 }
 
@@ -323,7 +322,35 @@ a:hover{
     opacity: 1;
 } */
 
+.donationTBodyTr td:nth-of-type(7){
+	padding-left: 3%;
+	
+}
 
 .submenu a.underline {
     text-decoration: underline;
+}
+
+.donationInfoCheck{
+	width: 80%;
+	height: 28px;
+	
+	
+	border-radius: 5px;
+	
+	background-color: #FEE4D6;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.donationInfoCheck:hover{
+	background-color: #FFE3E3;
+	
+	cursor: pointer;
+}
+
+#onePay{
+	background-color: white;
 }
