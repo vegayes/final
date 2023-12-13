@@ -52,7 +52,7 @@ public class AdoptController {
 		
 		model.addAttribute("map", map);
 		
-		System.out.println("map::" + map);
+		//System.out.println("map::" + map);
 		
 		return "adopt/dogList";
 	}
@@ -64,11 +64,11 @@ public class AdoptController {
 	        @RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
 	        @RequestBody Dog selectedFilters) {
 		
-		System.out.println("selectedFilters::" + selectedFilters);
+		//System.out.println("selectedFilters::" + selectedFilters);
 		
 	    Map<String, Object> map = service.selectDogList(cp, selectedFilters);
 	    
-	    System.out.println("searchMap::" + map);
+	    //System.out.println("searchMap::" + map);
 
 	    return map;
 	}
@@ -108,13 +108,13 @@ public class AdoptController {
 			
 			path = "adopt/dogDetail";
 			
-			System.out.println("상세조회한 개 정보 : " + dog);
+			//System.out.println("상세조회한 개 정보 : " + dog);
 			model.addAttribute("dog", dog); 
 			session.setAttribute("dog", dog); 
 			
 			if(dog.getImageList().size() != 0) { // 강아지 이미지가 있을 경우				
 				
-				System.out.println("개 이미지 있음");
+				//System.out.println("개 이미지 있음");
 				DogImage thumbnail = null;
 				
 				if(dog.getImageList().get(0).getImageOrder() == 0) {

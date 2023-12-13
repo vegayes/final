@@ -40,11 +40,11 @@ public class AdminInquiryController {
 		@GetMapping("/adminInquiry/{inquiryNo}")
 		public String adminInquiryDetail(@PathVariable("inquiryNo") int inquiryNo, Model model) {
 			
-			System.out.println("상세 조회 No :" + inquiryNo);
+			//System.out.println("상세 조회 No :" + inquiryNo);
 			
 			Inquiry inquiryDetail = adminInquiryService.adminInquiryDetail(inquiryNo);
 			
-			System.out.println("상세 조회 :" + inquiryDetail);
+			//System.out.println("상세 조회 :" + inquiryDetail);
 			
 			model.addAttribute("inquiry", inquiryDetail);
 			return "mypage/admin/adminInquiry";
@@ -80,7 +80,7 @@ public class AdminInquiryController {
 		    System.out.println("닉네임 : " + nickname);
 		    List<Inquiry> inquiries = adminInquiryService.findInquiriesByNickname(nickname);
 
-		    System.out.println("출력 :" + inquiries);
+		   //System.out.println("출력 :" + inquiries);
 
 		    if (inquiries.isEmpty()) {
 		        model.addAttribute("message", "검색 결과가 없습니다");

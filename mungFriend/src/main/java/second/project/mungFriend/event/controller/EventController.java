@@ -142,7 +142,7 @@ public class EventController {
 	    List<Integer> quizAnswers = new ArrayList<>();
 	    List<List<Map<String, String>>> quizImages = new ArrayList<>();
 	    
-	    System.out.println("quiz : " + choose);
+	   // System.out.println("quiz : " + choose);
 
 	    for (Quiz quizElement : choose) {
 	        // Quiz choices

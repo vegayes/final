@@ -41,7 +41,7 @@ public class AdminReservationListController {
 			
 			model.addAttribute("map", map);
 			
-			System.out.println("map:::" + map);
+			//System.out.println("map:::" + map);
 			
 		}else { // 검색어가 있을 때
 			
@@ -51,7 +51,7 @@ public class AdminReservationListController {
 			Map<String, Object> map = service.selectReservationList(paramMap);			
 			model.addAttribute("map", map);
 			
-			System.out.println("Searchmap:::" + map);
+			//System.out.println("Searchmap:::" + map);
 		}
 		
 		return "mypage/admin/reservationList_admin";

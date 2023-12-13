@@ -48,7 +48,7 @@ public class PmController {
 		// 활동일지 조회하기(페이지네이션과 활동일지 목록을 가져와야 되기때문에 Map으로 받음 => admin 회원관리 참조)
 		Map<String, Object> map = service.selectPmList(memberNo, cp);
 		
-		System.out.println(map);
+		//System.out.println(map);
 		
 		model.addAttribute("map", map);
 		
@@ -110,16 +110,16 @@ public class PmController {
 		
 		// System.out.println("activityNo :" + activityNo);
 		Pm pm = service.activityLogSelectDetail(activityNo);
-		System.out.println("pm : " + pm);
+		//System.out.println("pm : " + pm);
 		
 		if(pm != null) { // 활동일지 상세 조회 성공
 			
-			System.out.println("활동일지 상세 조회 성공");
+			//System.out.println("활동일지 상세 조회 성공");
 			model.addAttribute("pm", pm);
 			
 		} else { // 활동일지 상세 조회 실패
 			
-			System.out.println("활동일지 상세 조회 실패");
+			//System.out.println("활동일지 상세 조회 실패");
 			
 		}
 		
@@ -146,13 +146,13 @@ public class PmController {
 		
 		if(result > 0) { // 활동일지 수정 성공
 			
-			System.out.println("활동일지 수정 성공");
+			//System.out.println("활동일지 수정 성공");
 			message = "활동일지 수정 성공";
 			
 			// 활동일지 상세 재조회하기
 			Pm pm1 = service.activityLogSelectDetail(pm.getActivityNo());
 			
-			System.out.println("pm1:" + pm1);
+			//System.out.println("pm1:" + pm1);
 			model.addAttribute("pm", pm1);
 			
 		} else { // 활동일지 수정 실패
@@ -186,7 +186,7 @@ public class PmController {
 			// 활동일지 재조회하기
 			Map<String, Object> map = service.selectPmList(memberNo, 1);
 			
-			System.out.println(map);
+			//System.out.println(map);
 			
 			model.addAttribute("map", map);
 
@@ -196,7 +196,7 @@ public class PmController {
 			
 		} else { // 활동일지 삭제 실패
 			
-			System.out.println("활동일지 삭제 실패");
+			//System.out.println("활동일지 삭제 실패");
 			
 			message = "활동일지 삭제 실패";
 			
@@ -219,14 +219,14 @@ public class PmController {
 		// System.out.println(result);
 		
 		if(result > 0) { // 좋아요 추가 성공
-			System.out.println("좋아요 추가 성공");
+			//System.out.println("좋아요 추가 성공");
 			
 			Map<String, Object> map = service.selectPmList(loginMember.getMemberNo(), 1);
 			
 			model.addAttribute("map", map);
 			
 		} else { // 좋아요 추가 실패
-			System.out.println("좋아요 추가 실패");
+			//System.out.println("좋아요 추가 실패");
 			
 		}
 		
@@ -241,14 +241,14 @@ public class PmController {
 		int result = service.deleteLike(activityLikeNo);
 		
 		if(result > 0) { // 좋아요 삭제 성공
-			System.out.println("좋아요 삭제 성공");
+			//System.out.println("좋아요 삭제 성공");
 			
 			Map<String, Object> map = service.selectPmList(loginMember.getMemberNo(), 1);
 			
 			model.addAttribute("map", map);
 			
 		} else { // 좋아요 삭제 실패
-			System.out.println("좋아요 삭제 실패");
+			//System.out.println("좋아요 삭제 실패");
 			
 		}
 		

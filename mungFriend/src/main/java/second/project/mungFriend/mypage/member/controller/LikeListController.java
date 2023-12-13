@@ -33,7 +33,7 @@ public class LikeListController {
 		
 		model.addAttribute("map", map);
 
-		System.out.println("map:::" + map);
+		//System.out.println("map:::" + map);
 		
 		return "mypage/member/myPageLikeList";
 		
@@ -48,8 +48,8 @@ public class LikeListController {
 		
 		int memberNo = loginMember.getMemberNo();
 		
-		System.out.println("dogNo"+dogNo);
-		System.out.println("memberNo:::" + memberNo);
+		//System.out.println("dogNo"+dogNo);
+		//System.out.println("memberNo:::" + memberNo);
 		
 		int result = service.likeDelete(dogNo, memberNo);
 

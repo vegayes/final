@@ -67,7 +67,7 @@ public class UserInquiryController {
 		   // inquiryList 조회하기
 		   List<Inquiry> inquiryList = service.inquiryList(loginMember.getMemberNo());
 		   
-		   System.out.println("1:1  = " + inquiryList);
+		   //System.out.println("1:1  = " + inquiryList);
 		   
 		   model.addAttribute("inquiryList", inquiryList);
 		   
@@ -89,7 +89,7 @@ public class UserInquiryController {
 		
 		Inquiry inquiryDetail = service.selectInquiryDetail(inquiryNo);
 		
-		System.out.println("상세 조회 :" + inquiryDetail);
+		//System.out.println("상세 조회 :" + inquiryDetail);
 		
 		model.addAttribute("inquiry", inquiryDetail);
 		return "mypage/member/userInquiryscs";

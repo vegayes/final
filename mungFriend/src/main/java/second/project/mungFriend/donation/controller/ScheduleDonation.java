@@ -64,9 +64,9 @@ public class ScheduleDonation {
 		
 		for(RegularCardInfo oneSchedule : Schedule) {
 			
-			System.out.println("나 들어옴");
+			//System.out.println("나 들어옴");
 			System.out.println(oneSchedule);
-			System.out.println("unix 시간 : " + oneSchedule.getSchedule_at());
+			//System.out.println("unix 시간 : " + oneSchedule.getSchedule_at());
 			
 			
 //            Date date = new Date(oneSchedule.getSchedule_at() * 1000L); // Unix 타임스탬프를 밀리초로 변환하여 Date 객체 생성
@@ -81,7 +81,7 @@ public class ScheduleDonation {
 			
 	        BigDecimal amount = new BigDecimal(oneSchedule.getAmount());
 	        
-	        System.out.println("정기결제 예약금액 : " + amount);
+	        //System.out.println("정기결제 예약금액 : " + amount);
 
             ScheduleEntry entry = new ScheduleEntry(oneSchedule.getMerchantUid(), date, amount);
 
@@ -108,15 +108,15 @@ public class ScheduleDonation {
  	@ResponseBody
 	public IamportResponse<List<Schedule>> unsubscribeSchedule(@RequestBody RegularCardInfo cancelData) throws IamportResponseException, IOException {
 
- 		System.out.println("cancelData :" + cancelData);
- 		System.out.println("빌링키 :" + cancelData.getCustomer_uid());
- 		System.out.println("list :" + cancelData.getMerchantList());
+ 		//System.out.println("cancelData :" + cancelData);
+ 		//System.out.println("빌링키 :" + cancelData.getCustomer_uid());
+ 		//System.out.println("list :" + cancelData.getMerchantList());
  		
  		UnscheduleData cancelSchedule = new UnscheduleData(cancelData.getCustomer_uid());
  		
  		if(cancelData != null) {
  			for(String cancel : cancelData.getMerchantList()) {
- 				System.out.println("취소 내용 :" + cancel);
+ 				//System.out.println("취소 내용 :" + cancel);
  				cancelSchedule.addMerchantUid(cancel);
  			}
  			

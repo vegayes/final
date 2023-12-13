@@ -34,7 +34,7 @@ public class PaymentController {
 	
     @PostMapping("/{imp_uid}")
     public IamportResponse<Payment> paymentByImpUid(@PathVariable String imp_uid) throws IamportResponseException, IOException{
-    	System.out.println("string :" + imp_uid);
+    	//System.out.println("string :" + imp_uid);
         log.info("일반(일시) 결제 진입");
         return iamportClient.paymentByImpUid(imp_uid);
     }
@@ -47,7 +47,7 @@ public class PaymentController {
 													@RequestBody RegularCardInfo cardData
 												/*PathVOnetimePaymentData onetimeData*/) throws IamportResponseException, IOException {
 
-    	System.out.println("cardData :" + cardData);
+    	//System.out.println("cardData :" + cardData);
     	
     	
     	CardInfo card = new CardInfo(cardData.getCardNumber(), cardData.getCardExpiry(), cardData.getBirth(), cardData.getPwd2Digit());
@@ -67,7 +67,7 @@ public class PaymentController {
     	onetimeData.setCustomer_uid(cardData.getCustomer_uid());
     	
     	
-    	System.out.println("cardData :" + cardData);
+    	//System.out.println("cardData :" + cardData);
     	
     	
 		return iamportClient.onetimePayment(onetimeData);

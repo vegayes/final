@@ -93,7 +93,7 @@ public class ReviewController {
 		
 		
 		if(review != null) {
-			path = "adoptReview/reviewDetail";   
+			path = "adoptReview/ReviewDetail";   
 			
 			int result = service.updateCount(reviewNo);
 			if(result > 0) {
@@ -160,7 +160,7 @@ public class ReviewController {
 		}
 		
 		
-		return"redirect:reviewList/1";
+		return"redirect:ReviewList/1";
 	}
 	
 	
@@ -225,7 +225,7 @@ public class ReviewController {
 		ra.addFlashAttribute("message",message);
 		
 		
-		return "redirect:/adoptReview/reviewDetail/" + reviewNo + "?cp=" + cp;
+		return "redirect:/adoptReview/ReviewDetail/" + reviewNo + "?cp=" + cp;
 	}
 	
 	
@@ -257,27 +257,12 @@ public class ReviewController {
 		ra.addFlashAttribute("message",message);
 		
 		
-		return "redirect:/adoptReview/reviewList/"+cp;
+		return "redirect:/adoptReview/ReviewList/"+cp;
 	}
 	
 	
 	
-	/** 챗봇에서 추천한 강아지 검색
-	 * @param cp
-	 * @param breedName
-	 * @param model
-	 * @return
-	 */
-	@GetMapping("searchDogList/{breedName}")
-	public String selectDogList(@RequestParam(value="cp", required= false, defaultValue="1") int cp,
-			@PathVariable ("breedName") String breedName,
-			Model model) {
-		
-		Map<String, Object> map = service.selectDogList(cp,breedName);
-		model.addAttribute("map", map);
-		
-		return "adopt/dogList";
-	}
+	
 	
 	
 }
