@@ -184,12 +184,14 @@ public class PmServiceImpl implements PmService{
 	}
 
 	// 활동일지 삭제하기
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int activityLogDelete(int activityNo) {
 		return mapper.activityLogDelete(activityNo);
 	}
 
 	// 좋아요 추가 버튼 관련
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int insertLike(int loginMemberNo, int activityNo) {
 		// System.out.println("Impl : " + loginMemberNo);
@@ -197,6 +199,7 @@ public class PmServiceImpl implements PmService{
 	}
 
 	// 좋아요 삭제 버튼 관련
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int deleteLike(int activityLikeNo) {
 		return mapper.deleteLike(activityLikeNo);

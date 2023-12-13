@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import jakarta.mail.Message;
 import jakarta.mail.internet.InternetAddress;
@@ -56,6 +57,7 @@ public class EmailServiceImpl implements EmailService{
         
 	}
 
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int signUp(String email) {
 		// 6자리 난수 인증번호 생성
