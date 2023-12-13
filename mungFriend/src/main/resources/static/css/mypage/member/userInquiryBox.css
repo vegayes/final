@@ -174,7 +174,7 @@ a:hover{
 /*nav바 13% 위치*/
 .adminContentContainer{
     flex-basis: 74%;
-    padding: 50px;
+    padding: 40px;
 
     /*페이지네이션 내리기 위해서 일단 임의로 잡아둠*/
     height: 700px; /*★나중에 필요 없을 듯★*/

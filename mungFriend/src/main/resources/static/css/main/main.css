@@ -40,6 +40,10 @@ main {
     /* padding-right: 7px; */
     margin-left: 10px;
     cursor: pointer;
+
+    /* 돋보기 아이콘 위치 옮기기 */
+    position: relative;
+    right: 42px;
 }
 
 /* search-container */
