@@ -14,5 +14,5 @@ public class DogBreed {
 	
    private int dogNo;
    private String dogName;
-   private String thumbnail;
+   private String thumbnail;	
 }

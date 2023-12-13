@@ -185,6 +185,13 @@ a:hover{
     /* border : 2px solid yellow; */
 }
 
+.no-inquiry-message td {
+	font-size: 14px;
+	height: 400px;
+	 vertical-align: middle;   /* 텍스트를 세로 중앙에 위치시킵니다. */
+    padding: 20px; /* 원하는 간격만큼 조정 */
+    text-align: center;
+}
 /*************************************************************
                 후원 내역 (관리자) Content - 테이블
 **************************************************************/
@@ -216,7 +223,7 @@ a:hover{
     padding : 10px 25px;
     /* border : 2px solid red; */
     border-top: 5px solid #FEE4D6;
-    border-bottom: 3px solid #D2D2D2;
+    border-bottom: 2px solid #D2D2D2;
     border-collapse: collapse;
 
 
