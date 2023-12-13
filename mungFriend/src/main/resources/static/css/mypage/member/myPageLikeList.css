@@ -129,14 +129,14 @@ a:hover{
     grid-row-gap: 15px;
 }
 
-/* .like-dog{
-    width: 200px;
-    height: 230px;
-    background-color: #FFF0E8;
-    border-radius: 20px;
+.like-dog-none{
+    font-size: 14px;
+    height: 100%;
 
-    margin: 5px 15px 5px 15px;
-} */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .top{
     display: flex;

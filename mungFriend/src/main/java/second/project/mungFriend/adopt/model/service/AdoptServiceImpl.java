@@ -61,13 +61,17 @@ public class AdoptServiceImpl implements AdoptService{
 		// 2) RowBounds 객체 생성
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		
-		// 강아지 목록 조회 (일반 전체 조회)
+		// 페이지에 맞는 강아지 목록 조회 (일반 전체 조회)
 		List<Dog> dogList = mapper.selectDogList(rowBounds);
+		
+		// 필터기능 구현을 위한 모든 견종 조회
+		List<Dog> dogBreedList = mapper.selectDogBreed();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("pagination", pagination);
 		map.put("dogList", dogList);
+		map.put("dogBreedList", dogBreedList);
 		
 		return map;
 	}
@@ -462,6 +466,12 @@ public class AdoptServiceImpl implements AdoptService{
 		}
 		
 		return insertResult;
+	}
+
+	@Override
+	public List<String> getReservedTimes(String selectedDate) {
+		
+		return mapper.getReservedTimes(selectedDate);
 	}
 
 

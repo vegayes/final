@@ -31,16 +31,17 @@
 
             <!-- 내용 작성영역-->
             <div class = "userContentContainer">
-                <button id="prevBtn" type="button">&lt;</button>
-                <div class="like-dog-list">
 
-                    <th:block th:if="${likeList.isEmpty()}">
-                        <div class="like-dog">
-                            <p style="font-size: 12px;">찜한 목록이 없습니다.</p>
-                        </div>
-                    </th:block>
+                <th:block th:if="${likeList.isEmpty()}">
+                    <div class="like-dog-none">
+                        <p>찜한 목록이 없습니다.</p>
+                    </div>
+                </th:block>
 
-                    <th:block th:unless="${likeList.isEmpty()}">
+                <th:block th:unless="${likeList.isEmpty()}">
+                    <button id="prevBtn" type="button">&lt;</button>
+
+                    <div class="like-dog-list">
                         <div class="like-dog" th:each="like : ${likeList}">
                             <div class="top">
                                 <div id="dog-name" th:value="${like.dogName}">[[${like.dogName}]]</div>
@@ -56,11 +57,10 @@
                             <div id="dog-info">[[${like.dogBirthDay}]] / [[${like.dogGender}]]</div>
                             <div id="dog-kind">[[${like.breedName}]]</div>
                         </div>
-
-                    </th:block>
-                </div>
-                
-                <button id="nextBtn" type="button">&gt;</button>
+                    </div>
+                    
+                    <button id="nextBtn" type="button">&gt;</button>
+                </th:block>
             </div>
         </section>
     </main>

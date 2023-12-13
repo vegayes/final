@@ -1,5 +1,4 @@
 // 예약하기
-
 function showCalendar() {
 
     // 로그인 여부 검사
@@ -30,7 +29,7 @@ function showCalendar() {
     cancelBtn.style.border = 'none';
     cancelBtn.style.backgroundColor = 'white';    
 
-    // 스타일 직접 추가
+    // 스타일 추가
     dateInput.style.width = '150px';
     dateInput.style.height = '25px';
     dateInput.style.marginRight = '7px';
@@ -160,7 +159,7 @@ function updateAvailableTimes(selectedDate) {
     const timeContainer = document.getElementById('time-container');
 
     // 기존 버튼 모두 제거
-    timeContainer.innerHTML = '';
+    // timeContainer.innerHTML = '';
 
     // 현재 날짜를 가져오는 함수
     function getCurrentDate() {
@@ -175,31 +174,55 @@ function updateAvailableTimes(selectedDate) {
 
         return `${year}-${month}-${day}`;
     }
-
+    
     // 현재 날짜
     const currentDate = getCurrentDate();
+    console.log("currentDate:", currentDate);
+
+    // 예약 불가한 시간을 서버에서 가져오는 함수
+    async function fetchReservedTimes(selectedDate) {
+        try {
+            const response = await fetch(`/adopt/getReservedTimes?selectedDate=${selectedDate}`);
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error fetching reserved times:', error);
+            return [];
+        }
+    }
 
     // 날짜가 현재 날짜보다 뒤의 날짜이면 시간 버튼을 추가
     if (selectedDate >= currentDate) {
-        // 서버에서 가져온 예약 가능한 시간
-        const availableTimes = ['11:00', '13:00', '15:00', '17:00'];
 
-        // 새로운 버튼 추가
-        availableTimes.forEach(time => {
-            const button = document.createElement('button');
-            button.value = time;
-            button.textContent = time;
+        updateReservedTimes(selectedDate);
 
-            button.style.margin = '10px 10px 10px 0px';
-            button.style.width = '58px';
-            button.style.height = '25px';
-            button.style.backgroundColor = 'white';
-            button.style.border = '1px solid black';
-            button.style.borderRadius = '5px';
+        async function updateReservedTimes(selectedDate) {
+            const reservedTimes = await fetchReservedTimes(selectedDate);        
+            console.log('reservedTimes::', reservedTimes);
+            
+            timeContainer.style.display = 'flex';
 
-            button.addEventListener('click', handleTimeButtonClick);
-            timeContainer.appendChild(button);
-        });
+            // reservedTimes를 사용하여 UI 업데이트
+            const buttons = document.querySelectorAll("#time-container button");
+        
+            buttons.forEach(function(button) {
+                const timeValue = button.value;
+                console.log('timeValue::', timeValue);
+                // timeValue가 reservedTimes 배열에 있으면 
+                // isReserved는 true가 되고, 그렇지 않으면 false
+                const isReserved = reservedTimes.includes(timeValue);
+        
+                if (isReserved) {
+                    button.disabled = true;
+                    button.style.backgroundColor = 'gray'
+                    button.style.border = 'none'
+                } else {
+                    button.disabled = false;
+                    button.addEventListener('click', handleTimeButtonClick);
+                }
+            });
+        }
+        
     }
 }
 

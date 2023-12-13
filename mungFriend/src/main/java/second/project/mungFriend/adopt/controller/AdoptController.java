@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
@@ -138,6 +140,18 @@ public class AdoptController {
 		return path;
 		
 	}
+	
+	// 예약 가능한 날짜와 시간 조회
+	@GetMapping("/getReservedTimes")
+    @ResponseBody
+    public ResponseEntity<List<String>> getReservedTimes(@RequestParam String selectedDate) {
+        
+    	// selectedDate에 따른 예약 불가한 시간을 조회하고 리스트로 반환
+        List<String> reservedTimes = service.getReservedTimes(selectedDate);
+        System.out.println("reservedTimes::" + reservedTimes);
+        
+        return ResponseEntity.ok(reservedTimes);
+    }
 	
 	// 좋아요 처리
 	@PostMapping("/like")

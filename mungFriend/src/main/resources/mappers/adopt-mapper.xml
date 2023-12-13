@@ -76,6 +76,14 @@
 		ORDER BY DOG_ADMISSION_DATE DESC
 	</select>
 	
+	<!-- 필터기능 구현을 위한 모든 견종 조회 -->
+	<select id="selectDogBreed" resultMap="dog_rm">
+		SELECT DISTINCT BREED_NAME
+		FROM DOG
+		LEFT JOIN DOG_BREED db USING(BREED_NO)
+		WHERE DOG_ADOPT_FL = 'N'
+	</select>
+	
 	<!-- 조건에 맞는 강아지수 조회 -->
 	<select id="getSearchListCount" resultType="_int">
 		SELECT COUNT(*)
@@ -164,6 +172,13 @@
 		SELECT COUNT(*) FROM DOG_RESERVATION
 		WHERE MEMBER_NO = #{memberNo}
 		AND DOG_NO = #{dogNo}
+		AND RESERVE_YN = 'Y'
+	</select>
+	
+	<select id="getReservedTimes" resultType ="string">
+		SELECT RESERVE_TIME
+		FROM DOG_RESERVATION
+		WHERE RESERVE_DATE = #{selectedDate}
 		AND RESERVE_YN = 'Y'
 	</select>
 	

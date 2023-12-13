@@ -59,6 +59,8 @@ public interface AdoptService {
 	// 알림 목록에 insert
 	int insertAlarm(List<Object> memberNoList,int dogNo);
 
+	List<String> getReservedTimes(String selectedDate);
+
 
 
 
