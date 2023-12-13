@@ -35,6 +35,10 @@ public class MemberUserServiceImpl implements MemberUserService{
 	@Override
 	public int updateInfoUser(MultipartFile profileImage, Member updateMember, Member loginMember) throws Exception {
 		
+		// 비밀번호 암호화 (Bcrypt) 후 다시 updateMember 세팅
+		String encPw = bcrypt.encode(updateMember.getMemberPw());
+		updateMember.setMemberPw(encPw);
+		
 		// 프로필 이미지 변경 실패 대비
 		String temp = updateMember.getMemberProfile(); // 기존에 가지고 있던 이전 이미지 저장
 		

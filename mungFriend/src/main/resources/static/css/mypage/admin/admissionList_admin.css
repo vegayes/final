@@ -173,6 +173,14 @@ a:hover{
     height : 800px;
   /* margin-left: auto; */
   /* margin-right: auto; */
+  
+  border : 2px solid blue;
+}
+
+.swiper-wrapper{
+    width: 845px;
+    height : 800px;
+    border : 2px solid red;
 }
 
 .swiper-slide {
@@ -205,12 +213,9 @@ a:hover{
     */
 }
 
-
+/*
 .admissionCardBoxArea{
-    /*flex-basis: 50%;*/
     width: 100%;
-	/*진행완료된 경우는 220px로 줄이기*/
-    /*padding : 10px 4%;*/
 
     display: flex;
     
@@ -219,8 +224,6 @@ a:hover{
     border : 2px solid red;
 
 }
-
-
 
 .admissionCardBox{
 
@@ -231,6 +234,29 @@ a:hover{
 
     display: flex;
 }
+*/
+
+.admissionCardBoxArea{
+    width: 100%;
+
+    display: flex;
+    
+    padding:10px;
+    
+    border : 2px solid rebeccapurple;
+
+}
+
+.admissionCardBox{
+    width: 100%;
+    
+    border-radius: 5px;
+    background-color: #F3F3F3;
+
+    display: flex;
+}
+
+
 
 /*프로필 사진*/
 .cardProfile{
@@ -257,6 +283,7 @@ a:hover{
 
 .cardProfileWrapper > img{
     height: 100%;
+    
 }
 
 
@@ -272,6 +299,11 @@ a:hover{
 
     font-size: 11px;
     font-weight: 400;
+
+    display: flex;
+    justify-content: start;
+
+
 }
 
 .registArea{
@@ -337,8 +369,57 @@ a:hover{
 	display: flex; 
 	justify-content: center; 
 	padding:10px;  
-	border:2px solid red;
 }
+
+
+.submenu a.underline {
+    text-decoration: underline;
+}
+
+
+/*************************************************
+                grid로 swiper 이용
+*************************************************/
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2개의 열 */
+    grid-template-rows: repeat(3, 1fr); /* 3개의 행 */
+    gap: 10px; /* 각 아이템 사이의 간격 */
+    
+    position: relative;
+}
+
+.grid-item {
+    background-color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.swiperBtn{
+	position: absolute;
+	background-color: transparent;
+	
+	width: 50px;
+	height: 50px;
+	border: none;
+	z-index: 10;
+	
+	font-size: 35px;
+	font-weight: 700;
+	color : #F95353;
+    top: 50%; 
+}
+
+.swiperBtn:hover{
+    cursor: pointer;
+}
+
+#nextBtn {
+    right: 0; /* 오른쪽으로 이동 */
+}
+
+
 
 
 

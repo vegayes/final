@@ -8,7 +8,8 @@
         
         <!-- swiper-->
 	    <link rel="stylesheet" th:href="@{https://unpkg.com/swiper/swiper-bundle.min.css}"/>
-
+        <script th:src="@{https://kit.fontawesome.com/ac58eafae7.js}" crossorigin="anonymous"></script>
+        
     </head>
     <body>
 	    <th:block th:replace="~{common/header}"></th:block>
@@ -45,80 +46,76 @@
 	                        </div>  
 	                    </div>			
 	                    <!-- 입소 신청된 내역 자격증 카드 형태 영역 -->
-	                    <div class = "admissionCardArea">
-							<div class="swiper mySwiper">
-								<div class="swiper-wrapper">
-			                        <!-- 카드 한 개 -->
-			                        <div class = "admissionCardBoxArea swiper-slide"  th:each = "admission : ${admissionList}">
-			                            <div class = "admissionCardBox">
-			                                <div class = "cardProfile">
-			                                    <div class = "cardProfileWrapper">
-			                                        <img th:src="${admission.admProfile}">
-			                                    </div>
-			                                </div>
-			    
-			                                <div class = "cardInfo">
-			                                    <div class = "cardInfoContent">
-			                                        이름 : [[${admission.admName}]]
-			                                    </div>
-			
-			                                    <div class = "cardInfoContent">
-			                                        연락처 : [[${admission.admPhone}]]
-			                                    </div>
-			
-			                                    <div class = "cardInfoContent">
-			                                        견종 : [[${admission.admBreed}]]
-			                                    </div>
-			
-			                                    <div class = "cardInfoContent">
-			                                        성별 : [[${admission.admGender}]]
-			                                    </div>
-			
-			                                    <div class = "cardInfoContent">
-			                                        나이 : [[${admission.age}]]
-			                                    </div>
-			
-			                                    <div class = "cardInfoContent">
-			                                        특이사항 : [[${admission.admSignificant}]]
-			                                    </div>
-			
-			                                    <div class = "cardInfoContent">
-			                                        입소희망일 : [[${admission.admHopeDate}]]
-			                                    </div>
-			                                    
-		                    	       			<th:block th:if="${admission.admYN} == 'N'">
-				                                    <div class = "cardInfoContent registArea">
-														
-														<a th:href = "@{/adopt/dogRegistration/{admNo}(admNo = ${admission.admNo})}">
-															<div class = "admissionRegist" >
-																등록하기
-															</div>														
-														</a>
-		
-														
-													</div>
-												</th:block>
-			                                </div>
-			                            </div>
-			                        </div>
-								</div>
-								
-					            <div class="swiper-pagination"></div>
-					            <div class="swiper-button-prev"></div>
-					            <div class="swiper-button-next"></div>
-								
-													
-								
+						<div class="admissionCardArea grid-container">
+
+						    <div class="grid-item" th:each = "admission : ${admissionList}">
+	                            <div class = "admissionCardBox">
+	                                <div class = "cardProfile">
+	                                    <div class = "cardProfileWrapper">
+	                                        <img th:src="${admission.admProfile}">
+	                                    </div>
+	                                </div>
+	    
+	                                <div class = "cardInfo">
+	                                    <div class = "cardInfoContent">
+	                                        이름 : [[${admission.admName}]]
+	                                    </div>
+	
+	                                    <div class = "cardInfoContent">
+	                                        연락처 : [[${admission.admPhone}]]
+	                                    </div>
+	
+	                                    <div class = "cardInfoContent">
+	                                        견종 : [[${admission.admBreed}]]
+	                                    </div>
+	
+	                                    <div class = "cardInfoContent">
+	                                        성별 : [[${admission.admGender}]]
+	                                    </div>
+	
+	                                    <div class = "cardInfoContent">
+	                                        나이 : [[${admission.age}]]
+	                                    </div>
+	
+	                                    <div class = "cardInfoContent">
+	                                        특이사항 : [[${admission.admSignificant}]]
+	                                    </div>
+	
+	                                    <div class = "cardInfoContent">
+	                                        입소희망일 : [[${admission.admHopeDate}]]
+	                                    </div>
+	                                    
+	                	       			<th:block th:if="${admission.admYN} == 'N'">
+		                                    <div class = "cardInfoContent registArea">
+												
+												<a th:href = "@{/adopt/dogRegistration/{admNo}(admNo = ${admission.admNo})}">
+													<div class = "admissionRegist" >
+														등록하기
+													</div>														
+												</a>
+	
+												
+											</div>
+										</th:block>
+	                                </div>
+	                            </div>	
 							</div>
-							
-	                    </div>
+							<button class = "swiperBtn" id="prevBtn">&lt;</button>
+							<button class = "swiperBtn" id="nextBtn">&gt;</button>
+						</div>
+						
+
+
+						
 		       		</th:block>
                 </div>
             </section>
         </main>
 
+     
+		<th:block th:replace="~{common/chatbot}"></th:block>
+        <img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image">
         <a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
-		<a th:href="@{#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
 
 
 	    <th:block th:replace="~{common/footer}"></th:block>

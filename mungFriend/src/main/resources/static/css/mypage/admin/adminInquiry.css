@@ -68,11 +68,32 @@ a:hover {
     color: red;
 }
 
+.submenu {
+    display: none;
+    margin-left: 20px;
+   
+}
+
+.submenu li {
+    margin-top: 5px;
+    padding: 5px;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 10px;
+}
+
+.submenu.active {
+    display: block;
+}
+
 /* 사용자 콘텐츠 영역 */
 .userContentArea {
     flex-basis: 70%;
-    display: flex;
+
+resize: none;    display: flex;
 }
+
 
 /* 사용자 콘텐츠 컨테이너 */
 .userContentContainer {
@@ -81,6 +102,7 @@ a:hover {
     padding: 20px;
     margin-left: 40px;
     justify-content: center;
+    resize: none;
 }
 
 /* 입력 필드 스타일 */
@@ -93,11 +115,13 @@ a:hover {
     background: none;
     box-shadow: none;
     outline: none; 
+   resize: none;
 }
  
 .textareaBox {
     height: 100px;
-    resize: vertical;
+     resize: none;
+    
 }
 
 .buttonBox {
@@ -150,3 +174,6 @@ a:hover {
 }
 
 
+.submenu a.underline {
+    text-decoration: underline;
+}

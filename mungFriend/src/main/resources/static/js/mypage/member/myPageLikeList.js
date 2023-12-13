@@ -1,19 +1,36 @@
+// 페이지 슬라이드 넘김 처리
 document.addEventListener("DOMContentLoaded", function() {
     
     var currentPageIndex = 0; // 현재 페이지의 인덱스를 추적
 
     function showItemsByPage() {
+        var likeDogListElements = document.getElementsByClassName('like-dog-list');
         var likeDogElements = document.querySelectorAll('.like-dog');
         var itemsPerPage = 6;
         var startIndex = currentPageIndex * itemsPerPage;
 
-        for (var i = 0; i < likeDogElements.length; i++) {
-            if (i >= startIndex && i < startIndex + itemsPerPage) {
-                likeDogElements[i].style.display = 'block';
-            } else {
-                likeDogElements[i].style.display = 'none';
+        if(likeDogElements.length != 0){
+            for (var i = 0; i < likeDogElements.length; i++) {
+
+                if (i >= startIndex && i < startIndex + itemsPerPage) {
+                    likeDogElements[i].style.display = 'block';
+                    likeDogElements[i].style.width = '200px';
+                    likeDogElements[i].style.height = '230px';
+                    likeDogElements[i].style.backgroundColor = '#FFF0E8';
+                    likeDogElements[i].style.borderRadius = '20px';
+                    likeDogElements[i].style.margin = '5px 15px 5px 15px';
+    
+                } else {
+                    likeDogElements[i].style.display = 'none';
+                }
             }
+            
+
+        }else{
+            likeDogListElements.style.display = 'block';
+            likeDogListElements.style.display = 'block';
         }
+
     }
 
     // 페이지 로드 시 처음 6개의 항목을 보이도록 설정
@@ -62,6 +79,7 @@ function selectLikeList(){
     
 } 
 
+
 function deleteLikeDog(dogNo){
 
     if( confirm("찜한 목록에서 삭제하시겠습니까?")){
@@ -74,6 +92,7 @@ function deleteLikeDog(dogNo){
             if(result > 0){
                 alert("찜한 목록이 삭제되었습니다");
                 selectLikeList(); // 목록을 다시 조회해서 삭제된 글을 제거
+                window.location.reload();
             }else{
                 alert("찜한 목록 삭제를 실패하였습니다");
                 selectLikeList(); 
@@ -84,49 +103,3 @@ function deleteLikeDog(dogNo){
     }
 
 }
-
-// // 좋아요 목록 조회
-// function selectLikeList() {
-//     fetch("/mypage/member/myPageLikeList")
-//         .then(response => response.json())
-//         .then(likeList => {
-//             // 화면에 출력되어 있는 목록 삭제
-//             const likeDogList = document.querySelector(".like-dog-list");
-//             likeDogList.innerHTML = "";
-
-//             // 출력된 데이터를 기반으로 화면에 목록 추가
-//             likeList.forEach(like => {
-//                 const likeDogElement = createLikeDogElement(like);
-//                 likeDogList.appendChild(likeDogElement);
-//             });
-
-//             // 페이지를 처음부터 보여주도록 설정
-//             currentPageIndex = 0;
-//             showItemsByPage();
-//         });
-// }
-
-
-// function createLikeDogElement(like) {
-//     const likeDogElement = document.createElement("div");
-//     likeDogElement.classList.add("like-dog");
-
-//     // 여기서 좋아요 목록 항목의 정보를 동적으로 추가
-//     // 예를 들어, 개의 이름을 추가하는 코드
-//     const dogNameElement = document.createElement("div");
-//     dogNameElement.innerText = like.dogName;
-//     likeDogElement.appendChild(dogNameElement);
-
-//     // 삭제 버튼을 생성하고 클릭 이벤트를 추가
-//     const deleteBtn = document.createElement("button");
-//     deleteBtn.innerText = "X";
-//     deleteBtn.addEventListener("click", function() {
-//         console.log("Delete button clicked for dogNo:", like.dogNo);
-//         deleteLikeDog(like.dogNo);
-//     });
-
-//     // 좋아요 목록 항목에 삭제 버튼을 추가
-//     likeDogElement.appendChild(deleteBtn);
-
-//     return likeDogElement;
-// }

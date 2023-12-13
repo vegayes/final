@@ -43,7 +43,7 @@ public class EventController {
 
 		int check = service.eventCheck(loginMember.getMemberNo());
 				
-		System.out.println("chcekc" + check);
+		//System.out.println("chcekc" + check);
 		return check;
 	}
 	
@@ -65,7 +65,7 @@ public class EventController {
 
 	        quizChoices.add(choices);
 	    }
-	    System.out.println(quizChoices);
+	    //System.out.println(quizChoices);
 	    return quizChoices;
 	}
 	
@@ -78,7 +78,7 @@ public class EventController {
 	    for (Quiz quizElement : choose) {
 	        quizAnswers.add(quizElement.getAnswerNo());
 	    }
-	    System.out.println(quizAnswers);
+	    //System.out.println(quizAnswers);
 	    
 	    return quizAnswers;
 	}	
@@ -126,7 +126,7 @@ public class EventController {
 	        quizImages.add(images);
 	    }
 	    
-	    System.out.println(quizImages);
+	    //System.out.println(quizImages);
 
 	    return quizImages;
 	}
@@ -142,7 +142,7 @@ public class EventController {
 	    List<Integer> quizAnswers = new ArrayList<>();
 	    List<List<Map<String, String>>> quizImages = new ArrayList<>();
 	    
-	    System.out.println("quiz : " + choose);
+	   // System.out.println("quiz : " + choose);
 
 	    for (Quiz quizElement : choose) {
 	        // Quiz choices
@@ -225,7 +225,7 @@ public class EventController {
 		// 쿠폰 선택
 		int couponContent = service.couponSelect(totalScore);
 		
-		System.out.println("쿠폰 선택 : " + couponContent);
+		//System.out.println("쿠폰 선택 : " + couponContent);
 		
 		// 회원한테 쿠폰 넘기기 
 		Coupon newCoupon = new Coupon();

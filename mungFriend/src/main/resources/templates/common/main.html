@@ -7,126 +7,55 @@
 	<title>메인 페이지</title>
 
 	<link rel="stylesheet" th:href="@{/css/main/main.css}">
+	<link rel="stylesheet" th:href="@{/css/main/sideAlarm.css}">
+	<script th:src="@{https://kit.fontawesome.com/ac58eafae7.js}" crossorigin="anonymous"></script>
 </head>
 
 <body>
-
 	<th:block th:replace="~{common/header}"></th:block>
+	<th:block th:replace="~{common/sideAlarm}"></th:block>
+
+	<img th:src="@{/images/main_img.png}" style="width: 100%; height: 400px;">
+
 	<main>
-
-
 		<div class="search-container">
-
-			<input type="text" id="search-box" placeholder="견종을 입력하세요.">
-			<img th:src="@{/images/main/Vector.png}" alt="검색" class="search-icon">
-
+        	<form th:action="@{/search}" id="searchForm" method="POST">
+				<input type="text" id="search-box" name="searchInput" placeholder="견종 또는 이름을 입력하세요.">
+				<button class = "search-icon fa-solid fa-magnifying-glass" id = "searchBtn"></button>
+        	</form>
 		</div>
+
 		<div class="dog-photo-grid">
-			<div class="dog-photo">
-				<img th:src="@{/images/main/dog1.png}" alt="강아지 1" class="active">
-				<div class="dog-info">
-
-					<p>멍멍이</p>
-					<p>골든 리트리버</p>
-				</div>
-			</div>
-			<div class="dog-photo">
-				<img th:src="@{/images/main/dog2.png}" alt="강아지 1" class="active">
-				<div class="dog-info">
-					<p>바보개</p>
-					<p>호랑이</p>
-				</div>
-			</div>
-			<div class="dog-photo">
-				<img th:src="@{/images/main/dog3.png}" alt="강아지 1" class="active">
-				<div class="dog-info">
-					<p>바보개</p>
-					<p>호랑이</p>
-				</div>
-			</div>
-			<div class="dog-photo">
-				<img th:src="@{/images/main/dog4.png}" alt="강아지 1" class="active">
-				<div class="dog-info">
-					<p>바보개</p>
-					<p>호랑이</p>
-				</div>
-			</div>
-			
-			
-			<a href="http://localhost/adopt/dogList/5">
-    <div class="dog-photo">
-        <img src="/images/main/dog5.png" alt="강아지 1" class="active">
-        <div class="dog-info">
-            <p>먹태깡</p>
-            <p>믹스견</p>
-        </div>
-    </div>
-</a>
-			
-			
-			<div class="dog-photo">
-				<img th:src="@{/images/main/dog6.png}" alt="강아지 1" class="active">
-				<div class="dog-info">
-					<p>바보개</p>
-					<p>호랑이</p>
-				</div>
-			</div>
-			<div class="dog-photo">
-				<img th:src="@{/images/main/dog7.png}" alt="강아지 1" class="active">
-				<div class="dog-info">
-					<p>바보개</p>
-					<p>호랑이</p>
-				</div>
-			</div>
-			<div class="dog-photo">
-				<img th:src="@{/images/main/dog8.png}" alt="강아지 1" class="active">
-				<div class="dog-info">
-					<p>바보개</p>
-					<p>호랑이</p>
-				</div>
-			</div>
-			<div class="dog-photo">
-				<img th:src="@{/images/main/dog9.png}" alt="강아지 1" class="active">
-				<div class="dog-info">
-					<p>바보개</p>
-					<p>호랑이</p>
-				</div>
-			</div>
-			<div class="dog-photo">
-				<img th:src="@{/images/main/dog10.png}" alt="강아지 1" class="active">
-				<div class="dog-info">
-					<p>바보개</p>
-					<p>호랑이</p>
-				</div>
-			</div>
-			<div class="dog-photo">
-				<img th:src="@{/images/main/dog11.png}" alt="강아지 1" class="active">
-				<div class="dog-info">
-					<p>바보개</p>
-					<p>호랑이</p>
-				</div>
-			</div>
-			<div class="dog-photo">
-				<img th:src="@{/images/main/dog12.png}" alt="강아지 1" class="active">
-				<div class="dog-info">
-					<p>바보개</p>
-					<p>호랑이</p>
-				</div>
+			<div class="dog-photo" th:each = "dog : ${dogList}">
+				<a th:href="@{/adopt/dogList/{dogNo}(dogNo=${dog.dogNo})}">
+					<img th:src="${dog.imgPath + dog.imgRename}" alt="강아지 1" class="active">
+					<div class="dog-info">
+						<p>[[${dog.dogName}]]</p>
+						<p>[[${dog.breedName}]]</p>
+					</div>
+				</a>
+				<!-- <a th:href="@{/adopt/dogList/{dogNo}(dogNo=${dog.dogNo})}"> -->
+				<!-- </a> -->
 			</div>
 		</div>
-		
-		<a th:href="@{http://localhost/adopt/dogList}">
-			<div class="more-button">더 보기</div>
+			
+		<a th:href="@{/adopt/dogList}" id="moreBtn">
+			<button class="more-button">더보기</button>
 		</a>
 
-      <a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
-	    <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
-
+	    <script th:src ="@{/js/event/view.js}"></script>
+	    <th:block th:replace="~{event/event}"></th:block>
 	</main>
 
+    <a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+    <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
+    
+
+	
 	<th:block th:replace="~{common/chatbot}"></th:block>
 	<th:block th:replace="~{common/footer}"></th:block>
 
 </body>
+	
 
 </html>

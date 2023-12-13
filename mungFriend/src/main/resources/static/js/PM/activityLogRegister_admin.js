@@ -22,7 +22,7 @@ document.getElementById("register-form").addEventListener("submit", e => {
 	if(initCheck && deleteCheck == 1) flag = false;
 	
 	// 이전 이미지가 있으면서, 이미지 삭제 버튼을 눌렀다 -> 삭제
-	if(initCheck && deleteCheck == 0) falg = false;
+	if(initCheck && deleteCheck == 0) flag = false;
 	
 	if(flag) { // flag == true -> 제출하면 안되는 경우
 		e.preventDefault(); // form 기본 이벤트 제거

@@ -33,7 +33,7 @@ function connect() {
 
            for (var i = 0; i < descriptionArray.length; i++) {
 
-               
+                // 견종리스트를 출력해줬는지 확인
                 const breedMatches = descriptionArray[i].match(/'([^']+)'/g);
                 
                 if(i == 0){
@@ -49,13 +49,13 @@ function connect() {
                 if(breedMatches != null){
                     // 추출된 문자열에서 따옴표를 제거하고 견종 리스트 생성
                     const breedList = breedMatches.map(match => match.replace(/'/g, ''));
-                
+                        
                     // 결과 출력
                     console.log("견종리스트 : ", breedList);
 
                     showMessage("나에게 어울리는 견종 검색하기");
                     for (var i = 0; i < breedList.length; i++){
-                        showLink(breedList[i]);
+                        showDogLink(breedList[i]);
                         
                     }
 
@@ -63,8 +63,15 @@ function connect() {
 
 
                 else if(i > 0){
-                    console.log("showButton");
-                    showButton(descriptionArray[i]);
+                   
+                    if(descriptionArray[i].startsWith("http")) { //바로가기 링크인 경우
+                        console.log("showLink");
+                        showLink(descriptionArray[i]);
+                    }else{
+                        console.log("showButton");
+                        showButton(descriptionArray[i]);
+                    }
+                   
                 }
 
                
@@ -121,10 +128,10 @@ function showButton(message) {
     
 }
 
-function showLink(message) {
+function showDogLink(message) {
     
     // 자바스크립트 형식의 링크 조립
-    var link = '/adoptReview/searchDogList/' + message;
+    var link = '/searchDogList/' + message;
 
     // 동적으로 생성된 HTML을 추가
     $("#communicate").append("<tr><td><a class='chatLink' href='" + link + "'>" + message + "</a></td></tr><br>");
@@ -134,6 +141,9 @@ function showLink(message) {
     table.scrollTop(table.prop("scrollHeight"));
 }
 
+function showLink(message) {
+    $("#communicate").append("<tr><td><button class='linkButton'><a href='" + message + "'>" + "후원 바로가기" + "<br></a></button></td></tr><br>")
+}
 
 
 

@@ -14,6 +14,9 @@
 	<th:block th:replace="~{common/header}"></th:block>
 	<main>
 		<section class="adminIntroArea">
+			
+			
+			
 			<div class="adminIntroTitle">
 				1:1 문의함
 			</div>
@@ -23,37 +26,48 @@
 		<section class="adminContentArea">
 
 			<!-- nav 자리-->
-			<nav class="navAdmission">
+            <nav class = "navAdmission">
 				<th:block th:replace="~{common/nav_admin}"></th:block>
-			</nav>
+            </nav>
 
 			<!-- 후원 내용 영역-->
 			<div class="adminContentContainer">
+				
+				
 
 				<!-- 후원 검색 창-->
 
-
+              <div class = "adminSearchArea">
+				<form th:action="@{/mypage/admin/searchByNickname}" name="adminMemberSearch" id="memberSearchForm" method="GET">
+					<fieldset class="adminSearch">
+						<input type="text" id="memberSearch" name="nickname" class="applyInput" autocomplete="on"
+							placeholder="닉네임 검색">
+						<button id="searchBtn" class="fa-solid fa-magnifying-glass"></button>
+					</fieldset>
+				</form>
+                </div>
+				
 
 				<!-- 후원 내역 리스트 -->
 				<div class="adminDonationContainer">
 
 					<table class="donationTable">
-
+                 
 						<thead>
 							<tr class="donationTheadTr">
 								<th>번호</th>
-								<th>닉네임</th>
-									<th>제목</th>
-								<th>작성일</th>
-								<th>처리 상황</th>
+								<th class="center-text">닉네임</th>
+								<th class="center-text">제목</th>
+								<th class="center-text">작성일</th>
+								<th class="center-text">처리 상황</th>
 							</tr>
 						</thead>
 
+					
+          
 						<tbody>
-
-						<tbody>
-
-
+							
+							
 							<tr th:each="inquiry : ${inquiryList}" class="donationTBodyTr">
 								<td th:text="${inquiry.inquiryNo}"></td>
 								<td th:text="${inquiry.memberNickname}"></td>
@@ -73,14 +87,15 @@
 
 							</tr>
 						</tbody>
-
-
-
-						</tbody>
+          
 					</table>
+					
 				</div>
 
 
+
+
+                <!--버튼 등록 
 				<div style="margin-top: 380px; margin-left: -40px;">
 
 					<form th:action="@{/adminInquiry/reviewList/1}" method="get" id="searchContainer">
@@ -92,66 +107,19 @@
 						<input type="text" name="searchContent" id="searchContent" placeholder="검색어를 입력해주세요.">
 						<button id="searchButton">검색</button>
 					</form>
-				</div>
+				</div>-->
 
-				<!-- 페이지 네이션 -->
-				<div class="paginationArea">
-					<ul class="pagination">
-
-						<!-- 첫 페이지로 이동 -->
-						<li><a href="#">&lt;&lt;</a></li>
-
-						<!-- 이전 목록 마지막 번호로 이동 -->
-						<li><a href="#">&lt;</a></li>
-
-
-						<!-- 특정 페이지로 이동 -->
-						<!-- jsp 코드 
-                            <c:forEach var="i" begin="${pagination.startPage}" end = "${pagination.endPage}" step="1">
-                                
-                                <c:choose>
-                                    <c:when test="${i == pagination.currentPage }">
-                                        <li><a class="current">${i}</a></li>
-                                    </c:when>
-                                    
-                                    <c:otherwise>
-                                        <li><a href="/board/${boardCode}/?cp=${i}${kq}">${i}</a></li>                  		
-                                    </c:otherwise>
-                                </c:choose>
-                                
-                            </c:forEach>
-                            -->
-						<li><a class="current">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">5</a></li>
-						<li><a href="#">6</a></li>
-						<li><a href="#">7</a></li>
-						<li><a href="#">8</a></li>
-						<li><a href="#">9</a></li>
-						<li><a href="#">10</a></li>
-
-
-
-						<!-- 다음 목록 시작 번호로 이동 -->
-						<li><a href="#">&gt;</a></li>
-
-						<!-- 끝 페이지로 이동 -->
-						<li><a href="#">&gt;&gt;</a></li>
-
-					</ul>
-				</div>
-
-			</div>
+			
 		</section>
 
 
-		<a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
-		<a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+		
+		<th:block th:replace="~{common/chatbot}"></th:block>
+        <img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image">
+        <a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
 </body>
 </main>
 <th:block th:replace="~{common/footer}"></th:block>
 </body>
 
-</html>
+</html> 

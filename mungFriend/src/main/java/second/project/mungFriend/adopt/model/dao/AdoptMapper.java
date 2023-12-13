@@ -1,5 +1,6 @@
 package second.project.mungFriend.adopt.model.dao;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -19,9 +20,19 @@ public interface AdoptMapper {
 	// 삭제되지않은 강아지 수 조회
 	public int getListCount();
 
-	// 현재 페이지에 해당하는 부분에 대한 강아지목록 조회 
+	// 현재 페이지에 해당하는 부분에 대한 강아지목록 조회 (일반 전체 조회)
 	public List<Dog> selectDogList(RowBounds rowBounds);
-
+	
+	// 필터기능 구현을 위한 모든 견종 조회
+	public List<Dog> selectDogBreed();
+	
+	// 조건에 맞고 삭제되지않은 강아지 수 조회
+	public int getSearchListCount(Dog selectedFilters);
+	
+	// 현재 페이지에 해당하는 부분에 대한 강아지목록 조회 (필터 조회)
+	public List<Dog> searchDogList(RowBounds rowBounds, 
+									Dog selectedFilters);
+	
 	// 게시글만 상세조회
 	public Dog selectDogDetail(Map<String, Object> map);
 
@@ -89,26 +100,19 @@ public interface AdoptMapper {
 			@Param("dogNo") int dogNo, 
 			@Param("memberNo") int memberNo);
 	
+  
+	// 강아지 입양 시 예약 취소
+	public int updateReservation(int dogNo);
+	
+	// 강아지 입양 시 예약했던 회원번호 조회
+	public List<Object> selectReservation(int dogNo);
 	
 	
+	// 알림 테이블에 insert
+	public int insertAlarm(Map<String, Object> parameterMap);
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
 //	*****************************챗봇에서 사용*****************************************************************
 	// 검색한 강아지 마리 수 조회
 	public int getSearchDogListCount(String breedName);
@@ -116,20 +120,6 @@ public interface AdoptMapper {
 	// 강아지 검색결과 
 	public List<Dog> selectChatbotDogList(RowBounds rowBounds, String breedName);
 
-
-
-
-
-
-
-
-
-
-
-
-
-	
-	
-	
+	public List<String> getReservedTimes(String selectedDate);
 
 }

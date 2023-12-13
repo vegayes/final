@@ -1,6 +1,7 @@
 package second.project.mungFriend.mypage.admin.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,26 +28,28 @@ public class AdminInquiryController {
 	    @GetMapping("/adminInquiryBox")
 	    public String adminInquiryBox(Model model) {
 	    	
+	    	
+	    	
 	    	List<Inquiry> inquiryList = adminInquiryService.adminInquiryBox();
 	    	
 	        model.addAttribute("inquiryList", inquiryList);
 	        return "mypage/admin/adminInquiryBox";
 	    }
-
 	    
 	 // 1:1 게시글 상세 조회
 		@GetMapping("/adminInquiry/{inquiryNo}")
 		public String adminInquiryDetail(@PathVariable("inquiryNo") int inquiryNo, Model model) {
 			
-			System.out.println("상세 조회 No :" + inquiryNo);
+			//System.out.println("상세 조회 No :" + inquiryNo);
 			
 			Inquiry inquiryDetail = adminInquiryService.adminInquiryDetail(inquiryNo);
 			
-			System.out.println("상세 조회 :" + inquiryDetail);
+			//System.out.println("상세 조회 :" + inquiryDetail);
 			
 			model.addAttribute("inquiry", inquiryDetail);
 			return "mypage/admin/adminInquiry";
 		}
+		
 		
 		
 		@PostMapping("/admninInquiryBox")
@@ -71,8 +74,30 @@ public class AdminInquiryController {
 		    return path;
 		}
 		
+		
+		@GetMapping("/searchByNickname")
+		public String searchByNickname(@RequestParam("nickname") String nickname, Model model) {
+		    System.out.println("닉네임 : " + nickname);
+		    List<Inquiry> inquiries = adminInquiryService.findInquiriesByNickname(nickname);
+
+		   //System.out.println("출력 :" + inquiries);
+
+		    if (inquiries.isEmpty()) {
+		        model.addAttribute("message", "검색 결과가 없습니다");
+		    } else {
+		        model.addAttribute("inquiryList", inquiries);
+		    }
+		    
+		    return "mypage/admin/adminInquiryBox"; // 뷰 페이지 경로 수정 필요
+		}
+		
+}
+		
+		
+		
+		
 	
 
-}
+
 
 	

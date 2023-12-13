@@ -6,6 +6,9 @@ import org.apache.ibatis.annotations.Mapper;
 
 import second.project.mungFriend.admissionApply.model.dto.Admission;
 
+/**
+ * 
+ */
 @Mapper
 public interface FreeAdmissionMapper {
 
@@ -44,6 +47,15 @@ public interface FreeAdmissionMapper {
 	 * @return
 	 */
 	int updateAdm(int admNo);
+
+
+
+
+
+	/** 입소신청 진행완료
+	 * @return
+	 */
+	List<Admission> selectDoneAdmissionList();
 
 
 }

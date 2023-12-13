@@ -84,7 +84,7 @@
 	<select id = "eventCheck">
 		SELECT COUNT(*)
 		FROM TEST_COUPON 
-		WHERE MEMBER_NO = 2
+		WHERE MEMBER_NO = #{memberNo}
 		AND COUPON_STATUS = 'Y'
 	</select>		
 	
@@ -108,9 +108,10 @@
 		]]>		
 	</select>
 	
+	<!-- 쿠폰 등록 --> 
 	<insert id = "couponInsert">
 		INSERT INTO TEST_COUPON 
-		VALUES (SEQ_COUPON_NO.NEXTVAL,#{memberNo},#{couponContentNo} ,SYSDATE, DEFAULT)
+		VALUES (SEQ_COUPON_NO.NEXTVAL,#{memberNo},#{couponContentNo} ,SYSDATE, DEFAULT, DEFAULT)
 	</insert>
 	
 	

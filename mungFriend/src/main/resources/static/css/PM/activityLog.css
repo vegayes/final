@@ -48,8 +48,8 @@ body > section {
     flex-basis: 60%;
     display: flex;
     flex-direction: column;
-    padding: 90px 150px;
-    padding-bottom: 190px;
+    padding: 140px 150px 95px 150px;
+    /* padding-bottom: 190px; */
 }
 
 /* 제목 영역 */
@@ -76,14 +76,23 @@ body > section {
     display: flex;
     align-items: center;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 18px;
     padding-left: 10px;
 }
 
 /* 내용 영역 */
+/* 활동일지 내역 없을 경우*/
+#info-section {
+	font-size: 14px;
+	padding: 150px;
+	padding: 208px 0px 208px 300px;
+}
+
+/* 활동일지 내역 있을 경우 */
 #cont-section {
     flex-basis: 90%;
     display: flex;
+    margin-top: 30px;
 }
 
 #leftMove-section {
@@ -104,13 +113,21 @@ body > section {
     cursor: pointer;
 }
 
-#one, #two, #three, #four {
-    flex-basis: 20%;
+#img-section {
+    flex-basis: 80%;
+    height : 410px;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 14px;
+}
+
+#img-sectionArea {
+    flex-basis: calc(100%/4);
     display: flex;
     flex-direction: column;
 }
 
-.img1, .img2 {
+.img1 {
     flex-basis: 30%;
 }
 
@@ -118,15 +135,44 @@ body > section {
     width: 150px;
     height: 150px;
     transition: filter 0.3s ease; /* 부드러운 전환 효과 */
+    object-fit: cover;
 }
 
 .imgs:hover {
     filter: brightness(40%); /* 이미지의 밝기 감소 */
+    transition: opacity 0.5s; /* opacity 속성의 변화에 대해 0.5초 동안 애니메이션 효과 적용 : 투명도가 변할 때 부드러운 전환 효과 */
+    opacity: 1; /* 요소의 투명도 설정 : 1=불투명, 0=투명 */
 }
 
-.heart1, .heart2 {
+/* 관리자일때만 */
+#imgAdminHover {
+	cursor: pointer;
+}
+
+.checkContent{
+	display: none;
+	position: absolute;
+	color: white;
+	font-size: 13px;
+	padding: 10px;
+	max-width: 150px; /* 최대 너비 설정 */
+    word-wrap: break-word; /* 단어가 넘칠 경우 줄바꿈 */ 
+    pointer-events: none; /* 글자 깜빡임 방지 */
+}
+
+.heart1 {
     flex-basis: 20%;
     padding-bottom: 20px;
+    display: flex;
+    margin-top: 5px;
+}
+
+#heart-sec {
+	flex-basis: 10%;
+}
+
+#xBtn-sec {
+	flex-basis: 90%;
 }
 
 #emptyHeart-btn {
@@ -135,10 +181,29 @@ body > section {
     font-size: 20px;
 }
 
+#emptyHeart-btn:hover {
+	cursor: pointer;
+}
+
+#x-btn {
+	border: none;
+	font-size: 14px;
+	background-color: transparent;
+	margin-left: 120px;
+}
+
+#x-btn:hover {
+	cursor: pointer;
+}
+
 #fullHeart-btn {
     border: none;
     background-color: white;
     font-size: 20px;
+}
+
+#fullHeart-btn:hover {
+	cursor: pointer;
 }
 
 #rightMove-section {
@@ -168,7 +233,7 @@ body > section {
 
 #register-btn {
     width: 110px;
-    height: 40px;
+    height: 35px;
     border: none;
     border-radius: 5px;
     background-color: #FEE4D6;

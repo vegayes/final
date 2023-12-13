@@ -4,10 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import jakarta.servlet.http.HttpSession;
 import second.project.mungFriend.event.model.service.EventService;
 
 // @Controller, @Service, @Repository의 부모 어노테이션
@@ -19,11 +19,12 @@ public class expirationScheduling {
 
 	
 	//cron = "초 분 시 일 월 요일 [년도]" - 요일 : 1(SUN) ~ 7(SAT)
-	//@Scheduled(cron = "0,30 * * * * *") // 매 분 0초, 30초 마다 수행
-	@Scheduled(cron = "0 0 0 * * *") // 매일 자정
+//	@Scheduled(cron = "0,30 * * * * *") // 매 분 0초, 30초 마다 수행
+//	@Scheduled(cron = "0 0 0 * * *") // 매일 자정
+	@Scheduled(cron = "0 0 0,12 * * * ") // 매일 자정 정오마다
 	public void couponExpiration() { 
 			
-		//System.out.println("=======DB 스케쥴링 진행 ==========");
+		System.out.println("=======DB 스케쥴링 진행 ==========");
         // 현재 날짜/시간
         Date now = new Date();
        
@@ -42,6 +43,11 @@ public class expirationScheduling {
 		// 1) DB에서 유효기간 지나면 update진행해야하는 사항이 있는지 파악
 		int updateCount = service.countExpiration(formatedNow);
 		
+		// 유효기간 2주 내의 쿠폰 조회 후 알림테이블에 삽입
+		int couponAlarm = service.selectcouponAlarm(formatedNow);
+		System.out.println("알림테이블 삽입결과 : " + couponAlarm);
+		
+		
 		//System.err.println("updateCount : " + updateCount);
 		
 		if(updateCount > 0) { // DB에서 유효기간이 지난 쿠폰
@@ -54,6 +60,9 @@ public class expirationScheduling {
 		}
 		
 	}
+	
+
+	
 }
 
 /*

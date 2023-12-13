@@ -1,5 +1,6 @@
 package second.project.mungFriend.adopt.model.dto;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import lombok.Getter;
@@ -41,5 +42,12 @@ public class Dog {
 	// 입소 신청 내역에서 가져온 이미지 
 	private String imgPath;
 	private String imgRename;
+	
+	private String selectedFilters;
+	
+	private LocalDate toDate;
+	private LocalDate fromDate;
+	
+	
 	
 }

@@ -31,16 +31,16 @@
                             <div>
                                 결제 금액  
                             </div>
-                            <div>
+                            <div id = "regularAmount">
                                 1000원
                             </div>
                         </div>
                         <hr>
                         <div class = "payPeriod">
-                            <div>
+                            <div id = "regularPeriod">
                                 정기 결제 기간 : 2023.12.06 ~ 2024.12.06
                             </div>
-                            <div>
+                            <div id = "nextPay">
                                 다음 결제일 : 2024.01.06
                             </div>
                         </div>
@@ -93,7 +93,7 @@
 
 
                     <div class = "cardInfo btnFlex">
-                        <div class = "regularBtn" id = "regularBtn" th:onclick="regularCardInfoCheck()">
+                        <div class = "regularBtn" id = "regularBtn">
                             정기결제 
                         </div>
                     </div>

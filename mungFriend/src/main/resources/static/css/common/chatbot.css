@@ -20,6 +20,8 @@
     margin-right: 5px;
 }
 
+
+
 button {
     cursor: pointer;
 }
@@ -94,6 +96,8 @@ button {
 }
 
 .selectButton {
+
+    border: 1px solid black;
     width: auto;
     height: 30px;
     background-color: #FFF0E8;
@@ -102,14 +106,8 @@ button {
     margin-bottom: 5px;
     cursor: pointer;
     border-radius: 5px;
-}
-
-#disconnect {
-    margin-left: 70%;
-    width: 80px;
-    height: 30px;
-    border-radius: 5px;
-    background-color: #FFF0E8;
+    text-decoration: none; 
+    color: black;
 }
 
 .selectButton > p {
@@ -118,7 +116,69 @@ button {
 }
 
 
+.linkButton {
+
+    border: 1px solid black;
+    width: auto;
+    height: 30px;
+    background-color: #FFF0E8;
+    text-align: center;
+    font-size: normal;
+    margin-bottom: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none; 
+    color: black;
+}
+
+
+.linkButton > a {
+    text-decoration: none;
+    color: black;
+    margin-left: 10px;
+    margin-right: 10px;
+    
+}
+
+#disconnect {
+    margin-left: 70%;
+    width: 80px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: #FFF0E8;
+    border: 1px solid black;
+}
+
+
+
+
 .form-group {
     display: flex;
     align-items: center;
+}
+
+
+/* 오른쪽 하단 후원, 챗봇 아이콘 */
+.fixed-image {
+    position: fixed;
+    right: 25px;
+    z-index: 100;
+    width: 50px;
+}
+
+.fixed-image:hover {
+    cursor: pointer;
+}
+
+#chat-image {
+    bottom: 20px;
+}
+
+#donate-image {
+    bottom: 85px;
+}
+
+
+.submenu a.underline {
+    text-decoration: underline;
 }

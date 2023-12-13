@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import second.project.mungFriend.admissionApply.model.exception.FileUploadException;
 import second.project.mungFriend.adopt.model.dao.AdoptMapper;
 import second.project.mungFriend.adopt.model.dto.Dog;
-import second.project.mungFriend.adopt.model.dto.Pagination;
+import second.project.mungFriend.adoptReview.model.dto.Pagination10;
 import second.project.mungFriend.adoptReview.model.dao.ReviewMapper;
 import second.project.mungFriend.adoptReview.model.dto.Review;
 import second.project.mungFriend.adoptReview.model.dto.ReviewImage;
@@ -50,7 +50,7 @@ public class ReviewServiceImpl implements ReviewService{
 		int listCount = mapper.getListCount();
 		
 		// 2. 게시글 수 조회 결과 + cp를 이용해 Pagination 객체 생성
-		Pagination pagination = new Pagination(listCount, cp);
+		Pagination10 pagination = new Pagination10(listCount, cp);
 		
 		// 3. 특정 게시판에서 현재 페이지에 해당하는 부분에 대한 게시글 목록 조회 
 		// boardCode 에 따른 게시판에서 몇 페이지(Pagination.currnetPage) 에 대한 
@@ -91,7 +91,7 @@ public class ReviewServiceImpl implements ReviewService{
 		
 		int listCount = mapper.getSearchListCount(paramMap); 
 		
-		Pagination pagination = new Pagination(listCount, cp);
+		Pagination10 pagination = new Pagination10(listCount, cp);
 		
 		// 1) offset 계산
 		int offset 
@@ -332,7 +332,7 @@ public class ReviewServiceImpl implements ReviewService{
 		int listCount = adoptMapper.getSearchDogListCount(breedName);
 		
 		// 2. 조회결과를 cp를 이용해서 Pagination 객체 생성
-		Pagination pagination = new Pagination(listCount, cp);
+		Pagination10 pagination = new Pagination10(listCount, cp);
 		
 		// 3. 현재 페이지에 해당하는 부분에 대한 몇개(paginatioin.limit) 게시글 목록 조회
 		

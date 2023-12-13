@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,7 +44,7 @@ public class AdoptController {
 	@Autowired
 	private ListAdminServcie admService;
 	
-	// 강아지 목록 조회
+	// 강아지 목록 조회 (일반 전체 조회)
 	@GetMapping("/dogList")
 	public String selectDogList(
 			@RequestParam(value="cp", required= false, defaultValue="1") int cp,
@@ -52,8 +54,27 @@ public class AdoptController {
 		
 		model.addAttribute("map", map);
 		
+		//System.out.println("map::" + map);
+		
 		return "adopt/dogList";
 	}
+
+	// 강아지 목록 조회 (필터 조회)
+	@PostMapping("/dogList")
+	@ResponseBody
+	public Map<String, Object> selectDogList(
+	        @RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+	        @RequestBody Dog selectedFilters) {
+		
+		//System.out.println("selectedFilters::" + selectedFilters);
+		
+	    Map<String, Object> map = service.selectDogList(cp, selectedFilters);
+	    
+	    //System.out.println("searchMap::" + map);
+
+	    return map;
+	}
+	
 	
 	// 강아지 상세 조회
 	@GetMapping("/dogList/{dogNo}") 
@@ -89,13 +110,13 @@ public class AdoptController {
 			
 			path = "adopt/dogDetail";
 			
-			System.out.println("상세조회한 개 정보 : " + dog);
+			//System.out.println("상세조회한 개 정보 : " + dog);
 			model.addAttribute("dog", dog); 
 			session.setAttribute("dog", dog); 
 			
 			if(dog.getImageList().size() != 0) { // 강아지 이미지가 있을 경우				
 				
-				System.out.println("개 이미지 있음");
+				//System.out.println("개 이미지 있음");
 				DogImage thumbnail = null;
 				
 				if(dog.getImageList().get(0).getImageOrder() == 0) {
@@ -119,6 +140,18 @@ public class AdoptController {
 		return path;
 		
 	}
+	
+	// 예약 가능한 날짜와 시간 조회
+	@GetMapping("/getReservedTimes")
+    @ResponseBody
+    public ResponseEntity<List<String>> getReservedTimes(@RequestParam String selectedDate) {
+        
+    	// selectedDate에 따른 예약 불가한 시간을 조회하고 리스트로 반환
+        List<String> reservedTimes = service.getReservedTimes(selectedDate);
+        System.out.println("reservedTimes::" + reservedTimes);
+        
+        return ResponseEntity.ok(reservedTimes);
+    }
 	
 	// 좋아요 처리
 	@PostMapping("/like")
@@ -161,7 +194,7 @@ public class AdoptController {
 			Dog dog,
 			@RequestParam(value="images", required = false) List<MultipartFile> images, 
 			@RequestParam(value="admFile", required = false) String admFile, 
-			@RequestParam(value="admNo", required = false) int admNo, 
+			@RequestParam(value="admNo", required = false, defaultValue= "0") int admNo, 
 			@SessionAttribute("loginMember") Member loginMember,
 			RedirectAttributes ra) throws IllegalStateException, IOException {
 
@@ -200,9 +233,9 @@ public class AdoptController {
 		String message = null;
 		String path = "redirect:";
 		
-		if(dogNo > 0) {
+		if(dogNo != 0) {
 			
-			if(admNo >0) {
+			if(admNo > 0) {
 				System.out.println("adm에서 가져온 값인경우 성공");
 				int updateAdm = admService.updateAdm(admNo);
 				
@@ -303,6 +336,16 @@ public class AdoptController {
 			
 			message = "게시글이 삭제되었습니다";
 			path += "/adopt/dogList";
+			
+			// 강아지 입양 시 예약했던 회원번호 조회
+			List<Object> memberNoList = service.selectReservation(dogNo);
+			System.out.println("예약한 회원번호 : " + memberNoList);
+			
+			if(memberNoList != null) {
+				int insertResult = service.insertAlarm(memberNoList,dogNo);
+				System.out.println("알림테이블 삽입결과 : " + insertResult);
+			}
+			
 		}else {
 			
 			message = "게시글 삭제 실패";
@@ -333,6 +376,7 @@ public class AdoptController {
 		int dogNo = dog.getDogNo();
 		int memberNo = loginMember.getMemberNo();
 		
+		System.out.println("reservationData : " + reservationData);
 		int result = service.dogReservation(reservationData, dogNo, memberNo); 
 		
 		Map<String, Object> response = new HashMap<>();

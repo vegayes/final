@@ -127,7 +127,7 @@ a:hover{
 
     /* flex-basis: 92%; */
     padding : 4px;
-
+   margin-top: -50px	;
     display: flex;
  }
 
@@ -191,13 +191,14 @@ a:hover{
     /* flex-basis: 90%; */
     display: flex;
     /* border : 2px solid green; */
-
+    margin-top: -50px;
     padding : 5px 25px;
-    
+   
 }
 
 /*테이블 전체*/
 .donationTable{
+	
     flex-basis: 100%;
     padding : 10px 25px;
     /* border : 2px solid red; */
@@ -205,27 +206,99 @@ a:hover{
     border-top: 5px solid #FEE4D6;
     border-bottom: 3px solid #D2D2D2;
     border-collapse: collapse;
+    
 }
 
 /*테이블의 헤더*/
 .donationTheadTr th {
+	
     padding : 15px 10px;
     border-bottom: 5px solid #FEE4D6;
-
+    text-align: center; 
     font-size: 14px;
     font-weight: 700;
+    
+   
+     
 }
+
+.donationTheadTr th:not(:nth-of-type(1)) {
+	
+    padding : 15px 15px;
+    padding-right: 35px;
+    border-bottom: 5px solid #FEE4D6;
+    text-align: center; 
+    font-size: 14px;
+    font-weight: 700;
+
+   
+     
+}
+
+
+
+
+/*
+.center-text {
+   padding : 0px 0px;
+   padding-left: 10px; 
+   padding-right: 50px; 
+    
+    border : 2px solid red;
+}
+
+*/
 
 
 /*테이블의 데이터 요소*/
 .donationTBodyTr td{
     /*가운데 정렬*/
     text-align: center; 
+
     padding : 13px 10px;
     border-bottom: 3px solid #D2D2D2;
-
     font-size: 12px;
+  
 }
+
+
+
+
+/* 기본 박스 모델 설정 */
+.donationTable, .donationTable th, .donationTable td {
+    box-sizing: border-box; /* 패딩과 보더가 너비에 포함되도록 설정 */
+}
+
+/* 테이블 헤더를 고정 */
+.donationTable thead th {
+    position: sticky;
+    top: 0;
+     text-align: center;   
+     vertical-align: middle;
+    background-color: white;
+    z-index: 10;
+}
+
+/* 테이블 행과 셀을 블록 대신 테이블과 테이블 셀로 표시 */
+.donationTable tbody, .donationTable thead, .donationTable tbody tr, .donationTable thead tr {
+    display: table;
+    width: 100%; /* 테이블의 전체 너비를 사용 */
+    table-layout: fixed; /* 열 너비를 고정 */
+}
+
+/* 테이블 바디의 높이를 제한하고 스크롤 가능하게 설정 */
+.donationTable tbody {
+    display: block;
+    max-height: 400px; /* 원하는 최대 높이로 설정 */
+    overflow-y: auto;
+}
+
+/* 각 열의 너비를 고정 (정확한 너비는 테이블에 맞게 조절 필요) */
+.donationTable th, .donationTable td {
+    display: table-cell;
+    width: 10%; /* 열의 수에 따라 조절 */
+}
+
 
 
 
@@ -239,37 +312,7 @@ a:hover{
           실제 코딩할 때는 다 채워진 후에 페이지네이션이 생성
           되므로 필요 margin 영역 필요 없을 거 같아요 
 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★*/
-.paginationArea{
-    margin-top: auto; /*★나중에 필요 없을 듯★*/
-}
 
-
-.pagination{
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    padding: 10px 0px;
-}
-
-.pagination li{
-    width: 20px;
-    margin: 0 5px;
-    text-align: center;
-}
-
-.pagination a{
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
-.current{
-    font-weight: bold;
-    background-color: #F95353;
-    border-radius: 50%;
-    color: white !important;
-    letter-spacing: 0 !important;
-}
 .fixed-image {
     position: fixed;
     right: 10px;
@@ -330,4 +373,3 @@ a:hover{
     cursor: pointer;
     border-radius: 5px;
 }
-

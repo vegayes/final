@@ -38,6 +38,11 @@ public interface ListAdminServcie {
 	 */
 	int updateAdm(int admNo);
 
+	/** 입소신청 내역(입소진행완료)
+	 * @return
+	 */
+	List<Admission> selectDoneAdmissionList();
+
 	
 
 	

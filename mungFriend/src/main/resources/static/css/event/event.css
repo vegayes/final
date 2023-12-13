@@ -28,7 +28,7 @@
     display: none;
     justify-content: center;
     align-items: center;
-    z-index:50;
+    z-index:101;
 }
 
 #eventContentArea{
@@ -174,7 +174,7 @@
 }
 
 #couponBtn{
-    background-color: yellow;
+    background-color: #F8FFAB;
 }
 
 /*************************************************
@@ -296,7 +296,7 @@
 
 body {
     margin: 0;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 

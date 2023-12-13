@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>활동 일지 수정</title>
+
+    <link rel="stylesheet" th:href="@{/css/PM/activityLogUpdate_admin.css}">
+
+    <script th:src="@{https://kit.fontawesome.com/f821b57119.js}" crossorigin="anonymous"></script>
+</head>
+<body>
+    <section>
+        <!-- 헤더 -->
+        <th:block th:replace="~{common/header}"></th:block>
+
+        <!-- 내용 -->
+        <div id="content">
+            <!-- 왼쪽 여백 -->
+            <div id="left-gap"></div>
+
+            <!-- 콘텐츠 영역 -->
+            <div id="content-section">
+                <!-- 제목 영역 -->
+                <div id="title-section">
+                    <div id="bone-section">
+                        <img th:src="@{/images/PM/bone.png}" id="bone">
+                    </div>
+                    <div id="title-sec">
+                        이달의 활동 일지
+                    </div>
+                </div>
+
+                <!-- 내용 영역 -->
+                <div id="cont-section" th:object="${pm}">
+                    <form th:action="@{/pm/activityLogUpdate}" method="POST" id="update-form" enctype="multipart/form-data">
+						
+						<input th:value="*{activityNo}" name="activityNo" hidden>
+						
+                        <!-- 사진 영역 -->
+                        <div id="photoLine-up"></div>
+                        <div id="photo-title">사진</div>
+                        <div id="photoLine-bottom"></div>
+                        <div id="photo-section">
+                            <div id="photo-upload-sec">
+                                <img th:src="*{acitivityImg}" id="noImage">
+                            </div>
+                            <div id="upload-btn-sec">
+                                <label for="uploadInput">사진 업로드</label>
+                                <input type="file" name="updateImage" id="uploadInput" accept="image/*">
+                            </div>
+                            <div id="img-delete-sec">
+                                <button type="button" id="img-del-btn">이미지 삭제</button>
+                            </div>
+                        </div>
+
+                        <!-- 내용 영역 -->
+                        <div id="contentLine-up"></div>
+                        <div id="content-title">내용</div>
+                        <div id="contentLine-bottom"></div>
+                        <div id="contentInsert-section">
+                            <textarea id="textarea" name="activityContent" th:text="*{activityContent}">기존 활동일지 내용</textarea>
+                        </div>
+
+                        <!-- 수정하기 및 목록으로 영역 -->
+                        <div id="btn-section">
+                            <button type="submit" id="update-btn">수정하기</button>
+                            <a th:href="@{/pm/activityLog?memberNo=} + *{memberNo}"><button type="button" id="list-btn">목록으로</button></a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+         
+        </div>
+
+        <th:block th:replace="~{common/chatbot}"></th:block>
+        <img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image">
+        <a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
+        
+        <!-- 풋터 -->
+        <th:block th:replace="~{common/footer}"></th:block>
+    </section>
+    
+    <script th:src="@{/js/PM/activityLogUpdate_admin.js}"></script>
+</body>
+</html>

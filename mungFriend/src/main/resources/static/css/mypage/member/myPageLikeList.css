@@ -109,7 +109,7 @@ a:hover{
     align-items: center;
     justify-content: center;
     
-    padding: 50px 0 50px 0;
+    padding: 40px 0 40px 0;
 }
 
 
@@ -129,13 +129,13 @@ a:hover{
     grid-row-gap: 15px;
 }
 
-.like-dog{
-    width: 200px;
-    height: 230px;
-    background-color: #FFF0E8;
-    border-radius: 20px;
+.like-dog-none{
+    font-size: 14px;
+    height: 100%;
 
-    margin: 5px 15px 5px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .top{
@@ -172,7 +172,7 @@ div#dog-info {
 }
 
 div#dog-kind {
-    font-size: 15px;
+    font-size: 14px;
 }
 
 

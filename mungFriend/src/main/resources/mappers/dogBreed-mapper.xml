@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="second.project.mungFriend.common.dao.DogBreedMapper">
+
+	<resultMap type="Dog" id="dog_rm">
+		<id property="dogNo" column="DOG_NO" />
+
+		<result property="breedNo" column="BREED_NO" />
+		<result property="dogName" column="DOG_NAME" />
+		<result property="dogBirthDay" column="DOG_BIRTHDAY" />
+		<result property="dogGender" column="DOG_GENDER" />
+		<result property="dogSize" column="DOG_SIZE" />
+		<result property="dogPersonality" column="DOG_PERSONALITY" />
+		<result property="dogNeutering" column="DOG_NEUTERING_YN" />
+		<result property="dogVaccine" column="DOG_VACCINE_YN" />
+		<result property="dogLike" column="DOG_LIKE" />
+		<result property="dogHate" column="DOG_HATE" />
+		<result property="dogSpecialNote" column="DOG_SIGNIFICANT" />
+		<result property="dogAdmissionDate" column="DOG_ADMISSION_DATE" />
+		<result property="dogAdoptFl" column="DOG_ADOPT_FL" />
+		<result property="dogAdoptDate" column="DOG_ADOPT_DATE" />
+
+		<result property="breedName" column="BREED_NAME" />
+		<result property="thumbnail" column="THUMBNAIL" />
+
+		<result property="imgPath" column="IMG_PATH" />
+		<result property="imgRename" column="IMG_RENAME" />
+	</resultMap>
+
+	<!-- 견종과 강아지 이름으로 갯수 검색 -->
+	<select id="getListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM DOG D
+		WHERE DOG_ADOPT_FL = 'N'
+		AND (
+		BREED_NO IN (
+		SELECT BREED_NO
+		FROM DOG_BREED db
+		WHERE BREED_NAME LIKE '%' || #{searchInput} || '%'
+		)
+		OR DOG_NAME LIKE '%' || #{searchInput} || '%'
+		)
+		ORDER BY DOG_ADMISSION_DATE DESC
+	</select>
+
+	<!--견종과 강아지 이름으로 검색한 결과 나오기-->
+	<select id="selectDogList" resultMap="dog_rm">
+		SELECT DOG_NAME, DOG_NO,
+		IMG_PATH, IMG_RENAME, BREED_NAME
+		FROM DOG
+		LEFT JOIN DOG_BREED USING(BREED_NO)
+		LEFT JOIN DOG_IMG USING(DOG_NO)
+		WHERE DOG_ADOPT_FL = 'N'
+		AND IMG_ORDER = 0
+		AND (
+		BREED_NO IN (
+		SELECT BREED_NO
+		FROM DOG_BREED db
+		WHERE BREED_NAME LIKE '%' || #{searchInput} || '%'
+		)
+		OR DOG_NAME LIKE '%' || #{searchInput} || '%'
+		)
+		ORDER BY DOG_ADMISSION_DATE DESC
+	</select>
+
+</mapper>

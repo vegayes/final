@@ -1,0 +1,97 @@
+
+<th:block th:if="${session.loginMember}">
+
+    <div class="alarmContainer">
+
+        <th:block th:unless="${#lists.size(session.alarmList) == 0}">
+            <div class="menu-btn" onclick="toggleMenu()"><i class="fa-solid fa-bell"></i></div>
+        </th:block>
+
+      
+
+        <div class="sidebar" id="sidebar">
+            
+            <th:block th:if="${#lists.size(session.alarmList) == 0}">
+                            
+                <p>알림사항이 존재하지 않습니다.</p>
+           
+            </th:block>
+    
+    
+    
+            <th:block th:unless="${#lists.size(session.alarmList) == 0}">
+    
+                <ul th:each="alarm : ${session.alarmList}">
+    
+                    <li class="alarmList">
+
+                        <th:block th:if="${alarm.alarmImgPath != null and alarm.alarmImgPath != 'null'}">
+                            <div class="deleteBtn" th:onclick="|deleteAlarm(${alarm.alarmNo} ,this)|">&times;</div>
+                            <div class="imageContainer" th:with="path=|${alarm.alarmImgPath}${alarm.alarmImgName}|">
+                                
+                                <img id="alarmImg" th:src="${path}" />
+                                <br><br>
+                            </div>
+                        </th:block>
+
+
+                        <th:block th:if="${alarm.alarmCategory == 'D'}">
+                            <div class="alarmContent" >
+                                <p style="padding-bottom: 10px;" th:text="|${session.loginMember.memberNickname} 님이 예약하셨던 강아지가 다른 회원분께 입양되었습니다.|"></p>
+                            </div>
+                          </th:block>
+          
+                          <th:block th:if="${alarm.alarmCategory == 'M'}">
+                            <div class="deleteBtn" th:onclick="|deleteAlarm(${alarm.alarmNo} ,this)|">&times;</div>
+                        
+                            <p th:text="|${session.loginMember.memberNickname} 님의 정기 결제일이 얼마 남지 않았습니다.|"></p>
+                          </th:block>
+          
+
+                          <th:block th:if="${alarm.alarmCategory == 'C'}">
+                            <div class="deleteBtn" th:onclick="|deleteAlarm(${alarm.alarmNo} ,this)|">&times;</div>
+                           
+                            <p th:text="|${session.loginMember.memberNickname} 님의 쿠폰 사용기간이 얼마 남지 않았습니다!|"></p>
+                            <br>
+                            <a th:href="@{/mypage/member/couponList}">지금 확인하기</a>
+                            
+                          </th:block>
+                    </li>
+    
+                   
+                    
+                </ul>
+                
+              
+            </th:block>
+    
+    
+        </div>
+       
+    </div>
+
+    <script th:inline="javascript">
+
+        function toggleMenu() {
+        const sidebar = document.getElementById("sidebar");
+        sidebar.style.width = sidebar.style.width === "285px" ? "0" : "285px";
+        }
+    
+        // const alarmNo = /*[[alarmList.alarmNo]]*/ "알림번호";
+        
+        const memberNo = parseInt(/*[[${session.loginMember.memberNo}]]*/ "회원번호", 10) || 0;
+        console.log("회원번호  :", memberNo)
+    
+        if(memberNo == null){
+            memberNo = 0;
+        }
+    
+    </script>
+
+</th:block>
+
+  
+
+
+
+<script th:src="@{/js/member/sideAlarm.js}"></script>

@@ -50,13 +50,15 @@
 
                 <div id="scroll">
                     <th:block th:if="${reservationList.isEmpty()}">
-                        현재 예약 내역이 존재하지 않습니다.
+                        <p style="display: flex; align-items: center; justify-content: center; margin-top: 200px">
+                            현재 예약 내역이 존재하지 않습니다.
+                        </p>
                     </th:block>
 
                     <th:block th:unless="${reservationList.isEmpty()}">
                         <div class="list-bottom">
                             <div id="list" th:each="reserve : ${reservationList}">
-                                <input type="checkbox">
+                                <input type="checkbox" name="selectedReservations">
                                 <div id="reserve-no">[[${reserve.reserveNo}]]</div>
                                 <div id="dog-name">[[${reserve.dogName}]]</div>
                                 <div id="reserve-name">[[${reserve.memberName}]]</div>
@@ -73,11 +75,13 @@
 
             </div>
         </section>
+
+        
+		<th:block th:replace="~{common/chatbot}"></th:block>
+        <img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image">
+        <a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
     </main>
-    <div class="main-right">
-        <a th:href="@{/#}"><img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image"></a>
-        <a th:href="@{/#}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
-    </div>
+    
     <th:block th:replace="~{common/footer}"></th:block>
 </body>
 

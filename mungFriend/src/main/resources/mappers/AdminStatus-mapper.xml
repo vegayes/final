@@ -41,13 +41,24 @@
 
 <!-- 비회원 후원내역 월별 조회(4개월) -->
 <select id="nonMemberDonationList" resultType="java.util.Map">
+	
+	<![CDATA[ 
+	WITH months AS (
+	    SELECT ADD_MONTHS(TRUNC(SYSDATE, 'MONTH'), LEVEL - 4) AS month_start
+	    FROM DUAL
+	    CONNECT BY LEVEL <= 4
+	)
+	]]>	
+	
 	SELECT 
-	 	TO_CHAR(TRUNC(DONATION_DATE , 'MONTH'), 'YYYY-MM') AS donation_month,
-	    SUM(DONATION_AMOUNT) AS DONATION_AMOUNT
-	FROM TEST_NON_DONATION td
-	WHERE DONATION_DATE >= ADD_MONTHS(TRUNC(SYSDATE, 'MONTH'), -3)
-	GROUP BY TO_CHAR(TRUNC(DONATION_DATE, 'MONTH'), 'YYYY-MM')
+	    TO_CHAR(months.month_start, 'YYYY-MM') AS donation_month,
+	    NVL(SUM(td.DONATION_AMOUNT), 0) AS DONATION_AMOUNT
+	FROM months
+	LEFT JOIN TEST_NON_DONATION td
+	    ON months.month_start = TRUNC(td.DONATION_DATE, 'MONTH')
+	GROUP BY TO_CHAR(months.month_start, 'YYYY-MM')
 	ORDER BY donation_month
+
 </select>
 
 
@@ -55,6 +66,8 @@
 	
 	
 	
+		
+		
 	
 	
 	

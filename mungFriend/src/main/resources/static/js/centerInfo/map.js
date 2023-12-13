@@ -71,12 +71,12 @@ function displayPlaces(places) {
 	removeMarker();
 
 	for (var i = 0; i < places.length; i++) {
-
-		// 마커를 생성하고 지도에 표시합니다
+		
 		var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
-			marker = addMarker(placePosition, i),
-			itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
+            marker = addMarker(placePosition, i, places[i]); // 여기에서 place 객체를 전달합니다
 
+        // 검색 결과 항목 Element를 생성합니다
+        var itemEl = getListItem(i, places[i]);
 		// 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
 		// LatLngBounds 객체에 좌표를 추가합니다
 		bounds.extend(placePosition);
@@ -139,7 +139,9 @@ function getListItem(index, places) {
 
 // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 function addMarker(position, idx, title) {
-	var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+	
+	
+	var imageSrc = 'https://i.imgur.com/Jo326SS.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
 		imageSize = new kakao.maps.Size(36, 37),  // 마커 이미지의 크기
 		imgOptions = {
 			spriteSize: new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
@@ -154,6 +156,16 @@ function addMarker(position, idx, title) {
 
 	marker.setMap(map); // 지도 위에 마커를 표출합니다
 	markers.push(marker);  // 배열에 생성된 마커를 추가합니다
+	
+
+	
+  kakao.maps.event.addListener(marker, 'click', function() {
+        var searchUrl = 'https://search.naver.com/search.naver?query=' + encodeURIComponent(place.place_name);
+        window.open(searchUrl);
+    });
+    
+    
+
 
 	return marker;
 }
@@ -197,14 +209,20 @@ function displayPagination(pagination) {
 	paginationEl.appendChild(fragment);
 }
 
+
+
+
+
 // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 // 인포윈도우에 장소명을 표시합니다
 function displayInfowindow(marker, title) {
-	var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
+	var content =  '<div style="padding:5px;z-index:1;">' + title + '</div>';
 
 	infowindow.setContent(content);
 	infowindow.open(map, marker);
 }
+
+
 
 // 검색결과 목록의 자식 Element를 제거하는 함수입니다
 function removeAllChildNods(el) {
@@ -212,3 +230,31 @@ function removeAllChildNods(el) {
 		el.removeChild(el.lastChild);
 	}
 } akao.maps.Map(container, options);
+
+
+
+
+
+
+// 검색결과 항목을 Element로 반환하는 함수입니다
+function getListItem(index, place) {
+    var el = document.createElement('li'),
+        itemStr = '<span class="markerbg marker_' + (index + 1) + '"></span>' +
+            '<div class="info">' +
+            '   <h5><a href="https://search.naver.com/search.naver?query=' + encodeURIComponent(place.place_name) + '" target="_blank">' + place.place_name + '</a></h5>';
+
+    if (place.road_address_name) {
+        itemStr += '    <span>' + place.road_address_name + '</span>' +
+            '   <span class="jibun gray">' + place.address_name + '</span>';
+    } else {
+        itemStr += '    <span>' + place.address_name + '</span>';
+    }
+
+    itemStr += '  <span class="tel">' + place.phone + '</span>' +
+        '</div>';
+
+    el.innerHTML = itemStr;
+    el.className = 'item';
+
+    return el;
+}

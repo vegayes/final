@@ -26,92 +26,99 @@
 			
 	        <div>입양리뷰 인증게시판</div> 
 	
-	       
-	        <table class="boardList"> 
-	           
-	            <thead>
-	                <tr>
-	                    <td class="boardRectangle"></td>
-	                </tr>
-	                <tr class="boardTitle">
-	                    <th>게시글 번호</th>
-	                    <th>제목</th>
-	                    <th>작성자</th>
-	                    <th>작성일</th>
-	                    <th>조회수</th>
-	                </tr>
-	                <tr>
-	                    <td class="boardRectangle"></td>
-	                </tr>
-	            </thead>
-				
-				
-                    	
-				<tbody>
+	       	<div class = "boardListDiv">
+		        <table class="boardList"> 
+		           
+		            <thead>
+		                <tr>
+		                    <td class="boardRectangle"></td>
+		                </tr>
+		                <tr class="boardTitle">
+		                    <th>게시글 번호</th>
+		                    <th>제목</th>
+		                    <th>작성자</th>
+		                    <th>작성일</th>
+		                    <th>조회수</th>
+		                </tr>
+		                <tr>
+		                    <td class="boardRectangle"></td>
+		                </tr>
+		            </thead>
 
-					<th:block th:if="${#lists.size(reviewList)} == 0">
-						
-						 <tr>
-							<th colspan="6">
-								<br><br><br>
-								게시글이 존재하지 않습니다.
-							</th>
-						 </tr>
-
-					</th:block>
-
-				</tbody>	
 					
-				<th:block th:unless="${#lists.size(reviewList)} == 0">
-
-					<tbody th:each="board : ${reviewList}">
+					
+	                    	
+					<tbody>
+	
+						<th:block th:if="${#lists.size(reviewList)} == 0">
 							
-						<tr class="boardContent"> 
-
-							<td th:text="${board.reviewNo}">게시글 번호</td>
-
-							<td> 
-
-								<a th:href="@{/adoptReview/reviewDetail/{reviewNo}(reviewNo=${board.reviewNo}, cp=${pagination.currentPage} )}" th:text="${board.reviewTitle}">게시글 제목</a> 
+							 <tr>
+								<th colspan="6">
+									<br><br><br>
+									게시글이 존재하지 않습니다.
+								</th>
+							 </tr>
+	
+						</th:block>
+	
+					</tbody>	
+						
+					<th:block th:unless="${#lists.size(reviewList)} == 0">
+	
+						<tbody th:each="board : ${reviewList}">
 								
-								<!-- <a th:if="${param.query}" th:href="@{/adoptReview/reviewDetail/{reviewNo}(reviewNo=${board.reviewNo}, cp=${pagination.currentPage})}" th:text="${board.reviewTitle}">게시글 제목</a>  -->
-
-							</td>
-
-							<td th:text="${board.memberNickname}">작성자</td>
-
-							<td th:text="${board.reviewDate}">작성일</td>
-
-							<td th:text="${board.reviewCount}">조회수</td>
-
-						</tr>
-
-						<tr>
-							<td class="boardRectangle_1"></td>
-						</tr>
-
-					</tbody>
-
-				</th:block>
-
-	           
-	           
-	        </table>
+							<tr class="boardContent"> 
+	
+								<td th:text="${board.reviewNo}">게시글 번호</td>
+	
+								<td> 
+	
+									<a th:href="@{/adoptReview/reviewDetail/{reviewNo}(reviewNo=${board.reviewNo}, cp=${pagination.currentPage} )}" th:text="${board.reviewTitle}">게시글 제목</a> 
+									
+									<!-- <a th:if="${param.query}" th:href="@{/adoptReview/reviewDetail/{reviewNo}(reviewNo=${board.reviewNo}, cp=${pagination.currentPage})}" th:text="${board.reviewTitle}">게시글 제목</a>  -->
+	
+								</td>
+	
+								<td th:text="${board.memberNickname}">작성자</td>
+	
+								<td th:text="${board.reviewDate}">작성일</td>
+	
+								<td th:text="${board.reviewCount}">조회수</td>
+	
+							</tr>
+	
+							<tr>
+								<td class="boardRectangle_1"></td>
+							</tr>
+	
+						</tbody>
+	
+					</th:block>
+	
+		           
+		           
+		        </table>
+		   </div>
 	
 	
 	       
 	
-	
+
 			<!-- 검색창 -->
-	        <div style="margin-top: 100px;"> 
+	        <div style="margin-top: 35px;"> 
+
 				<button th:if="${session.loginMember}"  id="writeReview"><a th:href="@{/adoptReview/reviewInsert}">글쓰기</a></button>
 				<form th:action="@{/adoptReview/reviewList/1}" method="get" id="searchContainer">
+
+					
 					<select name="searchType" id="searchType">
 						<option value="title">제목</option>
-						<option value="content">내용</option>
-						<option value="writer">작성자</option>
+    					<option value="writer">작성자</option>
 					</select>
-					<input type="text" name="searchContent" id="searchContent" placeholder="검색어를 입력해주세요.">
+
+
+
+					<input type="text" name="searchContent" id="searchContent" placeholder="검색어를 입력해주세요." th:value="${param.searchContent}">
 					<button id="searchButton">검색</button>
 				</form>
 	        </div>
@@ -121,7 +128,7 @@
 			<div th:if="${#lists.size(reviewList) > 0 }" class="pagination-area">
 
 
-				<ul class="pagination">
+				<ul th:unless="${param.searchContent}" class="pagination">
 				
 					<!-- 첫 페이지로 이동 -->
 					<li><a th:href="@{/adoptReview/reviewList/{cp}(cp=1)}">&lt;&lt;</a></li>
@@ -149,13 +156,52 @@
 					</th:block>
 					
 					<!-- 다음 목록 시작 번호로 이동 -->
-						<li><a th:href="@{/adoptReview/{cp}(cp=${pagination.nextPage})}">&gt;</a></li>
+						<li><a th:href="@{/adoptReview/reviewList/{cp}(cp=${pagination.nextPage})}">&gt;</a></li>
 
 					<!-- 끝 페이지로 이동 -->
-						<li><a th:href="@{/adoptReview/{cp}(cp=${pagination.maxPage})}">&gt;&gt;</a></li>
+						<li><a th:href="@{/adoptReview/reviewList/{cp}(cp=${pagination.maxPage})}">&gt;&gt;</a></li>
 
 				</ul>
+
+
+
+				<!-- 검색 O 일때 : ${param.searchContent} 컨트롤러로 전송한 파라미터에서 searchContent 가 있으면 실행 -->
+				<!-- ${param} : 컨트롤러로의 요청에 전달된 파라미터 조회 -->
+				<ul th:if="${param.searchContent}" class="pagination">
+				
+					<!-- 첫 페이지로 이동 -->
+					<li><a th:href="@{/adoptReview/reviewList/{cp}(cp=1, searchType=${param.searchType}, searchContent=${param.searchContent})}">&lt;&lt;</a></li>
 			
+					<!-- 이전 목록 마지막 번호로 이동 -->
+					<li><a th:href="@{/adoptReview/reviewList/{cp}(cp=${pagination.prevPage}, searchType=${param.searchType}, searchContent=${param.searchContent})}">&lt;</a></li>
+
+					
+					<!-- 특정 페이지로 이동 -->
+					<!-- #numbers.sequence(시작,끝[,step]) : 시작 이상 끝 이하까지 step 만큼 증가하는 숫자를 발생시켜 리스트로 반환 -->
+					<th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
+					
+						<!-- 현재 보고있는 페이지 -->
+						<li th:if="${i== pagination.currentPage}">
+							<a class="current" th:text="${i}">현재 페이지</a>
+						</li>
+					
+					
+						<!-- 현재 페이지를 제외한 나머지 -->		
+						<li th:unless ="${i== pagination.currentPage}">
+							<a th:href="@{/adoptReview/reviewList/{cp}(cp=${i}, searchType=${param.searchType}, searchContent=${param.searchContent})}" th:text="${i}">나머지 페이지</a>
+						</li>
+							
+					
+					</th:block>
+					
+					<!-- 다음 목록 시작 번호로 이동 -->
+						<li><a th:href="@{/adoptReview/reviewList/{cp}(cp=${pagination.nextPage}, searchType=${param.searchType}, searchContent=${param.searchContent})}">&gt;</a></li>
+
+					<!-- 끝 페이지로 이동 -->
+						<li><a th:href="@{/adoptReview/reviewList/{cp}(cp=${pagination.maxPage}, searchType=${param.searchType}, searchContent=${param.searchContent})}">&gt;&gt;</a></li>
+
+				</ul>
+
 				
 
 			</div>
@@ -172,6 +218,24 @@
     <a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
 	
     <th:block th:replace="~{common/footer}"></th:block>
+
+
+
+	<script th:inline="javascript">
+		var searchType = /*[[${param.searchType}]]*/ '';
+		console.log("searchType : ", searchType);
+		
+		document.addEventListener('DOMContentLoaded', function() {
+			var searchTypeSelect = document.getElementById('searchType');
+			for (var i = 0; i < searchTypeSelect.options.length; i++) {
+				if (searchTypeSelect.options[i].value === searchType[0]) {
+					searchTypeSelect.options[i].selected = true;
+					break;
+				}
+			}
+		});
+	</script>
+	
 	
 </body>
 </html>

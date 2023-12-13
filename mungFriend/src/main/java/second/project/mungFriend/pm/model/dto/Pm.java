@@ -16,5 +16,9 @@ public class Pm {
 	private String acitivityImg;
 	private String activityContent;
 	private String activityDate;
+	
+	/* 좋아요 관련 컬럼 */
+	private int activityLikeNo;
+	private int likeMemberNo;
 
 }

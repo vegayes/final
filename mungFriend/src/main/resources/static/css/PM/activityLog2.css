@@ -1,0 +1,264 @@
+/* 글꼴 */
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+.nanumgothic * {
+ font-family: 'Nanum Gothic', sans-serif;
+}
+
+/* 전체 */
+* {
+    box-sizing: border-box;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+/* section, div {
+    border: 1px solid black;
+} */
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+body > section {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 헤더 */
+#header {
+    flex-basis: 10%;
+}
+
+/* 내용 */
+#content {
+    flex-basis: 70%;
+    display: flex;
+}
+
+/* 왼쪽 여백 */
+#left-gap {
+    flex-basis: 20%;
+}
+
+/* 콘텐츠 영역 */
+#content-section {
+    flex-basis: 60%;
+    display: flex;
+    flex-direction: column;
+    padding: 120px 150px;
+    padding-bottom: 190px;
+}
+
+/* 제목 영역 */
+#title-section {
+    flex-basis: 10%;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+#bone-section {
+    flex-basis: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#bone {
+    width: 40px;
+    height: 40px;
+}
+
+#title-sec {
+    flex-basis: 95%;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 20px;
+    padding-left: 10px;
+}
+
+/* 내용 영역 */
+#cont-section {
+    flex-basis: 90%;
+    display: flex;
+    margin-top: 30px;
+}
+
+#leftMove-section {
+    flex-basis: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 10px;
+}
+
+#leftMove-btn {
+    border: none;
+    background-color: white;
+    font-size: 30px;
+}
+
+#leftMove-btn:hover {
+    cursor: pointer;
+}
+
+#img-section {
+    flex-basis: 80%;
+    height : 410px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#img-sectionArea {
+    flex-basis: calc(100%/4);
+    display: flex;
+    flex-direction: column;
+}
+
+.img1 {
+    flex-basis: 30%;
+}
+
+.imgs {
+    width: 150px;
+    height: 150px;
+    transition: filter 0.3s ease; /* 부드러운 전환 효과 */
+}
+
+.imgs:hover {
+    filter: brightness(40%); /* 이미지의 밝기 감소 */
+    transition: opacity 0.5s; /* opacity 속성의 변화에 대해 0.5초 동안 애니메이션 효과 적용 : 투명도가 변할 때 부드러운 전환 효과 */
+    opacity: 1; /* 요소의 투명도 설정 : 1=불투명, 0=투명 */
+}
+
+/* 관리자일때만 */
+#imgAdminHover {
+	cursor: pointer;
+}
+
+.checkContent{
+	display: none;
+	position: absolute;
+	color: white;
+	font-size: 13px;
+	padding: 10px;
+	max-width: 150px; /* 최대 너비 설정 */
+    word-wrap: break-word; /* 단어가 넘칠 경우 줄바꿈 */ 
+}
+
+.heart1 {
+    flex-basis: 20%;
+    padding-bottom: 20px;
+    display: flex;
+}
+
+#heart-sec {
+	flex-basis: 10%;
+}
+
+#xBtn-sec {
+	flex-basis: 90%;
+}
+
+#emptyHeart-btn {
+    border: none;
+    background-color: white;
+    font-size: 20px;
+}
+
+#emptyHeart-btn:hover {
+	cursor: pointer;
+}
+
+#x-btn {
+	border: none;
+	font-size: 15px;
+	font-weight: bold;
+	background-color: transparent;
+	margin-left: 120px;
+}
+
+#x-btn:hover {
+	cursor: pointer;
+}
+
+#fullHeart-btn {
+    border: none;
+    background-color: white;
+    font-size: 20px;
+}
+
+#fullHeart-btn:hover {
+	cursor: pointer;
+}
+
+#rightMove-section {
+    flex-basis: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#rightMove-btn {
+    border: none;
+    background-color: white;
+    font-size: 30px;
+}
+
+#rightMove-btn:hover {
+    cursor: pointer;
+}
+
+/* 등록하기 영역 */
+#register-sec {
+    display: flex;
+    justify-content: end;
+    padding-right: 100px;
+    padding-top: 20px;
+}
+
+#register-btn {
+    width: 110px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    background-color: #FEE4D6;
+    font-weight: bold;
+}
+
+#register-btn:hover {
+    cursor: pointer;
+}
+
+/* 오른쪽 여백 */
+#right-gap {
+    flex-basis: 20%;
+}
+
+/* 오른쪽 하단 후원, 챗봇 아이콘 */
+.fixed-image {
+    position: fixed;
+    right: 10px;
+    z-index: 100;
+    width: 50px;
+}
+
+.fixed-image:hover {
+    cursor: pointer;
+}
+
+#chat-image {
+    bottom: 10px;
+}
+
+#donate-image {
+    bottom: 70px;
+}
+
+/* 풋터 */
+#footer {
+    flex-basis: 20%;
+}

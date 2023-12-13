@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>유기견 상세페이지(조회)</title>
+    <style>
+        .unavailable {
+            color: #999;
+            cursor: not-allowed;
+        }
+    </style>
     <link rel="stylesheet" th:href="@{/css/adopt/dogDetail.css}">
     <script th:src="@{https://kit.fontawesome.com/323ba1dcd4.js}" crossorigin="anonymous"></script>
 </head>
@@ -144,12 +150,18 @@
 
 		let dogNo = /*[[${dog.dogNo}]]*/ "강아지 번호";
 		
+        let dogImagePath = /*[[${dog.imageList[0].imagePath}]]*/ "강아지 썸네일 주소";
+
+        let dogImageReName =  /*[[${dog.imageList[0].imageReName}]]*/ "강아지 썸네일 이름";
+
 		let loginMemberNo = /*[[${session.loginMember?.memberNo}]]*/ "로그인 회원번호";
 		
 		if(loginMemberNo == null) loginMemberNo = "";
 
 		console.log(dogNo);
 		console.log(loginMemberNo);
+        console.log(dogImagePath);
+        console.log(dogImageReName);
 	</script>
 
     <script th:src="@{/js/adopt/dogDetail.js}"></script>

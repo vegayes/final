@@ -12,7 +12,7 @@
 
     <th:block th:replace="~{common/header}"></th:block>
 
-    <main th:with="pagination=${map.pagination}, dogList=${map.dogList}">
+    <main th:with="pagination=${map.pagination}, dogList=${map.dogList}, dogBreed=${map.dogBreedList}">
         <div class="main-left"></div>
 
         <div class="main-center">
@@ -22,58 +22,66 @@
             </div>
 
             <div class="filter">
-                <form name="filter" multiple required action="#">
+                <form name="filter" onsubmit="submitFilter(); return false;">
                     <div class="filter-age">
-                        <select id="age" name="age" onchange="onchangeEvent();">
-                            <option value="none">나이</option>
+                        <select id="age" name="dogBirthDay">
+                            <option th:value="none">나이</option>
+                            <option th:value="'0-12'">0~12개월</option>
+                            <option th:value="'1-4'">1~4세</option>
+                            <option th:value="'4-10'">4~10세</option>
+                            <option th:value="'10+'">10세 이상</option>
                         </select>
                     </div>
                     <div class="filter-gender">
-                        <select id="gender" name="gender">
-                            <option value="none">성별</option>
-                            <option value="mail">남아</option>
-                            <option value="femail">여아</option>
+                        <select id="gender" name="dogGender">
+                            <option th:value="none">성별</option>
+                            <option th:value="남아">남아</option>
+                            <option th:value="여아">여아</option>
                         </select>
                     </div>
                     <div class="filter-kind">
-                        <select id="kind" name="kind">
-                            <option value="none">견종</option>
-                            <option value=""></option>
+                        <select id="kind" name="breedName">
+                            <option th:value="none">견종</option>
+                            <th:block th:each="dog : ${dogBreed}">
+                                <option th:value="${dog.breedName}" th:text="${dog.breedName}"></option>
+                            </th:block>
                         </select>
                     </div>
                     <div class="filter-size">
-                        <select id="size" name="size">
-                            <option value="none">크기</option>
-                            <option value="small">소형</option>
-                            <option value="medium">중형</option>
-                            <option value="large">대형</option>
+                        <select id="size" name="dogSize">
+                            <option th:value="none">크기</option>
+                            <option th:value="소형">소형</option>
+                            <option th:value="중형">중형</option>
+                            <option th:value="대형">대형</option>
                         </select>
                     </div>
                     <div class="filter-surgery">
-                        <select id="surgery" name="surgery">
-                            <option value="none">중성화 여부</option>
-                            <option value="Y">완료</option>
-                            <option value="N">미완료</option>
+                        <select id="surgery" name="dogNeutering">
+                            <option th:value="none">중성화 여부</option>
+                            <option th:value="Y">완료</option>
+                            <option th:value="N">미완료</option>
                         </select>
                     </div>
-                    <button type="submit" value="Submit">
+
+                    <button type="submit" th:value="Submit">
                         <img th:src="@{/images/adopt/finder.png}" id="finder-img">
                     </button>
                 </form>
             </div>
 
-            <div class="dog">
-                <th:block th:if="${dogList.isEmpty()}">
+            <div class="dog" id="firstContainer">
+                <th:block th:if="${dogList.isEmpty()}" id="secondContainer">
                     <div class="dog-list" th:each="dog : ${dogList}">
                         <p style="font-size: 12px;">입양리스트가 존재하지 않습니다.</p>
                     </div>
                 </th:block>
+                  
                 <th:block th:unless="${dogList.isEmpty()}">
-                    <div class="dog-list" >
+                    <div class="dog-list" id="secondContainer">
                         <div id="dog-list" th:each="dog : ${dogList}">
                             <a th:href="@{/adopt/dogList/{dogNo}(dogNo=${dog.dogNo})}">
-                                <img th:src="${dog.thumbnail}" id="dog-img">
-                            </a>                        
+                                <img th:src="${dog.imgPath + dog.imgRename}" id="dog-img">
+                            </a>
                             <div id="dog-kind" th:text="${dog.dogName}"></div>
                         </div>
                     </div>
@@ -95,15 +103,13 @@
 
                     <!-- 특정 페이지로 이동 -->
                     <th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
-                        <c:choose>
-                            <li th:if="${i == pagination.currentPage}">
-                                <a class="current" th:href="@{/adopt/dogList(cp=${i})}" th:text="${i}">현재 페이지</a>
-                            </li>
-                    		
-                            <li th:unless="${i == pagination.currentPage}">
-                                <a th:href="@{/adopt/dogList(cp=${i})}" th:text="${i}">나머지 페이지</a>
-                            </li>
-                        </c:choose>
+                        <li th:if="${i == pagination.currentPage}">
+                            <a class="current" th:href="@{/adopt/dogList(cp=${i})}" th:text="${i}">현재 페이지</a>
+                        </li>
+                        
+                        <li th:unless="${i == pagination.currentPage}">
+                            <a th:href="@{/adopt/dogList(cp=${i})}" th:text="${i}">나머지 페이지</a>
+                        </li>
                     </th:block>
 
                     <!-- 다음 목록 시작 번호로 이동 -->
@@ -126,6 +132,8 @@
     </main>
 
     <th:block th:replace="~{common/footer}"></th:block>
+
+    <script th:src="@{/js/adopt/dogList.js}"></script>
 </body>
 
 </html>

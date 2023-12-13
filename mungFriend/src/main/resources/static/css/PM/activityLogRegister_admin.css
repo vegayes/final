@@ -76,7 +76,7 @@ body > section {
     display: flex;
     align-items: center;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 17px;
     padding-left: 10px;
 }
 
@@ -90,6 +90,7 @@ body > section {
     flex-direction: column;
     align-items: center;
     height: 500px;
+    margin-top: 20px;
 }
 
 /* 사진 영역 */
@@ -105,6 +106,7 @@ body > section {
     justify-content: center;
     align-items: center;
     font-weight: bold;
+    font-size: 14px;
     padding: 10px;
 }
 
@@ -129,6 +131,7 @@ body > section {
 #noImage {
     width: 130px;
     height: 130px;
+    object-fit: cover;
 }
 
 #upload-btn-sec {
@@ -145,9 +148,10 @@ body > section {
     height: 30px;
     text-align: center;
     margin: 14px;
-    padding: 5px 0px;
+    /* padding: 5px 0px; */
     cursor: pointer;
-    font-size: 13px;
+    font-size: 12px;
+    line-height: 28px;
 }
 
 #uploadInput {
@@ -169,6 +173,7 @@ body > section {
     text-align: center;
     padding: 3px 0px;
     cursor: pointer;
+    font-size: 12px;
 }
 
 /* 내용 영역 */
@@ -184,6 +189,7 @@ body > section {
     justify-content: center;
     align-items: center;
     font-weight: bold;
+    font-size: 14px;
     padding: 10px;
 }
 
@@ -205,6 +211,7 @@ body > section {
     resize: none;
     padding: 10px;
     margin: 10px 0px;
+    font-size: 12px;
 }
 
 /* 등록하기 영역 */
@@ -221,23 +228,12 @@ body > section {
     background-color: #FEE4D6;
     font-weight: bold;
     border: none;
+    border-radius: 5px;
 }
 
 #register-btn:hover {
     cursor: pointer;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* 오른쪽 여백 */
 #right-gap {

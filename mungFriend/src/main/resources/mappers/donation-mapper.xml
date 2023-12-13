@@ -18,13 +18,18 @@
 		
 		<result property="impUid" column="DONATION_UID"/>
 		<result property="applyNum" column="DONATION_APPLY_NUM"/>
+		<result property="merchantUid" column="DONATION_MERCHANT_UID"/>
 		
 		<result property="cardName" column="DONATION_CARD"/>
 			
 		<result property="receiptUrl" column="DONATION_RECEIPT"/>			
 		<result property="billingKey" column="BILLINGKEY"/>		
+
+		<result property="cancelYN" column="CANCEL_YN"/>	
 		
-	
+		<result property="memberYN" column="MEMBER_YN"/>
+		<result property="merchantNo" column="MERCHANT_NO"/>
+		
 	</resultMap>
 	
 	<!-- 회원 후원 등록
@@ -37,9 +42,9 @@
 	<insert id = "donationMemberPay">
 		INSERT INTO DONATION_INFO 
 		VALUES (SEQ_DONATION_INFO_NO.NEXTVAL, 
-					#{memberNo}, #{impUid}, #{donationAmount}, #{cardName},
+					#{memberNo}, #{impUid}, #{merchantUid}, #{donationAmount}, #{cardName},
 					#{applyNum}, #{donationType},  #{billingKey}, #{receiptUrl}, 
-					#{donationContent}, SYSDATE, #{status})
+					#{donationContent}, #{donationDate}, #{status},DEFAULT,  DEFAULT)
 	</insert>	
 	
 	
@@ -49,77 +54,76 @@
 	<!-- 비회원 후원 등록 -->
 	<insert id = "donationNonMemberPay">
 		INSERT INTO TEST_NON_DONATION 
-		VALUES (SEQ_NON_DONATION_NO.NEXTVAL, #{imp_uid} , #{memberName}, 
+		VALUES (SEQ_NON_DONATION_NO.NEXTVAL, #{impUid} , #{memberName}, 
 		       #{memberEmail}, #{donationContent} , #{donationType},  #{donationAmount}, SYSDATE, #{status})
 
 	</insert>
 	
 	
 	
-	
-	
-	
-	
-	<!-- 후원 내역 개수 ( 마이페이지/ 관리자 ) --> 
+	<!-- 후원 내역 개수 ( 마이페이지/ 관리자 )  바꿈.--> 
 	<select id = "countDonationList" resultType = "_int">
 		SELECT COUNT(*)
-		FROM (SELECT DONATION_NO 
-				FROM TEST_DONATION
+		FROM (SELECT DONATION_INFO_NO ,MEMBER_NAME
+				FROM DONATION_INFO
 				LEFT JOIN "MEMBER" USING(MEMBER_NO)
+				WHERE SUBSTR(DONATION_MERCHANT_UID, -2, INSTR(DONATION_MERCHANT_UID, '_')) = '_1'
 				UNION ALL
-			SELECT NON_DONATION_NO 
+				SELECT NON_DONATION_NO ,MEMBER_NAME
 				FROM TEST_NON_DONATION)
 	</select>
 	
 	
-	<!-- 후원 내역 확인 ( 마이페이지/ 관리자 ) --> 
+	<!-- 후원 내역 확인 ( 마이페이지/ 관리자 ) 바꿈--> 
 	<select id = "selectDonationList" resultMap = "donation_rm">
 		SELECT *
-		FROM (SELECT DONATION_NO , MEMBER_NAME, MEMBER_EMAIL, DONATION_CONTENT,
+		FROM (SELECT DONATION_INFO_NO , MEMBER_NAME, MEMBER_EMAIL, DONATION_CONTENT,
 				    CASE 
 				        WHEN DONATION_TYPE = 'O' THEN '일시' 
 				        WHEN DONATION_TYPE = 'R' THEN '정기' 
 				        ELSE DONATION_TYPE 
 				    END AS DONATION_TYPE
-				    ,DONATION_AMOUNT , DONATION_DATE , DONATION_STATUS 
-		FROM TEST_DONATION
+				    ,DONATION_AMOUNT , DONATION_DATE , DONATION_STATUS ,'회원' AS MEMBER_YN
+		FROM DONATION_INFO 
 		LEFT JOIN "MEMBER" USING(MEMBER_NO)
+		WHERE SUBSTR(DONATION_MERCHANT_UID, -2, INSTR(DONATION_MERCHANT_UID, '_')) = '_1'
 		UNION ALL
 		SELECT NON_DONATION_NO , MEMBER_NAME, MEMBER_EMAIL, DONATION_CONTENT,
 				    CASE 
 				        WHEN DONATION_TYPE = 'O' THEN '일시'  
 				        ELSE DONATION_TYPE 
 				    END AS DONATION_TYPE
-				    ,DONATION_AMOUNT , DONATION_DATE , DONATION_STATUS 
+				    ,DONATION_AMOUNT , DONATION_DATE , DONATION_STATUS ,'비회원' AS MEMBER_YN
 		FROM TEST_NON_DONATION)
 		ORDER BY DONATION_DATE DESC
 	</select>
 	
 	
-	<!-- 후원 내역 검색 개수 ( 마이페이지/ 관리자 ) --> 
+	<!-- 후원 내역 검색 개수 ( 마이페이지/ 관리자 ) 바꿈 --> 
 	<select id = "countSearchDonationList" resultType = "_int">
 		SELECT COUNT(*)
-		FROM (SELECT DONATION_NO ,MEMBER_NAME
-				FROM TEST_DONATION
+		FROM (SELECT DONATION_INFO_NO ,MEMBER_NAME
+				FROM DONATION_INFO
 				LEFT JOIN "MEMBER" USING(MEMBER_NO)
+				WHERE SUBSTR(DONATION_MERCHANT_UID, -2, INSTR(DONATION_MERCHANT_UID, '_')) = '_1'
 				UNION ALL
-			SELECT NON_DONATION_NO ,MEMBER_NAME
+				SELECT NON_DONATION_NO ,MEMBER_NAME
 				FROM TEST_NON_DONATION)
-		WHERE MEMBER_NAME LIKE '%${donationSearch}%'
+		WHERE MEMBER_NAME LIKE '%' || #{donationSearch} || '%'
 	</select>
 	
 	
-	<!-- 후원 내역 검색 확인 (마이페이지 / 관리자 ) -->
+	<!-- 후원 내역 검색 확인 (마이페이지 / 관리자 ) 바꿈-->
 	<select id = "searchDonationList" resultMap = "donation_rm">
 		SELECT *
-		FROM (SELECT DONATION_NO , MEMBER_NAME, MEMBER_EMAIL, DONATION_CONTENT,
+		FROM (SELECT DONATION_INFO_NO , MEMBER_NAME, MEMBER_EMAIL, DONATION_CONTENT,
 				    CASE 
 				        WHEN DONATION_TYPE = 'O' THEN '일시' 
 				        WHEN DONATION_TYPE = 'R' THEN '정기' 
 				        ELSE DONATION_TYPE 
 				    END AS DONATION_TYPE
-				    ,DONATION_AMOUNT , DONATION_DATE , DONATION_STATUS 
-		FROM TEST_DONATION
+				    ,DONATION_AMOUNT , DONATION_DATE , DONATION_STATUS ,'회원' AS MEMBER_YN
+		FROM DONATION_INFO
 		LEFT JOIN "MEMBER" USING(MEMBER_NO)
 		UNION ALL
 		SELECT NON_DONATION_NO , MEMBER_NAME, MEMBER_EMAIL, DONATION_CONTENT,
@@ -127,36 +131,89 @@
 				        WHEN DONATION_TYPE = 'O' THEN '일시' 
 				        ELSE DONATION_TYPE 
 				    END AS DONATION_TYPE
-				    ,DONATION_AMOUNT , DONATION_DATE , DONATION_STATUS 
+				    ,DONATION_AMOUNT , DONATION_DATE , DONATION_STATUS ,'비회원' AS MEMBER_YN
 		FROM TEST_NON_DONATION)
-		WHERE MEMBER_NAME LIKE '%${donationSearch}%'
+		WHERE MEMBER_NAME LIKE '%' || #{donationSearch} || '%'
 		ORDER BY DONATION_DATE DESC
 	</select>
 	
 	
 	<!-- 후원 내역 개수 확인 ( 마이페이지/ 유저  )  새롭게 바꿈--> 
 	<select id = "countUserDonation" resultType = "_int">
-		SELECT COUNT(DONATION_INFO_NO)  
+		SELECT COUNT(DONATION_INFO_NO)
 		FROM DONATION_INFO
 		LEFT JOIN "MEMBER" USING(MEMBER_NO)
 		WHERE MEMBER_NO = #{memberNo}
-		ORDER BY DONATION_DATE DESC
+		AND SUBSTR(DONATION_MERCHANT_UID, -2, INSTR(DONATION_MERCHANT_UID, '_')) = '_1'
 	</select>	
 	
 	<!-- 후원 내역 확인 ( 마이페이지/ 유저  ) 새롭게 바꿈 --> 
 	<select id = "userDonationList" resultMap = "donation_rm">
-		SELECT DONATION_INFO_NO , MEMBER_NAME, MEMBER_EMAIL, DONATION_UID, DONATION_CARD, DONATION_CONTENT, 
+		SELECT DONATION_INFO_NO , MEMBER_NAME, MEMBER_EMAIL, DONATION_UID, DONATION_MERCHANT_UID, DONATION_CARD, DONATION_CONTENT, 
 		    CASE 
 		        WHEN DONATION_TYPE = 'O' THEN '일시' 
 		        WHEN DONATION_TYPE = 'R' THEN '정기' 
 		        ELSE DONATION_TYPE 
 		    END AS DONATION_TYPE
-		    ,DONATION_AMOUNT ,BILLINGKEY, DONATION_RECEIPT,   DONATION_DATE , DONATION_STATUS 
+		    ,DONATION_AMOUNT ,BILLINGKEY, DONATION_RECEIPT,   DONATION_DATE , DONATION_STATUS , CANCEL_YN
 		FROM DONATION_INFO  
 		LEFT JOIN "MEMBER" USING(MEMBER_NO)
 		WHERE MEMBER_NO = #{memberNo}
+		AND SUBSTR(DONATION_MERCHANT_UID, -2, INSTR(DONATION_MERCHANT_UID, '_')) = '_1'
 		ORDER BY DONATION_DATE DESC
 	</select>
 	
+	
+	<!-- 정기 후원 내역 확인 ( 마이페이지/ 유저  ) 새롭게 바꿈 --> 
+	<select id = "selectRegularList" resultMap = "donation_rm">
+		SELECT DONATION_INFO_NO , MEMBER_NAME, MEMBER_EMAIL, DONATION_UID, DONATION_MERCHANT_UID, DONATION_CARD, DONATION_CONTENT, 
+		    CASE 
+		        WHEN DONATION_TYPE = 'O' THEN '일시' 
+		        WHEN DONATION_TYPE = 'R' THEN '정기' 
+		        ELSE DONATION_TYPE 
+		    END AS DONATION_TYPE
+		    ,DONATION_AMOUNT ,BILLINGKEY, DONATION_RECEIPT,   DONATION_DATE , DONATION_STATUS , CANCEL_YN
+		FROM DONATION_INFO  
+		LEFT JOIN "MEMBER" USING(MEMBER_NO)
+		WHERE DONATION_MERCHANT_UID LIKE '%' || #{extractedValue}||'%'
+		ORDER BY DONATION_DATE DESC
+	</select>
+	
+	<!-- 후원 정기 취소 ( 마이페이지/ 유저  ) --> 
+	<update id = "cancelCheck">
+		UPDATE DONATION_INFO
+		SET CANCEL_YN = 'Y'
+		WHERE DONATION_MERCHANT_UID LIKE '%' || #{merchantData} ||'%'
+	</update>
+	
+	<select id = "selectMemberInfo" resultMap = "donation_rm">
+		SELECT DONATION_INFO_NO , MEMBER_NAME, MEMBER_EMAIL, DONATION_UID, DONATION_MERCHANT_UID, DONATION_CARD, DONATION_CONTENT, 
+		    DONATION_AMOUNT ,BILLINGKEY, DONATION_RECEIPT,   DONATION_DATE , DONATION_STATUS , CANCEL_YN
+		FROM DONATION_INFO  
+		LEFT JOIN "MEMBER" USING(MEMBER_NO)
+		WHERE DONATION_INFO_NO = #{donationNo}
+		AND SUBSTR(DONATION_MERCHANT_UID, -2, INSTR(DONATION_MERCHANT_UID, '_')) = '_1'
+	</select>
+	
+
+	<!-- 해당 merchant값 가지고 오기 (마이페이지 / 관리자) -->
+	<select id = "selectMerchant" resultType = "string">
+		SELECT SUBSTR(DONATION_MERCHANT_UID, 1, INSTR(DONATION_MERCHANT_UID, '_', -1) - 1) AS Extracted_Value
+		FROM DONATION_INFO 
+		WHERE DONATION_INFO_NO = #{donationInfoNo}	
+	</select>
+
+	<!-- 마지막 후원 기간 파악 (마이페이지 / 관리자) -->
+	<select id = "selectLastDate" resultMap = "donation_rm">
+		SELECT DONATION_DATE, 
+		       TO_NUMBER(SUBSTR(DONATION_MERCHANT_UID, -1 * INSTR(REVERSE(DONATION_MERCHANT_UID), '_') + 1)) AS MERCHANT_NO
+		FROM (
+		    SELECT DONATION_MERCHANT_UID, DONATION_DATE 
+		    FROM DONATION_INFO 
+		    WHERE DONATION_MERCHANT_UID LIKE '%'|| #{merchant} ||'%'
+		    ORDER BY DONATION_DATE DESC, DONATION_INFO_NO DESC
+		)
+		WHERE ROWNUM = 1
+	</select>
 
 </mapper>

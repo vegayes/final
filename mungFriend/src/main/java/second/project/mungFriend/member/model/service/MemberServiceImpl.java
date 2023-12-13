@@ -4,6 +4,7 @@ import java.io.File;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.PatternSyntaxException;
 
@@ -25,9 +26,12 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import second.project.mungFriend.common.dto.Alarm;
 import second.project.mungFriend.common.utility.Util;
+import second.project.mungFriend.member.model.dao.AlarmMapper;
 import second.project.mungFriend.member.model.dao.MemberDAO;
 import second.project.mungFriend.member.model.dto.Member;
+import second.project.mungFriend.member.model.dto.MemberGoogle;
 import second.project.mungFriend.member.model.dto.MemberKakao;
 import second.project.mungFriend.member.model.dto.MemberNaver;
 
@@ -43,6 +47,9 @@ public class MemberServiceImpl implements MemberService{
 	
 	@Autowired
 	private MemberDAO dao;
+	
+	@Autowired
+	private AlarmMapper mapper; 
 	
 	@Autowired
 	private BCryptPasswordEncoder bcrypt;
@@ -83,6 +90,20 @@ public class MemberServiceImpl implements MemberService{
     private String KAKAO_API_URL;
 
 	// 구글 프로퍼티 불러오기
+	@Value("${google.client.id}")
+    private String GOOGLE_CLIENT_ID;
+
+    @Value("${google.client.secret}")
+    private String GOOGLE_CLIENT_SECRET;
+    
+    @Value("${google.redirect.url}")
+    private String GOOGLE_REDIRECT_URL;
+
+    @Value("${google.auth.url}")
+    private String GOOGLE_AUTH_URL;
+    
+    @Value("${google.login.url}")
+    private String GOOGLE_LOGIN_URL;
 
 	// 로그인
 	@Override
@@ -335,9 +356,79 @@ public class MemberServiceImpl implements MemberService{
 	//구글 로그인
 	@Override
 	public Object getGoogleUrlLogin() {
-		String googleUrl = "";
+		String googleUrl = GOOGLE_LOGIN_URL + "?client_id=" + GOOGLE_CLIENT_ID + "&redirect_uri=" + GOOGLE_REDIRECT_URL
+                + "&response_type=code&scope=email%20profile%20openid&access_type=offline";
 		
 		return googleUrl;
+	}
+	
+	//구글 로그인 후 구글 회원 정보로 없으면 인서트 있으면 셀렉트
+	@Override
+	public Member loginGoogle(MemberGoogle googleInfo) {
+		Member loginMember = dao.loginGoogle(googleInfo);
+		
+		// 구글 정보로 조회 후 로그인 데이터가 없을때..
+		// 인서트를 하는데 패스워드는 없이 들어가야 된다.
+		if(loginMember == null) {
+
+			// 초기암호 설정
+			String encPw = bcrypt.encode("1234");
+			googleInfo.setGooglePw(encPw);
+			
+			int result = dao.loginGoogleInsert(googleInfo);
+			
+			if(result > 0) {
+				loginMember = dao.loginGoogle(googleInfo);
+			}
+			else {
+				loginMember = null;
+			}
+		}
+		
+		return loginMember;
+	}
+	
+	
+	//구글 로그인 후 구글 서버에서 토큰 및 회원정보 가져오기 
+	@Override
+	public MemberGoogle getGoogleInfo(String code) throws Exception {
+		if (code == null) throw new Exception("Failed get authorization code");
+
+	    String accessToken = "";
+	    String refreshToken = "";
+	        
+	    try {
+            HttpHeaders headers = new HttpHeaders();
+	        headers.add("Content-type", "application/x-www-form-urlencoded");
+
+	        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+	        params.add("grant_type"   , "authorization_code");
+	        params.add("client_id"    , GOOGLE_CLIENT_ID);
+	        params.add("client_secret", GOOGLE_CLIENT_SECRET);
+	        params.add("code"         , code);
+	        params.add("redirect_uri" , GOOGLE_REDIRECT_URL);
+
+	        RestTemplate restTemplate = new RestTemplate();
+	        HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(params, headers);
+
+	        ResponseEntity<String> response = restTemplate.exchange(
+	        		GOOGLE_AUTH_URL+"/token",
+	                HttpMethod.POST,
+	                httpEntity,
+	                String.class
+	        );
+
+	        JSONParser jsonParser = new JSONParser();
+	        JSONObject jsonObj = (JSONObject) jsonParser.parse(response.getBody());
+
+            accessToken  = (String) jsonObj.get("access_token");
+            refreshToken = (String) jsonObj.get("refresh_token");
+            
+        } catch (Exception e) {
+            throw new Exception("API call failed");
+        }
+
+        return getUserInfoWithTokenGoogle(accessToken);
 	}
 	
 	//네이버 로그인 후 토큰을 이용한 회원정보를 가져오기 위한 메소드에 호출 상세 메소드
@@ -431,5 +522,63 @@ public class MemberServiceImpl implements MemberService{
         
         return memberKakao;
     }
+
+	//구글 로그인 후 토큰을 이용한 회원정보를 가져오기 위한 메소드에 호출 상세 메소드
+	private MemberGoogle getUserInfoWithTokenGoogle(String accessToken) throws Exception {
+        //HttpHeader 생성
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Bearer " + accessToken);
+        headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+
+        //HttpHeader 담기
+        RestTemplate rt = new RestTemplate();
+        HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(headers);
+        ResponseEntity<String> response = rt.exchange(
+        		GOOGLE_AUTH_URL+"/tokeninfo",
+                HttpMethod.POST,
+                httpEntity,
+                String.class
+        );
+
+        //Response 데이터 파싱
+        JSONParser jsonParser = new JSONParser();
+        JSONObject jsonObj    = (JSONObject) jsonParser.parse(response.getBody());
+        //JSONObject account    = (JSONObject) jsonObj.get("kakao_account");
+        //JSONObject profile    = (JSONObject) account.get("profile");
+
+        System.out.println(jsonObj.toJSONString());
+        
+
+	    String id = String.valueOf(jsonObj.get("sub"));
+	    String email = String.valueOf(jsonObj.get("email"));
+	    String name = "google guest";
+	    String nickName = "google guest";
+	    String mobile = "010-1111-2222";
+
+	    MemberGoogle memberGoogle = new MemberGoogle();
+
+	    memberGoogle.setGoogleId(id);
+	    memberGoogle.setGoogleEmail(email);
+	    memberGoogle.setGoogleName(name);
+	    memberGoogle.setGoogleNickName(nickName);
+	    memberGoogle.setGoogleMobile(mobile);
+	    
+        return memberGoogle;
+    }
+	
+	
+	
+	/**
+	 * 로그인 시 알림목록 얻어오기
+	 */
+	@Override
+	public List<Alarm> selectAlarm(int memberNo) {
+		
+		return mapper.selectAlarm(memberNo);
+	}
+	
+	
+	
+	
 
 }

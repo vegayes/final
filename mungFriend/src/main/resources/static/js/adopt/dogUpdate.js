@@ -14,11 +14,37 @@ const inputImage = document.getElementsByClassName("inputImage");
 // x버튼 5개
 const deleteImage = document.getElementsByClassName("delete-image"); 
 
+function setInitialDimensions(index) {
+    if (index === 0) {
+
+        preview[index].style.width = '300px';
+        preview[index].style.height = '300px';
+        preview[index].style.objectFit = 'cover';
+
+    } else if (preview[index].getAttribute("src") !== "/images/adopt/카메라.png") {
+
+        preview[index].style.width = '300px';
+        preview[index].style.height = '200px';
+        preview[index].style.objectFit = 'cover';
+        
+    } else {
+
+        preview[index].style.width = '9%';
+        preview[index].style.height = '10%';
+        preview[index].style.objectFit = 'cover';
+    }
+}
+
+window.addEventListener('load', function () {
+    for (let i = 0; i < inputImage.length; i++) {
+        setInitialDimensions(i);
+    }
+});
+
 
 // 게시글 수정 시 삭제된 이미지의 순서를 기록할 Set 객체 생성
 const deleteSet = new Set(); // 순서x, 중복x
 // -> X버튼 클릭 시 순서를 한 번만 저장하는 용도
-
 
 // -> 위에 얻어온 요소들의 개수가 같음 == 인덱스가 일치함
 
@@ -39,8 +65,8 @@ for(let i=0 ; i< inputImage.length ; i++){
             reader.onload = e => { // 파일을 다 읽은 후 수행
                 preview[i].setAttribute("src", e.target.result);
 
-                preview[i].style.width = '100%';
-                preview[i].style.height = '100%';
+                preview[i].style.width = '300px';
+                preview[i].style.height = i === 0 ? '300px' : '200px';
                 preview[i].style.objectFit = 'cover';
 
                 deleteSet.delete(i);
@@ -48,7 +74,10 @@ for(let i=0 ; i< inputImage.length ; i++){
 
         } else { // 선택 후 취소 되었을 때
                 // -> 선택된 파일 없음 -> 미리보기 삭제
-            preview[i].removeAttribute("src");
+                preview[i].setAttribute("src", "/images/adopt/카메라.png");
+                preview[i].style.width = '9%';
+                preview[i].style.height = '10%';
+                preview[i].style.objectFit = 'cover';
         }
     });
 

@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import second.project.mungFriend.admissionApply.model.dto.Admission;
 import second.project.mungFriend.donation.model.dto.Donation;
@@ -40,6 +42,34 @@ public class ListAdminController {
 		return "mypage/admin/admissionList_admin";
 	}
 	
+	/** 입소신청 완료 값 가져오기
+	 * @return
+	 */
+	@PostMapping("/admissionList/done")
+	@ResponseBody
+	public List<Admission> freeAdmissionDonePage() {
+		
+		// 1) 입소신청 내역 가져오기
+		List<Admission> selectDoneAdmissionList = service.selectDoneAdmissionList();
+		
+		
+		return selectDoneAdmissionList;
+	}
+	
+	/** 입소신청 진행 값 가져오기
+	 * @return
+	 */
+	@PostMapping("/admissionList/ing")
+	@ResponseBody
+	public List<Admission> freeAdmissionPage() {
+		
+		// 1) 입소신청 내역 가져오기
+		List<Admission> selectAdmissionList = service.selectAdmissionList();
+		
+		
+		return selectAdmissionList;
+	}
+	
 	
 	/** 후원 내역 페이지 이동
 	 * @param model
@@ -64,7 +94,7 @@ public class ListAdminController {
 			model.addAttribute("map", selectDonationList);
 				
 		}else { // 검색어가 있을 떄 ( 검색 O) 
-			System.out.println("검색 내용 :" + donationSearch);
+			//System.out.println("검색 내용 :" + donationSearch);
 			 Map<String, Object> searchDonationList = service.searchDonationList(donationSearch, cp);
 			
 			 model.addAttribute("map", searchDonationList);
