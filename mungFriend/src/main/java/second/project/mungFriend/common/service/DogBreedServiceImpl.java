@@ -8,6 +8,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import second.project.mungFriend.adopt.model.dao.AdoptMapper;
 import second.project.mungFriend.adopt.model.dto.Dog;
 import second.project.mungFriend.adopt.model.dto.Pagination;
 import second.project.mungFriend.common.dao.DogBreedMapper;
@@ -18,6 +19,9 @@ public class DogBreedServiceImpl implements DogBreedService {
 
 	@Autowired
 	private DogBreedMapper mapper;
+	
+	@Autowired
+	private AdoptMapper adoptMapper;
 
 //	@Override
 //	public List<DogBreed> findDogBreed(String searchInput) {
@@ -55,10 +59,14 @@ public class DogBreedServiceImpl implements DogBreedService {
 		// 강아지 목록 조회 (일반 전체 조회)
 		List<Dog> dogList = mapper.selectDogList(searchInput,rowBounds);
 		
+		// 필터기능 구현을 위한 모든 견종 조회
+		List<Dog> dogBreedList = adoptMapper.selectDogBreed();
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("pagination", pagination);
 		map.put("dogList", dogList);
+		map.put("dogBreedList", dogBreedList);
 		
 		return map;		
 	}

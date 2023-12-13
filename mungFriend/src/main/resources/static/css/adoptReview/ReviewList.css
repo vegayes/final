@@ -80,6 +80,11 @@ input, textarea {
     margin-bottom: 20px;
 }
 
+.boardListDiv{
+	height: 370px;
+}
+
+
 /* 게시글 테이블 */
 .boardList {
     flex-basis: 50%;
