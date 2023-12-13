@@ -78,11 +78,27 @@ public class ChatController {
                 JSONObject bubbles = (JSONObject)bubblesArray.get(0);
                 JSONObject data = (JSONObject)bubbles.get("data");
               
-                String description = "";
-                description = (String)data.get("description");
-              
+                //System.out.println("data : " + data);
                 
-                descriptionArray = ((String) data.get("description")).split("\\s*\\{\\s*|\\s*}\\s*"); // 받은 데이터를 {}를 기준으로 나눔
+                String description = "";
+                String donationUrl = "";
+                description = (String)data.get("description");
+                donationUrl = (String)data.get("url");
+                
+                if(donationUrl != null) {
+                	description = description + "(" + donationUrl + ")";
+             	}
+                
+               // System.out.println("description :" +description);
+                //System.out.println("링크 주소 : " + donationUrl);
+                
+                if(donationUrl != null) {
+                	descriptionArray = description.split("\\s*\\(\\s*|\\s*\\)\\s*"); // 받은 데이터를 ()를 기준으로 나눔
+
+                }else {
+                	descriptionArray = description.split("\\s*\\{\\s*|\\s*}\\s*"); // 받은 데이터를 {}를 기준으로 나눔
+                }
+                
                // descriptionArray = ((String) data.get("description")).split("\n"); // 받은 데이터를 엔터키를 기준으로 나눔
                 
                 descriptionArray = Arrays.stream(descriptionArray) //빈 문자열 제거
@@ -92,8 +108,12 @@ public class ChatController {
              	chatMessage = description;
              	ObjectMapper objectMapper = new ObjectMapper();
              	
+            	
+             	
              	jsonMessage = objectMapper.writeValueAsString(descriptionArray);
-             	System.out.println("받은 메시지 : " + jsonMessage);
+             
+             	//System.out.println("받은 메시지 : " + jsonMessage);
+             	
             } catch (Exception e) {
                 System.out.println("error");
                 e.printStackTrace();
@@ -143,7 +163,7 @@ public class ChatController {
 
             long timestamp = new Date().getTime();
 
-            System.out.println("##"+timestamp);
+           // System.out.println("##"+timestamp);
 
             obj.put("version", "v2");
             obj.put("userId", "U47b00b58c90f8e47428af8b7bddc1231heo2");

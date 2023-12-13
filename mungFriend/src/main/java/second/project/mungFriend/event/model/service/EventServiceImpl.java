@@ -73,7 +73,7 @@ public class EventServiceImpl implements EventService {
 
 	
 	/**
-	 * 유효기간 1주일 내의 쿠폰 조회
+	 * 유효기간 2주일 내의 쿠폰 조회
 	 */
 	@Transactional(rollbackFor = Exception.class)
 	@Override

@@ -94,7 +94,7 @@ public class ListAdminController {
 			model.addAttribute("map", selectDonationList);
 				
 		}else { // 검색어가 있을 떄 ( 검색 O) 
-			System.out.println("검색 내용 :" + donationSearch);
+			//System.out.println("검색 내용 :" + donationSearch);
 			 Map<String, Object> searchDonationList = service.searchDonationList(donationSearch, cp);
 			
 			 model.addAttribute("map", searchDonationList);

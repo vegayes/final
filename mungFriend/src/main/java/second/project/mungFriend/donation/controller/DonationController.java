@@ -76,7 +76,7 @@ public class DonationController {
 		
 		
 		if(loginMember != null) { // 로그인이 된 경우
-			System.out.println("로그인  회원 정보 : "+  loginMember.getMemberNo());
+			//System.out.println("로그인  회원 정보 : "+  loginMember.getMemberNo());
 			donation.setMemberNo(loginMember.getMemberNo());
 		}
         
@@ -96,8 +96,8 @@ public class DonationController {
 	public List<Donation> regularList(@RequestBody String merchant_uid,
 			@SessionAttribute(value ="loginMember", required = false) Member loginMember) throws Exception{
 		
-		System.out.println("정보 분석");
-		System.out.println("merchnat_uid :" + merchant_uid);
+		//System.out.println("정보 분석");
+		//System.out.println("merchnat_uid :" + merchant_uid);
 		
         // 맨 뒤의 '_'의 인덱스 찾기
         int lastIndex = merchant_uid.lastIndexOf('_');
