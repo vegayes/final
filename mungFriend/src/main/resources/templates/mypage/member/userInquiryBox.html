@@ -46,11 +46,10 @@
 							<tbody style="overflow: auto;">
 								<!-- 1:1 문의가 없을 경우 -->
 								<th:block th:if="${#lists.size(inquiryList)} == 0">
-									<tr>
-										<th colspan="4">1:1 문의가 존재하지 않습니다.</th>
+									<tr class="no-inquiry-message">
+										<td colspan="4">1:1 문의가 존재하지 않습니다.</td>
 									</tr>
 								</th:block>
-
 								<!-- 1:1 문의가 있을 경우 -->
 								<th:block th:unless="${#lists.size(inquiryList)} == 0">
 									<tr th:each="inquiry : ${inquiryList}" class="donationTBodyTr">

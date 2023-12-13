@@ -6,7 +6,7 @@
 		<id property="inquiryNo" column="INQUIRY_NO" />
 		<result property="memberNo" column="MEMBER_NO" />
 		<result property="inquiryTitle" column="INQUIRY_TITLE" />
-		<result property="inquiryContent" column="INQUIRY_CONTENT" />
+		<result property="inquiryContent" column="INQUIRY_CONTE"/>
 		<result property="inquiryDate" column="INQUIRY_DATE" />
 		<result property="inquiryStatus" column="INQUIRY_STATUS" />
 		<result property="inquiryCompleteDate" column="INQUIRY_COMPLETE_DATE" />
@@ -15,10 +15,11 @@
 	</resultMap>
 	 
 	<select id="adminInquiryBox" resultMap="inquiry_rm">
-        SELECT INQUIRY_NO, MEMBER_NO, INQUIRY_TITLE, INQUIRY_CONTENT, 
-		INQUIRY_DATE, INQUIRY_STATUS, INQUIRY_COMPLETE_DATE, MEMBER_NICKNAME
-		FROM INQUIRY
-		LEFT JOIN "MEMBER" USING(MEMBER_NO)
+	SELECT INQUIRY_NO, MEMBER_NO, INQUIRY_TITLE, INQUIRY_CONTENT, 
+INQUIRY_DATE, INQUIRY_STATUS, INQUIRY_COMPLETE_DATE, MEMBER_NICKNAME
+FROM INQUIRY
+LEFT JOIN "MEMBER" USING(MEMBER_NO)
+ORDER BY INQUIRY_STATUS ASC, INQUIRY_DATE ASC
     </select>
 	
 	
