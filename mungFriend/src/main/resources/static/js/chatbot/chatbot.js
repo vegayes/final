@@ -112,7 +112,7 @@ function sendButton(selectedButtonText) {
 //=================메시지 출력=========================//
 function showMessage(message) {
 
-    $("#communicate").append("<tr><td><div>" + message + "<br></div><br></td></tr>");
+    $("#communicate").append("<tr><td><div class='message'>" + message + "<br></div><br></td></tr>");
     var table = $("#content-container");
     table.scrollTop(table.prop("scrollHeight"));;
     
