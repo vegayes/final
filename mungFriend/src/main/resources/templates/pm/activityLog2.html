@@ -27,91 +27,92 @@
                         <img th:src="@{/images/PM/bone.png}" id="bone">
                     </div>
                     <div id="title-sec">
-                        오늘의 활동 일지
+                        이달의 활동 일지
                     </div>
                 </div>
 
-                <!-- 내용 영역 -->
-                <div id="cont-section">
-                    <div id="leftMove-section">
-                        <a th:if="${session.loginMember}" th:href="@{/pm/activityLog(memberNo=${session.loginMember.memberNo}, cp=${pagination.prevPage})}"><button class="fa-solid fa-chevron-left" style="color: #6b6b6b;" id="leftMove-btn"></button></a>
-                        <a th:unless="${session.loginMember}" th:href="@{/pm/activityLog(memberNo=-1, cp=${pagination.prevPage})}"><button class="fa-solid fa-chevron-left" style="color: #6b6b6b;" id="leftMove-btn"></button></a>
-                    </div>
-                    
-                    <!-- 활동일지 내역 없을 경우-->
-                    <th:block th:if="${#lists.size(pmList) == 0}">
-	                    <div id="img-section">
-							활동일지 내역이 존재하지 않습니다.
-						</div>
-					</th:block>
-                    
-                    <!-- 활동일지 내역 있을 경우 -->
-                    <th:block th:unless="${#lists.size(pmList) == 0}">
-	                    <div id="img-section">
-							<div id="img-sectionArea" th:each="pm : ${pmList}">
-		                        <div class="img1">
-									
-									<!-- 관리자일 경우에만 수정화면 전환될 수 있도록 -->
-									<th:block th:if = "${session.loginMember != null}">
-										<th:block th:if="${session.loginMember.adminYn == 'Y'}">
-		                            		<img th:src="${pm.acitivityImg}" id="imgAdminHover" class="imgs" th:activityNo="${pm.activityNo}" th:onclick="onUpdateClick(this.getAttribute('activityNo'))" th:onmouseover="onMouseOver(this.getAttribute('activityNo'))" th:onmouseout="onMouseOut(this.getAttribute('activityNo'))">
-		                        		</th:block>
-		                        
-			                        	<!-- 일반회원일 경우 -->
-			                        	<th:block th:unless="${session.loginMember.adminYn == 'Y'}">
-			                        		<img th:src="${pm.acitivityImg}" class="imgs" th:activityNo="${pm.activityNo}" th:onmouseover="onMouseOver(this.getAttribute('activityNo'))" th:onmouseout="onMouseOut(this.getAttribute('activityNo'))">
-			                        	</th:block>		
-									</th:block>
-								
-									<!-- 비회원일 경우 -->
-									<th:block th:unless = "${session.loginMember != null}">
-										<img th:src="${pm.acitivityImg}" class="imgs" th:activityNo="${pm.activityNo}" th:onmouseover="onMouseOver(this.getAttribute('activityNo'))" th:onmouseout="onMouseOut(this.getAttribute('activityNo'))">	
-									</th:block>
-		                        
-		                        </div>
-		                        <div th:text="${pm.activityContent}"  class = "checkContent" th:id = "'check_' + ${pm.activityNo}">활동일지 내용</div>
-		                        <!-- <div th:text="${pm.activityNo}">활동일지 내용</div> -->
-		                        <div class="heart1">
-									
-									<!-- 좋아요 있을 경우 -->
-									<th:block th:if="${pm.activityLikeNo}">
-									
-										<div id="heart-sec">
-											<button class="fa-solid fa-heart" style="color: #f55c91;" id="fullHeart-btn" th:activityLikeNo="${pm.activityLikeNo}" th:onclick="onLikeDeleteClick(this.getAttribute('activityLikeNo'))"></button>
-			                            </div>
-		                            
-		                            </th:block>
-		                            
-		                            <!-- 좋아요 없을 경우 -->
-									<th:block th:unless="${pm.activityLikeNo}">
-									
-										<div id="heart-sec">
-			                            	<button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn" th:activityNo="${pm.activityNo}" th:onclick="onLikeInsertClick(this.getAttribute('activityNo'))"></button>
-			                            </div>
-		                            
-		                            </th:block>
-		                            
-									<!-- session.loginMember가 null 일 경우 -->
-									<th:block th:if="${session.loginMember == null}"></th:block>
-									
-									<!-- session.loginMember가 null 이 아닐 경우 -->
-									<th:block th:if="${session.loginMember}">
-			                            <th:block th:if="${session.loginMember.adminYn == 'Y'}">
-				                            <div id="xBtn-sec">
-				                            	<button type="button" id="x-btn" th:activityNo="${pm.activityNo}" th:onclick="onDeleteClick(this.getAttribute('activityNo'))">X</button>
-				                        	</div>
-			                        	</th:block>
-		                        	</th:block>
-		                        </div>
-	                        </div>
+                <!-- 활동일지 내역 없을 경우-->
+                <th:block th:if="${#lists.size(pmList) == 0}">
+                    <div id="info-section">
+						활동일지 내역이 존재하지 않습니다.
+					</div>
+				</th:block>
+				
+                <!-- 활동일지 내역 있을 경우 -->
+                <th:block th:unless="${#lists.size(pmList) == 0}">
+	                <!-- 내용 영역 -->
+	                <div id="cont-section">
+	                    <div th:if="${#lists.size(pmList) > 0}" id="leftMove-section">
+	                        <a th:if="${session.loginMember}" th:href="@{/pm/activityLog(memberNo=${session.loginMember.memberNo}, cp=${pagination.prevPage})}"><button class="fa-solid fa-chevron-left" style="color: #6b6b6b;" id="leftMove-btn"></button></a>
+	                        <a th:unless="${session.loginMember}" th:href="@{/pm/activityLog(memberNo=-1, cp=${pagination.prevPage})}"><button class="fa-solid fa-chevron-left" style="color: #6b6b6b;" id="leftMove-btn"></button></a>
 	                    </div>
-                    </th:block>
-                    
-                    <div id="rightMove-section">
-						<a th:if="${session.loginMember}" th:href="@{/pm/activityLog(memberNo=${session.loginMember.memberNo}, cp=${pagination.nextPage})}"><button class="fa-solid fa-chevron-right" style="color: #6b6b6b;" id="leftMove-btn"></button></a>
-                        <a th:unless="${session.loginMember}" th:href="@{/pm/activityLog(memberNo=-1, cp=${pagination.nextPage})}"><button class="fa-solid fa-chevron-right" style="color: #6b6b6b;" id="leftMove-btn"></button></a>
-                    </div>
-                </div>
+	                    
+		                    <div id="img-section">
+								<div id="img-sectionArea" th:each="pm : ${pmList}">
+			                        <div class="img1">
+										
+										<!-- 관리자일 경우에만 수정화면 전환될 수 있도록 -->
+										<th:block th:if = "${session.loginMember != null}">
+											<th:block th:if="${session.loginMember.adminYn == 'Y'}">
+			                            		<img th:src="${pm.acitivityImg}" id="imgAdminHover" class="imgs" th:activityNo="${pm.activityNo}" th:onclick="onUpdateClick(this.getAttribute('activityNo'))" th:onmouseover="onMouseOver(this.getAttribute('activityNo'))" th:onmouseout="onMouseOut(this.getAttribute('activityNo'))">
+			                        		</th:block>
+			                        
+				                        	<!-- 일반회원일 경우 -->
+				                        	<th:block th:unless="${session.loginMember.adminYn == 'Y'}">
+				                        		<img th:src="${pm.acitivityImg}" class="imgs" th:activityNo="${pm.activityNo}" th:onmouseover="onMouseOver(this.getAttribute('activityNo'))" th:onmouseout="onMouseOut(this.getAttribute('activityNo'))">
+				                        	</th:block>		
+										</th:block>
+									
+										<!-- 비회원일 경우 -->
+										<th:block th:unless = "${session.loginMember != null}">
+											<img th:src="${pm.acitivityImg}" class="imgs" th:activityNo="${pm.activityNo}" th:onmouseover="onMouseOver(this.getAttribute('activityNo'))" th:onmouseout="onMouseOut(this.getAttribute('activityNo'))">	
+										</th:block>
+			                        
+			                        </div>
+			                        <div th:text="${pm.activityContent}"  class = "checkContent" th:id = "'check_' + ${pm.activityNo}">활동일지 내용</div>
+			                        <!-- <div th:text="${pm.activityNo}">활동일지 내용</div> -->
+			                        <div class="heart1">
+										
+										<!-- 좋아요 있을 경우 -->
+										<th:block th:if="${pm.activityLikeNo}">
+										
+											<div id="heart-sec">
+												<button class="fa-solid fa-heart" style="color: #f55c91;" id="fullHeart-btn" th:activityLikeNo="${pm.activityLikeNo}" th:onclick="onLikeDeleteClick(this.getAttribute('activityLikeNo'))"></button>
+				                            </div>
+			                            
+			                            </th:block>
+			                            
+			                            <!-- 좋아요 없을 경우 -->
+										<th:block th:unless="${pm.activityLikeNo}">
+										
+											<div id="heart-sec">
+				                            	<button class="fa-regular fa-heart" style="color: #f55c91;" id="emptyHeart-btn" th:activityNo="${pm.activityNo}" th:onclick="onLikeInsertClick(this.getAttribute('activityNo'))"></button>
+				                            </div>
+			                            
+			                            </th:block>
+			                            
+										<!-- session.loginMember가 null 일 경우 -->
+										<th:block th:if="${session.loginMember == null}"></th:block>
+										
+										<!-- session.loginMember가 null 이 아닐 경우 -->
+										<th:block th:if="${session.loginMember}">
+				                            <th:block th:if="${session.loginMember.adminYn == 'Y'}">
+					                            <div id="xBtn-sec">
+					                            	<button type="button" id="x-btn" th:activityNo="${pm.activityNo}" th:onclick="onDeleteClick(this.getAttribute('activityNo'))">X</button>
+					                        	</div>
+				                        	</th:block>
+			                        	</th:block>
+			                        </div>
+		                        </div>
+		                    </div>
+	                    
+	                    <div th:if="${#lists.size(pmList) > 0}" id="rightMove-section">
+							<a th:if="${session.loginMember}" th:href="@{/pm/activityLog(memberNo=${session.loginMember.memberNo}, cp=${pagination.nextPage})}"><button class="fa-solid fa-chevron-right" style="color: #6b6b6b;" id="leftMove-btn"></button></a>
+	                        <a th:unless="${session.loginMember}" th:href="@{/pm/activityLog(memberNo=-1, cp=${pagination.nextPage})}"><button class="fa-solid fa-chevron-right" style="color: #6b6b6b;" id="leftMove-btn"></button></a>
+	                    </div>
+	                </div>
+                </th:block>
+                
 
                 <!-- 등록하기 영역 -->
                 <div id="register-sec">
@@ -128,7 +129,7 @@
             </div>
 
             <!-- 오른쪽 여백 -->
-			<th:block th:replace="~{common/chatbot}"></th:block>
+            <th:block th:replace="~{common/chatbot}"></th:block>
 			<img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image">
 			<a th:href="@{/donation}"><img th:src="@{/images/donation.png}" class="fixed-image" id="donate-image"></a>
         </div>
