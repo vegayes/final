@@ -100,7 +100,8 @@ public class MemberController {
 	public String signUp(Member inputMember,
 						@RequestParam("uploadImage") MultipartFile profileImage, // 업로드 파일
 						String[] memberAddress,
-						RedirectAttributes ra) throws Exception{
+						RedirectAttributes ra,
+						Model model) throws Exception{
 		
 		// Member inputMember : 커맨드 객체 (제출된 파라미터가 저장된 객체)
 		
@@ -141,7 +142,9 @@ public class MemberController {
 		if(result > 0) { // 가입 성공
 			path = "member/login"; // 로그인 페이지로
 			
-			message = inputMember.getMemberNickname() + "님의 가입을 환영합니다";
+			message = inputMember.getMemberNickname() + "님의 가입을 환영합니다.";
+			
+			model.addAttribute("message", message);
 			
 		} else { // 가입 실패
 			

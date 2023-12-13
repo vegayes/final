@@ -81,6 +81,14 @@ body > section {
 }
 
 /* 내용 영역 */
+/* 활동일지 내역 없을 경우*/
+#info-section {
+	font-size: 14px;
+	padding: 150px;
+	padding: 208px 0px 208px 300px;
+}
+
+/* 활동일지 내역 있을 경우 */
 #cont-section {
     flex-basis: 90%;
     display: flex;
@@ -110,6 +118,7 @@ body > section {
     height : 410px;
     display: flex;
     flex-wrap: wrap;
+    font-size: 14px;
 }
 
 #img-sectionArea {
