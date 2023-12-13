@@ -8,9 +8,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -111,6 +113,20 @@ public class DonationController {
 		return regularList;
 	}
 
+	
+	@GetMapping("/memberInfo")
+	@ResponseBody
+	public Donation selectMemberInfo(@RequestParam int donationNo) throws Exception{
+		
+		System.out.println("정보 분석");
+		System.out.println("donationNo :" + donationNo);
+		
+		//1) 후원 정보 분석
+		Donation memberInfo = service.selectMemberInfo(donationNo);
+		
+		
+		return memberInfo;
+	}
 	
 	
 

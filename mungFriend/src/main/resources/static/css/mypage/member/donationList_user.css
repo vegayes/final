@@ -263,5 +263,7 @@ a:hover{
 	height : 615px; 
 	display: flex; 
 	justify-content: center; 
-	padding:10px;  
+	align-items: center;
+	padding:10px;
+	font-size: 14px;  
 }

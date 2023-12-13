@@ -63,6 +63,14 @@ public class DonationServiceImpl implements DonationService {
 	public int cancelCheck(String merchantData) {
 		return mapper.cancelCheck(merchantData);
 	}
+
+	/**
+	 * 마이페이지 관리자에서 후원한 회원 정보 가져오기
+	 */
+	@Override
+	public Donation selectMemberInfo(int donationNo) {
+		return mapper.selectMemberInfo(donationNo);
+	}
 	
 
 	

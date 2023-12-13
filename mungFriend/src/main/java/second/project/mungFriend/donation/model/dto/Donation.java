@@ -42,5 +42,6 @@ public class Donation {
 	private String alaramYN; 
 	
 	private String memberYN; // 회원 여부
+	private String merchantNo; 
 		
 }

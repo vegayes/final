@@ -20,4 +20,10 @@ public interface DonationService {
 	 */
 	int cancelCheck(String merchantData);
 
+	/** 마이페이지 관리자 페이지에서 회원정보 가져오기
+	 * @param donationNo
+	 * @return
+	 */
+	Donation selectMemberInfo(int donationNo);
+
 }

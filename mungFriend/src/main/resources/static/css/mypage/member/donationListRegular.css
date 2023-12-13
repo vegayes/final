@@ -149,6 +149,7 @@
 
     border : 2px solid #fda1a1;
     border-radius: 5px;
+    
 }
 
 
@@ -196,7 +197,7 @@
 .payPeriod > div{
     padding: 7px 0px 0px 0px;
     font-size: 12px;
-    font-weight: 400;
+    font-weight: 500;
 }
 
 .regularHr{
@@ -214,6 +215,10 @@
     padding : 5px 0px;
 }
 
+#adminRegularDetail{
+	flex-basis :70%;
+}
+
 .regularDetail > div:nth-of-type(1){
 
     padding : 5px 0px;
@@ -224,37 +229,16 @@
     font-weight: 700;   
 }
 
-.regularTable{
-    flex-basis: 100%;
-    padding : 5px 15px;
-    /* border : 2px solid red; */
-
-    border-top: 5px solid #FEE4D6;
-    border-bottom: 3px solid #D2D2D2;
-    border-collapse: collapse;
-}
-
-.regularTable tbody{
-    overflow:auto;
-    height:190px;
-}
-
-.regularContent{
-    height: 50px;
-    overflow: scroll;
-    overflow-x: hidden;
-
-    border : 2px solid yellow;
-}
-
-.regularTable{
-	width: 100%;	
-}
-
 .tableWrapper {
-    max-height: 200px; /* 필요한 높이 설정 */
+    height: 200px; /* 필요한 높이 설정 */
     overflow-y: auto; /* 수직 스크롤 설정 */
-    border : 2px solid red;
+    
+    display: flex;
+    flex-direction: column;
+}
+
+#adminWrapper{
+	height: 250px; /* 필요한 높이 설정 */
 }
 
 .tableWrapper::-webkit-scrollbar {
@@ -272,8 +256,31 @@
     background: white;  /*스크롤바 뒷 배경 색상*/
 }
 
+.regularTable{
+	
+	width: 100%;
+	
+	/*width: calc(100% - 30px); /* 좌우 padding 고려하여 width 설정 */
+    padding : 5px 15px;
+    /* border : 2px solid red; */
+
+    border-top: 5px solid #FEE4D6;
+    border-bottom: 3px solid #D2D2D2;
+    border-collapse: collapse;
+}
+
+
+
+.regularContent{
+    height: 50px;
+    overflow: scroll;
+    overflow-x: hidden;
+
+    border : 2px solid yellow;
+}
+
 .regularTheadTr {
-    height: 30px; /* 원하는 높이 설정 */
+    height: 35px; /* 원하는 높이 설정 */
 }
 
 /*테이블의 헤더*/
@@ -288,6 +295,7 @@
 
 /*테이블의 데이터 요소*/
 .regularTheadTr td{
+	
     /*가운데 정렬*/
     text-align: center; 
     padding : 5px 10px;
@@ -312,7 +320,6 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	
 }
 
 .regularInfoCheck:hover{
@@ -340,6 +347,10 @@
 
 #sumAmount{
     padding-left: 10px;
+}
+
+#sumAdminAmount{
+	padding-right: 11%;
 }
 
 /*************************************************
