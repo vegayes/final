@@ -145,6 +145,16 @@ main{
     border-radius: 5px;
 }
 
+#time-container button{
+    margin: 10px 10px 10px 0px;
+    width: 58px;
+    height: 25px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+
 
 
 /* dog-detail */

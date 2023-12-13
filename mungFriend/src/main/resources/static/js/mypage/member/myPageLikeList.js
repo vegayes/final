@@ -29,11 +29,8 @@ document.addEventListener("DOMContentLoaded", function() {
         }else{
             likeDogListElements.style.display = 'block';
             likeDogListElements.style.display = 'block';
-
         }
 
-        
-        
     }
 
     // 페이지 로드 시 처음 6개의 항목을 보이도록 설정

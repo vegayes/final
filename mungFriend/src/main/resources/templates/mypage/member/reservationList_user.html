@@ -31,18 +31,20 @@
 
             <!-- 내용 작성영역-->
             <div class = "userContentContainer">
-
-                <div class="list-top">
-                    <div>사진</div>
-                    <div>정보</div>
-                    <div>예약일</div>
-                </div>
-   
                 <th:block th:if="${reservationList.isEmpty()}">
-                    현재 예약 내역이 존재하지 않습니다.
+                    <p style="display: flex; justify-content: center; align-items: center;
+                        font-size: 14px; height: 100%;">
+                        현재 예약 내역이 존재하지 않습니다.
+                    </p>
                 </th:block>
 
                 <th:block th:unless="${reservationList.isEmpty()}">
+                    <div class="list-top">
+                        <div>사진</div>
+                        <div>정보</div>
+                        <div>예약일</div>
+                    </div>
+                    
                     <div class="list-bottom" th:each="reserve : ${reservationList}">
                         <div>
                             <a id="img-wrap" th:href="@{/adopt/dogList/{dogNo}(dogNo=${reserve.dogNo})}">
@@ -57,7 +59,6 @@
                         </div>
                         <div id="reserve-date">[[${reserve.reserveDate}]] [[${reserve.reserveTime}]]</div>
                         <button th:onclick="|deleteReserve(${reserve.dogNo})|" id="cancle-btn" type="button">X</button>
-    
                     </div>
                 </th:block>
 

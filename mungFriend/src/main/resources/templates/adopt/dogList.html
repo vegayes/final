@@ -12,7 +12,7 @@
 
     <th:block th:replace="~{common/header}"></th:block>
 
-    <main th:with="pagination=${map.pagination}, dogList=${map.dogList}">
+    <main th:with="pagination=${map.pagination}, dogList=${map.dogList}, dogBreed=${map.dogBreedList}">
         <div class="main-left"></div>
 
         <div class="main-center">
@@ -42,7 +42,7 @@
                     <div class="filter-kind">
                         <select id="kind" name="breedName">
                             <option th:value="none">견종</option>
-                            <th:block th:each="dog : ${dogList}">
+                            <th:block th:each="dog : ${dogBreed}">
                                 <option th:value="${dog.breedName}" th:text="${dog.breedName}"></option>
                             </th:block>
                         </select>
@@ -75,11 +75,6 @@
                         <p style="font-size: 12px;">입양리스트가 존재하지 않습니다.</p>
                     </div>
                 </th:block>
-                  
-                  
-                  
-                  
-                  
                   
                 <th:block th:unless="${dogList.isEmpty()}">
                     <div class="dog-list" id="secondContainer">
