@@ -141,18 +141,6 @@ public class AdoptController {
 		
 	}
 	
-	// 예약 가능한 날짜와 시간 조회
-	@GetMapping("/getReservedTimes")
-    @ResponseBody
-    public ResponseEntity<List<String>> getReservedTimes(@RequestParam String selectedDate) {
-        
-    	// selectedDate에 따른 예약 불가한 시간을 조회하고 리스트로 반환
-        List<String> reservedTimes = service.getReservedTimes(selectedDate);
-        System.out.println("reservedTimes::" + reservedTimes);
-        
-        return ResponseEntity.ok(reservedTimes);
-    }
-	
 	// 좋아요 처리
 	@PostMapping("/like")
 	@ResponseBody // 반환되는 값이 비동기 요청한 곳으로 돌아가게 함
@@ -172,8 +160,6 @@ public class AdoptController {
 		return "adopt/dogRegistration";
 	}
 	
-	
-
 	/** 입소 신청 정보 가지고 게시글 작성 화면으로 전환
 	 * @return
 	 */
@@ -187,44 +173,45 @@ public class AdoptController {
 		return "adopt/dogRegistration";
 	}
 	
-
 	// 강아지 insert
 	@PostMapping("/dogRegistration/insert")
 	public String dogRegiInsert(
 			Dog dog,
 			@RequestParam(value="images", required = false) List<MultipartFile> images, 
 			@RequestParam(value="admFile", required = false) String admFile, 
-			@RequestParam(value="admNo", required = false, defaultValue= "0") int admNo, 
+			@RequestParam(value="admNo", required = false, defaultValue= "0") int admNo,
 			@SessionAttribute("loginMember") Member loginMember,
 			RedirectAttributes ra) throws IllegalStateException, IOException {
 
 		
 		if(admFile != null) {
+			
 			String[] parts = admFile.split("/", 4);
 			String imgPath = "/" + parts[1] + "/" + parts[2] + "/" ;
 			String imgRename = parts[3]; 
 		
-		// 세 번째 '/' 이후의 부분 가져오기
-		System.out.println("주소:" + imgPath);
-		System.out.println("이름:" + imgRename);
+			// 세 번째 '/' 이후의 부분 가져오기
+			System.out.println("주소:" + imgPath);
+			System.out.println("이름:" + imgRename);
+			
+			dog.setImgPath(imgPath);
+			dog.setImgRename(imgRename);
 		
-		dog.setImgPath(imgPath);
-		dog.setImgRename(imgRename);
-		// ==========================================
-		//   입소 신청 내역을 가져왔지만 프로필을 바꾼 경우
-		if(admFile != null  && images != null) { // 입소 신청 이미지 내역을 가져왔을 때 
-			
-			// 0번째 요소에 업로드된 파일이 있다면
-			if(images.get(0).getSize() > 0) {
+			// ==========================================
+			// 입소 신청 내역을 가져왔지만 프로필을 바꾼 경우
+			if(admFile != null  && images != null) { // 입소 신청 이미지 내역을 가져왔을 때 
 				
-				dog.setImgPath(null);
-				dog.setImgRename(null);
+				// 0번째 요소에 업로드된 파일이 있다면
+				if(images.get(0).getSize() > 0) {
+					
+					dog.setImgPath(null);
+					dog.setImgRename(null);
+					
+					System.out.println("setImgPath" + dog.getImgPath());
+				}
 				
-				System.out.println("setImgPath" + dog.getImgPath());
 			}
-			
-		}
-		// ==========================================
+			// ==========================================
 		
 		}
 	
@@ -245,7 +232,6 @@ public class AdoptController {
 					System.out.println("admNo 실패");
 				}
 			}
-			
 			
 			message = "게시글 등록이 완료되었습니다.";
 			path += "/adopt/dogList/" + dogNo;
@@ -296,7 +282,6 @@ public class AdoptController {
 		int rowCount = service.dogUpdate(dog, images, deleteList);
 		
 		// 결과에 따라 분기처리
-		
 		String message = null;
 		String path = "redirect:";
 		
@@ -304,7 +289,7 @@ public class AdoptController {
 			
 			message = "게시글이 수정되었습니다";
 			path += "/adopt/dogList/" + dogNo;
-			// 경로 맞는지 확인하기
+			
 		}else {
 			
 			message = "게시글 수정 실패";
@@ -386,6 +371,25 @@ public class AdoptController {
 		
 	}	
 	
+	// 예약 가능한 날짜와 시간 조회
+	@GetMapping("/getReservedTimes")
+    @ResponseBody
+    public ResponseEntity<List<String>> getReservedTimes(
+    		@RequestParam String selectedDate,
+    		HttpSession session) {
+
+		// 세션에서 dog 객체 가져오기
+		Dog dog = (Dog) session.getAttribute("dog");
+	    
+		int dogNo = dog.getDogNo();
+		
+    	// selectedDate에 따른 예약 불가한 시간을 조회하고 리스트로 반환
+        List<String> reservedTimes = service.getReservedTimes(selectedDate, dogNo);
+        System.out.println("reservedTimes::" + reservedTimes);
+        System.out.println("dogNo::" + dogNo);
+        
+        return ResponseEntity.ok(reservedTimes);
+    }
 
 
 }

@@ -53,13 +53,15 @@ public interface AdoptService {
 	// 강아지 예약하기
 	int dogReservation(Reservation reservationData, int dogNo, int memberNo);
 	
+	// 예약 가능한 날짜와 시간 조회
+	List<String> getReservedTimes(String selectedDate, int dogNo);
+
 	// 강아지 입양 시 예약했던 회원번호 조회
 	List<Object> selectReservation(int dogNo);
 
 	// 알림 목록에 insert
 	int insertAlarm(List<Object> memberNoList,int dogNo);
 
-	List<String> getReservedTimes(String selectedDate);
 
 
 

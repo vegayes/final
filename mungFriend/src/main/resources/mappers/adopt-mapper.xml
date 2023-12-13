@@ -175,13 +175,6 @@
 		AND RESERVE_YN = 'Y'
 	</select>
 	
-	<select id="getReservedTimes" resultType ="string">
-		SELECT RESERVE_TIME
-		FROM DOG_RESERVATION
-		WHERE RESERVE_DATE = #{selectedDate}
-		AND RESERVE_YN = 'Y'
-	</select>
-	
 	<!-- 좋아요 처리 -->
 	<!-- 좋아요 테이블 삽입 -->
 	<insert id="insertDogLike">
@@ -380,6 +373,16 @@
 				#{dogNo}, #{memberNo}, #{reservationData.reserveDate}, #{reservationData.reserveTime}, 
 				DEFAULT, DEFAULT, DEFAULT)
 	</insert>
+	
+		
+	<!-- 예약 가능한 날짜와 시간 조회 -->
+	<select id="getReservedTimes" resultType ="string">
+		SELECT RESERVE_TIME
+		FROM DOG_RESERVATION
+		WHERE RESERVE_DATE = #{selectedDate}
+		AND RESERVE_YN = 'Y'
+		AND DOG_NO = #{dogNo}
+	</select>
 	
 
 <!-- ===============================챗봇==============================================  -->

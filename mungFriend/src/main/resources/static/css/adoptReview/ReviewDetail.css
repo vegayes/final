@@ -141,6 +141,7 @@ a {
     border-radius: 10px;
     margin-right: 10px; /* 이미지 간격 조절 */
     margin-left: 10px; /* 이미지 간격 조절 */
+    object-fit: cover;
 }
 
 .boardImage img:last-child {
