@@ -26,77 +26,79 @@
 			
 	        <div>입양리뷰 인증게시판</div> 
 	
-			
-	        <table class="boardList"> 
-	           
-	            <thead>
-	                <tr>
-	                    <td class="boardRectangle"></td>
-	                </tr>
-	                <tr class="boardTitle">
-	                    <th>게시글 번호</th>
-	                    <th>제목</th>
-	                    <th>작성자</th>
-	                    <th>작성일</th>
-	                    <th>조회수</th>
-	                </tr>
-	                <tr>
-	                    <td class="boardRectangle"></td>
-	                </tr>
-	            </thead>
-				
-				
-                    	
-				<tbody>
+	       	<div class = "boardListDiv">
+		        <table class="boardList"> 
+		           
+		            <thead>
+		                <tr>
+		                    <td class="boardRectangle"></td>
+		                </tr>
+		                <tr class="boardTitle">
+		                    <th>게시글 번호</th>
+		                    <th>제목</th>
+		                    <th>작성자</th>
+		                    <th>작성일</th>
+		                    <th>조회수</th>
+		                </tr>
+		                <tr>
+		                    <td class="boardRectangle"></td>
+		                </tr>
+		            </thead>
 
-					<th:block th:if="${#lists.size(reviewList)} == 0">
-						
-						 <tr>
-							<th colspan="6">
-								<br><br><br>
-								게시글이 존재하지 않습니다.
-							</th>
-						 </tr>
-
-					</th:block>
-
-				</tbody>	
 					
-				<th:block th:unless="${#lists.size(reviewList)} == 0">
-
-					<tbody th:each="board : ${reviewList}">
+					
+	                    	
+					<tbody>
+	
+						<th:block th:if="${#lists.size(reviewList)} == 0">
 							
-						<tr class="boardContent"> 
-
-							<td th:text="${board.reviewNo}">게시글 번호</td>
-
-							<td> 
-
-								<a th:href="@{/adoptReview/reviewDetail/{reviewNo}(reviewNo=${board.reviewNo}, cp=${pagination.currentPage} )}" th:text="${board.reviewTitle}">게시글 제목</a> 
+							 <tr>
+								<th colspan="6">
+									<br><br><br>
+									게시글이 존재하지 않습니다.
+								</th>
+							 </tr>
+	
+						</th:block>
+	
+					</tbody>	
+						
+					<th:block th:unless="${#lists.size(reviewList)} == 0">
+	
+						<tbody th:each="board : ${reviewList}">
 								
-								<!-- <a th:if="${param.query}" th:href="@{/adoptReview/reviewDetail/{reviewNo}(reviewNo=${board.reviewNo}, cp=${pagination.currentPage})}" th:text="${board.reviewTitle}">게시글 제목</a>  -->
-
-							</td>
-
-							<td th:text="${board.memberNickname}">작성자</td>
-
-							<td th:text="${board.reviewDate}">작성일</td>
-
-							<td th:text="${board.reviewCount}">조회수</td>
-
-						</tr>
-
-						<tr>
-							<td class="boardRectangle_1"></td>
-						</tr>
-
-					</tbody>
-
-				</th:block>
-
-	           
-	           
-	        </table>
+							<tr class="boardContent"> 
+	
+								<td th:text="${board.reviewNo}">게시글 번호</td>
+	
+								<td> 
+	
+									<a th:href="@{/adoptReview/reviewDetail/{reviewNo}(reviewNo=${board.reviewNo}, cp=${pagination.currentPage} )}" th:text="${board.reviewTitle}">게시글 제목</a> 
+									
+									<!-- <a th:if="${param.query}" th:href="@{/adoptReview/reviewDetail/{reviewNo}(reviewNo=${board.reviewNo}, cp=${pagination.currentPage})}" th:text="${board.reviewTitle}">게시글 제목</a>  -->
+	
+								</td>
+	
+								<td th:text="${board.memberNickname}">작성자</td>
+	
+								<td th:text="${board.reviewDate}">작성일</td>
+	
+								<td th:text="${board.reviewCount}">조회수</td>
+	
+							</tr>
+	
+							<tr>
+								<td class="boardRectangle_1"></td>
+							</tr>
+	
+						</tbody>
+	
+					</th:block>
+	
+		           
+		           
+		        </table>
+		   </div>
 	
 	
 	       
