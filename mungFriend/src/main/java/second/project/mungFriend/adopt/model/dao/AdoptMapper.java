@@ -99,6 +99,9 @@ public interface AdoptMapper {
 			@Param("reservationData") Reservation reservationData, 
 			@Param("dogNo") int dogNo, 
 			@Param("memberNo") int memberNo);
+
+	// 예약 가능한 날짜와 시간 조회
+	public List<String> getReservedTimes(@Param("selectedDate")String selectedDate, @Param("dogNo")int dogNo);
 	
   
 	// 강아지 입양 시 예약 취소
@@ -112,14 +115,11 @@ public interface AdoptMapper {
 	public int insertAlarm(Map<String, Object> parameterMap);
 	
 
-
 //	*****************************챗봇에서 사용*****************************************************************
 	// 검색한 강아지 마리 수 조회
 	public int getSearchDogListCount(String breedName);
 	
 	// 강아지 검색결과 
 	public List<Dog> selectChatbotDogList(RowBounds rowBounds, String breedName);
-
-	public List<String> getReservedTimes(String selectedDate);
 
 }
