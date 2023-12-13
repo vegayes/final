@@ -337,9 +337,10 @@ a:hover{
 	
 	
 	border-radius: 5px;
-	
+	/*
 	background-color: #FEE4D6;
-	
+	*/
+	border:2px solid #FEE4D6 ;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -353,4 +354,5 @@ a:hover{
 
 #onePay{
 	background-color: white;
+	border :none;
 }

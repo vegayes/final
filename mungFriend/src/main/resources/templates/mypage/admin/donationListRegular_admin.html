@@ -22,8 +22,7 @@
 						<!--
                         <img th:src = "@{images/member/logo.png}">
                         -->
-                        <div>
-                            [[${loginMember.memberNickname}]]님의 정기결제 내역
+                        <div id = "donationName">
                         </div>
 
                     </div>
@@ -54,19 +53,18 @@
                         </div>
                     </div>
 
-                    <div class = "regularInfo regularDetail" >
+                    <div class = "regularInfo regularDetail" id = "adminRegularDetail">
                         <div>
                             정기결제 내역
                         </div>
                         
-                        <div class = "tableWrapper"> 
+                        <div class = "tableWrapper" id = "adminWrapper"> 
                             <table class="regularTable">
                                 <thead>
                                     <tr class = "regularTheadTr">
                                         <th>번호</th>
                                         <th>결제 일시 </th>
                                         <th>후원 금액</th>
-                                        <th>상세조회</th>
                                     </tr>
                                 </thead>
                                 
@@ -76,8 +74,8 @@
                                 <tfoot class = "regularFoot">
                                     <tr>
                                         <td></td>
-                                        <td>후원 총 금액 :</td>
-                                        <td id = "sumAmount"></td>
+                                        <td id = "sumAdminAmount"></td>
+                                        <td></td>
                                         <td></td>
                                     </tr>
                                 </tfoot>

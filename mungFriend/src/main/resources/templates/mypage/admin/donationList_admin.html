@@ -68,7 +68,6 @@
 	                            </thead>
 	        
 	                            <tbody>
-	                                
 	                                <tr class = "donationTBodyTr" th:each="donation, donationState:${donationList}">
 	                                    <td>[[${donationState.count}]]</td>
 										<td>[[${donation.memberYN}]]</td>
@@ -76,11 +75,12 @@
 	                                    <td>[[${donation.memberEmail}]]</td>
 	                                    <td>[[${donation.paidAt}]]</td>
 	                                    <td>[[${donation.donationAmount}]]원</td>
+
 	                                    <th:block th:if = "${donation.donationType} == '일시'">											
 		                                    <td><div class = "donationInfoCheck" id = "onePay">일시</div></td>
 										</th:block>
 	                                    <th:block th:if = "${donation.donationType} == '정기'">											
-		                                    <td><div class = "donationInfoCheck" th:onclick="regularInfo([[${donation.billingKey}]],[[${donation.merchantUid}]], [[${session.loginMember.memberNo}]])">정기</div></td>
+		                                    <td><div class = "donationInfoCheck" th:onclick="adminRegular([[${donation.donationInfoNo}]])">정기</div></td>
 										</th:block>
 	                                </tr> 	 
 	                                              	      
@@ -171,6 +171,7 @@
             </section>
         </main>
         
+       <th:block th:replace="~{mypage/admin/donationListRegular_admin}"></th:block>
        
 		<th:block th:replace="~{common/chatbot}"></th:block>
         <img th:src="@{/images/chat.png}" class="fixed-image" id="chat-image">
@@ -222,6 +223,6 @@
 		</script> -->
 
 		
-
+		<script th:src="@{/js/mypage/admin/donationList_admin.js}"></script>
     </body>
 </html>
