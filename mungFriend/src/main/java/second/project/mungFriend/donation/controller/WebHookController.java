@@ -57,7 +57,7 @@ public class WebHookController {
 	    
 		// parts 배열의 첫 번째 값이 "donation"이 아니거나, 배열의 길이가 5이고 5번째 값이 "1"인 경우
 		if (!parts[0].equals("donation") || (parts.length == 5 && parts[4].equals("1"))) {
-		     System.out.println("첫 번째 값이 donation이 아니거나, 5번째 값이 1입니다.");
+//		     System.out.println("첫 번째 값이 donation이 아니거나, 5번째 값이 1입니다.");
 		     
 		     return " 끝 ";
 		 } else {
@@ -68,7 +68,7 @@ public class WebHookController {
 					
 				    String memberNoString = parts[3]; // 문자열로 저장
 				    memberNo = Integer.parseInt(memberNoString); // String을 int로 변환
-				    System.out.println("웹훅 멤버 넘버 : " + memberNo);
+//				    System.out.println("웹훅 멤버 넘버 : " + memberNo);
 				 }
 			 
 				 // 2) amount int로 바꾸기
@@ -78,17 +78,17 @@ public class WebHookController {
 				Date date = resp.getResponse().getPaidAt();
 				if (date != null) {
 					
-					System.out.println("웹훅 : date  + " + date);
+//					System.out.println("웹훅 : date  + " + date);
 				    Instant instant = date.toInstant(); // Date를 Instant로 변환
 				    OffsetDateTime paidAt = OffsetDateTime.ofInstant(instant, ZoneId.systemDefault()); // Instant를 OffsetDateTime으로 변환
 		
 				    // 원하는 형식으로 변환
 				    String formattedPaidAt = paidAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-				    System.out.println("웹훅 변환된 paidAt: " + formattedPaidAt);
+//				    System.out.println("웹훅 변환된 paidAt: " + formattedPaidAt);
 		
 				    // OffsetDateTime을 java.util.Date로 변환
 				    Date convertedDate = Date.from(paidAt.toInstant());
-				    System.out.println("변환된 paidAt: " + convertedDate);
+//				    System.out.println("변환된 paidAt: " + convertedDate);
 				    donation.setDonationDate(convertedDate);
 				}
 	
@@ -97,10 +97,10 @@ public class WebHookController {
 	        
 	        
 				if(resp.getResponse().getStatus().equals("paid")) {
-					System.out.println("성공");
+//					System.out.println("성공");
 					donation.setStatus("Y");
 				}else {
-					System.out.println("실패 혹은 중단");
+//					System.out.println("실패 혹은 중단");
 					donation.setStatus("N");
 				}
 				 
@@ -119,12 +119,12 @@ public class WebHookController {
 		 	}
 		
 		
-			System.out.println("웹훅 최종 Doatnion :" + donation );
+//			System.out.println("웹훅 최종 Doatnion :" + donation );
 			
 			int result = service.donationPay(donation);
 			
 			if(result > 0) {
-				System.out.println("웹훅 결제 성공 인서트하고 이제 y 보낼거임. ");
+//				System.out.println("웹훅 결제 성공 인서트하고 이제 y 보낼거임. ");
 				return "y";
 			}else {
 				
