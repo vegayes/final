@@ -200,9 +200,7 @@ function regularOnePay(paymentData, donationContent, donationType){
     })
         .then(resp => resp.json())
         .then(function(onePay) {
-            alert("정기 결제 첫 회 성공")
-            console.log("정기결제 1회 ");
-            console.log(onePay);
+            // alert("정기 결제 첫 회 성공");
 
             var donation = {
 							

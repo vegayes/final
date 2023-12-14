@@ -7,6 +7,27 @@
 
         <link rel="stylesheet" th:href="@{/css/donation/donationInfo.css}">
         <script th:src="@{https://kit.fontawesome.com/ac58eafae7.js}" crossorigin="anonymous"></script>
+       <style>
+	        #load {
+	            width: 100%;
+	            height: 100%;
+	            top: 0;
+	            left: 0;
+	            position: fixed;
+	            display: none;
+	            justify-content: center;
+	            align-items: center;
+	            background: rgba(255, 255, 255, 0.26);
+	            z-index: 200;
+	        }
+	
+	        #load img {
+	            /*max-width: 200px;*/
+	            max-height: 350px;
+	            transform: scaleX(-1);
+	        }
+	    </style>
+   
     </head>
     <body>
 
@@ -101,7 +122,16 @@
 
                 </div>
             </div>
-        </div>    
+        </div>
+        
+		<div id="load">
+			<!--
+		    <img th:src="@{/images/donation/loadDog.png}" alt="loading">
+		    
+		    <img th:src="@{/images/donation/running_dog.gif}" alt="loading">
+		    -->
+		    <img th:src="@{/images/donation/dogCat2.gif}" alt="loading">
+		</div>    
       
         <script th:src ="@{/js/donation/cardInfoModal.js}"></script>
 

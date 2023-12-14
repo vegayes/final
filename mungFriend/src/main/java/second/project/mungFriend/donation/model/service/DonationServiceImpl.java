@@ -24,7 +24,7 @@ public class DonationServiceImpl implements DonationService {
 	@Transactional(rollbackFor = Exception.class)
 	public int donationPay(Donation donation) {
 		
-		System.out.println("service Donation : " + donation);
+//		System.out.println("service Donation : " + donation);
 		
 		if(donation.getMemberNo() != 0) {  // 회원인 경우
 			return mapper.donationMemberPay(donation);
@@ -40,14 +40,14 @@ public class DonationServiceImpl implements DonationService {
 	public List<Donation> selectRegularList(String extractedValue) {
 		
 		List<Donation> regularList = mapper.selectRegularList(extractedValue);
-		System.out.println("regularList" + regularList);
+//		System.out.println("regularList" + regularList);
 		for(Donation regular : regularList) {
-			System.out.println("후원 내 : " + regular);
+//			System.out.println("후원 내 : " + regular);
 			Date date = regular.getDonationDate();
 			
 			SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		    String paidAt = fm.format(date);
-			System.out.println("후원 내 값  date 값 : " + paidAt );
+//			System.out.println("후원 내 값  date 값 : " + paidAt );
 			regular.setPaidAt(paidAt);
 			
 		}

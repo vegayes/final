@@ -103,7 +103,19 @@ function paymentInfoCheck(){
 	}else if(donationType.value === '정기'){
 
 		var cardInfo; 
-
+		
+	    // 로딩창 표시 함수
+	    function showLoading() {
+	        var loadingElement = document.getElementById("load");
+	        loadingElement.style.display = "flex";
+	    }
+	
+	    // 로딩창 숨김 함수
+/*	    function hideLoading() {
+	        var loadingElement = document.getElementById("load");
+	        loadingElement.style.display = "none";
+	    }
+*/
 		// 1) 모달창 열기
 		openCardInfo(paymentData.amount); 
 
@@ -111,6 +123,7 @@ function paymentInfoCheck(){
 		var regularBtn = document.getElementById("regularBtn");
  
 		regularBtn.addEventListener("click", function() {
+			showLoading();
 			cardInfo = regularCardInfoCheck();
 
 			if(cardInfo  !== undefined){

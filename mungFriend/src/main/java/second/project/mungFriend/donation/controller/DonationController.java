@@ -34,12 +34,6 @@ public class DonationController {
 	public String donationPay(@RequestBody Donation donation,
 			@SessionAttribute(value ="loginMember", required = false) Member loginMember) throws Exception{
 		
-		System.out.println("결제 성공");
-		
-		System.out.println("donation : " + donation);
-		System.out.println("donation Type : " + donation.getDonationType() );
-		System.out.println("billingKey : " + donation.getBillingKey() );
-		
         String paidAtString = donation.getPaidAt(); // donation 객체에서 paidAt 값 가져오기
 
         // 주어진 문자열을 OffsetDateTime으로 파싱
@@ -117,9 +111,6 @@ public class DonationController {
 	@GetMapping("/memberInfo")
 	@ResponseBody
 	public Donation selectMemberInfo(@RequestParam int donationNo) throws Exception{
-		
-		System.out.println("정보 분석");
-		System.out.println("donationNo :" + donationNo);
 		
 		//1) 후원 정보 분석
 		Donation memberInfo = service.selectMemberInfo(donationNo);
