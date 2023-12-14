@@ -24,4 +24,8 @@ public class Member {
 	private String adminYn;
 	private String memberDelYn;
 	
+	// 로그인 API VO 변수
+	private String apiId;
+	private String apiGubun;
+	
 }

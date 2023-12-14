@@ -41,7 +41,8 @@
 		, #{memberNickname}
 		, #{memberAddress}
 		, #{memberProfile}
-		, DEFAULT, DEFAULT, DEFAULT, NULL, NULL)
+		, DEFAULT, DEFAULT, DEFAULT 
+		, #{apiId}, #{apiGubun})
 	</insert>
 	
 	<!-- 아이디찾기 -->
@@ -67,15 +68,9 @@
 		TO_CHAR(MEMBER_ENROLL_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') AS MEMBER_ENROLL_DATE, ADMIN_YN, MEMBER_DEL_YN
 		FROM "MEMBER"
 		WHERE MEMBER_DEL_YN = 'N'
-		AND API_AUTH_ID = #{naverId}
+		AND API_AUTH_ID = #{apiId}
 		AND PLATFORM_CODE = 'N'
 	</select>
-	
-	<insert id="loginNaverInsert">
-		INSERT INTO MEMBER 
-		VALUES(SEQ_MEMBER_NO.NEXTVAL, #{naverEmail}, #{naverPw}, #{naverEmail}, #{naverName}, #{mobile}, #{naverNickName}, 
-			NULL, NULL, DEFAULT, 'Y', DEFAULT, #{naverId},'N')
-	</insert>	
 	
 	<!-- 카카오 회원정보로 로그인 정보 찾기 -->
 	<select id="loginKakao" resultMap="member_rm">
@@ -83,15 +78,9 @@
 		TO_CHAR(MEMBER_ENROLL_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') AS MEMBER_ENROLL_DATE, ADMIN_YN, MEMBER_DEL_YN
 		FROM "MEMBER"
 		WHERE MEMBER_DEL_YN = 'N'
-		AND API_AUTH_ID = #{kakaoId}
+		AND API_AUTH_ID = #{apiId}
 		AND PLATFORM_CODE = 'K'
 	</select>
-	
-	<insert id="loginKakaoInsert">
-		INSERT INTO MEMBER 
-		VALUES(SEQ_MEMBER_NO.NEXTVAL, #{kakaoEmail}, #{kakaoPw}, #{kakaoEmail}, #{kakaoName}, #{kakaoMobile}, #{kakaoNickName}, 
-			NULL, NULL, DEFAULT, 'Y', DEFAULT, #{kakaoId},'K')
-	</insert>
 	
 	<!-- 구글 회원정보로 로그인 정보 찾기 -->
 	<select id="loginGoogle" resultMap="member_rm">
@@ -99,14 +88,8 @@
 		TO_CHAR(MEMBER_ENROLL_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') AS MEMBER_ENROLL_DATE, ADMIN_YN, MEMBER_DEL_YN
 		FROM "MEMBER"
 		WHERE MEMBER_DEL_YN = 'N'
-		AND API_AUTH_ID = #{googleId}
+		AND API_AUTH_ID = #{apiId}
 		AND PLATFORM_CODE = 'G'
 	</select>
-	
-	<insert id="loginGoogleInsert">
-		INSERT INTO MEMBER 
-		VALUES(SEQ_MEMBER_NO.NEXTVAL, #{googleEmail}, #{googlePw}, #{googleEmail}, #{googleName}, #{googleMobile}, #{googleNickName}, 
-			NULL, NULL, DEFAULT, 'Y', DEFAULT, #{googleId},'G')
-	</insert>
 	
 </mapper>
