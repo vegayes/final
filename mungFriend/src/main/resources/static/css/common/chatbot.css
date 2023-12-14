@@ -2,7 +2,7 @@
   
     padding: 1.5em 1.5em;
     background-color: #fff;
-    border: 1px solid #e5e5e5;
+    border: none;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
@@ -54,7 +54,7 @@ button {
     margin-left: 20px;
     height: 30px;
     text-indent: 1em;
-    border: 1px solid black;
+    border: 1px solid gray;
     border-radius: 5px;
 }
 
@@ -90,14 +90,14 @@ button {
     width: 50px;
     height: 30px;
     background-color: #FFF0E8;
-    border: 1px solid black;
+    border: none;
     border-radius: 5px;
     margin-left: 10px;
 }
 
 .selectButton {
 
-    border: 1px solid black;
+    border: none;
     width: auto;
     height: 30px;
     background-color: #FFF0E8;
@@ -146,7 +146,7 @@ button {
     height: 30px;
     border-radius: 5px;
     background-color: #FFF0E8;
-    border: 1px solid black;
+    border: none;
 }
 
 
@@ -155,6 +155,7 @@ button {
 .form-group {
     display: flex;
     align-items: center;
+    font-size: 15px;
 }
 
 

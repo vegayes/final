@@ -433,7 +433,14 @@ public class AdoptServiceImpl implements AdoptService{
 
 		return mapper.dogReservation(reservationData, dogNo, memberNo);
 	}
-
+	
+	// 예약 가능한 날짜와 시간 조회
+	@Override
+	public List<String> getReservedTimes(String selectedDate, int dogNo) {
+		
+		return mapper.getReservedTimes(selectedDate, dogNo);
+	}
+	
 	
 	// 강아지 입양 시 예약했던 회원번호 조회
 	@Override
@@ -468,14 +475,5 @@ public class AdoptServiceImpl implements AdoptService{
 		return insertResult;
 	}
 
-	@Override
-	public List<String> getReservedTimes(String selectedDate) {
-		
-		return mapper.getReservedTimes(selectedDate);
-	}
-
-
-
-	
 
 }
