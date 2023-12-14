@@ -61,75 +61,75 @@ public class WebHookController {
 		     
 		     return " 끝 ";
 		 } else {
+				 
+			    //1) 회원 번호 저장
+				int memberNo = 0;
+				if(parts.length == 5) {
+					
+				    String memberNoString = parts[3]; // 문자열로 저장
+				    memberNo = Integer.parseInt(memberNoString); // String을 int로 변환
+				    System.out.println("웹훅 멤버 넘버 : " + memberNo);
+				 }
 			 
-	    //1) 회원 번호 저장
-		int memberNo = 0;
-		if(parts.length == 5) {
+				 // 2) amount int로 바꾸기
+				BigDecimal amount = resp.getResponse().getAmount();
+				int amountAsInt = amount.intValue(); // BigDecimal을 int로 변환
+				 
+				Date date = resp.getResponse().getPaidAt();
+				if (date != null) {
+					
+					System.out.println("웹훅 : date  + " + date);
+				    Instant instant = date.toInstant(); // Date를 Instant로 변환
+				    OffsetDateTime paidAt = OffsetDateTime.ofInstant(instant, ZoneId.systemDefault()); // Instant를 OffsetDateTime으로 변환
+		
+				    // 원하는 형식으로 변환
+				    String formattedPaidAt = paidAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+				    System.out.println("웹훅 변환된 paidAt: " + formattedPaidAt);
+		
+				    // OffsetDateTime을 java.util.Date로 변환
+				    Date convertedDate = Date.from(paidAt.toInstant());
+				    System.out.println("변환된 paidAt: " + convertedDate);
+				    donation.setDonationDate(convertedDate);
+				}
+	
+	
+	        
+	        
+	        
+				if(resp.getResponse().getStatus().equals("paid")) {
+					System.out.println("성공");
+					donation.setStatus("Y");
+				}else {
+					System.out.println("실패 혹은 중단");
+					donation.setStatus("N");
+				}
+				 
+				 donation.setMemberNo(memberNo);
+				 donation.setImpUid(resp.getResponse().getImpUid());
+				 donation.setMerchantUid(resp.getResponse().getMerchantUid());
+				 donation.setDonationAmount(amountAsInt);
+				 donation.setCardName(resp.getResponse().getCardName());
+				 donation.setApplyNum(resp.getResponse().getApplyNum());
+				 donation.setDonationType("R"); // 일단 무조건 정기임.
+				 donation.setBillingKey(resp.getResponse().getCustomerUid());
+				 donation.setReceiptUrl(resp.getResponse().getReceiptUrl());
+				 donation.setDonationContent( parts[4]+ " 번째" +" 정기결제" );
+				 
+				 
+		 	}
+		
+		
+			System.out.println("웹훅 최종 Doatnion :" + donation );
 			
-		    String memberNoString = parts[3]; // 문자열로 저장
-		    memberNo = Integer.parseInt(memberNoString); // String을 int로 변환
-		    System.out.println("웹훅 멤버 넘버 : " + memberNo);
-		 }
-		 
-		 // 2) amount int로 바꾸기
-		BigDecimal amount = resp.getResponse().getAmount();
-		int amountAsInt = amount.intValue(); // BigDecimal을 int로 변환
-		 
-		Date date = resp.getResponse().getPaidAt();
-		if (date != null) {
+			int result = service.donationPay(donation);
 			
-			System.out.println("웹훅 : date  + " + date);
-		    Instant instant = date.toInstant(); // Date를 Instant로 변환
-		    OffsetDateTime paidAt = OffsetDateTime.ofInstant(instant, ZoneId.systemDefault()); // Instant를 OffsetDateTime으로 변환
-
-		    // 원하는 형식으로 변환
-		    String formattedPaidAt = paidAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-		    System.out.println("웹훅 변환된 paidAt: " + formattedPaidAt);
-
-		    // OffsetDateTime을 java.util.Date로 변환
-		    Date convertedDate = Date.from(paidAt.toInstant());
-		    System.out.println("변환된 paidAt: " + convertedDate);
-		    donation.setDonationDate(convertedDate);
-		}
-
-
-        
-        
-        
-		if(resp.getResponse().getStatus().equals("paid")) {
-			System.out.println("성공");
-			donation.setStatus("Y");
-		}else {
-			System.out.println("실패 혹은 중단");
-			donation.setStatus("N");
-		}
-		 
-		 donation.setMemberNo(memberNo);
-		 donation.setImpUid(resp.getResponse().getImpUid());
-		 donation.setMerchantUid(resp.getResponse().getMerchantUid());
-		 donation.setDonationAmount(amountAsInt);
-		 donation.setCardName(resp.getResponse().getCardName());
-		 donation.setApplyNum(resp.getResponse().getApplyNum());
-		 donation.setDonationType("R"); // 일단 무조건 정기임.
-		 donation.setBillingKey(resp.getResponse().getCustomerUid());
-		 donation.setReceiptUrl(resp.getResponse().getReceiptUrl());
-		 donation.setDonationContent( parts[4]+ " 번째" +" 정기결제" );
-			 
-			 
-		 }
-		
-		
-		System.out.println("웹훅 최종 Doatnion :" + donation );
-		
-		int result = service.donationPay(donation);
-		
-		if(result > 0) {
-			System.out.println("웹훅 결제 성공 인서트하고 이제 y 보낼거임. ");
-			return "y";
-		}else {
-			
-			return "n";
-		}
+			if(result > 0) {
+				System.out.println("웹훅 결제 성공 인서트하고 이제 y 보낼거임. ");
+				return "y";
+			}else {
+				
+				return "n";
+			}
 
 	}
 }
