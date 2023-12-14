@@ -117,6 +117,7 @@ function hideCalendar() {
 
 }
 
+// 예약 완료 후 예약완료로 보이기
 function reserveDone() {
     // 예약완료 보이기
     const reserveDone = document.getElementById('reserveDone');
@@ -153,13 +154,10 @@ function reserveDone() {
 }
 
 
-
+// 예약 불가한 시간 체크하기
 function updateAvailableTimes(selectedDate) {
 
     const timeContainer = document.getElementById('time-container');
-
-    // 기존 버튼 모두 제거
-    // timeContainer.innerHTML = '';
 
     // 현재 날짜를 가져오는 함수
     function getCurrentDate() {
@@ -180,7 +178,7 @@ function updateAvailableTimes(selectedDate) {
     console.log("currentDate:", currentDate);
 
     // 예약 불가한 시간을 서버에서 가져오는 함수
-    async function fetchReservedTimes(selectedDate) {
+    async function fetchReservedTimes(selectedDate, dogNo) {
         try {
             const response = await fetch(`/adopt/getReservedTimes?selectedDate=${selectedDate}`);
             const data = await response.json();
@@ -208,6 +206,7 @@ function updateAvailableTimes(selectedDate) {
             buttons.forEach(function(button) {
                 const timeValue = button.value;
                 console.log('timeValue::', timeValue);
+
                 // timeValue가 reservedTimes 배열에 있으면 
                 // isReserved는 true가 되고, 그렇지 않으면 false
                 const isReserved = reservedTimes.includes(timeValue);
@@ -218,18 +217,21 @@ function updateAvailableTimes(selectedDate) {
                     button.style.border = 'none'
                 } else {
                     button.disabled = false;
-                    button.addEventListener('click', handleTimeButtonClick);
                 }
+                button.addEventListener('click', handleTimeButtonClick);
             });
         }
+        
         
     }
 }
 
+// 다른 시간 선택할 때
 function handleTimeButtonClick(event) {
 
     // 이전에 선택된 버튼이 있으면 원래 색상으로 되돌리기
     const previouslySelectedButton = document.querySelector('.selected-time-button');
+
     if (previouslySelectedButton) {
         previouslySelectedButton.style.backgroundColor = 'white'; // 이전 색상으로 변경
         previouslySelectedButton.style.border = '1px solid black'; 
