@@ -56,16 +56,12 @@ public class ScheduleDonation {
  	@ResponseBody
 	public IamportResponse<List<Schedule>> subscribeSchedule(@PathVariable String customerUid ,
 															@RequestBody List<RegularCardInfo> Schedule/*ScheduleData scheduleData*/) throws IamportResponseException, IOException {
-
-		System.out.println("Schedule 스케쥴 : " + Schedule);
-		System.out.println("customerUid 스케쥴 : " + customerUid);
 		
 		ScheduleData scheduleData = new ScheduleData(customerUid);
 		
 		for(RegularCardInfo oneSchedule : Schedule) {
 			
 			//System.out.println("나 들어옴");
-			System.out.println(oneSchedule);
 			//System.out.println("unix 시간 : " + oneSchedule.getSchedule_at());
 			
 			
@@ -75,7 +71,7 @@ public class ScheduleDonation {
 			Date date = new Date(oneSchedule.getSchedule_at()*1000L);
 
 			// SimpleDateFormat을 사용하여 날짜와 시간 형식 지정하기
-			System.out.println("Date 객체로 변환된 날짜: " + date);
+//			System.out.println("Date 객체로 변환된 날짜: " + date);
 			
 //			Date schedule_at = new Date(oneSchedule.getSchedule_at());
 			
