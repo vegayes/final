@@ -20,20 +20,18 @@ function showCalendar() {
     const dateInfo = document.getElementById('dateInfo');
     dateInfo.style.marginRight = '5px';
     
-    // dateInput의 값이 변경될 때마다 이벤트 리스너 등록
-    const dateInput = document.getElementById('dateInput');
-    const timeContainer = document.getElementById('time-container');
-
     // x버튼 스타일 적용
     const cancelBtn = document.getElementById('cancelBtn');
     cancelBtn.style.border = 'none';
     cancelBtn.style.backgroundColor = 'white';    
+    
+    // dateInput의 값이 변경될 때마다 이벤트 리스너 등록
+    const dateInput = document.getElementById('dateInput');
+    const timeContainer = document.getElementById('time-container');
 
-    // 스타일 추가
     dateInput.style.width = '150px';
     dateInput.style.height = '25px';
     dateInput.style.marginRight = '7px';
-
 
     dateInput.addEventListener('input', function () {
         // 현재 날짜를 가져오는 함수
@@ -88,33 +86,6 @@ function showCalendar() {
 
     // 예약하기 버튼의 기존 스타일 클래스를 제거
     registButton.classList.remove('your-existing-style-class');
-}
-
-function hideCalendar() {
-
-    // 예약하기 버튼 보이기
-    const registButton = document.getElementById('regist');
-    registButton.style.display = 'flex'; // display를 flex로 변경
-
-    // 달력 감추기
-    const calendarContainer = document.getElementById('calendar-container');
-    calendarContainer.style.display = 'none';
-
-    // #calendedr-img 클래스 제거
-    const calendedrImg = document.getElementById('calendedr-img');
-    calendedrImg.classList.remove('calendedr-img');
-
-    // 예약하기 버튼에 기존 스타일 클래스를 다시 추가
-    registButton.classList.add('your-existing-style-class');
-
-    // 달력을 감춤과 동시에 시간을 감춤
-    const timeContainer = document.getElementById('time-container');
-    timeContainer.style.display = 'none';
-
-    // 예약하기 버튼 감춤
-    const reserveBtn = document.getElementById("reserveBtn");
-    reserveBtn.style.display = 'none';
-
 }
 
 // 예약 완료 후 예약완료로 보이기
@@ -178,7 +149,7 @@ function updateAvailableTimes(selectedDate) {
     console.log("currentDate:", currentDate);
 
     // 예약 불가한 시간을 서버에서 가져오는 함수
-    async function fetchReservedTimes(selectedDate, dogNo) {
+    async function fetchReservedTimes(selectedDate) {
         try {
             const response = await fetch(`/adopt/getReservedTimes?selectedDate=${selectedDate}`);
             const data = await response.json();
@@ -189,10 +160,18 @@ function updateAvailableTimes(selectedDate) {
         }
     }
 
+    // 기존에 시간 버튼들 원래 스타일으로 되돌리기
+    const buttons = document.querySelectorAll("#time-container button");
+
+    buttons.forEach(function(button) {
+            button.disabled = true;
+            button.style.backgroundColor = 'white';
+            button.style.border = '1px solid black'; 
+            button.classList.remove('selected-time-button');
+    });
+
     // 날짜가 현재 날짜보다 뒤의 날짜이면 시간 버튼을 추가
     if (selectedDate >= currentDate) {
-
-        updateReservedTimes(selectedDate);
 
         async function updateReservedTimes(selectedDate) {
             const reservedTimes = await fetchReservedTimes(selectedDate);        
@@ -213,6 +192,7 @@ function updateAvailableTimes(selectedDate) {
         
                 if (isReserved) {
                     button.disabled = true;
+                    button.style.cursor = "default";
                     button.style.backgroundColor = 'gray'
                     button.style.border = 'none'
                 } else {
@@ -221,10 +201,10 @@ function updateAvailableTimes(selectedDate) {
                 button.addEventListener('click', handleTimeButtonClick);
             });
         }
-        
-        
+        updateReservedTimes(selectedDate);
     }
 }
+
 
 // 다른 시간 선택할 때
 function handleTimeButtonClick(event) {
@@ -252,8 +232,6 @@ function handleTimeButtonClick(event) {
 }
 
 
-
-
 // 선택된 날짜, 시간 java로 보내기
 function submitReservation() {
     // 선택된 날짜와 시간을 가져오기
@@ -270,40 +248,64 @@ function submitReservation() {
     // 선택된 날짜와 시간을 서버로 전송
     sendReservationData(selectedDate, selectedTime);
 
-    // // 예약하기 버튼 감추기
-    // const reserveBtn = document.getElementById('reserveBtn');
-    // reserveBtn.style.display = 'none';
-}
+    function sendReservationData(selectedDate, selectedTime) {
 
-
-function sendReservationData(selectedDate, selectedTime) {
-
-    const reservationData = {
-        date: selectedDate,
-        time: selectedTime
-    };
-
-    fetch('/adopt/dogReservation', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(reservationData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        
-        const result = data.result;
-
-        if(result > 0){
-            alert("예약이 완료되었습니다.");
-            reserveDone();
-        }else{
-            alert("예약을 실패하였습니다. 다시 시도해주세요.");
-        }
-        
-    })
-    .catch(error => {
-        console.error('Error during reservation:', error);
-    });
+        const reservationData = {
+            date: selectedDate,
+            time: selectedTime
+        };
     
-
+        fetch('/adopt/dogReservation', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(reservationData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            
+            const result = data.result;
+    
+            if(result > 0){
+                alert("예약이 완료되었습니다.");
+                reserveDone();
+            }else{
+                alert("예약을 실패하였습니다. 다시 시도해주세요.");
+            }
+            
+        })
+        .catch(error => {
+            console.error('Error during reservation:', error);
+        });
+        
+    
+    }
 }
+
+
+
+// function hideCalendar() {
+
+//     // 예약하기 버튼 보이기
+//     const registButton = document.getElementById('regist');
+//     registButton.style.display = 'flex'; // display를 flex로 변경
+
+//     // 달력 감추기
+//     const calendarContainer = document.getElementById('calendar-container');
+//     calendarContainer.style.display = 'none';
+
+//     // #calendedr-img 클래스 제거
+//     const calendedrImg = document.getElementById('calendedr-img');
+//     calendedrImg.classList.remove('calendedr-img');
+
+//     // 예약하기 버튼에 기존 스타일 클래스를 다시 추가
+//     registButton.classList.add('your-existing-style-class');
+
+//     // 달력을 감춤과 동시에 시간을 감춤
+//     const timeContainer = document.getElementById('time-container');
+//     timeContainer.style.display = 'none';
+
+//     // 예약하기 버튼 감춤
+//     const reserveBtn = document.getElementById("reserveBtn");
+//     reserveBtn.style.display = 'none';
+
+// }
