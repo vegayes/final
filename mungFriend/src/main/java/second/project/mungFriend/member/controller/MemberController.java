@@ -223,12 +223,12 @@ public class MemberController {
 		
 		if(result > 0) { // 비밀번호 변경 성공
 			
-			path = "/member/login";
+			path += "/member/login";
 			message = "비밀번호 변경 성공";
 			
 		} else { // 비밀번호 변경 실패
 			
-			path = "/member/findPw2";
+			path += "/member/findPw2";
 			message = "비밀번호 변경 실패";
 			
 		}
