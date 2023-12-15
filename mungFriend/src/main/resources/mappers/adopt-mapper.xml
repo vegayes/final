@@ -379,7 +379,7 @@
 	<select id="getReservedTimes" resultType ="string">
 		SELECT RESERVE_TIME
 		FROM DOG_RESERVATION
-		WHERE RESERVE_DATE = #{selectedDate}
+		WHERE RESERVE_DATE = TO_DATE(#{selectedDate},'YYYY-MM-DD')
 		AND RESERVE_YN = 'Y'
 		AND DOG_NO = #{dogNo}
 	</select>

@@ -37,7 +37,7 @@ public class ListUserServiceImpl implements ListUserService {
 	}*/
 	@Override
 	public Map<String, Object> userDonationList(int memberNo, int cp) {
-		System.out.println("들어가기전");
+//		System.out.println("들어가기전");
 		
 		int listCount = mapperDonation.countUserDonation(memberNo);
 		
@@ -50,7 +50,7 @@ public class ListUserServiceImpl implements ListUserService {
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		
 		List<Donation> donationList = mapperDonation.userDonationList(memberNo, rowBounds);
-		System.out.println("donationList" + donationList);
+//		System.out.println("donationList" + donationList);
 		for(Donation donation : donationList) {
 			//System.out.println("후원 내 : " + donation);
 			Date date = donation.getDonationDate();
@@ -71,7 +71,7 @@ public class ListUserServiceImpl implements ListUserService {
 		        SimpleDateFormat lastDayFormatter = new SimpleDateFormat("yyyy-MM-dd");
 		        String paidAtRegular = lastDayFormatter.format(cal.getTime());
 		        String paidAtStart = lastDayFormatter.format(date);
-		        System.out.println("정기 기간  : " + paidAtStart + " ~ " + paidAtRegular);
+//		        System.out.println("정기 기간  : " + paidAtStart + " ~ " + paidAtRegular);
 		        donation.setPaidAt(paidAtStart + " ~ " + paidAtRegular); // 같은 날짜 두 번 출력
 			}
 			
