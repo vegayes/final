@@ -8,6 +8,7 @@ import second.project.mungFriend.common.dto.Alarm;
 import second.project.mungFriend.member.model.dto.Member;
 import second.project.mungFriend.member.model.dto.MemberGoogle;
 import second.project.mungFriend.member.model.dto.MemberKakao;
+import second.project.mungFriend.member.model.dto.MemberLoginApi;
 import second.project.mungFriend.member.model.dto.MemberNaver;
 
 public interface MemberService {
@@ -47,13 +48,13 @@ public interface MemberService {
 	 * @param token(String)
 	 * @return MemberNaver(VO)
 	 */
-	MemberNaver getNaverInfo(String code) throws Exception;
+	MemberLoginApi getNaverInfo(String code) throws Exception;
 	
 	/** 네이버 로그인 후 가져온 회원정보로 없으면 인서트 있으면 셀렉트  
 	 * @param Member(id, email,nickname,name)
 	 * @return Member(VO)
 	 */
-	Member loginNaver(MemberNaver naverInfo);
+	Member loginNaver(MemberLoginApi memberLoginApi);
 	
 	/** 카카오톡 로그인
 	 * @param N/A
@@ -65,13 +66,13 @@ public interface MemberService {
 	 * @param token(String)
 	 * @return MemberNaver(VO)
 	 */
-	MemberKakao getKakaoInfo(String code) throws Exception;
+	MemberLoginApi getKakaoInfo(String code) throws Exception;
 
 	/** 카카오 로그인 후 가져온 회원정보로 없으면 인서트 있으면 셀렉트  
 	 * @param Member(id, email,nickname,name)
 	 * @return Member(VO)
 	 */
-	Member loginKakao(MemberKakao kakaoInfo);
+	Member loginKakao(MemberLoginApi memberLoginApi);
 	
 	/** 구글 로그인
 	 * @param N/A
@@ -83,13 +84,13 @@ public interface MemberService {
 	 * @param code(String)
 	 * @return MemberKakao(VO)
 	 */
-	MemberGoogle getGoogleInfo(String code) throws Exception;
+	MemberLoginApi getGoogleInfo(String code) throws Exception;
 
 	/** 구글 로그인 후 가져온 회원정보로 없으면 인서트 있으면 셀렉트  
 	 * @param code(String)
 	 * @return MemberGoogle(VO)
 	 */
-	Member loginGoogle(MemberGoogle googleInfo);
+	Member loginGoogle(MemberLoginApi memberLoginApi);
 
 	//알림 목록 조회
 	List<Alarm> selectAlarm(int memberNo);

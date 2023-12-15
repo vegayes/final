@@ -99,8 +99,8 @@
     <script th:src="@{/js/member/login.js}"></script>
     
     <script th:inline="javascript">
-		const message = /*[[${message}]]*/ "전달 받은 메세지";
-		if(message != null) alert(message);
+		const loginMessage = /*[[${loginMessage}]]*/ "전달 받은 메세지";
+		if(loginMessage != null) alert(loginMessage);
 	</script>
 </body>
 </html>
