@@ -56,7 +56,7 @@ public class AdminInquiryController {
 		public String completeAnswer(int inquiryNo, @RequestParam String adminReply, RedirectAttributes redirectAttributes, Model model) {
 		    int result = adminInquiryService.completeAnswer(inquiryNo, adminReply);
 		    
-		    System.out.println(result);
+		    //System.out.println(result);
 		    
 		    String path = null;
 		    
