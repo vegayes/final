@@ -33,7 +33,7 @@ public class UserInquiryController {
 	   // inquiryList 조회하기
 	   List<Inquiry> inquiryList = service.inquiryList(loginMember.getMemberNo());
 		
-	   System.out.println("1:1  = " + inquiryList);
+//	   System.out.println("1:1  = " + inquiryList);
 	   
 	   model.addAttribute("inquiryList", inquiryList);
 	   
@@ -58,7 +58,7 @@ public class UserInquiryController {
 	   
 	   int result = service.userInquiry(inquiry);
 	   
-	   System.out.println(result);
+//	   System.out.println(result);
 	   
 	   String path = null;
 	   
@@ -85,7 +85,7 @@ public class UserInquiryController {
 	@GetMapping("/userInquiryscs/{inquiryNo}")
 	public String userInquiryDetail(@PathVariable("inquiryNo") int inquiryNo, Model model) {
 		
-		System.out.println("상세 조회 No :" + inquiryNo);
+//		System.out.println("상세 조회 No :" + inquiryNo);
 		
 		Inquiry inquiryDetail = service.selectInquiryDetail(inquiryNo);
 		
