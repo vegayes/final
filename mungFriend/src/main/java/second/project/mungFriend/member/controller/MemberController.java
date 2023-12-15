@@ -258,7 +258,7 @@ public class MemberController {
 			 model.addAttribute("loginMember", loginMember);		
 		 } 
 		 else { // 회원정보가 없을때 
-			 path = "member/signUp";
+			 path += "/member/signUp";
 			 model.addAttribute("memberLoginApi", memberLoginApi);		
 			 model.addAttribute("loginApiMessage", "네이버 로그인 정보가 없어 회원가입 페이지로 이동합니다. 회원가입 후 이용해주세요.");		
 		 }
@@ -284,7 +284,7 @@ public class MemberController {
 			 ra.addFlashAttribute("message", loginMember.getMemberNickname() + "님 환영합니다.");
 			 model.addAttribute("loginMember", loginMember);		
 		 } else { // 회원정보가 없을때 
-			 path = "member/signUp";
+			 path += "/member/signUp";
 			 model.addAttribute("memberLoginApi", memberLoginApi);		
 			 model.addAttribute("loginApiMessage", "카카오 로그인 정보가 없어 회원가입 페이지로 이동합니다. 회원가입 후 이용해주세요.");		
 		 }
@@ -310,7 +310,7 @@ public class MemberController {
 			 ra.addFlashAttribute("message", loginMember.getMemberNickname() + "님 환영합니다.");
 			 model.addAttribute("loginMember", loginMember);		
 		 } else {  // 회원정보가 없을때 
-			 path = "member/signUp";
+			 path += "/member/signUp";
 			 model.addAttribute("memberLoginApi", memberLoginApi);		
 			 model.addAttribute("loginApiMessage", "구글 로그인 정보가 없어 회원가입 페이지로 이동합니다. 회원가입 후 이용해주세요.");	
 		 }
