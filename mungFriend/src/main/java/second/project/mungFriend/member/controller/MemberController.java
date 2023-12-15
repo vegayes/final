@@ -27,6 +27,7 @@ import second.project.mungFriend.common.dto.Alarm;
 import second.project.mungFriend.member.model.dto.Member;
 import second.project.mungFriend.member.model.dto.MemberGoogle;
 import second.project.mungFriend.member.model.dto.MemberKakao;
+import second.project.mungFriend.member.model.dto.MemberLoginApi;
 import second.project.mungFriend.member.model.dto.MemberNaver;
 import second.project.mungFriend.member.model.service.MemberService;
 
@@ -66,7 +67,7 @@ public class MemberController {
 		
 		if(loginMember != null) { // 로그인 성공
 			path += "/";
-			ra.addFlashAttribute("message", loginMember.getMemberNickname() + "님 환영합니다.");
+			ra.addFlashAttribute("loginMessage", loginMember.getMemberNickname() + "님 환영합니다.");
 			model.addAttribute("loginMember", loginMember);
 			//로그인 시 알림목록 얻어오기
 			List<Alarm> alarmList = service.selectAlarm(loginMember.getMemberNo()); 
@@ -241,12 +242,11 @@ public class MemberController {
 	// 네이버 로그인 확인 후 자동으로 콜백
 	@GetMapping("/oauth2/code/naver")
 	 public String callback(HttpServletRequest request, Model model, RedirectAttributes ra)  throws Exception {
-		 MemberNaver naverInfo = service.getNaverInfo(request.getParameter("code"));
-		 System.out.println("네이버~~~~"+naverInfo.toString());
+		MemberLoginApi memberLoginApi = service.getNaverInfo(request.getParameter("code"));
+		 System.out.println("네이버~~~~"+memberLoginApi.toString());
 		 
 		 // 디비에 해당 정보를 가지고 로그인 하기
-		 // 디비에 해당 정보를 가지고 로그인 하기
-		 Member loginMember = service.loginNaver(naverInfo);
+		 Member loginMember = service.loginNaver(memberLoginApi);
 			
 		 System.out.println(loginMember);
 		
@@ -256,9 +256,11 @@ public class MemberController {
 			 path += "/";
 			 ra.addFlashAttribute("message", loginMember.getMemberNickname() + "님 환영합니다.");
 			 model.addAttribute("loginMember", loginMember);		
-		 } else { // 로그인 실패
-			 path += "member/login";
-			 ra.addFlashAttribute("message", "아이디 또는 비밀번호가 불일치합니다.");
+		 } 
+		 else { // 회원정보가 없을때 
+			 path = "member/signUp";
+			 model.addAttribute("memberLoginApi", memberLoginApi);		
+			 model.addAttribute("loginApiMessage", "네이버 로그인 정보가 없어 회원가입 페이지로 이동합니다. 회원가입 후 이용해주세요.");		
 		 }
 		
 		 return path;
@@ -267,11 +269,11 @@ public class MemberController {
 	// 카카오 로그인 확인 후 자동으로 콜백
 	@GetMapping("/oauth2/code/kakao")
 	 public String callbackKakao(HttpServletRequest request, Model model, RedirectAttributes ra)  throws Exception {
-		 MemberKakao kakaoInfo = service.getKakaoInfo(request.getParameter("code"));
-		 System.out.println("카카오톡~~~~"+kakaoInfo);
+		 MemberLoginApi memberLoginApi = service.getKakaoInfo(request.getParameter("code"));
+		 System.out.println("카카오톡~~~~"+memberLoginApi);
 		 
 		 // 디비에 해당 정보를 가지고 로그인 하기
-		 Member loginMember = service.loginKakao(kakaoInfo);
+		 Member loginMember = service.loginKakao(memberLoginApi);
 			
 		 System.out.println(loginMember);
 		
@@ -281,9 +283,10 @@ public class MemberController {
 			 path += "/";
 			 ra.addFlashAttribute("message", loginMember.getMemberNickname() + "님 환영합니다.");
 			 model.addAttribute("loginMember", loginMember);		
-		 } else { // 로그인 실패
-			 path += "member/login";
-			 ra.addFlashAttribute("message", "아이디 또는 비밀번호가 불일치합니다.");
+		 } else { // 회원정보가 없을때 
+			 path = "member/signUp";
+			 model.addAttribute("memberLoginApi", memberLoginApi);		
+			 model.addAttribute("loginApiMessage", "카카오 로그인 정보가 없어 회원가입 페이지로 이동합니다. 회원가입 후 이용해주세요.");		
 		 }
 		
 		 return path;
@@ -292,11 +295,11 @@ public class MemberController {
 	// 구글 로그인 확인 후 자동으로 콜백
 	@GetMapping("/oauth2/code/google")
 	 public String callbackGoogle(HttpServletRequest request, Model model, RedirectAttributes ra)  throws Exception {
-		 MemberGoogle googleInfo = service.getGoogleInfo(request.getParameter("code"));
+		MemberLoginApi memberLoginApi = service.getGoogleInfo(request.getParameter("code"));
 		 System.out.println("구글~~~~"+request.getParameter("code"));
 		 
 		 // 디비에 해당 정보를 가지고 로그인 하기
-		 Member loginMember = service.loginGoogle(googleInfo);
+		 Member loginMember = service.loginGoogle(memberLoginApi);
 			
 		 System.out.println(loginMember);
 
@@ -306,9 +309,10 @@ public class MemberController {
 			 path += "/";
 			 ra.addFlashAttribute("message", loginMember.getMemberNickname() + "님 환영합니다.");
 			 model.addAttribute("loginMember", loginMember);		
-		 } else { // 로그인 실패
-			 path += "member/login";
-			 ra.addFlashAttribute("message", "아이디 또는 비밀번호가 불일치합니다.");
+		 } else {  // 회원정보가 없을때 
+			 path = "member/signUp";
+			 model.addAttribute("memberLoginApi", memberLoginApi);		
+			 model.addAttribute("loginApiMessage", "구글 로그인 정보가 없어 회원가입 페이지로 이동합니다. 회원가입 후 이용해주세요.");	
 		 }
 		
 		 return path;

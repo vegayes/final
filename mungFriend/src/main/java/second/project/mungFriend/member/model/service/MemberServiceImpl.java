@@ -1,12 +1,7 @@
 package second.project.mungFriend.member.model.service;
 
 import java.io.File;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.regex.PatternSyntaxException;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -24,7 +19,6 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import second.project.mungFriend.common.dto.Alarm;
 import second.project.mungFriend.common.utility.Util;
@@ -33,6 +27,7 @@ import second.project.mungFriend.member.model.dao.MemberDAO;
 import second.project.mungFriend.member.model.dto.Member;
 import second.project.mungFriend.member.model.dto.MemberGoogle;
 import second.project.mungFriend.member.model.dto.MemberKakao;
+import second.project.mungFriend.member.model.dto.MemberLoginApi;
 import second.project.mungFriend.member.model.dto.MemberNaver;
 
 @Service
@@ -213,33 +208,15 @@ public class MemberServiceImpl implements MemberService{
 
 	//네이버 로그인 에이버 회원 정보로 없으면 인서트 있으면 셀렉트  
 	@Override
-	public Member loginNaver(MemberNaver naverInfo) {
-		Member loginMember = dao.loginNaver(naverInfo);
-		
-		// 네이버 정보로 조회 후 로그인 데이터가 없을때..
-		// 인서트를 하는데 패스워드는 없이 들어가야 된다.
-		if(loginMember == null) {
-
-			// 초기암호 설정
-			String encPw = bcrypt.encode("1234");
-			naverInfo.setNaverPw(encPw);
-			
-			int result = dao.loginNaverInsert(naverInfo);
-			
-			if(result > 0) {
-				loginMember = dao.loginNaver(naverInfo);
-			}
-			else {
-				loginMember = null;
-			}
-		}
+	public Member loginNaver(MemberLoginApi memberLoginApi) {
+		Member loginMember = dao.loginNaver(memberLoginApi);
 		
 		return loginMember;
 	}
 
 	//네이버 로그인 후 네이버 서버에서 토큰 및 회원정보 가져오기 
 	@Override
-	public MemberNaver getNaverInfo(String code) throws Exception {
+	public MemberLoginApi getNaverInfo(String code) throws Exception {
 		if (code == null) throw new Exception("Failed get authorization code");
 
 	    String accessToken = "";
@@ -288,26 +265,8 @@ public class MemberServiceImpl implements MemberService{
 	
 	//카카오 로그인 카카오 회원 정보로 없으면 인서트 있으면 셀렉트  
 	@Override
-	public Member loginKakao(MemberKakao kakaoInfo) {
-		Member loginMember = dao.loginKakao(kakaoInfo);
-		
-		// 네이버 정보로 조회 후 로그인 데이터가 없을때..
-		// 인서트를 하는데 패스워드는 없이 들어가야 된다.
-		if(loginMember == null) {
-
-			// 초기암호 설정
-			String encPw = bcrypt.encode("1234");
-			kakaoInfo.setKakaoPw(encPw);
-			
-			int result = dao.loginKakaoInsert(kakaoInfo);
-			
-			if(result > 0) {
-				loginMember = dao.loginKakao(kakaoInfo);
-			}
-			else {
-				loginMember = null;
-			}
-		}
+	public Member loginKakao(MemberLoginApi memberLoginApi) {
+		Member loginMember = dao.loginKakao(memberLoginApi);
 		
 		return loginMember;
 	}
@@ -315,7 +274,7 @@ public class MemberServiceImpl implements MemberService{
 	
 	//카카오 로그인 후 카카오 서버에서 토큰 및 회원정보 가져오기 
 	@Override
-	public MemberKakao getKakaoInfo(String code) throws Exception {
+	public MemberLoginApi getKakaoInfo(String code) throws Exception {
 		if (code == null) throw new Exception("Failed get authorization code");
 
 	    String accessToken = "";
@@ -364,26 +323,8 @@ public class MemberServiceImpl implements MemberService{
 	
 	//구글 로그인 후 구글 회원 정보로 없으면 인서트 있으면 셀렉트
 	@Override
-	public Member loginGoogle(MemberGoogle googleInfo) {
-		Member loginMember = dao.loginGoogle(googleInfo);
-		
-		// 구글 정보로 조회 후 로그인 데이터가 없을때..
-		// 인서트를 하는데 패스워드는 없이 들어가야 된다.
-		if(loginMember == null) {
-
-			// 초기암호 설정
-			String encPw = bcrypt.encode("1234");
-			googleInfo.setGooglePw(encPw);
-			
-			int result = dao.loginGoogleInsert(googleInfo);
-			
-			if(result > 0) {
-				loginMember = dao.loginGoogle(googleInfo);
-			}
-			else {
-				loginMember = null;
-			}
-		}
+	public Member loginGoogle(MemberLoginApi memberLoginApi) {
+		Member loginMember = dao.loginGoogle(memberLoginApi);
 		
 		return loginMember;
 	}
@@ -391,7 +332,7 @@ public class MemberServiceImpl implements MemberService{
 	
 	//구글 로그인 후 구글 서버에서 토큰 및 회원정보 가져오기 
 	@Override
-	public MemberGoogle getGoogleInfo(String code) throws Exception {
+	public MemberLoginApi getGoogleInfo(String code) throws Exception {
 		if (code == null) throw new Exception("Failed get authorization code");
 
 	    String accessToken = "";
@@ -432,7 +373,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	//네이버 로그인 후 토큰을 이용한 회원정보를 가져오기 위한 메소드에 호출 상세 메소드
-	private MemberNaver getUserInfoWithToken(String accessToken) throws Exception {
+	private MemberLoginApi getUserInfoWithToken(String accessToken) throws Exception {
         //HttpHeader 생성
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer " + accessToken);
@@ -459,22 +400,24 @@ public class MemberServiceImpl implements MemberService{
         String email = String.valueOf(account.get("email"));
         String name = String.valueOf(account.get("name"));
         String nickName = String.valueOf(account.get("nickname"));
-        String mobile = String.valueOf(account.get("mobile"));
+        String mobile = String.valueOf(account.get("mobile")).replaceAll("-","");
 
 
-        MemberNaver memberNaver = new MemberNaver();
+        //MemberNaver memberNaver = new MemberNaver();
+        MemberLoginApi memberLoginApi = new MemberLoginApi();
 
-        memberNaver.setNaverId(id);
-        memberNaver.setNaverEmail(email);
-        memberNaver.setNaverName(name);
-        memberNaver.setNaverNickName(nickName);
-        memberNaver.setMobile(mobile);
+        memberLoginApi.setApiId(id);
+        memberLoginApi.setApiEmail(email);
+        memberLoginApi.setApiName(name);
+        memberLoginApi.setApiNickName(nickName);
+        memberLoginApi.setApiMobile(mobile);
+        memberLoginApi.setApiGubun("N");
         
-        return memberNaver;
+        return memberLoginApi;
     }
 	
 	//카카오 로그인 후 토큰을 이용한 회원정보를 가져오기 위한 메소드에 호출 상세 메소드
-	private MemberKakao getUserInfoWithTokenKakao(String accessToken) throws Exception {
+	private MemberLoginApi getUserInfoWithTokenKakao(String accessToken) throws Exception {
         //HttpHeader 생성
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer " + accessToken);
@@ -508,23 +451,25 @@ public class MemberServiceImpl implements MemberService{
 
         String id = String.valueOf(jsonObj.get("id"));
         String email = String.valueOf(account.get("email"));
-        String name = String.valueOf(profile.get("nickname"));
+        //String name = String.valueOf(profile.get("nickname"));
+        String name = "";
         String nickName = String.valueOf(profile.get("nickname"));
-        String mobile = "010-1111-2222";
+        String mobile = "";
 
-        MemberKakao memberKakao = new MemberKakao();
+        MemberLoginApi memberLoginApi = new MemberLoginApi();
 
-	        memberKakao.setKakaoId(id);
-	        memberKakao.setKakaoEmail(email);
-	        memberKakao.setKakaoName(name);
-	        memberKakao.setKakaoNickName(nickName);
-	        memberKakao.setKakaoMobile(mobile);
+        memberLoginApi.setApiId(id);
+        memberLoginApi.setApiEmail(email);
+        memberLoginApi.setApiName(name);
+        memberLoginApi.setApiNickName(nickName);
+        memberLoginApi.setApiMobile(mobile);
+        memberLoginApi.setApiGubun("K");
         
-        return memberKakao;
+        return memberLoginApi;
     }
 
 	//구글 로그인 후 토큰을 이용한 회원정보를 가져오기 위한 메소드에 호출 상세 메소드
-	private MemberGoogle getUserInfoWithTokenGoogle(String accessToken) throws Exception {
+	private MemberLoginApi getUserInfoWithTokenGoogle(String accessToken) throws Exception {
         //HttpHeader 생성
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer " + accessToken);
@@ -551,19 +496,20 @@ public class MemberServiceImpl implements MemberService{
 
 	    String id = String.valueOf(jsonObj.get("sub"));
 	    String email = String.valueOf(jsonObj.get("email"));
-	    String name = "google guest";
-	    String nickName = "google guest";
-	    String mobile = "010-1111-2222";
+	    String name = "";
+	    String nickName = "";
+	    String mobile = "";
 
-	    MemberGoogle memberGoogle = new MemberGoogle();
+	    MemberLoginApi memberLoginApi = new MemberLoginApi();
 
-	    memberGoogle.setGoogleId(id);
-	    memberGoogle.setGoogleEmail(email);
-	    memberGoogle.setGoogleName(name);
-	    memberGoogle.setGoogleNickName(nickName);
-	    memberGoogle.setGoogleMobile(mobile);
+	    memberLoginApi.setApiId(id);
+	    memberLoginApi.setApiEmail(email);
+	    memberLoginApi.setApiName(name);
+	    memberLoginApi.setApiNickName(nickName);
+	    memberLoginApi.setApiMobile(mobile);
+        memberLoginApi.setApiGubun("G");
 	    
-        return memberGoogle;
+        return memberLoginApi;
     }
 	
 	

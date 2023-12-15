@@ -1,14 +1,12 @@
 package second.project.mungFriend.member.model.dao;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import second.project.mungFriend.common.dto.Alarm;
 import second.project.mungFriend.member.model.dto.Member;
 import second.project.mungFriend.member.model.dto.MemberGoogle;
 import second.project.mungFriend.member.model.dto.MemberKakao;
+import second.project.mungFriend.member.model.dto.MemberLoginApi;
 import second.project.mungFriend.member.model.dto.MemberNaver;
 
 @Repository
@@ -56,50 +54,23 @@ public class MemberDAO {
 	 * @param Member(id, email,nickname,name,mobile)
 	 * @return Member(VO)
 	 */
-	public Member loginNaver(MemberNaver naverInfo) {
-		return memberMapper.loginNaver(naverInfo);
-	}
-	
-	/** 네이버 로그인 후 가져온 회원정보로 없으면 인서트하는 로직  
-	 * @param Member(id, email,nickname,name, mobile)
-	 * @return int
-	 */
-	public int loginNaverInsert(MemberNaver naverInfo) {
-		return memberMapper.loginNaverInsert(naverInfo);
+	public Member loginNaver(MemberLoginApi memberLoginApi) {
+		return memberMapper.loginNaver(memberLoginApi);
 	}
 	
 	/** 카카오톡 로그인 후 가져온 회원정보로 셀렉트  
 	 * @param Member(id, email,nickname,name,mobile)
 	 * @return Member(VO)
 	 */
-	public Member loginKakao(MemberKakao kakaoInfo) {
-		return memberMapper.loginKakao(kakaoInfo);
-	}
-	
-	/** 카카오 로그인 후 가져온 회원정보로 없으면 인서트하는 로직  
-	 * @param Member(id, email,nickname,name, mobile)
-	 * @return int
-	 */
-	public int loginKakaoInsert(MemberKakao kakaoInfo) {
-		return memberMapper.loginKakaoInsert(kakaoInfo);
+	public Member loginKakao(MemberLoginApi memberLoginApi) {
+		return memberMapper.loginKakao(memberLoginApi);
 	}
 	
 	/** 구글 로그인 후 가져온 회원정보로 셀렉트  
 	 * @param Member(id, email,nickname,name,mobile)
 	 * @return Member(VO)
 	 */
-	public Member loginGoogle(MemberGoogle googleInfo) {
-		return memberMapper.loginGoogle(googleInfo);
+	public Member loginGoogle(MemberLoginApi memberLoginApi) {
+		return memberMapper.loginGoogle(memberLoginApi);
 	}
-	
-	/** 구글 로그인 후 가져온 회원정보로 없으면 인서트하는 로직  
-	 * @param Member(id, email,nickname,name, mobile)
-	 * @return int
-	 */
-	public int loginGoogleInsert(MemberGoogle googleInfo) {
-		return memberMapper.loginGoogleInsert(googleInfo);
-	}
-
-	
-
 }
