@@ -370,7 +370,7 @@
 	<insert id="dogReservation">
 		INSERT INTO DOG_RESERVATION
 		VALUES(SEQ_RESERVE_NO.NEXTVAL, 
-				#{dogNo}, #{memberNo}, TO_DATE(#{reservationData.reserveDate},'YYYY-MM-DD'), TO_DATE(#{reservationData.reserveTime},'HH24:MI'), 
+				#{dogNo}, #{memberNo}, TO_DATE(#{reservationData.reserveDate},'YYYY-MM-DD'), #{reservationData.reserveTime}, 
 				DEFAULT, DEFAULT, DEFAULT)
 	</insert>
 	
