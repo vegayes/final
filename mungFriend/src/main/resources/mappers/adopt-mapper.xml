@@ -217,7 +217,7 @@
 			VALUES( #{dogNo},
 				(SELECT BREED_NO FROM DOG_BREED WHERE BREED_NAME = #{breedName}),
 				#{dogName},
-				#{dogBirthDay},
+				TO_DATE(#{dogBirthDay}, 'YYYY-MM-DD'),
 				#{dogGender}, 
 				#{dogSize},
 				#{dogPersonality},
@@ -276,11 +276,11 @@
 	</select>
 	
 	<!-- 강아지 수정 -->
-	<update id="dogUpdate">
+	<update id="dogUpdate">  
 		UPDATE "DOG" SET
 			BREED_NO = (SELECT BREED_NO FROM DOG_BREED WHERE BREED_NAME = #{breedName}),
 			DOG_NAME = #{dogName}, 
-			DOG_BIRTHDAY = #{dogBirthDay}, 
+			DOG_BIRTHDAY = TO_DATE(#{dogBirthDay},'YYYY-MM-DD'), 
 			DOG_GENDER = #{dogGender},
 			DOG_SIZE = #{dogSize},
 			DOG_PERSONALITY = #{dogPersonality},
@@ -370,7 +370,7 @@
 	<insert id="dogReservation">
 		INSERT INTO DOG_RESERVATION
 		VALUES(SEQ_RESERVE_NO.NEXTVAL, 
-				#{dogNo}, #{memberNo}, #{reservationData.reserveDate}, #{reservationData.reserveTime}, 
+				#{dogNo}, #{memberNo}, TO_DATE(#{reservationData.reserveDate},'YYYY-MM-DD'), TO_DATE(#{reservationData.reserveTime},'HH24:MI'), 
 				DEFAULT, DEFAULT, DEFAULT)
 	</insert>
 	
