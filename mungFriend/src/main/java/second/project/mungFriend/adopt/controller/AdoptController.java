@@ -193,6 +193,7 @@ public class AdoptController {
 			// 세 번째 '/' 이후의 부분 가져오기
 			System.out.println("주소:" + imgPath);
 			System.out.println("이름:" + imgRename);
+			System.out.println("생일 : " + dog.getDogBirthDay());
 			
 			dog.setImgPath(imgPath);
 			dog.setImgRename(imgRename);

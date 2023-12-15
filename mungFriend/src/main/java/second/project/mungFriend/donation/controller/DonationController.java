@@ -46,7 +46,7 @@ public class DonationController {
 	         // OffsetDateTime을 java.util.Date로 변환
 	        Instant instant = paidAt.toInstant();
 	        Date date = Date.from(instant);
-	         System.out.println("변환된 paidAt: " + date);
+//	         System.out.println("변환된 paidAt: " + date);
 	         donation.setDonationDate(date);
         }
         
@@ -55,16 +55,16 @@ public class DonationController {
 		if(donation.getDonationType().equals("정기")) {
 			donation.setDonationType("R");
 		}else {
-			System.out.println("일시");
+//			System.out.println("일시");
 			donation.setDonationType("O");
 		}
 		
 		// 후원 결제 상태
 		if(donation.getStatus().equals("paid")) {
-			System.out.println("성공");
+//			System.out.println("성공");
 			donation.setStatus("Y");
 		}else {
-			System.out.println("실패 혹은 중단");
+//			System.out.println("실패 혹은 중단");
 			donation.setStatus("N");
 		}
 		
@@ -77,7 +77,7 @@ public class DonationController {
 		int result = service.donationPay(donation);
 		
 		if(result > 0) {
-			System.out.println("결제 성공 인서트하고 이제 y 보낼거임. ");
+//			System.out.println("결제 성공 인서트하고 이제 y 보낼거임. ");
 			return "y";
 		}else {
 			
