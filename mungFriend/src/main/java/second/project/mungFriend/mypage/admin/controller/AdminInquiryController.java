@@ -56,7 +56,6 @@ public class AdminInquiryController {
 		public String completeAnswer(int inquiryNo, @RequestParam String adminReply, RedirectAttributes redirectAttributes, Model model) {
 		    int result = adminInquiryService.completeAnswer(inquiryNo, adminReply);
 		    
-		    //System.out.println(result);
 		    
 		    String path = null;
 		    
@@ -77,7 +76,7 @@ public class AdminInquiryController {
 		
 		@GetMapping("/searchByNickname")
 		public String searchByNickname(@RequestParam("nickname") String nickname, Model model) {
-		    System.out.println("닉네임 : " + nickname);
+//		    System.out.println("닉네임 : " + nickname);
 		    List<Inquiry> inquiries = adminInquiryService.findInquiriesByNickname(nickname);
 
 		   //System.out.println("출력 :" + inquiries);
