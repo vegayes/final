@@ -249,8 +249,6 @@ public class MemberController {
 		 
 		 // 디비에 해당 정보를 가지고 로그인 하기
 		 Member loginMember = service.loginNaver(memberLoginApi);
-			
-		 System.out.println("11111111111111111====>"+loginMember);
 		
 		 String path = "redirect:";
 		

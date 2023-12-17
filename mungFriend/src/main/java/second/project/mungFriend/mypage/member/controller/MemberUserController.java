@@ -58,7 +58,8 @@ public class MemberUserController {
 		 * RedirectAttributes ra : 리다이렉트 시 값 전달용 객체
 		 * 
 		 * */
-		
+		String updateProfileYn = updateMember.getUpdateProfileYn();
+
 		// 주소 하나로 합치기(a^^^b^^^c)
 		if(updateMember.getMemberAddress().equals(",,")) {
 			updateMember.setMemberAddress(null);
@@ -70,7 +71,6 @@ public class MemberUserController {
 		
 		// 로그인한 회원의 번호를 updateMember에 세팅
 		updateMember.setMemberNo(loginMember.getMemberNo());
-		
 		
 		// DB 회원 정보 수정 (update) 서비스 호출
 		int result = service.updateInfoUser(profileImage, updateMember, loginMember);
@@ -84,7 +84,9 @@ public class MemberUserController {
 			loginMember.setMemberEmail(updateMember.getMemberEmail());
 			loginMember.setMemberNickname(updateMember.getMemberNickname());
 			loginMember.setMemberAddress(updateMember.getMemberAddress());
-			loginMember.setMemberProfile(updateMember.getMemberProfile());			
+			if(!updateProfileYn.equals("N")) {
+				loginMember.setMemberProfile(updateMember.getMemberProfile());
+			}
 			message = "회원 정보 수정 성공";
 			
 		} else {
