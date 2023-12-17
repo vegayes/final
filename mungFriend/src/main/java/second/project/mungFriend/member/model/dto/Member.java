@@ -28,4 +28,7 @@ public class Member {
 	private String apiId;
 	private String apiGubun;
 	
+	// 회원수정 시 이미지 변경 여부 변수
+	private String updateProfileYn;
+	
 }

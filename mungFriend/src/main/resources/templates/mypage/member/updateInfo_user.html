@@ -33,7 +33,7 @@
             <!-- 내용 작성영역-->
             <div class = "userContentContainer">
                 <form th:action = "@{/mypage/member/updateInfoUser}" th:object="${session.loginMember}" method = "POST" name ="updateForm" id="updateForm" class = "updateForm" enctype="multipart/form-data">
-					
+					<input type = "hidden" name = "updateProfileYn" id = "updateProfileYn">
                     <div class = "updateElement">
                         <div class = "updateTitle formDogFlex">
                             <div class = "formProfile">
