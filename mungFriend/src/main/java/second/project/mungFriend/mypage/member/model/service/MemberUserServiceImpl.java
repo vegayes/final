@@ -80,7 +80,6 @@ public class MemberUserServiceImpl implements MemberUserService{
 			
 			// 업로드된 새 이미지가 있을 경우
 			if(rename != null) {
-				System.out.println("5555555===>"+rename);
 				// 메모리에 임시 저장되어있는 파일을 서버에 진짜로 저장하는 것
 				profileImage.transferTo(new File(filePath + rename));
 				loginMember.setMemberProfile(webPath + rename);
@@ -88,8 +87,6 @@ public class MemberUserServiceImpl implements MemberUserService{
 			
 			
 		} else { // 실패
-
-			System.out.println("66666===>");
 			// 이전 이미지로 프로필 다시 세팅
 			updateMember.setMemberProfile(temp);
 			
