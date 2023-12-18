@@ -112,7 +112,7 @@ public class EmailServiceImpl implements EmailService{
 			result = dao.insertAuthKey(map);
 		}
 		
-		
+		System.out.println("인증테이블 삽입결과 : " + result);
 		return result;
 		
 	}
