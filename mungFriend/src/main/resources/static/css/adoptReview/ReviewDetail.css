@@ -27,7 +27,7 @@ a {
     display: flex;
     flex-direction: column;
     margin-left: 28%;
-    margin-top: 50px;
+    margin-top: 40px;
 }
 
 .titleSection {
@@ -63,15 +63,16 @@ a {
 
 /* 입양리뷰 인증게시판 */
 .mainContainer > div:nth-child(1) {
-    height: 35px;
-    width: 25%;
+    height: 40px;
+    width: 20%;
     border-radius: 10px;
     background: #FEE4D6;
-    font-size: 15px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 700;
-    line-height: 35px;
+    line-height: 40px;
     text-align: center;
+  
 }
 
 /* 구분줄(굵음) */
