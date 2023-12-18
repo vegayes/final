@@ -122,7 +122,7 @@ button {
 
 .linkButton {
 
-    border: 1px solid black;
+    border: none;
     width: auto;
     height: 30px;
     background-color: #FFF0E8;
