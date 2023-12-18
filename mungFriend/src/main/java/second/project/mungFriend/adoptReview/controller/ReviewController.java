@@ -160,7 +160,7 @@ public class ReviewController {
 		}
 		
 		
-		return"redirect:ReviewList/1";
+		return"redirect:/adoptReview/reviewList/1";
 	}
 	
 	
@@ -225,7 +225,7 @@ public class ReviewController {
 		ra.addFlashAttribute("message",message);
 		
 		
-		return "redirect:/adoptReview/ReviewDetail/" + reviewNo + "?cp=" + cp;
+		return "redirect:/adoptReview/reviewDetail/" + reviewNo + "?cp=" + cp;
 	}
 	
 	
@@ -257,7 +257,7 @@ public class ReviewController {
 		ra.addFlashAttribute("message",message);
 		
 		
-		return "redirect:/adoptReview/ReviewList/"+cp;
+		return "redirect:/adoptReview/reviewList/"+cp;
 	}
 	
 	
