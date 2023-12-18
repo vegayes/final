@@ -28,6 +28,7 @@ public class EmailController {
 	@ResponseBody
 	public int checkAuthKey(@RequestParam Map<String, Object> paramMap) {
 		
+		System.out.println("수신된 인증코드");
 		System.out.println(paramMap);
 		
 		return service.checkAuthKey(paramMap);
