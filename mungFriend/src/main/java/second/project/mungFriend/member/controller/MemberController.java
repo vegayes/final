@@ -49,7 +49,7 @@ public class MemberController {
 		// 여기서 네이버,카카오톡,구글 등 기본적으로 가져올꺼 셋팅을 한다.
         model.addAttribute("naverUrl", service.getNaverLogin());
         model.addAttribute("kakaoUrl", service.getKakaoLogin());
-		model.addAttribute("googleUrl", service.getGoogleUrlLogin());
+		//model.addAttribute("googleUrl", service.getGoogleUrlLogin());
 		
 		return "member/login";
 	}
@@ -67,7 +67,7 @@ public class MemberController {
 		
 		if(loginMember != null) { // 로그인 성공
 			path += "/";
-			ra.addFlashAttribute("loginMessage", loginMember.getMemberNickname() + "님 환영합니다.");
+			ra.addFlashAttribute("message", loginMember.getMemberNickname() + "님 환영합니다.");
 			model.addAttribute("loginMember", loginMember);
 			//로그인 시 알림목록 얻어오기
 			List<Alarm> alarmList = service.selectAlarm(loginMember.getMemberNo()); 
@@ -144,7 +144,9 @@ public class MemberController {
 			path = "member/login"; // 로그인 페이지로
 			
 			message = inputMember.getMemberNickname() + "님의 가입을 환영합니다.";
-			
+
+	        model.addAttribute("naverUrl", service.getNaverLogin());
+	        model.addAttribute("kakaoUrl", service.getKakaoLogin());
 			model.addAttribute("message", message);
 			
 		} else { // 가입 실패
@@ -247,8 +249,6 @@ public class MemberController {
 		 
 		 // 디비에 해당 정보를 가지고 로그인 하기
 		 Member loginMember = service.loginNaver(memberLoginApi);
-			
-		 System.out.println(loginMember);
 		
 		 String path = "redirect:";
 		

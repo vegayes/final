@@ -423,6 +423,9 @@ document.getElementById("updateForm").addEventListener("submit", e=> {
     }
 
     return true; */
+    if(initCheck && deleteCheck == -1) {
+		updateProfileYn.value = "N";
+	}
     
 });
 
@@ -432,6 +435,7 @@ document.getElementById("updateForm").addEventListener("submit", e=> {
 const profileImage = document.getElementById("profileImage"); // img 태그
 const imageInput = document.getElementById("updateProfile"); // input 태그
 const deleteImage = document.getElementById("imgDelBtn"); // 이미지 삭제 버튼
+const updateProfileYn = document.getElementById("updateProfileYn"); // 이미지 변경여부 hidden
 
 let initCheck; // 초기 프로필 이미지 상태를 저장하는 변수
 				// false == 기본 이미지, true == DB에서 가져온 이미지
