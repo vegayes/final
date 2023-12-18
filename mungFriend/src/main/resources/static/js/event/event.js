@@ -42,7 +42,7 @@ quizBtnWraps.forEach(btnWrap => {
 
 
 
-// 오늘 하루 이벤트 참여하지 않음.
+// 오늘 하루 이벤트 참여하지 않음.(나중에 할 것)
 function setCookie(name, value, expiredays) {
     var date = new Date();
     date.setDate(date.getDate() + expiredays);

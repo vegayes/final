@@ -104,7 +104,7 @@ public class EmailServiceImpl implements EmailService{
 		map.put("authKey", authKey);
 		map.put("email", email);
 		
-		//System.out.println(map);
+		System.out.println(map);
 		
 		int result = dao.updateAuthKey(map);
 		
