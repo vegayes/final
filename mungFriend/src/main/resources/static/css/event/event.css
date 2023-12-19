@@ -135,6 +135,27 @@
 
 }
 
+.cookieEvent{
+    flex-basis: 10%;
+    /* border : 2px solid blue; */
+
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+.cookieBtn{
+    font-weight: 400;
+    font-size: 12px;
+
+    text-align: center;
+
+    cursor: pointer;
+}
+
 .modalBtn{
 
     flex: 1;

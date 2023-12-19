@@ -128,10 +128,13 @@ document.getElementById('submitBtn').addEventListener('click', function(event) {
     
     // 필수 입력 필드 중 하나라도 비어있으면 알림창 표시
     if (!name || !birthday || !gender || !kind || !size || !personality || !neutering || !vaccine || !likeThings || !hateThings || !dogSpecialNote) {
-        
+         
         // 이벤트 기본 동작 중단 (폼이 실제로 제출되지 않도록 함)
         event.preventDefault();
         
         alert('입력사항들을 모두 입력해주세요.');
     } 
+    
+    document.querySelector("[name='deleteList']").value 
+        =  Array.from(deleteSet);
 });
