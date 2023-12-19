@@ -282,7 +282,7 @@ function settingDonePage(list){
 	                </div>
 	
 	                <div class = "cardInfoContent">
-	                    입소희망일 : ${admission.admHopeDate}
+	                     입소 날짜 : ${admission.admDate}
 	                </div>
 	            </div>
 	        </div>

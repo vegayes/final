@@ -86,7 +86,7 @@
 
 
 .modalContent{
-    flex-basis: 80%;
+    flex-basis: 70%;
     /* border :2px solid red; */
 
     display: flex;
@@ -135,6 +135,27 @@
 
 }
 
+.cookieEvent{
+    flex-basis: 10%;
+    /* border : 2px solid blue; */
+
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+.cookieBtn{
+    font-weight: 400;
+    font-size: 12px;
+
+    text-align: center;
+
+    cursor: pointer;
+}
+
 .modalBtn{
 
     flex: 1;
@@ -180,6 +201,8 @@
 #oneDay{
 	background-color: aliceblue;
 }
+
+
 
 /*************************************************
                  이벤트 display

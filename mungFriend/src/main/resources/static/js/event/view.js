@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		 
 				}else{
 				console.log("쿠폰 없음 :: 게임 참여 가능");
+					
 				
 		        	fetch("/event/quiz/allData")
 		            .then(response => response.json())
@@ -31,6 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		                console.log("quizImgData선택 ", quizImgData);
 		
 		                openEvent();
+		                getCookiePopup();
 		            })
 		            .catch(error => console.error("퀴즈 에러:", error));
 				}
