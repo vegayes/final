@@ -57,7 +57,7 @@ public class EmailServiceImpl implements EmailService{
         
 	}
 
-	@Transactional(rollbackFor = Exception.class)
+	@Transactional
 	@Override
 	public int signUp(String email) {
 		// 6자리 난수 인증번호 생성
