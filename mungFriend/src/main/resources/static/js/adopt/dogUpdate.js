@@ -134,7 +134,8 @@ document.getElementById('submitBtn').addEventListener('click', function(event) {
         
         alert('입력사항들을 모두 입력해주세요.');
     } 
-    
+
     document.querySelector("[name='deleteList']").value 
         =  Array.from(deleteSet);
+
 });
