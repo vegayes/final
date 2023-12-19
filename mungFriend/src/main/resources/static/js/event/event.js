@@ -9,6 +9,8 @@ function openEvent(){
 	
     modal.style.display = "flex";
     subModal.style.display = "flex";
+    
+    
 }
 
 /*모달창 닫기 */
@@ -42,10 +44,11 @@ quizBtnWraps.forEach(btnWrap => {
 
 
 
-// 오늘 하루 이벤트 참여하지 않음.
+// 오늘 하루 이벤트 참여하지 않음.(나중에 할 것)
 function setCookie(name, value, expiredays) {
     var date = new Date();
-    date.setDate(date.getDate() + expiredays);
+    date.setDate(date.getDate() + expiredays); // 하루 
+    //date.setTime(date.getTime() + 1*60*1000); // 1분
     document.cookie = escape(name) + "=" + escape(value) + "; expires=" + date.toUTCString();
 }
 
@@ -53,7 +56,7 @@ function setCookie(name, value, expiredays) {
 
 function eventCloseOneDay() {
 	console.log("쿠키 :" + "event_"+ loginMember.memberNo);
-    setCookie("event"+loginMember.memberNo, "N", 1);
+    setCookie("event"+loginMember.memberNo, "eventCloseOneDay"+loginMember.memberNo, 1);
     closeEvent();
 }
 
@@ -62,11 +65,14 @@ function eventCloseOneDay() {
 //쿠키값이 있는지 확인하여 팝업창 show, hide 처리.
 function getCookiePopup () {
 	var cookiedata = document.cookie;
-	if ( cookiedata.indexOf("eventdone") < 0 ){
-		//$('.float-banner').show();
+	console.log("cookiedata" + cookiedata);
+	console.log("cookiedata :: " + "event" + loginMember.memberNo);
+	if ( cookiedata.indexOf("event" + loginMember.memberNo) !=  -1 ){ // 쿠키가 존재한 경우
+	   console.log("쿠키가 존재한 경우");
+		closeEvent();
 	}
 	else {
-		//$('.float-banner').hide();
+		openEvent();
 	}
 }
 

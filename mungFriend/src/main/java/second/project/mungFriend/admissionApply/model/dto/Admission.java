@@ -27,6 +27,8 @@ public class Admission {
 	private String admHopeDate;
 	private String admYN;
 	private int admMemberNo;
+	private String admDate; // 입소된 날짜
+
 	
 	// 나이 
 	private String age;
