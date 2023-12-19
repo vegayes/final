@@ -36,7 +36,7 @@
 	<insert id = "donationMemberPay">
 		INSERT INTO TEST_DONATION  
 		VALUES(SEQ_DONATION_NO.NEXTVAL, #{memberNo},  
-		       #{donationContent}, #{donationType}, #{donationAmount}, SYSDATE, #{status})	
+		       #{donationContent}, #{donationType}, #{donationAmount}, CURRENT_DATE, #{status})	
 	</insert>-->
 	
 	<insert id = "donationMemberPay">
@@ -55,7 +55,7 @@
 	<insert id = "donationNonMemberPay">
 		INSERT INTO TEST_NON_DONATION 
 		VALUES (SEQ_NON_DONATION_NO.NEXTVAL, #{impUid} , #{memberName}, 
-		       #{memberEmail}, #{donationContent} , #{donationType},  #{donationAmount}, SYSDATE, #{status})
+		       #{memberEmail}, #{donationContent} , #{donationType},  #{donationAmount}, CURRENT_DATE, #{status})
 
 	</insert>
 	

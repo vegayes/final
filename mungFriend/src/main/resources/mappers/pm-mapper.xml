@@ -21,7 +21,7 @@
 	
 	<!-- 활동일지 전체 리스트 수 조회 -->
 	<select id="getListCount" resultType="_int">
-		SELECT COUNT(*) FROM "ACTIVITY_LOG" WHERE ACTIVITY_DATE BETWEEN ADD_MONTHS(SYSDATE, -1) AND SYSDATE
+		SELECT COUNT(*) FROM "ACTIVITY_LOG" WHERE ACTIVITY_DATE BETWEEN ADD_MONTHS(CURRENT_DATE, -1) AND CURRENT_DATE
 	</select>
 	
 	<!-- 현재 페이지에 해당하는 부분에 대한 활동일지 조회하기 -->
@@ -43,7 +43,7 @@
 				WHERE Z.MEMBER_NO  = #{memberNo}
 			) B
 			ON A.ACTIVITY_NO  = B.ACTIVITY_NO
-		 WHERE A.ACTIVITY_DATE BETWEEN ADD_MONTHS(SYSDATE, -1) AND SYSDATE
+		 WHERE A.ACTIVITY_DATE BETWEEN ADD_MONTHS(CURRENT_DATE, -1) AND CURRENT_DATE
 		 ORDER BY ACTIVITY_NO DESC
 	</select>
 	
@@ -60,7 +60,7 @@
 		UPDATE ACTIVITY_LOG SET
 	    MEMBER_NO = #{memberNo},
 	    ACTIVITY_CONTENT = #{activityContent},
-	    ACTIVITY_DATE = SYSDATE
+	    ACTIVITY_DATE = CURRENT_DATE
 	    <if test="acitivityImg != null and acitivityImg != ''">
 	        ,ACTIVITY_IMG = #{acitivityImg}
 	    </if>

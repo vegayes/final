@@ -30,7 +30,7 @@
 		INSERT INTO ADMISSION 
 		VALUES(SEQ_ADM_NO.NEXTVAL, #{admProfile}, #{admName}, TO_DATE(#{admBirthday}, 'YYYY-MM-DD'), 
     			#{admPhone}, #{admBreed},  #{admGender},  #{admNeuteringYN}, #{admVaccineYN}, #{admSignificant}, 
-     			SYSDATE, TO_DATE(#{admHopeDate}, 'YYYY-MM-DD'), DEFAULT, #{admMemberNo}) 
+     			CURRENT_DATE, TO_DATE(#{admHopeDate}, 'YYYY-MM-DD'), DEFAULT, #{admMemberNo}, NULL) 
 	</insert>
 	
 	
@@ -38,12 +38,12 @@
 	<select id = "selectAdmissionList" resultMap = "admission_rm">
 		SELECT ADM_NO, ADM_PROFILE , ADM_NAME, 
 			<![CDATA[ 
-			   CASE WHEN TRUNC(SYSDATE) - ADM_BIRTHDAY <= 30 THEN
+			   CASE WHEN TRUNC(CURRENT_DATE) - ADM_BIRTHDAY <= 30 THEN
 		                 1 || '개월 미만'
-		             WHEN MONTHS_BETWEEN(TRUNC(SYSDATE), ADM_BIRTHDAY) < 12 THEN
-		                 TRUNC(MONTHS_BETWEEN(TRUNC(SYSDATE), ADM_BIRTHDAY)) || '개월'
+		             WHEN MONTHS_BETWEEN(TRUNC(CURRENT_DATE), ADM_BIRTHDAY) < 12 THEN
+		                 TRUNC(MONTHS_BETWEEN(TRUNC(CURRENT_DATE), ADM_BIRTHDAY)) || '개월'
 		             ELSE
-		                 TRUNC(MONTHS_BETWEEN(TRUNC(SYSDATE), ADM_BIRTHDAY) / 12 ) || '세'
+		                 TRUNC(MONTHS_BETWEEN(TRUNC(CURRENT_DATE), ADM_BIRTHDAY) / 12 ) || '세'
 		    
 		       END AGE,
 		    ]]> 
@@ -67,12 +67,12 @@
 	<select id = "selectAdmissionInfo" resultMap = "admission_rm">
 		SELECT ADM_NO, ADM_PROFILE , ADM_NAME, 
 			<![CDATA[ 
-			   CASE WHEN TRUNC(SYSDATE) - ADM_BIRTHDAY <= 30 THEN
+			   CASE WHEN TRUNC(CURRENT_DATE) - ADM_BIRTHDAY <= 30 THEN
 		                 1 || '개월 미만'
-		             WHEN MONTHS_BETWEEN(TRUNC(SYSDATE), ADM_BIRTHDAY) < 12 THEN
-		                 TRUNC(MONTHS_BETWEEN(TRUNC(SYSDATE), ADM_BIRTHDAY)) || '개월'
+		             WHEN MONTHS_BETWEEN(TRUNC(CURRENT_DATE), ADM_BIRTHDAY) < 12 THEN
+		                 TRUNC(MONTHS_BETWEEN(TRUNC(CURRENT_DATE), ADM_BIRTHDAY)) || '개월'
 		             ELSE
-		                 TRUNC(MONTHS_BETWEEN(TRUNC(SYSDATE), ADM_BIRTHDAY) / 12 ) || '세'
+		                 TRUNC(MONTHS_BETWEEN(TRUNC(CURRENT_DATE), ADM_BIRTHDAY) / 12 ) || '세'
 		    
 		       END AGE,
 		    ]]> 
@@ -103,12 +103,12 @@
 	<select id = "selectDoneAdmissionList" resultMap = "admission_rm" >
 		SELECT ADM_NO, ADM_PROFILE , ADM_NAME, 
 			<![CDATA[ 
-			   CASE WHEN TRUNC(SYSDATE) - ADM_BIRTHDAY <= 30 THEN
+			   CASE WHEN TRUNC(CURRENT_DATE) - ADM_BIRTHDAY <= 30 THEN
 		                 1 || '개월 미만'
-		             WHEN MONTHS_BETWEEN(TRUNC(SYSDATE), ADM_BIRTHDAY) < 12 THEN
-		                 TRUNC(MONTHS_BETWEEN(TRUNC(SYSDATE), ADM_BIRTHDAY)) || '개월'
+		             WHEN MONTHS_BETWEEN(TRUNC(CURRENT_DATE), ADM_BIRTHDAY) < 12 THEN
+		                 TRUNC(MONTHS_BETWEEN(TRUNC(CURRENT_DATE), ADM_BIRTHDAY)) || '개월'
 		             ELSE
-		                 TRUNC(MONTHS_BETWEEN(TRUNC(SYSDATE), ADM_BIRTHDAY) / 12 ) || '세'
+		                 TRUNC(MONTHS_BETWEEN(TRUNC(CURRENT_DATE), ADM_BIRTHDAY) / 12 ) || '세'
 		    
 		       END AGE,
 		    ]]> 
