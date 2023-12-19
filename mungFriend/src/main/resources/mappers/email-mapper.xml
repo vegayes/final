@@ -5,7 +5,7 @@
 	<update id="updateAuthKey">
 		UPDATE "EMAIL_CHECK" SET
 		CHECK_KEY = #{authKey},
-		CHECK_DATE = SYSDATE
+		CHECK_DATE = CURRENT_DATE
 		WHERE CHECK_EMAIL = #{email}
 	</update>
 	

@@ -177,7 +177,7 @@
 	  	UPDATE "REVIEW" SET
 	  	REVIEW_TITLE = #{reviewTitle},
 	  	REVIEW_CONTENT = #{reviewContent},
-	  	REVIEW_DATE = SYSDATE
+	  	REVIEW_DATE = CURRENT_DATE
 	  	WHERE REVIEW_NO = #{reviewNo}
   	</update>
   
@@ -283,7 +283,7 @@
 	
 	<update id="updateComment">
 		UPDATE REVIEW_COMMENT SET
-		COMMENT_CONTENT = #{commentContent}, COMMENT_DATE = SYSDATE
+		COMMENT_CONTENT = #{commentContent}, COMMENT_DATE = CURRENT_DATE
 		WHERE COMMENT_NO = #{commentNo}
 	</update>
 	
@@ -291,7 +291,7 @@
 	<insert id="insertComment">
 		INSERT INTO REVIEW_COMMENT VALUES
 		(SEQ_REVIEW_COMMENT_NO.NEXTVAL,#{reviewNo},#{memberNo},
-		#{commentContent},SYSDATE,
+		#{commentContent},CURRENT_DATE,
 		CASE WHEN #{parentComment} > 0 THEN #{parentComment} ELSE NULL END, DEFAULT)
 	</insert>
 	

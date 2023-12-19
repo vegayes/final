@@ -19,6 +19,7 @@
 		<result property="admHopeDate" column="ADM_HOPE_DATE"/>
 		<result property="admYN" column="ADM_YN"/>
 		<result property="admMemberNo" column="ADM_MEMBER_NO"/>
+		<result property="admDate" column="ADM_DATE"/>
 		
 		<result property="age" column="AGE"/>
 		
@@ -30,7 +31,7 @@
 		INSERT INTO ADMISSION 
 		VALUES(SEQ_ADM_NO.NEXTVAL, #{admProfile}, #{admName}, TO_DATE(#{admBirthday}, 'YYYY-MM-DD'), 
     			#{admPhone}, #{admBreed},  #{admGender},  #{admNeuteringYN}, #{admVaccineYN}, #{admSignificant}, 
-     			SYSDATE, TO_DATE(#{admHopeDate}, 'YYYY-MM-DD'), DEFAULT, #{admMemberNo}) 
+     			CURRENT_DATE, TO_DATE(#{admHopeDate}, 'YYYY-MM-DD'), DEFAULT, #{admMemberNo}, NULL) 
 	</insert>
 	
 	
@@ -38,13 +39,12 @@
 	<select id = "selectAdmissionList" resultMap = "admission_rm">
 		SELECT ADM_NO, ADM_PROFILE , ADM_NAME, 
 			<![CDATA[ 
-			   CASE WHEN TRUNC(SYSDATE) - ADM_BIRTHDAY <= 30 THEN
+			   CASE WHEN TRUNC(CURRENT_DATE) - ADM_BIRTHDAY <= 30 THEN
 		                 1 || '개월 미만'
-		             WHEN MONTHS_BETWEEN(TRUNC(SYSDATE), ADM_BIRTHDAY) < 12 THEN
-		                 TRUNC(MONTHS_BETWEEN(TRUNC(SYSDATE), ADM_BIRTHDAY)) || '개월'
+		             WHEN MONTHS_BETWEEN(TRUNC(CURRENT_DATE), ADM_BIRTHDAY) < 12 THEN
+		                 TRUNC(MONTHS_BETWEEN(TRUNC(CURRENT_DATE), ADM_BIRTHDAY)) || '개월'
 		             ELSE
-		                 TRUNC(MONTHS_BETWEEN(TRUNC(SYSDATE), ADM_BIRTHDAY) / 12 ) || '세'
-		    
+		                 TRUNC(MONTHS_BETWEEN(TRUNC(CURRENT_DATE), ADM_BIRTHDAY) / 12 ) || '세'
 		       END AGE,
 		    ]]> 
 		       ADM_PHONE,
@@ -57,7 +57,8 @@
 		       ADM_APPLY_DATE,
 		       TO_CHAR(ADM_HOPE_DATE, 'YYYY-MM-DD') AS ADM_HOPE_DATE ,
 		       ADM_YN,
-		       ADM_MEMBER_NO
+		       ADM_MEMBER_NO,
+		       TO_CHAR(ADM_DATE, 'YYYY-MM-DD HH24:MI:SS') AS ADM_DATE
 		FROM ADMISSION
 		WHERE ADM_YN = 'N'
 		ORDER BY ADM_APPLY_DATE DESC
@@ -67,12 +68,12 @@
 	<select id = "selectAdmissionInfo" resultMap = "admission_rm">
 		SELECT ADM_NO, ADM_PROFILE , ADM_NAME, 
 			<![CDATA[ 
-			   CASE WHEN TRUNC(SYSDATE) - ADM_BIRTHDAY <= 30 THEN
+			   CASE WHEN TRUNC(CURRENT_DATE) - ADM_BIRTHDAY <= 30 THEN
 		                 1 || '개월 미만'
-		             WHEN MONTHS_BETWEEN(TRUNC(SYSDATE), ADM_BIRTHDAY) < 12 THEN
-		                 TRUNC(MONTHS_BETWEEN(TRUNC(SYSDATE), ADM_BIRTHDAY)) || '개월'
+		             WHEN MONTHS_BETWEEN(TRUNC(CURRENT_DATE), ADM_BIRTHDAY) < 12 THEN
+		                 TRUNC(MONTHS_BETWEEN(TRUNC(CURRENT_DATE), ADM_BIRTHDAY)) || '개월'
 		             ELSE
-		                 TRUNC(MONTHS_BETWEEN(TRUNC(SYSDATE), ADM_BIRTHDAY) / 12 ) || '세'
+		                 TRUNC(MONTHS_BETWEEN(TRUNC(CURRENT_DATE), ADM_BIRTHDAY) / 12 ) || '세'
 		    
 		       END AGE,
 		    ]]> 
@@ -95,7 +96,8 @@
 	<!--입소신청 내역을 토대로 강아지 등록 완료 후-->
 	<update id = "updateAdm">
 		UPDATE ADMISSION
-		SET ADM_YN = 'Y'
+		SET ADM_YN = 'Y',
+		ADM_DATE = CURRENT_DATE
 		WHERE ADM_NO = #{admNo}
 	</update>
 	
@@ -103,12 +105,12 @@
 	<select id = "selectDoneAdmissionList" resultMap = "admission_rm" >
 		SELECT ADM_NO, ADM_PROFILE , ADM_NAME, 
 			<![CDATA[ 
-			   CASE WHEN TRUNC(SYSDATE) - ADM_BIRTHDAY <= 30 THEN
+			   CASE WHEN TRUNC(CURRENT_DATE) - ADM_BIRTHDAY <= 30 THEN
 		                 1 || '개월 미만'
-		             WHEN MONTHS_BETWEEN(TRUNC(SYSDATE), ADM_BIRTHDAY) < 12 THEN
-		                 TRUNC(MONTHS_BETWEEN(TRUNC(SYSDATE), ADM_BIRTHDAY)) || '개월'
+		             WHEN MONTHS_BETWEEN(TRUNC(CURRENT_DATE), ADM_BIRTHDAY) < 12 THEN
+		                 TRUNC(MONTHS_BETWEEN(TRUNC(CURRENT_DATE), ADM_BIRTHDAY)) || '개월'
 		             ELSE
-		                 TRUNC(MONTHS_BETWEEN(TRUNC(SYSDATE), ADM_BIRTHDAY) / 12 ) || '세'
+		                 TRUNC(MONTHS_BETWEEN(TRUNC(CURRENT_DATE), ADM_BIRTHDAY) / 12 ) || '세'
 		    
 		       END AGE,
 		    ]]> 
@@ -122,7 +124,8 @@
 		       ADM_APPLY_DATE,
 		       TO_CHAR(ADM_HOPE_DATE, 'YYYY-MM-DD') AS ADM_HOPE_DATE ,
 		       ADM_YN,
-		       ADM_MEMBER_NO
+		       ADM_MEMBER_NO,
+		       TO_CHAR(ADM_DATE, 'YYYY-MM-DD HH24:MI:SS') AS ADM_DATE
 		FROM ADMISSION
 		WHERE ADM_YN = 'Y'
 		ORDER BY ADM_APPLY_DATE DESC		

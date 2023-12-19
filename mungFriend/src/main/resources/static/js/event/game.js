@@ -662,6 +662,18 @@ function startSubQuery() {
 
     modalBtnArea.appendChild(modalBtn1);
     modalBtnArea.appendChild(modalBtn2);
+    
+
+    /*쿠키 */
+    const closeCookieArea = document.createElement('div');
+    closeCookieArea.classList.add('cookieEvent');
+    
+    const settingBtn3 = document.createElement('div');
+    settingBtn3.classList.add('cookieBtn');
+    settingBtn3.id = 'eventCloseOneDay';
+    settingBtn3.setAttribute('onclick', 'eventCloseOneDay()');
+    settingBtn3.innerText = '오늘 하루 이벤트 참여하지 않기';
+    closeCookieArea.appendChild(settingBtn3);
 
     modalContent.appendChild(iconArea);
     iconArea.appendChild(icon);
@@ -670,6 +682,7 @@ function startSubQuery() {
 
     eventSubModalArea.appendChild(modalContent);
     eventSubModalArea.appendChild(modalBtnArea);
+    eventSubModalArea.appendChild(closeCookieArea);
 
     eventSubModalBox.appendChild(eventSubModalArea);
 }

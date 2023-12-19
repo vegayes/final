@@ -206,7 +206,7 @@ a:hover{
     border-top: 5px solid #FEE4D6;
     border-bottom: 3px solid #D2D2D2;
     border-collapse: collapse;
-    
+    z-index: 1;
 }
 
 /*테이블의 헤더*/
@@ -217,6 +217,7 @@ a:hover{
     text-align: center; 
     font-size: 14px;
     font-weight: 700;
+   
     
    
      
