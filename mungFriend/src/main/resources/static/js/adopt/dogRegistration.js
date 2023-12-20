@@ -93,16 +93,11 @@ document.getElementById('submitBtn').addEventListener('click', function(event) {
     
     // 필수 입력 필드 중 하나라도 비어있으면 알림창 표시
     if (!name || !birthday || !gender || !kind || !size || !personality || !neutering || !vaccine || !likeThings || !hateThings || !dogSpecialNote) {
-        
-	            
+
 		var sizeOption = document.getElementById('size').value;
 		
 		console.log(sizeOption);
-	    if(thumnail.src.includes('/images/adopt/%EC%B9%B4%EB%A9%94%EB%9D%BC.png')){
-			console.log("thumnail:");
-		    event.preventDefault();
-		    alert('썸네일을 지정해주세요!');		
-		}else if (sizeOption === 'none') {
+		 if (sizeOption === 'none') {
 		    event.preventDefault();
 		    alert('크기를 선택해주세요!');
 		}else{
@@ -111,7 +106,12 @@ document.getElementById('submitBtn').addEventListener('click', function(event) {
 	        
 	        alert('입력사항들을 모두 입력해주세요.');
 		}
-    } 
+		
+    }else if(thumnail.src.includes('/images/adopt/%EC%B9%B4%EB%A9%94%EB%9D%BC.png')){
+		console.log("thumnail:");
+	    event.preventDefault();
+	    alert('썸네일을 지정해주세요!');		
+	} 
     
 });
 
