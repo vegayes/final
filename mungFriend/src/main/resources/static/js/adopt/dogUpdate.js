@@ -126,14 +126,22 @@ document.getElementById('submitBtn').addEventListener('click', function(event) {
     var hateThings = document.getElementsByName('dogHate')[0].value;
     var dogSpecialNote = document.getElementsByName('dogSpecialNote')[0].value;
     
+    var thumnail = document.getElementById("thumnail");
+    
     // 필수 입력 필드 중 하나라도 비어있으면 알림창 표시
     if (!name || !birthday || !gender || !kind || !size || !personality || !neutering || !vaccine || !likeThings || !hateThings || !dogSpecialNote) {
-         
+     
         // 이벤트 기본 동작 중단 (폼이 실제로 제출되지 않도록 함)
         event.preventDefault();
         
-        alert('입력사항들을 모두 입력해주세요.');
-    } 
+        alert('입력사항들을 모두 입력해주세요.');			
+		
+         
+    }else if(thumnail.src.includes('/images/adopt/%EC%B9%B4%EB%A9%94%EB%9D%BC.png')){
+		console.log("thumnail:");
+	    event.preventDefault();
+	    alert('썸네일을 지정해주세요!');	
+    }
 
     document.querySelector("[name='deleteList']").value 
         =  Array.from(deleteSet);
