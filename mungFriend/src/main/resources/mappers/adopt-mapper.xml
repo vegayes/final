@@ -339,7 +339,7 @@
 	<select id="selectReservation" resultType="_int">
 		SELECT DISTINCT MEMBER_NO 
     	FROM DOG_RESERVATION
-    	WHERE DOG_NO = #{dogNo} AND
+    	WHERE DOG_NO = #{dogNo}
 	</select>
 	
 	
