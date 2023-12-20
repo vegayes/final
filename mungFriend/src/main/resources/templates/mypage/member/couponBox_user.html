@@ -41,11 +41,10 @@
 	
 	                        <!-- 쿠폰 한개-->
 	                        <div class = "userCouponElementArea" th:each="coupon:${couponList}">
-	
 	                            <div class = "couponBoxArea">
 	                                <div class = "couponBox">
 	                                    <div class = "couponImgArea">
-	                                        <img th:src="@{/images/event/discount10.jpg}">
+	                                        <img th:src="${coupon.couponImg}">
 	                                    </div>
 	                                    <div class = "couponInfoArea">
 	                                        <p>[[${coupon.couponContent}]]</p>

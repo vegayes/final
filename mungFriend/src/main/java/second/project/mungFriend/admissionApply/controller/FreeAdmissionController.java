@@ -60,10 +60,10 @@ public class FreeAdmissionController {
 		String path = "redirect:";
 		
 		if(admissionCheck > 0) {
-			message = "게시글이 등록 되었습니다.";
+			message = "입소신청 등록이 완료되었습니다.";
 			path += "/" ;
 		}else {
-			message = "게시글 등록이 실패되었습니다.";
+			message = "입소신청 등록에 실패하였습니다.";
 			path += "/";
 		}
 		
