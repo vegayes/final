@@ -36,7 +36,7 @@ function connect() {
                 // 견종리스트를 출력해줬는지 확인
                 const breedMatches = descriptionArray[i].match(/'([^']+)'/g);
                 
-                if(i == 0){
+                if(i == 0){ //텍스트에 해당하는 부분
 
                     const firstMessage = descriptionArray[0].split('\n');
 
@@ -46,7 +46,23 @@ function connect() {
                     
                 }
 
+                else if(i > 0){
+                   
+                    if(descriptionArray[i].startsWith("http")) { //바로가기 링크인 경우
+                        console.log("showLink");
+                        showLink(descriptionArray[i]);
+                    }else{ // 버튼에 해당하는 부분 => 버튼 선택지로 출력
+                        console.log("showButton");
+                        showButton(descriptionArray[i]);
+                    }
+                   
+                }
+
                 if(breedMatches != null){
+
+                    showButton(descriptionArray[1]);
+                    showButton(descriptionArray[2]);
+
                     // 추출된 문자열에서 따옴표를 제거하고 견종 리스트 생성
                     const breedList = breedMatches.map(match => match.replace(/'/g, ''));
                         
@@ -56,22 +72,8 @@ function connect() {
                     showMessage("나에게 어울리는 견종 검색하기");
                     for (var i = 0; i < breedList.length; i++){
                         showDogLink(breedList[i]);
-                        
                     }
-
-                }
-
-
-                else if(i > 0){
-                   
-                    if(descriptionArray[i].startsWith("http")) { //바로가기 링크인 경우
-                        console.log("showLink");
-                        showLink(descriptionArray[i]);
-                    }else{
-                        console.log("showButton");
-                        showButton(descriptionArray[i]);
-                    }
-                   
+                    
                 }
 
                
