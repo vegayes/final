@@ -507,6 +507,13 @@ function nextQuiz() {
                  게임 종료 
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 function doneQuiz(){
+	
+    const cookieEvent = document.querySelector(".cookieEvent");
+    console.log("쿠키 :" + cookieEvent);
+    if(cookieEvent != null){
+		console.log("하이");
+		cookieEvent.remove();
+	}
 
     subModal.style.display = "flex";
 
@@ -525,8 +532,6 @@ function doneQuiz(){
 
 
             const gameArea = document.querySelector('.gameArea');  
-        
-
 
             gameArea.innerText = memberNickname + "님의 점수는 " + totalScore + "점 입니다.";
             
@@ -551,6 +556,8 @@ function doneQuiz(){
             gameStart.innerText = '쿠폰 확인하러 가기';
             gameStart.setAttribute('onclick', 'checkCoupon()'); 
             gameStart.id = "couponBtn";
+            
+
             
         }
         

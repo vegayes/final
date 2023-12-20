@@ -240,7 +240,7 @@ function settingRegularInfo(list){
 			nextRegular.innerText = `정기결제 완료`;
 		}
 		
-		cancelCheck(merchant);
+		//cancelCheck(merchant);
 		
 		var countDonation = list.length;
 		
@@ -251,7 +251,7 @@ function settingRegularInfo(list){
 	
 }
 
-
+/*
 function cancelCheck(merchant){
 	console.log("merchant" + merchant);
 	const parts = merchant.split('_');
@@ -279,8 +279,6 @@ function cancelCheck(merchant){
 			const lastPart = parts[parts.length - 1];
 			
 			regularCount.innerText = (parseInt(lastPart) - 1) + '번';
-		}else{
-
 		}
     })
     .catch(err => {
@@ -288,3 +286,4 @@ function cancelCheck(merchant){
     });
 
 }
+*/
