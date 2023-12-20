@@ -90,8 +90,6 @@ document.getElementById('submitBtn').addEventListener('click', function(event) {
     
     console.log("thumnail:" , thumnail.src);
     
-
-    
     
     // 필수 입력 필드 중 하나라도 비어있으면 알림창 표시
     if (!name || !birthday || !gender || !kind || !size || !personality || !neutering || !vaccine || !likeThings || !hateThings || !dogSpecialNote) {
@@ -100,7 +98,7 @@ document.getElementById('submitBtn').addEventListener('click', function(event) {
 		var sizeOption = document.getElementById('size').value;
 		
 		console.log(sizeOption);
-	    if(thumnail.src.includes('/images/adopt/카메라.png')){
+	    if(thumnail.src.includes('http://localhost/images/adopt/%EC%B9%B4%EB%A9%94%EB%9D%BC.png')){
 			console.log("thumnail:");
 		    event.preventDefault();
 		    alert('썸네일을 지정해주세요!');		
