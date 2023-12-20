@@ -98,7 +98,7 @@ document.getElementById('submitBtn').addEventListener('click', function(event) {
 		var sizeOption = document.getElementById('size').value;
 		
 		console.log(sizeOption);
-	    if(thumnail.src.includes('http://localhost/images/adopt/%EC%B9%B4%EB%A9%94%EB%9D%BC.png')){
+	    if(thumnail.src.includes('/images/adopt/%EC%B9%B4%EB%A9%94%EB%9D%BC.png')){
 			console.log("thumnail:");
 		    event.preventDefault();
 		    alert('썸네일을 지정해주세요!');		
