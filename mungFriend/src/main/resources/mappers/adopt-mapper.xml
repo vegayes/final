@@ -337,10 +337,9 @@
 	
 	<!-- 강아지 입양 시 예약했던 회원번호 조회 -->	
 	<select id="selectReservation" resultType="_int">
-		SELECT MEMBER_NO
+		SELECT DISTINCT MEMBER_NO 
     	FROM DOG_RESERVATION
     	WHERE DOG_NO = #{dogNo} AND
-    	RESERVE_YN = 'N'
 	</select>
 	
 	
@@ -371,7 +370,7 @@
 		INSERT INTO DOG_RESERVATION
 		VALUES(SEQ_RESERVE_NO.NEXTVAL, 
 				#{dogNo}, #{memberNo}, TO_DATE(#{reservationData.reserveDate},'YYYY-MM-DD'), #{reservationData.reserveTime}, 
-				DEFAULT, DEFAULT, DEFAULT)
+				DEFAULT, CURRENT_DATE, DEFAULT)
 	</insert>
 	
 		
