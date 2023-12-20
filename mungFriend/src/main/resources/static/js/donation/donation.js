@@ -65,7 +65,7 @@ for(let i = 0; i <donationRadio.length; i++){
 /* 금액 합산 */
 $('#btn_add').click(function(evt) {
     $('.inputAmount').each(function(idx, ele) {
-        $(ele).val(parseInt($(ele).val())+100);
+        $(ele).val(parseInt($(ele).val())+1000);
     });
     evt.preventDefault();
 });
