@@ -278,8 +278,7 @@ function paymentDBInput(donation){
 				console.log("안녕 나 결제 DB 성공하고 들어옴.")
 			
 				if(loginMember != null){
-					console.log("넘어갈거임.")
-					//location.href = '/mypage/member/donationList';
+					location.href = '/mypage/member/donationList';
 						// 로그인되면 후원 내역으로 넘어가기
 						return; 
 				}
