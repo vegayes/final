@@ -71,13 +71,14 @@ public class ListAdminServiceImpl implements ListAdminServcie{
 				
 				// 1) 해당 merchant값 가지고 오기
 				String merchant = mapperDonation.selectMerchant(donation.getDonationInfoNo());
-//				System.out.println("주문번호 :" + merchant);
+				System.out.println("주문번호 :" + merchant);
 				
 				// 2) 해당 merchnat의 값을 가지고 마지막 후원 시간 가져오기
 				Donation selectLastDate = mapperDonation.selectLastDate(merchant);
-//				System.out.println("마지막 후원 시간 :" +selectLastDate);
-//				System.out.println("마지막 후원 시간 No :" +selectLastDate.getMerchantNo());
+				System.out.println("마지막 후원 시간 :" +selectLastDate);
+				System.out.println("마지막 후원 시간 No :" +selectLastDate.getMerchantNo());
 				int num = Integer.parseInt(selectLastDate.getMerchantNo())-1;
+				
 				
 				if(num == 0) {
 					donation.setPaidAt(paidAt);
@@ -92,7 +93,7 @@ public class ListAdminServiceImpl implements ListAdminServcie{
 			        SimpleDateFormat lastDayFormatter = new SimpleDateFormat("yyyy-MM-dd");
 			        String paidAtRegular = lastDayFormatter.format(cal.getTime());
 			        String paidAtStart = lastDayFormatter.format(date);
-//			        System.out.println("정기 기간  : " + paidAtStart + " ~ " + paidAtRegular);
+			        System.out.println("정기 기간  : " + paidAtStart + " ~ " + paidAtRegular);
 			        donation.setPaidAt(paidAtStart + " ~ " + paidAtRegular); // 같은 날짜 두 번 출력					
 				}
 
@@ -141,6 +142,38 @@ public class ListAdminServiceImpl implements ListAdminServcie{
 		    String paidAt = fm.format(date);
 			//System.out.println("후원 내 값  date 값 : " + paidAt );
 			donation.setPaidAt(paidAt);
+			
+			if(donation.getDonationType().equals("정기")) {
+				
+				// 1) 해당 merchant값 가지고 오기
+				String merchant = mapperDonation.selectMerchant(donation.getDonationInfoNo());
+				System.out.println("주문번호 :" + merchant);
+				
+				// 2) 해당 merchnat의 값을 가지고 마지막 후원 시간 가져오기
+				Donation selectLastDate = mapperDonation.selectLastDate(merchant);
+				System.out.println("마지막 후원 시간 :" +selectLastDate);
+				System.out.println("마지막 후원 시간 No :" +selectLastDate.getMerchantNo());
+				int num = Integer.parseInt(selectLastDate.getMerchantNo())-1;
+				
+				
+				if(num == 0) {
+					donation.setPaidAt(paidAt);
+				}else {
+			        Calendar cal = Calendar.getInstance();
+			        cal.setTime(date); // 기존 날짜 설정
+
+			        // 11개월 추가
+			        cal.add(Calendar.MONTH, num);
+
+			        // 변경된 날짜를 String 형태로 변환
+			        SimpleDateFormat lastDayFormatter = new SimpleDateFormat("yyyy-MM-dd");
+			        String paidAtRegular = lastDayFormatter.format(cal.getTime());
+			        String paidAtStart = lastDayFormatter.format(date);
+			        System.out.println("정기 기간  : " + paidAtStart + " ~ " + paidAtRegular);
+			        donation.setPaidAt(paidAtStart + " ~ " + paidAtRegular); // 같은 날짜 두 번 출력					
+				}
+
+			}
 			
 		}			
 		  
