@@ -9,7 +9,7 @@
    [Tech Stack](#-tech-stack-)<br>
    [프로젝트 설계](#-프로젝트-설계-)<br>
    [팀원 소개](#-팀원-소개-)<br>
-   [웹페이지 소개](#-웹페이지-소개-)
+   [웹페이지 소개](#-웹페이지-소개)<br>
 
 ## 📚 Tech Stack 📚
 <div align=center>
