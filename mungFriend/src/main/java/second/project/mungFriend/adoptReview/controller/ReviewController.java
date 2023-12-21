@@ -209,7 +209,9 @@ public class ReviewController {
 			) throws Exception {
 		
 		review.setReviewNo(reviewNo);
-		//System.out.println("삭제할 이미지 순서 : " + deleteList);
+		
+		System.out.println("삭제할 이미지 순서 : " + deleteList);
+		System.out.println("images : " + images);
 		
 		int rowCount = service.reviewUpdate(review,images,deleteList);
 		
