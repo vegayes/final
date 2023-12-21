@@ -279,7 +279,7 @@ function paymentDBInput(donation){
 			
 				if(loginMember != null){
 					console.log("넘어갈거임.")
-					location.href = '/mypage/member/donationList';
+					//location.href = '/mypage/member/donationList';
 						// 로그인되면 후원 내역으로 넘어가기
 						return; 
 				}
@@ -306,7 +306,7 @@ function regularSchduel(onePay){
 	const cardData = [];
 
 	const currentTimeStamp = Math.floor(Date.now() / 1000); // 현재 시간의 Unix 타임스탬프 
-	const oneMinute = 300; // *********************** 30일을 기준! ******************************
+	const oneMinute = 120; // *********************** 30일을 기준! ******************************
 
 
 	console.log("currentTimeStamp :" +currentTimeStamp);
