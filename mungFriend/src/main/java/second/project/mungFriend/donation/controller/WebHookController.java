@@ -44,7 +44,7 @@ public class WebHookController {
 	@ResponseBody
 	public String WebHook(@RequestBody WebHook webHook, Donation donation) throws IamportResponseException, IOException {
 	    // 웹훅으로 전달된 데이터 처리
-	    String imp_uid = webHook.getImp_uid(); // 예시로 받은 데이터 중 Imp_uid 값을 가져옴
+	    String imp_uid = webHook.getImp_uid(); 
 	    
 	    IamportResponse<Payment> resp = iamportClient.paymentByImpUid(imp_uid);
 	    

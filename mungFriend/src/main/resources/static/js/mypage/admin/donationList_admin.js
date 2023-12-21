@@ -74,6 +74,9 @@ closeModalBtn.addEventListener("click", function(){
 
 // 선택한 후원자 정보 가져오기
 function adminRegular(donationNo){
+	
+	console.log("정보 :" + donationNo);
+	
 	// 후원 정보 가져오기
 	fetch("/donation/memberInfo?donationNo="+donationNo)
     .then(resp => resp.json())
