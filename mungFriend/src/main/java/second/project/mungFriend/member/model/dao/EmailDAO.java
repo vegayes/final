@@ -14,6 +14,10 @@ public class EmailDAO {
 	public int updateAuthKey(Map<String, String> map) {
 		return mapper.updateAuthKey(map);
 	}
+	
+	public int updateInsertAuthKey(Map<String, String> map) {
+		return mapper.updateInsertAuthKey(map);
+	}
 
 	public int insertAuthKey(Map<String, String> map) {
 		return mapper.insertAuthKey(map);

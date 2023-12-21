@@ -106,14 +106,15 @@ public class EmailServiceImpl implements EmailService{
 		
 		System.out.println(map);
 		
-		int result = dao.updateAuthKey(map);
+		//int result = dao.updateAuthKey(map);
+		int result = dao.updateInsertAuthKey(map);
 		
 		if(result == 0) {
-			result = dao.insertAuthKey(map);
+			//result = dao.insertAuthKey(map);
 		}
 		
 		System.out.println("인증테이블 삽입결과 : " + result);
-		return result;
+		return 1;
 		
 	}
 

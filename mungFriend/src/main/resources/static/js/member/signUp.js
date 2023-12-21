@@ -344,6 +344,7 @@ sendAuthKeyBtn.addEventListener("click", function() {
 				tempEmail = memberEmail.value;
 				console.log(tempEmail);
 			} else {
+				tempEmail = memberEmail.value;
 				console.log("인증번호 발송 실패");
 			}
 			
