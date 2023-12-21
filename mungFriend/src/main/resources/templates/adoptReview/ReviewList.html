@@ -117,7 +117,7 @@
 					</select>
 
 
-
+					<!-- 검색어 있으면 해당 검색어 표시 -->
 					<input type="text" name="searchContent" id="searchContent" placeholder="검색어를 입력해주세요." th:value="${param.searchContent}">
 					<button id="searchButton">검색</button>
 				</form>
@@ -127,7 +127,7 @@
 			<!-- 게시글이 있을 때만 페이지네이션 보이기 -->
 			<div th:if="${#lists.size(reviewList) > 0 }" class="pagination-area">
 
-
+				<!-- 검색 X 일때 -->
 				<ul th:unless="${param.searchContent}" class="pagination">
 				
 					<!-- 첫 페이지로 이동 -->
@@ -166,7 +166,9 @@
 
 
 				<!-- 검색 O 일때 : ${param.searchContent} 컨트롤러로 전송한 파라미터에서 searchContent 가 있으면 실행 -->
-				<!-- ${param} : 컨트롤러로의 요청에 전달된 파라미터 조회 -->
+				<!-- ${param} : 컨트롤러로의 요청에 전달된 파라미터 조회 
+				검색 시 링크가 http://mungfriend.shop/adoptReview/reviewList/1?searchType=title&searchContent=후기 이런식으로 전달되서 
+				param.searchType: title, param.searchContent : 후기  -->
 				<ul th:if="${param.searchContent}" class="pagination">
 				
 					<!-- 첫 페이지로 이동 -->
@@ -220,7 +222,7 @@
     <th:block th:replace="~{common/footer}"></th:block>
 
 
-
+	<!-- 검색 종류 있을 경우 해당 값 표시 -->
 	<script th:inline="javascript">
 		var searchType = /*[[${param.searchType}]]*/ '';
 		console.log("searchType : ", searchType);

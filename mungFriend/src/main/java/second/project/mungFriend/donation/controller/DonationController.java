@@ -111,10 +111,12 @@ public class DonationController {
 	@GetMapping("/memberInfo")
 	@ResponseBody
 	public Donation selectMemberInfo(@RequestParam int donationNo) throws Exception{
+		System.out.println("번호 :" + donationNo);
 		
 		//1) 후원 정보 분석
 		Donation memberInfo = service.selectMemberInfo(donationNo);
 		
+		System.out.println("회원 정보 반환 :" + memberInfo);
 		
 		return memberInfo;
 	}

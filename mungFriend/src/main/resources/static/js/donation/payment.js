@@ -111,11 +111,11 @@ function paymentInfoCheck(){
 	    }
 	
 	    // 로딩창 숨김 함수
-/*	    function hideLoading() {
+	    function hideLoading() {
 	        var loadingElement = document.getElementById("load");
 	        loadingElement.style.display = "none";
 	    }
-*/
+
 		// 1) 모달창 열기
 		openCardInfo(paymentData.amount); 
 
@@ -180,6 +180,7 @@ function paymentInfoCheck(){
 
 					}else if (data.code == -1){
 						alert("카드정보가 불일치 합니다. 다시 정보를 기입해주세요!");
+						hideLoading();
 					}
 				})
 				.catch(function(error) {
@@ -191,6 +192,7 @@ function paymentInfoCheck(){
 			}else{
 				//alert("카드 정보를 정확하게 작성해주세요!");
 				console.log("카드 정보를 정확하게 작성해주세요!");
+				
 			}
 		})
 	
