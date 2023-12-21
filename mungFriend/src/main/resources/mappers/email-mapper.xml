@@ -19,4 +19,29 @@
 		AND CHECK_KEY = #{inputKey}
 	</select>
 	
+	<update id="updateInsertAuthKey">
+		DECLARE
+			nCnt  	Number;
+		Begin
+			Select
+				count(*)
+			Into
+				nCnt
+			From
+				EMAIL_CHECK
+			Where CHECK_EMAIL = #{email};
+			
+			if nCnt <![CDATA[>]]> 0 Then
+				UPDATE "EMAIL_CHECK" SET
+				CHECK_KEY = #{authKey},
+				CHECK_DATE = CURRENT_DATE
+				WHERE CHECK_EMAIL = #{email};
+			End if;
+			
+			if nCnt <![CDATA[<]]> 1 Then
+				INSERT INTO "EMAIL_CHECK" VALUES(SEQ_CHECK_NO.NEXTVAL, #{authKey}, #{email}, DEFAULT);
+			End if;
+		End;
+	</update>
+	
 </mapper>
