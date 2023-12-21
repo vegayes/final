@@ -45,8 +45,7 @@ public class BillingKeyController {
     /*빌링키 발급*/
     @PostMapping("/{customerUid}")
     public IamportResponse<BillingCustomer> postBillingCustomer(@PathVariable String customerUid ,
-    															@RequestBody RegularCardInfo cardData
-    															/*, BillingCustomerData billingData*/) throws IOException, IamportResponseException {
+    															@RequestBody RegularCardInfo cardData) throws IOException, IamportResponseException {
     	    	
     	
     	BillingCustomerData bcd = new BillingCustomerData(cardData.getCustomer_uid(),
