@@ -283,29 +283,29 @@ function submitReservation() {
 
 
 
-// function hideCalendar() {
+function hideCalendar() {
 
-//     // 예약하기 버튼 보이기
-//     const registButton = document.getElementById('regist');
-//     registButton.style.display = 'flex'; // display를 flex로 변경
+    // 예약하기 버튼 보이기
+    const registButton = document.getElementById('regist');
+    registButton.style.display = 'flex'; // display를 flex로 변경
 
-//     // 달력 감추기
-//     const calendarContainer = document.getElementById('calendar-container');
-//     calendarContainer.style.display = 'none';
+    // 달력 감추기
+    const calendarContainer = document.getElementById('calendar-container');
+    calendarContainer.style.display = 'none';
 
-//     // #calendedr-img 클래스 제거
-//     const calendedrImg = document.getElementById('calendedr-img');
-//     calendedrImg.classList.remove('calendedr-img');
+    // #calendedr-img 클래스 제거
+    const calendedrImg = document.getElementById('calendedr-img');
+    calendedrImg.classList.remove('calendedr-img');
 
-//     // 예약하기 버튼에 기존 스타일 클래스를 다시 추가
-//     registButton.classList.add('your-existing-style-class');
+    // 예약하기 버튼에 기존 스타일 클래스를 다시 추가
+    registButton.classList.add('your-existing-style-class');
 
-//     // 달력을 감춤과 동시에 시간을 감춤
-//     const timeContainer = document.getElementById('time-container');
-//     timeContainer.style.display = 'none';
+    // 달력을 감춤과 동시에 시간을 감춤
+    const timeContainer = document.getElementById('time-container');
+    timeContainer.style.display = 'none';
 
-//     // 예약하기 버튼 감춤
-//     const reserveBtn = document.getElementById("reserveBtn");
-//     reserveBtn.style.display = 'none';
+    // 예약하기 버튼 감춤
+    const reserveBtn = document.getElementById("reserveBtn");
+    reserveBtn.style.display = 'none';
 
-// }
+}
